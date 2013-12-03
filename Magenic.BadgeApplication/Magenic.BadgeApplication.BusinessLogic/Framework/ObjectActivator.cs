@@ -2,7 +2,7 @@
 using Csla.Server;
 using System;
 
-namespace Magenic.BadgeApplication.BusinessLogic
+namespace Magenic.BadgeApplication.BusinessLogic.Framework
 {
     [Serializable]
     public sealed class ObjectActivator : IDataPortalActivator

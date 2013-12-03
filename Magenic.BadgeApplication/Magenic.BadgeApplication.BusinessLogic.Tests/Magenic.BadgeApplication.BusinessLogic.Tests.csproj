@@ -25,6 +25,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\Magenic.BadgeApplication.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,6 +37,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.1.5\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Csla">
+      <HintPath>..\packages\CSLA-Core.4.5.40\lib\net45\Csla.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.1.1311.0615\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -50,8 +61,25 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="DateOrderRuleTests.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="HelperMethods\ContainerBuilder.cs" />
+    <Compile Include="HelperMethods\Reflection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestInitialize.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">
+      <Project>{0274f325-95a1-43c8-b1d7-f81adfc0a535}</Project>
+      <Name>Magenic.BadgeApplication.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Magenic.BadgeApplication.Common\Magenic.BadgeApplication.Common.csproj">
+      <Project>{d7b48f98-7bd5-4e80-8740-6c348a7f9a1e}</Project>
+      <Name>Magenic.BadgeApplication.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

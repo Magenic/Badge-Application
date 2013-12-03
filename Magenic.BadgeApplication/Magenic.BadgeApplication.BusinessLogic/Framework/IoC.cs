@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-namespace Magenic.BadgeApplication.BusinessLogic
+namespace Magenic.BadgeApplication.BusinessLogic.Framework
 {
     public static class IoC
     {
