@@ -7,10 +7,10 @@ namespace Magenic.BadgeApplication.Common.Interfaces
     /// that activities are used to determine if an employee is qualified to
     /// receive a particular badge.
     /// </summary>
-    public interface IEditActivity : Csla.IBusinessBase
+    public interface IActivityEdit : Csla.IBusinessBase
     {
         /// <summary>
-        /// The id of the activity
+        /// The id of the activity.  Zero if new.
         /// </summary>
         int Id { get; }
         /// <summary>
