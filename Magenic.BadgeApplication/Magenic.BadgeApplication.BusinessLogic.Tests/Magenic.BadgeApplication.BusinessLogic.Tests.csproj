@@ -63,6 +63,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CanSetBadgeTypeRuleTests.cs" />
     <Compile Include="DateOrderRuleTests.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HelperMethods\ContainerBuilder.cs" />

@@ -49,7 +49,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
             Assert.IsNotNull(newRule);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "newRule"), TestMethod]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "newRule")]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void StartDateMustBeDateTime()
         {

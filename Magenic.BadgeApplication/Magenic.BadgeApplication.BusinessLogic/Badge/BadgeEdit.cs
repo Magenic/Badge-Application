@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Csla;
+using Csla.Rules;
 using Csla.Rules.CommonRules;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.Interfaces;
@@ -163,6 +164,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.BusinessRules.AddRule(new MaxLength(NameProperty, 100));
             this.BusinessRules.AddRule(new Required(NameProperty));
             this.BusinessRules.AddRule(new MaxLength(TaglineProperty, 200));
+            this.BusinessRules.AddRule(new Rules.DateOrder(EffectiveStartDateProperty, EffectiveEndDateProperty));
+
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedByIdProperty, Common.Enums.Role.Administrator.ToString()));
         }
 
         #endregion Rules

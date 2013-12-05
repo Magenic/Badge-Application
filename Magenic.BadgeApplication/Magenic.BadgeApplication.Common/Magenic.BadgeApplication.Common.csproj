@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Arg.cs" />
     <Compile Include="Enums\BadgeType.cs" />
+    <Compile Include="Enums\Role.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interfaces\IActivityEdit.cs" />
     <Compile Include="Interfaces\IBadgeEdit.cs" />
