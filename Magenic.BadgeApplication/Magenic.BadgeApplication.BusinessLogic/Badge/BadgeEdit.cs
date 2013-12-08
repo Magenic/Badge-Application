@@ -3,6 +3,7 @@ using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 
@@ -166,7 +167,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.BusinessRules.AddRule(new MaxLength(TaglineProperty, 200));
             this.BusinessRules.AddRule(new Rules.DateOrder(EffectiveStartDateProperty, EffectiveEndDateProperty));
 
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedByIdProperty, Common.Enums.Role.Administrator.ToString()));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedByIdProperty, Role.Administrator.ToString()));
+
+            this.BusinessRules.AddRule(new Rules.CanSetBadgeType(AuthorizationActions.WriteProperty, TypeProperty, BadgeType.Corporate, Role.Administrator.ToString()));
         }
 
         #endregion Rules

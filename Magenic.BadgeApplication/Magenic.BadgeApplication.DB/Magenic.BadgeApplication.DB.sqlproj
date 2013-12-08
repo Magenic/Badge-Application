@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{479c8e2d-a649-4ac4-8b2d-afa0d887871d}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureDatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -75,5 +75,8 @@
     <Build Include="dbo\Tables\Permission.sql" />
     <Build Include="dbo\Views\CurrentActiveBadges.sql" />
     <Build Include="dbo\Views\EarnedBadges.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeployScaffolding.sql" />
   </ItemGroup>
 </Project>

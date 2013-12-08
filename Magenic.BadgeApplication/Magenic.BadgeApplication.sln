@@ -23,6 +23,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Magenic.BadgeApplication.DB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.BusinessLogic.Tests", "Magenic.BadgeApplication.BusinessLogic.Tests\Magenic.BadgeApplication.BusinessLogic.Tests.csproj", "{15F6B4C8-7712-4E81-85EA-B4293E4C7C1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.DataAccess.EF", "Magenic.BadgeApplication.DataAccess.EF\Magenic.BadgeApplication.DataAccess.EF.csproj", "{80DF9C9B-F946-42B1-87E7-57EF40709382}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{15F6B4C8-7712-4E81-85EA-B4293E4C7C1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15F6B4C8-7712-4E81-85EA-B4293E4C7C1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15F6B4C8-7712-4E81-85EA-B4293E4C7C1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80DF9C9B-F946-42B1-87E7-57EF40709382}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80DF9C9B-F946-42B1-87E7-57EF40709382}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80DF9C9B-F946-42B1-87E7-57EF40709382}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80DF9C9B-F946-42B1-87E7-57EF40709382}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
