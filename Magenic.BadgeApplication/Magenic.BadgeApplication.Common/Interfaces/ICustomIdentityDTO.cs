@@ -4,7 +4,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
 {
     /// <summary>
     /// Interface for defining a data transfer object for persist operations with the
-    /// ICSLACustomIdentity object.
+    /// ICSLACustomIdentity class.
     /// </summary>
     public interface ICustomIdentityDTO
     {

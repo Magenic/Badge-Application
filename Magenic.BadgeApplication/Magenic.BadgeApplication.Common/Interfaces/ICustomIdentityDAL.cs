@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
     /// <summary>
-    /// Data Access Layer interface to load the custom identity object
+    /// Data Access Layer interface to load for classes implementing ICslaIdentity.
     /// </summary>
+
     public interface ICustomIdentityDAL
     {
         /// <summary>

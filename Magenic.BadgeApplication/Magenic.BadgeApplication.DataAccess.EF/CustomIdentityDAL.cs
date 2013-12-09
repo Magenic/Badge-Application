@@ -34,7 +34,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 
                     foreach (var role in roles)
                     {
-                        ((List<string>)employee.Roles).Add(((Common.Enums.BadgeType)role.PermissionId).ToString());
+                        ((List<string>)employee.Roles).Add(((Common.Enums.PermissionType)role.PermissionId).ToString());
                     }
                 }
                 return employee;

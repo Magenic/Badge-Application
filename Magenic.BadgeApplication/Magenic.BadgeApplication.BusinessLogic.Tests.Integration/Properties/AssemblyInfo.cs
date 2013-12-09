@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Magenic.BadgeApplication.BusinessLogic")]
+[assembly: AssemblyTitle("Magenic.BadgeApplication.BusinessLogic.Tests.Integration")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Magenic.BadgeApplication.BusinessLogic")]
+[assembly: AssemblyProduct("Magenic.BadgeApplication.BusinessLogic.Tests.Integration")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0fcbdf84-aac3-4b6b-829e-415eed3ddbe9")]
+[assembly: Guid("e7eb0fe1-ca3d-4708-9c3d-5372b37e056f")]
 
 // Version information for an assembly consists of the following four values:
 //

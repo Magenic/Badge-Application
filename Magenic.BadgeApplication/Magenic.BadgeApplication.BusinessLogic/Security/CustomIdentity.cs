@@ -18,6 +18,12 @@ namespace Magenic.BadgeApplication.BusinessLogic.Security
         [Serializable]
         public class IdentityCriteria : IIdentityCriteria
         {
+            public IdentityCriteria(string userName, string password)
+            {
+                this.UserName = userName;
+                this.Password = password;
+            }
+
             public string UserName { get; set; }
             public string Password { get; set; }
         }
@@ -45,7 +51,12 @@ namespace Magenic.BadgeApplication.BusinessLogic.Security
             var dal = IoC.Container.Resolve<ICustomIdentityDAL>();
 
             var result = await dal.LogOnIdentityAsync(criteria.UserName, criteria.Password);
+            if (result == null)
+            {
+                throw new System.Security.SecurityException("Unable to logon with these credentials");
+            }
             this.Load(result.Name, result.Roles);
+            this.IsAuthenticated = true;
         }
 
         #endregion  Data Portal
