@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arg.cs" />
+    <Compile Include="DTO\ActivityEditDTO.cs" />
     <Compile Include="DTO\CustomIdentityDTO.cs" />
     <Compile Include="Enums\BadgeType.cs" />
     <Compile Include="Enums\Permission.cs" />
