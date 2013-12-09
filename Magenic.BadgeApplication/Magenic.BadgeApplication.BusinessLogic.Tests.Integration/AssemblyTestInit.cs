@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Csla.Security;
+using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -25,6 +26,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
             //builder.RegisterType<Security.CustomIdentity>().As<ICslaIdentity>();
             //builder.RegisterType<Security.CustomPrincipal>().As<ICslaPrincipal>();
             builder.RegisterGeneric(typeof(ObjectFactory<>)).As(typeof(IObjectFactory<>));
+            //builder.RegisterType(typeof(ActivityEdit)).As(typeof(IActivityEdit));
             IoC.Container = builder.Build();
             Csla.ApplicationContext.DataPortalActivator = new ObjectActivator();
 

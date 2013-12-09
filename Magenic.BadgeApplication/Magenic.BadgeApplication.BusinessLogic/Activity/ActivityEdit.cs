@@ -1,15 +1,21 @@
 ﻿using Autofac;
 using Csla;
+using Csla.Rules;
 using Csla.Rules.CommonRules;
-using Csla.Serialization.Mobile;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
+using System;
 using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
+    [Serializable]
     public class ActivityEdit : BusinessBase<ActivityEdit> , IActivityEdit
     {
+        public ActivityEdit(): base()
+        { }
+
         #region Properties
 
         public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(c => c.Id);
@@ -49,22 +55,35 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             base.AddBusinessRules();
             this.BusinessRules.AddRule(new MaxLength(NameProperty, 100));
             this.BusinessRules.AddRule(new Required(NameProperty));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, RequiresApprovalProperty, Role.Administrator.ToString()));
         }
 
         #endregion Rules
 
         #region Factory Methods
 
-        public static Task<IActivityEdit> GetActivityEditById(int activityEditId)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "activityEdit")]
+        public static Task<IActivityEdit> GetActivityEditByIdAsync(int activityEditId)
         {
-            return IoC.Container.Resolve<IDataPortal<IActivityEdit>>().FetchAsync(activityEditId);
+            return IoC.Container.Resolve<IObjectFactory<IActivityEdit>>().FetchAsync(activityEditId);
+        }
+
+        public static IActivityEdit CreateActivity()
+        {
+            return IoC.Container.Resolve<IObjectFactory<IActivityEdit>>().Create();
         }
 
         #endregion Factory Methods
 
         #region Data Access
 
-        private async Task DataPortal_Fetch(int activityEditId)
+        [RunLocal]
+        protected override void DataPortal_Create()
+        {
+            base.DataPortal_Create();
+        }
+
+        protected async Task DataPortal_Fetch(int activityEditId)
         {
             var dal = IoC.Container.Resolve<IActivityEditDAL>();
 
@@ -72,8 +91,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             this.LoadData(result);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
-        protected new async Task DataPortal_Update()
+        protected override void DataPortal_Update()
         {
             if (IsDeleted)
             {
@@ -91,7 +109,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             else if (IsDirty)
             {
                 var dal = IoC.Container.Resolve<IActivityEditDAL>();
-                this.LoadData(await dal.UpdateAsync(this.UnloadData()));
+                this.LoadData(dal.Update(this.UnloadData()));
                 FieldManager.UpdateChildren();
             }
             this.MarkClean();
@@ -120,6 +138,33 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                 this.Name = data.Name;
                 this.RequiresApproval = data.RequiresApproval;
             }
+        }
+
+        protected override void DataPortal_DeleteSelf()
+        {
+            base.DataPortal_DeleteSelf();
+            var dal = IoC.Container.Resolve<IActivityEditDAL>();
+
+            if (!IsNew)
+            {
+                this.DeleteChildren();
+                dal.Delete(this.Id);
+            }
+
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        private void DeleteChildren()
+        {
+        }
+
+        protected override void DataPortal_Insert()
+        {
+            base.DataPortal_Insert();
+            var dal = IoC.Container.Resolve<IActivityEditDAL>();
+
+            this.LoadData(dal.Insert(this.UnloadData()));
+            FieldManager.UpdateChildren();
         }
 
         #endregion Data Access

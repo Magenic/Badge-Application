@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -18,10 +14,21 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <returns>An <see cref="IActivityEditDTO"/>.</returns>
         Task<IActivityEditDTO> GetActivityByIdAsync(int activityEditId);
         /// <summary>
-        /// Asynchronously updates an existing activity based on informaiton passed in via the DTO.
+        /// Updates an existing activity based on informaiton passed in via the DTO.
         /// </summary>
-        /// <param name="data">the values to update.</param>
+        /// <param name="data">The values to update.</param>
         /// <returns>A DTO with updated values after the save.</returns>
-        Task<IActivityEditDTO> UpdateAsync(IActivityEditDTO data);
+        IActivityEditDTO Update(IActivityEditDTO data);
+        /// <summary>
+        /// Inserts a new activity based on information passed in via the DTO.
+        /// </summary>
+        /// <param name="data">The values to update.</param>
+        /// <returns>A DTO with updated values after the insert.</returns>
+        IActivityEditDTO Insert(IActivityEditDTO data);
+        /// <summary>
+        /// Removes the specified activity.
+        /// </summary>
+        /// <param name="activityId">The id of the activity to remove.</param>
+        void Delete(int activityId);
     }
 }
