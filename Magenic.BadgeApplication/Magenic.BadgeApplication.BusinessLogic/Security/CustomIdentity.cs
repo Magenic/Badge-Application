@@ -56,6 +56,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Security
                 throw new System.Security.SecurityException("Unable to logon with these credentials");
             }
             this.Load(result.Name, result.Roles);
+            this.IsAuthenticated = true;
         }
 
         #endregion  Data Portal

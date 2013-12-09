@@ -9,17 +9,20 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         [TestMethod]
         public async Task LoadValidPrincipal()
         {
-            var principal = await Security.CustomPrincipal.LoadPrincipalAsync("kevinf", "");
+            Csla.ApplicationContext.User = await Security.CustomPrincipal.LogOnAsync("kevinf", "");
+
+            var principal = Csla.ApplicationContext.User;
 
             Assert.AreEqual("kevinf", principal.Identity.Name);
             Assert.IsTrue(principal.IsInRole(Common.Enums.PermissionType.User.ToString()));
+            Assert.IsTrue(principal.Identity.IsAuthenticated);
         }
 
         [TestMethod]
         [ExpectedException(typeof(Csla.DataPortalException))]
         public async Task LoadInvalidPrincipal()
         {
-            var principal = await Security.CustomPrincipal.LoadPrincipalAsync("InvalidUser", "");
+            await Security.CustomPrincipal.LogOnAsync("InvalidUser", "");
 
             Assert.Fail("principal with created without an error and it shouldn't have been.");
         }

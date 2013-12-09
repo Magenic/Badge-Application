@@ -22,11 +22,17 @@ namespace Magenic.BadgeApplication.BusinessLogic.Security
 
         #region Factory Methods
 
-        public static async Task<ICslaPrincipal> LoadPrincipalAsync(string userName, string password)
+        public static async Task<ICslaPrincipal> LogOnAsync(string userName, string password)
         {
             var criteria = IoC.Container.Resolve<IIdentityCriteria>(new NamedParameter("userName", userName), new NamedParameter("password", password));
             var identity = await IoC.Container.Resolve<IObjectFactory<ICslaIdentity>>().FetchAsync(criteria);
+
             return IoC.Container.Resolve<ICslaPrincipal>(new NamedParameter("identity", identity));
+        }
+
+        public static void LogOff()
+        {
+            Csla.ApplicationContext.User = new UnauthenticatedPrincipal();
         }
 
         #endregion Factory Methods
