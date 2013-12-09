@@ -57,6 +57,8 @@
     <Compile Include="Enums\Role.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interfaces\IActivityEdit.cs" />
+    <Compile Include="Interfaces\IActivityEditDAL.cs" />
+    <Compile Include="Interfaces\IActivityEditDTO.cs" />
     <Compile Include="Interfaces\IBadgeEdit.cs" />
     <Compile Include="Interfaces\ICustomIdentityDAL.cs" />
     <Compile Include="Interfaces\ICustomIdentityDTO.cs" />

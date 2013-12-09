@@ -13,7 +13,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Security
         #region Constructors
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        private CustomPrincipal(CustomIdentity identity)
+        public CustomPrincipal(ICslaIdentity identity)
             : base(identity)
         {
         }
@@ -24,7 +24,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Security
 
         public static async Task<ICslaPrincipal> LoadPrincipalAsync(string userName, string password)
         {
-            var criteria = IoC.Container.Resolve<IIdentityCriteria>(new NamedParameter("UserName", userName), new NamedParameter("Password", password));
+            var criteria = IoC.Container.Resolve<IIdentityCriteria>(new NamedParameter("userName", userName), new NamedParameter("password", password));
             var identity = await IoC.Container.Resolve<IObjectFactory<ICslaIdentity>>().FetchAsync(criteria);
             return IoC.Container.Resolve<ICslaPrincipal>(new NamedParameter("identity", identity));
         }
