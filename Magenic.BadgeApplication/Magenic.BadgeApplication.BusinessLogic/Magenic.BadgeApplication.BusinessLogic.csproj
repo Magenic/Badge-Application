@@ -65,7 +65,10 @@
     <Compile Include="Framework\ObjectActivator.cs" />
     <Compile Include="Framework\ObjectFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rules\CanSetBadgeType.cs" />
     <Compile Include="Rules\DateOrder.cs" />
+    <Compile Include="Security\CustomIdentity.cs" />
+    <Compile Include="Security\CustomPrincipal.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

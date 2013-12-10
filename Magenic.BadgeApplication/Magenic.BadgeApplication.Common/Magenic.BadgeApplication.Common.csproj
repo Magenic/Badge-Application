@@ -53,10 +53,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arg.cs" />
+    <Compile Include="DTO\ActivityEditDTO.cs" />
+    <Compile Include="DTO\CustomIdentityDTO.cs" />
     <Compile Include="Enums\BadgeType.cs" />
+    <Compile Include="Enums\Permission.cs" />
+    <Compile Include="Enums\Role.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interfaces\IActivityEdit.cs" />
+    <Compile Include="Interfaces\IActivityEditDAL.cs" />
+    <Compile Include="Interfaces\IActivityEditDTO.cs" />
     <Compile Include="Interfaces\IBadgeEdit.cs" />
+    <Compile Include="Interfaces\ICustomIdentityDAL.cs" />
+    <Compile Include="Interfaces\ICustomIdentityDTO.cs" />
+    <Compile Include="Interfaces\IIdentityCriteria.cs" />
     <Compile Include="Interfaces\IObjectFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ApplicationResources.Designer.cs">
