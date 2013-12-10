@@ -12,14 +12,11 @@
         @Html.ImageActionLink(new Uri(Content.Images.magenic_badges_logo_png, UriKind.Relative), ApplicationResources.LogoTitle, Mvc.Home.Index())
     </div>
     <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav navbar-right">
             <li>@Html.ActionLink(ApplicationResources.BadgesLink, Mvc.Badges.Index())</li>
             <li>@Html.ActionLink(ApplicationResources.ActivitiesLink, Mvc.Activities.Index())</li>
             <li>@Html.ActionLink(ApplicationResources.AccountLink, Mvc.Account.Index())</li>
             <li>@Html.ActionLink(ApplicationResources.BadgeManagerLink, Mvc.BadgeManager.Index())</li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="navbar-text">Hello, @User.Identity.Name!</li>
         </ul>
     </div>
 </div>

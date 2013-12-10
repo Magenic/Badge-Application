@@ -23,6 +23,12 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Magenic.BadgeApplication.DB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.BusinessLogic.Tests", "Magenic.BadgeApplication.BusinessLogic.Tests\Magenic.BadgeApplication.BusinessLogic.Tests.csproj", "{15F6B4C8-7712-4E81-85EA-B4293E4C7C1E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{51877FB4-9A36-44D9-B030-5CE35BDBB83D}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.DataAccess.EF", "Magenic.BadgeApplication.DataAccess.EF\Magenic.BadgeApplication.DataAccess.EF.csproj", "{80DF9C9B-F946-42B1-87E7-57EF40709382}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.BusinessLogic.Tests.Integration", "Magenic.BadgeApplication.BusinessLogic.Tests.Integration\Magenic.BadgeApplication.BusinessLogic.Tests.Integration.csproj", "{03EBFAD6-39AE-4264-8B2B-A101402366A7}"
