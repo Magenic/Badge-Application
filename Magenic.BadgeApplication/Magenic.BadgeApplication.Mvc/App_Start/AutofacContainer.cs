@@ -24,11 +24,20 @@ namespace Magenic.BadgeApplication
             builder.RegisterModelBinderProvider();
             builder.RegisterModule(new AutofacWebTypesModule());
 
-            var services = Assembly.Load("Magenic.BadgeApplication.Common");
-            builder.RegisterAssemblyTypes(services).AsImplementedInterfaces();
+            var dataTransferObjects = Assembly.Load("Magenic.BadgeApplication.Common");
+            builder.RegisterAssemblyTypes(dataTransferObjects).AsImplementedInterfaces();
+
+            var businessLogicServices = Assembly.Load("Magenic.BadgeApplication.BusinessLogic");
+            builder.RegisterAssemblyTypes(businessLogicServices).AsImplementedInterfaces();
+
+            var dataAccessLayers = Assembly.Load("Magenic.BadgeApplication.DataAccess.EF");
+            builder.RegisterAssemblyTypes(dataAccessLayers).AsImplementedInterfaces();
+
             builder.RegisterGeneric(typeof(ObjectFactory<>)).As(typeof(IObjectFactory<>));
 
             IoC.Container = builder.Build();
+            Csla.ApplicationContext.DataPortalActivator = new ObjectActivator();
+
             DependencyResolver.SetResolver(new AutofacDependencyResolver(IoC.Container));
         }
     }
