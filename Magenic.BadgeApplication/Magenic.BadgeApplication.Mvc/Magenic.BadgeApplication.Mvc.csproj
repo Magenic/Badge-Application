@@ -20,6 +20,8 @@
     <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,6 +49,18 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.3.1.5\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.Mvc5.3.0.0\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Csla, Version=4.5.40.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CSLA-Core.4.5.40\lib\net45\Csla.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -141,6 +155,7 @@
     <Compile Include="ActivitiesController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="App_Start\AutofacContainer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -235,9 +250,17 @@
     <Content Include="Views\Badges\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">
+      <Project>{0274f325-95a1-43c8-b1d7-f81adfc0a535}</Project>
+      <Name>Magenic.BadgeApplication.BusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Magenic.BadgeApplication.Common\Magenic.BadgeApplication.Common.csproj">
       <Project>{d7b48f98-7bd5-4e80-8740-6c348a7f9a1e}</Project>
       <Name>Magenic.BadgeApplication.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Magenic.BadgeApplication.DataAccess.EF\Magenic.BadgeApplication.DataAccess.EF.csproj">
+      <Project>{80df9c9b-f946-42b1-87e7-57ef40709382}</Project>
+      <Name>Magenic.BadgeApplication.DataAccess.EF</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -284,6 +307,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

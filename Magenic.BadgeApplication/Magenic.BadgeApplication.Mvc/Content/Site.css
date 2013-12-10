@@ -18,6 +18,22 @@
     margin: 24px 0 0 24px;
 }
 
+.navbar .nav ul {
+    margin-top: 24px;
+}
+
+.navbar .nav ul li a:link,
+.navbar .nav ul li a:visited {
+    /* TODO: can we make this not px font, but em? */
+    font: 18px/18px Arial, HelveticaNeue, sans-serif;
+    color: #d3d3d3;
+    text-decoration: none;
+}
+
+.navbar .nav ul li a .active {
+    color: white;
+}
+
 .navbar .navbar-header img {
     margin: 24px 0 10px 32px;
     float: left;

@@ -15,6 +15,25 @@
 
     .nav {
         margin: 24px 0 0 24px;
+
+        ul {
+            margin-top: 24px;
+
+            li {
+                a:link, a:visited {
+                    /* TODO: can we make this not px font, but em? */
+                    font: 18px/18px Arial, HelveticaNeue, sans-serif;
+                    color: #d3d3d3;
+                    text-decoration: none;
+                }
+
+                a {
+                    .active {
+                        color: white;
+                    }
+                }
+            }
+        }
     }
 
     .navbar-header {

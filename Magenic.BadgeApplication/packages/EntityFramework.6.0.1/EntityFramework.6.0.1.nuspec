@@ -12,8 +12,6 @@
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>Entity Framework is Microsoft's recommended data access technology for new applications.</description>
     <summary>Entity Framework is Microsoft's recommended data access technology for new applications.</summary>
-    <releaseNotes />
-    <copyright />
     <language>en-US</language>
     <tags>Microsoft EF Database Data O/RM ADO.NET</tags>
     <frameworkAssemblies>
