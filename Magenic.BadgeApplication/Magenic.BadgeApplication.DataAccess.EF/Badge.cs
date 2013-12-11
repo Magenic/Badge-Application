@@ -26,19 +26,19 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public string BadgeName { get; set; }
         public string BadgeTagLine { get; set; }
         public string BadgeDescription { get; set; }
-        public Nullable<int> BadgeTypeId { get; set; }
-        public byte[] BadgeImage { get; set; }
+        public int BadgeTypeId { get; set; }
+        public string BadgePath { get; set; }
         public System.DateTime BadgeCreated { get; set; }
         public Nullable<System.DateTime> BadgeEffectiveStart { get; set; }
         public Nullable<System.DateTime> BadgeEffectiveEnd { get; set; }
-        public Nullable<int> BadgePriority { get; set; }
-        public Nullable<bool> MultipleAwardPossible { get; set; }
-        public Nullable<bool> DisplayOnce { get; set; }
-        public Nullable<bool> ManagementApprovalRequired { get; set; }
-        public Nullable<int> ActivityPointsAmount { get; set; }
-        public Nullable<int> BadgeAwardValueAmount { get; set; }
-        public int BadgeApprovedBy { get; set; }
-        public System.DateTime BadgeApprovedDate { get; set; }
+        public int BadgePriority { get; set; }
+        public bool MultipleAwardPossible { get; set; }
+        public bool DisplayOnce { get; set; }
+        public bool ManagementApprovalRequired { get; set; }
+        public int ActivityPointsAmount { get; set; }
+        public int BadgeAwardValueAmount { get; set; }
+        public Nullable<int> BadgeApprovedBy { get; set; }
+        public Nullable<System.DateTime> BadgeApprovedDate { get; set; }
     
         public virtual BadgeType BadgeType { get; set; }
         public virtual Employee Employee { get; set; }

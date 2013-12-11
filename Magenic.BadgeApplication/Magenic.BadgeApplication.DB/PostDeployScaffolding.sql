@@ -123,10 +123,10 @@ SET IDENTITY_INSERT [dbo].[BadgeType]  OFF
 SET IDENTITY_INSERT [dbo].[Badge]  ON
 MERGE INTO [dbo].[Badge]  AS Target
 USING (VALUES
-    (1, 'AT BAT', 'At bat for Magenic', 'Recognized employees who provide referrals for new business.', 1, '9/1/2013', '10/1/2013', '', 1, 1, 1, 1, 1, 20, 1, '9/1/2013'),
-    (2, 'SPEAKER', 'And now for the vocal stylings of...', 'Awarded for employees who speak at user groups, webinars, conferences, educational events or has their work published in a magazine or journal.', 1, '9/1/2013', '10/1/2013', '', 2, 1, 1, 1, 1, 50, 1, '9/1/2013'),
-    (3, 'SILVER SPEAKER', 'You silver tongued devil...', 'Awarded for employees who speak five times at user groups, webinars, conferences, educational events or has their work published in a magazine or journal.', 1, '9/1/2013', '10/1/2013', '', 3, 1, 1, 1, 5, 0, 1, '9/1/2013'),
-    (4, 'ATTENDED CODE DOJO', 'The zen of code...', 'Awarded for attending Code Dojo sessions.', 2, '1/1/2013', '1/1/2013', '', null, 0, 1, 0, 1, 0, 3, '1/1/2013')
+    (1, 'AT BAT', 'At bat for Magenic', 'Recognized employees who provide referrals for new business.', 1, '9/1/2013', '10/1/2013', null, 1, 1, 1, 1, 1, 20, 1, '9/1/2013'),
+    (2, 'SPEAKER', 'And now for the vocal stylings of...', 'Awarded for employees who speak at user groups, webinars, conferences, educational events or has their work published in a magazine or journal.', 1, '9/1/2013', '10/1/2013', null, 2, 1, 1, 1, 1, 50, 1, '9/1/2013'),
+    (3, 'SILVER SPEAKER', 'You silver tongued devil...', 'Awarded for employees who speak five times at user groups, webinars, conferences, educational events or has their work published in a magazine or journal.', 1, '9/1/2013', '10/1/2013', null, 3, 1, 1, 1, 5, 0, 1, '9/1/2013'),
+    (4, 'ATTENDED CODE DOJO', 'The zen of code...', 'Awarded for attending Code Dojo sessions.', 2, '1/1/2013', '1/1/2013', null, 4, 0, 1, 0, 1, 0, 3, '1/1/2013')
 )
 AS Source ([badge_id], [badge_name], [badge_tag_line], [badge_description], [badge_type_id], [badge_created], [badge_effective_start], [badge_effective_end], [badge_priority], [multiple_awards_possible], [display_once], [management_approval_required], [activity_points_amount], [badge_award_value_amount], [badge_approved_by], [badge_approved_date]) 
 ON Target.[BadgeId] = Source.[badge_id]

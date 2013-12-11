@@ -6,13 +6,18 @@ using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Badge
 {
     [Serializable]
     public class BadgeEdit : BusinessBase<BadgeEdit>, IBadgeEdit
     {
+        public BadgeEdit(): base()
+        { }
+        
         #region Properties
+
         public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(c => c.Id);
         public int Id
         {
@@ -41,8 +46,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             set { SetProperty(DescriptionProperty, value); }
         }
 
-        public static readonly PropertyInfo<Common.Enums.BadgeType> TypeProperty = RegisterProperty<Common.Enums.BadgeType>(c => c.Type);
-        public Common.Enums.BadgeType Type
+        public static readonly PropertyInfo<BadgeType> TypeProperty = RegisterProperty<BadgeType>(c => c.Type);
+        public BadgeType Type
         {
             get { return GetProperty(TypeProperty); }
             set { SetProperty(TypeProperty, value); }
@@ -62,15 +67,17 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             private set { LoadProperty(CreatedProperty, value); }
         }
 
-        public static readonly PropertyInfo<DateTime> EffectiveStartDateProperty = RegisterProperty<DateTime>(c => c.EffectiveStartDate);
-        public DateTime EffectiveStartDate
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        public static readonly PropertyInfo<DateTime?> EffectiveStartDateProperty = RegisterProperty<DateTime?>(c => c.EffectiveStartDate);
+        public DateTime? EffectiveStartDate
         {
             get { return GetProperty(EffectiveStartDateProperty); }
             set { SetProperty(EffectiveStartDateProperty, value); }
         }
 
-        public static readonly PropertyInfo<DateTime> EffectiveEndDateProperty = RegisterProperty<DateTime>(c => c.EffectiveEndDate);
-        public DateTime EffectiveEndDate
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        public static readonly PropertyInfo<DateTime?> EffectiveEndDateProperty = RegisterProperty<DateTime?>(c => c.EffectiveEndDate);
+        public DateTime? EffectiveEndDate
         {
             get { return GetProperty(EffectiveEndDateProperty); }
             set { SetProperty(EffectiveEndDateProperty, value); }
@@ -118,39 +125,53 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             set { SetProperty(AwardValueAmountProperty, value); }
         }
 
-        public static readonly PropertyInfo<int> ApprovedByIdProperty = RegisterProperty<int>(c => c.ApprovedById);
-        public int ApprovedById
+        public static readonly PropertyInfo<int?> ApprovedByIdProperty = RegisterProperty<int?>(c => c.ApprovedById);
+        public int? ApprovedById
         {
             get { return GetProperty(ApprovedByIdProperty); }
             set { SetProperty(ApprovedByIdProperty, value); }
         }
 
-        public static readonly PropertyInfo<DateTime> ApprovedDateProperty = RegisterProperty<DateTime>(c => c.ApprovedDate);
-        public DateTime ApprovedDate
+        public static readonly PropertyInfo<DateTime?> ApprovedDateProperty = RegisterProperty<DateTime?>(c => c.ApprovedDate);
+        public DateTime? ApprovedDate
         {
             get { return GetProperty(ApprovedDateProperty); }
             private set { LoadProperty(ApprovedDateProperty, value); }
+        }
+
+        public static readonly PropertyInfo<byte[]> ImageProperty = RegisterProperty<byte[]>(c => c.Image);
+        private byte[] Image
+        {
+            get { return GetProperty(ImageProperty); }
+            set { LoadProperty(ImageProperty, value);}
         }
 
         #endregion Properties
 
         #region Methods
 
+        /// <summary>
+        /// Sets a new image for this badge to be saved.  Any existing image path is
+        /// cleared out as it is no longer valid.  When the <see cref="BadgeEdit"/> is 
+        /// saved, the path to its location will be stored in the image path. 
+        /// </summary>
+        /// <param name="image">A <see cref="byte"/> array containing the new image.</param>
         public void SetBadgeImage(byte[] image)
         {
-            throw new NotImplementedException();
+            this.LoadProperty(ImageProperty, image);
+            this.LoadProperty(ImagePathProperty, string.Empty);
         }
 
         #endregion Methods
 
         #region Factory Methods
 
-        public static IBadgeEdit GetBadgeEditById(int badgeId)
+        public async static Task<IBadgeEdit> GetBadgeEditByIdAsync(int badgeId)
         {
-            return IoC.Container.Resolve<IObjectFactory<IBadgeEdit>>().Fetch(badgeId);
+            return await IoC.Container.Resolve<IObjectFactory<IBadgeEdit>>().FetchAsync(badgeId);
         }
 
-        public static IBadgeEdit CreateBadgeEdit()
+        public static IBadgeEdit CreateBadge()
         {
             return IoC.Container.Resolve<IObjectFactory<IBadgeEdit>>().Create();
         }
@@ -168,10 +189,141 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.BusinessRules.AddRule(new Rules.DateOrder(EffectiveStartDateProperty, EffectiveEndDateProperty));
 
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedByIdProperty, Role.Administrator.ToString()));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedDateProperty, Role.Administrator.ToString()));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ActivityPointsAmountProperty, Role.Administrator.ToString()));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, AwardValueAmountProperty, Role.Administrator.ToString()));
 
             this.BusinessRules.AddRule(new Rules.CanSetBadgeType(AuthorizationActions.WriteProperty, TypeProperty, BadgeType.Corporate, Role.Administrator.ToString()));
         }
 
         #endregion Rules
+
+        #region Data Access
+
+        [RunLocal]
+        protected override void DataPortal_Create()
+        {
+            base.DataPortal_Create();
+            this.LoadProperty(CreatedProperty, DateTime.UtcNow);
+            this.LoadProperty(PriorityProperty, int.MaxValue);
+            this.LoadProperty(TypeProperty, BadgeType.Community);
+        }
+
+        protected async Task DataPortal_Fetch(int badgeId)
+        {
+            var dal = IoC.Container.Resolve<IBadgeEditDAL>();
+
+            var result = await dal.GetBadgeByIdAsync(badgeId);
+            this.LoadData(result);
+        }
+
+        [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]
+        protected override void DataPortal_Update()
+        {
+            if (IsDeleted)
+            {
+                if (!IsNew)
+                {
+                    this.DataPortal_DeleteSelf();
+                }
+                return;
+            }
+
+            if (IsNew)
+            {
+                this.DataPortal_Insert();
+            }
+            else if (IsDirty)
+            {
+                var dal = IoC.Container.Resolve<IBadgeEditDAL>();
+                this.LoadData(dal.Update(this.UnloadData()));
+                FieldManager.UpdateChildren();
+            }
+            this.MarkClean();
+            this.MarkOld();
+        }
+
+        private IBadgeEditDTO UnloadData()
+        {
+            var returnValue = IoC.Container.Resolve<IBadgeEditDTO>();
+            using (this.BypassPropertyChecks)
+            {
+                returnValue.Id = this.Id;
+                returnValue.Name = this.Name;
+                returnValue.Tagline=this.Tagline;
+                returnValue.Description= this.Description;
+                returnValue.Type = this.Type;
+                returnValue.ImagePath = this.ImagePath;
+                returnValue.Created = this.Created;
+                returnValue.EffectiveStartDate = this.EffectiveStartDate;
+                returnValue.EffectiveEndDate = this.EffectiveEndDate;
+                returnValue.Priority = this.Priority;
+                returnValue.MultipleAwardsPossible = this.MultipleAwardsPossible;
+                returnValue.DisplayOnce = this.DisplayOnce;
+                returnValue.ManagementApprovalRequired = this.ManagementApprovalRequired;
+                returnValue.ActivityPointsAmount = this.ActivityPointsAmount;
+                returnValue.AwardValueAmount = this.AwardValueAmount;
+                returnValue.ApprovedById = this.ApprovedById;
+                returnValue.ApprovedDate = this.ApprovedDate;
+                returnValue.BadgeImage = this.Image;
+            }
+            return returnValue;
+        }
+
+        private void LoadData(IBadgeEditDTO data)
+        {
+            using (this.BypassPropertyChecks)
+            {
+                this.Id = data.Id;
+                this.Name = data.Name;
+                this.Tagline = data.Tagline;
+                this.Description = data.Description;
+                this.Type = data.Type;
+                this.ImagePath = data.ImagePath;
+                this.Created = data.Created;
+                this.EffectiveStartDate = data.EffectiveStartDate;
+                this.EffectiveEndDate = data.EffectiveEndDate;
+                this.Priority = data.Priority;
+                this.MultipleAwardsPossible = data.MultipleAwardsPossible;
+                this.DisplayOnce = data.DisplayOnce;
+                this.ManagementApprovalRequired = data.ManagementApprovalRequired;
+                this.ActivityPointsAmount = data.ActivityPointsAmount;
+                this.AwardValueAmount = data.AwardValueAmount;
+                this.ApprovedById = data.ApprovedById;
+                this.ApprovedDate = data.ApprovedDate;
+                this.Image = null;
+            }
+        }
+
+        [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]
+        protected override void DataPortal_DeleteSelf()
+        {
+            base.DataPortal_DeleteSelf();
+            var dal = IoC.Container.Resolve<IBadgeEditDAL>();
+
+            if (!IsNew)
+            {
+                this.DeleteChildren();
+                dal.Delete(this.Id);
+            }
+
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        private void DeleteChildren()
+        {
+        }
+
+        [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]
+        protected override void DataPortal_Insert()
+        {
+            base.DataPortal_Insert();
+            var dal = IoC.Container.Resolve<IBadgeEditDAL>();
+
+            this.LoadData(dal.Insert(this.UnloadData()));
+            FieldManager.UpdateChildren();
+        }
+
+        #endregion Data Access
     }
 }
