@@ -27,16 +27,16 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     
         public virtual DbSet<Activity> Activities { get; set; }
         public virtual DbSet<ActivitySubmission> ActivitySubmissions { get; set; }
-        public virtual DbSet<Badge> Badges { get; set; }
         public virtual DbSet<BadgeActivity> BadgeActivities { get; set; }
         public virtual DbSet<BadgeAward> BadgeAwards { get; set; }
-        public virtual DbSet<BadgePrerequisite> BadgePrerequisites { get; set; }
         public virtual DbSet<BadgeType> BadgeTypes { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmployeePermission> EmployeePermissions { get; set; }
         public virtual DbSet<ItemStatu> ItemStatus { get; set; }
         public virtual DbSet<Permission> Permissions { get; set; }
+        public virtual DbSet<BadgePrerequisite> BadgePrerequisites { get; set; }
         public virtual DbSet<CurrentActiveBadge> CurrentActiveBadges { get; set; }
         public virtual DbSet<EarnedBadge> EarnedBadges { get; set; }
+        public virtual DbSet<Badge> Badges { get; set; }
     }
 }

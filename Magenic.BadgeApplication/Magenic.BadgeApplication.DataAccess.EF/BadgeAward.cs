@@ -24,8 +24,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public Nullable<int> PaidCompletedBy { get; set; }
         public Nullable<bool> Published { get; set; }
     
-        public virtual Badge Badge { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual Employee Employee1 { get; set; }
+        public virtual Badge Badge { get; set; }
     }
 }

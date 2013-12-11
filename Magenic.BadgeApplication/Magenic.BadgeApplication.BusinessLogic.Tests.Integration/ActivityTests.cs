@@ -55,14 +55,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
             var activityEdit = ActivityEdit.CreateActivity();
             activityEdit.Name = newName;
             activityEdit.Description = newDescription;
-            activityEdit.RequiresApproval = true;
 
             activityEdit = (IActivityEdit)activityEdit.Save();
 
             Assert.IsNotNull(activityEdit);
             Assert.AreEqual(newName, activityEdit.Name);
             Assert.AreEqual(newDescription, activityEdit.Description);
-            Assert.IsTrue(activityEdit.RequiresApproval);
+            Assert.IsFalse(activityEdit.RequiresApproval);
             Assert.IsTrue(activityEdit.Id > 0);
         }
 
@@ -75,7 +74,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
             var activityEdit = ActivityEdit.CreateActivity();
             activityEdit.Name = newName;
             activityEdit.Description = newDescription;
-            activityEdit.RequiresApproval = true;
 
             activityEdit = (IActivityEdit)activityEdit.Save();
 

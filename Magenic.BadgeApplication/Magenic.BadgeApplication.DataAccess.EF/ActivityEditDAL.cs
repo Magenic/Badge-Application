@@ -1,4 +1,7 @@
-﻿using Magenic.BadgeApplication.Common.Interfaces;
+﻿using System.Configuration;
+using Magenic.BadgeApplication.Common.Interfaces;
+using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.Storage;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -34,7 +37,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             using (var ctx = new Entities())
             {
                 ctx.Database.Connection.Open();
-                var saveActivity = LoadActivity(data);
+                var saveActivity = LoadData(data);
                 ctx.Activities.Attach(saveActivity);
                 var objectState = ((IObjectContextAdapter)ctx).ObjectContext.ObjectStateManager;
                 objectState.GetObjectStateEntry(saveActivity).SetModifiedProperty("ActivityName");
@@ -47,7 +50,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             return data;
         }
 
-        private static Activity LoadActivity(IActivityEditDTO data)
+        private static Activity LoadData(IActivityEditDTO data)
         {
             var activityEntity = new Activity
             {
@@ -64,7 +67,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             using (var ctx = new Entities())
             {
                 ctx.Database.Connection.Open();
-                var saveActivity = LoadActivity(data);
+                var saveActivity = LoadData(data);
                 ctx.Activities.Add(saveActivity);
 
                 ctx.SaveChanges();
