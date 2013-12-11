@@ -79,4 +79,7 @@
   <ItemGroup>
     <PostDeploy Include="PostDeployScaffolding.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Magenic.BadgeApplication.DB.refactorlog" />
+  </ItemGroup>
 </Project>

@@ -48,18 +48,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
 
         #endregion Properties
 
-        #region Rules
-
-        protected override void AddBusinessRules()
-        {
-            base.AddBusinessRules();
-            this.BusinessRules.AddRule(new MaxLength(NameProperty, 100));
-            this.BusinessRules.AddRule(new Required(NameProperty));
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, RequiresApprovalProperty, Role.Administrator.ToString()));
-        }
-
-        #endregion Rules
-
         #region Factory Methods
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "activityEdit")]
@@ -74,6 +62,18 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         }
 
         #endregion Factory Methods
+
+        #region Rules
+
+        protected override void AddBusinessRules()
+        {
+            base.AddBusinessRules();
+            this.BusinessRules.AddRule(new MaxLength(NameProperty, 100));
+            this.BusinessRules.AddRule(new Required(NameProperty));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, RequiresApprovalProperty, Role.Administrator.ToString()));
+        }
+
+        #endregion Rules
 
         #region Data Access
 
@@ -91,6 +91,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             this.LoadData(result);
         }
 
+        [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]
         protected override void DataPortal_Update()
         {
             if (IsDeleted)
@@ -140,6 +141,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             }
         }
 
+        [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]
         protected override void DataPortal_DeleteSelf()
         {
             base.DataPortal_DeleteSelf();
@@ -158,6 +160,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         {
         }
 
+        [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]
         protected override void DataPortal_Insert()
         {
             base.DataPortal_Insert();

@@ -5,7 +5,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
     /// <summary>
     /// Interface to edit badges.
     /// </summary>
-    public interface IBadgeEdit
+    public interface IBadgeEdit : Csla.IBusinessBase
     {
         /// <summary>
         /// The id of the badge.
@@ -43,11 +43,11 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <summary>
         /// The date and time of when the badge is effective and can be awarded.
         /// </summary>
-        DateTime EffectiveStartDate { get; set; }
+        DateTime? EffectiveStartDate { get; set; }
         /// <summary>
         /// the date and time of when the badge is no longer effective and cannot be awarded.
         /// </summary>
-        DateTime EffectiveEndDate { get; set; }
+        DateTime? EffectiveEndDate { get; set; }
         /// <summary>
         /// A numeric priority for display order of badges.
         /// </summary>
@@ -77,10 +77,10 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <summary>
         /// The id of the person who approved this badge so it can be awarded.
         /// </summary>
-        int ApprovedById { get; set; }
+        int? ApprovedById { get; set; }
         /// <summary>
         /// The date and time of when this badge was approved to be awarded.
         /// </summary>
-        DateTime ApprovedDate { get; }
+        DateTime? ApprovedDate { get; }
     }
 }

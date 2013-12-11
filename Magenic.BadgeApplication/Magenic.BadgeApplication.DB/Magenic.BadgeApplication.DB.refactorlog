@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="c18b93d2-29a3-4d3c-aac8-92cc81452af3" ChangeDateTime="12/10/2013 23:09:15">
+    <Property Name="ElementName" Value="[dbo].[Badge].[BadgeImage]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Badge]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BadgePath" />
+  </Operation>
+</Operations>

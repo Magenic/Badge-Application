@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Magenic.BadgeApplication.DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Magenic.BadgeApplication.DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="ActivityId" />
@@ -34,19 +34,19 @@
           <Property Name="BadgeName" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="BadgeTagLine" Type="varchar" MaxLength="200" />
           <Property Name="BadgeDescription" Type="varchar(max)" />
-          <Property Name="BadgeTypeId" Type="int" />
-          <Property Name="BadgeImage" Type="varbinary(max)" />
+          <Property Name="BadgeTypeId" Type="int" Nullable="false" />
+          <Property Name="BadgePath" Type="varchar" MaxLength="512" />
           <Property Name="BadgeCreated" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="BadgeEffectiveStart" Type="datetime2" Precision="7" />
           <Property Name="BadgeEffectiveEnd" Type="datetime2" Precision="7" />
-          <Property Name="BadgePriority" Type="int" />
-          <Property Name="MultipleAwardPossible" Type="bit" />
-          <Property Name="DisplayOnce" Type="bit" />
-          <Property Name="ManagementApprovalRequired" Type="bit" />
-          <Property Name="ActivityPointsAmount" Type="int" />
-          <Property Name="BadgeAwardValueAmount" Type="int" />
-          <Property Name="BadgeApprovedBy" Type="int" Nullable="false" />
-          <Property Name="BadgeApprovedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="BadgePriority" Type="int" Nullable="false" />
+          <Property Name="MultipleAwardPossible" Type="bit" Nullable="false" />
+          <Property Name="DisplayOnce" Type="bit" Nullable="false" />
+          <Property Name="ManagementApprovalRequired" Type="bit" Nullable="false" />
+          <Property Name="ActivityPointsAmount" Type="int" Nullable="false" />
+          <Property Name="BadgeAwardValueAmount" Type="int" Nullable="false" />
+          <Property Name="BadgeApprovedBy" Type="int" />
+          <Property Name="BadgeApprovedDate" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="BadgeActivity">
           <Key>
@@ -134,7 +134,14 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.CurrentActiveBadge
             <PropertyRef Name="PayrollEligible" />
             <PropertyRef Name="BadgeId" />
             <PropertyRef Name="BadgeName" />
+            <PropertyRef Name="BadgeTypeId" />
             <PropertyRef Name="BadgeCreated" />
+            <PropertyRef Name="BadgePriority" />
+            <PropertyRef Name="MultipleAwardPossible" />
+            <PropertyRef Name="DisplayOnce" />
+            <PropertyRef Name="ManagementApprovalRequired" />
+            <PropertyRef Name="ActivityPointsAmount" />
+            <PropertyRef Name="BadgeAwardValueAmount" />
             <PropertyRef Name="BadgeApprovedBy" />
             <PropertyRef Name="BadgeApprovedDate" />
           </Key>
@@ -144,17 +151,17 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.CurrentActiveBadge
           <Property Name="BadgeName" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="BadgeTagLine" Type="varchar" MaxLength="200" />
           <Property Name="BadgeDescription" Type="varchar(max)" />
-          <Property Name="BadgeTypeId" Type="int" />
-          <Property Name="BadgeImage" Type="varbinary(max)" />
+          <Property Name="BadgeTypeId" Type="int" Nullable="false" />
+          <Property Name="BadgePath" Type="varchar" MaxLength="512" />
           <Property Name="BadgeCreated" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="BadgeEffectiveStart" Type="datetime2" Precision="7" />
           <Property Name="BadgeEffectiveEnd" Type="datetime2" Precision="7" />
-          <Property Name="BadgePriority" Type="int" />
-          <Property Name="MultipleAwardPossible" Type="bit" />
-          <Property Name="DisplayOnce" Type="bit" />
-          <Property Name="ManagementApprovalRequired" Type="bit" />
-          <Property Name="ActivityPointsAmount" Type="int" />
-          <Property Name="BadgeAwardValueAmount" Type="int" />
+          <Property Name="BadgePriority" Type="int" Nullable="false" />
+          <Property Name="MultipleAwardPossible" Type="bit" Nullable="false" />
+          <Property Name="DisplayOnce" Type="bit" Nullable="false" />
+          <Property Name="ManagementApprovalRequired" Type="bit" Nullable="false" />
+          <Property Name="ActivityPointsAmount" Type="int" Nullable="false" />
+          <Property Name="BadgeAwardValueAmount" Type="int" Nullable="false" />
           <Property Name="BadgeApprovedBy" Type="int" Nullable="false" />
           <Property Name="BadgeApprovedDate" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
@@ -168,7 +175,14 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
             <PropertyRef Name="ADName" />
             <PropertyRef Name="BadgeId" />
             <PropertyRef Name="BadgeName" />
+            <PropertyRef Name="BadgeTypeId" />
             <PropertyRef Name="BadgeCreated" />
+            <PropertyRef Name="BadgePriority" />
+            <PropertyRef Name="MultipleAwardPossible" />
+            <PropertyRef Name="DisplayOnce" />
+            <PropertyRef Name="ManagementApprovalRequired" />
+            <PropertyRef Name="ActivityPointsAmount" />
+            <PropertyRef Name="BadgeAwardValueAmount" />
             <PropertyRef Name="BadgeApprovedBy" />
             <PropertyRef Name="BadgeApprovedDate" />
             <PropertyRef Name="BadgeTypeName" />
@@ -183,17 +197,17 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <Property Name="BadgeName" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="BadgeTagLine" Type="varchar" MaxLength="200" />
           <Property Name="BadgeDescription" Type="varchar(max)" />
-          <Property Name="BadgeTypeId" Type="int" />
-          <Property Name="BadgeImage" Type="varbinary(max)" />
+          <Property Name="BadgeTypeId" Type="int" Nullable="false" />
+          <Property Name="BadgePath" Type="varchar" MaxLength="512" />
           <Property Name="BadgeCreated" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="BadgeEffectiveStart" Type="datetime2" Precision="7" />
           <Property Name="BadgeEffectiveEnd" Type="datetime2" Precision="7" />
-          <Property Name="BadgePriority" Type="int" />
-          <Property Name="MultipleAwardPossible" Type="bit" />
-          <Property Name="DisplayOnce" Type="bit" />
-          <Property Name="ManagementApprovalRequired" Type="bit" />
-          <Property Name="ActivityPointsAmount" Type="int" />
-          <Property Name="BadgeAwardValueAmount" Type="int" />
+          <Property Name="BadgePriority" Type="int" Nullable="false" />
+          <Property Name="MultipleAwardPossible" Type="bit" Nullable="false" />
+          <Property Name="DisplayOnce" Type="bit" Nullable="false" />
+          <Property Name="ManagementApprovalRequired" Type="bit" Nullable="false" />
+          <Property Name="ActivityPointsAmount" Type="int" Nullable="false" />
+          <Property Name="BadgeAwardValueAmount" Type="int" Nullable="false" />
           <Property Name="BadgeApprovedBy" Type="int" Nullable="false" />
           <Property Name="BadgeApprovedDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="BadgeTypeName" Type="varchar" MaxLength="50" Nullable="false" />
@@ -248,7 +262,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Badge_BadgeType">
-          <End Role="BadgeType" Type="Self.BadgeType" Multiplicity="0..1" />
+          <End Role="BadgeType" Type="Self.BadgeType" Multiplicity="1" />
           <End Role="Badge" Type="Self.Badge" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BadgeType">
@@ -260,7 +274,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Badge_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
           <End Role="Badge" Type="Self.Badge" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
@@ -424,7 +438,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
     [CurrentActiveBadges].[BadgeTagLine] AS [BadgeTagLine], 
     [CurrentActiveBadges].[BadgeDescription] AS [BadgeDescription], 
     [CurrentActiveBadges].[BadgeTypeId] AS [BadgeTypeId], 
-    [CurrentActiveBadges].[BadgeImage] AS [BadgeImage], 
+    [CurrentActiveBadges].[BadgePath] AS [BadgePath], 
     [CurrentActiveBadges].[BadgeCreated] AS [BadgeCreated], 
     [CurrentActiveBadges].[BadgeEffectiveStart] AS [BadgeEffectiveStart], 
     [CurrentActiveBadges].[BadgeEffectiveEnd] AS [BadgeEffectiveEnd], 
@@ -450,7 +464,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
     [EarnedBadges].[BadgeTagLine] AS [BadgeTagLine], 
     [EarnedBadges].[BadgeDescription] AS [BadgeDescription], 
     [EarnedBadges].[BadgeTypeId] AS [BadgeTypeId], 
-    [EarnedBadges].[BadgeImage] AS [BadgeImage], 
+    [EarnedBadges].[BadgePath] AS [BadgePath], 
     [EarnedBadges].[BadgeCreated] AS [BadgeCreated], 
     [EarnedBadges].[BadgeEffectiveStart] AS [BadgeEffectiveStart], 
     [EarnedBadges].[BadgeEffectiveEnd] AS [BadgeEffectiveEnd], 
@@ -535,8 +549,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
             <End Role="EmployeePermission" EntitySet="EmployeePermission" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Magenic.BadgeApplication.DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -567,34 +580,6 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <NavigationProperty Name="Employee1" Relationship="Self.fk_ActivitySubmission_EmployeeApproval" FromRole="ActivitySubmission" ToRole="Employee" />
           <NavigationProperty Name="ItemStatu" Relationship="Self.fk_ActivitySubmission_ItemStatus" FromRole="ActivitySubmission" ToRole="ItemStatus" />
         </EntityType>
-        <EntityType Name="Badge">
-          <Key>
-            <PropertyRef Name="BadgeId" />
-          </Key>
-          <Property Name="BadgeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BadgeName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="BadgeTagLine" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="BadgeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="BadgeTypeId" Type="Int32" />
-          <Property Name="BadgeImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="BadgeCreated" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="BadgeEffectiveStart" Type="DateTime" Precision="7" />
-          <Property Name="BadgeEffectiveEnd" Type="DateTime" Precision="7" />
-          <Property Name="BadgePriority" Type="Int32" />
-          <Property Name="MultipleAwardPossible" Type="Boolean" />
-          <Property Name="DisplayOnce" Type="Boolean" />
-          <Property Name="ManagementApprovalRequired" Type="Boolean" />
-          <Property Name="ActivityPointsAmount" Type="Int32" />
-          <Property Name="BadgeAwardValueAmount" Type="Int32" />
-          <Property Name="BadgeApprovedBy" Type="Int32" Nullable="false" />
-          <Property Name="BadgeApprovedDate" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="BadgeType" Relationship="Self.fk_Badge_BadgeType" FromRole="Badge" ToRole="BadgeType" />
-          <NavigationProperty Name="Employee" Relationship="Self.fk_Badge_Employee" FromRole="Badge" ToRole="Employee" />
-          <NavigationProperty Name="BadgeActivities" Relationship="Self.fk_BadgeActivity_Badge" FromRole="Badge" ToRole="BadgeActivity" />
-          <NavigationProperty Name="BadgeAwards" Relationship="Self.fk_BadgeAward_Badge" FromRole="Badge" ToRole="BadgeAward" />
-          <NavigationProperty Name="BadgePrerequisites" Relationship="Self.FK_BadgePrerequisite_Badge" FromRole="Badge" ToRole="BadgePrerequisite" />
-          <NavigationProperty Name="BadgePrerequisites1" Relationship="Self.FK_BadgePrerequisite_Badge1" FromRole="Badge" ToRole="BadgePrerequisite" />
-        </EntityType>
         <EntityType Name="BadgeActivity">
           <Key>
             <PropertyRef Name="BadgeActivityId" />
@@ -604,7 +589,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <Property Name="ActivityId" Type="Int32" Nullable="false" />
           <Property Name="PointsAwarded" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Activity" Relationship="Self.fk_BadgeActivity_Activity" FromRole="BadgeActivity" ToRole="Activity" />
-          <NavigationProperty Name="Badge" Relationship="Self.fk_BadgeActivity_Badge" FromRole="BadgeActivity" ToRole="Badge" />
+          <NavigationProperty Name="Badge" Relationship="Magenic.BadgeApplication.DBModel.fk_BadgeActivity_Badge" FromRole="BadgeActivity" ToRole="Badge" />
         </EntityType>
         <EntityType Name="BadgeAward">
           <Key>
@@ -619,19 +604,9 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <Property Name="PaidDate" Type="DateTime" Precision="7" />
           <Property Name="PaidCompletedBy" Type="Int32" />
           <Property Name="Published" Type="Boolean" />
-          <NavigationProperty Name="Badge" Relationship="Self.fk_BadgeAward_Badge" FromRole="BadgeAward" ToRole="Badge" />
           <NavigationProperty Name="Employee" Relationship="Self.fk_BadgeAward_Employee" FromRole="BadgeAward" ToRole="Employee" />
           <NavigationProperty Name="Employee1" Relationship="Self.fk_BadgeAward_PaidCompletedBy" FromRole="BadgeAward" ToRole="Employee" />
-        </EntityType>
-        <EntityType Name="BadgePrerequisite">
-          <Key>
-            <PropertyRef Name="PrerequisiteID" />
-          </Key>
-          <Property Name="PrerequisiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BadgeId" Type="Int32" />
-          <Property Name="RequiredBadgeId" Type="Int32" />
-          <NavigationProperty Name="Badge" Relationship="Self.FK_BadgePrerequisite_Badge" FromRole="BadgePrerequisite" ToRole="Badge" />
-          <NavigationProperty Name="Badge1" Relationship="Self.FK_BadgePrerequisite_Badge1" FromRole="BadgePrerequisite" ToRole="Badge" />
+          <NavigationProperty Name="Badge" Relationship="Magenic.BadgeApplication.DBModel.fk_BadgeAward_Badge" FromRole="BadgeAward" ToRole="Badge" />
         </EntityType>
         <EntityType Name="BadgeType">
           <Key>
@@ -640,7 +615,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <Property Name="BadgeTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BadgeTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PayrollEligible" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Badges" Relationship="Self.fk_Badge_BadgeType" FromRole="BadgeType" ToRole="Badge" />
+          <NavigationProperty Name="Badges" Relationship="Magenic.BadgeApplication.DBModel.fk_Badge_BadgeType" FromRole="BadgeType" ToRole="Badge" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -659,7 +634,6 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <Property Name="AwardPayoutThreshhold" Type="Int32" />
           <NavigationProperty Name="ActivitySubmissions" Relationship="Self.fk_ActivitySubmission_Employee" FromRole="Employee" ToRole="ActivitySubmission" />
           <NavigationProperty Name="ActivitySubmissions1" Relationship="Self.fk_ActivitySubmission_EmployeeApproval" FromRole="Employee" ToRole="ActivitySubmission" />
-          <NavigationProperty Name="Badges" Relationship="Self.fk_Badge_Employee" FromRole="Employee" ToRole="Badge" />
           <NavigationProperty Name="BadgeAwards" Relationship="Self.fk_BadgeAward_Employee" FromRole="Employee" ToRole="BadgeAward" />
           <NavigationProperty Name="BadgeAwards1" Relationship="Self.fk_BadgeAward_PaidCompletedBy" FromRole="Employee" ToRole="BadgeAward" />
           <NavigationProperty Name="Employee1" Relationship="Self.fk_Employee_ApprovingManager1" FromRole="Employee" ToRole="Employee1" />
@@ -667,6 +641,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <NavigationProperty Name="Employee11" Relationship="Self.fk_Employee_ApprovingManager2" FromRole="Employee" ToRole="Employee1" />
           <NavigationProperty Name="Employee3" Relationship="Self.fk_Employee_ApprovingManager2" FromRole="Employee1" ToRole="Employee" />
           <NavigationProperty Name="EmployeePermissions" Relationship="Self.fk_EmployeePermission_Employee" FromRole="Employee" ToRole="EmployeePermission" />
+          <NavigationProperty Name="Badges" Relationship="Magenic.BadgeApplication.DBModel.fk_Badge_Employee" FromRole="Employee" ToRole="Badge" />
         </EntityType>
         <EntityType Name="EmployeePermission">
           <Key>
@@ -694,75 +669,6 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <Property Name="PermissionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PermissionDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EmployeePermissions" Relationship="Self.fk_EmployeePermission_Permission" FromRole="Permission" ToRole="EmployeePermission" />
-        </EntityType>
-        <EntityType Name="CurrentActiveBadge">
-          <Key>
-            <PropertyRef Name="BadgeTypeName" />
-            <PropertyRef Name="PayrollEligible" />
-            <PropertyRef Name="BadgeId" />
-            <PropertyRef Name="BadgeName" />
-            <PropertyRef Name="BadgeCreated" />
-            <PropertyRef Name="BadgeApprovedBy" />
-            <PropertyRef Name="BadgeApprovedDate" />
-          </Key>
-          <Property Name="BadgeTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PayrollEligible" Type="Boolean" Nullable="false" />
-          <Property Name="BadgeId" Type="Int32" Nullable="false" />
-          <Property Name="BadgeName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="BadgeTagLine" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="BadgeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="BadgeTypeId" Type="Int32" />
-          <Property Name="BadgeImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="BadgeCreated" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="BadgeEffectiveStart" Type="DateTime" Precision="7" />
-          <Property Name="BadgeEffectiveEnd" Type="DateTime" Precision="7" />
-          <Property Name="BadgePriority" Type="Int32" />
-          <Property Name="MultipleAwardPossible" Type="Boolean" />
-          <Property Name="DisplayOnce" Type="Boolean" />
-          <Property Name="ManagementApprovalRequired" Type="Boolean" />
-          <Property Name="ActivityPointsAmount" Type="Int32" />
-          <Property Name="BadgeAwardValueAmount" Type="Int32" />
-          <Property Name="BadgeApprovedBy" Type="Int32" Nullable="false" />
-          <Property Name="BadgeApprovedDate" Type="DateTime" Nullable="false" Precision="7" />
-        </EntityType>
-        <EntityType Name="EarnedBadge">
-          <Key>
-            <PropertyRef Name="EmployeeId" />
-            <PropertyRef Name="FirstName" />
-            <PropertyRef Name="LastName" />
-            <PropertyRef Name="ADName" />
-            <PropertyRef Name="BadgeId" />
-            <PropertyRef Name="BadgeName" />
-            <PropertyRef Name="BadgeCreated" />
-            <PropertyRef Name="BadgeApprovedBy" />
-            <PropertyRef Name="BadgeApprovedDate" />
-            <PropertyRef Name="BadgeTypeName" />
-            <PropertyRef Name="PayrollEligible" />
-          </Key>
-          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="AwardPayoutThreshhold" Type="Int32" />
-          <Property Name="ADName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="BadgeId" Type="Int32" Nullable="false" />
-          <Property Name="BadgeName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="BadgeTagLine" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="BadgeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="BadgeTypeId" Type="Int32" />
-          <Property Name="BadgeImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="BadgeCreated" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="BadgeEffectiveStart" Type="DateTime" Precision="7" />
-          <Property Name="BadgeEffectiveEnd" Type="DateTime" Precision="7" />
-          <Property Name="BadgePriority" Type="Int32" />
-          <Property Name="MultipleAwardPossible" Type="Boolean" />
-          <Property Name="DisplayOnce" Type="Boolean" />
-          <Property Name="ManagementApprovalRequired" Type="Boolean" />
-          <Property Name="ActivityPointsAmount" Type="Int32" />
-          <Property Name="BadgeAwardValueAmount" Type="Int32" />
-          <Property Name="BadgeApprovedBy" Type="Int32" Nullable="false" />
-          <Property Name="BadgeApprovedDate" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="BadgeTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PayrollEligible" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="fk_ActivitySubmission_Activity">
           <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
@@ -821,78 +727,6 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
             </Principal>
             <Dependent Role="ActivitySubmission">
               <PropertyRef Name="SubmissionStatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Badge_BadgeType">
-          <End Role="BadgeType" Type="Self.BadgeType" Multiplicity="0..1" />
-          <End Role="Badge" Type="Self.Badge" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BadgeType">
-              <PropertyRef Name="BadgeTypeId" />
-            </Principal>
-            <Dependent Role="Badge">
-              <PropertyRef Name="BadgeTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Badge_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Badge" Type="Self.Badge" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeId" />
-            </Principal>
-            <Dependent Role="Badge">
-              <PropertyRef Name="BadgeApprovedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_BadgeActivity_Badge">
-          <End Role="Badge" Type="Self.Badge" Multiplicity="1" />
-          <End Role="BadgeActivity" Type="Self.BadgeActivity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Badge">
-              <PropertyRef Name="BadgeId" />
-            </Principal>
-            <Dependent Role="BadgeActivity">
-              <PropertyRef Name="BadgeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_BadgeAward_Badge">
-          <End Role="Badge" Type="Self.Badge" Multiplicity="1" />
-          <End Role="BadgeAward" Type="Self.BadgeAward" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Badge">
-              <PropertyRef Name="BadgeId" />
-            </Principal>
-            <Dependent Role="BadgeAward">
-              <PropertyRef Name="BadgeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BadgePrerequisite_Badge">
-          <End Role="Badge" Type="Self.Badge" Multiplicity="0..1" />
-          <End Role="BadgePrerequisite" Type="Self.BadgePrerequisite" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Badge">
-              <PropertyRef Name="BadgeId" />
-            </Principal>
-            <Dependent Role="BadgePrerequisite">
-              <PropertyRef Name="BadgeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BadgePrerequisite_Badge1">
-          <End Role="Badge" Type="Self.Badge" Multiplicity="0..1" />
-          <End Role="BadgePrerequisite" Type="Self.BadgePrerequisite" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Badge">
-              <PropertyRef Name="BadgeId" />
-            </Principal>
-            <Dependent Role="BadgePrerequisite">
-              <PropertyRef Name="RequiredBadgeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -971,17 +805,13 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Activities" EntityType="Self.Activity" />
           <EntitySet Name="ActivitySubmissions" EntityType="Self.ActivitySubmission" />
-          <EntitySet Name="Badges" EntityType="Self.Badge" />
           <EntitySet Name="BadgeActivities" EntityType="Self.BadgeActivity" />
           <EntitySet Name="BadgeAwards" EntityType="Self.BadgeAward" />
-          <EntitySet Name="BadgePrerequisites" EntityType="Self.BadgePrerequisite" />
           <EntitySet Name="BadgeTypes" EntityType="Self.BadgeType" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="EmployeePermissions" EntityType="Self.EmployeePermission" />
           <EntitySet Name="ItemStatus" EntityType="Self.ItemStatu" />
           <EntitySet Name="Permissions" EntityType="Self.Permission" />
-          <EntitySet Name="CurrentActiveBadges" EntityType="Self.CurrentActiveBadge" />
-          <EntitySet Name="EarnedBadges" EntityType="Self.EarnedBadge" />
           <AssociationSet Name="fk_ActivitySubmission_Activity" Association="Self.fk_ActivitySubmission_Activity">
             <End Role="Activity" EntitySet="Activities" />
             <End Role="ActivitySubmission" EntitySet="ActivitySubmissions" />
@@ -1001,30 +831,6 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <AssociationSet Name="fk_ActivitySubmission_ItemStatus" Association="Self.fk_ActivitySubmission_ItemStatus">
             <End Role="ItemStatus" EntitySet="ItemStatus" />
             <End Role="ActivitySubmission" EntitySet="ActivitySubmissions" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Badge_BadgeType" Association="Self.fk_Badge_BadgeType">
-            <End Role="BadgeType" EntitySet="BadgeTypes" />
-            <End Role="Badge" EntitySet="Badges" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Badge_Employee" Association="Self.fk_Badge_Employee">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="Badge" EntitySet="Badges" />
-          </AssociationSet>
-          <AssociationSet Name="fk_BadgeActivity_Badge" Association="Self.fk_BadgeActivity_Badge">
-            <End Role="Badge" EntitySet="Badges" />
-            <End Role="BadgeActivity" EntitySet="BadgeActivities" />
-          </AssociationSet>
-          <AssociationSet Name="fk_BadgeAward_Badge" Association="Self.fk_BadgeAward_Badge">
-            <End Role="Badge" EntitySet="Badges" />
-            <End Role="BadgeAward" EntitySet="BadgeAwards" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BadgePrerequisite_Badge" Association="Self.FK_BadgePrerequisite_Badge">
-            <End Role="Badge" EntitySet="Badges" />
-            <End Role="BadgePrerequisite" EntitySet="BadgePrerequisites" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BadgePrerequisite_Badge1" Association="Self.FK_BadgePrerequisite_Badge1">
-            <End Role="Badge" EntitySet="Badges" />
-            <End Role="BadgePrerequisite" EntitySet="BadgePrerequisites" />
           </AssociationSet>
           <AssociationSet Name="fk_BadgeAward_Employee" Association="Self.fk_BadgeAward_Employee">
             <End Role="Employee" EntitySet="Employees" />
@@ -1050,8 +856,229 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
             <End Role="Permission" EntitySet="Permissions" />
             <End Role="EmployeePermission" EntitySet="EmployeePermissions" />
           </AssociationSet>
-        </EntityContainer>
-      </Schema>
+          <EntitySet Name="BadgePrerequisites" EntityType="Magenic.BadgeApplication.DBModel.BadgePrerequisite" />
+          <EntitySet Name="CurrentActiveBadges" EntityType="Magenic.BadgeApplication.DBModel.CurrentActiveBadge" />
+          <EntitySet Name="EarnedBadges" EntityType="Magenic.BadgeApplication.DBModel.EarnedBadge" />
+          <EntitySet Name="Badges" EntityType="Magenic.BadgeApplication.DBModel.Badge" />
+          <AssociationSet Name="fk_Badge_BadgeType" Association="Magenic.BadgeApplication.DBModel.fk_Badge_BadgeType">
+            <End Role="BadgeType" EntitySet="BadgeTypes" />
+            <End Role="Badge" EntitySet="Badges" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Badge_Employee" Association="Magenic.BadgeApplication.DBModel.fk_Badge_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Badge" EntitySet="Badges" />
+          </AssociationSet>
+          <AssociationSet Name="fk_BadgeActivity_Badge" Association="Magenic.BadgeApplication.DBModel.fk_BadgeActivity_Badge">
+            <End Role="Badge" EntitySet="Badges" />
+            <End Role="BadgeActivity" EntitySet="BadgeActivities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_BadgeAward_Badge" Association="Magenic.BadgeApplication.DBModel.fk_BadgeAward_Badge">
+            <End Role="Badge" EntitySet="Badges" />
+            <End Role="BadgeAward" EntitySet="BadgeAwards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BadgePrerequisite_Badge" Association="Magenic.BadgeApplication.DBModel.FK_BadgePrerequisite_Badge">
+            <End Role="Badge" EntitySet="Badges" />
+            <End Role="BadgePrerequisite" EntitySet="BadgePrerequisites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BadgePrerequisite_Badge1" Association="Magenic.BadgeApplication.DBModel.FK_BadgePrerequisite_Badge1">
+            <End Role="Badge" EntitySet="Badges" />
+            <End Role="BadgePrerequisite" EntitySet="BadgePrerequisites" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="BadgePrerequisite">
+          <Key>
+            <PropertyRef Name="PrerequisiteID" />
+          </Key>
+          <Property Name="PrerequisiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BadgeId" Type="Int32" />
+          <Property Name="RequiredBadgeId" Type="Int32" />
+          <NavigationProperty Name="Badge" Relationship="Magenic.BadgeApplication.DBModel.FK_BadgePrerequisite_Badge" FromRole="BadgePrerequisite" ToRole="Badge" />
+          <NavigationProperty Name="Badge1" Relationship="Magenic.BadgeApplication.DBModel.FK_BadgePrerequisite_Badge1" FromRole="BadgePrerequisite" ToRole="Badge" />
+        </EntityType>
+        <EntityType Name="CurrentActiveBadge">
+          <Key>
+            <PropertyRef Name="BadgeTypeName" />
+            <PropertyRef Name="PayrollEligible" />
+            <PropertyRef Name="BadgeId" />
+            <PropertyRef Name="BadgeName" />
+            <PropertyRef Name="BadgeTypeId" />
+            <PropertyRef Name="BadgeCreated" />
+            <PropertyRef Name="BadgePriority" />
+            <PropertyRef Name="MultipleAwardPossible" />
+            <PropertyRef Name="DisplayOnce" />
+            <PropertyRef Name="ManagementApprovalRequired" />
+            <PropertyRef Name="ActivityPointsAmount" />
+            <PropertyRef Name="BadgeAwardValueAmount" />
+            <PropertyRef Name="BadgeApprovedBy" />
+            <PropertyRef Name="BadgeApprovedDate" />
+          </Key>
+          <Property Name="BadgeTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayrollEligible" Type="Boolean" Nullable="false" />
+          <Property Name="BadgeId" Type="Int32" Nullable="false" />
+          <Property Name="BadgeName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeTagLine" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeTypeId" Type="Int32" Nullable="false" />
+          <Property Name="BadgePath" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeCreated" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="BadgeEffectiveStart" Type="DateTime" Precision="7" />
+          <Property Name="BadgeEffectiveEnd" Type="DateTime" Precision="7" />
+          <Property Name="BadgePriority" Type="Int32" Nullable="false" />
+          <Property Name="MultipleAwardPossible" Type="Boolean" Nullable="false" />
+          <Property Name="DisplayOnce" Type="Boolean" Nullable="false" />
+          <Property Name="ManagementApprovalRequired" Type="Boolean" Nullable="false" />
+          <Property Name="ActivityPointsAmount" Type="Int32" Nullable="false" />
+          <Property Name="BadgeAwardValueAmount" Type="Int32" Nullable="false" />
+          <Property Name="BadgeApprovedBy" Type="Int32" Nullable="false" />
+          <Property Name="BadgeApprovedDate" Type="DateTime" Nullable="false" Precision="7" />
+        </EntityType>
+        <EntityType Name="EarnedBadge">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="ADName" />
+            <PropertyRef Name="BadgeId" />
+            <PropertyRef Name="BadgeName" />
+            <PropertyRef Name="BadgeTypeId" />
+            <PropertyRef Name="BadgeCreated" />
+            <PropertyRef Name="BadgePriority" />
+            <PropertyRef Name="MultipleAwardPossible" />
+            <PropertyRef Name="DisplayOnce" />
+            <PropertyRef Name="ManagementApprovalRequired" />
+            <PropertyRef Name="ActivityPointsAmount" />
+            <PropertyRef Name="BadgeAwardValueAmount" />
+            <PropertyRef Name="BadgeApprovedBy" />
+            <PropertyRef Name="BadgeApprovedDate" />
+            <PropertyRef Name="BadgeTypeName" />
+            <PropertyRef Name="PayrollEligible" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AwardPayoutThreshhold" Type="Int32" />
+          <Property Name="ADName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeId" Type="Int32" Nullable="false" />
+          <Property Name="BadgeName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeTagLine" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeTypeId" Type="Int32" Nullable="false" />
+          <Property Name="BadgePath" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeCreated" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="BadgeEffectiveStart" Type="DateTime" Precision="7" />
+          <Property Name="BadgeEffectiveEnd" Type="DateTime" Precision="7" />
+          <Property Name="BadgePriority" Type="Int32" Nullable="false" />
+          <Property Name="MultipleAwardPossible" Type="Boolean" Nullable="false" />
+          <Property Name="DisplayOnce" Type="Boolean" Nullable="false" />
+          <Property Name="ManagementApprovalRequired" Type="Boolean" Nullable="false" />
+          <Property Name="ActivityPointsAmount" Type="Int32" Nullable="false" />
+          <Property Name="BadgeAwardValueAmount" Type="Int32" Nullable="false" />
+          <Property Name="BadgeApprovedBy" Type="Int32" Nullable="false" />
+          <Property Name="BadgeApprovedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="BadgeTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PayrollEligible" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Badge">
+          <Key>
+            <PropertyRef Name="BadgeId" />
+          </Key>
+          <Property Name="BadgeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BadgeName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeTagLine" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeTypeId" Type="Int32" Nullable="false" />
+          <Property Name="BadgePath" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeCreated" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="BadgeEffectiveStart" Type="DateTime" Precision="7" />
+          <Property Name="BadgeEffectiveEnd" Type="DateTime" Precision="7" />
+          <Property Name="BadgePriority" Type="Int32" Nullable="false" />
+          <Property Name="MultipleAwardPossible" Type="Boolean" Nullable="false" />
+          <Property Name="DisplayOnce" Type="Boolean" Nullable="false" />
+          <Property Name="ManagementApprovalRequired" Type="Boolean" Nullable="false" />
+          <Property Name="ActivityPointsAmount" Type="Int32" Nullable="false" />
+          <Property Name="BadgeAwardValueAmount" Type="Int32" Nullable="false" />
+          <Property Name="BadgeApprovedBy" Type="Int32" />
+          <Property Name="BadgeApprovedDate" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="BadgeType" Relationship="Magenic.BadgeApplication.DBModel.fk_Badge_BadgeType" FromRole="Badge" ToRole="BadgeType" />
+          <NavigationProperty Name="Employee" Relationship="Magenic.BadgeApplication.DBModel.fk_Badge_Employee" FromRole="Badge" ToRole="Employee" />
+          <NavigationProperty Name="BadgeActivities" Relationship="Magenic.BadgeApplication.DBModel.fk_BadgeActivity_Badge" FromRole="Badge" ToRole="BadgeActivity" />
+          <NavigationProperty Name="BadgeAwards" Relationship="Magenic.BadgeApplication.DBModel.fk_BadgeAward_Badge" FromRole="Badge" ToRole="BadgeAward" />
+          <NavigationProperty Name="BadgePrerequisites" Relationship="Magenic.BadgeApplication.DBModel.FK_BadgePrerequisite_Badge" FromRole="Badge" ToRole="BadgePrerequisite" />
+          <NavigationProperty Name="BadgePrerequisites1" Relationship="Magenic.BadgeApplication.DBModel.FK_BadgePrerequisite_Badge1" FromRole="Badge" ToRole="BadgePrerequisite" />
+        </EntityType>
+        <Association Name="fk_Badge_BadgeType">
+          <End Type="Magenic.BadgeApplication.DBModel.BadgeType" Role="BadgeType" Multiplicity="1" />
+          <End Type="Magenic.BadgeApplication.DBModel.Badge" Role="Badge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BadgeType">
+              <PropertyRef Name="BadgeTypeId" />
+            </Principal>
+            <Dependent Role="Badge">
+              <PropertyRef Name="BadgeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Badge_Employee">
+          <End Type="Magenic.BadgeApplication.DBModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="Magenic.BadgeApplication.DBModel.Badge" Role="Badge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Badge">
+              <PropertyRef Name="BadgeApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_BadgeActivity_Badge">
+          <End Type="Magenic.BadgeApplication.DBModel.Badge" Role="Badge" Multiplicity="1" />
+          <End Type="Magenic.BadgeApplication.DBModel.BadgeActivity" Role="BadgeActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Badge">
+              <PropertyRef Name="BadgeId" />
+            </Principal>
+            <Dependent Role="BadgeActivity">
+              <PropertyRef Name="BadgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_BadgeAward_Badge">
+          <End Type="Magenic.BadgeApplication.DBModel.Badge" Role="Badge" Multiplicity="1" />
+          <End Type="Magenic.BadgeApplication.DBModel.BadgeAward" Role="BadgeAward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Badge">
+              <PropertyRef Name="BadgeId" />
+            </Principal>
+            <Dependent Role="BadgeAward">
+              <PropertyRef Name="BadgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BadgePrerequisite_Badge">
+          <End Type="Magenic.BadgeApplication.DBModel.Badge" Role="Badge" Multiplicity="0..1" />
+          <End Type="Magenic.BadgeApplication.DBModel.BadgePrerequisite" Role="BadgePrerequisite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Badge">
+              <PropertyRef Name="BadgeId" />
+            </Principal>
+            <Dependent Role="BadgePrerequisite">
+              <PropertyRef Name="BadgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BadgePrerequisite_Badge1">
+          <End Type="Magenic.BadgeApplication.DBModel.Badge" Role="Badge" Multiplicity="0..1" />
+          <End Type="Magenic.BadgeApplication.DBModel.BadgePrerequisite" Role="BadgePrerequisite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Badge">
+              <PropertyRef Name="BadgeId" />
+            </Principal>
+            <Dependent Role="BadgePrerequisite">
+              <PropertyRef Name="RequiredBadgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1080,29 +1107,6 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Badges">
-            <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.Badge">
-              <MappingFragment StoreEntitySet="Badge">
-                <ScalarProperty Name="BadgeId" ColumnName="BadgeId" />
-                <ScalarProperty Name="BadgeName" ColumnName="BadgeName" />
-                <ScalarProperty Name="BadgeTagLine" ColumnName="BadgeTagLine" />
-                <ScalarProperty Name="BadgeDescription" ColumnName="BadgeDescription" />
-                <ScalarProperty Name="BadgeTypeId" ColumnName="BadgeTypeId" />
-                <ScalarProperty Name="BadgeImage" ColumnName="BadgeImage" />
-                <ScalarProperty Name="BadgeCreated" ColumnName="BadgeCreated" />
-                <ScalarProperty Name="BadgeEffectiveStart" ColumnName="BadgeEffectiveStart" />
-                <ScalarProperty Name="BadgeEffectiveEnd" ColumnName="BadgeEffectiveEnd" />
-                <ScalarProperty Name="BadgePriority" ColumnName="BadgePriority" />
-                <ScalarProperty Name="MultipleAwardPossible" ColumnName="MultipleAwardPossible" />
-                <ScalarProperty Name="DisplayOnce" ColumnName="DisplayOnce" />
-                <ScalarProperty Name="ManagementApprovalRequired" ColumnName="ManagementApprovalRequired" />
-                <ScalarProperty Name="ActivityPointsAmount" ColumnName="ActivityPointsAmount" />
-                <ScalarProperty Name="BadgeAwardValueAmount" ColumnName="BadgeAwardValueAmount" />
-                <ScalarProperty Name="BadgeApprovedBy" ColumnName="BadgeApprovedBy" />
-                <ScalarProperty Name="BadgeApprovedDate" ColumnName="BadgeApprovedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="BadgeActivities">
             <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.BadgeActivity">
               <MappingFragment StoreEntitySet="BadgeActivity">
@@ -1125,15 +1129,6 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
                 <ScalarProperty Name="PaidDate" ColumnName="PaidDate" />
                 <ScalarProperty Name="PaidCompletedBy" ColumnName="PaidCompletedBy" />
                 <ScalarProperty Name="Published" ColumnName="Published" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BadgePrerequisites">
-            <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.BadgePrerequisite">
-              <MappingFragment StoreEntitySet="BadgePrerequisite">
-                <ScalarProperty Name="PrerequisiteID" ColumnName="PrerequisiteID" />
-                <ScalarProperty Name="BadgeId" ColumnName="BadgeId" />
-                <ScalarProperty Name="RequiredBadgeId" ColumnName="RequiredBadgeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1189,58 +1184,90 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="BadgePrerequisites">
+            <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.BadgePrerequisite">
+              <MappingFragment StoreEntitySet="BadgePrerequisite">
+                <ScalarProperty Name="RequiredBadgeId" ColumnName="RequiredBadgeId" />
+                <ScalarProperty Name="BadgeId" ColumnName="BadgeId" />
+                <ScalarProperty Name="PrerequisiteID" ColumnName="PrerequisiteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CurrentActiveBadges">
             <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.CurrentActiveBadge">
               <MappingFragment StoreEntitySet="CurrentActiveBadges">
-                <ScalarProperty Name="BadgeTypeName" ColumnName="BadgeTypeName" />
-                <ScalarProperty Name="PayrollEligible" ColumnName="PayrollEligible" />
-                <ScalarProperty Name="BadgeId" ColumnName="BadgeId" />
-                <ScalarProperty Name="BadgeName" ColumnName="BadgeName" />
-                <ScalarProperty Name="BadgeTagLine" ColumnName="BadgeTagLine" />
-                <ScalarProperty Name="BadgeDescription" ColumnName="BadgeDescription" />
-                <ScalarProperty Name="BadgeTypeId" ColumnName="BadgeTypeId" />
-                <ScalarProperty Name="BadgeImage" ColumnName="BadgeImage" />
-                <ScalarProperty Name="BadgeCreated" ColumnName="BadgeCreated" />
-                <ScalarProperty Name="BadgeEffectiveStart" ColumnName="BadgeEffectiveStart" />
-                <ScalarProperty Name="BadgeEffectiveEnd" ColumnName="BadgeEffectiveEnd" />
-                <ScalarProperty Name="BadgePriority" ColumnName="BadgePriority" />
-                <ScalarProperty Name="MultipleAwardPossible" ColumnName="MultipleAwardPossible" />
-                <ScalarProperty Name="DisplayOnce" ColumnName="DisplayOnce" />
-                <ScalarProperty Name="ManagementApprovalRequired" ColumnName="ManagementApprovalRequired" />
-                <ScalarProperty Name="ActivityPointsAmount" ColumnName="ActivityPointsAmount" />
-                <ScalarProperty Name="BadgeAwardValueAmount" ColumnName="BadgeAwardValueAmount" />
-                <ScalarProperty Name="BadgeApprovedBy" ColumnName="BadgeApprovedBy" />
                 <ScalarProperty Name="BadgeApprovedDate" ColumnName="BadgeApprovedDate" />
+                <ScalarProperty Name="BadgeApprovedBy" ColumnName="BadgeApprovedBy" />
+                <ScalarProperty Name="BadgeAwardValueAmount" ColumnName="BadgeAwardValueAmount" />
+                <ScalarProperty Name="ActivityPointsAmount" ColumnName="ActivityPointsAmount" />
+                <ScalarProperty Name="ManagementApprovalRequired" ColumnName="ManagementApprovalRequired" />
+                <ScalarProperty Name="DisplayOnce" ColumnName="DisplayOnce" />
+                <ScalarProperty Name="MultipleAwardPossible" ColumnName="MultipleAwardPossible" />
+                <ScalarProperty Name="BadgePriority" ColumnName="BadgePriority" />
+                <ScalarProperty Name="BadgeEffectiveEnd" ColumnName="BadgeEffectiveEnd" />
+                <ScalarProperty Name="BadgeEffectiveStart" ColumnName="BadgeEffectiveStart" />
+                <ScalarProperty Name="BadgeCreated" ColumnName="BadgeCreated" />
+                <ScalarProperty Name="BadgePath" ColumnName="BadgePath" />
+                <ScalarProperty Name="BadgeTypeId" ColumnName="BadgeTypeId" />
+                <ScalarProperty Name="BadgeDescription" ColumnName="BadgeDescription" />
+                <ScalarProperty Name="BadgeTagLine" ColumnName="BadgeTagLine" />
+                <ScalarProperty Name="BadgeName" ColumnName="BadgeName" />
+                <ScalarProperty Name="BadgeId" ColumnName="BadgeId" />
+                <ScalarProperty Name="PayrollEligible" ColumnName="PayrollEligible" />
+                <ScalarProperty Name="BadgeTypeName" ColumnName="BadgeTypeName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EarnedBadges">
             <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.EarnedBadge">
               <MappingFragment StoreEntitySet="EarnedBadges">
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="AwardPayoutThreshhold" ColumnName="AwardPayoutThreshhold" />
-                <ScalarProperty Name="ADName" ColumnName="ADName" />
-                <ScalarProperty Name="BadgeId" ColumnName="BadgeId" />
-                <ScalarProperty Name="BadgeName" ColumnName="BadgeName" />
-                <ScalarProperty Name="BadgeTagLine" ColumnName="BadgeTagLine" />
-                <ScalarProperty Name="BadgeDescription" ColumnName="BadgeDescription" />
-                <ScalarProperty Name="BadgeTypeId" ColumnName="BadgeTypeId" />
-                <ScalarProperty Name="BadgeImage" ColumnName="BadgeImage" />
-                <ScalarProperty Name="BadgeCreated" ColumnName="BadgeCreated" />
-                <ScalarProperty Name="BadgeEffectiveStart" ColumnName="BadgeEffectiveStart" />
-                <ScalarProperty Name="BadgeEffectiveEnd" ColumnName="BadgeEffectiveEnd" />
-                <ScalarProperty Name="BadgePriority" ColumnName="BadgePriority" />
-                <ScalarProperty Name="MultipleAwardPossible" ColumnName="MultipleAwardPossible" />
-                <ScalarProperty Name="DisplayOnce" ColumnName="DisplayOnce" />
-                <ScalarProperty Name="ManagementApprovalRequired" ColumnName="ManagementApprovalRequired" />
-                <ScalarProperty Name="ActivityPointsAmount" ColumnName="ActivityPointsAmount" />
-                <ScalarProperty Name="BadgeAwardValueAmount" ColumnName="BadgeAwardValueAmount" />
-                <ScalarProperty Name="BadgeApprovedBy" ColumnName="BadgeApprovedBy" />
-                <ScalarProperty Name="BadgeApprovedDate" ColumnName="BadgeApprovedDate" />
-                <ScalarProperty Name="BadgeTypeName" ColumnName="BadgeTypeName" />
                 <ScalarProperty Name="PayrollEligible" ColumnName="PayrollEligible" />
+                <ScalarProperty Name="BadgeTypeName" ColumnName="BadgeTypeName" />
+                <ScalarProperty Name="BadgeApprovedDate" ColumnName="BadgeApprovedDate" />
+                <ScalarProperty Name="BadgeApprovedBy" ColumnName="BadgeApprovedBy" />
+                <ScalarProperty Name="BadgeAwardValueAmount" ColumnName="BadgeAwardValueAmount" />
+                <ScalarProperty Name="ActivityPointsAmount" ColumnName="ActivityPointsAmount" />
+                <ScalarProperty Name="ManagementApprovalRequired" ColumnName="ManagementApprovalRequired" />
+                <ScalarProperty Name="DisplayOnce" ColumnName="DisplayOnce" />
+                <ScalarProperty Name="MultipleAwardPossible" ColumnName="MultipleAwardPossible" />
+                <ScalarProperty Name="BadgePriority" ColumnName="BadgePriority" />
+                <ScalarProperty Name="BadgeEffectiveEnd" ColumnName="BadgeEffectiveEnd" />
+                <ScalarProperty Name="BadgeEffectiveStart" ColumnName="BadgeEffectiveStart" />
+                <ScalarProperty Name="BadgeCreated" ColumnName="BadgeCreated" />
+                <ScalarProperty Name="BadgePath" ColumnName="BadgePath" />
+                <ScalarProperty Name="BadgeTypeId" ColumnName="BadgeTypeId" />
+                <ScalarProperty Name="BadgeDescription" ColumnName="BadgeDescription" />
+                <ScalarProperty Name="BadgeTagLine" ColumnName="BadgeTagLine" />
+                <ScalarProperty Name="BadgeName" ColumnName="BadgeName" />
+                <ScalarProperty Name="BadgeId" ColumnName="BadgeId" />
+                <ScalarProperty Name="ADName" ColumnName="ADName" />
+                <ScalarProperty Name="AwardPayoutThreshhold" ColumnName="AwardPayoutThreshhold" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Badges">
+            <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.Badge">
+              <MappingFragment StoreEntitySet="Badge">
+                <ScalarProperty Name="BadgeApprovedDate" ColumnName="BadgeApprovedDate" />
+                <ScalarProperty Name="BadgeApprovedBy" ColumnName="BadgeApprovedBy" />
+                <ScalarProperty Name="BadgeAwardValueAmount" ColumnName="BadgeAwardValueAmount" />
+                <ScalarProperty Name="ActivityPointsAmount" ColumnName="ActivityPointsAmount" />
+                <ScalarProperty Name="ManagementApprovalRequired" ColumnName="ManagementApprovalRequired" />
+                <ScalarProperty Name="DisplayOnce" ColumnName="DisplayOnce" />
+                <ScalarProperty Name="MultipleAwardPossible" ColumnName="MultipleAwardPossible" />
+                <ScalarProperty Name="BadgePriority" ColumnName="BadgePriority" />
+                <ScalarProperty Name="BadgeEffectiveEnd" ColumnName="BadgeEffectiveEnd" />
+                <ScalarProperty Name="BadgeEffectiveStart" ColumnName="BadgeEffectiveStart" />
+                <ScalarProperty Name="BadgeCreated" ColumnName="BadgeCreated" />
+                <ScalarProperty Name="BadgePath" ColumnName="BadgePath" />
+                <ScalarProperty Name="BadgeTypeId" ColumnName="BadgeTypeId" />
+                <ScalarProperty Name="BadgeDescription" ColumnName="BadgeDescription" />
+                <ScalarProperty Name="BadgeTagLine" ColumnName="BadgeTagLine" />
+                <ScalarProperty Name="BadgeName" ColumnName="BadgeName" />
+                <ScalarProperty Name="BadgeId" ColumnName="BadgeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

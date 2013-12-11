@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Arg.cs" />
     <Compile Include="DTO\ActivityEditDTO.cs" />
+    <Compile Include="DTO\BadgeEditDTO.cs" />
     <Compile Include="DTO\CustomIdentityDTO.cs" />
     <Compile Include="Enums\BadgeType.cs" />
     <Compile Include="Enums\Permission.cs" />
@@ -63,6 +64,8 @@
     <Compile Include="Interfaces\IActivityEditDAL.cs" />
     <Compile Include="Interfaces\IActivityEditDTO.cs" />
     <Compile Include="Interfaces\IBadgeEdit.cs" />
+    <Compile Include="Interfaces\IBadgeEditDAL.cs" />
+    <Compile Include="Interfaces\IBadgeEditDTO.cs" />
     <Compile Include="Interfaces\ICustomIdentityDAL.cs" />
     <Compile Include="Interfaces\ICustomIdentityDTO.cs" />
     <Compile Include="Interfaces\IIdentityCriteria.cs" />
