@@ -1,7 +1,40 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Common.Interfaces
+@model IBadgeEdit
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-sm-10">
+                <h3>
+                    @ApplicationResources.CorporateBadgeHeader
+                </h3>
+            </div>
+            <div class="col-sm-2">
+                <a href="#" data-bind="disableClick: showCorporateBadgeAllTab, click: showAll">@ApplicationResources.ShowAllCorporateBadges</a>
+                &nbsp;|&nbsp;
+                <a href="#" data-bind="disableClick: showCorporateBadgeEarnedTab, click: showEarned">@ApplicationResources.ShowEarnedCorporateBadges</a>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="grayLine col-md-8"></div>
+        <div class="col-md-4">
+
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div data-bind="visible: showCorporateBadgeAllTab">
+                    @Model.ImagePath
+                </div>
+                <div data-bind="visible: showCorporateBadgeEarnedTab">
+                    Test2
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/badgePage")
 }
-
-<h2>Index</h2>
-

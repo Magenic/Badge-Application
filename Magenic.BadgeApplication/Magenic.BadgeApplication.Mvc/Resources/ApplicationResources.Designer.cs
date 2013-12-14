@@ -97,11 +97,38 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Corporate Badges.
+        /// </summary>
+        public static string CorporateBadgeHeader {
+            get {
+                return ResourceManager.GetString("CorporateBadgeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Magenic Badge Application Logo.
         /// </summary>
         public static string LogoTitle {
             get {
                 return ResourceManager.GetString("LogoTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        public static string ShowAllCorporateBadges {
+            get {
+                return ResourceManager.GetString("ShowAllCorporateBadges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Earned.
+        /// </summary>
+        public static string ShowEarnedCorporateBadges {
+            get {
+                return ResourceManager.GetString("ShowEarnedCorporateBadges", resourceCulture);
             }
         }
     }

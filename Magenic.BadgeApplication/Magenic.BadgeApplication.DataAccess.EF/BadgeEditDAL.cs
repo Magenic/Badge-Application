@@ -94,7 +94,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 
                 blockBlob.UploadFromByteArray(data.BadgeImage, 0, data.BadgeImage.Length, null, null, null);
 
-                data.ImagePath = blockBlob.StorageUri.PrimaryUri.ToString();
+                data.ImagePath = blockBlob.Uri.ToString();
             }
         }
 

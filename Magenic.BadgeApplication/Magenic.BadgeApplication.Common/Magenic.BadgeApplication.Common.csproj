@@ -63,9 +63,13 @@
     <Compile Include="Interfaces\IActivityEdit.cs" />
     <Compile Include="Interfaces\IActivityEditDAL.cs" />
     <Compile Include="Interfaces\IActivityEditDTO.cs" />
+    <Compile Include="Interfaces\IBadgeCollection.cs" />
     <Compile Include="Interfaces\IBadgeEdit.cs" />
     <Compile Include="Interfaces\IBadgeEditDAL.cs" />
     <Compile Include="Interfaces\IBadgeEditDTO.cs" />
+    <Compile Include="Interfaces\IBadgeReadOnlyDAL.cs" />
+    <Compile Include="Interfaces\IBadgeReadOnlyDTO.cs" />
+    <Compile Include="Interfaces\IBadgeReadOnly.cs" />
     <Compile Include="Interfaces\ICustomIdentityDAL.cs" />
     <Compile Include="Interfaces\ICustomIdentityDTO.cs" />
     <Compile Include="Interfaces\IIdentityCriteria.cs" />
