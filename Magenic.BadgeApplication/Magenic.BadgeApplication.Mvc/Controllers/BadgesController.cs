@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using Magenic.BadgeApplication.BusinessLogic.Badge;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Magenic.BadgeApplication.Controllers
 {
@@ -12,9 +14,12 @@ namespace Magenic.BadgeApplication.Controllers
         /// Handles the /Home/Index action.
         /// </summary>
         /// <returns></returns>
-        public virtual ActionResult Index()
+        public async virtual Task<ActionResult> Index()
         {
-            return View();
+            var badges = await BadgeEdit.GetBadgeEditByIdAsync(1);
+
+
+            return View(badges);
         }
     }
 }

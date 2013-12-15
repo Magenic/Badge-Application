@@ -8,9 +8,9 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse" role="navigation">
         @Html.Partial("_Navbar")
-    </div>
+    </nav>
 
     <div class="container body-content">
         @RenderBody()
@@ -24,6 +24,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/knockout")
     @RenderSection("scripts", required: false)
 </body>
 </html>

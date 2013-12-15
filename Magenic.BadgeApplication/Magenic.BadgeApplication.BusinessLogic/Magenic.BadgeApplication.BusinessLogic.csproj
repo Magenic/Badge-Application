@@ -60,7 +60,9 @@
       <Link>GlobalSuppressions.cs</Link>
     </Compile>
     <Compile Include="Activity\ActivityEdit.cs" />
+    <Compile Include="Badge\BadgeCollection.cs" />
     <Compile Include="Badge\BadgeEdit.cs" />
+    <Compile Include="Badge\BadgeReadOnly.cs" />
     <Compile Include="Framework\IoC.cs" />
     <Compile Include="Framework\ObjectActivator.cs" />
     <Compile Include="Framework\ObjectFactory.cs" />

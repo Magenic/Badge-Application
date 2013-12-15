@@ -33,6 +33,14 @@ namespace Magenic.BadgeApplication
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-theme.css",
                       "~/Content/Site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
+                "~/Scripts/knockout-3.0.0.js"
+            ));
+
+            bundles.Add(new ScriptBundle("~/bundles/badgePage").Include(
+                "~/Scripts/badgePage.js"
+            ));
         }
     }
 }
