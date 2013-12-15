@@ -13,9 +13,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
     [Serializable]
     public class BadgeEdit : BusinessBase<BadgeEdit>, IBadgeEdit
     {
-        public BadgeEdit(): base()
+        public BadgeEdit()
+            : base()
         { }
-        
+
         #region Properties
 
         public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(c => c.Id);
@@ -143,7 +144,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         private byte[] Image
         {
             get { return GetProperty(ImageProperty); }
-            set { LoadProperty(ImageProperty, value);}
+            set { LoadProperty(ImageProperty, value); }
         }
 
         #endregion Properties
@@ -250,8 +251,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             {
                 returnValue.Id = this.Id;
                 returnValue.Name = this.Name;
-                returnValue.Tagline=this.Tagline;
-                returnValue.Description= this.Description;
+                returnValue.Tagline = this.Tagline;
+                returnValue.Description = this.Description;
                 returnValue.Type = this.Type;
                 returnValue.ImagePath = this.ImagePath;
                 returnValue.Created = this.Created;
