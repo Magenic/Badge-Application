@@ -51,9 +51,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         #region Factory Methods
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "activityEdit")]
-        public static Task<IActivityEdit> GetActivityEditByIdAsync(int activityEditId)
+        public static async Task<IActivityEdit> GetActivityEditByIdAsync(int activityEditId)
         {
-            return IoC.Container.Resolve<IObjectFactory<IActivityEdit>>().FetchAsync(activityEditId);
+            return await IoC.Container.Resolve<IObjectFactory<IActivityEdit>>().FetchAsync(activityEditId);
         }
 
         public static IActivityEdit CreateActivity()

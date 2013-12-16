@@ -1,38 +1,17 @@
 ﻿using Csla;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
+using System;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Badge
 {
     /// <summary>
     /// 
     /// </summary>
-    public class BadgeReadOnly
-        : BusinessBase<BadgeReadOnly>, IBadgeReadOnly
+    [Serializable]
+    public class BadgeItem : BusinessBase<BadgeItem>, IBadgeItem
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BadgeReadOnly"/> class.
-        /// </summary>
-        public BadgeReadOnly()
-            : base()
-        {
-
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BadgeReadOnly"/> class.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="name">The name.</param>
-        /// <param name="badgeType">Type of the badge.</param>
-        /// <param name="imagePath">The image path.</param>
-        public BadgeReadOnly(int id, string name, BadgeType badgeType, string imagePath)
-        {
-            this.Id = id;
-            this.Name = name;
-            this.Type = badgeType;
-            this.ImagePath = imagePath;
-        }
+        #region Properties
 
         /// <summary>
         /// The identifier property
@@ -85,5 +64,19 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             get { return GetProperty(ImagePathProperty); }
             private set { SetProperty(ImagePathProperty, value); }
         }
+
+        #endregion Properties
+
+        #region Methods
+
+        internal void Load(IBadgeItemDTO item)
+        {
+            this.Id = item.Id;
+            this.Name = item.Name;
+            this.Type = item.Type;
+            this.ImagePath = item.ImagePath;
+        }
+
+        #endregion Methods
     }
 }

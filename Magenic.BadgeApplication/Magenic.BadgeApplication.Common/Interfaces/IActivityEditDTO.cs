@@ -8,12 +8,11 @@ namespace Magenic.BadgeApplication.Common.Interfaces
     public interface IActivityEditDTO
     {        
         /// <summary>
-        /// The id of the activity.  Zero if new.
+        /// The id of the activity.
         /// </summary>
         int Id { get; set; }
         /// <summary>
         /// The name of the activity used to identify it.
-        /// Multiple activities are not allowed to use the same name.
         /// </summary>
         string Name { get; set; }
         /// <summary>

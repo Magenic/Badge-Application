@@ -95,7 +95,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ActivityCollectionTests.cs" />
     <Compile Include="AssemblyTestInit.cs" />
+    <Compile Include="BadgeCollectionTests.cs" />
     <Compile Include="BadgeTests.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="SecurityTests.cs" />

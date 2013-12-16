@@ -1,7 +1,4 @@
-﻿using System.Configuration;
-using Magenic.BadgeApplication.Common.Interfaces;
-using Microsoft.WindowsAzure;
-using Microsoft.WindowsAzure.Storage;
+﻿using Magenic.BadgeApplication.Common.Interfaces;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
