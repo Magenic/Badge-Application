@@ -82,6 +82,7 @@
     <Compile Include="Activity.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
+    <Compile Include="ActivityCollectionDAL.cs" />
     <Compile Include="ActivityEditDAL.cs" />
     <Compile Include="ActivitySubmission.cs">
       <DependentUpon>Badge.tt</DependentUpon>
@@ -110,6 +111,7 @@
     <Compile Include="BadgeAward.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
+    <Compile Include="BadgeCollectionDAL.cs" />
     <Compile Include="BadgeEditDAL.cs" />
     <Compile Include="BadgePrerequisite.cs">
       <DependentUpon>Badge.tt</DependentUpon>

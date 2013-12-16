@@ -1,10 +1,11 @@
-﻿
+﻿using Csla;
+
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
     /// <summary>
     /// 
     /// </summary>
-    public interface IBadgeReadOnlyDTO
+    public interface IBadgeItem : IReadOnlyBase
     {
         /// <summary>
         /// The id of the badge.
@@ -13,11 +14,11 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <summary>
         /// The name of a badge.
         /// </summary>
-        string Name { get; set; }
+        string Name { get; }
         /// <summary>
         /// The type of the badge, corporate or community.
         /// </summary>
-        Enums.BadgeType Type { get; set; }
+        Enums.BadgeType Type { get; }
         /// <summary>
         /// The path to where the badge's image resides.
         /// </summary>
