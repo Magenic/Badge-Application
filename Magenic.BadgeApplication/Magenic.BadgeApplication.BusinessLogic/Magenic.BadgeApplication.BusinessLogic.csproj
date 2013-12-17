@@ -59,16 +59,20 @@
     <Compile Include="..\Magenic.BadgeApplication.Common\GlobalSuppressions.cs">
       <Link>GlobalSuppressions.cs</Link>
     </Compile>
+    <Compile Include="Activity\ActivityCollection.cs" />
     <Compile Include="Activity\ActivityEdit.cs" />
+    <Compile Include="Activity\ActivityItem.cs" />
+    <Compile Include="Activity\ActivityNameExists.cs" />
     <Compile Include="Badge\BadgeCollection.cs" />
     <Compile Include="Badge\BadgeEdit.cs" />
-    <Compile Include="Badge\BadgeReadOnly.cs" />
+    <Compile Include="Badge\BadgeItem.cs" />
     <Compile Include="Framework\IoC.cs" />
     <Compile Include="Framework\ObjectActivator.cs" />
     <Compile Include="Framework\ObjectFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\CanSetBadgeType.cs" />
     <Compile Include="Rules\DateOrder.cs" />
+    <Compile Include="Rules\NoDuplicates.cs" />
     <Compile Include="Security\CustomIdentity.cs" />
     <Compile Include="Security\CustomPrincipal.cs" />
   </ItemGroup>

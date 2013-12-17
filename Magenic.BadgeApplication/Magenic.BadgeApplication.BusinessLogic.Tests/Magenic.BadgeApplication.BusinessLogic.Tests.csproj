@@ -71,6 +71,7 @@
     <Compile Include="HelperMethods\Reflection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestInitialize.cs" />
+    <Compile Include="NoDuplicateRuleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

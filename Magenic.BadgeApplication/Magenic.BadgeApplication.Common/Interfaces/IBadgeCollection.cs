@@ -1,17 +1,11 @@
 ﻿using Csla;
-using System.Collections.Generic;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
     /// <summary>
-    /// Represents a collection of badges
+    /// A readonly list of badge information.
     /// </summary>
-    public interface IBadgeCollection
-        : IBusinessListBase<IBadgeReadOnly>
+    public interface IBadgeCollection : IReadOnlyListBase<IBadgeItem>
     {
-        /// <summary>
-        /// The list of badges.
-        /// </summary>
-        IEnumerable<IBadgeReadOnly> Badges { get; set; }
     }
 }
