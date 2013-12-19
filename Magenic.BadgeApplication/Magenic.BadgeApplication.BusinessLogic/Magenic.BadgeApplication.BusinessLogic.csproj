@@ -63,6 +63,7 @@
     <Compile Include="Activity\ActivityEdit.cs" />
     <Compile Include="Activity\ActivityItem.cs" />
     <Compile Include="Activity\ActivityNameExists.cs" />
+    <Compile Include="Activity\SubmitActivity.cs" />
     <Compile Include="Badge\BadgeCollection.cs" />
     <Compile Include="Badge\BadgeEdit.cs" />
     <Compile Include="Badge\BadgeItem.cs" />

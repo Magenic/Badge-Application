@@ -16,15 +16,13 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     {
         public int ActivitySubmissionId { get; set; }
         public int ActivityId { get; set; }
-        public int EmployeeId { get; set; }
+        public string EmployeeADName { get; set; }
         public string SubmissionDescription { get; set; }
-        public Nullable<int> SubmissionApprovedBy { get; set; }
+        public string SubmissionApprovedADName { get; set; }
         public System.DateTime SubmissionDate { get; set; }
         public int SubmissionStatusId { get; set; }
     
         public virtual Activity Activity { get; set; }
-        public virtual Employee Employee { get; set; }
-        public virtual Employee Employee1 { get; set; }
         public virtual ItemStatu ItemStatu { get; set; }
     }
 }

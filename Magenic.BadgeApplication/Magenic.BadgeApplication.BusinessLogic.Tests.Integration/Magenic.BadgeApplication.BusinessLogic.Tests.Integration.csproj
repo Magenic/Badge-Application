@@ -103,6 +103,7 @@
     <Compile Include="SecurityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ActivityTests.cs" />
+    <Compile Include="SubmitActivityTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

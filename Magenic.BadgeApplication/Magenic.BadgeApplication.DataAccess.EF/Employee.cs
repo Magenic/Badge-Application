@@ -16,12 +16,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     {
         public Employee()
         {
-            this.ActivitySubmissions = new HashSet<ActivitySubmission>();
-            this.ActivitySubmissions1 = new HashSet<ActivitySubmission>();
-            this.BadgeAwards = new HashSet<BadgeAward>();
-            this.BadgeAwards1 = new HashSet<BadgeAward>();
-            this.Employee1 = new HashSet<Employee>();
-            this.Employee11 = new HashSet<Employee>();
             this.EmployeePermissions = new HashSet<EmployeePermission>();
             this.Badges = new HashSet<Badge>();
         }
@@ -38,14 +32,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public Nullable<int> ApprovingManagerId2 { get; set; }
         public Nullable<int> AwardPayoutThreshhold { get; set; }
     
-        public virtual ICollection<ActivitySubmission> ActivitySubmissions { get; set; }
-        public virtual ICollection<ActivitySubmission> ActivitySubmissions1 { get; set; }
-        public virtual ICollection<BadgeAward> BadgeAwards { get; set; }
-        public virtual ICollection<BadgeAward> BadgeAwards1 { get; set; }
-        public virtual ICollection<Employee> Employee1 { get; set; }
-        public virtual Employee Employee2 { get; set; }
-        public virtual ICollection<Employee> Employee11 { get; set; }
-        public virtual Employee Employee3 { get; set; }
         public virtual ICollection<EmployeePermission> EmployeePermissions { get; set; }
         public virtual ICollection<Badge> Badges { get; set; }
     }

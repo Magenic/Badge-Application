@@ -16,8 +16,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     {
         public Activity()
         {
-            this.ActivitySubmissions = new HashSet<ActivitySubmission>();
             this.BadgeActivities = new HashSet<BadgeActivity>();
+            this.ActivitySubmissions = new HashSet<ActivitySubmission>();
         }
     
         public int ActivityId { get; set; }
@@ -25,7 +25,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public string ActivityDescription { get; set; }
         public bool RequiresApproval { get; set; }
     
-        public virtual ICollection<ActivitySubmission> ActivitySubmissions { get; set; }
         public virtual ICollection<BadgeActivity> BadgeActivities { get; set; }
+        public virtual ICollection<ActivitySubmission> ActivitySubmissions { get; set; }
     }
 }

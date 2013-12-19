@@ -26,7 +26,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         }
     
         public virtual DbSet<Activity> Activities { get; set; }
-        public virtual DbSet<ActivitySubmission> ActivitySubmissions { get; set; }
         public virtual DbSet<BadgeActivity> BadgeActivities { get; set; }
         public virtual DbSet<BadgeAward> BadgeAwards { get; set; }
         public virtual DbSet<BadgeType> BadgeTypes { get; set; }
@@ -38,5 +37,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public virtual DbSet<CurrentActiveBadge> CurrentActiveBadges { get; set; }
         public virtual DbSet<EarnedBadge> EarnedBadges { get; set; }
         public virtual DbSet<Badge> Badges { get; set; }
+        public virtual DbSet<ActivitySubmission> ActivitySubmissions { get; set; }
     }
 }

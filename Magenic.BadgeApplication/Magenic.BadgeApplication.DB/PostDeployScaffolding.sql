@@ -194,23 +194,23 @@ SET IDENTITY_INSERT [dbo].[ItemStatus]  OFF
 SET IDENTITY_INSERT [dbo].[ActivitySubmission]  ON
 MERGE INTO [dbo].[ActivitySubmission]  AS Target
 USING (VALUES
-    (1, 2, 4, 'Spoke at the Boston Code Mastery Event.', 2, '9/26/2013', 2),
-    (2, 4, 4, 'Scott thinks I''m great!', 2, '8/8/2013', 3),
-    (3, 14, 4, 'Attended the code dojo on 8/5/2013.', null, '8/15/2013', 2),
-    (4, 5, 4, 'Became an MCSD', 2, '9/3/2013', 1)
+    (1, 2, 'kevinf', 'Spoke at the Boston Code Mastery Event.', 'scottd', '9/26/2013', 2),
+    (2, 4, 'kevinf', 'Scott thinks I''m great!', 'scottd', '8/8/2013', 3),
+    (3, 14, 'kevinf', 'Attended the code dojo on 8/5/2013.', null, '8/15/2013', 2),
+    (4, 5, 'kevinf', 'Became an MCSD', 'scottd', '9/3/2013', 1)
 )
-AS Source ([activity_submission_id], [activity_id], [employee_id], [submission_description], [submission_approved_by], [submission_date], [submission_status_id]) 
+AS Source ([activity_submission_id], [activity_id], [employee_ad_name], [submission_description], [submission_approved_ad_name], [submission_date], [submission_status_id]) 
 ON Target.[ActivitySubmissionId] = Source.[activity_submission_id]
 WHEN MATCHED THEN 
     UPDATE SET [ActivityId] = Source.[activity_id],
-               [EmployeeId] = Source.[employee_id],
+               [EmployeeADName] = Source.[employee_ad_name],
                [SubmissionDescription] = Source.[submission_description],
-               [SubmissionApprovedBy] = Source.[submission_approved_by],
+               [SubmissionApprovedADName] = Source.[submission_approved_ad_name],
                [SubmissionDate] = Source.[submission_date],
                [SubmissionStatusId] = Source.[submission_status_id]
 WHEN NOT MATCHED BY TARGET THEN 
-    INSERT ([ActivitySubmissionId], [ActivityId], [EmployeeId], [SubmissionDescription], [SubmissionApprovedBy], [SubmissionDate], [SubmissionStatusId])
-    VALUES ([activity_submission_id], [activity_id], [employee_id], [submission_description], [submission_approved_by], [submission_date], [submission_status_id]);
+    INSERT ([ActivitySubmissionId], [ActivityId], [EmployeeADName], [SubmissionDescription], [SubmissionApprovedADName], [SubmissionDate], [SubmissionStatusId])
+    VALUES ([activity_submission_id], [activity_id], [employee_ad_name], [submission_description], [submission_approved_ad_name], [submission_date], [submission_status_id]);
 
 SET IDENTITY_INSERT [dbo].[ActivitySubmission]  OFF
 

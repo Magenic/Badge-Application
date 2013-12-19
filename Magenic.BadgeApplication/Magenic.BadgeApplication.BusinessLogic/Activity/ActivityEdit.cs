@@ -13,9 +13,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
     [Serializable]
     public class ActivityEdit : BusinessBase<ActivityEdit> , IActivityEdit
     {
-        public ActivityEdit(): base()
-        { }
-
         #region Properties
 
         public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(c => c.Id);
@@ -70,7 +67,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             base.AddBusinessRules();
             this.BusinessRules.AddRule(new MaxLength(NameProperty, 100));
             this.BusinessRules.AddRule(new Required(NameProperty));
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, RequiresApprovalProperty, Role.Administrator.ToString()));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, RequiresApprovalProperty, PermissionType.Administrator.ToString()));
         }
 
         #endregion Rules
