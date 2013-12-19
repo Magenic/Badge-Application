@@ -12,13 +12,13 @@ namespace Magenic.BadgeApplication.Common.Interfaces
     public interface IBadgeEditDAL
     {
         /// <summary>
-        /// Asychronously returns an <see cref="IActivityEditDTO"/> for the specified id.
+        /// Asynchronously returns an <see cref="IActivityEditDTO"/> for the specified id.
         /// </summary>
-        /// <param name="badgeEditId">The actvity id to search for.</param>
+        /// <param name="badgeEditId">The activity id to search for.</param>
         /// <returns>An <see cref="IBadgeEditDTO"/>.</returns>
         Task<IBadgeEditDTO> GetBadgeByIdAsync(int badgeEditId);
         /// <summary>
-        /// Updates an existing badge based on informaiton passed in via the DTO.
+        /// Updates an existing badge based on information passed in via the DTO.
         /// </summary>
         /// <param name="data">The values to update.</param>
         /// <returns>A DTO with updated values after the save.</returns>
