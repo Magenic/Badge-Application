@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Magenic.BadgeApplication.BusinessLogic.Badge
 {
     /// <summary>
-    /// A readonly list of badge information.
+    /// A read only list of badge information.
     /// </summary>
     [Serializable]
     public class BadgeCollection : ReadOnlyListBase<BadgeCollection, IBadgeItem>, IBadgeCollection
@@ -34,11 +34,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             return await IoC.Container.Resolve<IObjectFactory<IBadgeCollection>>().FetchAsync(badgeType);
         }
 
-        public async static Task<IBadgeCollection> GetAllBadgesForUserByTypeAsync(string userName, BadgeType badgeType)
-        {
-            return await IoC.Container.Resolve<IObjectFactory<IBadgeCollection>>().FetchAsync(new BadgeCollectionForUserCriteria { BadgeType =  badgeType, UserName =  userName});
-        }
-
         #endregion Factory Methods
 
         #region Data Access
@@ -53,14 +48,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             var dal = IoC.Container.Resolve<IBadgeCollectionDAL>();
 
             var result = await dal.GetBadgesByBadgeTypeAsync(badgeType);
-            this.LoadData(result);
-        }
-
-        protected async Task DataPortal_Fetch(BadgeCollectionForUserCriteria criteria)
-        {
-            var dal = IoC.Container.Resolve<IBadgeCollectionDAL>();
-
-            var result = await dal.GetBadgesForUserByBadgeTypeAsync(criteria.UserName, criteria.BadgeType);
             this.LoadData(result);
         }
 

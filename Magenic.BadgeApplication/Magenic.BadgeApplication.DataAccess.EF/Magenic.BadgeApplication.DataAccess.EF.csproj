@@ -126,6 +126,7 @@
     <Compile Include="EarnedBadge.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
+    <Compile Include="EarnedBadgeCollectionDAL.cs" />
     <Compile Include="Employee.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>

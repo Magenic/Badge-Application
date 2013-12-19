@@ -26,24 +26,5 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 return badgeList;
             }
         }
-
-        public async Task<IEnumerable<IBadgeItemDTO>> GetBadgesForUserByBadgeTypeAsync(string userName, Common.Enums.BadgeType badgeType)
-        {
-            using (var ctx = new Entities())
-            {
-                ctx.Database.Connection.Open();
-                var badgeList = await (from eb in ctx.EarnedBadges
-                                       where eb.ADName == userName
-                                       where eb.BadgeTypeId == (badgeType == Common.Enums.BadgeType.Unset ? eb.BadgeTypeId : (int)badgeType)
-                                       select new Common.DTO.BadgeItemDTO
-                                       {
-                                           Id = eb.BadgeId,
-                                           Name = eb.BadgeName,
-                                           Type = (Common.Enums.BadgeType)eb.BadgeTypeId,
-                                           ImagePath = eb.BadgePath
-                                       }).ToArrayAsync();
-                return badgeList;
-            }
-        }
     }
 }

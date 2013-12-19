@@ -58,6 +58,7 @@
     <Compile Include="DTO\BadgeEditDTO.cs" />
     <Compile Include="DTO\BadgeItemDTO.cs" />
     <Compile Include="DTO\CustomIdentityDTO.cs" />
+    <Compile Include="DTO\EarnedBadgeItemDTO.cs" />
     <Compile Include="DTO\SubmitActivityDTO.cs" />
     <Compile Include="Enums\ActivitySubmissionStatus.cs" />
     <Compile Include="Enums\BadgeType.cs" />
@@ -79,6 +80,10 @@
     <Compile Include="Interfaces\IBadgeItem.cs" />
     <Compile Include="Interfaces\ICustomIdentityDAL.cs" />
     <Compile Include="Interfaces\ICustomIdentityDTO.cs" />
+    <Compile Include="Interfaces\IEarnedBadgeCollection.cs" />
+    <Compile Include="Interfaces\IEarnedBadgeCollectionDAL.cs" />
+    <Compile Include="Interfaces\IEarnedBadgeItemDTO.cs" />
+    <Compile Include="Interfaces\IEarnedBadgeItem.cs" />
     <Compile Include="Interfaces\IIdentityCriteria.cs" />
     <Compile Include="Interfaces\IObjectFactory.cs" />
     <Compile Include="Interfaces\ISubmitActivity.cs" />

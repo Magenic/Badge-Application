@@ -5,27 +5,22 @@ using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
 {
-    /// <summary>
-    /// Summary description for ActivityCollectionTests
-    /// </summary>
     [TestClass]
-    public class BadgeCollectionTests
+    public class EarnedBadgeCollectionTests
     {
         [TestMethod]
-        public async Task GetAllBadgesForAnyType()
+        public async Task GetUserBadgesForAnyType()
         {
-            var badgeCollection = await Badge.BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Unset);
+            var badgeCollection = await Badge.EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync("kevinf", BadgeType.Unset);
 
             Assert.IsNotNull(badgeCollection);
             Assert.IsTrue(badgeCollection.Count > 0);
-            Assert.IsTrue(badgeCollection.Any(b => b.Type == BadgeType.Community));
-            Assert.IsTrue(badgeCollection.Any(b => b.Type == BadgeType.Corporate));
         }
 
         [TestMethod]
-        public async Task GetAllBadgesForCorporate()
+        public async Task GetUserBadgesForCorporate()
         {
-            var badgeCollection = await Badge.BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Corporate);
+            var badgeCollection = await Badge.EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync("kevinf", BadgeType.Corporate);
 
             Assert.IsNotNull(badgeCollection);
             Assert.IsTrue(badgeCollection.Count > 0);
@@ -34,15 +29,14 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         }
 
         [TestMethod]
-        public async Task GetAllBadgesForCommunity()
+        public async Task GetUserBadgesForCommunity()
         {
-            var badgeCollection = await Badge.BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Community);
+            var badgeCollection = await Badge.EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync("kevinf", BadgeType.Community);
 
             Assert.IsNotNull(badgeCollection);
             Assert.IsTrue(badgeCollection.Count > 0);
             Assert.IsTrue(badgeCollection.Any(b => b.Type == BadgeType.Community));
             Assert.IsFalse(badgeCollection.Any(b => b.Type == BadgeType.Corporate));
         }
-
     }
 }
