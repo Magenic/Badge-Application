@@ -7,15 +7,12 @@
       <Diagram DiagramId="eeb27160bb5146dcb79e08f16fcda76d" Name="Diagram1" ZoomLevel="80">
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.Activity" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.BadgeActivity" Width="1.5" PointX="8.25" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.BadgeAward" Width="1.5" PointX="11.25" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.BadgeType" Width="1.5" PointX="3.75" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.Employee" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.EmployeePermission" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.ItemStatu" Width="1.5" PointX="0.75" PointY="16.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.Permission" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_BadgeActivity_Activity" ManuallyRouted="false" />
-        <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_BadgeAward_Employee" ManuallyRouted="false" />
-        <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_BadgeAward_PaidCompletedBy" ManuallyRouted="false" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_Employee_ApprovingManager1" ManuallyRouted="false" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_Employee_ApprovingManager2" ManuallyRouted="false" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_EmployeePermission_Employee" ManuallyRouted="false" />
@@ -27,12 +24,13 @@
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_Badge_BadgeType" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_Badge_Employee" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_BadgeActivity_Badge" />
-        <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_BadgeAward_Badge" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.FK_BadgePrerequisite_Badge" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.FK_BadgePrerequisite_Badge1" />
-        <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.ActivitySubmission" Width="2" PointX="3" PointY="9.375" />
+        <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.ActivitySubmission" Width="2" PointX="2.75" PointY="8.5" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_ActivitySubmission_Activity" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_ActivitySubmission_ItemStatus" />
+        <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.BadgeAward" Width="2.125" PointX="8.25" PointY="15.125" />
+        <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_BadgeAward_Badge" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -217,23 +217,23 @@ SET IDENTITY_INSERT [dbo].[ActivitySubmission]  OFF
 SET IDENTITY_INSERT [dbo].[BadgeAward]  ON
 MERGE INTO [dbo].[BadgeAward]  AS Target
 USING (VALUES
-    (1, 2, 4, '9/26/2013', 50, 0, null, null, null),
-    (2, 4, 4, '8/8/2013', 0, 0, null, null, null)
+    (1, 2, 'kevinf', '9/26/2013', 50, 0, null, null, null),
+    (2, 4, 'kevinf', '8/8/2013', 0, 0, null, null, null)
 )
-AS Source ([badge_award_id], [badge_id], [employee_id], [award_date], [award_amount], [paid_out], [paid_date], [paid_completed_by], [Published]) 
+AS Source ([badge_award_id], [badge_id], [employee_ad_name], [award_date], [award_amount], [paid_out], [paid_date], [paid_completed_by_ad_name], [Published]) 
 ON Target.[BadgeAwardId] = Source.[badge_award_id]
 WHEN MATCHED THEN 
     UPDATE SET [BadgeId] = Source.[badge_id],
-               [EmployeeId] = Source.[employee_id],
+               [EmployeeAdName] = Source.[employee_ad_name],
                [AwardDate] = Source.[award_date],
                [AwardAmount] = Source.[award_amount],
                [PaidOut] = Source.[paid_out],
                [PaidDate] = Source.[paid_date],
-               [PaidCompletedBy] = Source.[paid_completed_by],
+               [PaidCompletedByADName] = Source.[paid_completed_by_ad_name],
                [Published] = Source.[Published]
 WHEN NOT MATCHED BY TARGET THEN 
-    INSERT ([BadgeAwardId], [BadgeId], [EmployeeId], [AwardDate], [AwardAmount], [PaidOut], [PaidDate], [PaidCompletedBy], [Published])
-    VALUES ([badge_award_id], [badge_id], [employee_id], [award_date], [award_amount], [paid_out], [paid_date], [paid_completed_by], [Published]);
+    INSERT ([BadgeAwardId], [BadgeId], [EmployeeAdName], [AwardDate], [AwardAmount], [PaidOut], [PaidDate], [PaidCompletedByADName], [Published])
+    VALUES ([badge_award_id], [badge_id], [employee_ad_name], [award_date], [award_amount], [paid_out], [paid_date], [paid_completed_by_ad_name], [Published]);
 
 SET IDENTITY_INSERT [dbo].[BadgeAward]  OFF
 

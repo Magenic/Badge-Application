@@ -5,11 +5,8 @@ using System;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Badge
 {
-    /// <summary>
-    /// 
-    /// </summary>
     [Serializable]
-    public class BadgeItem : ReadOnlyBase<BadgeItem>, IBadgeItem
+    public class EarnedBadgeItem : ReadOnlyBase<EarnedBadgeItem>, IEarnedBadgeItem
     {
         #region Properties
 
@@ -65,16 +62,58 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             private set { LoadProperty(ImagePathProperty, value); }
         }
 
+        /// <summary>
+        /// The tag line property
+        /// </summary>
+        public static readonly PropertyInfo<string> TaglineProperty = RegisterProperty<string>(b => b.Tagline);
+        /// <summary>
+        /// A quip or funny phrase about the badge.
+        /// </summary>
+        public string Tagline
+        {
+            get { return GetProperty(TaglineProperty); }
+            private set { LoadProperty(TaglineProperty, value); }
+        }
+        
+        /// <summary>
+        /// The award date property
+        /// </summary>
+        public static readonly PropertyInfo<DateTime> AwardDateProperty = RegisterProperty<DateTime>(b => b.AwardDate);
+        /// <summary>
+        /// The date the badge was awarded.
+        /// </summary>
+        public DateTime AwardDate
+        {
+            get { return GetProperty(AwardDateProperty); }
+            private set { LoadProperty(AwardDateProperty, value); }
+        }
+        
+        /// <summary>
+        /// The award points property
+        /// </summary>
+        public static readonly PropertyInfo<int> AwardPointsProperty = RegisterProperty<int>(b => b.AwardPoints);
+        /// <summary>
+        /// The number of points, if any, awarded with this badge.
+        /// </summary>
+        public int AwardPoints
+        {
+            get { return GetProperty(AwardPointsProperty); }
+            private set { LoadProperty(AwardPointsProperty, value); }
+        }
+
         #endregion Properties
 
         #region Methods
 
-        internal void Load(IBadgeItemDTO item)
+        internal void Load(IEarnedBadgeItemDTO item)
         {
             this.Id = item.Id;
             this.Name = item.Name;
             this.Type = item.Type;
             this.ImagePath = item.ImagePath;
+            this.Tagline = item.Tagline;
+            this.AwardDate = item.AwardDate;
+            this.AwardPoints = item.AwardPoints;
         }
 
         #endregion Methods

@@ -67,6 +67,8 @@
     <Compile Include="Badge\BadgeCollection.cs" />
     <Compile Include="Badge\BadgeEdit.cs" />
     <Compile Include="Badge\BadgeItem.cs" />
+    <Compile Include="Badge\EarnedBadgeCollection.cs" />
+    <Compile Include="Badge\EarnedBadgeItem.cs" />
     <Compile Include="Framework\IoC.cs" />
     <Compile Include="Framework\ObjectActivator.cs" />
     <Compile Include="Framework\ObjectFactory.cs" />

@@ -1,11 +1,12 @@
-﻿using Csla;
+﻿using System;
+using Csla;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
     /// <summary>
-    /// A read only badge item to be used in a collection of badges.
+    /// A read only earned badge item to be used in a collection of earned badges.
     /// </summary>
-    public interface IBadgeItem : IReadOnlyBase
+    public interface IEarnedBadgeItem : IReadOnlyBase
     {
         /// <summary>
         /// The id of the badge.
@@ -23,5 +24,17 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// The path to where the badge's image resides.
         /// </summary>
         string ImagePath { get; }
+        /// <summary>
+        /// A quip or funny phrase about the badge.
+        /// </summary>
+        string Tagline { get; }
+        /// <summary>
+        /// The date the badge was awarded.
+        /// </summary>
+        DateTime AwardDate { get; }
+        /// <summary>
+        /// The number of points, if any, awarded with this badge.
+        /// </summary>
+        int AwardPoints { get; }
     }
 }
