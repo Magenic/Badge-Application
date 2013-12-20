@@ -64,6 +64,8 @@
     <Compile Include="Activity\ActivityItem.cs" />
     <Compile Include="Activity\ActivityNameExists.cs" />
     <Compile Include="Activity\SubmitActivity.cs" />
+    <Compile Include="Activity\SubmittedActivityCollection.cs" />
+    <Compile Include="Activity\SubmittedActivityItem.cs" />
     <Compile Include="Badge\BadgeCollection.cs" />
     <Compile Include="Badge\BadgeEdit.cs" />
     <Compile Include="Badge\BadgeItem.cs" />

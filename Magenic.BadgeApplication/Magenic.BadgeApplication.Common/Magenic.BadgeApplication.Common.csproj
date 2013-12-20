@@ -60,6 +60,7 @@
     <Compile Include="DTO\CustomIdentityDTO.cs" />
     <Compile Include="DTO\EarnedBadgeItemDTO.cs" />
     <Compile Include="DTO\SubmitActivityDTO.cs" />
+    <Compile Include="DTO\SubmittedActivityItemDTO.cs" />
     <Compile Include="Enums\ActivitySubmissionStatus.cs" />
     <Compile Include="Enums\BadgeType.cs" />
     <Compile Include="Enums\PermissionType.cs" />
@@ -89,6 +90,10 @@
     <Compile Include="Interfaces\ISubmitActivity.cs" />
     <Compile Include="Interfaces\ISubmitActivityDAL.cs" />
     <Compile Include="Interfaces\ISubmitActivityDTO.cs" />
+    <Compile Include="Interfaces\ISubmittedActivityCollection.cs" />
+    <Compile Include="Interfaces\ISubmittedActivityCollectionDAL.cs" />
+    <Compile Include="Interfaces\ISubmittedActivityItemDTO.cs" />
+    <Compile Include="Interfaces\ISubmittedActivityItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ApplicationResources.Designer.cs">
       <AutoGen>True</AutoGen>
