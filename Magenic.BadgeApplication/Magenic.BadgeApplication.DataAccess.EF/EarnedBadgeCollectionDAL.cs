@@ -32,6 +32,5 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 return badgeList;
             }
         }
-
     }
 }
