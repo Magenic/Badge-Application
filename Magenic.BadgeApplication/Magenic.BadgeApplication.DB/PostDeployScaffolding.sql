@@ -194,46 +194,46 @@ SET IDENTITY_INSERT [dbo].[ItemStatus]  OFF
 SET IDENTITY_INSERT [dbo].[ActivitySubmission]  ON
 MERGE INTO [dbo].[ActivitySubmission]  AS Target
 USING (VALUES
-    (1, 2, 4, 'Spoke at the Boston Code Mastery Event.', 2, '9/26/2013', 2),
-    (2, 4, 4, 'Scott thinks I''m great!', 2, '8/8/2013', 3),
-    (3, 14, 4, 'Attended the code dojo on 8/5/2013.', null, '8/15/2013', 2),
-    (4, 5, 4, 'Became an MCSD', 2, '9/3/2013', 1)
+    (1, 2, 'kevinf', 'Spoke at the Boston Code Mastery Event.', 'scottd', '9/26/2013', 2),
+    (2, 4, 'kevinf', 'Scott thinks I''m great!', 'scottd', '8/8/2013', 3),
+    (3, 14, 'kevinf', 'Attended the code dojo on 8/5/2013.', null, '8/15/2013', 2),
+    (4, 5, 'kevinf', 'Became an MCSD', 'scottd', '9/3/2013', 1)
 )
-AS Source ([activity_submission_id], [activity_id], [employee_id], [submission_description], [submission_approved_by], [submission_date], [submission_status_id]) 
+AS Source ([activity_submission_id], [activity_id], [employee_ad_name], [submission_description], [submission_approved_ad_name], [submission_date], [submission_status_id]) 
 ON Target.[ActivitySubmissionId] = Source.[activity_submission_id]
 WHEN MATCHED THEN 
     UPDATE SET [ActivityId] = Source.[activity_id],
-               [EmployeeId] = Source.[employee_id],
+               [EmployeeADName] = Source.[employee_ad_name],
                [SubmissionDescription] = Source.[submission_description],
-               [SubmissionApprovedBy] = Source.[submission_approved_by],
+               [SubmissionApprovedADName] = Source.[submission_approved_ad_name],
                [SubmissionDate] = Source.[submission_date],
                [SubmissionStatusId] = Source.[submission_status_id]
 WHEN NOT MATCHED BY TARGET THEN 
-    INSERT ([ActivitySubmissionId], [ActivityId], [EmployeeId], [SubmissionDescription], [SubmissionApprovedBy], [SubmissionDate], [SubmissionStatusId])
-    VALUES ([activity_submission_id], [activity_id], [employee_id], [submission_description], [submission_approved_by], [submission_date], [submission_status_id]);
+    INSERT ([ActivitySubmissionId], [ActivityId], [EmployeeADName], [SubmissionDescription], [SubmissionApprovedADName], [SubmissionDate], [SubmissionStatusId])
+    VALUES ([activity_submission_id], [activity_id], [employee_ad_name], [submission_description], [submission_approved_ad_name], [submission_date], [submission_status_id]);
 
 SET IDENTITY_INSERT [dbo].[ActivitySubmission]  OFF
 
 SET IDENTITY_INSERT [dbo].[BadgeAward]  ON
 MERGE INTO [dbo].[BadgeAward]  AS Target
 USING (VALUES
-    (1, 2, 4, '9/26/2013', 50, 0, null, null, null),
-    (2, 4, 4, '8/8/2013', 0, 0, null, null, null)
+    (1, 2, 'kevinf', '9/26/2013', 50, 0, null, null, null),
+    (2, 4, 'kevinf', '8/8/2013', 0, 0, null, null, null)
 )
-AS Source ([badge_award_id], [badge_id], [employee_id], [award_date], [award_amount], [paid_out], [paid_date], [paid_completed_by], [Published]) 
+AS Source ([badge_award_id], [badge_id], [employee_ad_name], [award_date], [award_amount], [paid_out], [paid_date], [paid_completed_by_ad_name], [Published]) 
 ON Target.[BadgeAwardId] = Source.[badge_award_id]
 WHEN MATCHED THEN 
     UPDATE SET [BadgeId] = Source.[badge_id],
-               [EmployeeId] = Source.[employee_id],
+               [EmployeeAdName] = Source.[employee_ad_name],
                [AwardDate] = Source.[award_date],
                [AwardAmount] = Source.[award_amount],
                [PaidOut] = Source.[paid_out],
                [PaidDate] = Source.[paid_date],
-               [PaidCompletedBy] = Source.[paid_completed_by],
+               [PaidCompletedByADName] = Source.[paid_completed_by_ad_name],
                [Published] = Source.[Published]
 WHEN NOT MATCHED BY TARGET THEN 
-    INSERT ([BadgeAwardId], [BadgeId], [EmployeeId], [AwardDate], [AwardAmount], [PaidOut], [PaidDate], [PaidCompletedBy], [Published])
-    VALUES ([badge_award_id], [badge_id], [employee_id], [award_date], [award_amount], [paid_out], [paid_date], [paid_completed_by], [Published]);
+    INSERT ([BadgeAwardId], [BadgeId], [EmployeeAdName], [AwardDate], [AwardAmount], [PaidOut], [PaidDate], [PaidCompletedByADName], [Published])
+    VALUES ([badge_award_id], [badge_id], [employee_ad_name], [award_date], [award_amount], [paid_out], [paid_date], [paid_completed_by_ad_name], [Published]);
 
 SET IDENTITY_INSERT [dbo].[BadgeAward]  OFF
 

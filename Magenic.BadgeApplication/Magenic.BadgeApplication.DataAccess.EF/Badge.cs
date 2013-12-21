@@ -17,9 +17,9 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public Badge()
         {
             this.BadgeActivities = new HashSet<BadgeActivity>();
-            this.BadgeAwards = new HashSet<BadgeAward>();
             this.BadgePrerequisites = new HashSet<BadgePrerequisite>();
             this.BadgePrerequisites1 = new HashSet<BadgePrerequisite>();
+            this.BadgeAwards = new HashSet<BadgeAward>();
         }
     
         public int BadgeId { get; set; }
@@ -43,8 +43,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public virtual BadgeType BadgeType { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual ICollection<BadgeActivity> BadgeActivities { get; set; }
-        public virtual ICollection<BadgeAward> BadgeAwards { get; set; }
         public virtual ICollection<BadgePrerequisite> BadgePrerequisites { get; set; }
         public virtual ICollection<BadgePrerequisite> BadgePrerequisites1 { get; set; }
+        public virtual ICollection<BadgeAward> BadgeAwards { get; set; }
     }
 }

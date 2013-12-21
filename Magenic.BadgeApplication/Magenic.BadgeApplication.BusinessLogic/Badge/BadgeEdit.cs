@@ -13,10 +13,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
     [Serializable]
     public class BadgeEdit : BusinessBase<BadgeEdit>, IBadgeEdit
     {
-        public BadgeEdit()
-            : base()
-        { }
-
         #region Properties
 
         public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(c => c.Id);
@@ -189,12 +185,12 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.BusinessRules.AddRule(new MaxLength(TaglineProperty, 200));
             this.BusinessRules.AddRule(new Rules.DateOrder(EffectiveStartDateProperty, EffectiveEndDateProperty));
 
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedByIdProperty, Role.Administrator.ToString()));
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedDateProperty, Role.Administrator.ToString()));
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ActivityPointsAmountProperty, Role.Administrator.ToString()));
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, AwardValueAmountProperty, Role.Administrator.ToString()));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedByIdProperty, PermissionType.Administrator.ToString()));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedDateProperty, PermissionType.Administrator.ToString()));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ActivityPointsAmountProperty, PermissionType.Administrator.ToString()));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, AwardValueAmountProperty, PermissionType.Administrator.ToString()));
 
-            this.BusinessRules.AddRule(new Rules.CanSetBadgeType(AuthorizationActions.WriteProperty, TypeProperty, BadgeType.Corporate, Role.Administrator.ToString()));
+            this.BusinessRules.AddRule(new Rules.CanSetBadgeType(AuthorizationActions.WriteProperty, TypeProperty, BadgeType.Corporate, PermissionType.Administrator.ToString()));
         }
 
         #endregion Rules

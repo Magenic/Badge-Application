@@ -60,7 +60,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
             mockTypeProperty.Setup(mp => mp.Type).Returns(typeof(Common.Enums.BadgeType));
             mockTypeProperty.Setup(mp => mp.Name).Returns("Type");
 
-            var newRule = new Rules.CanSetBadgeType(AuthorizationActions.WriteProperty, mockTypeProperty.Object, Common.Enums.BadgeType.Corporate, Common.Enums.Role.Administrator.ToString());
+            var newRule = new Rules.CanSetBadgeType(AuthorizationActions.WriteProperty, mockTypeProperty.Object, Common.Enums.BadgeType.Corporate, Common.Enums.PermissionType.Administrator.ToString());
             var targetObject = new Mock<IBadgeEdit>();
             targetObject.Setup(to => to.Type).Returns(Common.Enums.BadgeType.Community);
 
@@ -83,7 +83,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
             mockTypeProperty.Setup(mp => mp.Type).Returns(typeof(Common.Enums.BadgeType));
             mockTypeProperty.Setup(mp => mp.Name).Returns("Type");
 
-            var newRule = new Rules.CanSetBadgeType(AuthorizationActions.WriteProperty, mockTypeProperty.Object, Common.Enums.BadgeType.Corporate, Common.Enums.Role.Administrator.ToString());
+            var newRule = new Rules.CanSetBadgeType(AuthorizationActions.WriteProperty, mockTypeProperty.Object, Common.Enums.BadgeType.Corporate, Common.Enums.PermissionType.Administrator.ToString());
             var targetObject = new Mock<IBadgeEdit>();
             targetObject.Setup(to => to.Type).Returns(Common.Enums.BadgeType.Corporate);
 
@@ -106,7 +106,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
             mockTypeProperty.Setup(mp => mp.Type).Returns(typeof(Common.Enums.BadgeType));
             mockTypeProperty.Setup(mp => mp.Name).Returns("Type");
 
-            var newRule = new Rules.CanSetBadgeType(AuthorizationActions.WriteProperty, mockTypeProperty.Object, Common.Enums.BadgeType.Corporate, Common.Enums.Role.Administrator.ToString());
+            var newRule = new Rules.CanSetBadgeType(AuthorizationActions.WriteProperty, mockTypeProperty.Object, Common.Enums.BadgeType.Corporate, Common.Enums.PermissionType.Administrator.ToString());
             var targetObject = new Mock<IBadgeEdit>();
             targetObject.Setup(to => to.Type).Returns(Common.Enums.BadgeType.Corporate);
 

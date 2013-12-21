@@ -99,10 +99,13 @@
     <Compile Include="AssemblyTestInit.cs" />
     <Compile Include="BadgeCollectionTests.cs" />
     <Compile Include="BadgeTests.cs" />
+    <Compile Include="EarnedBadgeCollectionTests.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="SecurityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ActivityTests.cs" />
+    <Compile Include="SubmitActivityTests.cs" />
+    <Compile Include="SubmittedActivityCollectionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -7,4 +7,46 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="BadgePath" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="8656f356-2635-453f-af41-24d97963e1a9" ChangeDateTime="12/19/2013 01:13:03">
+    <Property Name="ElementName" Value="[dbo].[ActivitySubmission].[EmployeeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ActivitySubmission]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ADName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="82c98833-974d-4924-8973-9509b99092a3" ChangeDateTime="12/19/2013 01:14:01">
+    <Property Name="ElementName" Value="[dbo].[ActivitySubmission].[EmployeeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ActivitySubmission]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EmployeeADName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="65e5c339-f577-446b-82f6-bbf8ce5aeae0" ChangeDateTime="12/19/2013 01:14:43">
+    <Property Name="ElementName" Value="[dbo].[ActivitySubmission].[SubmissionApprovedBy]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ActivitySubmission]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SubmissionApprovedADName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b8f2969d-4d6b-4507-a54f-bf334a7bb5ce" ChangeDateTime="12/19/2013 18:46:51">
+    <Property Name="ElementName" Value="[dbo].[BadgeAward].[EmployeeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BadgeAward]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EmployeeADName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c2557e9b-138b-40d7-ae66-c12fdcd71ddb" ChangeDateTime="12/19/2013 18:52:11">
+    <Property Name="ElementName" Value="[dbo].[BadgeAward].[PaidCompletedBy]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BadgeAward]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PaidCompletedADName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6f42b2ed-6a6b-411b-b405-252736f128ac" ChangeDateTime="12/19/2013 18:53:24">
+    <Property Name="ElementName" Value="[dbo].[BadgeAward].[PaidCompletedADName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BadgeAward]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PaidCompletedByADName" />
+  </Operation>
 </Operations>

@@ -11,3 +11,6 @@
     [ApprovingManagerId2]   INT           NULL CONSTRAINT [fk_Employee_ApprovingManager2] FOREIGN KEY ([ApprovingManagerId2]) REFERENCES [dbo].[Employee] ([EmployeeId]),
     [AwardPayoutThreshhold] INT           CONSTRAINT [df_Employee_AwardPayoutThreshhold] DEFAULT 50 NULL
 );
+GO
+
+CREATE UNIQUE INDEX [IX_Employee_ADName] ON [dbo].[Employee] ([ADName])

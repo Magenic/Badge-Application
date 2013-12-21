@@ -38,5 +38,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public System.DateTime BadgeApprovedDate { get; set; }
         public string BadgeTypeName { get; set; }
         public bool PayrollEligible { get; set; }
+        public System.DateTime AwardDate { get; set; }
+        public int AwardAmount { get; set; }
     }
 }
