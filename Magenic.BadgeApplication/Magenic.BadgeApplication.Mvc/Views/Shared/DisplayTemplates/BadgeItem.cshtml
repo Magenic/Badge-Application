@@ -1,0 +1,7 @@
+﻿@using Magenic.BadgeApplication.BusinessLogic.Badge
+@using Magenic.BadgeApplication.Extensions
+@model BadgeItem
+
+<div class="col-md-2">
+    <img src="@Model.ImagePath" alt="@Model.ImagePath.GetFileNameFromPath()" title="@Model.Name" />
+</div>

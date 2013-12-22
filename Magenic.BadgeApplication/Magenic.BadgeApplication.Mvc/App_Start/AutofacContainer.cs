@@ -1,9 +1,9 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
-using Magenic.BadgeApplication.BusinessLogic.Badge;
+using Csla.Core;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.Interfaces;
-using Magenic.BadgeApplication.DataAccess.EF;
+using System;
 using System.Reflection;
 using System.Web.Mvc;
 
@@ -26,9 +26,12 @@ namespace Magenic.BadgeApplication
             builder.RegisterModelBinderProvider();
             builder.RegisterModule(new AutofacWebTypesModule());
 
-            builder.RegisterType(typeof(BadgeEdit)).As(typeof(IBadgeEdit));
-            builder.RegisterType(typeof(BadgeEditDAL)).As(typeof(IBadgeEditDAL));
-            builder.RegisterGeneric(typeof(ObjectFactory<>)).As(typeof(IObjectFactory<>));
+            builder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
+                .Where(t => t.GetInterface("IBusinessObject") == typeof(IBusinessObject))
+                .AsImplementedInterfaces();
+
+            builder.RegisterAssemblyTypes(Assembly.Load("Magenic.BadgeApplication.DataAccess.EF"))
+                .AsImplementedInterfaces();
 
             builder.RegisterGeneric(typeof(ObjectFactory<>)).As(typeof(IObjectFactory<>));
 

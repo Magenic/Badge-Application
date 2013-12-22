@@ -129,14 +129,23 @@
   <data name="BadgesLink" xml:space="preserve">
     <value>Badges</value>
   </data>
+  <data name="CommunityBadgeHeader" xml:space="preserve">
+    <value>Community Badges</value>
+  </data>
   <data name="CorporateBadgeHeader" xml:space="preserve">
     <value>Corporate Badges</value>
   </data>
   <data name="LogoTitle" xml:space="preserve">
     <value>Magenic Badge Application Logo</value>
   </data>
+  <data name="ShowAllCommunityBadges" xml:space="preserve">
+    <value>All</value>
+  </data>
   <data name="ShowAllCorporateBadges" xml:space="preserve">
     <value>All</value>
+  </data>
+  <data name="ShowEarnedCommunityBadges" xml:space="preserve">
+    <value>Earned</value>
   </data>
   <data name="ShowEarnedCorporateBadges" xml:space="preserve">
     <value>Earned</value>

@@ -1,19 +1,19 @@
 ﻿@using Magenic.BadgeApplication.Resources
-@using Magenic.BadgeApplication.Common.Interfaces
-@model IBadgeEdit
+@using Magenic.BadgeApplication.Models
+@model BadgeIndexViewModel
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
-            <div class="col-sm-10">
+        <div class="col-md-8 no-padding">
+            <div class="col-sm-8 no-padding">
                 <h3>
                     @ApplicationResources.CorporateBadgeHeader
                 </h3>
             </div>
-            <div class="col-sm-2">
-                <a href="#" data-bind="disableClick: showCorporateBadgeAllTab, click: showAll">@ApplicationResources.ShowAllCorporateBadges</a>
+            <div class="col-sm-4 text-right">
+                <a href="#" data-bind="disableClick: showCorporateBadgeAllTab, click: showAllCorporateBadges">@ApplicationResources.ShowAllCorporateBadges</a>
                 &nbsp;|&nbsp;
-                <a href="#" data-bind="disableClick: showCorporateBadgeEarnedTab, click: showEarned">@ApplicationResources.ShowEarnedCorporateBadges</a>
+                <a href="#" data-bind="disableClick: showCorporateBadgeEarnedTab, click: showEarnedCorporateBadges">@ApplicationResources.ShowEarnedCorporateBadges</a>
             </div>
         </div>
 
@@ -24,11 +24,82 @@
         </div>
         <div class="row">
             <div class="col-md-8">
-                <div data-bind="visible: showCorporateBadgeAllTab">
-                    @Model.ImagePath
+                <div class="badges" data-bind="visible: showCorporateBadgeAllTab">
+                    <div class="row">
+                        @foreach (var badgeItem in Model.CorporateBadgesTopRow)
+                        {
+                            @Html.DisplayFor(m => badgeItem);
+                        }
+                    </div>
+                    <div class="row indent">
+                        @foreach (var badgeItem in Model.CorporateBadgesBottomRow)
+                        {
+                            @Html.DisplayFor(m => badgeItem);
+                        }
+                    </div>
                 </div>
                 <div data-bind="visible: showCorporateBadgeEarnedTab">
-                    Test2
+                    <div class="row">
+                        @foreach (var badgeItem in Model.CorporateEarnedBadgesTopRow)
+                        {
+                            @Html.DisplayFor(m => badgeItem);
+                        }
+                    </div>
+                    <div class="row indent">
+                        @foreach (var badgeItem in Model.CorporateEarnedBadgesBottomRow)
+                        {
+                            @Html.DisplayFor(m => badgeItem);
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        &nbsp;
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 no-padding">
+            <div class="col-sm-8 no-padding">
+                <h3>
+                    @ApplicationResources.CommunityBadgeHeader
+                </h3>
+            </div>
+            <div class="col-sm-4 text-right">
+                <a href="#" data-bind="disableClick: showCommunityBadgeAllTab, click: showAllCommunityBadges">@ApplicationResources.ShowAllCommunityBadges</a>
+                &nbsp;|&nbsp;
+                <a href="#" data-bind="disableClick: showCommunityBadgeEarnedTab, click: showEarnedCommunityBadges">@ApplicationResources.ShowEarnedCommunityBadges</a>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="grayLine col-md-8"></div>
+        <div class="col-md-4">
+
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="badges" data-bind="visible: showCorporateBadgeAllTab">
+                    <div class="row">
+                        @foreach (var badgeItem in Model.CommunityBadgesTopRow)
+                        {
+                            @Html.DisplayFor(m => badgeItem);
+                        }
+                    </div>
+                    <div class="row indent">
+                        @foreach (var badgeItem in Model.CommunityBadgesBottomRow)
+                        {
+                            @Html.DisplayFor(m => badgeItem);
+                        }
+                    </div>
+                </div>
+                <div data-bind="visible: showCorporateBadgeEarnedTab">
+                    @foreach (var corporateEarnedBadges in Model.CommunityEarnedBadges)
+                    {
+                        @Html.DisplayFor(m => corporateEarnedBadges)
+                    }
                 </div>
             </div>
         </div>

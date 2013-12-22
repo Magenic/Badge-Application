@@ -4,6 +4,10 @@
     margin: 0 0 3px;
 }
 
+a {
+    color: #7ab800;
+}
+
 .grayLine {
     border-top: 1px solid #E0E0E0;
     margin-bottom: 15px;
@@ -15,8 +19,27 @@
     padding-right: 15px;
 }
 
+.no-padding {
+    padding: 0;
+}
+
 .disabled_anchor {
     color: gray;
+}
+
+.badges {
+    .col-md-2 {
+        text-align: center;
+        width: 100px;
+    }
+
+    .indent {
+        margin-left: 32px;
+
+        & > .col-md-2 {
+            margin-top: -5px;
+        }
+    }
 }
 
 .navbar {

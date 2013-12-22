@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
     /// <summary>
@@ -22,5 +23,9 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// The path to where the badge's image resides.
         /// </summary>
         string ImagePath { get; }
+        /// <summary>
+        /// The date and time of when this badge was approved to be awarded.
+        /// </summary>
+        DateTime? ApprovedDate { get; }
     }
 }
