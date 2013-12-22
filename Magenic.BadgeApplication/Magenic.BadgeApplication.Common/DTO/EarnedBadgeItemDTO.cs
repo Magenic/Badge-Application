@@ -40,5 +40,9 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// The number of points, if any, awarded with this badge.
         /// </summary>
         public int AwardPoints { get; set; }
+        /// <summary>
+        /// Indicates if the award points have been paid out.
+        /// </summary>
+        public bool PaidOut { get; set; }
     }
 }

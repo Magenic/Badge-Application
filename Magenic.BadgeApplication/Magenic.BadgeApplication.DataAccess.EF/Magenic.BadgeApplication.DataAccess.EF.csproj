@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountInfoEditDAL.cs" />
     <Compile Include="Activity.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
