@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arg.cs" />
+    <Compile Include="DTO\AccountInfoEditDTO.cs" />
     <Compile Include="DTO\ActivityEditDTO.cs" />
     <Compile Include="DTO\ActivityItemDTO.cs" />
     <Compile Include="DTO\BadgeEditDTO.cs" />
@@ -65,6 +66,9 @@
     <Compile Include="Enums\BadgeType.cs" />
     <Compile Include="Enums\PermissionType.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Interfaces\IAccountInfoEdit.cs" />
+    <Compile Include="Interfaces\IAccountInfoEditDAL.cs" />
+    <Compile Include="Interfaces\IAccountInfoEditDTO.cs" />
     <Compile Include="Interfaces\IActivityCollection.cs" />
     <Compile Include="Interfaces\IActivityEdit.cs" />
     <Compile Include="Interfaces\IActivityEditDAL.cs" />

@@ -2,7 +2,7 @@
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
     /// <summary>
-    /// Interface to edit activities.  Activites are are entered by employees as activity
+    /// Interface to edit activities.  Activates are are entered by employees as activity
     /// submissions.  Some activity submissions require approval with the intent
     /// that activities are used to determine if an employee is qualified to
     /// receive a particular badge.

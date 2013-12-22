@@ -49,4 +49,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="PaidCompletedByADName" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="18e576a1-bd40-4f09-aa3d-1a74415770f8" ChangeDateTime="12/22/2013 21:48:52">
+    <Property Name="ElementName" Value="[dbo].[Employee].[AwardPayoutThreshhold]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Employee]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AwardPayoutThreshold" />
+  </Operation>
 </Operations>

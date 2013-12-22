@@ -101,6 +101,19 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             private set { LoadProperty(AwardPointsProperty, value); }
         }
 
+        /// <summary>
+        /// The paid out property
+        /// </summary>
+        public static readonly PropertyInfo<bool> PaidOutProperty = RegisterProperty<bool>(b => b.PaidOut);
+        /// <summary>
+        /// Indicates if the award points have been paid out.
+        /// </summary>
+        public bool PaidOut
+        {
+            get { return GetProperty(PaidOutProperty);  }
+            private set { LoadProperty(PaidOutProperty, value); }
+        }
+
         #endregion Properties
 
         #region Methods
@@ -114,6 +127,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.Tagline = item.Tagline;
             this.AwardDate = item.AwardDate;
             this.AwardPoints = item.AwardPoints;
+            this.PaidOut = item.PaidOut;
         }
 
         #endregion Methods
