@@ -5,6 +5,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// <summary>
     /// Class for data transfer persist operations.
     /// </summary>
+    [Serializable]
     public class BadgeEditDTO : Interfaces.IBadgeEditDTO
     {
         /// <summary>

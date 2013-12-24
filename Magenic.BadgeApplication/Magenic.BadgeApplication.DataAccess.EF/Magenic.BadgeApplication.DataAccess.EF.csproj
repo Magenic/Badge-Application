@@ -88,6 +88,7 @@
     <Compile Include="ActivitySubmission.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
+    <Compile Include="ApproveActivityCollectionDAL.cs" />
     <Compile Include="Badge.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

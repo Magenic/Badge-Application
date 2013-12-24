@@ -6,7 +6,7 @@ using System;
 namespace Magenic.BadgeApplication.BusinessLogic.Badge
 {
     /// <summary>
-    /// 
+    /// A read only badge item in a collection.
     /// </summary>
     [Serializable]
     public class BadgeItem : ReadOnlyBase<BadgeItem>, IBadgeItem

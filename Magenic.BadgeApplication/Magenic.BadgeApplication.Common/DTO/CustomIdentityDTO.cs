@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Magenic.BadgeApplication.Common.DTO
 {
     /// <summary>
     /// Data Transfer Object for the CustomIdentity
     /// </summary>
+    [Serializable]
     public class CustomIdentityDTO : Interfaces.ICustomIdentityDTO
     {
         /// <summary>

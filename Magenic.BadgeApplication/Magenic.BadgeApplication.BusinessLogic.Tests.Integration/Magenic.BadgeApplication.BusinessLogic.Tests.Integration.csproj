@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="AccountInfoEditTests.cs" />
     <Compile Include="ActivityCollectionTests.cs" />
+    <Compile Include="ApproveActivityCollectionTests.cs" />
     <Compile Include="AssemblyTestInit.cs" />
     <Compile Include="BadgeCollectionTests.cs" />
     <Compile Include="BadgeTests.cs" />

@@ -2,11 +2,13 @@
 using Csla;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
+    [Serializable]
     public class ActivityCollection : ReadOnlyListBase<ActivityCollection, IActivityItem>, IActivityCollection
     {
         #region Factory Methods
