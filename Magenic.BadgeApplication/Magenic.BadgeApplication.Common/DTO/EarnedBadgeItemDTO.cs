@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Magenic.BadgeApplication.Common.Interfaces;
+﻿using Magenic.BadgeApplication.Common.Interfaces;
+using System;
 
 namespace Magenic.BadgeApplication.Common.DTO
 {
     /// <summary>
     /// Class for data transfer persist operations.
     /// </summary>
+    [Serializable]
     public class EarnedBadgeItemDTO : IEarnedBadgeItemDTO
     {
         /// <summary>

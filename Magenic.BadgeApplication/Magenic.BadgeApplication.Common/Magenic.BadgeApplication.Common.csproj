@@ -56,6 +56,7 @@
     <Compile Include="DTO\AccountInfoEditDTO.cs" />
     <Compile Include="DTO\ActivityEditDTO.cs" />
     <Compile Include="DTO\ActivityItemDTO.cs" />
+    <Compile Include="DTO\ApproveActivityItemDTO.cs" />
     <Compile Include="DTO\BadgeEditDTO.cs" />
     <Compile Include="DTO\BadgeItemDTO.cs" />
     <Compile Include="DTO\CustomIdentityDTO.cs" />
@@ -76,6 +77,10 @@
     <Compile Include="Interfaces\IActivityItem.cs" />
     <Compile Include="Interfaces\IActivityItemDTO.cs" />
     <Compile Include="Interfaces\IActivityCollectionDAL.cs" />
+    <Compile Include="Interfaces\IApproveActivityCollection.cs" />
+    <Compile Include="Interfaces\IApproveActivityCollectionDAL.cs" />
+    <Compile Include="Interfaces\IApproveActivityItem.cs" />
+    <Compile Include="Interfaces\IApproveActivityItemDTO.cs" />
     <Compile Include="Interfaces\IBadgeCollection.cs" />
     <Compile Include="Interfaces\IBadgeEdit.cs" />
     <Compile Include="Interfaces\IBadgeEditDAL.cs" />

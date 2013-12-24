@@ -1,8 +1,10 @@
 ﻿using Csla;
 using Magenic.BadgeApplication.Common.Interfaces;
+using System;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
+    [Serializable]
     public class ActivityItem : ReadOnlyBase<ActivityItem>, IActivityItem
     {
         #region Properties

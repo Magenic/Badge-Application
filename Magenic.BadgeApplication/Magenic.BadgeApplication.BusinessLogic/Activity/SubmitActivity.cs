@@ -92,41 +92,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
 
         #endregion Properties
 
-        #region Methods
-
-        public static readonly MethodInfo ApproveActivitySubmissionMethod = RegisterMethod(typeof(SubmitActivity), "ApproveActivitySubmission"); 
-        /// <summary>
-        /// Approves this activity submission.  Can only be called by a user with manager permission
-        /// and when the status is not denied or error.
-        /// </summary>
-        /// <param name="approverUserName">The AD user name of the manager approving this activity submission.</param>
-        public void ApproveActivitySubmission(string approverUserName)
-        {
-            if (CanExecuteMethod(ApproveActivitySubmissionMethod))
-            {
-                this.Status = ActivitySubmissionStatus.Approved;
-                this.ApprovedByUserName = approverUserName;
-
-            }
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Denys the activity submission.  Can only be called by a user with the manager permission
-        /// and when the status is not approved or error.
-        /// </summary>
-        public static readonly MethodInfo DenyActivitySubmissionMethod = RegisterMethod(typeof(SubmitActivity), "DenyActivitySubmission");
-        public void DenyActivitySubmission()
-        {
-            if (CanExecuteMethod(DenyActivitySubmissionMethod))
-            {
-
-            }
-            throw new NotImplementedException();
-        }
-
-        #endregion Methods
-
         #region Factory Methods
 
         public async static Task<ISubmitActivity> GetActivitySubmissionByIdAsync(int activitySubmissionId)
@@ -153,9 +118,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             base.AddBusinessRules();
 
             this.BusinessRules.AddRule(new Required(UserNameProperty));
-            
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, ApproveActivitySubmissionMethod, PermissionType.Manager.ToString()));
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, DenyActivitySubmissionMethod, PermissionType.Manager.ToString()));
         }
 
         #endregion Rules
