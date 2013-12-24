@@ -22,13 +22,14 @@ namespace Magenic.BadgeApplication.Controllers
             var corporateBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Corporate);
             var communityBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Community);
 
-            var sortedBadges = corporateBadges.OrderByDescending(b => b.ApprovedDate);
+            var sortedCorporateBadges = corporateBadges.OrderByDescending(b => b.ApprovedDate);
+            var sortedCommunityBadges = communityBadges.OrderByDescending(b => b.ApprovedDate);
             var badgeIndexViewModel = new BadgeIndexViewModel()
             {
-                CorporateBadgesTopRow = sortedBadges.Take(5),
-                CorporateBadgesBottomRow = sortedBadges.Skip(5).Take(4),
+                CorporateBadgesTopRow = sortedCorporateBadges.Take(5),
+                CorporateBadgesBottomRow = sortedCorporateBadges.Skip(5).Take(5),
                 CommunityBadgesTopRow = communityBadges.Take(5),
-                CommunityBadgesBottomRow = communityBadges.Skip(5).Take(4),
+                CommunityBadgesBottomRow = communityBadges.Skip(5).Take(5),
             };
 
             return View(badgeIndexViewModel);

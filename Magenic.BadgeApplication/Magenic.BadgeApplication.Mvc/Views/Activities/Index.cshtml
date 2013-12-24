@@ -1,7 +1,22 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Models
+@model ActivityIndexViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>
+                @ApplicationResources.PreviousActivitiesHeader
+            </h1>
+        </div>
+        <div class="col-md-4 grayBox">
+            <h2>
+                @ApplicationResources.SubmitCompletedActivityHeader
+            </h2>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/activityPage")
 }
-
-<h2>Index</h2>
-

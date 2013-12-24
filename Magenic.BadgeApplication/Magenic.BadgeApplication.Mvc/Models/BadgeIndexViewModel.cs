@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.Common.Interfaces;
+﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
+using Magenic.BadgeApplication.Common.Interfaces;
 using System.Collections.Generic;
 
 namespace Magenic.BadgeApplication.Models
@@ -20,6 +21,7 @@ namespace Magenic.BadgeApplication.Models
             CommunityBadgesTopRow = new List<IBadgeItem>();
             CommunityBadgesBottomRow = new List<IBadgeItem>();
             CommunityEarnedBadges = new List<IBadgeItem>();
+            NewActivity = ActivityEdit.CreateActivity();
         }
 
         /// <summary>
@@ -77,5 +79,13 @@ namespace Magenic.BadgeApplication.Models
         /// The community earned badges.
         /// </value>
         public IEnumerable<IBadgeItem> CommunityEarnedBadges { get; set; }
+
+        /// <summary>
+        /// Gets or sets the new activity.
+        /// </summary>
+        /// <value>
+        /// The new activity.
+        /// </value>
+        public IActivityEdit NewActivity { get; set; }
     }
 }

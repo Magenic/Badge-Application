@@ -104,30 +104,6 @@ namespace Links
             public static readonly string header_bg_gif = Url("header-bg.gif");
             public static readonly string header_shadow_png = Url("header-shadow.png");
             public static readonly string magenic_badges_logo_png = Url("magenic-badges-logo.png");
-            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public static class TempBadges {
-                private const string URLPATH = "~/Content/Images/TempBadges";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string at_bat_png = Url("at-bat.png");
-                public static readonly string close_business_png = Url("close-business.png");
-                public static readonly string consultant_qtr_png = Url("consultant-qtr.png");
-                public static readonly string consultant_year_png = Url("consultant-year.png");
-                public static readonly string employee_referral_plus_png = Url("employee-referral-plus.png");
-                public static readonly string employee_referral_png = Url("employee-referral.png");
-                public static readonly string magenic_mvp_png = Url("magenic-mvp.png");
-                public static readonly string ms_cert_png = Url("ms-cert.png");
-                public static readonly string ms_mvp_png = Url("ms-mvp.png");
-                public static readonly string qa_cert_png = Url("qa-cert.png");
-                public static readonly string service_1_png = Url("service-1.png");
-                public static readonly string service_10_png = Url("service-10.png");
-                public static readonly string service_15_png = Url("service-15.png");
-                public static readonly string service_3_png = Url("service-3.png");
-                public static readonly string service_5_png = Url("service-5.png");
-                public static readonly string speaker_png = Url("speaker.png");
-                public static readonly string spot_recognition_png = Url("spot-recognition.png");
-            }
-        
         }
     
         public static readonly string Site_less = Url("Site.less");

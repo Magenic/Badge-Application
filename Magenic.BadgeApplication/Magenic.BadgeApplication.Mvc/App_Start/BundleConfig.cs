@@ -41,6 +41,10 @@ namespace Magenic.BadgeApplication
             bundles.Add(new ScriptBundle("~/bundles/badgePage").Include(
                 "~/Scripts/badgePage.js"
             ));
+
+            bundles.Add(new ScriptBundle("~/bundles/activityPage").Include(
+                "~/Scripts/activityPage.js"
+            ));
         }
     }
 }

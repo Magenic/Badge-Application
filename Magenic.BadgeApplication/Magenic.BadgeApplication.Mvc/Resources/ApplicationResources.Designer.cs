@@ -124,6 +124,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Previous Activities.
+        /// </summary>
+        public static string PreviousActivitiesHeader {
+            get {
+                return ResourceManager.GetString("PreviousActivitiesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All.
         /// </summary>
         public static string ShowAllCommunityBadges {
@@ -156,6 +165,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string ShowEarnedCorporateBadges {
             get {
                 return ResourceManager.GetString("ShowEarnedCorporateBadges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit a Completed Activity.
+        /// </summary>
+        public static string SubmitCompletedActivityHeader {
+            get {
+                return ResourceManager.GetString("SubmitCompletedActivityHeader", resourceCulture);
             }
         }
     }

@@ -138,6 +138,9 @@
   <data name="LogoTitle" xml:space="preserve">
     <value>Magenic Badge Application Logo</value>
   </data>
+  <data name="PreviousActivitiesHeader" xml:space="preserve">
+    <value>Previous Activities</value>
+  </data>
   <data name="ShowAllCommunityBadges" xml:space="preserve">
     <value>All</value>
   </data>
@@ -149,5 +152,8 @@
   </data>
   <data name="ShowEarnedCorporateBadges" xml:space="preserve">
     <value>Earned</value>
+  </data>
+  <data name="SubmitCompletedActivityHeader" xml:space="preserve">
+    <value>Submit a Completed Activity</value>
   </data>
 </root>

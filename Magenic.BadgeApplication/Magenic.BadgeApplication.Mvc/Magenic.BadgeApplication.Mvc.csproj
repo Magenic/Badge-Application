@@ -183,6 +183,7 @@
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActivityIndexViewModel.cs" />
     <Compile Include="Models\BadgeIndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ApplicationResources.Designer.cs">
@@ -235,6 +236,9 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <None Include="T4MVC.tt.settings.xml" />
+    <Content Include="Views\Badges\_CorporateBadgeDisplay.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -259,6 +263,7 @@
     <Content Include="Views\BadgeManager\Index.cshtml" />
     <Content Include="Views\Badges\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BadgeItem.cshtml" />
+    <Content Include="Views\Badges\_CommunityBadgeDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">
