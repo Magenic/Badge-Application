@@ -25,5 +25,9 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// The path to where the badge's image resides.
         /// </summary>
         public string ImagePath { get; set; }
+        /// <summary>
+        /// The date and time of when this badge was approved to be awarded.
+        /// </summary>
+        public DateTime? ApprovedDate { get; set; }
     }
 }

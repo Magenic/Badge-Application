@@ -18,15 +18,27 @@ $(document).ready(function () {
     var BadgePageViewModel = {
         showCorporateBadgeAllTab: ko.observable(true),
         showCorporateBadgeEarnedTab: ko.observable(false),
+        showCommunityBadgeAllTab: ko.observable(true),
+        showCommunityBadgeEarnedTab: ko.observable(false),
 
-        showAll: function () {
+        showAllCorporateBadges: function () {
             this.showCorporateBadgeAllTab(true);
             this.showCorporateBadgeEarnedTab(false);
         },
 
-        showEarned: function () {
+        showEarnedCorporateBadges: function () {
             this.showCorporateBadgeAllTab(false);
             this.showCorporateBadgeEarnedTab(true);
+        },
+
+        showAllCommunityBadges: function () {
+            this.showCommunityBadgeAllTab(true);
+            this.showCommunityBadgeEarnedTab(false);
+        },
+
+        showEarnedCommunityBadges: function () {
+            this.showCommunityBadgeAllTab(false);
+            this.showCommunityBadgeEarnedTab(true);
         }
     };
 

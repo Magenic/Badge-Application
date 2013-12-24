@@ -1,0 +1,46 @@
+﻿@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Models
+@model BadgeIndexViewModel
+
+<div class="row">
+    <div class="col-md-10 no-padding">
+        <div class="col-sm-8 no-padding">
+            <h1>
+                @ApplicationResources.CommunityBadgeHeader
+            </h1>
+        </div>
+        <div class="col-sm-4 text-right">
+            <a href="#" data-bind="disableClick: showCommunityBadgeAllTab, click: showAllCommunityBadges">@ApplicationResources.ShowAllCommunityBadges</a>
+            &nbsp;|&nbsp;
+            <a href="#" data-bind="disableClick: showCommunityBadgeEarnedTab, click: showEarnedCommunityBadges">@ApplicationResources.ShowEarnedCommunityBadges</a>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="grayLine col-md-10"></div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="badges" data-bind="visible: showCorporateBadgeAllTab">
+                <div class="row">
+                    @foreach (var badgeItem in Model.CommunityBadgesTopRow)
+                    {
+                        @Html.DisplayFor(m => badgeItem);
+                    }
+                </div>
+                <div class="row indent">
+                    @foreach (var badgeItem in Model.CommunityBadgesBottomRow)
+                    {
+                        @Html.DisplayFor(m => badgeItem);
+                    }
+                </div>
+            </div>
+            <div data-bind="visible: showCorporateBadgeEarnedTab">
+                @foreach (var corporateEarnedBadges in Model.CommunityEarnedBadges)
+                {
+                    @Html.DisplayFor(m => corporateEarnedBadges)
+                }
+            </div>
+        </div>
+    </div>
+</div>

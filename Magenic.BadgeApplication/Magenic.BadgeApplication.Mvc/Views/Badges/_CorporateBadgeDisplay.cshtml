@@ -1,0 +1,54 @@
+﻿@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Models
+@model BadgeIndexViewModel
+
+<div class="row">
+    <div class="col-md-10 no-padding">
+        <div class="col-sm-8 no-padding">
+            <h1>
+                @ApplicationResources.CorporateBadgeHeader
+            </h1>
+        </div>
+        <div class="col-sm-4 text-right">
+            <a href="#" data-bind="disableClick: showCorporateBadgeAllTab, click: showAllCorporateBadges">@ApplicationResources.ShowAllCorporateBadges</a>
+            &nbsp;|&nbsp;
+            <a href="#" data-bind="disableClick: showCorporateBadgeEarnedTab, click: showEarnedCorporateBadges">@ApplicationResources.ShowEarnedCorporateBadges</a>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="grayLine col-md-10"></div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <div class="badges" data-bind="visible: showCorporateBadgeAllTab">
+                <div class="row">
+                    @foreach (var badgeItem in Model.CorporateBadgesTopRow)
+                    {
+                        @Html.DisplayFor(m => badgeItem);
+                    }
+                </div>
+                <div class="row indent">
+                    @foreach (var badgeItem in Model.CorporateBadgesBottomRow)
+                    {
+                        @Html.DisplayFor(m => badgeItem);
+                    }
+                </div>
+            </div>
+            <div data-bind="visible: showCorporateBadgeEarnedTab">
+                <div class="row">
+                    @foreach (var badgeItem in Model.CorporateEarnedBadgesTopRow)
+                    {
+                        @Html.DisplayFor(m => badgeItem);
+                    }
+                </div>
+                <div class="row indent">
+                    @foreach (var badgeItem in Model.CorporateEarnedBadgesBottomRow)
+                    {
+                        @Html.DisplayFor(m => badgeItem);
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

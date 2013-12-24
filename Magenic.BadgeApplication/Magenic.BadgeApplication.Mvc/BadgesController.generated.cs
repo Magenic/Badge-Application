@@ -80,8 +80,12 @@ namespace Magenic.BadgeApplication.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _CommunityBadgeDisplay = "_CommunityBadgeDisplay";
+                public readonly string _CorporateBadgeDisplay = "_CorporateBadgeDisplay";
                 public readonly string Index = "Index";
             }
+            public readonly string _CommunityBadgeDisplay = "~/Views/Badges/_CommunityBadgeDisplay.cshtml";
+            public readonly string _CorporateBadgeDisplay = "~/Views/Badges/_CorporateBadgeDisplay.cshtml";
             public readonly string Index = "~/Views/Badges/Index.cshtml";
         }
     }

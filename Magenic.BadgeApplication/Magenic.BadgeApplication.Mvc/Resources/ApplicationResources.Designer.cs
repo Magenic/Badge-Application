@@ -97,6 +97,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Community Badges.
+        /// </summary>
+        public static string CommunityBadgeHeader {
+            get {
+                return ResourceManager.GetString("CommunityBadgeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Corporate Badges.
         /// </summary>
         public static string CorporateBadgeHeader {
@@ -115,6 +124,24 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Previous Activities.
+        /// </summary>
+        public static string PreviousActivitiesHeader {
+            get {
+                return ResourceManager.GetString("PreviousActivitiesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        public static string ShowAllCommunityBadges {
+            get {
+                return ResourceManager.GetString("ShowAllCommunityBadges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All.
         /// </summary>
         public static string ShowAllCorporateBadges {
@@ -126,9 +153,27 @@ namespace Magenic.BadgeApplication.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Earned.
         /// </summary>
+        public static string ShowEarnedCommunityBadges {
+            get {
+                return ResourceManager.GetString("ShowEarnedCommunityBadges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Earned.
+        /// </summary>
         public static string ShowEarnedCorporateBadges {
             get {
                 return ResourceManager.GetString("ShowEarnedCorporateBadges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit a Completed Activity.
+        /// </summary>
+        public static string SubmitCompletedActivityHeader {
+            get {
+                return ResourceManager.GetString("SubmitCompletedActivityHeader", resourceCulture);
             }
         }
     }
