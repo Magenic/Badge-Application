@@ -1,42 +1,40 @@
-﻿using System;
-using Csla;
-
-namespace Magenic.BadgeApplication.Common.Interfaces
+﻿namespace Magenic.BadgeApplication.Common.Interfaces
 {
     /// <summary>
-    /// Interface to submit an activity.
+    /// Interface for defining a data transfer object for persist operations 
+    /// for classes implementing <see cref="IApproveActivityItem"/>.
     /// </summary>
-    public interface ISubmitActivity : IBusinessBase
+    public interface IApproveActivityItemDTO
     {
         /// <summary>
-        /// The Id for this activity submission.  Zero if new.
+        /// The id of the activity submission.
         /// </summary>
-        int Id { get; }
+        int SubmissionId { get; set; }
         /// <summary>
-        /// The id of the activity this submission is for.
+        /// The name of the activity used to identify it.
         /// </summary>
-        int ActivityId { get; set; }
+        string ActivityName { get; set; }
         /// <summary>
-        /// The date the activity occurred, should be set and saved in UTC.
+        /// The Description of the activity.
         /// </summary>
-        DateTime ActivitySubmissionDate { get; set; }
+        string ActivityDescription { get; set; }
         /// <summary>
         /// Any notes associated with this submission.
         /// </summary>
-        string Notes { get; set; }
+        string SubmissionNotes { get; set; }
         /// <summary>
         /// The AD user name of the person who this badge submission is for.  
         /// This should be the same as the name of the identity.
         /// </summary>
-        string UserName { get; set; }
+        string EmployeeUserName { get; set; }
         /// <summary>
         /// The current status of this activity submission.
         /// </summary>
-        Enums.ActivitySubmissionStatus Status { get; }
+        Enums.ActivitySubmissionStatus Status { get; set; }
         /// <summary>
         /// The AD user name of the user who approved this activity.  Blank if the 
         /// activity status is approved and no managerial approval is required.
         /// </summary>
-        string ApprovedByUserName { get; }
+        string ApprovedByUserName { get; set; }
     }
 }

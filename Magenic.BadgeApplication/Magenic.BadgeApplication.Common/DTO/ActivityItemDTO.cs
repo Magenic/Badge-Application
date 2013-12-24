@@ -1,10 +1,12 @@
 ﻿using Magenic.BadgeApplication.Common.Interfaces;
+using System;
 
 namespace Magenic.BadgeApplication.Common.DTO
 {
     /// <summary>
     /// Class for data transfer persist operations.
     /// </summary>
+    [Serializable]
     public class ActivityItemDTO : IActivityItemDTO
     {
         /// <summary>

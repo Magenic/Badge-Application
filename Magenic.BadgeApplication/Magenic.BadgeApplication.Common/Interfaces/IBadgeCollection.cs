@@ -3,7 +3,7 @@
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
     /// <summary>
-    /// A readonly list of badge information.
+    /// A read only list of badge information.
     /// </summary>
     public interface IBadgeCollection : IReadOnlyListBase<IBadgeItem>
     {

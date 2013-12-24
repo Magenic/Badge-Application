@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using Csla;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using System;
+using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
+    [Serializable]
     public class ActivityNameExists: CommandBase<ActivityNameExists>
     {
         private bool NameExists { get; set; }
