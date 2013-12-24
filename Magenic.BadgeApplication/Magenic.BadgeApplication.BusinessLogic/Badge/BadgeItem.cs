@@ -65,6 +65,19 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             private set { LoadProperty(ImagePathProperty, value); }
         }
 
+        /// <summary>
+        /// The approved date property
+        /// </summary>
+        public static readonly PropertyInfo<DateTime?> ApprovedDateProperty = RegisterProperty<DateTime?>(b => b.ApprovedDate);
+        /// <summary>
+        /// The date and time of when this badge was approved to be awarded.
+        /// </summary>
+        public DateTime? ApprovedDate
+        {
+            get { return GetProperty(ApprovedDateProperty); }
+            private set { LoadProperty(ApprovedDateProperty, value); }
+        }
+
         #endregion Properties
 
         #region Methods
@@ -75,6 +88,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.Name = item.Name;
             this.Type = item.Type;
             this.ImagePath = item.ImagePath;
+            this.ApprovedDate = item.ApprovedDate;
         }
 
         #endregion Methods

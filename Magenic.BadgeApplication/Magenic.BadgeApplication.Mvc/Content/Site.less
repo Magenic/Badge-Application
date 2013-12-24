@@ -1,7 +1,30 @@
-﻿h3 {
+﻿h1 {
     font: normal 30px HelveticaNeue, Arial, sans-serif;
     color: #222;
     margin: 0 0 3px;
+}
+
+h2 {
+    font: normal 23px Arial, sans-serif;
+    color: #333;
+    margin: 0 0 10px;
+}
+
+h3 {
+    font: normal 30px HelveticaNeue, Arial, sans-serif;
+    color: #222;
+    margin: 0 0 3px;
+}
+
+a {
+    color: #7ab800;
+}
+
+.grayBox, .tabGrayBox {
+    background-color: #EFEFEF;
+    border: 1px solid #D3D3D3;
+    border-radius: 3px 3px 3px 3px;
+    padding: 10px 15px 15px;
 }
 
 .grayLine {
@@ -15,8 +38,27 @@
     padding-right: 15px;
 }
 
+.no-padding {
+    padding: 0;
+}
+
 .disabled_anchor {
     color: gray;
+}
+
+.badges {
+    .col-md-2 {
+        text-align: center;
+        width: 110px;
+    }
+
+    .indent {
+        margin-left: 39px;
+
+        & > .col-md-2 {
+            margin-top: -5px;
+        }
+    }
 }
 
 .navbar {
