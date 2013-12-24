@@ -47,7 +47,7 @@ USING (VALUES
     (3, 'Rockford', 'Lhotka', 'rockyl', '1/1/1999', 3, 150),
     (4, 'Kevin', 'Ford', 'kevinf', '4/1/2011', 2, 100)
 )
-AS Source ([employee_id], [first_name], [last_name], [ad_name], [start_date], [approving_manager], [award_payout_threshhold]) 
+AS Source ([employee_id], [first_name], [last_name], [ad_name], [start_date], [approving_manager], [award_payout_threshold]) 
 ON Target.EmployeeId = Source.[employee_id]
 WHEN MATCHED THEN 
     UPDATE SET [FirstName] = Source.[first_name],
@@ -55,10 +55,10 @@ WHEN MATCHED THEN
                [ADName] = Source.[ad_name],
                [EmploymentStartDate] = Source.[start_date],
                [ApprovingManagerId1] = Source.[approving_manager],
-               [AwardPayoutThreshhold] = Source.[award_payout_threshhold]
+               [AwardPayoutThreshold] = Source.[award_payout_threshold]
 WHEN NOT MATCHED BY TARGET THEN 
-    INSERT ([EmployeeId], [FirstName], [LastName], [ADName], [EmploymentStartDate], [ApprovingManagerId1], [AwardPayoutThreshhold])
-    VALUES ([employee_id], [first_name], [last_name], [ad_name], [start_date], [approving_manager], [award_payout_threshhold]);
+    INSERT ([EmployeeId], [FirstName], [LastName], [ADName], [EmploymentStartDate], [ApprovingManagerId1], [AwardPayoutThreshold])
+    VALUES ([employee_id], [first_name], [last_name], [ad_name], [start_date], [approving_manager], [award_payout_threshold]);
 
 SET IDENTITY_INSERT [dbo].[Employee]  OFF
 

@@ -27,7 +27,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                            ImagePath = eb.BadgePath,
                                            Tagline = eb.BadgeTagLine,
                                            AwardDate = eb.AwardDate,
-                                           AwardPoints = eb.AwardAmount
+                                           AwardPoints = eb.AwardAmount,
+                                           PaidOut = eb.PaidOut
                                        }).ToArrayAsync();
                 return badgeList;
             }

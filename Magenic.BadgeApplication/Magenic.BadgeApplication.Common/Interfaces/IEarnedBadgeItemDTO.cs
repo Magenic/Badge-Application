@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -40,5 +36,9 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// The number of points, if any, awarded with this badge.
         /// </summary>
         int AwardPoints { get; set; }
+        /// <summary>
+        /// Indicates if the award points have been paid out.
+        /// </summary>
+        bool PaidOut { get; set; }
     }
 }

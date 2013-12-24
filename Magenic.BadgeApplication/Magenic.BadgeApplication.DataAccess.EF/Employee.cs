@@ -30,7 +30,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public Nullable<System.DateTime> EmploymentEndDate2 { get; set; }
         public int ApprovingManagerId1 { get; set; }
         public Nullable<int> ApprovingManagerId2 { get; set; }
-        public Nullable<int> AwardPayoutThreshhold { get; set; }
+        public Nullable<int> AwardPayoutThreshold { get; set; }
     
         public virtual ICollection<EmployeePermission> EmployeePermissions { get; set; }
         public virtual ICollection<Badge> Badges { get; set; }
