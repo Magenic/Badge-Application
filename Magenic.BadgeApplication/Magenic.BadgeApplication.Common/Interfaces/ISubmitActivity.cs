@@ -1,5 +1,5 @@
-﻿using System;
-using Csla;
+﻿using Csla;
+using System;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {

@@ -27,11 +27,13 @@ namespace Magenic.BadgeApplication
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap-datepicker.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-theme.css",
+                      "~/Content/bootstrap-datepicker.css",
                       "~/Content/Site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(

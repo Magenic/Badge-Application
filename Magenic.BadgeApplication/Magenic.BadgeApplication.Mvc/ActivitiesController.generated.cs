@@ -44,6 +44,13 @@ namespace Magenic.BadgeApplication.Controllers
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> CreateActivity()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CreateActivity);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActivitiesController Actions { get { return Mvc.Activities; } }
@@ -61,15 +68,25 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string CreateActivity = "CreateActivity";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string CreateActivity = "CreateActivity";
         }
 
 
+        static readonly ActionParamsClass_CreateActivity s_params_CreateActivity = new ActionParamsClass_CreateActivity();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_CreateActivity CreateActivityParams { get { return s_params_CreateActivity; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_CreateActivity
+        {
+            public readonly string submitActivityViewModel = "submitActivityViewModel";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -98,6 +115,16 @@ namespace Magenic.BadgeApplication.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
             return callInfo;
+        }
+
+        partial void CreateActivityOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Magenic.BadgeApplication.Models.SubmitActivityViewModel submitActivityViewModel);
+
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> CreateActivity(Magenic.BadgeApplication.Models.SubmitActivityViewModel submitActivityViewModel)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CreateActivity);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "submitActivityViewModel", submitActivityViewModel);
+            CreateActivityOverride(callInfo, submitActivityViewModel);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
     }
