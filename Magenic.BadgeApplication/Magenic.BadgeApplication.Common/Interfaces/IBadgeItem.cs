@@ -28,5 +28,9 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// The date and time of when this badge was approved to be awarded.
         /// </summary>
         DateTime? ApprovedDate { get; }
+        /// <summary>
+        /// The priority order to display the badges in, lowest to highest.
+        /// </summary>
+        int BadgePriority { get; }
     }
 }

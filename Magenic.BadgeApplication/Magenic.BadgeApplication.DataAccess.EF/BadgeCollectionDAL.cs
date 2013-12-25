@@ -20,7 +20,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                              Id = t.BadgeId,
                                              Name = t.BadgeName,
                                              Type = (Common.Enums.BadgeType)t.BadgeTypeId,
-                                             ImagePath = t.BadgePath
+                                             ImagePath = t.BadgePath,
+                                             BadgePriority = t.BadgePriority
                                          }).ToArrayAsync();
 
                 return badgeList;
