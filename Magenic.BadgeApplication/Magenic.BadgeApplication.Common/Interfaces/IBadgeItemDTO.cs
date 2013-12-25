@@ -10,7 +10,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <summary>
         /// The id of the badge.
         /// </summary>
-        int Id { get; }
+        int Id { get; set; }
         /// <summary>
         /// The name of a badge.
         /// </summary>
@@ -22,10 +22,14 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <summary>
         /// The path to where the badge's image resides.
         /// </summary>
-        string ImagePath { get; }
+        string ImagePath { get; set; }
         /// <summary>
         /// The date and time of when this badge was approved to be awarded.
         /// </summary>
-        DateTime? ApprovedDate { get; }
+        DateTime? ApprovedDate { get; set; }
+        /// <summary>
+        /// The priority order to display the badges in, lowest to highest.
+        /// </summary>
+        int BadgePriority { get; set; }
     }
 }

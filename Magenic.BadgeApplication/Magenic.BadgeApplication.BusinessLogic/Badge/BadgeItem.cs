@@ -78,6 +78,17 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             private set { LoadProperty(ApprovedDateProperty, value); }
         }
 
+        public static readonly PropertyInfo<int> BadgePriorityProperty = RegisterProperty<int>(b => b.BadgePriority);
+        /// <summary>
+        /// The priority order to display the badges in, lowest to highest.
+        /// </summary>
+        public int BadgePriority
+        {
+            get { return GetProperty(BadgePriorityProperty); }
+            private set { LoadProperty(BadgePriorityProperty, value); }
+        }
+
+
         #endregion Properties
 
         #region Methods
@@ -89,6 +100,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.Type = item.Type;
             this.ImagePath = item.ImagePath;
             this.ApprovedDate = item.ApprovedDate;
+            this.BadgePriority = item.BadgePriority;
         }
 
         #endregion Methods

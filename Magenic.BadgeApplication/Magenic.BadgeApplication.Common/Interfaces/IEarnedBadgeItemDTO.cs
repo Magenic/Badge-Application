@@ -40,5 +40,14 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// Indicates if the award points have been paid out.
         /// </summary>
         bool PaidOut { get; set; }
+        /// <summary>
+        /// The priority order to display the badges in, lowest to highest.
+        /// </summary>
+        int BadgePriority { get; set; }
+        /// <summary>
+        /// Indicates if the same badge should be displayed only once or multiple times.
+        /// </summary>
+        bool DisplayOnce { get; set; }
+
     }
 }
