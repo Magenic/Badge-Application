@@ -114,6 +114,27 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             private set { LoadProperty(PaidOutProperty, value); }
         }
 
+        public static readonly PropertyInfo<int> BadgePriorityProperty = RegisterProperty<int>(b => b.BadgePriority);
+        /// <summary>
+        /// The priority order to display the badges in, lowest to highest.
+        /// </summary>
+        public int BadgePriority
+        {
+            get { return GetProperty(BadgePriorityProperty); }
+            private set { LoadProperty(BadgePriorityProperty, value); }
+        }
+
+        public static readonly PropertyInfo<bool> DisplayOnceProperty = RegisterProperty<bool>(b => b.DisplayOnce);
+        /// <summary>
+        /// Indicates if the same badge should be displayed only once or multiple times.
+        /// </summary>
+        public bool DisplayOnce
+        {
+            get { return GetProperty(DisplayOnceProperty); }
+            private set { LoadProperty(DisplayOnceProperty, value); }
+        }
+
+
         #endregion Properties
 
         #region Methods
@@ -128,6 +149,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.AwardDate = item.AwardDate;
             this.AwardPoints = item.AwardPoints;
             this.PaidOut = item.PaidOut;
+            this.BadgePriority = item.BadgePriority;
+            this.DisplayOnce = item.DisplayOnce;
         }
 
         #endregion Methods

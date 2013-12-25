@@ -1,9 +1,7 @@
-﻿using System.Data.Entity;
-using Magenic.BadgeApplication.Common.Interfaces;
-using System;
+﻿using Magenic.BadgeApplication.Common.Interfaces;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.DataAccess.EF
@@ -28,7 +26,9 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                            Tagline = eb.BadgeTagLine,
                                            AwardDate = eb.AwardDate,
                                            AwardPoints = eb.AwardAmount,
-                                           PaidOut = eb.PaidOut
+                                           PaidOut = eb.PaidOut,
+                                           BadgePriority = eb.BadgePriority,
+                                           DisplayOnce = eb.DisplayOnce
                                        }).ToArrayAsync();
                 return badgeList;
             }

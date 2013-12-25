@@ -29,5 +29,9 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// The date and time of when this badge was approved to be awarded.
         /// </summary>
         public DateTime? ApprovedDate { get; set; }
+        /// <summary>
+        /// The priority order to display the badges in, lowest to highest.
+        /// </summary>
+        public int BadgePriority { get; set; }
     }
 }
