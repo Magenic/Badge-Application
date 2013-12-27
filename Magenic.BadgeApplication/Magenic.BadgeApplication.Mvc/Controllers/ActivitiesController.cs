@@ -1,6 +1,9 @@
 ﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Models;
+using System;
+using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -16,9 +19,18 @@ namespace Magenic.BadgeApplication.Controllers
         /// Handles the /Home/Index action.
         /// </summary>
         /// <returns></returns>
-        public virtual ActionResult Index()
+        public async virtual Task<ActionResult> Index()
         {
-            return View();
+            var submittedActivities = await SubmittedActivityCollection.GetSubmittedActivitiesByUserAsync(AuthenticatedUser.UserName, null, null);
+            var activityIndexViewModel = new ActivityIndexViewModel()
+            {
+                NewlySubmittedActivity = new SubmitActivityViewModel() { ActivitySubmissionDate = DateTime.UtcNow },
+            };
+
+            var allActivities = await ActivityCollection.GetAllActivitiesAsync();
+            activityIndexViewModel.PossibleActivities = allActivities.Select(ai => new SelectListItem() { Text = ai.Name, Value = ai.Id.ToString(CultureInfo.CurrentCulture) });
+
+            return View(activityIndexViewModel);
         }
 
         /// <summary>
@@ -28,7 +40,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async virtual Task<ActionResult> CreateActivity(SubmitActivityViewModel submitActivityViewModel)
+        public async virtual Task<ActionResult> Index(SubmitActivityViewModel submitActivityViewModel)
         {
             Arg.IsNotNull(() => submitActivityViewModel);
 

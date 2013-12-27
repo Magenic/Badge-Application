@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Magenic.BadgeApplication.Models
 {
@@ -8,11 +9,19 @@ namespace Magenic.BadgeApplication.Models
     public class ActivityIndexViewModel
     {
         /// <summary>
+        /// Gets or sets the possible activities.
+        /// </summary>
+        /// <value>
+        /// The possible activities.
+        /// </value>
+        public IEnumerable<SelectListItem> PossibleActivities { get; set; }
+
+        /// <summary>
         /// Gets or sets the new activity.
         /// </summary>
         /// <value>
         /// The new activity.
         /// </value>
-        public SubmitActivity NewlySubmittedActivity { get; set; }
+        public SubmitActivityViewModel NewlySubmittedActivity { get; set; }
     }
 }

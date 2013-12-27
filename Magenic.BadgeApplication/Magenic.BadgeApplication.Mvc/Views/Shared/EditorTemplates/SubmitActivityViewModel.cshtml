@@ -6,7 +6,7 @@
 <h2>
     @ApplicationResources.SubmitCompletedActivityHeader
 </h2>
-@using (Html.BeginForm(Mvc.Activities.CreateActivity(), FormMethod.Post, new { @role = "form" }))
+@using (Html.BeginForm(Mvc.Activities.Index(), FormMethod.Post, new { @role = "form" }))
 {
     @Html.AntiForgeryToken()
     <div class="form-group">

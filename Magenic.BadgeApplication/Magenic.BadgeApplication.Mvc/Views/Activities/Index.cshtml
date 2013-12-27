@@ -4,13 +4,41 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 grayHeaderList">
             <h1>
                 @ApplicationResources.PreviousActivitiesHeader
             </h1>
+            @foreach (var activity in Model.PreviousActivities)
+            {
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="row">
+                            <h3>
+                                @activity.Name
+                            </h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="@activity.BadgeUri.ToString()" title="@activity.BadgeName" />
+                                <br />
+                                <i>@activity.SubmissionStatus.ToString()</i>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="pull-right">
+                                    @activity.SubmissionDate.ToString("MMMM dd, yyyy")
+                                </div>
+                                <div class="clearfix">
+                                    &nbsp;
+                                </div>
+                                @activity.Notes
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
         <div class="col-md-4 grayBox">
-            @Html.EditorFor(bivm => bivm.NewlySubmittedActivity)
+            @Html.EditorFor(bivm => bivm.NewlySubmittedActivity, new { PossibleActivities = Model.PossibleActivities })
         </div>
     </div>
 </div>
