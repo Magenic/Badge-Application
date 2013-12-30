@@ -1,4 +1,5 @@
 ﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
+using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Models;
 using System;
@@ -29,6 +30,15 @@ namespace Magenic.BadgeApplication.Controllers
 
             var allActivities = await ActivityCollection.GetAllActivitiesAsync();
             activityIndexViewModel.PossibleActivities = allActivities.Select(ai => new SelectListItem() { Text = ai.Name, Value = ai.Id.ToString(CultureInfo.CurrentCulture) });
+
+            var previousActivities = await SubmittedActivityCollection.GetSubmittedActivitiesByUserAsync(AuthenticatedUser.UserName, null, null);
+            var previousBadges = await BadgeCollection.GetAllBadgesForActivitiesAsync(previousActivities.Select(sa => sa.ActivityId));
+            activityIndexViewModel.PreviousActivities = previousActivities
+                .GroupJoin(previousBadges, sa => sa.ActivityId, b => b.ActivityId, (sa, b) => new ActivityWithBadge()
+                {
+                    SubmittedActivity = sa,
+                    BadgeToDisplay = b.FirstOrDefault(),
+                });
 
             return View(activityIndexViewModel);
         }

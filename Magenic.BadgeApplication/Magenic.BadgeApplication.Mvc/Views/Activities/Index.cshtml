@@ -8,29 +8,33 @@
             <h1>
                 @ApplicationResources.PreviousActivitiesHeader
             </h1>
-            @foreach (var activity in Model.PreviousActivities)
+            @foreach (var activityWithBadge in Model.PreviousActivities)
             {
                 <div class="row">
                     <div class="col-md-10">
                         <div class="row">
                             <h3>
-                                @activity.Name
+                                @activityWithBadge.SubmittedActivity.ActivityName
                             </h3>
                         </div>
                         <div class="row">
                             <div class="col-md-2">
-                                <img src="@activity.BadgeUri.ToString()" title="@activity.BadgeName" />
+                                <img src="@activityWithBadge.BadgeToDisplay.ImagePath" title="@activityWithBadge.BadgeToDisplay.Name" />
                                 <br />
-                                <i>@activity.SubmissionStatus.ToString()</i>
+                                <div class="pull-center">
+                                    <i>@activityWithBadge.SubmittedActivity.Status.ToString()</i>
+                                </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-10">
                                 <div class="pull-right">
-                                    @activity.SubmissionDate.ToString("MMMM dd, yyyy")
+                                    <b>
+                                        @activityWithBadge.SubmittedActivity.ActivitySubmissionDate.ToString("MMMM dd, yyyy")
+                                    </b>
                                 </div>
                                 <div class="clearfix">
                                     &nbsp;
                                 </div>
-                                @activity.Notes
+                                @activityWithBadge.SubmittedActivity.SubmissionNotes
                             </div>
                         </div>
                     </div>

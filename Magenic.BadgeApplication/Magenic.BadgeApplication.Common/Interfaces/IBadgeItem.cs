@@ -13,6 +13,10 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         int Id { get; }
         /// <summary>
+        /// Gets the activity identifier.
+        /// </summary>
+        int? ActivityId { get; }
+        /// <summary>
         /// The name of a badge.
         /// </summary>
         string Name { get; }

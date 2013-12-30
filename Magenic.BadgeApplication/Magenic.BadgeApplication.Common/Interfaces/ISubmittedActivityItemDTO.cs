@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -16,6 +12,10 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// The Id for this activity submission.
         /// </summary>
         int Id { get; set; }
+        /// <summary>
+        /// Gets or sets the activity identifier.
+        /// </summary>
+        int ActivityId { get; set; }
         /// <summary>
         /// The name of the activity maps to type on UX mocks.
         /// </summary>

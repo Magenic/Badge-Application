@@ -16,6 +16,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             private set { LoadProperty(IdProperty, value); }
         }
 
+        public static readonly PropertyInfo<int> ActivityIdProperty = RegisterProperty<int>(c => c.ActivityId);
+        public int ActivityId
+        {
+            get { return GetProperty(ActivityIdProperty); }
+            private set { LoadProperty(ActivityIdProperty, value); }
+        }
+
         public static readonly PropertyInfo<string> NameProperty = RegisterProperty<string>(c => c.ActivityName);
         public string ActivityName
         {
@@ -65,6 +72,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         internal void Load(ISubmittedActivityItemDTO item)
         {
             this.Id = item.Id;
+            this.ActivityId = item.ActivityId;
             this.ActivityName = item.ActivityName;
             this.ActivitySubmissionDate = item.ActivitySubmissionDate;
             this.ApprovedByUserName = item.ApprovedByUserName;

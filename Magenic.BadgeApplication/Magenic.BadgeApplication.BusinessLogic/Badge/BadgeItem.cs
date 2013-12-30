@@ -27,6 +27,19 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         }
 
         /// <summary>
+        /// The activity identifier property
+        /// </summary>
+        public static readonly PropertyInfo<int?> ActivityIdProperty = RegisterProperty<int?>(b => b.ActivityId);
+        /// <summary>
+        /// Gets the activity identifier.
+        /// </summary>
+        public int? ActivityId
+        {
+            get { return GetProperty(ActivityIdProperty); }
+            private set { LoadProperty(ActivityIdProperty, value); }
+        }
+
+        /// <summary>
         /// The name property
         /// </summary>
         public static readonly PropertyInfo<string> NameProperty = RegisterProperty<string>(b => b.Name);
@@ -96,6 +109,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         internal void Load(IBadgeItemDTO item)
         {
             this.Id = item.Id;
+            this.ActivityId = item.ActivityId;
             this.Name = item.Name;
             this.Type = item.Type;
             this.ImagePath = item.ImagePath;

@@ -189,6 +189,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\ActivityIndexViewModel.cs" />
+    <Compile Include="Models\ActivityWithBadge.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />
     <Compile Include="Models\BadgeIndexViewModel.cs" />
     <Compile Include="Models\SubmitActivityViewModel.cs" />

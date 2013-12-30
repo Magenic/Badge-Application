@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Magenic.BadgeApplication.Common.Interfaces;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Magenic.BadgeApplication.Models
@@ -23,5 +24,13 @@ namespace Magenic.BadgeApplication.Models
         /// The new activity.
         /// </value>
         public SubmitActivityViewModel NewlySubmittedActivity { get; set; }
+
+        /// <summary>
+        /// Gets or sets the previous activities.
+        /// </summary>
+        /// <value>
+        /// The previous activities.
+        /// </value>
+        public IEnumerable<ActivityWithBadge> PreviousActivities { get; set; }
     }
 }
