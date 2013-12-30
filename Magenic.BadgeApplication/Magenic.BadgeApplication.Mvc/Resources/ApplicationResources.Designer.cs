@@ -79,6 +79,24 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string ActivitySubmissionDateLabel {
+            get {
+                return ResourceManager.GetString("ActivitySubmissionDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string ActivityTypeLabel {
+            get {
+                return ResourceManager.GetString("ActivityTypeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Badge Manager.
         /// </summary>
         public static string BadgeManagerLink {
@@ -165,6 +183,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string ShowEarnedCorporateBadges {
             get {
                 return ResourceManager.GetString("ShowEarnedCorporateBadges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit.
+        /// </summary>
+        public static string SubmitButton {
+            get {
+                return ResourceManager.GetString("SubmitButton", resourceCulture);
             }
         }
         

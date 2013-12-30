@@ -43,4 +43,6 @@ $(document).ready(function () {
     };
 
     ko.applyBindings(BadgePageViewModel);
+
+    $('.datepicker').datepicker();
 });

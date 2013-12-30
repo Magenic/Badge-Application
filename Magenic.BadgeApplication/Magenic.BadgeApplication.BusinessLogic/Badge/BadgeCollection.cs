@@ -34,6 +34,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             return await IoC.Container.Resolve<IObjectFactory<IBadgeCollection>>().FetchAsync(badgeType);
         }
 
+        public async static Task<IBadgeCollection> GetAllBadgesForActivitiesAsync(IEnumerable<int> activityIds)
+        {
+            return await IoC.Container.Resolve<IObjectFactory<IBadgeCollection>>().FetchAsync(activityIds);
+        }
+
         #endregion Factory Methods
 
         #region Data Access
@@ -48,6 +53,19 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             var dal = IoC.Container.Resolve<IBadgeCollectionDAL>();
 
             var result = await dal.GetBadgesByBadgeTypeAsync(badgeType);
+            this.LoadData(result);
+        }
+
+        /// <summary>
+        /// The fetch portal method.
+        /// </summary>
+        /// <param name="activityIds">The activity ids.</param>
+        /// <returns></returns>
+        protected async Task DataPortal_Fetch(IEnumerable<int> activityIds)
+        {
+            var dal = IoC.Container.Resolve<IBadgeCollectionDAL>();
+
+            var result = await dal.GetBadgesByActivityIdsAsync(activityIds);
             this.LoadData(result);
         }
 

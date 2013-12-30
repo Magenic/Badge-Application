@@ -19,5 +19,13 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         Task<IEnumerable<IBadgeItemDTO>> GetBadgesByBadgeTypeAsync(BadgeType badgeType);
+
+        /// <summary>
+        /// Gets the badges by activity identifier asynchronous.
+        /// </summary>
+        /// <param name="activityIds">The activity ids.</param>
+        /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        Task<IEnumerable<IBadgeItemDTO>> GetBadgesByActivityIdsAsync(IEnumerable<int> activityIds);
     }
 }

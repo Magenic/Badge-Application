@@ -30,6 +30,10 @@ namespace Magenic.BadgeApplication
                 .Where(t => t.GetInterface("IBusinessObject") == typeof(IBusinessObject))
                 .AsImplementedInterfaces();
 
+            builder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
+                .Where(t => t.GetTypeInfo().Name.EndsWith("DTO", StringComparison.OrdinalIgnoreCase))
+                .AsImplementedInterfaces();
+
             builder.RegisterAssemblyTypes(Assembly.Load("Magenic.BadgeApplication.DataAccess.EF"))
                 .AsImplementedInterfaces();
 

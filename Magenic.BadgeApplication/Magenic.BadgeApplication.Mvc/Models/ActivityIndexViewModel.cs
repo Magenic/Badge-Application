@@ -1,5 +1,6 @@
-﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
-using Magenic.BadgeApplication.Common.Interfaces;
+﻿using Magenic.BadgeApplication.Common.Interfaces;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Magenic.BadgeApplication.Models
 {
@@ -9,12 +10,12 @@ namespace Magenic.BadgeApplication.Models
     public class ActivityIndexViewModel
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ActivityIndexViewModel"/> class.
+        /// Gets or sets the possible activities.
         /// </summary>
-        public ActivityIndexViewModel()
-        {
-            NewActivity = ActivityEdit.CreateActivity();
-        }
+        /// <value>
+        /// The possible activities.
+        /// </value>
+        public IEnumerable<SelectListItem> PossibleActivities { get; set; }
 
         /// <summary>
         /// Gets or sets the new activity.
@@ -22,6 +23,14 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// The new activity.
         /// </value>
-        public IActivityEdit NewActivity { get; set; }
+        public SubmitActivityViewModel NewlySubmittedActivity { get; set; }
+
+        /// <summary>
+        /// Gets or sets the previous activities.
+        /// </summary>
+        /// <value>
+        /// The previous activities.
+        /// </value>
+        public IEnumerable<ActivityWithBadge> PreviousActivities { get; set; }
     }
 }
