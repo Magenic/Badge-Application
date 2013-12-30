@@ -123,6 +123,12 @@
   <data name="ActivitiesLink" xml:space="preserve">
     <value>Activities</value>
   </data>
+  <data name="ActivitySubmissionDateLabel" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="ActivityTypeLabel" xml:space="preserve">
+    <value>Type</value>
+  </data>
   <data name="BadgeManagerLink" xml:space="preserve">
     <value>Badge Manager</value>
   </data>
@@ -152,6 +158,9 @@
   </data>
   <data name="ShowEarnedCorporateBadges" xml:space="preserve">
     <value>Earned</value>
+  </data>
+  <data name="SubmitButton" xml:space="preserve">
+    <value>Submit</value>
   </data>
   <data name="SubmitCompletedActivityHeader" xml:space="preserve">
     <value>Submit a Completed Activity</value>

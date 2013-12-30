@@ -14,9 +14,7 @@
             @Html.Partial(Mvc.Badges.Views._CommunityBadgeDisplay, Model)
         </div>
         <div class="col-md-4 grayBox">
-            <h2>
-                @ApplicationResources.SubmitCompletedActivityHeader
-            </h2>
+            @Html.EditorFor(bivm => bivm.NewlySubmittedActivity, new { PossibleActivities = Model.PossibleActivities })
         </div>
     </div>
 </div>

@@ -14,6 +14,10 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public int Id { get; set; }
         /// <summary>
+        /// Gets or sets the activity identifier.
+        /// </summary>
+        public int ActivityId { get; set; }
+        /// <summary>
         /// The name of the activity maps to type on UX mocks.
         /// </summary>
         public string ActivityName { get; set; }

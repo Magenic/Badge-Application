@@ -23,6 +23,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                        select new Common.DTO.SubmittedActivityItemDTO
                                        {
                                            Id = s.ActivitySubmissionId,
+                                           ActivityId = s.ActivityId,
                                            ActivityName = a.ActivityName,
                                            ActivitySubmissionDate = s.SubmissionDate,
                                            ApprovedByUserName = s.SubmissionApprovedADName,

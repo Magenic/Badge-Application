@@ -1,6 +1,6 @@
-﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
-using Magenic.BadgeApplication.Common.Interfaces;
+﻿using Magenic.BadgeApplication.Common.Interfaces;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Magenic.BadgeApplication.Models
 {
@@ -9,21 +9,6 @@ namespace Magenic.BadgeApplication.Models
     /// </summary>
     public class BadgeIndexViewModel
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BadgeIndexViewModel"/> class.
-        /// </summary>
-        public BadgeIndexViewModel()
-        {
-            CorporateBadgesTopRow = new List<IBadgeItem>();
-            CorporateBadgesBottomRow = new List<IBadgeItem>();
-            CorporateEarnedBadgesTopRow = new List<IBadgeItem>();
-            CorporateEarnedBadgesBottomRow = new List<IBadgeItem>();
-            CommunityBadgesTopRow = new List<IBadgeItem>();
-            CommunityBadgesBottomRow = new List<IBadgeItem>();
-            CommunityEarnedBadges = new List<IBadgeItem>();
-            NewActivity = ActivityEdit.CreateActivity();
-        }
-
         /// <summary>
         /// Gets or sets the corporate badges.
         /// </summary>
@@ -81,11 +66,19 @@ namespace Magenic.BadgeApplication.Models
         public IEnumerable<IBadgeItem> CommunityEarnedBadges { get; set; }
 
         /// <summary>
+        /// Gets or sets the possible activities.
+        /// </summary>
+        /// <value>
+        /// The possible activities.
+        /// </value>
+        public IEnumerable<SelectListItem> PossibleActivities { get; set; }
+
+        /// <summary>
         /// Gets or sets the new activity.
         /// </summary>
         /// <value>
         /// The new activity.
         /// </value>
-        public IActivityEdit NewActivity { get; set; }
+        public SubmitActivityViewModel NewlySubmittedActivity { get; set; }
     }
 }
