@@ -88,8 +88,10 @@ namespace Magenic.BadgeApplication.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _PreviousActivities = "_PreviousActivities";
                 public readonly string Index = "Index";
             }
+            public readonly string _PreviousActivities = "~/Views/Activities/_PreviousActivities.cshtml";
             public readonly string Index = "~/Views/Activities/Index.cshtml";
         }
     }

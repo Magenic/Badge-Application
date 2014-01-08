@@ -48,6 +48,13 @@ textarea {
     padding: 10px 15px 15px;
 }
 
+.grayBox .greenEmphasis,
+.tabGrayBox .greenEmphasis {
+    font-size: 125%;
+    font-weight: bold;
+    color: #88bf3e;
+}
+
 .grayHeaderList h3 {
     font: normal 18px HelveticaNeue, Arial, sans-serif;
     color: #404040;

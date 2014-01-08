@@ -20,5 +20,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Framework
         public void InitializeInstance(object obj)
         {
         }
+
+        public void FinalizeInstance(object obj)
+        {
+        }
     }
 }

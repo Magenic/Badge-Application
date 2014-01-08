@@ -18,29 +18,29 @@
 
     <div class="clearfix"></div>
     <div class="grayLine col-md-10"></div>
+</div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="badges" data-bind="visible: showCorporateBadgeAllTab">
-                <div class="row">
-                    @foreach (var badgeItem in Model.CommunityBadgesTopRow)
-                    {
-                        @Html.DisplayFor(m => badgeItem);
-                    }
-                </div>
-                <div class="row indent">
-                    @foreach (var badgeItem in Model.CommunityBadgesBottomRow)
-                    {
-                        @Html.DisplayFor(m => badgeItem);
-                    }
-                </div>
-            </div>
-            <div data-bind="visible: showCorporateBadgeEarnedTab">
-                @foreach (var corporateEarnedBadges in Model.CommunityEarnedBadges)
+<div class="row">
+    <div class="col-md-12">
+        <div class="badges" data-bind="visible: showCorporateBadgeAllTab">
+            <div class="row">
+                @foreach (var badgeItem in Model.CommunityBadgesTopRow)
                 {
-                    @Html.DisplayFor(m => corporateEarnedBadges)
+                    @Html.DisplayFor(m => badgeItem);
                 }
             </div>
+            <div class="row indent">
+                @foreach (var badgeItem in Model.CommunityBadgesBottomRow)
+                {
+                    @Html.DisplayFor(m => badgeItem);
+                }
+            </div>
+        </div>
+        <div data-bind="visible: showCorporateBadgeEarnedTab">
+            @foreach (var corporateEarnedBadges in Model.CommunityEarnedBadges)
+            {
+                @Html.DisplayFor(m => corporateEarnedBadges)
+            }
         </div>
     </div>
 </div>
