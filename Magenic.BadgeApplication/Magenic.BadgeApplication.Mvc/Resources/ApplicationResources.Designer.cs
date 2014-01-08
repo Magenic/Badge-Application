@@ -63,6 +63,15 @@ namespace Magenic.BadgeApplication.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Account.
         /// </summary>
+        public static string AccountHeader {
+            get {
+                return ResourceManager.GetString("AccountHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account.
+        /// </summary>
         public static string AccountLink {
             get {
                 return ResourceManager.GetString("AccountLink", resourceCulture);
@@ -97,6 +106,24 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Badge Earned.
+        /// </summary>
+        public static string BadgeEarnedRowHeader {
+            get {
+                return ResourceManager.GetString("BadgeEarnedRowHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badge History.
+        /// </summary>
+        public static string BadgeHistoryHeader {
+            get {
+                return ResourceManager.GetString("BadgeHistoryHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Badge Manager.
         /// </summary>
         public static string BadgeManagerLink {
@@ -111,6 +138,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string BadgesLink {
             get {
                 return ResourceManager.GetString("BadgesLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badge Type.
+        /// </summary>
+        public static string BadgeTypeRowHeader {
+            get {
+                return ResourceManager.GetString("BadgeTypeRowHeader", resourceCulture);
             }
         }
         
@@ -133,11 +169,47 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date Earned.
+        /// </summary>
+        public static string DateEarnedRowHeader {
+            get {
+                return ResourceManager.GetString("DateEarnedRowHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Magenic Badge Application Logo.
         /// </summary>
         public static string LogoTitle {
             get {
                 return ResourceManager.GetString("LogoTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paid Out.
+        /// </summary>
+        public static string PaidOutRowHeader {
+            get {
+                return ResourceManager.GetString("PaidOutRowHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Point Payout Threshold.
+        /// </summary>
+        public static string PointPayoutThresholdHeader {
+            get {
+                return ResourceManager.GetString("PointPayoutThresholdHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Points Awarded.
+        /// </summary>
+        public static string PointsAwardedRowHeader {
+            get {
+                return ResourceManager.GetString("PointsAwardedRowHeader", resourceCulture);
             }
         }
         

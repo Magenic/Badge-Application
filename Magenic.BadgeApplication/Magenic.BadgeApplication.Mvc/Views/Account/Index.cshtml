@@ -1,7 +1,60 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
+﻿@using Magenic.BadgeApplication.Resources
 
-<h2>Index</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>
+                @ApplicationResources.AccountHeader
+            </h1>
+        </div>
+    </div>
 
+    <div class="clearfix"></div>
+    <div class="grayLine col-md-12"></div>
+
+    <div class="row">
+        <div class="col-md-4">
+            Earned: 300pts<br />
+            Paid Out: 250pts<br />
+            Remaining: 50pts<br />
+        </div>
+        <div class="col-md-4 grayBox col-md-offset-4">
+            <h2>
+                @ApplicationResources.PointPayoutThresholdHeader
+            </h2>
+            <b>
+                Payout at 
+            </b>
+            (25 point increments):
+            <span class="greenEmphasis">
+                50pts
+            </span>
+        </div>
+    </div>
+
+    <div class="row">
+        &nbsp;
+    </div>
+
+    <div class="row">
+        <h2>
+            @ApplicationResources.BadgeHistoryHeader
+        </h2>
+    </div>
+
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@ApplicationResources.BadgeEarnedRowHeader</th>
+                        <th>@ApplicationResources.DateEarnedRowHeader</th>
+                        <th>@ApplicationResources.BadgeTypeRowHeader</th>
+                        <th>@ApplicationResources.PointsAwardedRowHeader</th>
+                        <th>@ApplicationResources.PaidOutRowHeader</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>

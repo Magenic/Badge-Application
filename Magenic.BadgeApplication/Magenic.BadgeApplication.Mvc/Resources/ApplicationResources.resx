@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountHeader" xml:space="preserve">
+    <value>Account</value>
+  </data>
   <data name="AccountLink" xml:space="preserve">
     <value>Account</value>
   </data>
@@ -129,11 +132,20 @@
   <data name="ActivityTypeLabel" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="BadgeEarnedRowHeader" xml:space="preserve">
+    <value>Badge Earned</value>
+  </data>
+  <data name="BadgeHistoryHeader" xml:space="preserve">
+    <value>Badge History</value>
+  </data>
   <data name="BadgeManagerLink" xml:space="preserve">
     <value>Badge Manager</value>
   </data>
   <data name="BadgesLink" xml:space="preserve">
     <value>Badges</value>
+  </data>
+  <data name="BadgeTypeRowHeader" xml:space="preserve">
+    <value>Badge Type</value>
   </data>
   <data name="CommunityBadgeHeader" xml:space="preserve">
     <value>Community Badges</value>
@@ -141,8 +153,20 @@
   <data name="CorporateBadgeHeader" xml:space="preserve">
     <value>Corporate Badges</value>
   </data>
+  <data name="DateEarnedRowHeader" xml:space="preserve">
+    <value>Date Earned</value>
+  </data>
   <data name="LogoTitle" xml:space="preserve">
     <value>Magenic Badge Application Logo</value>
+  </data>
+  <data name="PaidOutRowHeader" xml:space="preserve">
+    <value>Paid Out</value>
+  </data>
+  <data name="PointPayoutThresholdHeader" xml:space="preserve">
+    <value>Point Payout Threshold</value>
+  </data>
+  <data name="PointsAwardedRowHeader" xml:space="preserve">
+    <value>Points Awarded</value>
   </data>
   <data name="PreviousActivitiesHeader" xml:space="preserve">
     <value>Previous Activities</value>
