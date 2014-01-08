@@ -43,7 +43,7 @@
       <HintPath>..\packages\Autofac.3.1.5\lib\net40\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Csla">
-      <HintPath>..\packages\CSLA-Core.4.5.40\lib\net45\Csla.dll</HintPath>
+      <HintPath>..\packages\CSLA-Core.4.5.500\lib\net45\Csla.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
