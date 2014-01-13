@@ -6,7 +6,7 @@ namespace Magenic.BadgeApplication.Controllers
     /// 
     /// </summary>
     public partial class BadgeManagerController
-        : Controller
+        : AsyncController
     {
         /// <summary>
         /// Handles the /Home/Index action.

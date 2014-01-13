@@ -31,7 +31,7 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// The corporate earned badges.
         /// </value>
-        public IEnumerable<IBadgeItem> CorporateEarnedBadgesTopRow { get; set; }
+        public IEnumerable<IEarnedBadgeItem> CorporateEarnedBadgesTopRow { get; set; }
 
         /// <summary>
         /// Gets or sets the corporate earned badges bottom row.
@@ -39,7 +39,7 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// The corporate earned badges bottom row.
         /// </value>
-        public IEnumerable<IBadgeItem> CorporateEarnedBadgesBottomRow { get; set; }
+        public IEnumerable<IEarnedBadgeItem> CorporateEarnedBadgesBottomRow { get; set; }
 
         /// <summary>
         /// Gets or sets the community badges.
@@ -63,7 +63,15 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// The community earned badges.
         /// </value>
-        public IEnumerable<IBadgeItem> CommunityEarnedBadges { get; set; }
+        public IEnumerable<IEarnedBadgeItem> CommunityEarnedBadgesTopRow { get; set; }
+
+        /// <summary>
+        /// Gets or sets the community earned badges.
+        /// </summary>
+        /// <value>
+        /// The community earned badges.
+        /// </value>
+        public IEnumerable<IEarnedBadgeItem> CommunityEarnedBadgesBottomRow { get; set; }
 
         /// <summary>
         /// Gets or sets the possible activities.

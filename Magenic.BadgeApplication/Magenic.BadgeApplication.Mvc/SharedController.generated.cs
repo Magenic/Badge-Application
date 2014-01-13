@@ -48,6 +48,9 @@ namespace T4Mvc
             public partial class _DisplayTemplatesClass
             {
                 public readonly string BadgeItem = "BadgeItem";
+                public readonly string EarnedBadgeCollection = "EarnedBadgeCollection";
+                public readonly string EarnedBadgeItem = "EarnedBadgeItem";
+                public readonly string TotalAccountInfo = "TotalAccountInfo";
             }
             static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
             public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }

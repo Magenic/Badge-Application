@@ -14,7 +14,7 @@ namespace Magenic.BadgeApplication.Controllers
     /// 
     /// </summary>
     public partial class BadgesController
-        : Controller
+        : AsyncController
     {
         /// <summary>
         /// Handles the /Home/Index action.
@@ -23,7 +23,9 @@ namespace Magenic.BadgeApplication.Controllers
         public async virtual Task<ActionResult> Index()
         {
             var corporateBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Corporate);
+            var earnedCorporateBadges = await EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(AuthenticatedUser.UserName, BadgeType.Corporate);
             var communityBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Community);
+            var earnedCommunityBadges = await EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(AuthenticatedUser.UserName, BadgeType.Community);
 
             var sortedCorporateBadges = corporateBadges.OrderByDescending(b => b.ApprovedDate);
             var sortedCommunityBadges = communityBadges.OrderByDescending(b => b.ApprovedDate);
@@ -31,11 +33,12 @@ namespace Magenic.BadgeApplication.Controllers
             {
                 CorporateBadgesTopRow = sortedCorporateBadges.Take(5),
                 CorporateBadgesBottomRow = sortedCorporateBadges.Skip(5).Take(5),
-                CorporateEarnedBadgesTopRow = new BadgeCollection(),
-                CorporateEarnedBadgesBottomRow = new BadgeCollection(),
+                CorporateEarnedBadgesTopRow = earnedCorporateBadges.Take(5),
+                CorporateEarnedBadgesBottomRow = earnedCorporateBadges.Skip(5).Take(5),
                 CommunityBadgesTopRow = communityBadges.Take(5),
                 CommunityBadgesBottomRow = communityBadges.Skip(5).Take(5),
-                CommunityEarnedBadges = new BadgeCollection(),
+                CommunityEarnedBadgesTopRow = earnedCommunityBadges.Take(5),
+                CommunityEarnedBadgesBottomRow = earnedCommunityBadges.Skip(5).Take(5),
                 NewlySubmittedActivity = new SubmitActivityViewModel() { ActivitySubmissionDate = DateTime.UtcNow },
             };
 
