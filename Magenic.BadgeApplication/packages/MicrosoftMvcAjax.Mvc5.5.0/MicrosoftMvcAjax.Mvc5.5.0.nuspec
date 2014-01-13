@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>MicrosoftMvcAjax.Mvc5</id>
+    <version>5.0</version>
+    <title>MicrosoftMvcAjax.Mvc5</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://aspnetwebstack.codeplex.com/license</licenseUrl>
+    <projectUrl>http://aspnet.com/mvc</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Microsoft ASP.NET MVC helpers for AJAX validation and AJAX rendering. Includes MicrosoftMvcAjax[.debug].js and MicrosoftMvcValidation[.debug].js.</description>
+    <summary>Microsoft ASP.NET MVC helpers for AJAX validation and AJAX rendering.</summary>
+    <releaseNotes />
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <language />
+    <dependencies>
+      <dependency id="MicrosoftAjax" version="4.0.20526.0" />
+    </dependencies>
+  </metadata>
+</package>
