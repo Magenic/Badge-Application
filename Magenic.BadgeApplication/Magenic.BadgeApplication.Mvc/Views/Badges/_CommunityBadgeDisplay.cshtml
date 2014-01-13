@@ -37,10 +37,18 @@
             </div>
         </div>
         <div data-bind="visible: showCorporateBadgeEarnedTab">
-            @foreach (var corporateEarnedBadges in Model.CommunityEarnedBadges)
-            {
-                @Html.DisplayFor(m => corporateEarnedBadges)
-            }
+            <div class="row">
+                @foreach (var badgeItem in Model.CommunityEarnedBadgesTopRow)
+                {
+                    @Html.DisplayFor(m => badgeItem);
+                }
+            </div>
+            <div class="row indent">
+                @foreach (var badgeItem in Model.CommunityEarnedBadgesBottomRow)
+                {
+                    @Html.DisplayFor(m => badgeItem);
+                }
+            </div>
         </div>
     </div>
 </div>

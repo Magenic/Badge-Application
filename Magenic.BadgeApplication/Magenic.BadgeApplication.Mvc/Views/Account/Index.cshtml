@@ -1,4 +1,6 @@
-﻿@using Magenic.BadgeApplication.Resources
+﻿@using Magenic.BadgeApplication.Models
+@using Magenic.BadgeApplication.Resources
+@model AccountInfoIndexViewModel
 
 <div class="container">
     <div class="row">
@@ -14,21 +16,10 @@
 
     <div class="row">
         <div class="col-md-4">
-            Earned: 300pts<br />
-            Paid Out: 250pts<br />
-            Remaining: 50pts<br />
+            @Html.DisplayFor(aiivm => aiivm.AccountInfo, "TotalAccountInfo")
         </div>
-        <div class="col-md-4 grayBox col-md-offset-4">
-            <h2>
-                @ApplicationResources.PointPayoutThresholdHeader
-            </h2>
-            <b>
-                Payout at 
-            </b>
-            (25 point increments):
-            <span class="greenEmphasis">
-                50pts
-            </span>
+        <div id="PayoutSlider" class="col-md-4 grayBox col-md-offset-4">
+            @Html.Partial(Mvc.Account.Views.PayoutThreshold, Model.AccountInfo)
         </div>
     </div>
 
@@ -44,17 +35,11 @@
 
     <div class="row">
         <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>@ApplicationResources.BadgeEarnedRowHeader</th>
-                        <th>@ApplicationResources.DateEarnedRowHeader</th>
-                        <th>@ApplicationResources.BadgeTypeRowHeader</th>
-                        <th>@ApplicationResources.PointsAwardedRowHeader</th>
-                        <th>@ApplicationResources.PaidOutRowHeader</th>
-                    </tr>
-                </thead>
-            </table>
+            @Html.DisplayFor(aiivm => aiivm.EarnedBadges)
         </div>
     </div>
 </div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/accountPage")
+}

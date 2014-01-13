@@ -1,0 +1,44 @@
+﻿@using Magenic.BadgeApplication.Common.Interfaces
+@using Magenic.BadgeApplication.Resources
+@model IEarnedBadgeCollection
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@ApplicationResources.BadgeEarnedRowHeader</th>
+            <th>@ApplicationResources.DateEarnedRowHeader</th>
+            <th>@ApplicationResources.BadgeTypeRowHeader</th>
+            <th>@ApplicationResources.PointsAwardedRowHeader</th>
+            <th>@ApplicationResources.PaidOutRowHeader</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var badgeHistoryItem in Model)
+        {
+            <tr>
+                <td>
+                    @badgeHistoryItem.Name
+                </td>
+                <td>
+                    @badgeHistoryItem.AwardDate.ToString("MM/dd/yyyy")
+                </td>
+                <td>
+                    @badgeHistoryItem.Type
+                </td>
+                <td>
+                    @badgeHistoryItem.AwardPoints
+                </td>
+                <td>
+                    @if (badgeHistoryItem.PaidOut)
+                    {
+                        <text>Yes</text>
+                    }
+                    else
+                    {
+                        <text>No</text>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
