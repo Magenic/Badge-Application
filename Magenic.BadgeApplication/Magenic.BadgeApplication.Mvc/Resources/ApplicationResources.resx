@@ -189,4 +189,7 @@
   <data name="SubmitCompletedActivityHeader" xml:space="preserve">
     <value>Submit a Completed Activity</value>
   </data>
+  <data name="InvalidPayoutThreshold" xml:space="preserve">
+    <value>Invalid Payout Threshold</value>
+  </data>
 </root>

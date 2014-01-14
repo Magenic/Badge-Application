@@ -1,10 +1,11 @@
 ﻿using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.Common.Enums;
-using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Models;
+using Magenic.BadgeApplication.Resources;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using CslaController = Csla.Web.Mvc.AsyncController;
 
 namespace Magenic.BadgeApplication.Controllers
 {
@@ -12,7 +13,7 @@ namespace Magenic.BadgeApplication.Controllers
     /// 
     /// </summary>
     public partial class AccountController
-        : AsyncController
+        : CslaController
     {
         /// <summary>
         /// Handles the /Home/Index action.
@@ -41,8 +42,12 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var accountInfo = await AccountInfoEdit.GetAccountInfoForUser(AuthenticatedUser.UserName);
             accountInfo.PointPayoutThreshold = pointPayoutThreshold;
-            var accountInfoEdit = (IAccountInfoEdit)await accountInfo.SaveAsync();
-            return PartialView(Mvc.Account.Views.ViewNames.PayoutThreshold, accountInfoEdit);
+            if (!await SaveObjectAsync(accountInfo, true))
+            {
+                return new HttpStatusCodeResult(500, ApplicationResources.InvalidPayoutThreshold);
+            }
+
+            return PartialView(Mvc.Account.Views.ViewNames.PayoutThreshold, accountInfo);
         }
     }
 }

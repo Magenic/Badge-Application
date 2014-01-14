@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using CslaController = Csla.Web.Mvc.AsyncController;
 
 namespace Magenic.BadgeApplication.Controllers
 {
@@ -6,7 +7,7 @@ namespace Magenic.BadgeApplication.Controllers
     /// 
     /// </summary>
     public partial class BadgeManagerController
-        : AsyncController
+        : CslaController
     {
         /// <summary>
         /// Handles the /Home/Index action.

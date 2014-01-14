@@ -55,6 +55,6 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// The new activity.
         /// </value>
-        public SubmitActivityViewModel NewlySubmittedActivity { get; set; }
+        public ISubmitActivity SubmittedActivity { get; set; }
     }
 }

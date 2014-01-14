@@ -16,6 +16,8 @@ namespace Magenic.BadgeApplication
         /// </summary>
         protected void Application_Start()
         {
+            ModelBinders.Binders.DefaultBinder = new Csla.Web.Mvc.CslaModelBinder();
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

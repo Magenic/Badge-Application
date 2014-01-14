@@ -2,11 +2,11 @@
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Models;
-using System;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using CslaController = Csla.Web.Mvc.AsyncController;
 
 namespace Magenic.BadgeApplication.Controllers
 {
@@ -14,7 +14,7 @@ namespace Magenic.BadgeApplication.Controllers
     /// 
     /// </summary>
     public partial class BadgesController
-        : AsyncController
+        : CslaController
     {
         /// <summary>
         /// Handles the /Home/Index action.
@@ -35,7 +35,7 @@ namespace Magenic.BadgeApplication.Controllers
                 CorporateEarnedBadges = earnedCorporateBadges,
                 CommunityBadges = communityBadges,
                 CommunityEarnedBadges = earnedCommunityBadges,
-                NewlySubmittedActivity = new SubmitActivityViewModel() { ActivitySubmissionDate = DateTime.UtcNow },
+                SubmittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.UserName),
             };
 
             var allActivities = await ActivityCollection.GetAllActivitiesAsync();
