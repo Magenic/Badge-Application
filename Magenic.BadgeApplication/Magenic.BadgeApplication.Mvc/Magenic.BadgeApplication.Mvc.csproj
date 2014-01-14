@@ -344,6 +344,8 @@
     <Content Include="Views\Shared\DisplayTemplates\EarnedBadgeItem.cshtml" />
     <Content Include="Views\Account\PayoutThreshold.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\EarnedBadgeCollection.cshtml" />
+    <Content Include="Views\Badges\_EarnedBadgeList.cshtml" />
+    <Content Include="Views\Badges\_BadgeList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">

@@ -31,14 +31,10 @@ namespace Magenic.BadgeApplication.Controllers
             var sortedCommunityBadges = communityBadges.OrderByDescending(b => b.ApprovedDate);
             var badgeIndexViewModel = new BadgeIndexViewModel()
             {
-                CorporateBadgesTopRow = sortedCorporateBadges.Take(5),
-                CorporateBadgesBottomRow = sortedCorporateBadges.Skip(5).Take(5),
-                CorporateEarnedBadgesTopRow = earnedCorporateBadges.Take(5),
-                CorporateEarnedBadgesBottomRow = earnedCorporateBadges.Skip(5).Take(5),
-                CommunityBadgesTopRow = communityBadges.Take(5),
-                CommunityBadgesBottomRow = communityBadges.Skip(5).Take(5),
-                CommunityEarnedBadgesTopRow = earnedCommunityBadges.Take(5),
-                CommunityEarnedBadgesBottomRow = earnedCommunityBadges.Skip(5).Take(5),
+                CorporateBadges = sortedCorporateBadges,
+                CorporateEarnedBadges = earnedCorporateBadges,
+                CommunityBadges = communityBadges,
+                CommunityEarnedBadges = earnedCommunityBadges,
                 NewlySubmittedActivity = new SubmitActivityViewModel() { ActivitySubmissionDate = DateTime.UtcNow },
             };
 

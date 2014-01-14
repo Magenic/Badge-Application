@@ -15,15 +15,7 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// The corporate badges.
         /// </value>
-        public IEnumerable<IBadgeItem> CorporateBadgesTopRow { get; set; }
-
-        /// <summary>
-        /// Gets or sets the corporate badges bottom row.
-        /// </summary>
-        /// <value>
-        /// The corporate badges bottom row.
-        /// </value>
-        public IEnumerable<IBadgeItem> CorporateBadgesBottomRow { get; set; }
+        public IEnumerable<IBadgeItem> CorporateBadges { get; set; }
 
         /// <summary>
         /// Gets or sets the corporate earned badges.
@@ -31,15 +23,7 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// The corporate earned badges.
         /// </value>
-        public IEnumerable<IEarnedBadgeItem> CorporateEarnedBadgesTopRow { get; set; }
-
-        /// <summary>
-        /// Gets or sets the corporate earned badges bottom row.
-        /// </summary>
-        /// <value>
-        /// The corporate earned badges bottom row.
-        /// </value>
-        public IEnumerable<IEarnedBadgeItem> CorporateEarnedBadgesBottomRow { get; set; }
+        public IEnumerable<IEarnedBadgeItem> CorporateEarnedBadges { get; set; }
 
         /// <summary>
         /// Gets or sets the community badges.
@@ -47,15 +31,7 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// The community badges.
         /// </value>
-        public IEnumerable<IBadgeItem> CommunityBadgesTopRow { get; set; }
-
-        /// <summary>
-        /// Gets or sets the community badges bottom row.
-        /// </summary>
-        /// <value>
-        /// The community badges bottom row.
-        /// </value>
-        public IEnumerable<IBadgeItem> CommunityBadgesBottomRow { get; set; }
+        public IEnumerable<IBadgeItem> CommunityBadges { get; set; }
 
         /// <summary>
         /// Gets or sets the community earned badges.
@@ -63,15 +39,7 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// The community earned badges.
         /// </value>
-        public IEnumerable<IEarnedBadgeItem> CommunityEarnedBadgesTopRow { get; set; }
-
-        /// <summary>
-        /// Gets or sets the community earned badges.
-        /// </summary>
-        /// <value>
-        /// The community earned badges.
-        /// </value>
-        public IEnumerable<IEarnedBadgeItem> CommunityEarnedBadgesBottomRow { get; set; }
+        public IEnumerable<IEarnedBadgeItem> CommunityEarnedBadges { get; set; }
 
         /// <summary>
         /// Gets or sets the possible activities.
