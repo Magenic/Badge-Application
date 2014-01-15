@@ -23,7 +23,7 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// The new activity.
         /// </value>
-        public SubmitActivityViewModel NewlySubmittedActivity { get; set; }
+        public ISubmitActivity SubmittedActivity { get; set; }
 
         /// <summary>
         /// Gets or sets the previous activities.
@@ -31,6 +31,6 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// The previous activities.
         /// </value>
-        public IEnumerable<ActivityWithBadge> PreviousActivities { get; set; }
+        public IEnumerable<ISubmittedActivityItem> PreviousActivities { get; set; }
     }
 }

@@ -61,8 +61,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CSLA-Core.4.5.500\lib\net45\Csla.dll</HintPath>
     </Reference>
-    <Reference Include="Csla.Web">
-      <HintPath>..\packages\CSLA-ASP.NET.4.5.500\lib\net45\Csla.Web.dll</HintPath>
+    <Reference Include="Csla.Web.Mvc5">
+      <HintPath>..\Library\Csla.Web.Mvc5.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -159,11 +159,9 @@
   <ItemGroup>
     <Compile Include="AccountController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="ActivitiesController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="App_Start\AutofacContainer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -171,11 +169,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BadgeManagerController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="BadgesController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\BadgesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -190,11 +186,9 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\AccountInfoIndexViewModel.cs" />
     <Compile Include="Models\ActivityIndexViewModel.cs" />
-    <Compile Include="Models\ActivityWithBadge.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />
     <Compile Include="Models\BadgeIndexViewModel.cs" />
     <Compile Include="Models\SubmitActivityViewModel.cs" />
@@ -209,13 +203,11 @@
     <Compile Include="Controllers\BadgeManagerController.cs" />
     <Compile Include="SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="T4MVC.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-      <SubType>Code</SubType>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -338,12 +330,14 @@
     <Content Include="Views\Badges\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BadgeItem.cshtml" />
     <Content Include="Views\Badges\_CommunityBadgeDisplay.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\SubmitActivityViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SubmitActivity.cshtml" />
     <Content Include="Views\Activities\_PreviousActivities.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\TotalAccountInfo.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\EarnedBadgeItem.cshtml" />
     <Content Include="Views\Account\PayoutThreshold.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\EarnedBadgeCollection.cshtml" />
+    <Content Include="Views\Badges\_EarnedBadgeList.cshtml" />
+    <Content Include="Views\Badges\_BadgeList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">
