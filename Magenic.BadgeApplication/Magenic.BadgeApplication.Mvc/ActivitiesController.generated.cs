@@ -61,23 +61,17 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string SubmitActivityForm = "SubmitActivityForm";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string SubmitActivityForm = "SubmitActivityForm";
         }
 
 
-        static readonly ActionParamsClass_Index s_params_Index = new ActionParamsClass_Index();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Index IndexParams { get { return s_params_Index; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Index
-        {
-            public readonly string submitActivityViewModel = "submitActivityViewModel";
-        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -110,13 +104,12 @@ namespace Magenic.BadgeApplication.Controllers
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Magenic.BadgeApplication.Models.SubmitActivityViewModel submitActivityViewModel);
+        partial void SubmitActivityFormOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Index(Magenic.BadgeApplication.Models.SubmitActivityViewModel submitActivityViewModel)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> SubmitActivityForm()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "submitActivityViewModel", submitActivityViewModel);
-            IndexOverride(callInfo, submitActivityViewModel);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SubmitActivityForm);
+            SubmitActivityFormOverride(callInfo);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 

@@ -11,33 +11,26 @@
 <div class="clearfix"></div>
 <div class="grayLine col-md-10"></div>
 
-@foreach (var activityWithBadge in Model.PreviousActivities)
+@foreach (var previousActivity in Model.PreviousActivities)
 {
     <div class="row">
         <div class="col-md-10">
             <div class="row">
                 <h3>
-                    @activityWithBadge.SubmittedActivity.ActivityName
+                    @previousActivity.ActivityName
                 </h3>
             </div>
             <div class="row">
                 <div class="col-md-2">
-                    <img src="@activityWithBadge.BadgeToDisplay.ImagePath" title="@activityWithBadge.BadgeToDisplay.Name" />
-                    <br />
-                    <div class="pull-center">
-                        <i>@activityWithBadge.SubmittedActivity.Status.ToString()</i>
-                    </div>
+                    <i>@previousActivity.Status.ToString()</i>
                 </div>
-                <div class="col-md-10">
-                    <div class="pull-right">
-                        <b>
-                            @activityWithBadge.SubmittedActivity.ActivitySubmissionDate.ToString("MMMM dd, yyyy")
-                        </b>
-                    </div>
-                    <div class="clearfix">
-                        &nbsp;
-                    </div>
-                    @activityWithBadge.SubmittedActivity.SubmissionNotes
+                <div class="col-md-6">
+                    @previousActivity.SubmissionNotes
+                </div>
+                <div class="col-md-4">
+                    <b>
+                        @previousActivity.ActivitySubmissionDate.ToString("MMMM dd, yyyy")
+                    </b>
                 </div>
             </div>
         </div>

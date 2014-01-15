@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using Csla;
-using Csla.Rules;
 using Csla.Rules.CommonRules;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.Enums;
@@ -118,6 +117,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             base.AddBusinessRules();
 
             this.BusinessRules.AddRule(new Required(UserNameProperty));
+            this.BusinessRules.AddRule(new MaxLength(NotesProperty, 10));
         }
 
         #endregion Rules

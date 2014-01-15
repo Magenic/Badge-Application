@@ -2,11 +2,11 @@
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Models;
-using System;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using CslaController = Csla.Web.Mvc.AsyncController;
 
 namespace Magenic.BadgeApplication.Controllers
 {
@@ -14,7 +14,7 @@ namespace Magenic.BadgeApplication.Controllers
     /// 
     /// </summary>
     public partial class BadgesController
-        : AsyncController
+        : CslaController
     {
         /// <summary>
         /// Handles the /Home/Index action.
@@ -31,15 +31,11 @@ namespace Magenic.BadgeApplication.Controllers
             var sortedCommunityBadges = communityBadges.OrderByDescending(b => b.ApprovedDate);
             var badgeIndexViewModel = new BadgeIndexViewModel()
             {
-                CorporateBadgesTopRow = sortedCorporateBadges.Take(5),
-                CorporateBadgesBottomRow = sortedCorporateBadges.Skip(5).Take(5),
-                CorporateEarnedBadgesTopRow = earnedCorporateBadges.Take(5),
-                CorporateEarnedBadgesBottomRow = earnedCorporateBadges.Skip(5).Take(5),
-                CommunityBadgesTopRow = communityBadges.Take(5),
-                CommunityBadgesBottomRow = communityBadges.Skip(5).Take(5),
-                CommunityEarnedBadgesTopRow = earnedCommunityBadges.Take(5),
-                CommunityEarnedBadgesBottomRow = earnedCommunityBadges.Skip(5).Take(5),
-                NewlySubmittedActivity = new SubmitActivityViewModel() { ActivitySubmissionDate = DateTime.UtcNow },
+                CorporateBadges = sortedCorporateBadges,
+                CorporateEarnedBadges = earnedCorporateBadges,
+                CommunityBadges = communityBadges,
+                CommunityEarnedBadges = earnedCommunityBadges,
+                SubmittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.UserName),
             };
 
             var allActivities = await ActivityCollection.GetAllActivitiesAsync();

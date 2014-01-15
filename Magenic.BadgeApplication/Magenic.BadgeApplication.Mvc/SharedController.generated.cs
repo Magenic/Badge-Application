@@ -57,7 +57,7 @@ namespace T4Mvc
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _EditorTemplatesClass
             {
-                public readonly string SubmitActivityViewModel = "SubmitActivityViewModel";
+                public readonly string SubmitActivity = "SubmitActivity";
             }
         }
     }

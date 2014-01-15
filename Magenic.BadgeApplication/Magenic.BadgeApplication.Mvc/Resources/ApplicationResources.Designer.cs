@@ -178,6 +178,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid Payout Threshold.
+        /// </summary>
+        public static string InvalidPayoutThreshold {
+            get {
+                return ResourceManager.GetString("InvalidPayoutThreshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Magenic Badge Application Logo.
         /// </summary>
         public static string LogoTitle {

@@ -23,32 +23,10 @@
 <div class="row">
     <div class="col-md-10">
         <div class="badges" data-bind="visible: showCorporateBadgeAllTab">
-            <div class="row">
-                @foreach (var badgeItem in Model.CorporateBadgesTopRow)
-                {
-                    @Html.DisplayFor(m => badgeItem);
-                }
-            </div>
-            <div class="row indent">
-                @foreach (var badgeItem in Model.CorporateBadgesBottomRow)
-                {
-                    @Html.DisplayFor(m => badgeItem);
-                }
-            </div>
+            @Html.Partial(Mvc.Badges.Views._BadgeList, Model.CorporateBadges)
         </div>
         <div data-bind="visible: showCorporateBadgeEarnedTab">
-            <div class="row">
-                @foreach (var badgeItem in Model.CorporateEarnedBadgesTopRow)
-                {
-                    @Html.DisplayFor(m => badgeItem);
-                }
-            </div>
-            <div class="row indent">
-                @foreach (var badgeItem in Model.CorporateEarnedBadgesBottomRow)
-                {
-                    @Html.DisplayFor(m => badgeItem);
-                }
-            </div>
+            @Html.Partial(Mvc.Badges.Views._EarnedBadgeList, Model.CorporateEarnedBadges)
         </div>
     </div>
 </div>
