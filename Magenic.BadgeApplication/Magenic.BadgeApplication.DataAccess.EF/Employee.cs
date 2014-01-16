@@ -17,7 +17,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public Employee()
         {
             this.EmployeePermissions = new HashSet<EmployeePermission>();
-            this.Badges = new HashSet<Badge>();
         }
     
         public int EmployeeId { get; set; }
@@ -33,6 +32,5 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public Nullable<int> AwardPayoutThreshold { get; set; }
     
         public virtual ICollection<EmployeePermission> EmployeePermissions { get; set; }
-        public virtual ICollection<Badge> Badges { get; set; }
     }
 }

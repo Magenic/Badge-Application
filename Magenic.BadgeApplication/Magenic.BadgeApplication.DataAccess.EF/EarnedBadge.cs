@@ -33,7 +33,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public bool ManagementApprovalRequired { get; set; }
         public int ActivityPointsAmount { get; set; }
         public int BadgeAwardValueAmount { get; set; }
-        public int BadgeApprovedBy { get; set; }
         public System.DateTime BadgeApprovedDate { get; set; }
         public string BadgeTypeName { get; set; }
         public bool PayrollEligible { get; set; }
@@ -41,5 +40,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public int AwardAmount { get; set; }
         public bool PaidOut { get; set; }
         public Nullable<int> AwardPayoutThreshold { get; set; }
+        public string BadgeApprovedByADName { get; set; }
     }
 }
