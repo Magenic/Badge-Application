@@ -122,11 +122,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             set { SetProperty(AwardValueAmountProperty, value); }
         }
 
-        public static readonly PropertyInfo<int?> ApprovedByIdProperty = RegisterProperty<int?>(c => c.ApprovedById);
-        public int? ApprovedById
+        public static readonly PropertyInfo<string> ApprovedByADNameProperty = RegisterProperty<string>(c => c.ApprovedByADName);
+        public string ApprovedByADName
         {
-            get { return GetProperty(ApprovedByIdProperty); }
-            set { SetProperty(ApprovedByIdProperty, value); }
+            get { return GetProperty(ApprovedByADNameProperty); }
+            set { SetProperty(ApprovedByADNameProperty, value); }
         }
 
         public static readonly PropertyInfo<DateTime?> ApprovedDateProperty = RegisterProperty<DateTime?>(c => c.ApprovedDate);
@@ -183,9 +183,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.BusinessRules.AddRule(new MaxLength(NameProperty, 100));
             this.BusinessRules.AddRule(new Required(NameProperty));
             this.BusinessRules.AddRule(new MaxLength(TaglineProperty, 200));
+            this.BusinessRules.AddRule(new MaxLength(ApprovedByADNameProperty, 100));
             this.BusinessRules.AddRule(new Rules.DateOrder(EffectiveStartDateProperty, EffectiveEndDateProperty));
 
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedByIdProperty, PermissionType.Administrator.ToString()));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedByADNameProperty, PermissionType.Administrator.ToString()));
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedDateProperty, PermissionType.Administrator.ToString()));
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ActivityPointsAmountProperty, PermissionType.Administrator.ToString()));
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, AwardValueAmountProperty, PermissionType.Administrator.ToString()));
@@ -260,7 +261,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
                 returnValue.ManagementApprovalRequired = this.ManagementApprovalRequired;
                 returnValue.ActivityPointsAmount = this.ActivityPointsAmount;
                 returnValue.AwardValueAmount = this.AwardValueAmount;
-                returnValue.ApprovedById = this.ApprovedById;
+                returnValue.ApprovedByADName = this.ApprovedByADName;
                 returnValue.ApprovedDate = this.ApprovedDate;
                 returnValue.BadgeImage = this.Image;
             }
@@ -286,7 +287,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
                 this.ManagementApprovalRequired = data.ManagementApprovalRequired;
                 this.ActivityPointsAmount = data.ActivityPointsAmount;
                 this.AwardValueAmount = data.AwardValueAmount;
-                this.ApprovedById = data.ApprovedById;
+                this.ApprovedByADName = data.ApprovedByADName;
                 this.ApprovedDate = data.ApprovedDate;
                 this.Image = null;
             }

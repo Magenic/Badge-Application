@@ -56,4 +56,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="AwardPayoutThreshold" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="365ed0ea-e6c9-40a4-9212-3f268e455ded" ChangeDateTime="01/16/2014 01:24:38">
+    <Property Name="ElementName" Value="[dbo].[Badge].[BadgeApprovedBy]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Badge]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BadgeApprovedByADName" />
+  </Operation>
 </Operations>
