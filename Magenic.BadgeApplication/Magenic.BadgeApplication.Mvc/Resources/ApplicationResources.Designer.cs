@@ -79,6 +79,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activities for Approval.
+        /// </summary>
+        public static string ActivitiesForApproval {
+            get {
+                return ResourceManager.GetString("ActivitiesForApproval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Activities.
         /// </summary>
         public static string ActivitiesLink {
@@ -102,6 +111,24 @@ namespace Magenic.BadgeApplication.Resources {
         public static string ActivityTypeLabel {
             get {
                 return ResourceManager.GetString("ActivityTypeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a Badge.
+        /// </summary>
+        public static string AddABadgeButton {
+            get {
+                return ResourceManager.GetString("AddABadgeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add / Edit Badges.
+        /// </summary>
+        public static string AddEditBadges {
+            get {
+                return ResourceManager.GetString("AddEditBadges", resourceCulture);
             }
         }
         
@@ -156,6 +183,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string CommunityBadgeHeader {
             get {
                 return ResourceManager.GetString("CommunityBadgeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Community Badges for Approval.
+        /// </summary>
+        public static string CommunityBadgesForApproval {
+            get {
+                return ResourceManager.GetString("CommunityBadgesForApproval", resourceCulture);
             }
         }
         
@@ -219,6 +255,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string PointsAwardedRowHeader {
             get {
                 return ResourceManager.GetString("PointsAwardedRowHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Points Report.
+        /// </summary>
+        public static string PointsReport {
+            get {
+                return ResourceManager.GetString("PointsReport", resourceCulture);
             }
         }
         

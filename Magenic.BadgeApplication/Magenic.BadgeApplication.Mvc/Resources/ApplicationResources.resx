@@ -192,4 +192,19 @@
   <data name="InvalidPayoutThreshold" xml:space="preserve">
     <value>Invalid Payout Threshold</value>
   </data>
+  <data name="ActivitiesForApproval" xml:space="preserve">
+    <value>Activities for Approval</value>
+  </data>
+  <data name="AddABadgeButton" xml:space="preserve">
+    <value>Add a Badge</value>
+  </data>
+  <data name="AddEditBadges" xml:space="preserve">
+    <value>Add / Edit Badges</value>
+  </data>
+  <data name="CommunityBadgesForApproval" xml:space="preserve">
+    <value>Community Badges for Approval</value>
+  </data>
+  <data name="PointsReport" xml:space="preserve">
+    <value>Points Report</value>
+  </data>
 </root>

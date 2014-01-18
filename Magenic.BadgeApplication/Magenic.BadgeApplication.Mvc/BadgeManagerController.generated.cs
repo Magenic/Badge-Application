@@ -44,6 +44,12 @@ namespace Magenic.BadgeApplication.Controllers
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult EditBadge()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.EditBadge);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public BadgeManagerController Actions { get { return Mvc.BadgeManager; } }
@@ -61,15 +67,33 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string AddBadge = "AddBadge";
+            public readonly string EditBadge = "EditBadge";
+            public readonly string ApproveCommunityBadges = "ApproveCommunityBadges";
+            public readonly string PointsReport = "PointsReport";
+            public readonly string ApproveActivities = "ApproveActivities";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string AddBadge = "AddBadge";
+            public const string EditBadge = "EditBadge";
+            public const string ApproveCommunityBadges = "ApproveCommunityBadges";
+            public const string PointsReport = "PointsReport";
+            public const string ApproveActivities = "ApproveActivities";
         }
 
 
+        static readonly ActionParamsClass_EditBadge s_params_EditBadge = new ActionParamsClass_EditBadge();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EditBadge EditBadgeParams { get { return s_params_EditBadge; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EditBadge
+        {
+            public readonly string id = "id";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -80,8 +104,10 @@ namespace Magenic.BadgeApplication.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _AdminBadgeList = "_AdminBadgeList";
                 public readonly string Index = "Index";
             }
+            public readonly string _AdminBadgeList = "~/Views/BadgeManager/_AdminBadgeList.cshtml";
             public readonly string Index = "~/Views/BadgeManager/Index.cshtml";
         }
     }
@@ -93,10 +119,56 @@ namespace Magenic.BadgeApplication.Controllers
 
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
-        public override System.Web.Mvc.ActionResult Index()
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Index()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        partial void AddBadgeOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult AddBadge()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AddBadge);
+            AddBadgeOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void EditBadgeOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
+
+        public override System.Web.Mvc.ActionResult EditBadge(int id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.EditBadge);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            EditBadgeOverride(callInfo, id);
+            return callInfo;
+        }
+
+        partial void ApproveCommunityBadgesOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult ApproveCommunityBadges()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ApproveCommunityBadges);
+            ApproveCommunityBadgesOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void PointsReportOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult PointsReport()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PointsReport);
+            PointsReportOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void ApproveActivitiesOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult ApproveActivities()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ApproveActivities);
+            ApproveActivitiesOverride(callInfo);
             return callInfo;
         }
 
