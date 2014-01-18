@@ -196,6 +196,8 @@
     </Compile>
     <Compile Include="Models\AccountInfoIndexViewModel.cs" />
     <Compile Include="Models\ActivityIndexViewModel.cs" />
+    <Compile Include="Models\AdminActivityViewModel.cs" />
+    <Compile Include="Models\ApproveActivitiesViewModel.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />
     <Compile Include="Models\BadgeIndexViewModel.cs" />
     <Compile Include="Models\BadgeManagerIndexViewModel.cs" />
@@ -348,6 +350,10 @@
     <Content Include="Views\Badges\_BadgeList.cshtml" />
     <Content Include="Views\Shared\_AdminNavbar.cshtml" />
     <Content Include="Views\BadgeManager\_AdminBadgeList.cshtml" />
+    <Content Include="Views\BadgeManager\ApproveCommunityBadges.cshtml" />
+    <Content Include="Views\BadgeManager\PointsReport.cshtml" />
+    <Content Include="Views\BadgeManager\ApproveActivities.cshtml" />
+    <Content Include="Views\BadgeManager\_ActivitiesForApproval.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">

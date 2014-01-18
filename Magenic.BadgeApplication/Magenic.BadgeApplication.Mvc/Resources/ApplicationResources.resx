@@ -207,4 +207,19 @@
   <data name="PointsReport" xml:space="preserve">
     <value>Points Report</value>
   </data>
+  <data name="ActivitiesForApprovalHeader" xml:space="preserve">
+    <value>Activities for Approval</value>
+  </data>
+  <data name="CommunityBadgesForApprovalHeader" xml:space="preserve">
+    <value>Community Badges for Approval</value>
+  </data>
+  <data name="PointsReportHeader" xml:space="preserve">
+    <value>Points Report</value>
+  </data>
+  <data name="ApproveActivityLink" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="RejectActivityLink" xml:space="preserve">
+    <value>Reject</value>
+  </data>
 </root>

@@ -1,4 +1,6 @@
-﻿namespace Magenic.BadgeApplication.Common.Interfaces
+﻿using System;
+
+namespace Magenic.BadgeApplication.Common.Interfaces
 {
     /// <summary>
     /// Activity that requires approval.
@@ -9,6 +11,10 @@
         /// The id of the activity submission.
         /// </summary>
         int SubmissionId { get; }
+        /// <summary>
+        /// Gets the submission date.
+        /// </summary>
+        DateTime SubmissionDate { get; }
         /// <summary>
         /// The name of the activity used to identify it.
         /// </summary>

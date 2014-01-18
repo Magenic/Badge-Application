@@ -1,4 +1,6 @@
-﻿using Magenic.BadgeApplication.BusinessLogic.Badge;
+﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
+using Magenic.BadgeApplication.BusinessLogic.Badge;
+using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Models;
 using System.Threading.Tasks;
@@ -77,9 +79,37 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public virtual ActionResult ApproveActivities()
+        public async virtual Task<ActionResult> ApproveActivities()
         {
-            return View();
+            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.UserName);
+            var approveActivitiesViewModel = new ApproveActivitiesViewModel(activitiesToApprove);
+            return View(approveActivitiesViewModel);
+        }
+
+        /// <summary>
+        /// Admins the activity.
+        /// </summary>
+        /// <param name="approveActivityItem">The approve activity item.</param>
+        /// <returns></returns>
+        [HttpPost]
+        public virtual ActionResult ApproveActivity(ApproveActivityItem approveActivityItem)
+        {
+            Arg.IsNotNull(() => approveActivityItem);
+
+            approveActivityItem.ApproveActivitySubmission(AuthenticatedUser.UserName);
+            return Json(new { Success = true });
+        }
+
+        /// <summary>
+        /// Admins the activity.
+        /// </summary>
+        /// <param name="approveActivityItem">The approve activity item.</param>
+        /// <returns></returns>
+        [HttpPost]
+        public virtual ActionResult RejectActivity(ApproveActivityItem approveActivityItem)
+        {
+            // TODO: need the approveActivityItem.RejectActivitySubmission(...)
+            return Json(new { Success = true });
         }
     }
 }

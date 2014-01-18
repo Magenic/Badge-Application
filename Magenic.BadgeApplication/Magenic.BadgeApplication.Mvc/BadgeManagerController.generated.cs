@@ -50,6 +50,18 @@ namespace Magenic.BadgeApplication.Controllers
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.EditBadge);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult ApproveActivity()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ApproveActivity);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult RejectActivity()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.RejectActivity);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public BadgeManagerController Actions { get { return Mvc.BadgeManager; } }
@@ -72,6 +84,8 @@ namespace Magenic.BadgeApplication.Controllers
             public readonly string ApproveCommunityBadges = "ApproveCommunityBadges";
             public readonly string PointsReport = "PointsReport";
             public readonly string ApproveActivities = "ApproveActivities";
+            public readonly string ApproveActivity = "ApproveActivity";
+            public readonly string RejectActivity = "RejectActivity";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -83,6 +97,8 @@ namespace Magenic.BadgeApplication.Controllers
             public const string ApproveCommunityBadges = "ApproveCommunityBadges";
             public const string PointsReport = "PointsReport";
             public const string ApproveActivities = "ApproveActivities";
+            public const string ApproveActivity = "ApproveActivity";
+            public const string RejectActivity = "RejectActivity";
         }
 
 
@@ -94,6 +110,22 @@ namespace Magenic.BadgeApplication.Controllers
         {
             public readonly string id = "id";
         }
+        static readonly ActionParamsClass_ApproveActivity s_params_ApproveActivity = new ActionParamsClass_ApproveActivity();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ApproveActivity ApproveActivityParams { get { return s_params_ApproveActivity; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ApproveActivity
+        {
+            public readonly string approveActivityItem = "approveActivityItem";
+        }
+        static readonly ActionParamsClass_RejectActivity s_params_RejectActivity = new ActionParamsClass_RejectActivity();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_RejectActivity RejectActivityParams { get { return s_params_RejectActivity; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_RejectActivity
+        {
+            public readonly string approveActivityItem = "approveActivityItem";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -104,11 +136,19 @@ namespace Magenic.BadgeApplication.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _ActivitiesForApproval = "_ActivitiesForApproval";
                 public readonly string _AdminBadgeList = "_AdminBadgeList";
+                public readonly string ApproveActivities = "ApproveActivities";
+                public readonly string ApproveCommunityBadges = "ApproveCommunityBadges";
                 public readonly string Index = "Index";
+                public readonly string PointsReport = "PointsReport";
             }
+            public readonly string _ActivitiesForApproval = "~/Views/BadgeManager/_ActivitiesForApproval.cshtml";
             public readonly string _AdminBadgeList = "~/Views/BadgeManager/_AdminBadgeList.cshtml";
+            public readonly string ApproveActivities = "~/Views/BadgeManager/ApproveActivities.cshtml";
+            public readonly string ApproveCommunityBadges = "~/Views/BadgeManager/ApproveCommunityBadges.cshtml";
             public readonly string Index = "~/Views/BadgeManager/Index.cshtml";
+            public readonly string PointsReport = "~/Views/BadgeManager/PointsReport.cshtml";
         }
     }
 
@@ -165,10 +205,30 @@ namespace Magenic.BadgeApplication.Controllers
 
         partial void ApproveActivitiesOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
-        public override System.Web.Mvc.ActionResult ApproveActivities()
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ApproveActivities()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ApproveActivities);
             ApproveActivitiesOverride(callInfo);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        partial void ApproveActivityOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Magenic.BadgeApplication.BusinessLogic.Activity.ApproveActivityItem approveActivityItem);
+
+        public override System.Web.Mvc.ActionResult ApproveActivity(Magenic.BadgeApplication.BusinessLogic.Activity.ApproveActivityItem approveActivityItem)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ApproveActivity);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "approveActivityItem", approveActivityItem);
+            ApproveActivityOverride(callInfo, approveActivityItem);
+            return callInfo;
+        }
+
+        partial void RejectActivityOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Magenic.BadgeApplication.BusinessLogic.Activity.ApproveActivityItem approveActivityItem);
+
+        public override System.Web.Mvc.ActionResult RejectActivity(Magenic.BadgeApplication.BusinessLogic.Activity.ApproveActivityItem approveActivityItem)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.RejectActivity);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "approveActivityItem", approveActivityItem);
+            RejectActivityOverride(callInfo, approveActivityItem);
             return callInfo;
         }
 

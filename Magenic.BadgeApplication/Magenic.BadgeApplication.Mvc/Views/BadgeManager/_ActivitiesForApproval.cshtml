@@ -1,0 +1,41 @@
+﻿@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Common.Interfaces
+@model IApproveActivityCollection
+
+@foreach (var activityForApproval in Model)
+{
+    <div class="row activityForApproval">
+        <div class="col-md-10">
+            <div class="row">
+                <h3>
+                    @activityForApproval.ActivityName
+                </h3>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="#" onclick="approveActivity(this, @activityForApproval.SubmissionId); return false;">
+                        @ApplicationResources.ApproveActivityLink
+                    </a>
+
+                    <a href="#" onclick="rejectActivity(this, @activityForApproval.SubmissionId); return false;">
+                        @ApplicationResources.RejectActivityLink
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <b>
+                        @activityForApproval.EmployeeUserName
+                    </b>
+                    @activityForApproval.SubmissionNotes
+                </div>
+                <div class="col-md-4">
+                    <b>
+                        @activityForApproval.SubmissionDate.ToString("MMMM dd, yyyy")
+                    </b>
+                </div>
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+}

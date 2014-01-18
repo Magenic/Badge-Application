@@ -15,26 +15,27 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             using (var ctx = new Entities())
             {
                 ctx.Database.Connection.Open();
-                var activityList = await(from t in ctx.ActivitySubmissions
-                                         join e in ctx.Employees on t.EmployeeADName equals e.ADName
-                                         join a in ctx.Activities on t.ActivityId equals a.ActivityId
-                                         join m1 in ctx.Employees on e.ApprovingManagerId1 equals m1.EmployeeId into manager1
-                                         join m2 in ctx.Employees on e.ApprovingManagerId2 equals m2.EmployeeId into manager2
-                                         where t.SubmissionStatusId == (int)ActivitySubmissionStatus.Proposed
-                                         where (manager1.DefaultIfEmpty().Any(m1 => m1.ADName == managerUserName)
-                                         || manager2.DefaultIfEmpty().Any(m2 => m2.ADName == managerUserName))
-                                         from man1 in manager1.DefaultIfEmpty()
-                                         from man2 in manager2.DefaultIfEmpty()
-                                         select new Common.DTO.ApproveActivityItemDTO
-                                         {
-                                             SubmissionId = t.ActivitySubmissionId,
-                                             ActivityDescription = a.ActivityDescription,
-                                             ActivityName = a.ActivityName,
-                                             ApprovedByUserName = t.SubmissionApprovedADName,
-                                             EmployeeUserName = t.EmployeeADName,
-                                             Status = (ActivitySubmissionStatus)t.SubmissionStatusId,
-                                             SubmissionNotes = t.SubmissionDescription
-                                         }).ToArrayAsync();
+                var activityList = await (from t in ctx.ActivitySubmissions
+                                          join e in ctx.Employees on t.EmployeeADName equals e.ADName
+                                          join a in ctx.Activities on t.ActivityId equals a.ActivityId
+                                          join m1 in ctx.Employees on e.ApprovingManagerId1 equals m1.EmployeeId into manager1
+                                          join m2 in ctx.Employees on e.ApprovingManagerId2 equals m2.EmployeeId into manager2
+                                          where t.SubmissionStatusId == (int)ActivitySubmissionStatus.Proposed
+                                          where (manager1.DefaultIfEmpty().Any(m1 => m1.ADName == managerUserName)
+                                          || manager2.DefaultIfEmpty().Any(m2 => m2.ADName == managerUserName))
+                                          from man1 in manager1.DefaultIfEmpty()
+                                          from man2 in manager2.DefaultIfEmpty()
+                                          select new Common.DTO.ApproveActivityItemDTO
+                                          {
+                                              SubmissionId = t.ActivitySubmissionId,
+                                              SubmissionDate = t.SubmissionDate,
+                                              ActivityDescription = a.ActivityDescription,
+                                              ActivityName = a.ActivityName,
+                                              ApprovedByUserName = t.SubmissionApprovedADName,
+                                              EmployeeUserName = t.EmployeeADName,
+                                              Status = (ActivitySubmissionStatus)t.SubmissionStatusId,
+                                              SubmissionNotes = t.SubmissionDescription
+                                          }).ToArrayAsync();
 
                 return activityList;
             }
@@ -54,7 +55,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                     ctx.ActivitySubmissions.Attach(saveSubmission);
                     var objectState = ((IObjectContextAdapter)ctx).ObjectContext.ObjectStateManager;
                     objectState.GetObjectStateEntry(saveSubmission).SetModifiedProperty("ActivitySubmissionId");
-                    objectState.GetObjectStateEntry(saveSubmission).SetModifiedProperty("SubmissionStatusId");                    
+                    objectState.GetObjectStateEntry(saveSubmission).SetModifiedProperty("SubmissionStatusId");
                 }
                 ctx.SaveChanges();
             }
