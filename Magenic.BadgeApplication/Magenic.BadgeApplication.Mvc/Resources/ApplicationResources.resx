@@ -222,4 +222,28 @@
   <data name="RejectActivityLink" xml:space="preserve">
     <value>Reject</value>
   </data>
+  <data name="BadgeEditDescription" xml:space="preserve">
+    <value>Here we can create new badges and assign them to an activity.</value>
+  </data>
+  <data name="BadgeImageLabel" xml:space="preserve">
+    <value>Badge image</value>
+  </data>
+  <data name="BadgeNameLabel" xml:space="preserve">
+    <value>Badge title</value>
+  </data>
+  <data name="BadgeTaglineLabel" xml:space="preserve">
+    <value>Quip or funny saying about the badge</value>
+  </data>
+  <data name="BadgeEndDateLabel" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="BadgeStartDateLabel" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="AddBadgeHeader" xml:space="preserve">
+    <value>Add a Badge</value>
+  </data>
+  <data name="BadgeDescriptionLabel" xml:space="preserve">
+    <value>Description including why/how it is awarded</value>
+  </data>
 </root>

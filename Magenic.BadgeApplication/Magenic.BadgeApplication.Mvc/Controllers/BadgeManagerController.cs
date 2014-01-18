@@ -38,9 +38,34 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public virtual ActionResult AddBadge()
+        public async virtual Task<ActionResult> AddBadge()
         {
-            return View();
+            var allActivities = await ActivityCollection.GetAllActivitiesAsync();
+            var badgeEditViewModel = new BadgeEditViewModel(allActivities);
+            badgeEditViewModel.Badge = BadgeEdit.CreateBadge();
+
+            return View(badgeEditViewModel);
+        }
+
+        /// <summary>
+        /// Adds the badge.
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public virtual async Task<ActionResult> AddBadgePost()
+        {
+            var badgeEditViewModel = new BadgeEditViewModel()
+            {
+                Badge = BadgeEdit.CreateBadge(),
+            };
+
+            TryUpdateModel(badgeEditViewModel);
+            if (await SaveObjectAsync(badgeEditViewModel.Badge, true))
+            {
+                return RedirectToAction(Mvc.BadgeManager.Index().Result);
+            }
+
+            return await AddBadge();
         }
 
         /// <summary>

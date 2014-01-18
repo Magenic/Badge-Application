@@ -33,6 +33,7 @@ namespace Magenic.BadgeApplication
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").IncludeT4MVC(
                 Links.Scripts.bootstrap_js,
                 Links.Scripts.bootstrap_datepicker_js,
+                Links.Scripts.bootstrap_filestyle_js,
                 Links.Scripts.bootstrap_slider_js,
                 Links.Scripts.respond_js));
 
@@ -57,6 +58,10 @@ namespace Magenic.BadgeApplication
 
             bundles.Add(new ScriptBundle("~/bundles/accountPage").IncludeT4MVC(
                 Links.Scripts.accountPage_js
+            ));
+
+            bundles.Add(new ScriptBundle("~/bundles/badgeManager").IncludeT4MVC(
+                Links.Scripts.badgeEditorPages_js
             ));
         }
     }

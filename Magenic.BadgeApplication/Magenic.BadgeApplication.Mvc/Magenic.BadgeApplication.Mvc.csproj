@@ -199,6 +199,7 @@
     <Compile Include="Models\AdminActivityViewModel.cs" />
     <Compile Include="Models\ApproveActivitiesViewModel.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />
+    <Compile Include="Models\BadgeEditViewModel.cs" />
     <Compile Include="Models\BadgeIndexViewModel.cs" />
     <Compile Include="Models\BadgeManagerIndexViewModel.cs" />
     <Compile Include="Models\SubmitActivityViewModel.cs" />
@@ -245,8 +246,11 @@
     <None Include="Content\Site.less" />
     <Content Include="Scripts\accountPage.js" />
     <Content Include="Scripts\activityPage.js" />
+    <Content Include="Scripts\badgeEditorPages.js" />
     <Content Include="Scripts\badgePage.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-filestyle.js" />
+    <Content Include="Scripts\bootstrap-filestyle.min.js" />
     <Content Include="Scripts\bootstrap-slider.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -354,6 +358,8 @@
     <Content Include="Views\BadgeManager\PointsReport.cshtml" />
     <Content Include="Views\BadgeManager\ApproveActivities.cshtml" />
     <Content Include="Views\BadgeManager\_ActivitiesForApproval.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\BadgeEdit.cshtml" />
+    <Content Include="Views\BadgeManager\AddBadge.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">

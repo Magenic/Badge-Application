@@ -59,6 +59,7 @@ namespace T4Mvc
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _EditorTemplatesClass
             {
+                public readonly string BadgeEdit = "BadgeEdit";
                 public readonly string SubmitActivity = "SubmitActivity";
             }
         }

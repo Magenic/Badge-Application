@@ -1,0 +1,74 @@
+﻿@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Common.Interfaces
+@model IBadgeEdit
+
+<div class="row">
+    <div class="col-md-12">
+        @ApplicationResources.BadgeEditDescription
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="editor-label">
+            @Html.LabelFor(be => be.Name, ApplicationResources.BadgeNameLabel)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(be => be.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(be => be.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(be => be.Tagline, ApplicationResources.BadgeTaglineLabel)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(be => be.Tagline, new { @class = "form-control" })
+            @Html.ValidationMessageFor(be => be.Tagline)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(be => be.Description, ApplicationResources.BadgeDescriptionLabel)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(be => be.Description, new { @class = "form-control" })
+            @Html.ValidationMessageFor(be => be.Description)
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        <div class="editor-label">
+            @Html.LabelFor(be => be.ImagePath, ApplicationResources.BadgeNameLabel)
+        </div>
+        <div class="editor-field">
+            <input type="file" class="filestyle" data-classbutton="btn btn-primary" data-input="false">
+            @Html.ValidationMessageFor(be => be.ImagePath)
+        </div>
+        <div class="pull-left">
+            <div class="editor-label">
+                @Html.LabelFor(be => be.EffectiveStartDate, ApplicationResources.BadgeStartDateLabel)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(be => be.EffectiveStartDate, new { @class = "form-control datepicker" })
+                @Html.ValidationMessageFor(be => be.EffectiveStartDate)
+            </div>
+        </div>
+        <div class="pull-left">
+            <div class="editor-label">
+                @Html.LabelFor(be => be.EffectiveEndDate, ApplicationResources.BadgeEndDateLabel)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(be => be.EffectiveEndDate, new { @class = "form-control datepicker" })
+                @Html.ValidationMessageFor(be => be.EffectiveEndDate)
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    &nbsp;
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <input type="submit" class="btn btn-success" value="@ApplicationResources.SubmitButton" />
+    </div>
+</div>

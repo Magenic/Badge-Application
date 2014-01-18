@@ -69,8 +69,11 @@ namespace Links
         public static readonly string _references_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/_references.min.js") ? Url("_references.min.js") : Url("_references.js");
         public static readonly string accountPage_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/accountPage.min.js") ? Url("accountPage.min.js") : Url("accountPage.js");
         public static readonly string activityPage_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/activityPage.min.js") ? Url("activityPage.min.js") : Url("activityPage.js");
+        public static readonly string badgeEditorPages_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/badgeEditorPages.min.js") ? Url("badgeEditorPages.min.js") : Url("badgeEditorPages.js");
         public static readonly string badgePage_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/badgePage.min.js") ? Url("badgePage.min.js") : Url("badgePage.js");
         public static readonly string bootstrap_datepicker_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-datepicker.min.js") ? Url("bootstrap-datepicker.min.js") : Url("bootstrap-datepicker.js");
+        public static readonly string bootstrap_filestyle_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-filestyle.min.js") ? Url("bootstrap-filestyle.min.js") : Url("bootstrap-filestyle.js");
+        public static readonly string bootstrap_filestyle_min_js = Url("bootstrap-filestyle.min.js");
         public static readonly string bootstrap_slider_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-slider.min.js") ? Url("bootstrap-slider.min.js") : Url("bootstrap-slider.js");
         public static readonly string bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.js") ? Url("bootstrap.min.js") : Url("bootstrap.js");
         public static readonly string bootstrap_min_js = Url("bootstrap.min.js");

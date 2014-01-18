@@ -80,6 +80,7 @@ namespace Magenic.BadgeApplication.Controllers
         {
             public readonly string Index = "Index";
             public readonly string AddBadge = "AddBadge";
+            public readonly string AddBadgePost = "AddBadgePost";
             public readonly string EditBadge = "EditBadge";
             public readonly string ApproveCommunityBadges = "ApproveCommunityBadges";
             public readonly string PointsReport = "PointsReport";
@@ -93,6 +94,7 @@ namespace Magenic.BadgeApplication.Controllers
         {
             public const string Index = "Index";
             public const string AddBadge = "AddBadge";
+            public const string AddBadgePost = "AddBadgePost";
             public const string EditBadge = "EditBadge";
             public const string ApproveCommunityBadges = "ApproveCommunityBadges";
             public const string PointsReport = "PointsReport";
@@ -138,6 +140,7 @@ namespace Magenic.BadgeApplication.Controllers
             {
                 public readonly string _ActivitiesForApproval = "_ActivitiesForApproval";
                 public readonly string _AdminBadgeList = "_AdminBadgeList";
+                public readonly string AddBadge = "AddBadge";
                 public readonly string ApproveActivities = "ApproveActivities";
                 public readonly string ApproveCommunityBadges = "ApproveCommunityBadges";
                 public readonly string Index = "Index";
@@ -145,6 +148,7 @@ namespace Magenic.BadgeApplication.Controllers
             }
             public readonly string _ActivitiesForApproval = "~/Views/BadgeManager/_ActivitiesForApproval.cshtml";
             public readonly string _AdminBadgeList = "~/Views/BadgeManager/_AdminBadgeList.cshtml";
+            public readonly string AddBadge = "~/Views/BadgeManager/AddBadge.cshtml";
             public readonly string ApproveActivities = "~/Views/BadgeManager/ApproveActivities.cshtml";
             public readonly string ApproveCommunityBadges = "~/Views/BadgeManager/ApproveCommunityBadges.cshtml";
             public readonly string Index = "~/Views/BadgeManager/Index.cshtml";
@@ -168,11 +172,20 @@ namespace Magenic.BadgeApplication.Controllers
 
         partial void AddBadgeOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
-        public override System.Web.Mvc.ActionResult AddBadge()
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> AddBadge()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AddBadge);
             AddBadgeOverride(callInfo);
-            return callInfo;
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        partial void AddBadgePostOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> AddBadgePost()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AddBadgePost);
+            AddBadgePostOverride(callInfo);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
         partial void EditBadgeOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
