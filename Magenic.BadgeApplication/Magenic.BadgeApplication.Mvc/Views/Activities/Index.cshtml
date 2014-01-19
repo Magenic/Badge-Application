@@ -8,7 +8,7 @@
             @Html.Partial(Mvc.Activities.Views._PreviousActivities, Model)
         </div>
 
-        <div class="col-md-4 grayBox">
+        <div class="col-md-4 grayBox submittedActivity">
             @Html.EditorFor(bivm => bivm.SubmittedActivity, new { PossibleActivities = Model.PossibleActivities })
         </div>
     </div>

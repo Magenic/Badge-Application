@@ -34,11 +34,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.BusinessLogic.Tests.Integration", "Magenic.BadgeApplication.BusinessLogic.Tests.Integration\Magenic.BadgeApplication.BusinessLogic.Tests.Integration.csproj", "{03EBFAD6-39AE-4264-8B2B-A101402366A7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{23CC3024-64CA-4E26-8EC8-85386FA8FF68}"
-	ProjectSection(SolutionItems) = preProject
-		Library\Csla.Web.Mvc5.dll = Library\Csla.Web.Mvc5.dll
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,7 +79,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{23CC3024-64CA-4E26-8EC8-85386FA8FF68} = {A6B06300-2261-4136-A86F-2BE3DD434CD0}
 		{A98CD380-FFB9-45E4-921A-C6CC3BD32905} = {D8B418F6-48F8-4B1B-9819-C0C68D1F6A49}
 		{15F6B4C8-7712-4E81-85EA-B4293E4C7C1E} = {D8B418F6-48F8-4B1B-9819-C0C68D1F6A49}
 		{03EBFAD6-39AE-4264-8B2B-A101402366A7} = {D8B418F6-48F8-4B1B-9819-C0C68D1F6A49}

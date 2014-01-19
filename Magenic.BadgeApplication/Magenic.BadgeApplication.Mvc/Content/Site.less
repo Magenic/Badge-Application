@@ -20,6 +20,12 @@ a {
     color: #7ab800;
 }
 
+form {
+    .editor-field {
+        padding-bottom: 15px;
+    }
+}
+
 label {
     font-size: 16px;
     font-weight: 500;
@@ -152,11 +158,19 @@ footer {
     }
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.submittedActivity {
+    /* Set width on the form input elements since they're 100% wide by default */
+    input,
+    select,
+    textarea {
+        max-width: 280px;
+    }
+}
+
+.bootstrap-filestyle {
+    input {
+        max-width: 300px;
+    }
 }
 
 /* styles for validation helpers */

@@ -1,0 +1,29 @@
+﻿@using Magenic.BadgeApplication.Common.Interfaces
+@model IEnumerable<IBadgeItem>
+
+@{
+    var list = Model.ToList();
+    var maxColumns = 6;
+}
+
+@for (int row = 0; row <= list.Count() / maxColumns; row++)
+{
+    var className = "row";
+    if (row % 2 == 1)
+    {
+        className = "row indent";
+    }
+
+    <div class="@className">
+        @for (int col = row * maxColumns; col < (row * maxColumns) + maxColumns; col++)
+        {
+            if (col < Model.Count())
+            {
+                var item = list[col];
+                <a href="@Url.Action(Mvc.BadgeManager.EditBadge(item.Id))">
+                    @Html.DisplayFor(m => item)
+                </a>
+            }
+        }
+    </div>
+}
