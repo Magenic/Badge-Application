@@ -385,6 +385,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit a Badge.
+        /// </summary>
+        public static string EditBadgeHeader {
+            get {
+                return ResourceManager.GetString("EditBadgeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid Payout Threshold.
         /// </summary>
         public static string InvalidPayoutThreshold {

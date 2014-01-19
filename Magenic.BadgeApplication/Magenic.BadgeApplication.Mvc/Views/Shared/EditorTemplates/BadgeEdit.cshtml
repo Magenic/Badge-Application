@@ -43,7 +43,7 @@
         </label>
         &nbsp;&nbsp;
         <label>
-            @Html.RadioButtonFor(be => be.Type, BadgeType.Corporate)
+            @Html.RadioButtonFor(be => be.Type, BadgeType.Community)
             @ApplicationResources.BadgeCommunityLabel
         </label>
     </div>
@@ -53,7 +53,7 @@
             @Html.LabelFor(be => be.ImagePath, ApplicationResources.BadgeNameLabel)
         </div>
         <div class="editor-field">
-            <input type="file" class="filestyle" data-classbutton="btn btn-primary" data-classinput="form-control pull-left">
+            <input name="badgeImage" type="file" class="filestyle" data-classbutton="btn btn-primary" data-classinput="form-control pull-left">
             @Html.ValidationMessageFor(be => be.ImagePath)
         </div>
         <div class="pull-left">
@@ -75,13 +75,6 @@
             </div>
         </div>
         <div class="clearfix">&nbsp;</div>
-        <div class="editor-label">
-            @Html.LabelFor(be => be.AwardValueAmount, ApplicationResources.BadgeActivityCompletedLabel)
-        </div>
-        <div class="editor-field">
-            @Html.DropDownListFor(be => be.AwardValueAmount, ViewData["AwardValuesPossible"] as IEnumerable<SelectListItem>, new { @class = "form-control" })
-            @Html.ValidationMessageFor(be => be.AwardValueAmount)
-        </div>
         <label>
             @Html.CheckBoxFor(be => be.MultipleAwardsPossible)
             @ApplicationResources.BadgeMultipleAwardsLabel

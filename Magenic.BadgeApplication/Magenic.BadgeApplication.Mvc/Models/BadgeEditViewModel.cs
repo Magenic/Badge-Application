@@ -1,6 +1,4 @@
 ﻿using Magenic.BadgeApplication.Common.Interfaces;
-using System.Collections.Generic;
-using System.Web.Mvc;
 
 namespace Magenic.BadgeApplication.Models
 {
@@ -33,14 +31,6 @@ namespace Magenic.BadgeApplication.Models
         /// All activities.
         /// </value>
         public IActivityCollection AllActivities { get; private set; }
-
-        /// <summary>
-        /// Gets or sets the award values possible.
-        /// </summary>
-        /// <value>
-        /// The award values possible.
-        /// </value>
-        public IEnumerable<SelectListItem> AwardValuesPossible { get; set; }
 
         /// <summary>
         /// Gets or sets the badge.

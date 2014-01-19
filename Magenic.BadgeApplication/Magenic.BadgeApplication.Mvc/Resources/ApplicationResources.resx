@@ -270,4 +270,7 @@
   <data name="BadgeManagementApprovalRequiredLabel" xml:space="preserve">
     <value>Is management approval required?</value>
   </data>
+  <data name="EditBadgeHeader" xml:space="preserve">
+    <value>Edit a Badge</value>
+  </data>
 </root>

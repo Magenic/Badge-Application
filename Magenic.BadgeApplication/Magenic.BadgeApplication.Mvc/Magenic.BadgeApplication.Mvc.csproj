@@ -185,6 +185,7 @@
     <Compile Include="Controllers\WebApi\AccountsController.cs" />
     <Compile Include="Extensions\BundleExtensions.cs" />
     <Compile Include="Extensions\ImageActionLinkExtensions.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -360,6 +361,7 @@
     <Content Include="Views\BadgeManager\_ActivitiesForApproval.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BadgeEdit.cshtml" />
     <Content Include="Views\BadgeManager\AddBadge.cshtml" />
+    <Content Include="Views\BadgeManager\EditBadge.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">

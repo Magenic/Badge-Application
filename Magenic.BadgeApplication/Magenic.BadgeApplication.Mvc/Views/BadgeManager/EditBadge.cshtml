@@ -10,10 +10,10 @@
         <div class="col-md-12 grayBox">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>@ApplicationResources.AddBadgeHeader</h2>
+                    <h2>@ApplicationResources.EditBadgeHeader</h2>
                 </div>
             </div>
-            @using (Html.BeginForm("AddBadgePost", "BadgeManager", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("EditBadgePost", "BadgeManager", new { id = Model.Badge.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.EditorFor(bevw => bevw.Badge)
             }

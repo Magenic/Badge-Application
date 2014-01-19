@@ -2,10 +2,10 @@
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Enums;
+using Magenic.BadgeApplication.Extensions;
 using Magenic.BadgeApplication.Models;
-using System.Globalization;
-using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using CslaController = Csla.Web.Mvc.AsyncController;
 
@@ -45,23 +45,27 @@ namespace Magenic.BadgeApplication.Controllers
             var allActivities = await ActivityCollection.GetAllActivitiesAsync();
             var badgeEditViewModel = new BadgeEditViewModel(allActivities);
             badgeEditViewModel.Badge = BadgeEdit.CreateBadge();
-            badgeEditViewModel.AwardValuesPossible = Enumerable.Range(1, 100)
-                .Select(i => new SelectListItem() { Value = i.ToString(CultureInfo.CurrentCulture), Text = i.ToString(CultureInfo.CurrentCulture) });
 
-            return View(badgeEditViewModel);
+            return View(Mvc.BadgeManager.Views.AddBadge, badgeEditViewModel);
         }
 
         /// <summary>
         /// Adds the badge.
         /// </summary>
+        /// <param name="badgeImage">The badge image.</param>
         /// <returns></returns>
         [HttpPost]
-        public virtual async Task<ActionResult> AddBadgePost()
+        public virtual async Task<ActionResult> AddBadgePost(HttpPostedFileBase badgeImage)
         {
+            Arg.IsNotNull(() => badgeImage);
+
             var badgeEditViewModel = new BadgeEditViewModel()
             {
                 Badge = BadgeEdit.CreateBadge(),
             };
+
+            var bytes = badgeImage.InputStream.GetBytes();
+            badgeEditViewModel.Badge.SetBadgeImage(bytes);
 
             TryUpdateModel(badgeEditViewModel);
             if (await SaveObjectAsync(badgeEditViewModel.Badge, true))
@@ -78,9 +82,41 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
         [HttpGet]
-        public virtual ActionResult EditBadge(int id)
+        public virtual async Task<ActionResult> EditBadge(int id)
         {
-            return View();
+            var allActivities = await ActivityCollection.GetAllActivitiesAsync();
+            var badgeEditViewModel = new BadgeEditViewModel(allActivities);
+            badgeEditViewModel.Badge = await BadgeEdit.GetBadgeEditByIdAsync(id);
+
+            return View(Mvc.BadgeManager.Views.EditBadge, badgeEditViewModel);
+        }
+
+        /// <summary>
+        /// Edits the badge post.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="badgeImage">The badge image.</param>
+        /// <returns></returns>
+        [HttpPost]
+        public virtual async Task<ActionResult> EditBadgePost(int id, HttpPostedFileBase badgeImage)
+        {
+            Arg.IsNotNull(() => badgeImage);
+
+            var badgeEditViewModel = new BadgeEditViewModel()
+            {
+                Badge = await BadgeEdit.GetBadgeEditByIdAsync(id),
+            };
+
+            var bytes = badgeImage.InputStream.GetBytes();
+            badgeEditViewModel.Badge.SetBadgeImage(bytes);
+
+            TryUpdateModel(badgeEditViewModel);
+            if (await SaveObjectAsync(badgeEditViewModel.Badge, true))
+            {
+                return RedirectToAction(Mvc.BadgeManager.Index().Result);
+            }
+
+            return await EditBadge(id);
         }
 
         /// <summary>
