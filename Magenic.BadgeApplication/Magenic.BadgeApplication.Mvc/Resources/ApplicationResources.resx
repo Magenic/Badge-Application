@@ -244,6 +244,30 @@
     <value>Add a Badge</value>
   </data>
   <data name="BadgeDescriptionLabel" xml:space="preserve">
-    <value>Description including why/how it is awarded</value>
+    <value>Description including why / how it is awarded</value>
+  </data>
+  <data name="BadgeCommunityLabel" xml:space="preserve">
+    <value>Community</value>
+  </data>
+  <data name="BadgeCorporateLabel" xml:space="preserve">
+    <value>Corporate</value>
+  </data>
+  <data name="BadgeTypeLabel" xml:space="preserve">
+    <value>Badge Type</value>
+  </data>
+  <data name="BadgeActivityCompletedLabel" xml:space="preserve">
+    <value>How many times the activity must be completed?</value>
+  </data>
+  <data name="BadgeMultipleAwardsLabel" xml:space="preserve">
+    <value>Can it be awarded multiple times?</value>
+  </data>
+  <data name="BadgePointsReceievedLabel" xml:space="preserve">
+    <value>Points received</value>
+  </data>
+  <data name="BadgePriorityLabel" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="BadgeManagementApprovalRequiredLabel" xml:space="preserve">
+    <value>Is management approval required?</value>
   </data>
 </root>

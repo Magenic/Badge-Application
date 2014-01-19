@@ -3,6 +3,8 @@ using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Models;
+using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using CslaController = Csla.Web.Mvc.AsyncController;
@@ -43,6 +45,8 @@ namespace Magenic.BadgeApplication.Controllers
             var allActivities = await ActivityCollection.GetAllActivitiesAsync();
             var badgeEditViewModel = new BadgeEditViewModel(allActivities);
             badgeEditViewModel.Badge = BadgeEdit.CreateBadge();
+            badgeEditViewModel.AwardValuesPossible = Enumerable.Range(1, 100)
+                .Select(i => new SelectListItem() { Value = i.ToString(CultureInfo.CurrentCulture), Text = i.ToString(CultureInfo.CurrentCulture) });
 
             return View(badgeEditViewModel);
         }

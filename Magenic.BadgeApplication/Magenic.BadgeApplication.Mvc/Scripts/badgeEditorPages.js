@@ -1,4 +1,4 @@
 ﻿$(document).ready(function () {
-    $(":file").filestyle();
+    $(':file').filestyle();
     $('.datepicker').datepicker();
 });

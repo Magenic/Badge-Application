@@ -15,7 +15,7 @@
             </div>
             @using (Html.BeginForm(Mvc.BadgeManager.AddBadgePost()))
             {
-                @Html.EditorFor(bevw => bevw.Badge)
+                @Html.EditorFor(bevw => bevw.Badge, new { AwardValuesPossible = Model.AwardValuesPossible })
             }
         </div>
     </div>

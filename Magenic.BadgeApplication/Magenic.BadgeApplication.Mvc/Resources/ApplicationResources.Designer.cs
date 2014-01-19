@@ -160,7 +160,34 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description including why/how it is awarded.
+        ///   Looks up a localized string similar to How many times the activity must be completed?.
+        /// </summary>
+        public static string BadgeActivityCompletedLabel {
+            get {
+                return ResourceManager.GetString("BadgeActivityCompletedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Community.
+        /// </summary>
+        public static string BadgeCommunityLabel {
+            get {
+                return ResourceManager.GetString("BadgeCommunityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Corporate.
+        /// </summary>
+        public static string BadgeCorporateLabel {
+            get {
+                return ResourceManager.GetString("BadgeCorporateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description including why / how it is awarded.
         /// </summary>
         public static string BadgeDescriptionLabel {
             get {
@@ -214,6 +241,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is management approval required?.
+        /// </summary>
+        public static string BadgeManagementApprovalRequiredLabel {
+            get {
+                return ResourceManager.GetString("BadgeManagementApprovalRequiredLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Badge Manager.
         /// </summary>
         public static string BadgeManagerLink {
@@ -223,11 +259,38 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can it be awarded multiple times?.
+        /// </summary>
+        public static string BadgeMultipleAwardsLabel {
+            get {
+                return ResourceManager.GetString("BadgeMultipleAwardsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Badge title.
         /// </summary>
         public static string BadgeNameLabel {
             get {
                 return ResourceManager.GetString("BadgeNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Points received.
+        /// </summary>
+        public static string BadgePointsReceievedLabel {
+            get {
+                return ResourceManager.GetString("BadgePointsReceievedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Priority.
+        /// </summary>
+        public static string BadgePriorityLabel {
+            get {
+                return ResourceManager.GetString("BadgePriorityLabel", resourceCulture);
             }
         }
         
@@ -255,6 +318,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string BadgeTaglineLabel {
             get {
                 return ResourceManager.GetString("BadgeTaglineLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badge Type.
+        /// </summary>
+        public static string BadgeTypeLabel {
+            get {
+                return ResourceManager.GetString("BadgeTypeLabel", resourceCulture);
             }
         }
         
