@@ -1,0 +1,27 @@
+﻿@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Models
+@model ApproveActivitiesViewModel
+
+<div class="container">
+    <div class="row">
+        @Html.Partial("_AdminNavbar")
+    </div>
+    <div class="row">
+        <div class="col-md-12 grayBox">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>@ApplicationResources.ActivitiesForApprovalHeader</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div id="AdminActivitiesForm">
+                    @Html.Hidden("UrlToApprove", Mvc.BadgeManager.ApproveActivity())
+                    @Html.Partial(Mvc.BadgeManager.Views._ActivitiesForApproval, Model.ActivitiesToApprove)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        &nbsp;
+    </div>
+</div>

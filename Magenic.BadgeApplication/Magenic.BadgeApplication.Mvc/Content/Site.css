@@ -1,178 +1,153 @@
 ﻿h1 {
-    font: normal 30px HelveticaNeue, Arial, sans-serif;
-    color: #222;
-    margin: 0 0 3px;
+  font: normal 30px HelveticaNeue, Arial, sans-serif;
+  color: #222;
+  margin: 0 0 3px;
 }
-
 h2 {
-    font: normal 23px Arial, sans-serif;
-    color: #333;
-    margin: 0 0 10px;
+  font: normal 23px Arial, sans-serif;
+  color: #333;
+  margin: 0 0 10px;
 }
-
 h3 {
-    font: normal 30px HelveticaNeue, Arial, sans-serif;
-    color: #222;
-    margin: 0 0 3px;
+  font: normal 30px HelveticaNeue, Arial, sans-serif;
+  color: #222;
+  margin: 0 0 3px;
 }
-
 a {
-    color: #7ab800;
+  color: #7ab800;
 }
-
+form .editor-field {
+  padding-bottom: 15px;
+}
 label {
-    font-size: 16px;
-    font-weight: 500;
-    color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
 }
-
 textarea {
-    height: auto;
+  height: auto;
 }
-
 .btn-success {
-    background: url(Images/button-gloss.png) repeat-x scroll 0 -31px #7ab800;
-    border: 1px solid #777;
-    color: #fff;
-    font-size: 18px;
-    margin: 10px 0 0 0;
-    padding: 11px 34px;
-    width: auto;
+  background: url('Images/button-gloss.png') repeat-x scroll 0 -31px #7ab800;
+  border: 1px solid #777;
+  color: #fff;
+  font-size: 18px;
+  margin: 10px 0 0 0;
+  padding: 11px 34px;
+  width: auto;
 }
-
 .grayBox,
 .tabGrayBox {
-    background-color: #EFEFEF;
-    border: 1px solid #D3D3D3;
-    border-radius: 3px 3px 3px 3px;
-    padding: 10px 15px 15px;
+  background-color: #EFEFEF;
+  border: 1px solid #D3D3D3;
+  border-radius: 3px 3px 3px 3px;
+  padding: 10px 15px 15px;
 }
-
 .grayBox .greenEmphasis,
 .tabGrayBox .greenEmphasis {
-    font-size: 125%;
-    font-weight: bold;
-    color: #88bf3e;
+  font-size: 125%;
+  font-weight: bold;
+  color: #88bf3e;
 }
-
 .grayHeaderList h3 {
-    font: normal 18px HelveticaNeue, Arial, sans-serif;
-    color: #404040;
-    margin: 0 0 10px;
-    padding: 4px 6px;
-    background-color: #F2F2F2;
+  font: normal 18px HelveticaNeue, Arial, sans-serif;
+  color: #404040;
+  margin: 0 0 10px;
+  padding: 4px 6px;
+  background-color: #F2F2F2;
 }
-
 .grayLine {
-    border-top: 1px solid #E0E0E0;
-    margin-bottom: 15px;
+  border-top: 1px solid #E0E0E0;
+  margin-bottom: 15px;
 }
-
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
-
 .no-padding {
-    padding: 0;
+  padding: 0;
 }
-
 .disabled_anchor {
-    color: gray;
+  color: gray;
 }
-
 .badges .col-md-2 {
-    text-align: center;
-    width: 110px;
+  text-align: center;
+  width: 110px;
 }
-
 .badges .indent {
-    margin-left: 39px;
+  margin-left: 39px;
 }
-
 .badges .indent > .col-md-2 {
-    margin-top: -5px;
+  margin-top: -5px;
 }
-
 .navbar {
-    width: 100%;
-    background: #191919 url(Images/header-bg.gif) repeat-y center;
+  width: 100%;
+  background: #191919 url('Images/header-bg.gif') repeat-y center;
 }
-
 .navbar .nav {
-    margin: 24px 0 0 24px;
+  margin: 24px 0 0 24px;
 }
-
 .navbar .nav ul {
-    margin-top: 24px;
+  margin-top: 24px;
 }
-
 .navbar .nav ul li a:link,
 .navbar .nav ul li a:visited {
-    /* TODO: can we make this not px font, but em? */
-    font: 18px/18px Arial, HelveticaNeue, sans-serif;
-    color: #d3d3d3;
-    text-decoration: none;
+  /* TODO: can we make this not px font, but em? */
+  font: 18px/18px Arial, HelveticaNeue, sans-serif;
+  color: #d3d3d3;
+  text-decoration: none;
 }
-
 .navbar .nav ul li a .active {
-    color: white;
+  color: white;
 }
-
 .navbar .navbar-header img {
-    margin: 24px 0 10px 32px;
-    float: left;
+  margin: 24px 0 10px 32px;
+  float: left;
 }
-
 .navbar .navbar-collapse {
-    background: url(Images/header-shadow.png) 140px 0 no-repeat;
+  background: url('Images/header-shadow.png') 140px 0 no-repeat;
 }
-
 .navbar .container {
-    padding-left: 0;
-    padding-right: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
-
 footer {
-    width: 100%;
-    height: 72px;
-    background-color: #F2F2F2;
-    border-top: 1px solid #DCDCDC;
+  width: 100%;
+  height: 72px;
+  background-color: #F2F2F2;
+  border-top: 1px solid #DCDCDC;
 }
-
 footer p {
-    font-size: smaller;
+  font-size: smaller;
 }
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.submittedActivity {
+  /* Set width on the form input elements since they're 100% wide by default */
 }
-
+.submittedActivity input,
+.submittedActivity select,
+.submittedActivity textarea {
+  max-width: 280px;
+}
+.bootstrap-filestyle input {
+  max-width: 300px;
+}
 /* styles for validation helpers */
 .field-validation-error {
-    color: #b94a48;
+  color: #b94a48;
 }
-
 .field-validation-valid {
-    display: none;
+  display: none;
 }
-
 input.input-validation-error {
-    border: 1px solid #b94a48;
+  border: 1px solid #b94a48;
 }
-
 input[type="checkbox"].input-validation-error {
-    border: 0 none;
+  border: 0 none;
 }
-
 .validation-summary-errors {
-    color: #b94a48;
+  color: #b94a48;
 }
-
 .validation-summary-valid {
-    display: none;
+  display: none;
 }

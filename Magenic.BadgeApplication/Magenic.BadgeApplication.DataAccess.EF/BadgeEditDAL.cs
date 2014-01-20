@@ -1,10 +1,10 @@
-﻿using System.Globalization;
-using Magenic.BadgeApplication.Common.DTO;
+﻿using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Microsoft.WindowsAzure.Storage;
 using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -70,7 +70,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("ManagementApprovalRequired");
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("ActivityPointsAmount");
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeAwardValueAmount");
-                objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeApprovedBy");
+                objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeApprovedByADName");
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeApprovedDate");
 
                 ctx.SaveChanges();
@@ -89,7 +89,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 
                 var blobClient = storageAccount.CreateCloudBlobClient();
                 var container = blobClient.GetContainerReference(ConfigurationManager.AppSettings["StorageAccountBlobContainer"]);
-                var blockBlob = container.GetBlockBlobReference(string.Format(CultureInfo.CurrentCulture ,"badgeimage{0}", data.Id));
+                var blockBlob = container.GetBlockBlobReference(string.Format(CultureInfo.CurrentCulture, "badgeimage{0}", data.Id));
 
                 blockBlob.UploadFromByteArray(data.BadgeImage, 0, data.BadgeImage.Length, null, null, null);
 
@@ -104,7 +104,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 BadgeId = data.Id,
                 BadgeName = data.Name,
                 BadgeTagLine = data.Tagline,
-                BadgeDescription= data.Description,
+                BadgeDescription = data.Description,
                 BadgeTypeId = (int)data.Type,
                 BadgePath = data.ImagePath,
                 BadgeCreated = data.Created,

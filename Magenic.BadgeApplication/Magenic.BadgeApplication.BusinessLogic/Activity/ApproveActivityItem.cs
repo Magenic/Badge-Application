@@ -25,6 +25,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             private set { LoadProperty(SubmissionIdProperty, value); }
         }
 
+        public static readonly PropertyInfo<DateTime> SubmissionDateProperty = RegisterProperty<DateTime>(c => c.SubmissionDate);
+        public DateTime SubmissionDate
+        {
+            get { return GetProperty(SubmissionDateProperty); }
+            private set { LoadProperty(SubmissionDateProperty, value); }
+        }
+
         public static readonly PropertyInfo<string> ActivityNameProperty = RegisterProperty<string>(c => c.ActivityName);
         public string ActivityName
         {
@@ -104,6 +111,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             using (this.BypassPropertyChecks)
             {
                 this.SubmissionId = item.SubmissionId;
+                this.SubmissionDate = item.SubmissionDate;
                 this.ActivityName = item.ActivityName;
                 this.ActivityDescription = item.ActivityDescription;
                 this.SubmissionNotes = item.SubmissionNotes;
@@ -122,6 +130,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             using (this.BypassPropertyChecks)
             {
                 returnValue.SubmissionId = this.SubmissionId;
+                returnValue.SubmissionDate = this.SubmissionDate;
                 returnValue.ActivityName = this.ActivityName;
                 returnValue.ActivityDescription = this.ActivityDescription;
                 returnValue.SubmissionNotes = this.SubmissionNotes;

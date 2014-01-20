@@ -1,4 +1,6 @@
-﻿namespace Magenic.BadgeApplication.Common.Interfaces
+﻿using System;
+
+namespace Magenic.BadgeApplication.Common.Interfaces
 {
     /// <summary>
     /// Interface for defining a data transfer object for persist operations 
@@ -10,6 +12,10 @@
         /// The id of the activity submission.
         /// </summary>
         int SubmissionId { get; set; }
+        /// <summary>
+        /// Gets or sets the submission date.
+        /// </summary>
+        DateTime SubmissionDate { get; set; }
         /// <summary>
         /// The name of the activity used to identify it.
         /// </summary>

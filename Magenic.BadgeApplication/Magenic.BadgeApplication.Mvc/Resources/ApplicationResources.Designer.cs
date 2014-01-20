@@ -79,6 +79,24 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activities for Approval.
+        /// </summary>
+        public static string ActivitiesForApproval {
+            get {
+                return ResourceManager.GetString("ActivitiesForApproval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activities for Approval.
+        /// </summary>
+        public static string ActivitiesForApprovalHeader {
+            get {
+                return ResourceManager.GetString("ActivitiesForApprovalHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Activities.
         /// </summary>
         public static string ActivitiesLink {
@@ -106,11 +124,101 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a Badge.
+        /// </summary>
+        public static string AddABadgeButton {
+            get {
+                return ResourceManager.GetString("AddABadgeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a Badge.
+        /// </summary>
+        public static string AddBadgeHeader {
+            get {
+                return ResourceManager.GetString("AddBadgeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add / Edit Badges.
+        /// </summary>
+        public static string AddEditBadges {
+            get {
+                return ResourceManager.GetString("AddEditBadges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approve.
+        /// </summary>
+        public static string ApproveActivityLink {
+            get {
+                return ResourceManager.GetString("ApproveActivityLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How many times the activity must be completed?.
+        /// </summary>
+        public static string BadgeActivityCompletedLabel {
+            get {
+                return ResourceManager.GetString("BadgeActivityCompletedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Community.
+        /// </summary>
+        public static string BadgeCommunityLabel {
+            get {
+                return ResourceManager.GetString("BadgeCommunityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Corporate.
+        /// </summary>
+        public static string BadgeCorporateLabel {
+            get {
+                return ResourceManager.GetString("BadgeCorporateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description including why / how it is awarded.
+        /// </summary>
+        public static string BadgeDescriptionLabel {
+            get {
+                return ResourceManager.GetString("BadgeDescriptionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Badge Earned.
         /// </summary>
         public static string BadgeEarnedRowHeader {
             get {
                 return ResourceManager.GetString("BadgeEarnedRowHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here we can create new badges and assign them to an activity..
+        /// </summary>
+        public static string BadgeEditDescription {
+            get {
+                return ResourceManager.GetString("BadgeEditDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Date.
+        /// </summary>
+        public static string BadgeEndDateLabel {
+            get {
+                return ResourceManager.GetString("BadgeEndDateLabel", resourceCulture);
             }
         }
         
@@ -124,6 +232,24 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Badge image.
+        /// </summary>
+        public static string BadgeImageLabel {
+            get {
+                return ResourceManager.GetString("BadgeImageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is management approval required?.
+        /// </summary>
+        public static string BadgeManagementApprovalRequiredLabel {
+            get {
+                return ResourceManager.GetString("BadgeManagementApprovalRequiredLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Badge Manager.
         /// </summary>
         public static string BadgeManagerLink {
@@ -133,11 +259,74 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can it be awarded multiple times?.
+        /// </summary>
+        public static string BadgeMultipleAwardsLabel {
+            get {
+                return ResourceManager.GetString("BadgeMultipleAwardsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badge title.
+        /// </summary>
+        public static string BadgeNameLabel {
+            get {
+                return ResourceManager.GetString("BadgeNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Points received.
+        /// </summary>
+        public static string BadgePointsReceievedLabel {
+            get {
+                return ResourceManager.GetString("BadgePointsReceievedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Priority.
+        /// </summary>
+        public static string BadgePriorityLabel {
+            get {
+                return ResourceManager.GetString("BadgePriorityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Badges.
         /// </summary>
         public static string BadgesLink {
             get {
                 return ResourceManager.GetString("BadgesLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Date.
+        /// </summary>
+        public static string BadgeStartDateLabel {
+            get {
+                return ResourceManager.GetString("BadgeStartDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quip or funny saying about the badge.
+        /// </summary>
+        public static string BadgeTaglineLabel {
+            get {
+                return ResourceManager.GetString("BadgeTaglineLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badge Type.
+        /// </summary>
+        public static string BadgeTypeLabel {
+            get {
+                return ResourceManager.GetString("BadgeTypeLabel", resourceCulture);
             }
         }
         
@@ -160,6 +349,24 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Community Badges for Approval.
+        /// </summary>
+        public static string CommunityBadgesForApproval {
+            get {
+                return ResourceManager.GetString("CommunityBadgesForApproval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Community Badges for Approval.
+        /// </summary>
+        public static string CommunityBadgesForApprovalHeader {
+            get {
+                return ResourceManager.GetString("CommunityBadgesForApprovalHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Corporate Badges.
         /// </summary>
         public static string CorporateBadgeHeader {
@@ -174,6 +381,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string DateEarnedRowHeader {
             get {
                 return ResourceManager.GetString("DateEarnedRowHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit a Badge.
+        /// </summary>
+        public static string EditBadgeHeader {
+            get {
+                return ResourceManager.GetString("EditBadgeHeader", resourceCulture);
             }
         }
         
@@ -223,11 +439,38 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Points Report.
+        /// </summary>
+        public static string PointsReport {
+            get {
+                return ResourceManager.GetString("PointsReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Points Report.
+        /// </summary>
+        public static string PointsReportHeader {
+            get {
+                return ResourceManager.GetString("PointsReportHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Previous Activities.
         /// </summary>
         public static string PreviousActivitiesHeader {
             get {
                 return ResourceManager.GetString("PreviousActivitiesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reject.
+        /// </summary>
+        public static string RejectActivityLink {
+            get {
+                return ResourceManager.GetString("RejectActivityLink", resourceCulture);
             }
         }
         

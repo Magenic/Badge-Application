@@ -35,10 +35,12 @@ namespace T4Mvc
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _AdminNavbar = "_AdminNavbar";
                 public readonly string _Layout = "_Layout";
                 public readonly string _Navbar = "_Navbar";
                 public readonly string Error = "Error";
             }
+            public readonly string _AdminNavbar = "~/Views/Shared/_AdminNavbar.cshtml";
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
             public readonly string _Navbar = "~/Views/Shared/_Navbar.cshtml";
             public readonly string Error = "~/Views/Shared/Error.cshtml";
@@ -57,6 +59,7 @@ namespace T4Mvc
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _EditorTemplatesClass
             {
+                public readonly string BadgeEdit = "BadgeEdit";
                 public readonly string SubmitActivity = "SubmitActivity";
             }
         }
