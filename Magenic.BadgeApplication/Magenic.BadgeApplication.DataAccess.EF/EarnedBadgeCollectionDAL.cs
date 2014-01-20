@@ -9,13 +9,13 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     public class EarnedBadgeCollectionDAL : IEarnedBadgeCollectionDAL
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
-        public async Task<IEnumerable<IEarnedBadgeItemDTO>> GetBadgesForUserByBadgeTypeAsync(string userADName, Common.Enums.BadgeType badgeType)
+        public async Task<IEnumerable<IEarnedBadgeItemDTO>> GetBadgesForUserByBadgeTypeAsync(int employeeId, Common.Enums.BadgeType badgeType)
         {
             using (var ctx = new Entities())
             {
                 ctx.Database.Connection.Open();
                 var badgeList = await (from eb in ctx.EarnedBadges
-                                       where eb.ADName == userADName
+                                       where eb.EmployeeId == employeeId
                                        where eb.BadgeTypeId == (badgeType == Common.Enums.BadgeType.Unset ? eb.BadgeTypeId : (int)badgeType)
                                        select new Common.DTO.EarnedBadgeItemDTO
                                        {

@@ -61,11 +61,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         /// The AD user name of the person who this badge submission is for.  
         /// This should be the same as the name of the identity.
         /// </summary>
-        public static readonly PropertyInfo<string> UserNameProperty = RegisterProperty<string>(c => c.UserName);
-        public string UserName
+        public static readonly PropertyInfo<int> EmployeeIdProperty = RegisterProperty<int>(c => c.EmployeeId);
+        public int EmployeeId
         {
-            get { return GetProperty(UserNameProperty); }
-            set { SetProperty(UserNameProperty, value); }
+            get { return GetProperty(EmployeeIdProperty); }
+            set { SetProperty(EmployeeIdProperty, value); }
         }
 
         /// <summary>
@@ -82,11 +82,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         /// The AD user name of the user who approved this activity.  Blank if the 
         /// activity status is approved and no managerial approval is required.
         /// </summary>
-        public static readonly PropertyInfo<string> ApprovedByUserNameProperty = RegisterProperty<string>(c => c.ApprovedByUserName);
-        public string ApprovedByUserName
+        public static readonly PropertyInfo<int> ApprovedByIdProperty = RegisterProperty<int>(c => c.ApprovedById);
+        public int ApprovedById
         {
-            get { return GetProperty(ApprovedByUserNameProperty); }
-            private set { LoadProperty(ApprovedByUserNameProperty, value); }
+            get { return GetProperty(ApprovedByIdProperty); }
+            private set { LoadProperty(ApprovedByIdProperty, value); }
         }
 
         #endregion Properties
@@ -101,11 +101,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         /// <summary>
         /// Creates a new instance of the <see cref="SubmitActivity"/> class.
         /// </summary>
-        /// <param name="userName">The AD user name that the activity submission is for.</param>
+        /// <param name="employeeId">The employee id that the activity submission is for.</param>
         /// <returns>An instance of a class the implements <see cref="ISubmitActivity"/>.</returns>
-        public static ISubmitActivity CreateActivitySubmission(string userName)
+        public static ISubmitActivity CreateActivitySubmission(int employeeId)
         {
-            return IoC.Container.Resolve<IObjectFactory<ISubmitActivity>>().Create(userName);
+            return IoC.Container.Resolve<IObjectFactory<ISubmitActivity>>().Create(employeeId);
         }
 
         #endregion Factory Methods
@@ -116,7 +116,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         {
             base.AddBusinessRules();
 
-            this.BusinessRules.AddRule(new Required(UserNameProperty));
+            this.BusinessRules.AddRule(new MinValue<int>(EmployeeIdProperty, 1));
             this.BusinessRules.AddRule(new MaxLength(NotesProperty, 10));
         }
 
@@ -125,12 +125,12 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         #region Data Access
 
         [RunLocal]
-        protected void DataPortal_Create(string userName)
+        protected void DataPortal_Create(int employeeId)
         {
             base.DataPortal_Create();
             this.LoadProperty(ActivitySubmissionDateProperty, DateTime.UtcNow);
             this.LoadProperty(StatusProperty, ActivitySubmissionStatus.Proposed);
-            this.LoadProperty(UserNameProperty, userName);
+            this.LoadProperty(EmployeeIdProperty, employeeId);
             this.BusinessRules.CheckRules();
         }
 
@@ -176,10 +176,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                 returnValue.Id = this.Id;
                 returnValue.ActivityId = this.ActivityId;
                 returnValue.ActivitySubmissionDate = this.ActivitySubmissionDate;
-                returnValue.ApprovedByUserName = this.ApprovedByUserName;
+                returnValue.ApprovedById = this.ApprovedById;
                 returnValue.Notes = this.Notes;
                 returnValue.Status = this.Status;
-                returnValue.UserName = this.UserName;
+                returnValue.EmployeeId = this.EmployeeId;
             }
             return returnValue;
         }
@@ -192,10 +192,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                 this.Id = data.Id;
                 this.ActivityId = data.ActivityId;
                 this.ActivitySubmissionDate = data.ActivitySubmissionDate;
-                this.ApprovedByUserName = data.ApprovedByUserName;
+                this.ApprovedById = data.ApprovedById;
                 this.Notes = data.Notes;
                 this.Status = data.Status;
-                this.UserName = data.UserName;
+                this.EmployeeId = data.EmployeeId;
             }
         }
 

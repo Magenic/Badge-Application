@@ -10,14 +10,14 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 {
     public class SubmittedActivityCollecitonDAL : ISubmittedActivityCollectionDAL
     {
-        public async Task<IEnumerable<ISubmittedActivityItemDTO>> GetSubmittedActivitiesForUserAsync(string userADName, DateTime? startDate, DateTime? endDate)
+        public async Task<IEnumerable<ISubmittedActivityItemDTO>> GetSubmittedActivitiesForEmployeeIdAsync(int employeeId, DateTime? startDate, DateTime? endDate)
         {
             using (var ctx = new Entities())
             {
                 ctx.Database.Connection.Open();
                 var badgeList = await (from s in ctx.ActivitySubmissions
                                        join a in ctx.Activities on s.ActivityId equals a.ActivityId
-                                       where s.EmployeeADName == userADName
+                                       where s.EmployeeId == employeeId
                                        where s.SubmissionDate >= (startDate.HasValue ? startDate.Value : DateTime.MinValue)
                                        where s.SubmissionDate <= (endDate.HasValue ? endDate.Value : DateTime.MaxValue)
                                        select new Common.DTO.SubmittedActivityItemDTO
@@ -26,10 +26,10 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                            ActivityId = s.ActivityId,
                                            ActivityName = a.ActivityName,
                                            ActivitySubmissionDate = s.SubmissionDate,
-                                           ApprovedByUserName = s.SubmissionApprovedADName,
+                                           ApprovedById = s.SubmissionApprovedById ?? 0,
                                            Status = (ActivitySubmissionStatus)s.SubmissionStatusId,
                                            SubmissionNotes = s.SubmissionDescription,
-                                           UserName = s.EmployeeADName
+                                           EmployeeId = s.EmployeeId
                                        }).ToArrayAsync();
                 return badgeList;
             }

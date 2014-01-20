@@ -92,8 +92,10 @@
     <Compile Include="Interfaces\IBadgeCollectionDAL.cs" />
     <Compile Include="Interfaces\IBadgeItemDTO.cs" />
     <Compile Include="Interfaces\IBadgeItem.cs" />
+    <Compile Include="Interfaces\ICustomIdentity.cs" />
     <Compile Include="Interfaces\ICustomIdentityDAL.cs" />
     <Compile Include="Interfaces\ICustomIdentityDTO.cs" />
+    <Compile Include="Interfaces\ICustomPrincipal.cs" />
     <Compile Include="Interfaces\IEarnedBadgeCollection.cs" />
     <Compile Include="Interfaces\IEarnedBadgeCollectionDAL.cs" />
     <Compile Include="Interfaces\IEarnedBadgeItemDTO.cs" />

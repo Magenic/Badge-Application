@@ -21,10 +21,10 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                         Id = t.ActivitySubmissionId,
                         ActivityId = t.ActivityId,
                         ActivitySubmissionDate = t.SubmissionDate,
-                        ApprovedByUserName = t.SubmissionApprovedADName,
+                        ApprovedById = t.SubmissionApprovedById ?? 0,
                         Notes = t.SubmissionDescription,
                         Status = (Common.Enums.ActivitySubmissionStatus) t.SubmissionStatusId,
-                        UserName = t.EmployeeADName
+                        EmployeeId = t.EmployeeId
                     }).ToArrayAsync();
 
                 var badge = badgeList.SingleOrDefault();
@@ -61,9 +61,9 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             {
                 ActivitySubmissionId = data.Id,
                 ActivityId = data.ActivityId,
-                EmployeeADName = data.UserName,
+                EmployeeId = data.EmployeeId,
                 SubmissionStatusId = (int)data.Status,
-                SubmissionApprovedADName = data.ApprovedByUserName.Length == 0? null: data.ApprovedByUserName,
+                SubmissionApprovedById = data.ApprovedById == 0 ? null : (int?)data.ApprovedById,
                 SubmissionDate = data.ActivitySubmissionDate,
                 SubmissionDescription = data.Notes
             };

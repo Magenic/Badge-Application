@@ -6,12 +6,19 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Csla;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Security
 {
     [Serializable]
-    public sealed class CustomIdentity : CslaIdentity
+    public sealed class CustomIdentity : CslaIdentity, ICustomIdentity
     {
+        #region Properties
+
+        public int EmployeeId { get; set; }
+
+        #endregion Properties
+
         #region Criteria
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
@@ -33,8 +40,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Security
         #region Methods
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal void Load(string name, IEnumerable<string> roles)
+        internal void Load(int employeeId, string name, IEnumerable<string> roles)
         {
+            this.EmployeeId = employeeId;
             this.Name = name;
             this.Roles = new MobileList<string>();
             this.Roles.AddRange(roles);
@@ -55,7 +63,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Security
             {
                 throw new System.Security.SecurityException("Unable to logon with these credentials");
             }
-            this.Load(result.Name, result.Roles);
+            this.Load(result.Id, result.Name, result.Roles);
             this.IsAuthenticated = true;
         }
 

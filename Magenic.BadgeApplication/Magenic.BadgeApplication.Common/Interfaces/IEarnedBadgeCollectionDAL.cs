@@ -13,11 +13,12 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// Asynchronously returns a <see cref="System.Collections.Generic.IEnumerable&lt;IBadgeItemDTO&gt;" />
         /// for the specified badge type for a given user's awarded badges.
         /// </summary>
-        /// <param name="userADName">The user name.</param>
+        /// <param name="employeeId">The employee id to return earned badges for.</param>
         /// <param name="badgeType">Type of the badge.</param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.IEnumerable&lt;IBadgeItemDTO&gt;" />.
         /// </returns>
-        Task<IEnumerable<IEarnedBadgeItemDTO>> GetBadgesForUserByBadgeTypeAsync(string userADName, BadgeType badgeType);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        Task<IEnumerable<IEarnedBadgeItemDTO>> GetBadgesForUserByBadgeTypeAsync(int employeeId, BadgeType badgeType);
     }
 }

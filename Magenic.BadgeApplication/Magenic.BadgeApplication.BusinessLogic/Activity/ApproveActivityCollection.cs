@@ -16,22 +16,22 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         /// <summary>
         /// Asynchronously returns a list of all activities awaiting approval for a specific manager.
         /// </summary>
-        /// <param name="managerUserName">The user name of the manager to retrieve all activities for.</param>
+        /// <param name="managerEmployeeId">The employee Id of the manager to retrieve all activities for.</param>
         /// <returns>A list of activities to approve.</returns>
-        public async static Task<IApproveActivityCollection> GetAllActivitiesToApproveAsync(string managerUserName)
+        public async static Task<IApproveActivityCollection> GetAllActivitiesToApproveAsync(int managerEmployeeId)
         {
-            return await IoC.Container.Resolve<IObjectFactory<IApproveActivityCollection>>().FetchAsync(managerUserName);
+            return await IoC.Container.Resolve<IObjectFactory<IApproveActivityCollection>>().FetchAsync(managerEmployeeId);
         }
 
         #endregion Factory Methods
 
         #region Data Access
 
-        protected async Task DataPortal_Fetch(string managerUserName)
+        protected async Task DataPortal_Fetch(int managerEmployeeId)
         {
             var dal = IoC.Container.Resolve<IApproveActivityCollectionDAL>();
 
-            var result = await dal.GetActivitiesToApproveForManagerAsync(managerUserName);
+            var result = await dal.GetActivitiesToApproveForManagerAsync(managerEmployeeId);
             this.LoadData(result);
         }
 

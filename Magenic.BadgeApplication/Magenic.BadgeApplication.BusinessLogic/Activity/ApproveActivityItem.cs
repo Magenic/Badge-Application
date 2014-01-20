@@ -53,11 +53,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             private set { LoadProperty(SubmissionNotesProperty, value); }
         }
 
-        public static readonly PropertyInfo<string> EmployeeUserNameProperty = RegisterProperty<string>(c => c.EmployeeUserName);
-        public string EmployeeUserName
+        public static readonly PropertyInfo<int> EmployeeIdProperty = RegisterProperty<int>(c => c.EmployeeId);
+        public int EmployeeId
         {
-            get { return GetProperty(EmployeeUserNameProperty); }
-            private set { LoadProperty(EmployeeUserNameProperty, value); }
+            get { return GetProperty(EmployeeIdProperty); }
+            private set { LoadProperty(EmployeeIdProperty, value); }
         }
 
         public static readonly PropertyInfo<ActivitySubmissionStatus> StatusProperty = RegisterProperty<ActivitySubmissionStatus>(c => c.Status);
@@ -67,11 +67,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             private set { SetProperty(StatusProperty, value); }
         }
 
-        public static readonly PropertyInfo<string> ApprovedByUserNameProperty = RegisterProperty<string>(c => c.ApprovedByUserName);
-        public string ApprovedByUserName
+        public static readonly PropertyInfo<int> ApprovedByIdProperty = RegisterProperty<int>(c => c.ApprovedById);
+        public int ApprovedById
         {
-            get { return GetProperty(ApprovedByUserNameProperty); }
-            private set { LoadProperty(ApprovedByUserNameProperty, value); }
+            get { return GetProperty(ApprovedByIdProperty); }
+            private set { LoadProperty(ApprovedByIdProperty, value); }
         }
 
         #endregion Properties
@@ -83,13 +83,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         /// Approves this activity submission.  Can only be called by a user with manager permission
         /// and when the status is not denied or error.
         /// </summary>
-        /// <param name="approverUserName">The AD user name of the manager approving this activity submission.</param>
-        public void ApproveActivitySubmission(string approverUserName)
+        /// <param name="approverId">The Id of the manager approving this activity submission.</param>
+        public void ApproveActivitySubmission(int approverId)
         {
             if (CanExecuteMethod(ApproveActivitySubmissionMethod))
             {
                 this.Status = ActivitySubmissionStatus.Approved;
-                this.ApprovedByUserName = approverUserName;
+                this.ApprovedById = approverId;
             }
         }
 
@@ -115,9 +115,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                 this.ActivityName = item.ActivityName;
                 this.ActivityDescription = item.ActivityDescription;
                 this.SubmissionNotes = item.SubmissionNotes;
-                this.EmployeeUserName = item.EmployeeUserName;
+                this.EmployeeId = item.EmployeeId;
                 this.Status = item.Status;
-                this.ApprovedByUserName = item.ApprovedByUserName;
+                this.ApprovedById = item.ApprovedById;
             }
             this.MarkClean();
             this.MarkOld();
@@ -134,9 +134,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                 returnValue.ActivityName = this.ActivityName;
                 returnValue.ActivityDescription = this.ActivityDescription;
                 returnValue.SubmissionNotes = this.SubmissionNotes;
-                returnValue.EmployeeUserName = this.EmployeeUserName;
+                returnValue.EmployeeId = this.EmployeeId;
                 returnValue.Status = this.Status;
-                returnValue.ApprovedByUserName = this.ApprovedByUserName;
+                returnValue.ApprovedById = this.ApprovedById;
             }
             return returnValue;
         }

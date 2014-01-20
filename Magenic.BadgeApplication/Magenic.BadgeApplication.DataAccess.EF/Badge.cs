@@ -37,10 +37,11 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public bool ManagementApprovalRequired { get; set; }
         public int ActivityPointsAmount { get; set; }
         public int BadgeAwardValueAmount { get; set; }
-        public string BadgeApprovedByADName { get; set; }
+        public Nullable<int> BadgeApprovedById { get; set; }
         public Nullable<System.DateTime> BadgeApprovedDate { get; set; }
     
         public virtual BadgeType BadgeType { get; set; }
+        public virtual Employee Employee { get; set; }
         public virtual ICollection<BadgeActivity> BadgeActivities { get; set; }
         public virtual ICollection<BadgeAward> BadgeAwards { get; set; }
         public virtual ICollection<BadgePrerequisite> BadgePrerequisites { get; set; }

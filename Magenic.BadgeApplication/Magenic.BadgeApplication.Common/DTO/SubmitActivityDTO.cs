@@ -26,18 +26,18 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public string Notes { get; set; }
         /// <summary>
-        /// The AD user name of the person who this badge submission is for.  
-        /// This should be the same as the name of the identity.
+        /// The id of the person who this badge submission is for.  
+        /// This should be the same as the id of the identity.
         /// </summary>
-        public string UserName { get; set; }
+        public int EmployeeId { get; set; }
         /// <summary>
         /// The current status of this activity submission.
         /// </summary>
         public Enums.ActivitySubmissionStatus Status { get; set; }
         /// <summary>
-        /// The AD user name of the user who approved this activity.  Blank if the 
+        /// The id of the user who approved this activity.  Blank if the 
         /// activity status is approved and no managerial approval is required.
         /// </summary>
-        public string ApprovedByUserName { get; set; }
+        public int ApprovedById { get; set; }
     }
 }

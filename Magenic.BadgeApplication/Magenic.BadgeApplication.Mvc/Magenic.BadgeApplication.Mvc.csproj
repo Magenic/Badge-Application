@@ -213,6 +213,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\BadgeManagerController.cs" />
+    <Compile Include="Security\ISecurityContextLocator.cs" />
+    <Compile Include="Security\SecurityContextLocator.cs" />
     <Compile Include="SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -324,7 +326,9 @@
     <Content Include="Views\Badges\_CorporateBadgeDisplay.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

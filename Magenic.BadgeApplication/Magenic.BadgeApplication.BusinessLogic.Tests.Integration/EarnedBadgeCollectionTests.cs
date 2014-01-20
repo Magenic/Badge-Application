@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.Common.Enums;
+﻿using Magenic.BadgeApplication.BusinessLogic.Tests.Integration.TestSupport;
+using Magenic.BadgeApplication.Common.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         [TestMethod]
         public async Task GetUserBadgesForAnyType()
         {
-            var badgeCollection = await Badge.EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync("kevinf", BadgeType.Unset);
+            var badgeCollection = await Badge.EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(Constants.KevinFUserId, BadgeType.Unset);
 
             Assert.IsNotNull(badgeCollection);
             Assert.IsTrue(badgeCollection.Count > 0);
@@ -20,7 +21,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         [TestMethod]
         public async Task GetUserBadgesForCorporate()
         {
-            var badgeCollection = await Badge.EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync("kevinf", BadgeType.Corporate);
+            var badgeCollection = await Badge.EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(Constants.KevinFUserId, BadgeType.Corporate);
 
             Assert.IsNotNull(badgeCollection);
             Assert.IsTrue(badgeCollection.Count > 0);
@@ -31,7 +32,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         [TestMethod]
         public async Task GetUserBadgesForCommunity()
         {
-            var badgeCollection = await Badge.EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync("kevinf", BadgeType.Community);
+            var badgeCollection = await Badge.EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(Constants.KevinFUserId, BadgeType.Community);
 
             Assert.IsNotNull(badgeCollection);
             Assert.IsTrue(badgeCollection.Count > 0);
