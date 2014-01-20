@@ -44,11 +44,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             private set { LoadProperty(SubmissionNotesProperty, value); }
         }
 
-        public static readonly PropertyInfo<string> UserADNameProperty = RegisterProperty<string>(c => c.UserADName);
-        public string UserADName
+        public static readonly PropertyInfo<int> EmployeeIdProperty = RegisterProperty<int>(c => c.EmployeeId);
+        public int EmployeeId
         {
-            get { return GetProperty(UserADNameProperty); }
-            private set { LoadProperty(UserADNameProperty, value); }
+            get { return GetProperty(EmployeeIdProperty); }
+            private set { LoadProperty(EmployeeIdProperty, value); }
         }
 
         public static readonly PropertyInfo<Common.Enums.ActivitySubmissionStatus> StatusProperty = RegisterProperty<Common.Enums.ActivitySubmissionStatus>(c => c.Status);
@@ -58,11 +58,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             private set { LoadProperty(StatusProperty, value); }
         }
 
-        public static readonly PropertyInfo<string> ApprovedByUserNameProperty = RegisterProperty<string>(c => c.ApprovedByUserName);
-        public string ApprovedByUserName
+        public static readonly PropertyInfo<int> ApprovedByIdProperty = RegisterProperty<int>(c => c.ApprovedById);
+        public int ApprovedById
         {
-            get { return GetProperty(ApprovedByUserNameProperty); }
-            private set { LoadProperty(ApprovedByUserNameProperty, value); }
+            get { return GetProperty(ApprovedByIdProperty); }
+            private set { LoadProperty(ApprovedByIdProperty, value); }
         }
 
         #endregion Properties
@@ -75,11 +75,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             this.ActivityId = item.ActivityId;
             this.ActivityName = item.ActivityName;
             this.ActivitySubmissionDate = item.ActivitySubmissionDate;
-            this.ApprovedByUserName = item.ApprovedByUserName;
+            this.ApprovedById = item.ApprovedById;
             this.Status = item.Status;
             this.SubmissionNotes = item.SubmissionNotes;
             this.ActivitySubmissionDate = item.ActivitySubmissionDate;
-            this.UserADName = item.UserName;
+            this.EmployeeId = item.EmployeeId;
         }
 
         #endregion Methods

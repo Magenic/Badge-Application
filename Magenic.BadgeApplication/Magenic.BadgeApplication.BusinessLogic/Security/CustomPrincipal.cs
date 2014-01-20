@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Magenic.BadgeApplication.BusinessLogic.Security
 {
     [Serializable]
-    public sealed class CustomPrincipal : CslaPrincipal
+    public sealed class CustomPrincipal : CslaPrincipal, ICustomPrincipal
     {
         #region Constructors
 
@@ -35,7 +35,28 @@ namespace Magenic.BadgeApplication.BusinessLogic.Security
             Csla.ApplicationContext.User = new UnauthenticatedPrincipal();
         }
 
+        public static async Task<ICslaPrincipal> LoadAsync(string userName)
+        {
+            var criteria = IoC.Container.Resolve<IIdentityCriteria>(new NamedParameter("userName", userName), new NamedParameter("password", null));
+            var identity = await IoC.Container.Resolve<IObjectFactory<ICslaIdentity>>().FetchAsync(criteria);
+
+            return IoC.Container.Resolve<ICslaPrincipal>(new NamedParameter("identity", identity));
+        }
+
         #endregion Factory Methods
+
+        #region Methods
+
+        /// <summary>
+        /// Returns a <see cref="ICustomIdentity"/> for this principal. 
+        /// </summary>
+        /// <returns>The <see cref="ICustomIdentity"/> for this principal.  Returns 
+        /// null if not castable to this type</returns>
+        public ICustomIdentity CustomIdentity()
+        {
+            return this.Identity as ICustomIdentity;
+        }
+        #endregion Methods
 
     }
 }

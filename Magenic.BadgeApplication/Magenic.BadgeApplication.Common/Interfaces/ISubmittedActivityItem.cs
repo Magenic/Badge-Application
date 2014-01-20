@@ -29,18 +29,18 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         string SubmissionNotes { get; }
         /// <summary>
-        /// The AD user name of the person who this badge submission is for.  
+        /// The employee Id of the person who this badge submission is for.  
         /// This should be the same as the name of the identity.
         /// </summary>
-        string UserADName { get; }
+        int EmployeeId { get; }
         /// <summary>
         /// The current status of this activity submission.
         /// </summary>
         Enums.ActivitySubmissionStatus Status { get; }
         /// <summary>
-        /// The AD user name of the user who approved this activity.  Blank if the 
+        /// The Id of the user who approved this activity.  Blank if the 
         /// activity status is approved and no managerial approval is required.
         /// </summary>
-        string ApprovedByUserName { get; }
+        int ApprovedById { get; }
     }
 }

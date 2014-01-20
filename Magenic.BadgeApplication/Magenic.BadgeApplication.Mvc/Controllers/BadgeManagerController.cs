@@ -1,5 +1,7 @@
-﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
+﻿using Autofac;
+using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
+using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Extensions;
@@ -146,7 +148,7 @@ namespace Magenic.BadgeApplication.Controllers
         [HttpGet]
         public async virtual Task<ActionResult> ApproveActivities()
         {
-            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.UserName);
+            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId);
             var approveActivitiesViewModel = new ApproveActivitiesViewModel(activitiesToApprove);
             return View(approveActivitiesViewModel);
         }
@@ -161,7 +163,7 @@ namespace Magenic.BadgeApplication.Controllers
         {
             Arg.IsNotNull(() => approveActivityItem);
 
-            approveActivityItem.ApproveActivitySubmission(AuthenticatedUser.UserName);
+            approveActivityItem.ApproveActivitySubmission(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId);
             return Json(new { Success = true });
         }
 

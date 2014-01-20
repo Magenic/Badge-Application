@@ -12,12 +12,12 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// Asynchronously returns a <see cref="System.Collections.Generic.IEnumerable&lt;IApproveActivityItemDTO&gt;" />
         /// for the specified badge type.
         /// </summary>
-        /// <param name="managerUserName">The user name of the manager to get badge submission for.</param>
+        /// <param name="managerEmployeeId">The employee Id of the manager to get badge submission for.</param>
         /// <returns>
         /// A <see cref="System.Collections.Generic.IEnumerable&lt;IApproveActivityItemDTO&gt;" />.
         /// </returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
-        Task<IEnumerable<IApproveActivityItemDTO>> GetActivitiesToApproveForManagerAsync(string managerUserName);
+        Task<IEnumerable<IApproveActivityItemDTO>> GetActivitiesToApproveForManagerAsync(int managerEmployeeId);
         /// <summary>
         /// Updates list of activity submissions for a manager's employees 
         /// based on information passed in via the DTO.

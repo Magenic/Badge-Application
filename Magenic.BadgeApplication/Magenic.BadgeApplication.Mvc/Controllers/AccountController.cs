@@ -1,5 +1,7 @@
-﻿using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
+﻿using Autofac;
+using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
+using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Models;
 using Magenic.BadgeApplication.Resources;
@@ -21,8 +23,8 @@ namespace Magenic.BadgeApplication.Controllers
         /// <returns></returns>
         public async virtual Task<ActionResult> Index()
         {
-            var accountInfo = await AccountInfoEdit.GetAccountInfoForUser(AuthenticatedUser.UserName);
-            var badgeHistory = await EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(AuthenticatedUser.UserName, BadgeType.Unset);
+            var accountInfo = await AccountInfoEdit.GetAccountInfoForEmployee(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId);
+            var badgeHistory = await EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId, BadgeType.Unset);
 
             var accountInfoIndexViewModel = new AccountInfoIndexViewModel(badgeHistory)
             {
@@ -40,7 +42,7 @@ namespace Magenic.BadgeApplication.Controllers
         [HttpPost]
         public async virtual Task<ActionResult> SubmitPayout(int pointPayoutThreshold)
         {
-            var accountInfo = await AccountInfoEdit.GetAccountInfoForUser(AuthenticatedUser.UserName);
+            var accountInfo = await AccountInfoEdit.GetAccountInfoForEmployee(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId);
             accountInfo.PointPayoutThreshold = pointPayoutThreshold;
             if (!await SaveObjectAsync(accountInfo, true))
             {

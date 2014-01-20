@@ -21,7 +21,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         [Serializable]
         protected class BadgeCollectionForUserCriteria : CriteriaBase<BadgeCollectionForUserCriteria>
         {
-            public string UserName { get; set; }
+            public int EmployeeId { get; set; }
             public BadgeType BadgeType { get; set; }
         }
 
@@ -32,12 +32,12 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         /// <summary>
         /// Retrieves all earned badges for a user
         /// </summary>
-        /// <param name="userADName">The active directory name of the user to get earned badges for.</param>
+        /// <param name="employeeId">The employee id of the user to get earned badges for.</param>
         /// <param name="badgeType">The type of badge to retrieve.  use unset to get all badge types.</param>
         /// <returns>A collection of earned badges for the provided user of the appropriate type.</returns>
-        public async static Task<IEarnedBadgeCollection> GetAllBadgesForUserByTypeAsync(string userADName, BadgeType badgeType)
+        public async static Task<IEarnedBadgeCollection> GetAllBadgesForUserByTypeAsync(int employeeId, BadgeType badgeType)
         {
-            return await IoC.Container.Resolve<IObjectFactory<IEarnedBadgeCollection>>().FetchAsync(new BadgeCollectionForUserCriteria { BadgeType = badgeType, UserName = userADName });
+            return await IoC.Container.Resolve<IObjectFactory<IEarnedBadgeCollection>>().FetchAsync(new BadgeCollectionForUserCriteria { BadgeType = badgeType, EmployeeId = employeeId });
         }
 
         #endregion Factory Methods
@@ -48,7 +48,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         {
             var dal = IoC.Container.Resolve<IEarnedBadgeCollectionDAL>();
 
-            var result = await dal.GetBadgesForUserByBadgeTypeAsync(criteria.UserName, criteria.BadgeType);
+            var result = await dal.GetBadgesForUserByBadgeTypeAsync(criteria.EmployeeId, criteria.BadgeType);
             this.LoadData(result);
         }
 

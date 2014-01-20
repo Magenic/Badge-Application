@@ -8,14 +8,14 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 {
     public class AccountInfoEditDAL : IAccountInfoEditDAL
     {
-        public async Task<IAccountInfoEditDTO> GetAccountInfoByUserNameAsync(string userName)
+        public async Task<IAccountInfoEditDTO> GetAccountInfoByEmployeeIdAsync(int employeeId)
         {
             using (var ctx = new Entities())
             {
                 ctx.Database.Connection.Open();
                 var activityList = await (from e in ctx.Employees
-                                         join b in ctx.BadgeAwards on e.ADName equals b.EmployeeADName
-                                         where e.ADName == userName
+                                         join b in ctx.BadgeAwards on e.EmployeeId equals b.EmployeeId
+                                          where e.EmployeeId == employeeId
                                          group b by new { e.EmployeeId, e.ADName, e.AwardPayoutThreshold } into g
                                          select new Common.DTO.AccountInfoEditDTO
                                          {

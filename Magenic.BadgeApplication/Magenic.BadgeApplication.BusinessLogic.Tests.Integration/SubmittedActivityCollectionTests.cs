@@ -1,8 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Magenic.BadgeApplication.BusinessLogic.Tests.Integration.TestSupport;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
@@ -13,7 +10,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         [TestMethod]
         public async Task GetSubmittedActivitiesForUser()
         {
-            var submittedActivityCollection = await Activity.SubmittedActivityCollection.GetSubmittedActivitiesByUserAsync("kevinf", null, null);
+            var submittedActivityCollection = await Activity.SubmittedActivityCollection.GetSubmittedActivitiesByEmployeeIdAsync(Constants.KevinFUserId, null, null);
 
             Assert.IsNotNull(submittedActivityCollection);
             Assert.IsTrue(submittedActivityCollection.Count > 0);
