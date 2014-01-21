@@ -109,6 +109,7 @@
     <Compile Include="ActivityTests.cs" />
     <Compile Include="SubmitActivityTests.cs" />
     <Compile Include="SubmittedActivityCollectionTests.cs" />
+    <Compile Include="TestSupport\Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

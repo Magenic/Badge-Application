@@ -38,7 +38,8 @@ namespace Magenic.BadgeApplication
                 .AsImplementedInterfaces();
 
             builder.RegisterGeneric(typeof(ObjectFactory<>)).As(typeof(IObjectFactory<>));
-
+            builder.RegisterType(typeof(Security.SecurityContextLocator)).As(typeof(Security.ISecurityContextLocator));
+            
             IoC.Container = builder.Build();
             Csla.ApplicationContext.DataPortalActivator = new ObjectActivator();
 

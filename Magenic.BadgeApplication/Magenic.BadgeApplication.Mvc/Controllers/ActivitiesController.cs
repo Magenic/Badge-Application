@@ -1,4 +1,6 @@
-﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
+﻿using Autofac;
+using Magenic.BadgeApplication.BusinessLogic.Activity;
+using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Models;
 using System.Globalization;
 using System.Linq;
@@ -20,15 +22,15 @@ namespace Magenic.BadgeApplication.Controllers
         /// <returns></returns>
         public async virtual Task<ActionResult> Index()
         {
-            var submittedActivities = await SubmittedActivityCollection.GetSubmittedActivitiesByUserAsync(AuthenticatedUser.UserName, null, null);
+            var submittedActivities = await SubmittedActivityCollection.GetSubmittedActivitiesByEmployeeIdAsync(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId, null, null);
             var activityIndexViewModel = new ActivityIndexViewModel()
             {
-                SubmittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.UserName),
+                SubmittedActivity = SubmitActivity.CreateActivitySubmission(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId),
             };
 
             var allActivities = await ActivityCollection.GetAllActivitiesAsync();
             activityIndexViewModel.PossibleActivities = allActivities.Select(ai => new SelectListItem() { Text = ai.Name, Value = ai.Id.ToString(CultureInfo.CurrentCulture) });
-            activityIndexViewModel.PreviousActivities = await SubmittedActivityCollection.GetSubmittedActivitiesByUserAsync(AuthenticatedUser.UserName, null, null);
+            activityIndexViewModel.PreviousActivities = await SubmittedActivityCollection.GetSubmittedActivitiesByEmployeeIdAsync(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId, null, null);
 
             return View(Mvc.Activities.Views.Index, activityIndexViewModel);
         }
@@ -41,7 +43,7 @@ namespace Magenic.BadgeApplication.Controllers
         [ValidateAntiForgeryToken]
         public async virtual Task<ActionResult> SubmitActivityForm()
         {
-            var submittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.UserName);
+            var submittedActivity = SubmitActivity.CreateActivitySubmission(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId);
             var activityIndexViewModel = new ActivityIndexViewModel()
             {
                 SubmittedActivity = submittedActivity,

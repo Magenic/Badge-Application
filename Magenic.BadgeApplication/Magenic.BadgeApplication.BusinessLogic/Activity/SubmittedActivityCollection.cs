@@ -16,14 +16,14 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible"), Serializable]
         public class SubmittedActivityCriteria : CriteriaBase<SubmittedActivityCriteria>
         {
-            public SubmittedActivityCriteria(string userADName, DateTime? startDate, DateTime? endDate)
+            public SubmittedActivityCriteria(int employeeId, DateTime? startDate, DateTime? endDate)
             {
-                this.UserADName = userADName;
+                this.EmployeeId = employeeId;
                 this.StartDate = startDate;
                 this.EndDate = endDate;
             }
-            
-            public string UserADName { get; set; }
+
+            public int EmployeeId { get; set; }
             public DateTime? StartDate { get; set; }
             public DateTime? EndDate { get; set; }
         }
@@ -32,9 +32,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
 
         #region Factory Methods
 
-        public async static Task<ISubmittedActivityCollection> GetSubmittedActivitiesByUserAsync(string userADName, DateTime? startDate, DateTime? endDate)
+        public async static Task<ISubmittedActivityCollection> GetSubmittedActivitiesByEmployeeIdAsync(int employeeId, DateTime? startDate, DateTime? endDate)
         {
-            return await IoC.Container.Resolve<IObjectFactory<ISubmittedActivityCollection>>().FetchAsync(new SubmittedActivityCriteria(userADName, startDate, endDate));
+            return await IoC.Container.Resolve<IObjectFactory<ISubmittedActivityCollection>>().FetchAsync(new SubmittedActivityCriteria(employeeId, startDate, endDate));
         }
 
         #endregion Factory Methods
@@ -45,7 +45,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         {
             var dal = IoC.Container.Resolve<ISubmittedActivityCollectionDAL>();
 
-            var result = await dal.GetSubmittedActivitiesForUserAsync(criteria.UserADName, criteria.StartDate, criteria.EndDate);
+            var result = await dal.GetSubmittedActivitiesForEmployeeIdAsync(criteria.EmployeeId, criteria.StartDate, criteria.EndDate);
             this.LoadData(result);
         }
 

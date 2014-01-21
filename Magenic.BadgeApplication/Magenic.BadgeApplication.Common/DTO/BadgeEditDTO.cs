@@ -73,7 +73,7 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// <summary>
         /// The id of the person who approved this badge so it can be awarded.
         /// </summary>
-        public string ApprovedByADName { get; set; }
+        public int ApprovedById { get; set; }
         /// <summary>
         /// The date and time of when this badge was approved to be awarded.
         /// </summary>

@@ -39,19 +39,19 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         public void InsertActivitySubmission()
         {
             var newNotes = "Test Notes";
-            var aDName = "kevinf";
-            var submitActivity = CreateSubmitActivity(newNotes, aDName);
+            var employeeId = 4;
+            var submitActivity = CreateSubmitActivity(newNotes, employeeId);
 
             Assert.IsNotNull(submitActivity);
             Assert.AreEqual(newNotes, submitActivity.Notes);
-            Assert.AreEqual(aDName, submitActivity.UserName);
+            Assert.AreEqual(employeeId, submitActivity.EmployeeId);
             Assert.AreEqual(ActivitySubmissionStatus.Proposed , submitActivity.Status);
             Assert.IsTrue(submitActivity.Id > 0);
         }
 
-        private ISubmitActivity CreateSubmitActivity(string newNotes, string aDName)
+        private ISubmitActivity CreateSubmitActivity(string newNotes, int employeeId)
         {
-            var submitActivity = SubmitActivity.CreateActivitySubmission(aDName);
+            var submitActivity = SubmitActivity.CreateActivitySubmission(employeeId);
             submitActivity.Notes = newNotes;
             submitActivity.ActivityId = 1;
 
@@ -64,14 +64,14 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         public async Task DeleteSubmitActivity()
         {
             var newNotes = "Test Notes";
-            var aDName = "kevinf";
-            var submitActivity = CreateSubmitActivity(newNotes, aDName);
+            var employeeId = 4;
+            var submitActivity = CreateSubmitActivity(newNotes, employeeId);
 
             var id = submitActivity.Id;
             submitActivity.Delete();
             submitActivity.Save();
 
-            submitActivity = ((ISubmitActivity)await SubmitActivity.GetActivitySubmissionByIdAsync(id));
+            await SubmitActivity.GetActivitySubmissionByIdAsync(id);
 
             Assert.Fail("Submit Activity should not return.");
         }

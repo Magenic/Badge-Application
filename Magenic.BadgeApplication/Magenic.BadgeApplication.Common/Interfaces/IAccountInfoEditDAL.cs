@@ -8,11 +8,11 @@ namespace Magenic.BadgeApplication.Common.Interfaces
     public interface IAccountInfoEditDAL
     {
         /// <summary>
-        /// Asynchronously returns an <see cref="IAccountInfoEditDTO"/> for the specified user name.
+        /// Asynchronously returns an <see cref="IAccountInfoEditDTO"/> for the specified employee id.
         /// </summary>
-        /// <param name="userName">The user name to search for.</param>
+        /// <param name="employeeId">The employee id of the user to search for.</param>
         /// <returns>An <see cref="IAccountInfoEditDTO"/>.</returns>
-        Task<IAccountInfoEditDTO> GetAccountInfoByUserNameAsync(string userName);
+        Task<IAccountInfoEditDTO> GetAccountInfoByEmployeeIdAsync(int employeeId);
         /// <summary>
         /// Updates an existing account info based on information passed in via the DTO.
         /// </summary>

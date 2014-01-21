@@ -123,12 +123,12 @@ SET IDENTITY_INSERT [dbo].[BadgeType]  OFF
 SET IDENTITY_INSERT [dbo].[Badge]  ON
 MERGE INTO [dbo].[Badge]  AS Target
 USING (VALUES
-    (1, 'AT BAT', 'At bat for Magenic', 'Recognized employees who provide referrals for new business.', 1, '9/1/2013', '10/1/2013', null, 1, 1, 1, 1, 1, 20, 'reneeb', '9/1/2013'),
-    (2, 'SPEAKER', 'And now for the vocal stylings of...', 'Awarded for employees who speak at user groups, webinars, conferences, educational events or has their work published in a magazine or journal.', 1, '9/1/2013', '10/1/2013', null, 2, 1, 1, 1, 1, 50, 'reneeb', '9/1/2013'),
-    (3, 'SILVER SPEAKER', 'You silver tongued devil...', 'Awarded for employees who speak five times at user groups, webinars, conferences, educational events or has their work published in a magazine or journal.', 1, '9/1/2013', '10/1/2013', null, 3, 1, 1, 1, 5, 0, 'reneeb', '9/1/2013'),
-    (4, 'ATTENDED CODE DOJO', 'The zen of code...', 'Awarded for attending Code Dojo sessions.', 2, '1/1/2013', '1/1/2013', null, 4, 0, 1, 0, 1, 0, 'rockyl', '1/1/2013')
+    (1, 'AT BAT', 'At bat for Magenic', 'Recognized employees who provide referrals for new business.', 1, '9/1/2013', '10/1/2013', null, 1, 1, 1, 1, 1, 20, 1, '9/1/2013'),
+    (2, 'SPEAKER', 'And now for the vocal stylings of...', 'Awarded for employees who speak at user groups, webinars, conferences, educational events or has their work published in a magazine or journal.', 1, '9/1/2013', '10/1/2013', null, 2, 1, 1, 1, 1, 50, 1, '9/1/2013'),
+    (3, 'SILVER SPEAKER', 'You silver tongued devil...', 'Awarded for employees who speak five times at user groups, webinars, conferences, educational events or has their work published in a magazine or journal.', 1, '9/1/2013', '10/1/2013', null, 3, 1, 1, 1, 5, 0, 1, '9/1/2013'),
+    (4, 'ATTENDED CODE DOJO', 'The zen of code...', 'Awarded for attending Code Dojo sessions.', 2, '1/1/2013', '1/1/2013', null, 4, 0, 1, 0, 1, 0, 3, '1/1/2013')
 )
-AS Source ([badge_id], [badge_name], [badge_tag_line], [badge_description], [badge_type_id], [badge_created], [badge_effective_start], [badge_effective_end], [badge_priority], [multiple_awards_possible], [display_once], [management_approval_required], [activity_points_amount], [badge_award_value_amount], [badge_approved_by_ad_name], [badge_approved_date]) 
+AS Source ([badge_id], [badge_name], [badge_tag_line], [badge_description], [badge_type_id], [badge_created], [badge_effective_start], [badge_effective_end], [badge_priority], [multiple_awards_possible], [display_once], [management_approval_required], [activity_points_amount], [badge_award_value_amount], [badge_approved_by_id], [badge_approved_date]) 
 ON Target.[BadgeId] = Source.[badge_id]
 WHEN MATCHED THEN 
     UPDATE SET [BadgeName] = Source.[badge_name],
@@ -144,11 +144,11 @@ WHEN MATCHED THEN
                [ManagementApprovalRequired] = Source.[management_approval_required],
                [ActivityPointsAmount] = Source.[activity_points_amount],
                [BadgeAwardValueAmount] = Source.[badge_award_value_amount],
-               [BadgeApprovedByADName] = Source.[badge_approved_by_ad_name],
+               [BadgeApprovedById] = Source.[badge_approved_by_id],
                [BadgeApprovedDate] = Source.[badge_approved_date]
 WHEN NOT MATCHED BY TARGET THEN 
-    INSERT ([BadgeId], [BadgeName], [BadgeTagLine], [BadgeDescription], [BadgeTypeId], [BadgeCreated], [BadgeEffectiveStart], [BadgeEffectiveEnd], [BadgePriority], [MultipleAwardPossible], [DisplayOnce], [ManagementApprovalRequired], [ActivityPointsAmount], [BadgeAwardValueAmount], [BadgeApprovedByADName], [BadgeApprovedDate])
-    VALUES ([badge_id], [badge_name], [badge_tag_line], [badge_description], [badge_type_id], [badge_created], [badge_effective_start], [badge_effective_end], [badge_priority], [multiple_awards_possible], [display_once], [management_approval_required], [activity_points_amount], [badge_award_value_amount], [badge_approved_by_ad_name], [badge_approved_date]);
+    INSERT ([BadgeId], [BadgeName], [BadgeTagLine], [BadgeDescription], [BadgeTypeId], [BadgeCreated], [BadgeEffectiveStart], [BadgeEffectiveEnd], [BadgePriority], [MultipleAwardPossible], [DisplayOnce], [ManagementApprovalRequired], [ActivityPointsAmount], [BadgeAwardValueAmount], [BadgeApprovedById], [BadgeApprovedDate])
+    VALUES ([badge_id], [badge_name], [badge_tag_line], [badge_description], [badge_type_id], [badge_created], [badge_effective_start], [badge_effective_end], [badge_priority], [multiple_awards_possible], [display_once], [management_approval_required], [activity_points_amount], [badge_award_value_amount], [badge_approved_by_id], [badge_approved_date]);
 
 SET IDENTITY_INSERT [dbo].[Badge]  OFF
 
@@ -194,46 +194,46 @@ SET IDENTITY_INSERT [dbo].[ItemStatus]  OFF
 SET IDENTITY_INSERT [dbo].[ActivitySubmission]  ON
 MERGE INTO [dbo].[ActivitySubmission]  AS Target
 USING (VALUES
-    (1, 2, 'kevinf', 'Spoke at the Boston Code Mastery Event.', 'scottd', '9/26/2013', 2),
-    (2, 4, 'kevinf', 'Scott thinks I''m great!', 'scottd', '8/8/2013', 3),
-    (3, 14, 'kevinf', 'Attended the code dojo on 8/5/2013.', null, '8/15/2013', 2),
-    (4, 5, 'kevinf', 'Became an MCSD', 'scottd', '9/3/2013', 1)
+    (1, 2, 4, 'Spoke at the Boston Code Mastery Event.', 2, '9/26/2013', 2),
+    (2, 4, 4, 'Scott thinks I''m great!', 2, '8/8/2013', 3),
+    (3, 14, 4, 'Attended the code dojo on 8/5/2013.', null, '8/15/2013', 2),
+    (4, 5, 4, 'Became an MCSD', 2, '9/3/2013', 1)
 )
-AS Source ([activity_submission_id], [activity_id], [employee_ad_name], [submission_description], [submission_approved_ad_name], [submission_date], [submission_status_id]) 
+AS Source ([activity_submission_id], [activity_id], [employee_id], [submission_description], [submission_approved_by_id], [submission_date], [submission_status_id]) 
 ON Target.[ActivitySubmissionId] = Source.[activity_submission_id]
 WHEN MATCHED THEN 
     UPDATE SET [ActivityId] = Source.[activity_id],
-               [EmployeeADName] = Source.[employee_ad_name],
+               [EmployeeId] = Source.[employee_id],
                [SubmissionDescription] = Source.[submission_description],
-               [SubmissionApprovedADName] = Source.[submission_approved_ad_name],
+               [SubmissionApprovedById] = Source.[submission_approved_by_id],
                [SubmissionDate] = Source.[submission_date],
                [SubmissionStatusId] = Source.[submission_status_id]
 WHEN NOT MATCHED BY TARGET THEN 
-    INSERT ([ActivitySubmissionId], [ActivityId], [EmployeeADName], [SubmissionDescription], [SubmissionApprovedADName], [SubmissionDate], [SubmissionStatusId])
-    VALUES ([activity_submission_id], [activity_id], [employee_ad_name], [submission_description], [submission_approved_ad_name], [submission_date], [submission_status_id]);
+    INSERT ([ActivitySubmissionId], [ActivityId], [EmployeeId], [SubmissionDescription], [SubmissionApprovedById], [SubmissionDate], [SubmissionStatusId])
+    VALUES ([activity_submission_id], [activity_id], [employee_id], [submission_description], [submission_approved_by_id], [submission_date], [submission_status_id]);
 
 SET IDENTITY_INSERT [dbo].[ActivitySubmission]  OFF
 
 SET IDENTITY_INSERT [dbo].[BadgeAward]  ON
 MERGE INTO [dbo].[BadgeAward]  AS Target
 USING (VALUES
-    (1, 2, 'kevinf', '9/26/2013', 50, 0, null, null, null),
-    (2, 4, 'kevinf', '8/8/2013', 0, 0, null, null, null)
+    (1, 2, 4, '9/26/2013', 50, 0, null, null, null),
+    (2, 4, 4, '8/8/2013', 0, 0, null, null, null)
 )
-AS Source ([badge_award_id], [badge_id], [employee_ad_name], [award_date], [award_amount], [paid_out], [paid_date], [paid_completed_by_ad_name], [Published]) 
+AS Source ([badge_award_id], [badge_id], [employee_id], [award_date], [award_amount], [paid_out], [paid_date], [paid_completed_by_id], [Published]) 
 ON Target.[BadgeAwardId] = Source.[badge_award_id]
 WHEN MATCHED THEN 
     UPDATE SET [BadgeId] = Source.[badge_id],
-               [EmployeeAdName] = Source.[employee_ad_name],
+               [EmployeeId] = Source.[employee_id],
                [AwardDate] = Source.[award_date],
                [AwardAmount] = Source.[award_amount],
                [PaidOut] = Source.[paid_out],
                [PaidDate] = Source.[paid_date],
-               [PaidCompletedByADName] = Source.[paid_completed_by_ad_name],
+               [PaidCompletedById] = Source.[paid_completed_by_id],
                [Published] = Source.[Published]
 WHEN NOT MATCHED BY TARGET THEN 
-    INSERT ([BadgeAwardId], [BadgeId], [EmployeeAdName], [AwardDate], [AwardAmount], [PaidOut], [PaidDate], [PaidCompletedByADName], [Published])
-    VALUES ([badge_award_id], [badge_id], [employee_ad_name], [award_date], [award_amount], [paid_out], [paid_date], [paid_completed_by_ad_name], [Published]);
+    INSERT ([BadgeAwardId], [BadgeId], [EmployeeId], [AwardDate], [AwardAmount], [PaidOut], [PaidDate], [PaidCompletedByID], [Published])
+    VALUES ([badge_award_id], [badge_id], [employee_id], [award_date], [award_amount], [paid_out], [paid_date], [paid_completed_by_id], [Published]);
 
 SET IDENTITY_INSERT [dbo].[BadgeAward]  OFF
 

@@ -77,7 +77,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <summary>
         /// The id of the person who approved this badge so it can be awarded.
         /// </summary>
-        string ApprovedByADName { get; set; }
+        int ApprovedById { get; set; }
         /// <summary>
         /// The date and time of when this badge was approved to be awarded.
         /// </summary>

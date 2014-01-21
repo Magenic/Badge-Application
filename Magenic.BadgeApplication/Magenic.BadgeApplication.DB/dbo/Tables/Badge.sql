@@ -14,6 +14,7 @@
     [ManagementApprovalRequired] BIT             NOT NULL,
     [ActivityPointsAmount]       INT             NOT NULL,
     [BadgeAwardValueAmount]      INT             NOT NULL,
-    [BadgeApprovedByADName]            VARCHAR(100)             NULL CONSTRAINT [fk_Badge_Employee] FOREIGN KEY ([BadgeApprovedByADName]) REFERENCES [dbo].[Employee] ([ADName]),
-    [BadgeApprovedDate]          DATETIME2 (7)   CONSTRAINT [df_Badge_BadgeApprovedDate] DEFAULT getdate() NULL
+    [BadgeApprovedById]          INT             NULL,
+    [BadgeApprovedDate]          DATETIME2 (7)   CONSTRAINT [df_Badge_BadgeApprovedDate] DEFAULT getdate() NULL,
+	CONSTRAINT [fk_Badge_Employee] FOREIGN KEY ([BadgeApprovedById]) REFERENCES [dbo].[Employee] ([EmployeeId])
 );

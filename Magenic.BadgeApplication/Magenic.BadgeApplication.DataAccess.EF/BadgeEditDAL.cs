@@ -36,7 +36,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                            ManagementApprovalRequired = t.ManagementApprovalRequired,
                                            ActivityPointsAmount = t.ActivityPointsAmount,
                                            AwardValueAmount = t.BadgeAwardValueAmount,
-                                           ApprovedByADName = t.BadgeApprovedByADName,
+                                           ApprovedById = t.BadgeApprovedById ?? 0,
                                            ApprovedDate = t.BadgeApprovedDate
                                        }).ToArrayAsync();
 
@@ -116,7 +116,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 ManagementApprovalRequired = data.ManagementApprovalRequired,
                 ActivityPointsAmount = data.ActivityPointsAmount,
                 BadgeAwardValueAmount = data.AwardValueAmount,
-                BadgeApprovedByADName = data.ApprovedByADName,
+                BadgeApprovedById = data.ApprovedById == 0 ? null : (int?)data.ApprovedById,
                 BadgeApprovedDate = data.ApprovedDate
             };
             return badgeEntity;

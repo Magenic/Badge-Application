@@ -59,9 +59,14 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
 
         #region Factory Methods
 
-        public static async Task<IAccountInfoEdit> GetAccountInfoForUser(string userName)
+        /// <summary>
+        /// Asynchronously returns the account information for an employee given a supplied employee id.
+        /// </summary>
+        /// <param name="employeeId">The employee id to search for.</param>
+        /// <returns>The account information for this employee.</returns>
+        public static async Task<IAccountInfoEdit> GetAccountInfoForEmployee(int employeeId)
         {
-            return await IoC.Container.Resolve<IObjectFactory<IAccountInfoEdit>>().FetchAsync(userName);
+            return await IoC.Container.Resolve<IObjectFactory<IAccountInfoEdit>>().FetchAsync(employeeId);
         }
 
         #endregion Factory Methods
@@ -79,11 +84,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
 
         #region Data Access
 
-        protected async Task DataPortal_Fetch(string userName)
+        protected async Task DataPortal_Fetch(int employeeId)
         {
             var dal = IoC.Container.Resolve<IAccountInfoEditDAL>();
 
-            var result = await dal.GetAccountInfoByUserNameAsync(userName);
+            var result = await dal.GetAccountInfoByEmployeeIdAsync(employeeId);
             this.LoadData(result);
         }
 
