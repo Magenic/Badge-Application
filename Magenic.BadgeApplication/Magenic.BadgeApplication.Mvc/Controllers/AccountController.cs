@@ -2,6 +2,7 @@
 using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Models;
 using Magenic.BadgeApplication.Resources;
@@ -50,6 +51,32 @@ namespace Magenic.BadgeApplication.Controllers
             }
 
             return PartialView(Mvc.Account.Views.ViewNames.PayoutThreshold, accountInfo);
+        }
+
+        /// <summary>
+        /// Logs the on.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public virtual ActionResult LogOn()
+        {
+            var logOnViewModel = new LogOnViewModel();
+            return View(logOnViewModel);
+        }
+
+        /// <summary>
+        /// Logs the on.
+        /// </summary>
+        /// <param name="logOnViewModel">The log on view model.</param>
+        /// <returns></returns>
+        [HttpPost]
+        public virtual async Task<ActionResult> LogOn(LogOnViewModel logOnViewModel)
+        {
+            Arg.IsNotNull(() => logOnViewModel);
+
+            var account = await AuthenticatedUser.LogOnAsync(logOnViewModel.UserName, logOnViewModel.Password);
+
+            return RedirectToAction(Mvc.Home.Index());
         }
     }
 }
