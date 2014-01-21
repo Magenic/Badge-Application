@@ -60,6 +60,7 @@ namespace T4Mvc
             public partial class _EditorTemplatesClass
             {
                 public readonly string BadgeEdit = "BadgeEdit";
+                public readonly string LogOnViewModel = "LogOnViewModel";
                 public readonly string SubmitActivity = "SubmitActivity";
             }
         }

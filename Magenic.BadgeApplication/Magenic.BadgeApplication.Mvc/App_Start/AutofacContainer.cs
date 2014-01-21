@@ -2,6 +2,7 @@
 using Autofac.Integration.Mvc;
 using Csla.Core;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.BusinessLogic.Security;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Reflection;
@@ -38,8 +39,9 @@ namespace Magenic.BadgeApplication
                 .AsImplementedInterfaces();
 
             builder.RegisterGeneric(typeof(ObjectFactory<>)).As(typeof(IObjectFactory<>));
+            builder.RegisterType(typeof(CustomIdentity.IdentityCriteria)).As(typeof(IIdentityCriteria));
             builder.RegisterType(typeof(Security.SecurityContextLocator)).As(typeof(Security.ISecurityContextLocator));
-            
+
             IoC.Container = builder.Build();
             Csla.ApplicationContext.DataPortalActivator = new ObjectActivator();
 

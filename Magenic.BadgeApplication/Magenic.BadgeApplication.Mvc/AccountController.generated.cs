@@ -69,6 +69,7 @@ namespace Magenic.BadgeApplication.Controllers
         {
             public readonly string Index = "Index";
             public readonly string SubmitPayout = "SubmitPayout";
+            public readonly string LogOn = "LogOn";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -76,6 +77,7 @@ namespace Magenic.BadgeApplication.Controllers
         {
             public const string Index = "Index";
             public const string SubmitPayout = "SubmitPayout";
+            public const string LogOn = "LogOn";
         }
 
 
@@ -86,6 +88,14 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionParamsClass_SubmitPayout
         {
             public readonly string pointPayoutThreshold = "pointPayoutThreshold";
+        }
+        static readonly ActionParamsClass_LogOn s_params_LogOn = new ActionParamsClass_LogOn();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_LogOn LogOnParams { get { return s_params_LogOn; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_LogOn
+        {
+            public readonly string logOnViewModel = "logOnViewModel";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -98,9 +108,11 @@ namespace Magenic.BadgeApplication.Controllers
             public class _ViewNamesClass
             {
                 public readonly string Index = "Index";
+                public readonly string LogOn = "LogOn";
                 public readonly string PayoutThreshold = "PayoutThreshold";
             }
             public readonly string Index = "~/Views/Account/Index.cshtml";
+            public readonly string LogOn = "~/Views/Account/LogOn.cshtml";
             public readonly string PayoutThreshold = "~/Views/Account/PayoutThreshold.cshtml";
         }
     }
@@ -126,6 +138,25 @@ namespace Magenic.BadgeApplication.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SubmitPayout);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "pointPayoutThreshold", pointPayoutThreshold);
             SubmitPayoutOverride(callInfo, pointPayoutThreshold);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        partial void LogOnOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult LogOn()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LogOn);
+            LogOnOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void LogOnOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Magenic.BadgeApplication.Models.LogOnViewModel logOnViewModel);
+
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> LogOn(Magenic.BadgeApplication.Models.LogOnViewModel logOnViewModel)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LogOn);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "logOnViewModel", logOnViewModel);
+            LogOnOverride(callInfo, logOnViewModel);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 

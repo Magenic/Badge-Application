@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Csla;
+using Magenic.BadgeApplication.BusinessLogic.Security;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -14,7 +18,15 @@ namespace Magenic.BadgeApplication
         : HttpApplication
     {
         /// <summary>
-        /// Application_s the start.
+        /// Initializes a new instance of the <see cref="MvcApplication"/> class.
+        /// </summary>
+        public MvcApplication()
+        {
+            this.AddOnAuthenticateRequestAsync(BeginApplication_AuthenticateRequest, EndApplication_AuthenticateRequest);
+        }
+
+        /// <summary>
+        /// The application entry point
         /// </summary>
         protected void Application_Start()
         {
@@ -28,18 +40,62 @@ namespace Magenic.BadgeApplication
         }
 
         /// <summary>
+        /// An async way of running Authenticate_Request. That isn't supported with await or async yet.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="eventArgs">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="asyncCallback">The asynchronous callback.</param>
+        /// <param name="objectState">State of the object.</param>
+        /// <returns></returns>
+        protected IAsyncResult BeginApplication_AuthenticateRequest(Object source, EventArgs eventArgs, AsyncCallback asyncCallback, Object objectState)
+        {
+            var task = this.Application_AuthenticateRequest(source, eventArgs);
+            var taskCompletionSource = new TaskCompletionSource<bool>(objectState);
+
+            task.ContinueWith(t =>
+            {
+                if (task.IsFaulted && task.Exception != null)
+                {
+                    taskCompletionSource.TrySetException(task.Exception.InnerExceptions);
+                }
+                else if (task.IsCanceled)
+                {
+                    taskCompletionSource.TrySetCanceled();
+                }
+                else
+                {
+                    taskCompletionSource.TrySetResult(true);
+                }
+
+                if (asyncCallback != null)
+                {
+                    asyncCallback(taskCompletionSource.Task);
+                }
+            }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
+
+            return taskCompletionSource.Task;
+        }
+
+        /// <summary>
+        /// This happens after the BeginApplication_AuthenticateRequest completes.
+        /// </summary>
+        /// <param name="asyncResult">The asynchronous result.</param>
+        protected void EndApplication_AuthenticateRequest(IAsyncResult asyncResult)
+        {
+            // Nothing to do here...
+        }
+
+        /// <summary>
         /// Correctly sets the CSLA principal/Identity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected async void Application_AuthenticateRequest(object sender, EventArgs e)
+        protected async Task Application_AuthenticateRequest(object sender, EventArgs e)
         {
-            if (Csla.ApplicationContext.User != null &&
-                Csla.ApplicationContext.User.Identity.IsAuthenticated &&
-                Csla.ApplicationContext.User.Identity is FormsIdentity)
+            if (ApplicationContext.User != null && ApplicationContext.User.Identity.IsAuthenticated && ApplicationContext.User.Identity is FormsIdentity)
             {
-                await BusinessLogic.Security.CustomPrincipal.LoadAsync(Csla.ApplicationContext.User.Identity.Name);
+                await CustomPrincipal.LoadAsync(ApplicationContext.User.Identity.Name);
             }
-        } 
+        }
     }
 }
