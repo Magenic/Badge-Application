@@ -117,7 +117,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             base.AddBusinessRules();
 
             this.BusinessRules.AddRule(new MinValue<int>(EmployeeIdProperty, 1));
-            this.BusinessRules.AddRule(new MaxLength(NotesProperty, 10));
+            this.BusinessRules.AddRule(new MinValue<int>(ActivityIdProperty, 1));
+            this.BusinessRules.AddRule(new Rules.DefaultActivityStatus(ActivityIdProperty, StatusProperty, ApprovedByIdProperty));
         }
 
         #endregion Rules
@@ -129,7 +130,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         {
             base.DataPortal_Create();
             this.LoadProperty(ActivitySubmissionDateProperty, DateTime.UtcNow);
-            this.LoadProperty(StatusProperty, ActivitySubmissionStatus.Proposed);
+            this.LoadProperty(StatusProperty, ActivitySubmissionStatus.AwaitingApproval);
             this.LoadProperty(EmployeeIdProperty, employeeId);
             this.BusinessRules.CheckRules();
         }

@@ -18,7 +18,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 var activityList = await (from t in ctx.ActivitySubmissions
                                           join e in ctx.Employees on t.EmployeeId equals e.EmployeeId
                                           join a in ctx.Activities on t.ActivityId equals a.ActivityId
-                                          where t.SubmissionStatusId == (int)ActivitySubmissionStatus.Proposed
+                                          where t.SubmissionStatusId == (int)ActivitySubmissionStatus.AwaitingApproval
                                           where (e.ApprovingManagerId1 == managerEmployeeId
                                           || e.ApprovingManagerId2 == managerEmployeeId)
                                           select new Common.DTO.ApproveActivityItemDTO
@@ -55,7 +55,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 }
                 ctx.SaveChanges();
             }
-            return list.Where(i => i.Status == ActivitySubmissionStatus.Proposed);
+            return list.Where(i => i.Status == ActivitySubmissionStatus.AwaitingApproval);
         }
 
         private static ActivitySubmission LoadData(IApproveActivityItemDTO data)

@@ -26,7 +26,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                              TotalPointsPaidOut = g.Any(t => t.PaidOut) ? g.Where(t => t.PaidOut).Sum(t => t.AwardAmount) : 0
                                          }).ToArrayAsync();
 
-                var activity = activityList.SingleOrDefault();
+                var activity = activityList.Single();
                 return activity;
             }
         }

@@ -27,7 +27,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                         EmployeeId = t.EmployeeId
                     }).ToArrayAsync();
 
-                var badge = badgeList.SingleOrDefault();
+                var badge = badgeList.Single();
 
                 return badge;
             }
