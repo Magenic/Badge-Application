@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.Common.Interfaces;
+﻿using Magenic.BadgeApplication.Common.DTO;
+using Magenic.BadgeApplication.Common.Interfaces;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 {
     public class BadgeCollectionDAL : IBadgeCollectionDAL
     {
-        public async Task<IEnumerable<IBadgeItemDTO>> GetBadgesByBadgeTypeAsync(Common.Enums.BadgeType badgeType)
+        public async Task<IEnumerable<BadgeItemDTO>> GetBadgesByBadgeTypeAsync(Common.Enums.BadgeType badgeType)
         {
             using (var ctx = new Entities())
             {
@@ -28,7 +29,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             }
         }
 
-        public async Task<IEnumerable<IBadgeItemDTO>> GetBadgesByActivityIdsAsync(IEnumerable<int> activityIds)
+        public async Task<IEnumerable<BadgeItemDTO>> GetBadgesByActivityIdsAsync(IEnumerable<int> activityIds)
         {
             using (var ctx = new Entities())
             {

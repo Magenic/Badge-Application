@@ -2,6 +2,7 @@
 using Csla;
 using Csla.Rules.CommonRules;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
@@ -169,9 +170,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             this.MarkOld();
         }
 
-        private ISubmitActivityDTO UnloadData()
+        private SubmitActivityDTO UnloadData()
         {
-            var returnValue = IoC.Container.Resolve<ISubmitActivityDTO>();
+            var returnValue = IoC.Container.Resolve<SubmitActivityDTO>();
             using (this.BypassPropertyChecks)
             {
                 returnValue.Id = this.Id;
@@ -186,7 +187,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "data")]
-        private void LoadData(ISubmitActivityDTO data)
+        private void LoadData(SubmitActivityDTO data)
         {
             using (this.BypassPropertyChecks)
             {

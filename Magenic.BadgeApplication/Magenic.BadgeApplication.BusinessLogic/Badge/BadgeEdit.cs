@@ -3,6 +3,7 @@ using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
@@ -241,9 +242,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.MarkOld();
         }
 
-        private IBadgeEditDTO UnloadData()
+        private BadgeEditDTO UnloadData()
         {
-            var returnValue = IoC.Container.Resolve<IBadgeEditDTO>();
+            var returnValue = IoC.Container.Resolve<BadgeEditDTO>();
             using (this.BypassPropertyChecks)
             {
                 returnValue.Id = this.Id;
@@ -268,7 +269,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             return returnValue;
         }
 
-        private void LoadData(IBadgeEditDTO data)
+        private void LoadData(BadgeEditDTO data)
         {
             using (this.BypassPropertyChecks)
             {

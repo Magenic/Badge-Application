@@ -1,4 +1,5 @@
 ﻿using Csla;
+using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 
@@ -27,7 +28,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
 
         #region Methods
 
-        internal void Load(IActivityItemDTO item)
+        internal void Load(ActivityItemDTO item)
         {
             this.Id = item.Id;
             this.Name = item.Name;

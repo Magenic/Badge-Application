@@ -1,5 +1,4 @@
-﻿using Magenic.BadgeApplication.Common.Interfaces;
-using System;
+﻿using System;
 
 namespace Magenic.BadgeApplication.Common.DTO
 {
@@ -7,7 +6,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// Data Transfer Object for the SubmitedActivityItem
     /// </summary>
     [Serializable]
-    public class SubmittedActivityItemDTO : ISubmittedActivityItemDTO
+    public class SubmittedActivityItemDTO
     {
         /// <summary>
         /// The Id for this activity submission.

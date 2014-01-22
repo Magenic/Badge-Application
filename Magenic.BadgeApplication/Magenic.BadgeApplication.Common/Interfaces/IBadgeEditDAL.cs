@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Magenic.BadgeApplication.Common.DTO;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -8,23 +9,23 @@ namespace Magenic.BadgeApplication.Common.Interfaces
     public interface IBadgeEditDAL
     {
         /// <summary>
-        /// Asynchronously returns an <see cref="IActivityEditDTO"/> for the specified id.
+        /// Asynchronously returns an <see cref="BadgeEditDTO"/> for the specified id.
         /// </summary>
         /// <param name="badgeEditId">The activity id to search for.</param>
-        /// <returns>An <see cref="IBadgeEditDTO"/>.</returns>
-        Task<IBadgeEditDTO> GetBadgeByIdAsync(int badgeEditId);
+        /// <returns>An <see cref="BadgeEditDTO"/>.</returns>
+        Task<BadgeEditDTO> GetBadgeByIdAsync(int badgeEditId);
         /// <summary>
         /// Updates an existing badge based on information passed in via the DTO.
         /// </summary>
         /// <param name="data">The values to update.</param>
         /// <returns>A DTO with updated values after the save.</returns>
-        IBadgeEditDTO Update(IBadgeEditDTO data);
+        BadgeEditDTO Update(BadgeEditDTO data);
         /// <summary>
         /// Inserts a new badge based on information passed in via the DTO.
         /// </summary>
         /// <param name="data">The values to update.</param>
         /// <returns>A DTO with updated values after the insert.</returns>
-        IBadgeEditDTO Insert(IBadgeEditDTO data);
+        BadgeEditDTO Insert(BadgeEditDTO data);
         /// <summary>
         /// Removes the specified badge.
         /// </summary>

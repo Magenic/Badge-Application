@@ -1,20 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mime;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using Csla.Core;
 using Csla.Rules;
+using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.BusinessLogic.Rules;
+using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
-using Magenic.BadgeApplication.BusinessLogic.Activity;
-using Magenic.BadgeApplication.Common.DTO;
-using Moq.Protected;
+using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Tests
 {
@@ -208,22 +206,22 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
 
         internal class ActivityEditDAL : IActivityEditDAL
         {
-            public Task<IActivityEditDTO> GetActivityByIdAsync(int activityEditId)
+            public Task<ActivityEditDTO> GetActivityByIdAsync(int activityEditId)
             {
                 var dto = new ActivityEditDTO
                 {
                     Id = activityEditId,
                     RequiresApproval = activityEditId == ItemRequiresApproval
                 };
-                return Task.FromResult((IActivityEditDTO)dto);
+                return Task.FromResult(dto);
             }
 
-            public IActivityEditDTO Update(IActivityEditDTO data)
+            public ActivityEditDTO Update(ActivityEditDTO data)
             {
                 throw new NotImplementedException();
             }
 
-            public IActivityEditDTO Insert(IActivityEditDTO data)
+            public ActivityEditDTO Insert(ActivityEditDTO data)
             {
                 throw new NotImplementedException();
             }

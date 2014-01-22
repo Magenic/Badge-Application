@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.Common.Interfaces;
+﻿using Magenic.BadgeApplication.Common.DTO;
+using Magenic.BadgeApplication.Common.Interfaces;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     public class EarnedBadgeCollectionDAL : IEarnedBadgeCollectionDAL
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
-        public async Task<IEnumerable<IEarnedBadgeItemDTO>> GetBadgesForUserByBadgeTypeAsync(int employeeId, Common.Enums.BadgeType badgeType)
+        public async Task<IEnumerable<EarnedBadgeItemDTO>> GetBadgesForUserByBadgeTypeAsync(int employeeId, Common.Enums.BadgeType badgeType)
         {
             using (var ctx = new Entities())
             {

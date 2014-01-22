@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Csla;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -35,9 +36,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             this.LoadData(result);
         }
 
-        private void LoadData(IEnumerable<IApproveActivityItemDTO> data)
+        private void LoadData(IEnumerable<ApproveActivityItemDTO> data)
         {
-            foreach (IApproveActivityItemDTO item in data)
+            foreach (ApproveActivityItemDTO item in data)
             {
                 var newItem = new ApproveActivityItem();
                 newItem.Load(item);
@@ -48,7 +49,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]
         protected override void DataPortal_Update()
         {
-            var saveList = new List<IApproveActivityItemDTO>();
+            var saveList = new List<ApproveActivityItemDTO>();
             foreach (ApproveActivityItem i in this)
             {
                 saveList.Add(i.Unload());

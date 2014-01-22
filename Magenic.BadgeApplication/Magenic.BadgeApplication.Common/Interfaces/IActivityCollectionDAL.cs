@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Magenic.BadgeApplication.Common.DTO;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -13,6 +14,6 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-        Task<IEnumerable<IActivityItemDTO>> GetAllActvitiesAsync();
+        Task<IEnumerable<ActivityItemDTO>> GetAllActvitiesAsync();
     }
 }

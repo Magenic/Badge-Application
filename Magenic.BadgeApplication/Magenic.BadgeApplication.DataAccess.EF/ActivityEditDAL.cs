@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.Common.Interfaces;
+﻿using Magenic.BadgeApplication.Common.DTO;
+using Magenic.BadgeApplication.Common.Interfaces;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -8,14 +9,14 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 {
     public class ActivityEditDAL : IActivityEditDAL
     {
-        public async Task<IActivityEditDTO> GetActivityByIdAsync(int activityEditId)
+        public async Task<ActivityEditDTO> GetActivityByIdAsync(int activityEditId)
         {
             using (var ctx = new Entities())
             {
                 ctx.Database.Connection.Open();
                 var activityList = await (from t in ctx.Activities
                                           where t.ActivityId == activityEditId
-                    select new Common.DTO.ActivityEditDTO
+                    select new ActivityEditDTO
                     {
                         Id = t.ActivityId,
                         Name = t.ActivityName,
@@ -29,7 +30,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             }
         }
 
-        public IActivityEditDTO Update(IActivityEditDTO data)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
+        public ActivityEditDTO Update(ActivityEditDTO data)
         {
             using (var ctx = new Entities())
             {
@@ -47,7 +49,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             return data;
         }
 
-        private static Activity LoadData(IActivityEditDTO data)
+        private static Activity LoadData(ActivityEditDTO data)
         {
             var activityEntity = new Activity
             {
@@ -59,7 +61,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             return activityEntity;
         }
 
-        public IActivityEditDTO Insert(IActivityEditDTO data)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
+        public ActivityEditDTO Insert(ActivityEditDTO data)
         {
             using (var ctx = new Entities())
             {
