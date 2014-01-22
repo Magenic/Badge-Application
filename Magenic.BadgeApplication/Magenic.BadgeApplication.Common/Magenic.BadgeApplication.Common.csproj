@@ -65,11 +65,15 @@
     <Compile Include="DTO\BadgeItemDTO.cs" />
     <Compile Include="DTO\CustomIdentityDTO.cs" />
     <Compile Include="DTO\EarnedBadgeItemDTO.cs" />
+    <Compile Include="DTO\QueueEventLogDTO.cs" />
+    <Compile Include="DTO\QueueItemDTO.cs" />
     <Compile Include="DTO\SubmitActivityDTO.cs" />
     <Compile Include="DTO\SubmittedActivityItemDTO.cs" />
     <Compile Include="Enums\ActivitySubmissionStatus.cs" />
     <Compile Include="Enums\BadgeType.cs" />
     <Compile Include="Enums\PermissionType.cs" />
+    <Compile Include="Enums\QueueEventType.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interfaces\IAccountInfoEdit.cs" />
     <Compile Include="Interfaces\IAccountInfoEditDAL.cs" />
@@ -94,6 +98,7 @@
     <Compile Include="Interfaces\IEarnedBadgeItem.cs" />
     <Compile Include="Interfaces\IIdentityCriteria.cs" />
     <Compile Include="Interfaces\IObjectFactory.cs" />
+    <Compile Include="Interfaces\IQueueItemDAL.cs" />
     <Compile Include="Interfaces\ISubmitActivity.cs" />
     <Compile Include="Interfaces\ISubmitActivityDAL.cs" />
     <Compile Include="Interfaces\ISubmittedActivityCollection.cs" />

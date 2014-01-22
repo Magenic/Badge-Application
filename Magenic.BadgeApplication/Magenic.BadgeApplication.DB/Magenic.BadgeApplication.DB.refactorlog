@@ -63,4 +63,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="BadgeApprovedByADName" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="95168b6b-87b0-4cc7-a54f-aa7fb23cab67" ChangeDateTime="01/21/2014 15:37:35">
+    <Property Name="ElementName" Value="[dbo].[QueueItems].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QueueItems]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QueueItemId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="281800e4-dcac-476d-b571-78a7b2d91cb3" ChangeDateTime="01/21/2014 16:04:09">
+    <Property Name="ElementName" Value="[dbo].[QueueEvent].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QueueEvent]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QueueEventId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="50977d1b-598b-41ee-ae72-a86e91281e58" ChangeDateTime="01/21/2014 16:05:44">
+    <Property Name="ElementName" Value="[dbo].[QueueEventLog].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QueueEventLog]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="QueueEventLogId" />
+  </Operation>
 </Operations>
