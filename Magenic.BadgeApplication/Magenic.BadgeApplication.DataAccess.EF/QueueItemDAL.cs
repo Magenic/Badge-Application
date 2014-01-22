@@ -8,7 +8,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 {
     public class QueueItemDAL : IQueueItemDAL
     {
-        public QueueItemDTO GetTopItem()
+        public QueueItemDTO Peek()
         {
             using (Entities context = new Entities())
             {
@@ -27,7 +27,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "QueueItem")]
-        public QueueItemDTO GetItem(int id)
+        public QueueItemDTO Get(int id)
         {
             using (Entities context = new Entities())
             {
@@ -45,7 +45,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
-        public QueueItemDTO AddItem(QueueItemDTO item)
+        public QueueItemDTO Add(QueueItemDTO item)
         {
             using (Entities context = new Entities())
             {
@@ -61,7 +61,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             }
         }
 
-        public QueueItemDTO UpdateItem(QueueItemDTO item)
+        public QueueItemDTO Update(QueueItemDTO item)
         {
             using (Entities context = new Entities())
             {
@@ -77,19 +77,18 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 
                 context.SaveChanges();
 
-                return GetItem(item.QueueItemId);
+                return Get(item.QueueItemId);
             }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "QueueItem")]
-        public void DeleteItem(int id)
+        public void Delete(int id)
         {
             using (Entities context = new Entities())
             {
                 QueueItem item = context
                     .QueueItems
-                    .OrderByDescending(i => i.QueueItemCreated)
-                    .FirstOrDefault();
+                    .SingleOrDefault(i => i.QueueItemId == id);
 
                 if (item == null)
                 {

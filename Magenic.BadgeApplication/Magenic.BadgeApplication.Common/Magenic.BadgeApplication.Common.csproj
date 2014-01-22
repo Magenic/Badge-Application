@@ -64,6 +64,7 @@
     <Compile Include="DTO\BadgeEditDTO.cs" />
     <Compile Include="DTO\BadgeItemDTO.cs" />
     <Compile Include="DTO\CustomIdentityDTO.cs" />
+    <Compile Include="DTO\DTOBase.cs" />
     <Compile Include="DTO\EarnedBadgeItemDTO.cs" />
     <Compile Include="DTO\QueueEventLogDTO.cs" />
     <Compile Include="DTO\QueueItemDTO.cs" />
@@ -98,7 +99,9 @@
     <Compile Include="Interfaces\IEarnedBadgeItem.cs" />
     <Compile Include="Interfaces\IIdentityCriteria.cs" />
     <Compile Include="Interfaces\IObjectFactory.cs" />
+    <Compile Include="Interfaces\IQueueEventLogDAL.cs" />
     <Compile Include="Interfaces\IQueueItemDAL.cs" />
+    <Compile Include="Interfaces\IDTORepository.cs" />
     <Compile Include="Interfaces\ISubmitActivity.cs" />
     <Compile Include="Interfaces\ISubmitActivityDAL.cs" />
     <Compile Include="Interfaces\ISubmittedActivityCollection.cs" />
