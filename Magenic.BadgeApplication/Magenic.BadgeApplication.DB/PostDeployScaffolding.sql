@@ -253,3 +253,21 @@ WHEN NOT MATCHED BY TARGET THEN
     VALUES ([prerequisite_id], [badge_id], [required_badge_id]);
 
 SET IDENTITY_INSERT [dbo].[BadgePrerequisite]  OFF
+
+SET IDENTITY_INSERT [dbo].[QueueEvent]  ON
+MERGE INTO [dbo].[QueueEvent]  AS Target
+USING (VALUES
+    (1, 'Processed', 'The item successfully processed'),
+    (2, 'Processing', 'The item is processing'),
+    (3, 'Failed', 'The item failed to process')
+)
+AS Source ([QueueEventId], [QueueEventName], [QueueEventDescription]) 
+ON Target.[QueueEventId] = Source.[QueueEventId]
+WHEN MATCHED THEN 
+    UPDATE SET [QueueEventName] = Source.[QueueEventName],
+				[QueueEventDescription] = Source.[QueueEventDescription]
+WHEN NOT MATCHED BY TARGET THEN 
+    INSERT ([QueueEventId], [QueueEventName], [QueueEventDescription])
+    VALUES ([QueueEventId], [QueueEventName], [QueueEventDescription]);
+
+SET IDENTITY_INSERT [dbo].[QueueEvent]  OFF
