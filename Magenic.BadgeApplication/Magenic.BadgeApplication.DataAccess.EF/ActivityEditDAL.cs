@@ -23,7 +23,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                         RequiresApproval = t.RequiresApproval
                     }).ToArrayAsync();
 
-                var activity = activityList.SingleOrDefault();
+                var activity = activityList.Single();
 
                 return activity;
             }

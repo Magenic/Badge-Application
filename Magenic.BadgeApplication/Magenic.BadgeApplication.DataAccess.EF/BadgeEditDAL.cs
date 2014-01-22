@@ -40,7 +40,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                            ApprovedDate = t.BadgeApprovedDate
                                        }).ToArrayAsync();
 
-                var badge = badgeList.SingleOrDefault();
+                var badge = badgeList.Single();
 
                 return badge;
             }

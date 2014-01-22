@@ -45,7 +45,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
             Assert.IsNotNull(submitActivity);
             Assert.AreEqual(newNotes, submitActivity.Notes);
             Assert.AreEqual(employeeId, submitActivity.EmployeeId);
-            Assert.AreEqual(ActivitySubmissionStatus.Proposed , submitActivity.Status);
+            Assert.AreEqual(ActivitySubmissionStatus.AwaitingApproval , submitActivity.Status);
             Assert.IsTrue(submitActivity.Id > 0);
         }
 
