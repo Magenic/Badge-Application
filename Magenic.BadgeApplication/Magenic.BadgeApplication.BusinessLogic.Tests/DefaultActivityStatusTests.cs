@@ -11,7 +11,6 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Tests
@@ -122,11 +121,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
 
             ruleRunner.Execute(ruleContext);
 
-            while (ruleContext.Results.Count == 0)
-            {
-                Thread.Sleep(50);
-            }
-
             Assert.IsNotNull(newRule);
         }
 
@@ -153,11 +147,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
             var ruleRunner = (IBusinessRule)newRule;
 
             ruleRunner.Execute(ruleContext);
-
-            while (ruleContext.Results.Count == 0)
-            {
-                Thread.Sleep(50);
-            }
 
             Assert.IsNotNull(newRule);
             Assert.IsTrue(ruleContext.OutputPropertyValues.Count == 1);
@@ -187,11 +176,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
             var ruleRunner = (IBusinessRule)newRule;
 
             ruleRunner.Execute(ruleContext);
-
-            while (ruleContext.Results.Count == 0)
-            {
-                Thread.Sleep(50);
-            }
 
             Assert.IsNotNull(newRule);
             Assert.IsTrue(ruleContext.OutputPropertyValues.Count == 1);
@@ -227,6 +211,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
             }
 
             public void Delete(int activityId)
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool ActivityNameExists(int id, string name)
             {
                 throw new NotImplementedException();
             }

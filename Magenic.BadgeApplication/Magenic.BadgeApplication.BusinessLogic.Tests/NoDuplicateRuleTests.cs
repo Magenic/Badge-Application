@@ -13,13 +13,16 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
     public class NoDuplicateRuleTests
     {
         [TestMethod]
-        public void AcceptsString()
+        public void AcceptsValidParameters()
         {
             var mockProperty = new Mock<IPropertyInfo>();
             mockProperty.Setup(mp => mp.Type).Returns(typeof(string));
             mockProperty.Setup(mp => mp.Name).Returns("Name");
+            var mockIdProperty = new Mock<IPropertyInfo>();
+            mockIdProperty.Setup(mp => mp.Type).Returns(typeof(int));
+            mockIdProperty.Setup(mp => mp.Name).Returns("Id");
 
-            var newRule = new NoDuplicates(mockProperty.Object, MockFactoryFoundNone);
+            var newRule = new NoDuplicates(mockProperty.Object, mockIdProperty.Object, MockFoundNone);
 
             Assert.IsNotNull(newRule);
         }
@@ -27,22 +30,33 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "newRule")]
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void MustBeString()
+        public void ParameterMustBeString()
         {
             var mockProperty = new Mock<IPropertyInfo>();
             mockProperty.Setup(mp => mp.Type).Returns(typeof(int));
             mockProperty.Setup(mp => mp.Name).Returns("Name");
+            var mockIdProperty = new Mock<IPropertyInfo>();
+            mockIdProperty.Setup(mp => mp.Type).Returns(typeof(int));
+            mockIdProperty.Setup(mp => mp.Name).Returns("Id");
 
-            try
-            {
-                var newRule = new NoDuplicates(mockProperty.Object, MockFactoryFoundNone);
-                Assert.Fail();
-            }
-            catch (Exception ex)
-            {
-                Assert.AreEqual("primaryProperty must be a string.", ex.Message);
-                throw;
-            }
+            var newRule = new NoDuplicates(mockProperty.Object, mockIdProperty.Object, MockFoundNone);
+            Assert.Fail();
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "newRule")]
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ParameterMustBeInteger()
+        {
+            var mockProperty = new Mock<IPropertyInfo>();
+            mockProperty.Setup(mp => mp.Type).Returns(typeof(string));
+            mockProperty.Setup(mp => mp.Name).Returns("Name");
+            var mockIdProperty = new Mock<IPropertyInfo>();
+            mockIdProperty.Setup(mp => mp.Type).Returns(typeof(string));
+            mockIdProperty.Setup(mp => mp.Name).Returns("Id");
+
+            var newRule = new NoDuplicates(mockProperty.Object, mockIdProperty.Object, MockFoundNone);
+            Assert.Fail();
         }
 
         [TestMethod]
@@ -52,30 +66,29 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
             var mockProperty = new Mock<IPropertyInfo>();
             mockProperty.Setup(mp => mp.Type).Returns(typeof(string));
             mockProperty.Setup(mp => mp.Name).Returns("Name");
+            var mockIdProperty = new Mock<IPropertyInfo>();
+            mockIdProperty.Setup(mp => mp.Type).Returns(typeof(int));
+            mockIdProperty.Setup(mp => mp.Name).Returns("Id");
 
-            try
-            {
-                var newRule = new NoDuplicates(mockProperty.Object, null);
-                Assert.Fail();
-            }
-            catch (Exception ex)
-            {
-                Assert.AreEqual("duplicateCommand cannot be null.", ex.Message);
-                throw;
-            }
+            var newRule = new NoDuplicates(mockProperty.Object, mockIdProperty.Object, null);
+            Assert.Fail();
         }
 
         [TestMethod]
-        public void RegistrationNotFound()
+        public void NoErrorIfNotFound()
         {
             var mockProperty = new Mock<IPropertyInfo>();
             mockProperty.Setup(mp => mp.Type).Returns(typeof(string));
             mockProperty.Setup(mp => mp.Name).Returns("Name");
+            var mockIdProperty = new Mock<IPropertyInfo>();
+            mockIdProperty.Setup(mp => mp.Type).Returns(typeof(int));
+            mockIdProperty.Setup(mp => mp.Name).Returns("Id");
 
-            var newRule = new NoDuplicates(mockProperty.Object, MockFactoryFoundNone);
+            var newRule = new NoDuplicates(mockProperty.Object, mockIdProperty.Object, MockFoundNone);
 
-            var targetObject = new Mock<IBadgeEdit>();
-            var ruleContext = new RuleContext(null, newRule, targetObject, new Dictionary<IPropertyInfo, object> { { mockProperty.Object, "FoundString" } });
+            var targetObject = new Mock<IActivityEdit>();
+            targetObject.Setup(a => a.IsNew).Returns(true);
+            var ruleContext = new RuleContext(null, newRule, targetObject.Object, new Dictionary<IPropertyInfo, object> { { mockProperty.Object, "FoundString" }, {mockIdProperty.Object, 1} });
 
             var ruleInterface = (IBusinessRule) newRule;
 
@@ -84,35 +97,36 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
             Assert.AreEqual(0, ruleContext.Results.Count);
         }
 
-        //[Ignore]
-        //[TestMethod]
-        //public void RegistrationFound()
-        //{
-        //    var mockProperty = new Mock<IPropertyInfo>();
-        //    mockProperty.Setup(mp => mp.Type).Returns(typeof(string));
-        //    mockProperty.Setup(mp => mp.Name).Returns("Name");
+        [TestMethod]
+        public void ErrorIfFound()
+        {
+            var mockProperty = new Mock<IPropertyInfo>();
+            mockProperty.Setup(mp => mp.Type).Returns(typeof(string));
+            mockProperty.Setup(mp => mp.Name).Returns("Name");
+            var mockIdProperty = new Mock<IPropertyInfo>();
+            mockIdProperty.Setup(mp => mp.Type).Returns(typeof(int));
+            mockIdProperty.Setup(mp => mp.Name).Returns("Id");
 
-        //    var newRule = new NoDuplicates(mockProperty.Object, MockFactoryFoundOne);
+            var newRule = new NoDuplicates(mockProperty.Object, mockIdProperty.Object, MockFoundOne);
 
-        //    var targetObject = new Mock<IBadgeEdit>();
-        //    var ruleContext = new RuleContext(null, newRule, targetObject, new Dictionary<IPropertyInfo, object> { { mockProperty.Object, "NotFoundString" } });
+            var targetObject = new Mock<IActivityEdit>();
+            targetObject.Setup(a => a.IsNew).Returns(true);
+            var ruleContext = new RuleContext(null, newRule, targetObject.Object, new Dictionary<IPropertyInfo, object> { { mockProperty.Object, "FoundString" }, { mockIdProperty.Object, 1 } });
 
-        //    var ruleInterface = (IBusinessRule)newRule;
+            var ruleInterface = (IBusinessRule)newRule;
 
-        //    ruleInterface.Execute(ruleContext);
+            ruleInterface.Execute(ruleContext);
 
-        //    Assert.AreEqual(1, ruleContext.Results.Count);
-        //    Assert.AreEqual(RuleSeverity.Error, ruleContext.Results[0].Severity);
-        //    Assert.IsFalse(ruleContext.Results[0].Success);
-        //}
+            Assert.AreEqual(1, ruleContext.Results.Count);
+        }
 
-        public bool MockFactoryFoundNone(string value)
+        public bool MockFoundNone(int id, string value)
         {
             return false;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
-        public bool MockFactoryFoundOne(string value)
+        public bool MockFoundOne(int id, string value)
         {
             return true;
         }

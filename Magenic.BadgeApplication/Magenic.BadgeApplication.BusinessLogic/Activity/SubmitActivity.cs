@@ -119,7 +119,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
 
             this.BusinessRules.AddRule(new MinValue<int>(EmployeeIdProperty, 1));
             this.BusinessRules.AddRule(new MinValue<int>(ActivityIdProperty, 1));
-            this.BusinessRules.AddRule(new Rules.DefaultActivityStatus(ActivityIdProperty, StatusProperty, ApprovedByIdProperty));
+
+            // Only run this rule if the associated properties are otherwise valid.
+            this.BusinessRules.AddRule(new Rules.DefaultActivityStatus(ActivityIdProperty, StatusProperty, ApprovedByIdProperty) { Priority = 1 });
         }
 
         #endregion Rules
