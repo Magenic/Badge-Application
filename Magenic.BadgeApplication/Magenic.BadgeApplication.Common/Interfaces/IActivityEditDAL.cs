@@ -31,5 +31,14 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         /// <param name="activityId">The id of the activity to remove.</param>
         void Delete(int activityId);
+        /// <summary>
+        /// Checks to see if a given name already exists in the database for an activity. 
+        /// This method is case insensitive.  It will return not found if a matching name is
+        /// found with the same id.
+        /// </summary>
+        /// <param name="id">The activity id.</param>
+        /// <param name="name">The name to look for.</param>
+        /// <returns>A <see cref="bool"/> indicating if the supplied name was found in the database.</returns>
+        bool ActivityNameExists(int id, string name);
     }
 }

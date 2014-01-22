@@ -24,8 +24,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
             var dals = Assembly.Load("Magenic.BadgeApplication.DataAccess.EF");
             builder.RegisterAssemblyTypes(dals).AsImplementedInterfaces();
             builder.RegisterGeneric(typeof(ObjectFactory<>)).As(typeof(IObjectFactory<>));
+            
             IoC.Container = builder.Build();
             Csla.ApplicationContext.DataPortalActivator = new ObjectActivator();
+
+
 
             //ApplicationContext.User = IntroToCSLA.BusinessObjects.Security.CustomPrincipal.CreatePrincipal("TestAdmin", new List<string> { IntroToCSLA.BusinessObjects.Constants.Values.Admin });
         }

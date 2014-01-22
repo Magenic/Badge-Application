@@ -3,11 +3,13 @@ using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.BusinessLogic.Rules;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Threading.Tasks;
+using NuGet;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
@@ -69,12 +71,20 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             this.BusinessRules.AddRule(new MaxLength(NameProperty, 100));
             this.BusinessRules.AddRule(new Required(NameProperty));
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, RequiresApprovalProperty, PermissionType.Administrator.ToString()));
+            
+            // Only run this rule if the associated properties are otherwise valid.
+            this.BusinessRules.AddRule(new NoDuplicates(NameProperty, IdProperty, NameExists) { Priority = 1 });
         }
 
         #endregion Rules
 
         #region Data Access
 
+        internal bool NameExists(int id, string name)
+        {
+            return ActivityNameExists.NameAlreadyExists(id, name);
+        }
+        
         [RunLocal]
         protected override void DataPortal_Create()
         {

@@ -90,5 +90,15 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 ctx.SaveChanges();
             }
         }
+
+        public bool ActivityNameExists(int id, string name)
+        {
+            using (var ctx = new Entities())
+            {
+                ctx.Database.Connection.Open();
+                return ctx.Activities.Any(a => a.ActivityName.ToUpper() == name.ToUpper()
+                    && a.ActivityId != id);
+            }
+        }
     }
 }
