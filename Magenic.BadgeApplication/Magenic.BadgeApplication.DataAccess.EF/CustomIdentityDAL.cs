@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.Common.Interfaces;
+﻿using Magenic.BadgeApplication.Common.DTO;
+using Magenic.BadgeApplication.Common.Interfaces;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 {
     public class CustomIdentityDAL : ICustomIdentityDAL
     {
-        public async Task<ICustomIdentityDTO> LogOnIdentityAsync(string userName, string password)
+        public async Task<CustomIdentityDTO> LogOnIdentityAsync(string userName, string password)
         {
             using (var ctx = new Entities())
             {

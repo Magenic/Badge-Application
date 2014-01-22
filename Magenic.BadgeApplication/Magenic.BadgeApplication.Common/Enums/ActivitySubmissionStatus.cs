@@ -14,9 +14,9 @@ namespace Magenic.BadgeApplication.Common.Enums
         /// <summary>
         /// A new activity submission that has not yet been approved.
         /// </summary>
-        Proposed = 1,
+        AwaitingApproval = 1,
         /// <summary>
-        /// The submission has been approved, either by a manager in the system or because the activity does not requrie approval.
+        /// The submission has been approved, either by a manager in the system or because the activity does not require approval.
         /// </summary>
         Approved = 2,
         /// <summary>
@@ -24,9 +24,9 @@ namespace Magenic.BadgeApplication.Common.Enums
         /// </summary>
         Denied = 3,
         /// <summary>
-        /// An undefined state, not currently used.
+        /// The activity has had badges generated from it, not further action required.
         /// </summary>
-	    Undefined = 4,
+	    Complete = 4,
         /// <summary>
         /// There is some error in the submission process.
         /// </summary>

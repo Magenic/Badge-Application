@@ -2,6 +2,7 @@
 using Csla;
 using Csla.Rules.CommonRules;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
@@ -117,7 +118,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             base.AddBusinessRules();
 
             this.BusinessRules.AddRule(new MinValue<int>(EmployeeIdProperty, 1));
-            this.BusinessRules.AddRule(new MaxLength(NotesProperty, 10));
+            this.BusinessRules.AddRule(new MinValue<int>(ActivityIdProperty, 1));
+            this.BusinessRules.AddRule(new Rules.DefaultActivityStatus(ActivityIdProperty, StatusProperty, ApprovedByIdProperty));
         }
 
         #endregion Rules
@@ -129,7 +131,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         {
             base.DataPortal_Create();
             this.LoadProperty(ActivitySubmissionDateProperty, DateTime.UtcNow);
-            this.LoadProperty(StatusProperty, ActivitySubmissionStatus.Proposed);
+            this.LoadProperty(StatusProperty, ActivitySubmissionStatus.AwaitingApproval);
             this.LoadProperty(EmployeeIdProperty, employeeId);
             this.BusinessRules.CheckRules();
         }
@@ -168,9 +170,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             this.MarkOld();
         }
 
-        private ISubmitActivityDTO UnloadData()
+        private SubmitActivityDTO UnloadData()
         {
-            var returnValue = IoC.Container.Resolve<ISubmitActivityDTO>();
+            var returnValue = IoC.Container.Resolve<SubmitActivityDTO>();
             using (this.BypassPropertyChecks)
             {
                 returnValue.Id = this.Id;
@@ -185,7 +187,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "data")]
-        private void LoadData(ISubmitActivityDTO data)
+        private void LoadData(SubmitActivityDTO data)
         {
             using (this.BypassPropertyChecks)
             {
