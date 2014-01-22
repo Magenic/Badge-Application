@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.Common.Enums;
+﻿using Magenic.BadgeApplication.Common.DTO;
+using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,7 +11,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 {
     public class ApproveActivityCollectionDAL : IApproveActivityCollectionDAL
     {
-        public async Task<IEnumerable<IApproveActivityItemDTO>> GetActivitiesToApproveForManagerAsync(int managerEmployeeId)
+        public async Task<IEnumerable<ApproveActivityItemDTO>> GetActivitiesToApproveForManagerAsync(int managerEmployeeId)
         {
             using (var ctx = new Entities())
             {
@@ -38,7 +39,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 
         }
 
-        public IEnumerable<IApproveActivityItemDTO> Update(IEnumerable<IApproveActivityItemDTO> data)
+        public IEnumerable<ApproveActivityItemDTO> Update(IEnumerable<ApproveActivityItemDTO> data)
         {
             var list = data.ToList();
             using (var ctx = new Entities())
@@ -58,7 +59,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             return list.Where(i => i.Status == ActivitySubmissionStatus.AwaitingApproval);
         }
 
-        private static ActivitySubmission LoadData(IApproveActivityItemDTO data)
+        private static ActivitySubmission LoadData(ApproveActivityItemDTO data)
         {
             var badgeEntity = new ActivitySubmission
             {

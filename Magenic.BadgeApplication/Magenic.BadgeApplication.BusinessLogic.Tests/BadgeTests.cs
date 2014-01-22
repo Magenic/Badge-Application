@@ -1,9 +1,9 @@
 ﻿using Autofac;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using System;
 using System.Threading.Tasks;
 
@@ -48,20 +48,22 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
     {
         private string ImagePath = "http:\\\\MySite.com\\TestImage.jpg";
 
-        public Task<IBadgeEditDTO> GetBadgeByIdAsync(int badgeEditId)
+        public Task<BadgeEditDTO> GetBadgeByIdAsync(int badgeEditId)
         {
-            var mockDto = new Mock<IBadgeEditDTO>();
-            mockDto.Setup(t => t.Id).Returns(1);
-            mockDto.Setup(_ => _.ImagePath).Returns(ImagePath);
-            return Task.FromResult(mockDto.Object);
+            var dto = new BadgeEditDTO
+            {
+                Id = 1,
+                ImagePath = ImagePath
+            };
+            return Task.FromResult(dto);
         }
 
-        public IBadgeEditDTO Update(IBadgeEditDTO data)
+        public BadgeEditDTO Update(BadgeEditDTO data)
         {
             throw new NotImplementedException();
         }
 
-        public IBadgeEditDTO Insert(IBadgeEditDTO data)
+        public BadgeEditDTO Insert(BadgeEditDTO data)
         {
             throw new NotImplementedException();
         }

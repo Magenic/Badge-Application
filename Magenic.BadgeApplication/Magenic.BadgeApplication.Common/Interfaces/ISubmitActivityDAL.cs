@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Magenic.BadgeApplication.Common.DTO;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -8,23 +9,23 @@ namespace Magenic.BadgeApplication.Common.Interfaces
     public interface ISubmitActivityDAL
     {
         /// <summary>
-        /// Asynchronously returns an <see cref="ISubmitActivityDTO"/> for the specified id.
+        /// Asynchronously returns an <see cref="SubmitActivityDTO"/> for the specified id.
         /// </summary>
         /// <param name="activitySubmissionId">The activity submission id to search for.</param>
-        /// <returns>A <see cref="ISubmitActivityDTO"/>.</returns>
-        Task<ISubmitActivityDTO> GetActivitySubmissionByIdAsync(int activitySubmissionId);
+        /// <returns>A <see cref="SubmitActivityDTO"/>.</returns>
+        Task<SubmitActivityDTO> GetActivitySubmissionByIdAsync(int activitySubmissionId);
         /// <summary>
         /// Updates an existing activity submission based on information passed in via the DTO.
         /// </summary>
         /// <param name="data">The values to update.</param>
         /// <returns>A DTO with updated values after the save.</returns>
-        ISubmitActivityDTO Update(ISubmitActivityDTO data);
+        SubmitActivityDTO Update(SubmitActivityDTO data);
         /// <summary>
         /// Inserts a new activity submission based on information passed in via the DTO.
         /// </summary>
         /// <param name="data">The values to update.</param>
         /// <returns>A DTO with updated values after the insert.</returns>
-        ISubmitActivityDTO Insert(ISubmitActivityDTO data);
+        SubmitActivityDTO Insert(SubmitActivityDTO data);
         /// <summary>
         /// Removes the specified activity submission.
         /// </summary>

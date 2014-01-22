@@ -6,7 +6,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// Class for data transfer persist operations.
     /// </summary>
     [Serializable]
-    public class BadgeEditDTO : Interfaces.IBadgeEditDTO
+    public class BadgeEditDTO
     {
         /// <summary>
         /// The id of the badge.
@@ -27,6 +27,7 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// <summary>
         /// The type of the badge, corporate or community.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]
         public Enums.BadgeType Type { get; set; }
         /// <summary>
         /// The path to where the badge's image resides.
@@ -81,6 +82,7 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// <summary>
         /// A byte array with the image for the badge, used for saving only.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         public byte[] BadgeImage { get; set; }
     }
 }

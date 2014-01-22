@@ -12,7 +12,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 {
     public class BadgeEditDAL : IBadgeEditDAL
     {
-        public async Task<IBadgeEditDTO> GetBadgeByIdAsync(int badgeEditId)
+        public async Task<BadgeEditDTO> GetBadgeByIdAsync(int badgeEditId)
         {
             using (var ctx = new Entities())
             {
@@ -46,7 +46,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             }
         }
 
-        public IBadgeEditDTO Update(IBadgeEditDTO data)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
+        public BadgeEditDTO Update(BadgeEditDTO data)
         {
             this.SaveToBlobStorage(data);
 
@@ -80,7 +81,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        private void SaveToBlobStorage(IBadgeEditDTO data)
+        private void SaveToBlobStorage(BadgeEditDTO data)
         {
             if (data.BadgeImage != null && data.BadgeImage.Length > 0)
             {
@@ -97,7 +98,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             }
         }
 
-        private static Badge LoadData(IBadgeEditDTO data)
+        private static Badge LoadData(BadgeEditDTO data)
         {
             var badgeEntity = new Badge
             {
@@ -122,7 +123,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             return badgeEntity;
         }
 
-        public IBadgeEditDTO Insert(IBadgeEditDTO data)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
+        public BadgeEditDTO Insert(BadgeEditDTO data)
         {
             using (var ctx = new Entities())
             {

@@ -68,7 +68,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Rules
                                 ? ActivitySubmissionStatus.AwaitingApproval
                                 : ActivitySubmissionStatus.Approved);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         context.AddErrorResult(PrimaryProperty,
                             string.Format("Activity id {0} was not able to be retrieved.", activityIdValue));
