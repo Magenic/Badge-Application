@@ -9,7 +9,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 {
     public class SubmitActivityDAL : ISubmitActivityDAL
     {
-        public async Task<ISubmitActivityDTO> GetActivitySubmissionByIdAsync(int activitySubmissionId)
+        public async Task<SubmitActivityDTO> GetActivitySubmissionByIdAsync(int activitySubmissionId)
         {
             using (var ctx = new Entities())
             {
@@ -27,14 +27,14 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                         EmployeeId = t.EmployeeId
                     }).ToArrayAsync();
 
-                var badge = badgeList.SingleOrDefault();
+                var badge = badgeList.Single();
 
                 return badge;
             }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
-        public ISubmitActivityDTO Update(ISubmitActivityDTO data)
+        public SubmitActivityDTO Update(SubmitActivityDTO data)
         {
             using (var ctx = new Entities())
             {
@@ -55,7 +55,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             return data;
         }
 
-        private static ActivitySubmission LoadData(ISubmitActivityDTO data)
+        private static ActivitySubmission LoadData(SubmitActivityDTO data)
         {
             var activitySubmission = new ActivitySubmission
             {
@@ -71,7 +71,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
-        public ISubmitActivityDTO Insert(ISubmitActivityDTO data)
+        public SubmitActivityDTO Insert(SubmitActivityDTO data)
         {
             using (var ctx = new Entities())
             {

@@ -174,10 +174,10 @@ SET IDENTITY_INSERT [dbo].[BadgeActivity]  OFF
 SET IDENTITY_INSERT [dbo].[ItemStatus]  ON
 MERGE INTO [dbo].[ItemStatus]  AS Target
 USING (VALUES
-    (1, 'Proposed'),
+    (1, 'Awaiting Approval'),
     (2, 'Approved'),
     (3, 'Denied'),
-	(4, 'Undefined'),
+	(4, 'Complete'),
     (5, 'Error')
 )
 AS Source ([item_status_id], [item_status_name]) 

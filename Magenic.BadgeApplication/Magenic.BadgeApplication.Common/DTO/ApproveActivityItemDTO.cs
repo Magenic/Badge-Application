@@ -1,5 +1,4 @@
-﻿using Magenic.BadgeApplication.Common.Interfaces;
-using System;
+﻿using System;
 
 namespace Magenic.BadgeApplication.Common.DTO
 {
@@ -7,7 +6,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// Class for data transfer persist operations.
     /// </summary>
     [Serializable]
-    public class ApproveActivityItemDTO : IApproveActivityItemDTO
+    public class ApproveActivityItemDTO
     {
         /// <summary>
         /// The id of the activity submission.

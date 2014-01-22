@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Magenic.BadgeApplication.Common.DTO;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -13,8 +14,8 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         /// <param name="userName">The user name to log in with.</param>
         /// <param name="password">The unencrypted password to use.</param>
-        /// <returns>A <see cref="ICustomIdentityDTO"/> with the information needed to 
+        /// <returns>A <see cref="CustomIdentityDTO"/> with the information needed to 
         /// load the custom identity.</returns>
-        Task<ICustomIdentityDTO> LogOnIdentityAsync(string userName, string password);
+        Task<CustomIdentityDTO> LogOnIdentityAsync(string userName, string password);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.Common.Enums;
+﻿using Magenic.BadgeApplication.Common.DTO;
+using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 {
     public class SubmittedActivityCollecitonDAL : ISubmittedActivityCollectionDAL
     {
-        public async Task<IEnumerable<ISubmittedActivityItemDTO>> GetSubmittedActivitiesForEmployeeIdAsync(int employeeId, DateTime? startDate, DateTime? endDate)
+        public async Task<IEnumerable<SubmittedActivityItemDTO>> GetSubmittedActivitiesForEmployeeIdAsync(int employeeId, DateTime? startDate, DateTime? endDate)
         {
             using (var ctx = new Entities())
             {

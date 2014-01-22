@@ -7,7 +7,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// Data Transfer Object for the CustomIdentity
     /// </summary>
     [Serializable]
-    public class CustomIdentityDTO : Interfaces.ICustomIdentityDTO
+    public class CustomIdentityDTO
     {
         /// <summary>
         /// Creates a new instance of the <see cref="CustomIdentityDTO"/>.
@@ -18,7 +18,7 @@ namespace Magenic.BadgeApplication.Common.DTO
         }
 
         /// <summary>
-        /// The Id for this indentity.
+        /// The Id for this identity.
         /// </summary>
         public int Id { get; set; }
         /// <summary>

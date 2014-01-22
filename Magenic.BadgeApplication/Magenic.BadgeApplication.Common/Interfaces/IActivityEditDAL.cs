@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Magenic.BadgeApplication.Common.DTO;
+using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -8,23 +9,23 @@ namespace Magenic.BadgeApplication.Common.Interfaces
     public interface IActivityEditDAL
     {
         /// <summary>
-        /// Asynchronously returns an <see cref="IActivityEditDTO"/> for the specified id.
+        /// Asynchronously returns an <see cref="ActivityEditDTO"/> for the specified id.
         /// </summary>
         /// <param name="activityEditId">The activity id to search for.</param>
-        /// <returns>An <see cref="IActivityEditDTO"/>.</returns>
-        Task<IActivityEditDTO> GetActivityByIdAsync(int activityEditId);
+        /// <returns>An <see cref="ActivityEditDTO"/>.</returns>
+        Task<ActivityEditDTO> GetActivityByIdAsync(int activityEditId);
         /// <summary>
         /// Updates an existing activity based on information passed in via the DTO.
         /// </summary>
         /// <param name="data">The values to update.</param>
         /// <returns>A DTO with updated values after the save.</returns>
-        IActivityEditDTO Update(IActivityEditDTO data);
+        ActivityEditDTO Update(ActivityEditDTO data);
         /// <summary>
         /// Inserts a new activity based on information passed in via the DTO.
         /// </summary>
         /// <param name="data">The values to update.</param>
         /// <returns>A DTO with updated values after the insert.</returns>
-        IActivityEditDTO Insert(IActivityEditDTO data);
+        ActivityEditDTO Insert(ActivityEditDTO data);
         /// <summary>
         /// Removes the specified activity.
         /// </summary>

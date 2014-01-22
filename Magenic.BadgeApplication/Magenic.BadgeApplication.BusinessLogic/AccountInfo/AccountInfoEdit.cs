@@ -2,6 +2,7 @@
 using Csla;
 using Csla.Rules.CommonRules;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Threading.Tasks;
@@ -105,9 +106,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
             this.MarkOld();
         }
 
-        private IAccountInfoEditDTO UnloadData()
+        private AccountInfoEditDTO UnloadData()
         {
-            var returnValue = IoC.Container.Resolve<IAccountInfoEditDTO>();
+            var returnValue = new AccountInfoEditDTO();
             using (this.BypassPropertyChecks)
             {
                 returnValue.EmployeeId = this.EmployeeId;
@@ -119,7 +120,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
             return returnValue;
         }
 
-        private void LoadData(IAccountInfoEditDTO data)
+        private void LoadData(AccountInfoEditDTO data)
         {
             using (this.BypassPropertyChecks)
             {

@@ -1,6 +1,9 @@
-﻿using System.Linq;
-using System.Security.Principal;
-using System.Web;
+﻿using Csla.Security;
+using Magenic.BadgeApplication.BusinessLogic.Security;
+using Magenic.BadgeApplication.Common.Interfaces;
+using Magenic.BadgeApplication.Security;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Magenic.BadgeApplication.Models
@@ -10,30 +13,29 @@ namespace Magenic.BadgeApplication.Models
     /// </summary>
     public static class AuthenticatedUser
     {
-        private static HttpContextBase httpContextBase
+        private static ICustomPrincipal customPrincipal
         {
             get
             {
-                var httpContextBase = DependencyResolver.Current.GetService<HttpContextBase>();
-                return httpContextBase;
-            }
-        }
-
-        private static IPrincipal principal
-        {
-            get
-            {
-                return httpContextBase.User;
-            }
-        }
-
-        private static IIdentity identity
-        {
-            get
-            {
-                if (principal != null)
+                var securityContextLocator = DependencyResolver.Current.GetService<ISecurityContextLocator>();
+                var customPrincipal = securityContextLocator.Principal();
+                if (customPrincipal != null)
                 {
-                    return principal.Identity;
+                    return customPrincipal;
+                }
+
+                return null;
+            }
+        }
+
+        private static ICustomIdentity customIdentity
+        {
+            get
+            {
+                var customIdentity = customPrincipal.CustomIdentity();
+                if (customIdentity != null)
+                {
+                    return customIdentity;
                 }
 
                 return null;
@@ -50,15 +52,44 @@ namespace Magenic.BadgeApplication.Models
         {
             get
             {
-                if (identity != null)
+                if (customIdentity != null)
                 {
-                    var fullUserDomainName = identity.Name;
+                    var fullUserDomainName = customIdentity.Name;
                     var parts = fullUserDomainName.Split('\\');
                     return parts.Last();
                 }
 
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Gets the employee identifier.
+        /// </summary>
+        /// <value>
+        /// The employee identifier.
+        /// </value>
+        public static int? EmployeeId
+        {
+            get
+            {
+                if (customIdentity != null)
+                {
+                    return customIdentity.EmployeeId;
+                }
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Logs the on the user asynchronously.
+        /// </summary>
+        /// <param name="userName">Name of the user.</param>
+        /// <param name="password">The password.</param>
+        public static async Task<ICslaPrincipal> LogOnAsync(string userName, string password)
+        {
+            return await CustomPrincipal.LogOnAsync(userName, password);
         }
     }
 }

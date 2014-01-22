@@ -273,4 +273,7 @@
   <data name="EditBadgeHeader" xml:space="preserve">
     <value>Edit a Badge</value>
   </data>
+  <data name="ClearButton" xml:space="preserve">
+    <value>Clear</value>
+  </data>
 </root>
