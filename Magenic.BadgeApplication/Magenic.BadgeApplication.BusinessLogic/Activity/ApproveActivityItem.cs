@@ -3,6 +3,7 @@ using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
@@ -106,7 +107,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             }
         }
 
-        internal void Load(IApproveActivityItemDTO item)
+        internal void Load(ApproveActivityItemDTO item)
         {
             using (this.BypassPropertyChecks)
             {
@@ -124,9 +125,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             this.MarkAsChild();
         }
 
-        internal IApproveActivityItemDTO Unload()
+        internal ApproveActivityItemDTO Unload()
         {
-            var returnValue = IoC.Container.Resolve<IApproveActivityItemDTO>();
+            var returnValue = IoC.Container.Resolve<ApproveActivityItemDTO>();
             using (this.BypassPropertyChecks)
             {
                 returnValue.SubmissionId = this.SubmissionId;

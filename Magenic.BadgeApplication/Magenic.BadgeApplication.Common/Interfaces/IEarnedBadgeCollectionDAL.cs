@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.Common.Enums;
+﻿using Magenic.BadgeApplication.Common.DTO;
+using Magenic.BadgeApplication.Common.Enums;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -19,6 +20,6 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// A <see cref="System.Collections.Generic.IEnumerable&lt;IBadgeItemDTO&gt;" />.
         /// </returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
-        Task<IEnumerable<IEarnedBadgeItemDTO>> GetBadgesForUserByBadgeTypeAsync(int employeeId, BadgeType badgeType);
+        Task<IEnumerable<EarnedBadgeItemDTO>> GetBadgesForUserByBadgeTypeAsync(int employeeId, BadgeType badgeType);
     }
 }

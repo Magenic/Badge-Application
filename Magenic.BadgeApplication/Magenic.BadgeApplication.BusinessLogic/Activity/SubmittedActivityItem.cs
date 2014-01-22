@@ -1,4 +1,5 @@
 ﻿using Csla;
+using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 
@@ -69,7 +70,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
 
         #region Methods
 
-        internal void Load(ISubmittedActivityItemDTO item)
+        internal void Load(SubmittedActivityItemDTO item)
         {
             this.Id = item.Id;
             this.ActivityId = item.ActivityId;

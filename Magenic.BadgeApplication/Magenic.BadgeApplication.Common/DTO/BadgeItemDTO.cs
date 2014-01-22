@@ -1,5 +1,4 @@
-﻿using Magenic.BadgeApplication.Common.Interfaces;
-using System;
+﻿using System;
 
 namespace Magenic.BadgeApplication.Common.DTO
 {
@@ -7,7 +6,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// Class for data transfer persist operations.
     /// </summary>
     [Serializable]
-    public class BadgeItemDTO : IBadgeItemDTO
+    public class BadgeItemDTO
     {
         /// <summary>
         /// The id of the badge.
@@ -24,6 +23,7 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// <summary>
         /// The type of the badge, corporate or community.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]
         public Enums.BadgeType Type { get; set; }
         /// <summary>
         /// The path to where the badge's image resides.

@@ -203,6 +203,7 @@
     <Compile Include="Models\BadgeEditViewModel.cs" />
     <Compile Include="Models\BadgeIndexViewModel.cs" />
     <Compile Include="Models\BadgeManagerIndexViewModel.cs" />
+    <Compile Include="Models\LogOnViewModel.cs" />
     <Compile Include="Models\SubmitActivityViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ApplicationResources.Designer.cs">
@@ -366,6 +367,8 @@
     <Content Include="Views\Shared\EditorTemplates\BadgeEdit.cshtml" />
     <Content Include="Views\BadgeManager\AddBadge.cshtml" />
     <Content Include="Views\BadgeManager\EditBadge.cshtml" />
+    <Content Include="Views\Account\LogOn.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\LogOnViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">

@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Csla;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -49,10 +50,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             this.LoadData(result);
         }
 
-        private void LoadData(IEnumerable<ISubmittedActivityItemDTO> data)
+        private void LoadData(IEnumerable<SubmittedActivityItemDTO> data)
         {
             this.IsReadOnly = false;
-            foreach (ISubmittedActivityItemDTO item in data)
+            foreach (SubmittedActivityItemDTO item in data)
             {
                 var newItem = new SubmittedActivityItem();
                 newItem.Load(item);

@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.Common.Enums;
+﻿using Magenic.BadgeApplication.Common.DTO;
+using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,7 +11,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 {
     public class ApproveActivityCollectionDAL : IApproveActivityCollectionDAL
     {
-        public async Task<IEnumerable<IApproveActivityItemDTO>> GetActivitiesToApproveForManagerAsync(int managerEmployeeId)
+        public async Task<IEnumerable<ApproveActivityItemDTO>> GetActivitiesToApproveForManagerAsync(int managerEmployeeId)
         {
             using (var ctx = new Entities())
             {
@@ -18,7 +19,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 var activityList = await (from t in ctx.ActivitySubmissions
                                           join e in ctx.Employees on t.EmployeeId equals e.EmployeeId
                                           join a in ctx.Activities on t.ActivityId equals a.ActivityId
-                                          where t.SubmissionStatusId == (int)ActivitySubmissionStatus.Proposed
+                                          where t.SubmissionStatusId == (int)ActivitySubmissionStatus.AwaitingApproval
                                           where (e.ApprovingManagerId1 == managerEmployeeId
                                           || e.ApprovingManagerId2 == managerEmployeeId)
                                           select new Common.DTO.ApproveActivityItemDTO
@@ -38,7 +39,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 
         }
 
-        public IEnumerable<IApproveActivityItemDTO> Update(IEnumerable<IApproveActivityItemDTO> data)
+        public IEnumerable<ApproveActivityItemDTO> Update(IEnumerable<ApproveActivityItemDTO> data)
         {
             var list = data.ToList();
             using (var ctx = new Entities())
@@ -55,10 +56,10 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 }
                 ctx.SaveChanges();
             }
-            return list.Where(i => i.Status == ActivitySubmissionStatus.Proposed);
+            return list.Where(i => i.Status == ActivitySubmissionStatus.AwaitingApproval);
         }
 
-        private static ActivitySubmission LoadData(IApproveActivityItemDTO data)
+        private static ActivitySubmission LoadData(ApproveActivityItemDTO data)
         {
             var badgeEntity = new ActivitySubmission
             {

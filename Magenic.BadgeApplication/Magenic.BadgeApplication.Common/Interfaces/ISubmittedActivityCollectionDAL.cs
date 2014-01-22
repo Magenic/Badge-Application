@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Magenic.BadgeApplication.Common.DTO;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -10,7 +11,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
     public interface ISubmittedActivityCollectionDAL
     {
         /// <summary>
-        /// Asynchronously returns a <see cref="System.Collections.Generic.IEnumerable&lt;ISubmittedActivityItemDTO&gt;" />
+        /// Asynchronously returns a <see cref="System.Collections.Generic.IEnumerable&lt;SubmittedActivityItemDTO&gt;" />
         /// for the specified badge type for a given employee's awarded badges.
         /// </summary>
         /// <param name="employeeId">The employee id.</param>
@@ -21,9 +22,9 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// user based on when the activity was submitted.  Send in null to search for submitted
         /// activities unit the end of time.</param>
         /// <returns>
-        /// A <see cref="System.Collections.Generic.IEnumerable&lt;ISubmittedActivityItemDTO&gt;" />.
+        /// A <see cref="System.Collections.Generic.IEnumerable&lt;SubmittedActivityItemDTO&gt;" />.
         /// </returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
-        Task<IEnumerable<ISubmittedActivityItemDTO>> GetSubmittedActivitiesForEmployeeIdAsync(int employeeId, DateTime? startDate, DateTime? endDate);
+        Task<IEnumerable<SubmittedActivityItemDTO>> GetSubmittedActivitiesForEmployeeIdAsync(int employeeId, DateTime? startDate, DateTime? endDate);
     }
 }

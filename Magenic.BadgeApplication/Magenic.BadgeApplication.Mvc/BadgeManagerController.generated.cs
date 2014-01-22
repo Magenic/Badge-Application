@@ -127,7 +127,7 @@ namespace Magenic.BadgeApplication.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_AddBadgePost
         {
-            public readonly string httpPostedFile = "httpPostedFile";
+            public readonly string badgeImage = "badgeImage";
         }
         static readonly ActionParamsClass_EditBadge s_params_EditBadge = new ActionParamsClass_EditBadge();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -144,7 +144,7 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionParamsClass_EditBadgePost
         {
             public readonly string id = "id";
-            public readonly string httpPostedFile = "httpPostedFile";
+            public readonly string badgeImage = "badgeImage";
         }
         static readonly ActionParamsClass_ApproveActivity s_params_ApproveActivity = new ActionParamsClass_ApproveActivity();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -215,13 +215,13 @@ namespace Magenic.BadgeApplication.Controllers
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
-        partial void AddBadgePostOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Web.HttpPostedFileBase httpPostedFile);
+        partial void AddBadgePostOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Web.HttpPostedFileBase badgeImage);
 
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> AddBadgePost(System.Web.HttpPostedFileBase httpPostedFile)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> AddBadgePost(System.Web.HttpPostedFileBase badgeImage)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AddBadgePost);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "httpPostedFile", httpPostedFile);
-            AddBadgePostOverride(callInfo, httpPostedFile);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "badgeImage", badgeImage);
+            AddBadgePostOverride(callInfo, badgeImage);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
@@ -235,14 +235,14 @@ namespace Magenic.BadgeApplication.Controllers
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
-        partial void EditBadgePostOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, System.Web.HttpPostedFileBase httpPostedFile);
+        partial void EditBadgePostOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, System.Web.HttpPostedFileBase badgeImage);
 
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> EditBadgePost(int id, System.Web.HttpPostedFileBase httpPostedFile)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> EditBadgePost(int id, System.Web.HttpPostedFileBase badgeImage)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.EditBadgePost);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "httpPostedFile", httpPostedFile);
-            EditBadgePostOverride(callInfo, id, httpPostedFile);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "badgeImage", badgeImage);
+            EditBadgePostOverride(callInfo, id, badgeImage);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
