@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
     [Serializable]
-    public class ActivityCollection : ReadOnlyListBase<ActivityCollection, IActivityItem>, IActivityCollection
+    public sealed class ActivityCollection : ReadOnlyListBase<ActivityCollection, IActivityItem>, IActivityCollection
     {
         #region Factory Methods
 
@@ -23,7 +23,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
 
         #region Data Access
 
-        protected async Task DataPortal_Fetch()
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        private async Task DataPortal_Fetch()
         {
             var dal = IoC.Container.Resolve<IActivityCollectionDAL>();
 

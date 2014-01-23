@@ -16,6 +16,10 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         DateTime SubmissionDate { get; }
         /// <summary>
+        /// The id of the activity used to identify it.
+        /// </summary>
+        int ActivityId { get; }
+        /// <summary>
         /// The name of the activity used to identify it.
         /// </summary>
         string ActivityName { get; }

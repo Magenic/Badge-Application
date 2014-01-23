@@ -14,13 +14,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
     /// A read only list of badge information.
     /// </summary>
     [Serializable]
-    public class BadgeCollection : ReadOnlyListBase<BadgeCollection, IBadgeItem>, IBadgeCollection
+    public sealed class BadgeCollection : ReadOnlyListBase<BadgeCollection, IBadgeItem>, IBadgeCollection
     {
 
         #region Criteria Classes
 
-        [Serializable]
-        protected class BadgeCollectionForUserCriteria : CriteriaBase<BadgeCollectionForUserCriteria>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses"), Serializable]
+        internal class BadgeCollectionForUserCriteria : CriteriaBase<BadgeCollectionForUserCriteria>
         {
             public string UserName { get; set; }
             public BadgeType BadgeType { get; set; }
@@ -49,7 +49,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         /// </summary>
         /// <param name="badgeType">Type of the badge.</param>
         /// <returns></returns>
-        protected async Task DataPortal_Fetch(BadgeType badgeType)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        private async Task DataPortal_Fetch(BadgeType badgeType)
         {
             var dal = IoC.Container.Resolve<IBadgeCollectionDAL>();
 
@@ -62,7 +63,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         /// </summary>
         /// <param name="activityIds">The activity ids.</param>
         /// <returns></returns>
-        protected async Task DataPortal_Fetch(IEnumerable<int> activityIds)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        private async Task DataPortal_Fetch(IEnumerable<int> activityIds)
         {
             var dal = IoC.Container.Resolve<IBadgeCollectionDAL>();
 

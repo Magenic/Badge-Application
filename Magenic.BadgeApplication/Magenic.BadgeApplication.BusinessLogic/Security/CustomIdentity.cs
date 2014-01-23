@@ -23,7 +23,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Security
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
         [Serializable]
-        public class IdentityCriteria : IIdentityCriteria
+        public sealed class IdentityCriteria : IIdentityCriteria
         {
             public IdentityCriteria(string userName, string password)
             {

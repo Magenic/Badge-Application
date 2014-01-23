@@ -14,7 +14,7 @@ using NuGet;
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
     [Serializable]
-    public class ActivityEdit : BusinessBase<ActivityEdit> , IActivityEdit
+    public sealed class ActivityEdit : BusinessBase<ActivityEdit> , IActivityEdit
     {
         #region Properties
 
@@ -91,7 +91,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             base.DataPortal_Create();
         }
 
-        protected async Task DataPortal_Fetch(int activityEditId)
+        private async Task DataPortal_Fetch(int activityEditId)
         {
             var dal = IoC.Container.Resolve<IActivityEditDAL>();
 

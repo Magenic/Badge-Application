@@ -50,7 +50,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         [TestMethod]
         public void InsertActivity()
         {
-            const string newName = "Test Name";
+            var newName = Guid.NewGuid().ToString();
             const string newDescription = "Test Description";
             var activityEdit = ActivityEdit.CreateActivity();
             activityEdit.Name = newName;
@@ -69,7 +69,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         [ExpectedException(typeof(Csla.DataPortalException))]
         public async Task DeleteActivity()
         {
-            const string newName = "Test Name";
+            var newName = Guid.NewGuid().ToString();
             const string newDescription = "Test Description";
             var activityEdit = ActivityEdit.CreateActivity();
             activityEdit.Name = newName;

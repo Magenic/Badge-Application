@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.Common.DTO;
+﻿using System.Collections.Generic;
+using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Microsoft.WindowsAzure.Storage;
 using System.Configuration;
@@ -17,33 +18,49 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             using (var ctx = new Entities())
             {
                 ctx.Database.Connection.Open();
-                var badgeList = await (from t in ctx.Badges
+                
+                var badgeList = await (from t in ctx.Badges.Include("BadgeActivities")
                                        where t.BadgeId == badgeEditId
-                                       select new BadgeEditDTO
-                                       {
-                                           Id = t.BadgeId,
-                                           Name = t.BadgeName,
-                                           Tagline = t.BadgeTagLine,
-                                           Description = t.BadgeDescription,
-                                           Type = (Common.Enums.BadgeType)t.BadgeTypeId,
-                                           ImagePath = t.BadgePath,
-                                           Created = t.BadgeCreated,
-                                           EffectiveStartDate = t.BadgeEffectiveStart,
-                                           EffectiveEndDate = t.BadgeEffectiveEnd,
-                                           Priority = t.BadgePriority,
-                                           MultipleAwardsPossible = t.MultipleAwardPossible,
-                                           DisplayOnce = t.DisplayOnce,
-                                           ManagementApprovalRequired = t.ManagementApprovalRequired,
-                                           ActivityPointsAmount = t.ActivityPointsAmount,
-                                           AwardValueAmount = t.BadgeAwardValueAmount,
-                                           ApprovedById = t.BadgeApprovedById ?? 0,
-                                           ApprovedDate = t.BadgeApprovedDate
-                                       }).ToArrayAsync();
-
+                                       select t).ToListAsync();
                 var badge = badgeList.Single();
+                var returnValue = LoadReturnData(badge);
 
-                return badge;
+                return returnValue;
             }
+        }
+
+        private BadgeEditDTO LoadReturnData(Badge badge)
+        {
+            var returnValue = new BadgeEditDTO
+            {
+                Id = badge.BadgeId,
+                Name = badge.BadgeName,
+                Tagline = badge.BadgeTagLine,
+                Description = badge.BadgeDescription,
+                Type = (Common.Enums.BadgeType)badge.BadgeTypeId,
+                ImagePath = badge.BadgePath,
+                Created = badge.BadgeCreated,
+                EffectiveStartDate = badge.BadgeEffectiveStart,
+                EffectiveEndDate = badge.BadgeEffectiveEnd,
+                Priority = badge.BadgePriority,
+                MultipleAwardsPossible = badge.MultipleAwardPossible,
+                DisplayOnce = badge.DisplayOnce,
+                ManagementApprovalRequired = badge.ManagementApprovalRequired,
+                ActivityPointsAmount = badge.ActivityPointsAmount,
+                AwardValueAmount = badge.BadgeAwardValueAmount,
+                ApprovedById = badge.BadgeApprovedById ?? 0,
+                ApprovedDate = badge.BadgeApprovedDate,
+                BadgeActivities = new List<BadgeActivityEditDTO>()
+            };
+            foreach (var badgeActivity in badge.BadgeActivities)
+            {
+                returnValue.BadgeActivities.Add(new BadgeActivityEditDTO
+                {
+                    BadgeActivityId = badgeActivity.BadgeActivityId,
+                    ActivityId = badgeActivity.ActivityId
+                });
+            }
+            return returnValue;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
@@ -71,13 +88,53 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("ManagementApprovalRequired");
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("ActivityPointsAmount");
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeAwardValueAmount");
-                objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeApprovedByADName");
+                objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeApprovedById");
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeApprovedDate");
 
+                AttachChildren(ctx, data, saveBadge.BadgeId);
                 ctx.SaveChanges();
-                data.Id = saveBadge.BadgeId;
+                var badge = GetRefreshedBadgeInfo(ctx, saveBadge.BadgeId);
+                data = LoadReturnData(badge);
             }
             return data;
+        }
+
+        private void AttachChildren(Entities ctx, BadgeEditDTO data, int badgeId)
+        {
+            foreach (var badgeActivity in data.BadgeActivities)
+            {
+                if (badgeActivity.IsDeleted && badgeActivity.BadgeActivityId > 0) // Delete
+                {
+                    var deleteBadgeActivity = new BadgeActivity
+                    {
+                        BadgeActivityId = badgeActivity.BadgeActivityId
+                    };
+                    ctx.BadgeActivities.Attach(deleteBadgeActivity);
+                    ctx.BadgeActivities.Remove(deleteBadgeActivity);
+                }
+                else if (!badgeActivity.IsDeleted && badgeActivity.BadgeActivityId == 0) // Insert
+                {
+                    var insertBadgeActivity = new BadgeActivity
+                    {
+                        ActivityId = badgeActivity.ActivityId,
+                        BadgeId = badgeId
+                    };
+                    ctx.BadgeActivities.Add(insertBadgeActivity);
+                }
+                else if (!badgeActivity.IsDeleted && badgeActivity.BadgeActivityId > 0) // Update
+                {
+                    var updateBadgeActivity = new BadgeActivity
+                    {
+                        BadgeActivityId = badgeActivity.BadgeActivityId,
+                        ActivityId = badgeActivity.ActivityId,
+                        BadgeId = badgeId
+                    };
+                    ctx.BadgeActivities.Attach(updateBadgeActivity);
+                    var objectState = ((IObjectContextAdapter)ctx).ObjectContext.ObjectStateManager;
+                    objectState.GetObjectStateEntry(updateBadgeActivity).SetModifiedProperty("ActivityId");
+                    objectState.GetObjectStateEntry(updateBadgeActivity).SetModifiedProperty("BadgeId");
+                }
+            }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
@@ -133,9 +190,21 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 ctx.Badges.Add(saveBadge);
 
                 ctx.SaveChanges();
-                data.Id = saveBadge.BadgeId;
+                AttachChildren(ctx, data, saveBadge.BadgeId);
+                ctx.SaveChanges();
+
+                var badge = GetRefreshedBadgeInfo(ctx, saveBadge.BadgeId);
+                data = LoadReturnData(badge);
             }
             return data;
+        }
+
+        private static Badge GetRefreshedBadgeInfo(Entities ctx, int badgeId)
+        {
+            var badgeList = from t in ctx.Badges.Include("BadgeActivities")
+                where t.BadgeId == badgeId
+                select t;
+            return badgeList.Single();
         }
 
         public void Delete(int badgeId)
@@ -143,6 +212,10 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             using (var ctx = new Entities())
             {
                 ctx.Database.Connection.Open();
+                var badgeActivities = ctx.BadgeActivities.Where(ba => ba.BadgeId == badgeId).ToList();
+                ctx.BadgeActivities.RemoveRange(badgeActivities);
+                ctx.SaveChanges();
+                
                 var deleteBadge = new Badge
                 {
                     BadgeId = badgeId
@@ -150,6 +223,26 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 ctx.Badges.Attach(deleteBadge);
                 ctx.Badges.Remove(deleteBadge);
                 ctx.SaveChanges();
+            }
+        }
+
+        public IList<BadgeEditDTO> GetPotentialBadgesForActivity(int activityId)
+        {
+            using (var ctx = new Entities())
+            {
+                ctx.Database.Connection.Open();
+                var returnList = new List<BadgeEditDTO>();
+
+                var badgeList = (from t in ctx.Badges.Include("BadgeActivities")
+                                join ba in ctx.BadgeActivities on t.BadgeId equals ba.BadgeId
+                                where ba.ActivityId == activityId
+                                select t).Distinct();
+
+                foreach (var badge in badgeList)
+                {
+                    returnList.Add(LoadReturnData(badge));
+                }
+                return returnList.ToList();
             }
         }
     }

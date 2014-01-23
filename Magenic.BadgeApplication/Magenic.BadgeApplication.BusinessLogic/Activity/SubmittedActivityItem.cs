@@ -6,7 +6,7 @@ using System;
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
     [Serializable]
-    public class SubmittedActivityItem : ReadOnlyBase<SubmittedActivityItem>, ISubmittedActivityItem
+    public sealed class SubmittedActivityItem : ReadOnlyBase<SubmittedActivityItem>, ISubmittedActivityItem
     {
         #region Properties
 

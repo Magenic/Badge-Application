@@ -1,6 +1,8 @@
-﻿using Autofac;
+﻿using System.Linq;
+using Autofac;
 using Csla;
 using Csla.Rules.CommonRules;
+using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
@@ -15,7 +17,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
     /// approve or deny an existing activity submission.
     /// </summary>
     [Serializable]
-    public class SubmitActivity : BusinessBase<SubmitActivity>, ISubmitActivity
+    public sealed class SubmitActivity : BusinessBase<SubmitActivity>, ISubmitActivity
     {
 
         #region Properties
@@ -129,7 +131,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         #region Data Access
 
         [RunLocal]
-        protected void DataPortal_Create(int employeeId)
+        private void DataPortal_Create(int employeeId)
         {
             base.DataPortal_Create();
             this.LoadProperty(ActivitySubmissionDateProperty, DateTime.UtcNow);
@@ -138,7 +140,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             this.BusinessRules.CheckRules();
         }
 
-        protected async Task DataPortal_Fetch(int badgeId)
+        private async Task DataPortal_Fetch(int badgeId)
         {
             var dal = IoC.Container.Resolve<ISubmitActivityDAL>();
 
@@ -164,28 +166,61 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             }
             else if (IsDirty)
             {
+                IQueryable<BadgeAwardDTO> badgesToCreate = null;
+                if (ShouldCreateBadges())
+                {
+                    badgesToCreate = CreateBadges(this);
+                }
                 var dal = IoC.Container.Resolve<ISubmitActivityDAL>();
                 this.LoadData(dal.Update(this.UnloadData()));
                 FieldManager.UpdateChildren();
+                SaveBadges(badgesToCreate);
             }
             this.MarkClean();
             this.MarkOld();
         }
 
+        private void SaveBadges(IQueryable<BadgeAwardDTO> badgesToCreate)
+        {
+            AwardBadges.SaveBadges(badgesToCreate);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "submitActivity")]
+        private IQueryable<BadgeAwardDTO> CreateBadges(SubmitActivity submitActivity)
+        {
+            var activityInfo = new AwardBadges.ActivityInfo
+            {
+                ActivityId = this.ActivityId,
+                EmployeeId = this.EmployeeId,
+                Status = this.Status
+            };
+            var returnValue = AwardBadges.CreateBadges(activityInfo);
+            this.LoadProperty(StatusProperty, activityInfo.Status);
+            return returnValue;
+        }
+
+        private bool ShouldCreateBadges()
+        {
+            return ((IsNew || IsDirty) && this.Status == ActivitySubmissionStatus.Approved);
+        }
+
+        
         private SubmitActivityDTO UnloadData()
         {
-            var returnValue = IoC.Container.Resolve<SubmitActivityDTO>();
             using (this.BypassPropertyChecks)
             {
-                returnValue.Id = this.Id;
-                returnValue.ActivityId = this.ActivityId;
-                returnValue.ActivitySubmissionDate = this.ActivitySubmissionDate;
-                returnValue.ApprovedById = this.ApprovedById;
-                returnValue.Notes = this.Notes;
-                returnValue.Status = this.Status;
-                returnValue.EmployeeId = this.EmployeeId;
+                var returnValue = new SubmitActivityDTO
+                {
+                    Id = this.Id,
+                    ActivityId = this.ActivityId,
+                    ActivitySubmissionDate = this.ActivitySubmissionDate,
+                    ApprovedById = this.ApprovedById,
+                    Notes = this.Notes,
+                    Status = this.Status,
+                    EmployeeId = this.EmployeeId
+                };
+                return returnValue;
             }
-            return returnValue;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "data")]
@@ -228,8 +263,14 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             base.DataPortal_Insert();
             var dal = IoC.Container.Resolve<ISubmitActivityDAL>();
 
+            IQueryable<BadgeAwardDTO> badgesToCreate = null;
+            if (ShouldCreateBadges())
+            {
+                badgesToCreate = CreateBadges(this);
+            }
             this.LoadData(dal.Insert(this.UnloadData()));
             FieldManager.UpdateChildren();
+            SaveBadges(badgesToCreate);
         }
 
         #endregion Data Access

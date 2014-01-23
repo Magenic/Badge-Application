@@ -1,7 +1,10 @@
-﻿using Autofac;
+﻿using System.Linq;
+using Autofac;
 using Csla;
+using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.DTO;
+using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,7 +13,7 @@ using System.Threading.Tasks;
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
     [Serializable]
-    public class ApproveActivityCollection : BusinessListBase<ApproveActivityCollection, IApproveActivityItem>, IApproveActivityCollection
+    public sealed class ApproveActivityCollection : BusinessListBase<ApproveActivityCollection, IApproveActivityItem>, IApproveActivityCollection
     {
         #region Factory Methods
 
@@ -28,7 +31,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
 
         #region Data Access
 
-        protected async Task DataPortal_Fetch(int managerEmployeeId)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        private async Task DataPortal_Fetch(int managerEmployeeId)
         {
             var dal = IoC.Container.Resolve<IApproveActivityCollectionDAL>();
 
@@ -50,12 +54,28 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         protected override void DataPortal_Update()
         {
             var saveList = new List<ApproveActivityItemDTO>();
+            var badgeList = new List<BadgeAwardDTO>();
             foreach (ApproveActivityItem i in this)
             {
+                if (i.Status == ActivitySubmissionStatus.Approved)
+                {
+                    var activityInfo = new AwardBadges.ActivityInfo
+                    {
+                        ActivityId = i.ActivityId,
+                        EmployeeId = i.EmployeeId,
+                        Status = i.Status
+                    };
+                    badgeList.AddRange(AwardBadges.CreateBadges(activityInfo));
+                    if (activityInfo.Status == ActivitySubmissionStatus.Complete)
+                    {
+                        i.CompleteActivitySubmission();
+                    }
+                }
                 saveList.Add(i.Unload());
             }
             var dal = IoC.Container.Resolve<IApproveActivityCollectionDAL>();
             var results = dal.Update(saveList);
+            AwardBadges.SaveBadges(badgeList.AsQueryable());
             this.Clear();
             this.DeletedList.Clear();
             this.LoadData(results);

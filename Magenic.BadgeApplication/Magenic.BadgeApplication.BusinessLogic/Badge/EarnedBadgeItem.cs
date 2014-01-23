@@ -7,7 +7,7 @@ using System;
 namespace Magenic.BadgeApplication.BusinessLogic.Badge
 {
     [Serializable]
-    public class EarnedBadgeItem : ReadOnlyBase<EarnedBadgeItem>, IEarnedBadgeItem
+    public sealed class EarnedBadgeItem : ReadOnlyBase<EarnedBadgeItem>, IEarnedBadgeItem
     {
         #region Properties
 

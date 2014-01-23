@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Magenic.BadgeApplication.BusinessLogic.Badge
 {
     [Serializable]
-    public class BadgeEdit : BusinessBase<BadgeEdit>, IBadgeEdit
+    public sealed class BadgeEdit : BusinessBase<BadgeEdit>, IBadgeEdit
     {
         #region Properties
 
@@ -137,6 +137,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             private set { LoadProperty(ApprovedDateProperty, value); }
         }
 
+        public static readonly PropertyInfo<IBadgeActivityEditCollection> BadgeActivitiesProperty = RegisterProperty<IBadgeActivityEditCollection>(c => c.BadgeActivities);
+        public IBadgeActivityEditCollection BadgeActivities
+        {
+            get { return GetProperty(BadgeActivitiesProperty); }
+            private set { LoadProperty(BadgeActivitiesProperty, value); }
+        }
+
         public static readonly PropertyInfo<byte[]> ImageProperty = RegisterProperty<byte[]>(c => c.Image);
         private byte[] Image
         {
@@ -206,9 +213,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.LoadProperty(CreatedProperty, DateTime.UtcNow);
             this.LoadProperty(PriorityProperty, int.MaxValue);
             this.LoadProperty(TypeProperty, BadgeType.Community);
+            this.LoadProperty(BadgeActivitiesProperty, new BadgeActivityEditCollection());
         }
 
-        protected async Task DataPortal_Fetch(int badgeId)
+        private async Task DataPortal_Fetch(int badgeId)
         {
             var dal = IoC.Container.Resolve<IBadgeEditDAL>();
 
@@ -236,7 +244,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             {
                 var dal = IoC.Container.Resolve<IBadgeEditDAL>();
                 this.LoadData(dal.Update(this.UnloadData()));
-                FieldManager.UpdateChildren();
             }
             this.MarkClean();
             this.MarkOld();
@@ -244,30 +251,39 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
 
         private BadgeEditDTO UnloadData()
         {
-            var returnValue = IoC.Container.Resolve<BadgeEditDTO>();
             using (this.BypassPropertyChecks)
             {
-                returnValue.Id = this.Id;
-                returnValue.Name = this.Name;
-                returnValue.Tagline = this.Tagline;
-                returnValue.Description = this.Description;
-                returnValue.Type = this.Type;
-                returnValue.ImagePath = this.ImagePath;
-                returnValue.Created = this.Created;
-                returnValue.EffectiveStartDate = this.EffectiveStartDate;
-                returnValue.EffectiveEndDate = this.EffectiveEndDate;
-                returnValue.Priority = this.Priority;
-                returnValue.MultipleAwardsPossible = this.MultipleAwardsPossible;
-                returnValue.DisplayOnce = this.DisplayOnce;
-                returnValue.ManagementApprovalRequired = this.ManagementApprovalRequired;
-                returnValue.ActivityPointsAmount = this.ActivityPointsAmount;
-                returnValue.AwardValueAmount = this.AwardValueAmount;
-                returnValue.ApprovedById = this.ApprovedById;
-                returnValue.ApprovedDate = this.ApprovedDate;
-                returnValue.BadgeImage = this.Image;
+                var returnValue = new BadgeEditDTO
+                {
+                    Id = this.Id,
+                    Name = this.Name,
+                    Tagline = this.Tagline,
+                    Description = this.Description,
+                    Type = this.Type,
+                    ImagePath = this.ImagePath,
+                    Created = this.Created,
+                    EffectiveStartDate = this.EffectiveStartDate,
+                    EffectiveEndDate = this.EffectiveEndDate,
+                    Priority = this.Priority,
+                    MultipleAwardsPossible = this.MultipleAwardsPossible,
+                    DisplayOnce = this.DisplayOnce,
+                    ManagementApprovalRequired = this.ManagementApprovalRequired,
+                    ActivityPointsAmount = this.ActivityPointsAmount,
+                    AwardValueAmount = this.AwardValueAmount,
+                    ApprovedById = this.ApprovedById,
+                    ApprovedDate = this.ApprovedDate,
+                    BadgeImage = this.Image
+                };
+                this.UnLoadChildren(returnValue);
+                return returnValue;
             }
-            return returnValue;
         }
+
+        private void UnLoadChildren(BadgeEditDTO returnValue)
+        {
+            returnValue.BadgeActivities = ((BadgeActivityEditCollection)this.BadgeActivities).UnloadChildren();
+        }
+
 
         private void LoadData(BadgeEditDTO data)
         {
@@ -291,7 +307,14 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
                 this.ApprovedById = data.ApprovedById;
                 this.ApprovedDate = data.ApprovedDate;
                 this.Image = null;
+                this.LoadChildren(data);
             }
+        }
+
+        private void LoadChildren(BadgeEditDTO data)
+        {
+            this.LoadProperty(BadgeActivitiesProperty, new BadgeActivityEditCollection());
+            ((BadgeActivityEditCollection)this.BadgeActivities).LoadChildren(data.BadgeActivities);
         }
 
         [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]

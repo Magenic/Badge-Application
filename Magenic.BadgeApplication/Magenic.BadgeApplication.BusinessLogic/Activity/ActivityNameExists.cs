@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
     [Serializable]
-    public class ActivityNameExists: CommandBase<ActivityNameExists>
+    public sealed class ActivityNameExists: CommandBase<ActivityNameExists>
     {
         private bool NameExists { get; set; }
         private string Name { get; set; }
