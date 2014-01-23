@@ -10,17 +10,17 @@
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
-        @Html.LabelFor(sa => sa.ActivityId)
+        @Html.LabelFor(sa => sa.ActivityId, ApplicationResources.ActivitySubmissionTypeLabel)
         @Html.DropDownListFor(sa => sa.ActivityId, ViewData["PossibleActivities"] as IEnumerable<SelectListItem>, new { @class = "form-control" })
         @Html.ValidationMessageFor(sa => sa.ActivityId)
     </div>
     <div class="form-group">
-        @Html.LabelFor(sa => sa.ActivitySubmissionDate)
+        @Html.LabelFor(sa => sa.ActivitySubmissionDate, ApplicationResources.ActivitySubmissionDateLabel)
         @Html.TextBoxFor(sa => sa.ActivitySubmissionDate, new { @class = "form-control datepicker" })
         @Html.ValidationMessageFor(sa => sa.ActivitySubmissionDate)
     </div>
     <div class="form-group">
-        @Html.LabelFor(sa => sa.Notes)
+        @Html.LabelFor(sa => sa.Notes, ApplicationResources.ActivitySubmissionNotesLabel)
         @Html.TextAreaFor(sa => sa.Notes, new { @class = "form-control", rows = "4", cols = "10" })
         @Html.ValidationMessageFor(sa => sa.Notes)
     </div>

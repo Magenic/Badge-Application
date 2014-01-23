@@ -1,9 +1,6 @@
-﻿using Csla.Security;
-using Magenic.BadgeApplication.BusinessLogic.Security;
-using Magenic.BadgeApplication.Common.Interfaces;
+﻿using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Security;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Magenic.BadgeApplication.Models
@@ -69,7 +66,7 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// The employee identifier.
         /// </value>
-        public static int? EmployeeId
+        public static int EmployeeId
         {
             get
             {
@@ -78,18 +75,9 @@ namespace Magenic.BadgeApplication.Models
                     return customIdentity.EmployeeId;
                 }
 
-                return null;
+                // Return some bad value here.
+                return -1;
             }
-        }
-
-        /// <summary>
-        /// Logs the on the user asynchronously.
-        /// </summary>
-        /// <param name="userName">Name of the user.</param>
-        /// <param name="password">The password.</param>
-        public static async Task<ICslaPrincipal> LogOnAsync(string userName, string password)
-        {
-            return await CustomPrincipal.LogOnAsync(userName, password);
         }
     }
 }
