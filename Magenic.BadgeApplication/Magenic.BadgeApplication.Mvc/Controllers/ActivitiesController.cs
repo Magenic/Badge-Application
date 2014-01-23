@@ -1,12 +1,9 @@
-﻿using Autofac;
-using Magenic.BadgeApplication.BusinessLogic.Activity;
-using Magenic.BadgeApplication.BusinessLogic.Framework;
+﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.Models;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using CslaController = Csla.Web.Mvc.AsyncController;
 
 namespace Magenic.BadgeApplication.Controllers
 {
@@ -14,7 +11,7 @@ namespace Magenic.BadgeApplication.Controllers
     /// 
     /// </summary>
     public partial class ActivitiesController
-        : CslaController
+        : BaseController
     {
         /// <summary>
         /// Handles the /Home/Index action.
@@ -22,15 +19,15 @@ namespace Magenic.BadgeApplication.Controllers
         /// <returns></returns>
         public async virtual Task<ActionResult> Index()
         {
-            var submittedActivities = await SubmittedActivityCollection.GetSubmittedActivitiesByEmployeeIdAsync(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId, null, null);
+            var submittedActivities = await SubmittedActivityCollection.GetSubmittedActivitiesByEmployeeIdAsync(AuthenticatedUser.EmployeeId, null, null);
             var activityIndexViewModel = new ActivityIndexViewModel()
             {
-                SubmittedActivity = SubmitActivity.CreateActivitySubmission(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId),
+                SubmittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.EmployeeId),
             };
 
             var allActivities = await ActivityCollection.GetAllActivitiesAsync();
             activityIndexViewModel.PossibleActivities = allActivities.Select(ai => new SelectListItem() { Text = ai.Name, Value = ai.Id.ToString(CultureInfo.CurrentCulture) });
-            activityIndexViewModel.PreviousActivities = await SubmittedActivityCollection.GetSubmittedActivitiesByEmployeeIdAsync(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId, null, null);
+            activityIndexViewModel.PreviousActivities = await SubmittedActivityCollection.GetSubmittedActivitiesByEmployeeIdAsync(AuthenticatedUser.EmployeeId, null, null);
 
             return View(Mvc.Activities.Views.Index, activityIndexViewModel);
         }
@@ -43,7 +40,7 @@ namespace Magenic.BadgeApplication.Controllers
         [ValidateAntiForgeryToken]
         public async virtual Task<ActionResult> SubmitActivityForm()
         {
-            var submittedActivity = SubmitActivity.CreateActivitySubmission(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId);
+            var submittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.EmployeeId);
             var activityIndexViewModel = new ActivityIndexViewModel()
             {
                 SubmittedActivity = submittedActivity,

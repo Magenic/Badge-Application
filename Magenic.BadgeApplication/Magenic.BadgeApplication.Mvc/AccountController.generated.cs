@@ -96,6 +96,7 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionParamsClass_LogOn
         {
             public readonly string logOnViewModel = "logOnViewModel";
+            public readonly string returnUrl = "returnUrl";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -150,13 +151,14 @@ namespace Magenic.BadgeApplication.Controllers
             return callInfo;
         }
 
-        partial void LogOnOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Magenic.BadgeApplication.Models.LogOnViewModel logOnViewModel);
+        partial void LogOnOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Magenic.BadgeApplication.Models.LogOnViewModel logOnViewModel, string returnUrl);
 
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> LogOn(Magenic.BadgeApplication.Models.LogOnViewModel logOnViewModel)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> LogOn(Magenic.BadgeApplication.Models.LogOnViewModel logOnViewModel, string returnUrl)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LogOn);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "logOnViewModel", logOnViewModel);
-            LogOnOverride(callInfo, logOnViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
+            LogOnOverride(callInfo, logOnViewModel, returnUrl);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
