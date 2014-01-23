@@ -94,7 +94,8 @@ namespace Magenic.BadgeApplication
         {
             if (ApplicationContext.User != null && ApplicationContext.User.Identity.IsAuthenticated && ApplicationContext.User.Identity is FormsIdentity)
             {
-                await CustomPrincipal.LoadAsync(ApplicationContext.User.Identity.Name);
+                var customPrincipal = await CustomPrincipal.LoadAsync(ApplicationContext.User.Identity.Name);
+                ApplicationContext.User = customPrincipal;
             }
         }
     }

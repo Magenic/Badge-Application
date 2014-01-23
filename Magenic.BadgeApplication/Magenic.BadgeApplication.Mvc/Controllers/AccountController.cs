@@ -1,14 +1,14 @@
-﻿using Autofac;
+﻿using Csla;
 using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
-using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.BusinessLogic.Security;
 using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Models;
 using Magenic.BadgeApplication.Resources;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using CslaController = Csla.Web.Mvc.AsyncController;
+using System.Web.Security;
 
 namespace Magenic.BadgeApplication.Controllers
 {
@@ -16,7 +16,7 @@ namespace Magenic.BadgeApplication.Controllers
     /// 
     /// </summary>
     public partial class AccountController
-        : CslaController
+        : BaseController
     {
         /// <summary>
         /// Handles the /Home/Index action.
@@ -24,8 +24,8 @@ namespace Magenic.BadgeApplication.Controllers
         /// <returns></returns>
         public async virtual Task<ActionResult> Index()
         {
-            var accountInfo = await AccountInfoEdit.GetAccountInfoForEmployee(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId);
-            var badgeHistory = await EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId, BadgeType.Unset);
+            var accountInfo = await AccountInfoEdit.GetAccountInfoForEmployee(AuthenticatedUser.EmployeeId);
+            var badgeHistory = await EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(AuthenticatedUser.EmployeeId, BadgeType.Unset);
 
             var accountInfoIndexViewModel = new AccountInfoIndexViewModel(badgeHistory)
             {
@@ -43,7 +43,7 @@ namespace Magenic.BadgeApplication.Controllers
         [HttpPost]
         public async virtual Task<ActionResult> SubmitPayout(int pointPayoutThreshold)
         {
-            var accountInfo = await AccountInfoEdit.GetAccountInfoForEmployee(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId);
+            var accountInfo = await AccountInfoEdit.GetAccountInfoForEmployee(AuthenticatedUser.EmployeeId);
             accountInfo.PointPayoutThreshold = pointPayoutThreshold;
             if (!await SaveObjectAsync(accountInfo, true))
             {
@@ -68,15 +68,26 @@ namespace Magenic.BadgeApplication.Controllers
         /// Logs the on.
         /// </summary>
         /// <param name="logOnViewModel">The log on view model.</param>
+        /// <param name="returnUrl">The return URL.</param>
         /// <returns></returns>
         [HttpPost]
-        public virtual async Task<ActionResult> LogOn(LogOnViewModel logOnViewModel)
+        public virtual async Task<ActionResult> LogOn(LogOnViewModel logOnViewModel, string returnUrl)
         {
             Arg.IsNotNull(() => logOnViewModel);
 
-            var account = await AuthenticatedUser.LogOnAsync(logOnViewModel.UserName, logOnViewModel.Password);
+            try
+            {
+                var customPrincipal = await CustomPrincipal.LogOnAsync(logOnViewModel.UserName, logOnViewModel.Password);
+                ApplicationContext.User = customPrincipal;
+                FormsAuthentication.RedirectFromLoginPage(customPrincipal.Identity.Name, logOnViewModel.RememberMe);
+            }
+            catch (DataPortalException dataPortalException)
+            {
+                // TODO: do we add logging here?
+                ModelState.AddModelError("*", dataPortalException.BusinessException.Message);
+            }
 
-            return RedirectToAction(Mvc.Home.Index());
+            return View(logOnViewModel);
         }
     }
 }

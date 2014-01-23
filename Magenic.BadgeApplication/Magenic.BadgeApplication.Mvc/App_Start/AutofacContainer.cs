@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using Csla.Core;
+using Csla.Security;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.BusinessLogic.Security;
 using Magenic.BadgeApplication.Common.Interfaces;
@@ -27,6 +28,17 @@ namespace Magenic.BadgeApplication
             builder.RegisterModelBinderProvider();
             builder.RegisterModule(new AutofacWebTypesModule());
 
+            RegisterDataAccess(builder);
+            RegisterAuthentication(builder);
+
+            IoC.Container = builder.Build();
+            Csla.ApplicationContext.DataPortalActivator = new ObjectActivator();
+
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(IoC.Container));
+        }
+
+        private static void RegisterDataAccess(ContainerBuilder builder)
+        {
             builder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
                 .Where(t => t.GetInterface("IBusinessObject") == typeof(IBusinessObject))
                 .AsImplementedInterfaces();
@@ -37,15 +49,14 @@ namespace Magenic.BadgeApplication
 
             builder.RegisterAssemblyTypes(Assembly.Load("Magenic.BadgeApplication.DataAccess.EF"))
                 .AsImplementedInterfaces();
+        }
 
+        private static void RegisterAuthentication(ContainerBuilder builder)
+        {
             builder.RegisterGeneric(typeof(ObjectFactory<>)).As(typeof(IObjectFactory<>));
             builder.RegisterType(typeof(CustomIdentity.IdentityCriteria)).As(typeof(IIdentityCriteria));
+            builder.RegisterType(typeof(CustomPrincipal)).As(typeof(ICslaPrincipal));
             builder.RegisterType(typeof(Security.SecurityContextLocator)).As(typeof(Security.ISecurityContextLocator));
-
-            IoC.Container = builder.Build();
-            Csla.ApplicationContext.DataPortalActivator = new ObjectActivator();
-
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(IoC.Container));
         }
     }
 }

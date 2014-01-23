@@ -1,14 +1,11 @@
-﻿using Autofac;
-using Magenic.BadgeApplication.BusinessLogic.Activity;
+﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
-using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Models;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using CslaController = Csla.Web.Mvc.AsyncController;
 
 namespace Magenic.BadgeApplication.Controllers
 {
@@ -16,7 +13,7 @@ namespace Magenic.BadgeApplication.Controllers
     /// 
     /// </summary>
     public partial class BadgesController
-        : CslaController
+        : BaseController
     {
         /// <summary>
         /// Handles the /Home/Index action.
@@ -25,9 +22,9 @@ namespace Magenic.BadgeApplication.Controllers
         public async virtual Task<ActionResult> Index()
         {
             var corporateBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Corporate);
-            var earnedCorporateBadges = await EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId, BadgeType.Corporate);
+            var earnedCorporateBadges = await EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(AuthenticatedUser.EmployeeId, BadgeType.Corporate);
             var communityBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Community);
-            var earnedCommunityBadges = await EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId, BadgeType.Community);
+            var earnedCommunityBadges = await EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(AuthenticatedUser.EmployeeId, BadgeType.Community);
 
             var sortedCorporateBadges = corporateBadges.OrderByDescending(b => b.ApprovedDate);
             var sortedCommunityBadges = communityBadges.OrderByDescending(b => b.ApprovedDate);
@@ -37,7 +34,7 @@ namespace Magenic.BadgeApplication.Controllers
                 CorporateEarnedBadges = earnedCorporateBadges,
                 CommunityBadges = communityBadges,
                 CommunityEarnedBadges = earnedCommunityBadges,
-                SubmittedActivity = SubmitActivity.CreateActivitySubmission(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId),
+                SubmittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.EmployeeId),
             };
 
             var allActivities = await ActivityCollection.GetAllActivitiesAsync();
