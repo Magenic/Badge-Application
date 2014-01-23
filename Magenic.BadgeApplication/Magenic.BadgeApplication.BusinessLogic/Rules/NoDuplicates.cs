@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Rules
 {
-    public class NoDuplicates : BusinessRule
+    public sealed class NoDuplicates : BusinessRule
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
         public delegate bool CheckForDuplicates(int currentId, string value);

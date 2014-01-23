@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Magenic.BadgeApplication.Common.DTO;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
@@ -31,5 +32,11 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         /// <param name="badgeId">The id of the badge to remove.</param>
         void Delete(int badgeId);
+        /// <summary>
+        /// Returns a list of badges that could be created by a given activity.
+        /// </summary>
+        /// <param name="activityId">The activity id to look for.</param>
+        /// <returns>A list of badges that could be created by a given activity.</returns>
+        IList<BadgeEditDTO> GetPotentialBadgesForActivity(int activityId);
     }
 }

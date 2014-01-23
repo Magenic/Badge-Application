@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.Collections.Generic;
+using Autofac;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.DTO;
@@ -69,6 +70,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
         }
 
         public void Delete(int badgeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<BadgeEditDTO> GetPotentialBadgesForActivity(int activityId)
         {
             throw new NotImplementedException();
         }

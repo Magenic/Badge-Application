@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace Magenic.BadgeApplication.Common.DTO
 {
@@ -84,5 +85,10 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         public byte[] BadgeImage { get; set; }
+        /// <summary>
+        /// A list of activities that are required for this badge to be awarded.
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public System.Collections.Generic.IList<BadgeActivityEditDTO> BadgeActivities { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
     /// and then either approve or deny the activity.
     /// </summary>
     [Serializable]
-    public class ApproveActivityItem : BusinessBase<ApproveActivityItem>, IApproveActivityItem
+    public sealed class ApproveActivityItem : BusinessBase<ApproveActivityItem>, IApproveActivityItem
     {
         #region Properties
 
@@ -31,6 +31,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         {
             get { return GetProperty(SubmissionDateProperty); }
             private set { LoadProperty(SubmissionDateProperty, value); }
+        }
+
+        public static readonly PropertyInfo<int> ActivityIdProperty = RegisterProperty<int>(c => c.ActivityId);
+        public int ActivityId
+        {
+            get { return GetProperty(ActivityIdProperty); }
+            private set { LoadProperty(ActivityIdProperty, value); }
         }
 
         public static readonly PropertyInfo<string> ActivityNameProperty = RegisterProperty<string>(c => c.ActivityName);
@@ -107,12 +114,22 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             }
         }
 
+        /// <summary>
+        /// Called when an approved activity item is saved.  If badges are created successfully the status is 
+        /// set to complete.
+        /// </summary>
+        internal void CompleteActivitySubmission()
+        {
+            this.Status = ActivitySubmissionStatus.Complete;
+        }
+
         internal void Load(ApproveActivityItemDTO item)
         {
             using (this.BypassPropertyChecks)
             {
                 this.SubmissionId = item.SubmissionId;
                 this.SubmissionDate = item.SubmissionDate;
+                this.ActivityId = item.ActivityId;
                 this.ActivityName = item.ActivityName;
                 this.ActivityDescription = item.ActivityDescription;
                 this.SubmissionNotes = item.SubmissionNotes;
@@ -127,19 +144,22 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
 
         internal ApproveActivityItemDTO Unload()
         {
-            var returnValue = IoC.Container.Resolve<ApproveActivityItemDTO>();
             using (this.BypassPropertyChecks)
             {
-                returnValue.SubmissionId = this.SubmissionId;
-                returnValue.SubmissionDate = this.SubmissionDate;
-                returnValue.ActivityName = this.ActivityName;
-                returnValue.ActivityDescription = this.ActivityDescription;
-                returnValue.SubmissionNotes = this.SubmissionNotes;
-                returnValue.EmployeeId = this.EmployeeId;
-                returnValue.Status = this.Status;
-                returnValue.ApprovedById = this.ApprovedById;
+                var returnValue = new ApproveActivityItemDTO
+                {
+                    SubmissionId = this.SubmissionId,
+                    SubmissionDate = this.SubmissionDate,
+                    ActivityId = this.ActivityId,
+                    ActivityName = this.ActivityName,
+                    ActivityDescription = this.ActivityDescription,
+                    SubmissionNotes = this.SubmissionNotes,
+                    EmployeeId = this.EmployeeId,
+                    Status = this.Status,
+                    ApprovedById = this.ApprovedById,
+                };
+                return returnValue;
             }
-            return returnValue;
         }
 
         #endregion Methods

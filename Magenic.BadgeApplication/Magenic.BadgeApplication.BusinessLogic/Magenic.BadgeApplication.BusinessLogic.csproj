@@ -71,6 +71,9 @@
     <Compile Include="Activity\SubmitActivity.cs" />
     <Compile Include="Activity\SubmittedActivityCollection.cs" />
     <Compile Include="Activity\SubmittedActivityItem.cs" />
+    <Compile Include="Badge\AwardBadges.cs" />
+    <Compile Include="Badge\BadgeActivityEdit.cs" />
+    <Compile Include="Badge\BadgeActivityEditCollection.cs" />
     <Compile Include="Badge\BadgeCollection.cs" />
     <Compile Include="Badge\BadgeEdit.cs" />
     <Compile Include="Badge\BadgeItem.cs" />

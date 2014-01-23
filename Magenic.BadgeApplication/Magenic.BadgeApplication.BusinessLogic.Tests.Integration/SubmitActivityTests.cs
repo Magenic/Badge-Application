@@ -53,7 +53,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         {
             var submitActivity = SubmitActivity.CreateActivitySubmission(employeeId);
             submitActivity.Notes = newNotes;
-            submitActivity.ActivityId = 1;
+            submitActivity.ActivityId = 2;
 
             submitActivity = (ISubmitActivity)submitActivity.Save();
             return submitActivity;

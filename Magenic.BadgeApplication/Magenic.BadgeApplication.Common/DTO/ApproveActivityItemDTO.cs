@@ -17,6 +17,10 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public DateTime SubmissionDate { get; set; }
         /// <summary>
+        /// The id of the activity used to identify it.
+        /// </summary>
+        public int ActivityId { get; set; }
+        /// <summary>
         /// The name of the activity used to identify it.
         /// </summary>
         public string ActivityName { get; set; }

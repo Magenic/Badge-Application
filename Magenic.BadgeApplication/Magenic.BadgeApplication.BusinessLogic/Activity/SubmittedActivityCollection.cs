@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
     [Serializable]
-    public class SubmittedActivityCollection : ReadOnlyListBase<SubmittedActivityCollection, ISubmittedActivityItem>, ISubmittedActivityCollection
+    public sealed class SubmittedActivityCollection : ReadOnlyListBase<SubmittedActivityCollection, ISubmittedActivityItem>, ISubmittedActivityCollection
     {
         #region Criteria
 
@@ -42,7 +42,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
 
         #region Data Access
 
-        protected async Task DataPortal_Fetch(SubmittedActivityCriteria criteria)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        private async Task DataPortal_Fetch(SubmittedActivityCriteria criteria)
         {
             var dal = IoC.Container.Resolve<ISubmittedActivityCollectionDAL>();
 

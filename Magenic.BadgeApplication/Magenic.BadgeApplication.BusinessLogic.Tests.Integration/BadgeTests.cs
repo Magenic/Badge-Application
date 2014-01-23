@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
 {
     [TestClass]
-    public class BadgeTests
+    public class BadgeTests : TransactionalTest
     {
         [TestMethod]
-        public async Task GetActivityEditById()
+        public async Task GetBadgeEditById()
         {
             var activityEdit = await BadgeEdit.GetBadgeEditByIdAsync(1);
 
@@ -32,7 +32,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
                 badgeEdit.SetBadgeImage(buffer);
             }
 
-            badgeEdit = (IBadgeEdit)badgeEdit.Save();
+            badgeEdit = (IBadgeEdit) badgeEdit.Save();
 
             Assert.AreEqual(newName, badgeEdit.Name);
 
@@ -62,13 +62,17 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
             badgeEdit.Tagline = "dsfds";
             badgeEdit.Priority = 5;
 
+            var badgeActivity = new BadgeActivityEdit();
+            badgeActivity.ActivityId = 1;
+            badgeEdit.BadgeActivities.Add(badgeActivity);
+
             badgeEdit = (IBadgeEdit) badgeEdit.Save();
             return badgeEdit;
         }
 
         [TestMethod]
         [ExpectedException(typeof(Csla.DataPortalException))]
-        public async Task DeleteActivity()
+        public async Task DeleteBadge()
         {
             const string newName = "Test Name";
             const string newDescription = "Test Description";
