@@ -1,4 +1,5 @@
 ﻿using Magenic.BadgeApplication.Common.Interfaces;
+using System.Web.Mvc;
 
 namespace Magenic.BadgeApplication.Models
 {
@@ -21,7 +22,7 @@ namespace Magenic.BadgeApplication.Models
         /// <param name="allActivities">All activities.</param>
         public BadgeEditViewModel(IActivityCollection allActivities)
         {
-            AllActivities = allActivities;
+            AllActivities = new MultiSelectList(allActivities, "Id", "Name");
         }
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// All activities.
         /// </value>
-        public IActivityCollection AllActivities { get; private set; }
+        public MultiSelectList AllActivities { get; private set; }
 
         /// <summary>
         /// Gets or sets the badge.
