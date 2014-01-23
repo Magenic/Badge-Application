@@ -46,6 +46,13 @@
             @Html.RadioButtonFor(be => be.Type, BadgeType.Community)
             @ApplicationResources.BadgeCommunityLabel
         </label>
+        <br /><br />
+        <div class="editor-label">
+            @Html.Label(ApplicationResources.RequiredActivitiesLabel)
+        </div>
+        <div class="editor-field">
+            @Html.ListBox("SelectedActivities", ViewData["AllActivities"] as MultiSelectList, new { @class = "form-control selectpicker" })
+        </div>
     </div>
 
     <div class="col-md-5">

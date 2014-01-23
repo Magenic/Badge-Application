@@ -1,4 +1,5 @@
-﻿@using Magenic.BadgeApplication.Resources
+﻿@using Magenic.BadgeApplication.Extensions
+@using Magenic.BadgeApplication.Resources
 @using Magenic.BadgeApplication.Models
 @model ActivityIndexViewModel
 
@@ -22,7 +23,7 @@
             </div>
             <div class="row">
                 <div class="col-md-2">
-                    <i>@previousActivity.Status.ToString()</i>
+                    <i>@previousActivity.Status.GetDescriptionFromEnumValue()</i>
                 </div>
                 <div class="col-md-6">
                     @previousActivity.SubmissionNotes

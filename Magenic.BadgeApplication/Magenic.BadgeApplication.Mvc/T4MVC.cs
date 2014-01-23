@@ -74,6 +74,8 @@ namespace Links
         public static readonly string bootstrap_datepicker_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-datepicker.min.js") ? Url("bootstrap-datepicker.min.js") : Url("bootstrap-datepicker.js");
         public static readonly string bootstrap_filestyle_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-filestyle.min.js") ? Url("bootstrap-filestyle.min.js") : Url("bootstrap-filestyle.js");
         public static readonly string bootstrap_filestyle_min_js = Url("bootstrap-filestyle.min.js");
+        public static readonly string bootstrap_select_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-select.min.js") ? Url("bootstrap-select.min.js") : Url("bootstrap-select.js");
+        public static readonly string bootstrap_select_min_js = Url("bootstrap-select.min.js");
         public static readonly string bootstrap_slider_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-slider.min.js") ? Url("bootstrap-slider.min.js") : Url("bootstrap-slider.js");
         public static readonly string bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.js") ? Url("bootstrap.min.js") : Url("bootstrap.js");
         public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
@@ -156,6 +158,9 @@ namespace Links
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
         public static readonly string bootstrap_datepicker_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-datepicker.min.css") ? Url("bootstrap-datepicker.min.css") : Url("bootstrap-datepicker.css");
 
+        public static readonly string bootstrap_select_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-select.min.css") ? Url("bootstrap-select.min.css") : Url("bootstrap-select.css");
+
+        public static readonly string bootstrap_select_min_css = Url("bootstrap-select.min.css");
         public static readonly string bootstrap_theme_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-theme.min.css") ? Url("bootstrap-theme.min.css") : Url("bootstrap-theme.css");
 
         public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");

@@ -35,12 +35,14 @@ namespace Magenic.BadgeApplication
                 Links.Scripts.bootstrap_datepicker_js,
                 Links.Scripts.bootstrap_filestyle_js,
                 Links.Scripts.bootstrap_slider_js,
+                Links.Scripts.bootstrap_select_js,
                 Links.Scripts.respond_js));
 
             bundles.Add(new StyleBundle("~/Content/css").IncludeT4MVC(
                 Links.Content.bootstrap_css,
                 Links.Content.bootstrap_theme_css,
                 Links.Content.bootstrap_datepicker_css,
+                Links.Content.bootstrap_select_css,
                 Links.Content.slider_css,
                 Links.Content.Site_css));
 

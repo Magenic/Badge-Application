@@ -439,6 +439,24 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manage Activities.
+        /// </summary>
+        public static string ManageActivitiesHeader {
+            get {
+                return ResourceManager.GetString("ManageActivitiesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Activities.
+        /// </summary>
+        public static string ManageActivitiesLink {
+            get {
+                return ResourceManager.GetString("ManageActivitiesLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paid Out.
         /// </summary>
         public static string PaidOutRowHeader {
@@ -507,6 +525,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string RememberMeLabel {
             get {
                 return ResourceManager.GetString("RememberMeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Required Activities.
+        /// </summary>
+        public static string RequiredActivitiesLabel {
+            get {
+                return ResourceManager.GetString("RequiredActivitiesLabel", resourceCulture);
             }
         }
         
