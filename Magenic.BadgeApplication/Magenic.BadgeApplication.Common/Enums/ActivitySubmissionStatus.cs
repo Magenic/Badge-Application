@@ -1,4 +1,5 @@
-﻿
+﻿using System.ComponentModel;
+
 namespace Magenic.BadgeApplication.Common.Enums
 {
     /// <summary>
@@ -14,6 +15,7 @@ namespace Magenic.BadgeApplication.Common.Enums
         /// <summary>
         /// A new activity submission that has not yet been approved.
         /// </summary>
+        [Description("Awaiting Approval")]
         AwaitingApproval = 1,
         /// <summary>
         /// The submission has been approved, either by a manager in the system or because the activity does not require approval.
@@ -26,7 +28,7 @@ namespace Magenic.BadgeApplication.Common.Enums
         /// <summary>
         /// The activity has had badges generated from it, not further action required.
         /// </summary>
-	    Complete = 4,
+        Complete = 4,
         /// <summary>
         /// There is some error in the submission process.
         /// </summary>

@@ -94,6 +94,7 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string ManageActivities = "ManageActivities";
             public readonly string AddBadge = "AddBadge";
             public readonly string AddBadgePost = "AddBadgePost";
             public readonly string EditBadge = "EditBadge";
@@ -109,6 +110,7 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string ManageActivities = "ManageActivities";
             public const string AddBadge = "AddBadge";
             public const string AddBadgePost = "AddBadgePost";
             public const string EditBadge = "EditBadge";
@@ -203,6 +205,15 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        partial void ManageActivitiesOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ManageActivities()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ManageActivities);
+            ManageActivitiesOverride(callInfo);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 

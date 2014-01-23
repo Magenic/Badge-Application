@@ -35,6 +35,17 @@ namespace Magenic.BadgeApplication.Controllers
         }
 
         /// <summary>
+        /// Manages the activities.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async virtual Task<ActionResult> ManageActivities()
+        {
+            var allActivities = await ActivityCollection.GetAllActivitiesAsync();
+            return View(allActivities);
+        }
+
+        /// <summary>
         /// Adds the badge.
         /// </summary>
         /// <returns></returns>
@@ -56,15 +67,16 @@ namespace Magenic.BadgeApplication.Controllers
         [HttpPost]
         public virtual async Task<ActionResult> AddBadgePost(HttpPostedFileBase badgeImage)
         {
-            Arg.IsNotNull(() => badgeImage);
-
             var badgeEditViewModel = new BadgeEditViewModel()
             {
                 Badge = BadgeEdit.CreateBadge(),
             };
 
-            var bytes = badgeImage.InputStream.GetBytes();
-            badgeEditViewModel.Badge.SetBadgeImage(bytes);
+            if (badgeImage != null)
+            {
+                var bytes = badgeImage.InputStream.GetBytes();
+                badgeEditViewModel.Badge.SetBadgeImage(bytes);
+            }
 
             TryUpdateModel(badgeEditViewModel);
             if (await SaveObjectAsync(badgeEditViewModel.Badge, true))
@@ -99,15 +111,16 @@ namespace Magenic.BadgeApplication.Controllers
         [HttpPost]
         public virtual async Task<ActionResult> EditBadgePost(int id, HttpPostedFileBase badgeImage)
         {
-            Arg.IsNotNull(() => badgeImage);
-
             var badgeEditViewModel = new BadgeEditViewModel()
             {
                 Badge = await BadgeEdit.GetBadgeEditByIdAsync(id),
             };
 
-            var bytes = badgeImage.InputStream.GetBytes();
-            badgeEditViewModel.Badge.SetBadgeImage(bytes);
+            if (badgeImage != null)
+            {
+                var bytes = badgeImage.InputStream.GetBytes();
+                badgeEditViewModel.Badge.SetBadgeImage(bytes);
+            }
 
             TryUpdateModel(badgeEditViewModel);
             if (await SaveObjectAsync(badgeEditViewModel.Badge, true))
