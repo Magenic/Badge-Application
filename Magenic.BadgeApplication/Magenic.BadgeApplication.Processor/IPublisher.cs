@@ -1,8 +1,9 @@
-﻿
+﻿using Magenic.BadgeApplication.Common.DTO;
+
 namespace Magenic.BadgeApplication.Processor
 {
     public interface IPublisher
     {
-        void Publish();
+        void Publish(EarnedBadgeItemDTO earnedBadge);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Magenic.BadgeApplication.Common.DTO;
+using Magenic.BadgeApplication.Common.Exceptions;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -32,6 +33,36 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                            DisplayOnce = eb.DisplayOnce
                                        }).ToArrayAsync();
                 return badgeList;
+            }
+        }
+
+
+        public EarnedBadgeItemDTO GetEarnedBadge(int badgeAwardId)
+        {
+            using (var ctx = new Entities())
+            {
+                BadgeAward badgeAward = ctx.BadgeAwards.SingleOrDefault(badges => badges.BadgeAwardId == badgeAwardId);
+                if (badgeAward == null)
+                { 
+                    throw new NotFoundException(string.Format("Badge award with id {0} was not found", badgeAwardId));
+                }
+               
+                EarnedBadgeItemDTO earnedBadge = new EarnedBadgeItemDTO()
+                {
+                    AwardDate = badgeAward.AwardDate,
+                    AwardPoints = badgeAward.Badge.BadgeAwardValueAmount,
+                    BadgePriority = badgeAward.Badge.BadgePriority,
+                    DisplayOnce = badgeAward.Badge.DisplayOnce,
+                    EmployeeADName = badgeAward.Employee.ADName,
+                    Id = badgeAward.BadgeAwardId,
+                    ImagePath = badgeAward.Badge.BadgePath,
+                    Name = badgeAward.Badge.BadgeName,
+                    PaidOut = badgeAward.PaidOut,
+                    Tagline = badgeAward.Badge.BadgeTagLine,
+                    Type = (Common.Enums.BadgeType)badgeAward.Badge.BadgeTypeId                    
+                };
+
+                return earnedBadge;
             }
         }
     }

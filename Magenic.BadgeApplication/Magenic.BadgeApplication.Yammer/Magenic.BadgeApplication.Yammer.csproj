@@ -31,7 +31,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,8 +41,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Helpers\SerializedJson.cs" />
+    <Compile Include="Helpers\YammerAttachment.cs" />
+    <Compile Include="Helpers\YammerContactInfo.cs" />
+    <Compile Include="Helpers\YammerEmailAddresses.cs" />
+    <Compile Include="Helpers\YammerEmployer.cs" />
+    <Compile Include="Helpers\YammerGroupsAndFeeds.cs" />
+    <Compile Include="Helpers\YammerIM.cs" />
+    <Compile Include="Helpers\YammerLikes.cs" />
+    <Compile Include="Helpers\YammerLikeUser.cs" />
+    <Compile Include="Helpers\YammerMessageContent.cs" />
+    <Compile Include="Helpers\YammerMessage.cs" />
+    <Compile Include="Helpers\YammerNetworkSettings.cs" />
+    <Compile Include="Helpers\YammerPhoneNumbers.cs" />
+    <Compile Include="Helpers\YammerSchool.cs" />
+    <Compile Include="Helpers\YammerSettingsAndFeedsAndGroups.cs" />
+    <Compile Include="Helpers\YammerUserStats.cs" />
+    <Compile Include="YammerPublisher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Helpers\YammerUser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Magenic.BadgeApplication.Common\Magenic.BadgeApplication.Common.csproj">
+      <Project>{d7b48f98-7bd5-4e80-8740-6c348a7f9a1e}</Project>
+      <Name>Magenic.BadgeApplication.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Magenic.BadgeApplication.Processor\Magenic.BadgeApplication.Processor.csproj">
+      <Project>{0d8c2715-a9b5-4e95-885b-3928063bc61e}</Project>
+      <Name>Magenic.BadgeApplication.Processor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

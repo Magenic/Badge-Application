@@ -19,7 +19,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 
                 if (item == null)
                 {
-                    throw new NotFoundException("The top item in the queue could not be found");
+                    return null;
                 }
 
                 return new QueueItemDTO(item.QueueItemId, item.BadgeAwardId, item.QueueItemCreated);
