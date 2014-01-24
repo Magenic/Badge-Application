@@ -15,7 +15,7 @@
             </div>
             @using (Html.BeginForm("EditBadgePost", "BadgeManager", new { id = Model.Badge.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-                @Html.EditorFor(bevw => bevw.Badge)
+                @Html.EditorFor(bevw => bevw.Badge, new { AllActivities = Model.AllActivities })
             }
         </div>
     </div>

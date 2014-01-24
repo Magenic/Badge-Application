@@ -50,7 +50,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         [TestMethod]
         public void InsertActivity()
         {
-            const string newName = "Test Name";
+            var newName = Guid.NewGuid().ToString();
             const string newDescription = "Test Description";
             var activityEdit = ActivityEdit.CreateActivity();
             activityEdit.Name = newName;
@@ -69,7 +69,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         [ExpectedException(typeof(Csla.DataPortalException))]
         public async Task DeleteActivity()
         {
-            const string newName = "Test Name";
+            var newName = Guid.NewGuid().ToString();
             const string newDescription = "Test Description";
             var activityEdit = ActivityEdit.CreateActivity();
             activityEdit.Name = newName;
@@ -84,7 +84,37 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
             activityEdit = ((IActivityEdit) await ActivityEdit.GetActivityEditByIdAsync(id));
 
             Assert.Fail("Activity Edit Fail should not return.");
-
         }
+
+        [TestMethod]
+        public async Task ActivityNameSameAsExisting()
+        {
+            var activityEdit = await ActivityEdit.GetActivityEditByIdAsync(1);
+            var secondActivity = await ActivityEdit.GetActivityEditByIdAsync(2);
+            activityEdit.Name = secondActivity.Name;
+
+            Assert.IsFalse(activityEdit.IsValid);
+        }
+
+        [TestMethod]
+        public async Task ActivityNameNotSameAsExisting()
+        {
+            var activityEdit = await ActivityEdit.GetActivityEditByIdAsync(1);
+            activityEdit.Name = Guid.NewGuid().ToString();
+
+            Assert.IsTrue(activityEdit.IsValid);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "NameAble"), TestMethod]
+        public async Task ActivityNameAbleToBeSetToDbValue()
+        {
+            var activityEdit = await ActivityEdit.GetActivityEditByIdAsync(1);
+            var oldName = activityEdit.Name;
+            activityEdit.Name = Guid.NewGuid().ToString();
+            activityEdit.Name = oldName;
+
+            Assert.IsTrue(activityEdit.IsValid);
+        }
+
     }
 }

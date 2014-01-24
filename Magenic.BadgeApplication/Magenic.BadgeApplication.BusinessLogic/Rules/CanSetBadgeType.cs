@@ -5,7 +5,7 @@ using System;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Rules
 {
-    public class CanSetBadgeType : Csla.Rules.AuthorizationRule
+    public sealed class CanSetBadgeType : Csla.Rules.AuthorizationRule
     {
         private string AllowedRole { get; set; }
         private Common.Enums.BadgeType BadgeType { get; set; }

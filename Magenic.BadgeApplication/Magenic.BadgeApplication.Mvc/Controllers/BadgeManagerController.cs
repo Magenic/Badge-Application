@@ -1,7 +1,5 @@
-﻿using Autofac;
-using Magenic.BadgeApplication.BusinessLogic.Activity;
+﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
-using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Extensions;
@@ -9,7 +7,6 @@ using Magenic.BadgeApplication.Models;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using CslaController = Csla.Web.Mvc.AsyncController;
 
 namespace Magenic.BadgeApplication.Controllers
 {
@@ -17,7 +14,7 @@ namespace Magenic.BadgeApplication.Controllers
     /// 
     /// </summary>
     public partial class BadgeManagerController
-        : CslaController
+        : BaseController
     {
         /// <summary>
         /// Handles the /Home/Index action.
@@ -35,6 +32,17 @@ namespace Magenic.BadgeApplication.Controllers
             };
 
             return View(badgeManagerIndexViewModel);
+        }
+
+        /// <summary>
+        /// Manages the activities.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async virtual Task<ActionResult> ManageActivities()
+        {
+            var allActivities = await ActivityCollection.GetAllActivitiesAsync();
+            return View(allActivities);
         }
 
         /// <summary>
@@ -59,15 +67,16 @@ namespace Magenic.BadgeApplication.Controllers
         [HttpPost]
         public virtual async Task<ActionResult> AddBadgePost(HttpPostedFileBase badgeImage)
         {
-            Arg.IsNotNull(() => badgeImage);
-
             var badgeEditViewModel = new BadgeEditViewModel()
             {
                 Badge = BadgeEdit.CreateBadge(),
             };
 
-            var bytes = badgeImage.InputStream.GetBytes();
-            badgeEditViewModel.Badge.SetBadgeImage(bytes);
+            if (badgeImage != null)
+            {
+                var bytes = badgeImage.InputStream.GetBytes();
+                badgeEditViewModel.Badge.SetBadgeImage(bytes);
+            }
 
             TryUpdateModel(badgeEditViewModel);
             if (await SaveObjectAsync(badgeEditViewModel.Badge, true))
@@ -102,15 +111,16 @@ namespace Magenic.BadgeApplication.Controllers
         [HttpPost]
         public virtual async Task<ActionResult> EditBadgePost(int id, HttpPostedFileBase badgeImage)
         {
-            Arg.IsNotNull(() => badgeImage);
-
             var badgeEditViewModel = new BadgeEditViewModel()
             {
                 Badge = await BadgeEdit.GetBadgeEditByIdAsync(id),
             };
 
-            var bytes = badgeImage.InputStream.GetBytes();
-            badgeEditViewModel.Badge.SetBadgeImage(bytes);
+            if (badgeImage != null)
+            {
+                var bytes = badgeImage.InputStream.GetBytes();
+                badgeEditViewModel.Badge.SetBadgeImage(bytes);
+            }
 
             TryUpdateModel(badgeEditViewModel);
             if (await SaveObjectAsync(badgeEditViewModel.Badge, true))
@@ -148,7 +158,7 @@ namespace Magenic.BadgeApplication.Controllers
         [HttpGet]
         public async virtual Task<ActionResult> ApproveActivities()
         {
-            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId);
+            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
             var approveActivitiesViewModel = new ApproveActivitiesViewModel(activitiesToApprove);
             return View(approveActivitiesViewModel);
         }
@@ -163,7 +173,7 @@ namespace Magenic.BadgeApplication.Controllers
         {
             Arg.IsNotNull(() => approveActivityItem);
 
-            approveActivityItem.ApproveActivitySubmission(IoC.Container.Resolve<Security.ISecurityContextLocator>().Principal().CustomIdentity().EmployeeId);
+            approveActivityItem.ApproveActivitySubmission(AuthenticatedUser.EmployeeId);
             return Json(new { Success = true });
         }
 

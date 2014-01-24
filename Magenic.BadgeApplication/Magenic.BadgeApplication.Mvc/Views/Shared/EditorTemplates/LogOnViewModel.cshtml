@@ -2,11 +2,11 @@
 @using Magenic.BadgeApplication.Models
 @model LogOnViewModel
 
-@using (Html.BeginForm(Mvc.Account.ActionNames.LogOn))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
-        @Html.LabelFor(lovm => lovm.UserName)
+        @Html.LabelFor(lovm => lovm.UserName, ApplicationResources.UserNameLabel)
         @Html.TextBoxFor(lovm => lovm.UserName, new { @class = "form-control" })
         @Html.ValidationMessageFor(lovm => lovm.UserName)
     </div>
@@ -15,5 +15,14 @@
         @Html.PasswordFor(lovm => lovm.Password, new { @class = "form-control" })
         @Html.ValidationMessageFor(lovm => lovm.Password)
     </div>
+    <div class="form-group">
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(lovm => lovm.RememberMe) @ApplicationResources.RememberMeLabel
+            </label>
+        </div>
+    </div>
     <input type="submit" value="@ApplicationResources.SubmitButton" class="btn btn-success" />
+    <br /><br />
+    @Html.ValidationSummary(false)
 }

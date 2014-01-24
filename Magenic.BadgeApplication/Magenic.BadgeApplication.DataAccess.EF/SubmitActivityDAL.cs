@@ -43,9 +43,9 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 ctx.ActivitySubmissions.Attach(saveActivitySubmission);
                 var objectState = ((IObjectContextAdapter)ctx).ObjectContext.ObjectStateManager;
                 objectState.GetObjectStateEntry(saveActivitySubmission).SetModifiedProperty("ActivityId");
-                objectState.GetObjectStateEntry(saveActivitySubmission).SetModifiedProperty("EmployeeADName");
+                objectState.GetObjectStateEntry(saveActivitySubmission).SetModifiedProperty("EmployeeId");
                 objectState.GetObjectStateEntry(saveActivitySubmission).SetModifiedProperty("SubmissionStatusId");
-                objectState.GetObjectStateEntry(saveActivitySubmission).SetModifiedProperty("SubmissionApprovedADName");
+                objectState.GetObjectStateEntry(saveActivitySubmission).SetModifiedProperty("SubmissionApprovedById");
                 objectState.GetObjectStateEntry(saveActivitySubmission).SetModifiedProperty("SubmissionDate");
                 objectState.GetObjectStateEntry(saveActivitySubmission).SetModifiedProperty("SubmissionDescription");
 

@@ -1,27 +1,31 @@
-﻿using Csla;
+﻿using System.Globalization;
 using Csla.Core;
 using Csla.Rules;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using Magenic.BadgeApplication.BusinessLogic.Activity;
+using System.Linq;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Rules
 {
-    public class NoDuplicates : BusinessRule
+    public sealed class NoDuplicates : BusinessRule
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
-        public delegate bool CheckForDuplicates(string value);
+        public delegate bool CheckForDuplicates(int currentId, string value);
 
         private CheckForDuplicates DuplicateCommand;
+        private string IdPropertyName;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NoDuplicates(IPropertyInfo primaryProperty, CheckForDuplicates duplicateCommand)
+        public NoDuplicates(IPropertyInfo primaryProperty, IPropertyInfo idProperty, CheckForDuplicates duplicateCommand)
             : base(primaryProperty)
         {
             if (primaryProperty == null)
             {
                 throw new ArgumentException("primaryProperty cannot be null.");
+            }
+            if (idProperty == null)
+            {
+                throw new ArgumentException("idProperty cannot be null.");
             }
             if (duplicateCommand == null)
             {
@@ -31,31 +35,26 @@ namespace Magenic.BadgeApplication.BusinessLogic.Rules
             {
                 throw new ArgumentException("primaryProperty must be a string.");
             }
+            if (idProperty.Type != typeof(int))
+            {
+                throw new ArgumentException("idProperty must be an int.");
+            }
 
-            this.InputProperties = new List<IPropertyInfo> { PrimaryProperty };
+            this.IdPropertyName = idProperty.Name;
+            this.InputProperties = new List<IPropertyInfo> { primaryProperty, idProperty };
             this.DuplicateCommand = duplicateCommand;
-            this.IsAsync = true;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
-        protected async override void Execute(RuleContext context)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
+        protected override void Execute(RuleContext context)
         {
             var primaryPropertyValue = (string)context.InputPropertyValues[PrimaryProperty];
-            var isNew = ((IBusinessBase)context.Target).IsNew;
+            var idProperty = this.InputProperties.Single(p => p.Name == this.IdPropertyName);
+            var idValue = (int)context.InputPropertyValues[idProperty];
 
-            try
+            if (DuplicateCommand(idValue, primaryPropertyValue))
             {
-                if (isNew)
-                {
-                    if (await ActivityNameExists.NameAlreadyExistsAsync(primaryPropertyValue))
-                    {
-                        context.AddErrorResult(string.Format("The Name {0} already exists.", primaryPropertyValue));
-                    }
-                }
-            }
-            finally
-            {
-                context.Complete();
+                context.AddErrorResult(string.Format(CultureInfo.CurrentCulture, "The value {0} already exists.", primaryPropertyValue));
             }
         }
     }

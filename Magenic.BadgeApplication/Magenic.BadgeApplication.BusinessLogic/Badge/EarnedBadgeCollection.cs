@@ -14,13 +14,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
     /// A read only list of earned badge information.
     /// </summary>
     [Serializable]
-    public class EarnedBadgeCollection : ReadOnlyListBase<EarnedBadgeCollection, IEarnedBadgeItem>, IEarnedBadgeCollection
+    public sealed class EarnedBadgeCollection : ReadOnlyListBase<EarnedBadgeCollection, IEarnedBadgeItem>, IEarnedBadgeCollection
     {
 
         #region Criteria Classes
 
         [Serializable]
-        protected class BadgeCollectionForUserCriteria : CriteriaBase<BadgeCollectionForUserCriteria>
+        private class BadgeCollectionForUserCriteria : CriteriaBase<BadgeCollectionForUserCriteria>
         {
             public int EmployeeId { get; set; }
             public BadgeType BadgeType { get; set; }
@@ -45,7 +45,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
 
         #region Data Access
 
-        protected async Task DataPortal_Fetch(BadgeCollectionForUserCriteria criteria)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        private async Task DataPortal_Fetch(BadgeCollectionForUserCriteria criteria)
         {
             var dal = IoC.Container.Resolve<IEarnedBadgeCollectionDAL>();
 

@@ -276,4 +276,25 @@
   <data name="ClearButton" xml:space="preserve">
     <value>Clear</value>
   </data>
+  <data name="ActivitySubmissionNotesLabel" xml:space="preserve">
+    <value>Activity Description</value>
+  </data>
+  <data name="ActivitySubmissionTypeLabel" xml:space="preserve">
+    <value>Activity Type</value>
+  </data>
+  <data name="RememberMeLabel" xml:space="preserve">
+    <value>Remember Me</value>
+  </data>
+  <data name="UserNameLabel" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="RequiredActivitiesLabel" xml:space="preserve">
+    <value>Select Required Activities</value>
+  </data>
+  <data name="ManageActivitiesHeader" xml:space="preserve">
+    <value>Manage Activities</value>
+  </data>
+  <data name="ManageActivitiesLink" xml:space="preserve">
+    <value>Manage Activities</value>
+  </data>
 </root>

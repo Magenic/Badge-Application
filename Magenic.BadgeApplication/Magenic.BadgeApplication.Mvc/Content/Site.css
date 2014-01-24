@@ -121,14 +121,6 @@ footer {
 footer p {
   font-size: smaller;
 }
-.submittedActivity {
-  /* Set width on the form input elements since they're 100% wide by default */
-}
-.submittedActivity input,
-.submittedActivity select,
-.submittedActivity textarea {
-  max-width: 280px;
-}
 .bootstrap-filestyle input {
   max-width: 300px;
 }

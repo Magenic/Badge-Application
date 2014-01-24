@@ -1,23 +1,25 @@
 ﻿using Autofac;
 using Csla;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
     [Serializable]
-    public class ActivityNameExists: CommandBase<ActivityNameExists>
+    public sealed class ActivityNameExists: CommandBase<ActivityNameExists>
     {
         private bool NameExists { get; set; }
         private string Name { get; set; }
-        
+        private int Id { get; set; }
+
         #region Factory Methods
 
-        public async static Task<bool> NameAlreadyExistsAsync(string name)
+        public static bool NameAlreadyExists(int id, string name)
         {
-            var nameExistsCommand = new ActivityNameExists {Name = name};
-            nameExistsCommand = await IoC.Container.Resolve<IDataPortal<ActivityNameExists>>().ExecuteAsync(nameExistsCommand);
+            var nameExistsCommand = new ActivityNameExists {Name = name, Id = id};
+            nameExistsCommand = IoC.Container.Resolve<IObjectFactory<ActivityNameExists>>().Execute(nameExistsCommand);
             return nameExistsCommand.NameExists;
         }
 
@@ -27,7 +29,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
 
         protected override void DataPortal_Execute()
         {
-            this.NameExists = this.Name == "Foo";
+            var dal = IoC.Container.Resolve<IActivityEditDAL>();
+            this.NameExists = dal.ActivityNameExists(this.Id, this.Name);
         }
 
         #endregion Data Access

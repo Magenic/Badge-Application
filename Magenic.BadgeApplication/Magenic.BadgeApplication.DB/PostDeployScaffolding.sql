@@ -157,7 +157,8 @@ MERGE INTO [dbo].[BadgeActivity]  AS Target
 USING (VALUES
     (1, 1, 1, 20),
     (2, 2, 2, 50),
-    (3, 3, 2, 0)
+    (3, 3, 2, 0),
+	(4, 4, 14, 0)
 )
 AS Source ([badge_activity_id], [badge_id], [activity_id], [points_awarded]) 
 ON Target.[BadgeActivityId] = Source.[badge_activity_id]
