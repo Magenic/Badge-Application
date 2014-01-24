@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Rules
 {
-    public class DateOrder : BusinessRule
+    public sealed class DateOrder : BusinessRule
     {
         private IPropertyInfo EndDateProperty;
         public DateOrder(IPropertyInfo startDateProperty, IPropertyInfo endDateProperty)

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
 {
     [Serializable]
-    public class AccountInfoEdit : BusinessBase<AccountInfoEdit>, IAccountInfoEdit
+    public sealed class AccountInfoEdit : BusinessBase<AccountInfoEdit>, IAccountInfoEdit
     {
         #region Properties
 
@@ -85,7 +85,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
 
         #region Data Access
 
-        protected async Task DataPortal_Fetch(int employeeId)
+        private async Task DataPortal_Fetch(int employeeId)
         {
             var dal = IoC.Container.Resolve<IAccountInfoEditDAL>();
 

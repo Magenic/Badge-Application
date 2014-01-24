@@ -10,7 +10,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
     /// A read only badge item in a collection.
     /// </summary>
     [Serializable]
-    public class BadgeItem : ReadOnlyBase<BadgeItem>, IBadgeItem
+    public sealed class BadgeItem : ReadOnlyBase<BadgeItem>, IBadgeItem
     {
         #region Properties
 

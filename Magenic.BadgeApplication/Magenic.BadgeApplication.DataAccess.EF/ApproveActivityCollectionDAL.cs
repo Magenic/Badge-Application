@@ -22,10 +22,11 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                           where t.SubmissionStatusId == (int)ActivitySubmissionStatus.AwaitingApproval
                                           where (e.ApprovingManagerId1 == managerEmployeeId
                                           || e.ApprovingManagerId2 == managerEmployeeId)
-                                          select new Common.DTO.ApproveActivityItemDTO
+                                          select new ApproveActivityItemDTO
                                           {
                                               SubmissionId = t.ActivitySubmissionId,
                                               SubmissionDate = t.SubmissionDate,
+                                              ActivityId = t.ActivityId,
                                               ActivityDescription = a.ActivityDescription,
                                               ActivityName = a.ActivityName,
                                               ApprovedById = t.SubmissionApprovedById ?? 0,

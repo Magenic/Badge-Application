@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Rules
 {
-    public class DefaultActivityStatus : BusinessRule
+    public sealed class DefaultActivityStatus : BusinessRule
     {
         private string StatusName;
         private string ApprovedByIdName;

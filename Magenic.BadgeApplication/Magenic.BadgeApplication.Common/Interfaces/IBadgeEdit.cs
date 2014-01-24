@@ -82,5 +82,9 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// The date and time of when this badge was approved to be awarded.
         /// </summary>
         DateTime? ApprovedDate { get; }
+        /// <summary>
+        /// A collection of prerequisite activities needed to be awarded this badge.
+        /// </summary>
+        IBadgeActivityEditCollection BadgeActivities { get; }
     }
 }
