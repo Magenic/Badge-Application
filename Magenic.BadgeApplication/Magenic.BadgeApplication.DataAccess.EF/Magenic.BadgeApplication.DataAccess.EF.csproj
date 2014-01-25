@@ -150,6 +150,7 @@
     <Compile Include="QueueEventLog.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
+    <Compile Include="QueueEventLogDAL.cs" />
     <Compile Include="QueueItem.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
