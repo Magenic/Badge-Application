@@ -4,6 +4,7 @@ using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Extensions;
 using Magenic.BadgeApplication.Models;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -53,8 +54,9 @@ namespace Magenic.BadgeApplication.Controllers
         public async virtual Task<ActionResult> AddBadge()
         {
             var allActivities = await ActivityCollection.GetAllActivitiesAsync();
+            var badgeEdit = BadgeEdit.CreateBadge();
             var badgeEditViewModel = new BadgeEditViewModel(allActivities);
-            badgeEditViewModel.Badge = BadgeEdit.CreateBadge();
+            badgeEditViewModel.Badge = badgeEdit as BadgeEdit;
 
             return View(Mvc.BadgeManager.Views.AddBadge, badgeEditViewModel);
         }
@@ -62,16 +64,14 @@ namespace Magenic.BadgeApplication.Controllers
         /// <summary>
         /// Adds the badge.
         /// </summary>
+        /// <param name="badgeEditViewModel">The badge edit view model.</param>
         /// <param name="badgeImage">The badge image.</param>
         /// <returns></returns>
         [HttpPost]
-        public virtual async Task<ActionResult> AddBadgePost(HttpPostedFileBase badgeImage)
+        public virtual async Task<ActionResult> AddBadgePost(BadgeEditViewModel badgeEditViewModel, HttpPostedFileBase badgeImage)
         {
-            var badgeEditViewModel = new BadgeEditViewModel()
-            {
-                Badge = BadgeEdit.CreateBadge(),
-            };
-
+            var badgeEdit = BadgeEdit.CreateBadge();
+            badgeEditViewModel.Badge = badgeEdit as BadgeEdit;
             if (badgeImage != null)
             {
                 var bytes = badgeImage.InputStream.GetBytes();
@@ -79,12 +79,13 @@ namespace Magenic.BadgeApplication.Controllers
             }
 
             TryUpdateModel(badgeEditViewModel);
+            SetActivitiesToAdd(badgeEditViewModel);
             if (await SaveObjectAsync(badgeEditViewModel.Badge, true))
             {
                 return RedirectToAction(Mvc.BadgeManager.Index().Result);
             }
 
-            return await AddBadge();
+            return await EditBadge(badgeEditViewModel.Badge.Id);
         }
 
         /// <summary>
@@ -96,8 +97,9 @@ namespace Magenic.BadgeApplication.Controllers
         public virtual async Task<ActionResult> EditBadge(int id)
         {
             var allActivities = await ActivityCollection.GetAllActivitiesAsync();
-            var badgeEditViewModel = new BadgeEditViewModel(allActivities);
-            badgeEditViewModel.Badge = await BadgeEdit.GetBadgeEditByIdAsync(id);
+            var badgeEdit = await BadgeEdit.GetBadgeEditByIdAsync(id);
+            var badgeEditViewModel = new BadgeEditViewModel(allActivities, badgeEdit.BadgeActivities);
+            badgeEditViewModel.Badge = badgeEdit as BadgeEdit;
 
             return View(Mvc.BadgeManager.Views.EditBadge, badgeEditViewModel);
         }
@@ -106,16 +108,13 @@ namespace Magenic.BadgeApplication.Controllers
         /// Edits the badge post.
         /// </summary>
         /// <param name="id">The identifier.</param>
+        /// <param name="badgeEditViewModel">The badge edit view model.</param>
         /// <param name="badgeImage">The badge image.</param>
         /// <returns></returns>
         [HttpPost]
-        public virtual async Task<ActionResult> EditBadgePost(int id, HttpPostedFileBase badgeImage)
+        public virtual async Task<ActionResult> EditBadgePost(int id, BadgeEditViewModel badgeEditViewModel, HttpPostedFileBase badgeImage)
         {
-            var badgeEditViewModel = new BadgeEditViewModel()
-            {
-                Badge = await BadgeEdit.GetBadgeEditByIdAsync(id),
-            };
-
+            badgeEditViewModel.Badge = await BadgeEdit.GetBadgeEditByIdAsync(id) as BadgeEdit;
             if (badgeImage != null)
             {
                 var bytes = badgeImage.InputStream.GetBytes();
@@ -123,12 +122,47 @@ namespace Magenic.BadgeApplication.Controllers
             }
 
             TryUpdateModel(badgeEditViewModel);
+            SetActivitiesToAdd(badgeEditViewModel);
+            SetActivitiesToRemove(badgeEditViewModel);
+
             if (await SaveObjectAsync(badgeEditViewModel.Badge, true))
             {
                 return RedirectToAction(Mvc.BadgeManager.Index().Result);
             }
 
             return await EditBadge(id);
+        }
+
+        private static void SetActivitiesToAdd(BadgeEditViewModel badgeEditViewModel)
+        {
+            var activityIdsToAdd = badgeEditViewModel.SelectedActivityIds
+                .Except(badgeEditViewModel.Badge.BadgeActivities
+                .Select(bae => bae.ActivityId));
+
+            foreach (var activityId in activityIdsToAdd)
+            {
+                var badgeActivityEdit = BadgeActivityEdit.CreateBadgeActivity();
+                badgeActivityEdit.ActivityId = activityId;
+
+                badgeEditViewModel.Badge.BadgeActivities.Add(badgeActivityEdit);
+            }
+        }
+
+        private static void SetActivitiesToRemove(BadgeEditViewModel badgeEditViewModel)
+        {
+            var activityIdsToRemove = badgeEditViewModel.Badge.BadgeActivities
+                .Select(bae => bae.ActivityId)
+                .Except(badgeEditViewModel.SelectedActivityIds)
+                .ToList();
+
+            foreach (var activityId in activityIdsToRemove)
+            {
+                var badgeActivityEdit = badgeEditViewModel.Badge.BadgeActivities
+                    .Where(bae => bae.ActivityId == activityId)
+                    .Single();
+
+                badgeEditViewModel.Badge.BadgeActivities.Remove(badgeActivityEdit);
+            }
         }
 
         /// <summary>

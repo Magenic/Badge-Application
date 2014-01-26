@@ -2,6 +2,15 @@
 @using Magenic.BadgeApplication.Common.Interfaces
 @model IActivityCollection
 
+@section content {
+    @Styles.Render("~/Content/jtable")
+}
+
+@Html.Hidden("ListAction", Url.Action("List", "ManageActivities"))
+@Html.Hidden("CreateAction", Url.Action("Create", "ManageActivities"))
+@Html.Hidden("UpdateAction", Url.Action("Update", "ManageActivities"))
+@Html.Hidden("DeleteAction", Url.Action("Delete", "ManageActivities"))
+
 <div class="container">
     <div class="row">
         @Html.Partial("_AdminNavbar")
@@ -13,10 +22,21 @@
                     <h2>@ApplicationResources.ManageActivitiesHeader</h2>
                 </div>
             </div>
-
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="ActivitiesTable"></div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
         &nbsp;
     </div>
 </div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jtable")
+}

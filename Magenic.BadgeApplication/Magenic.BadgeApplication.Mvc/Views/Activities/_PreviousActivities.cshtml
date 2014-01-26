@@ -10,33 +10,35 @@
 </div>
 
 <div class="clearfix">&nbsp;</div>
-<div class="grayLine col-md-10">&nbsp;</div>
+<div class="grayLine col-md-11">&nbsp;</div>
 
-@foreach (var previousActivity in Model.PreviousActivities)
-{
-    <div class="row">
-        <div class="col-md-10">
-            <div class="row">
-                <h3>
-                    @previousActivity.ActivityName
-                </h3>
-            </div>
-            <div class="row">
-                <div class="col-md-2">
-                    <i>@previousActivity.Status.GetDescriptionFromEnumValue()</i>
+<div class="container">
+    @foreach (var previousActivity in Model.PreviousActivities)
+    {
+        <div class="row">
+            <div class="col-md-7">
+                <div class="row">
+                    <h3>
+                        @previousActivity.ActivityName
+                    </h3>
                 </div>
-                <div class="col-md-6">
-                    @previousActivity.SubmissionNotes
-                </div>
-                <div class="col-md-4">
-                    <b>
-                        @previousActivity.ActivitySubmissionDate.ToString("MMMM dd, yyyy")
-                    </b>
+                <div class="row">
+                    <div class="col-md-2">
+                        <i>@previousActivity.Status.GetDescriptionFromEnumValue()</i>
+                    </div>
+                    <div class="col-md-6">
+                        @previousActivity.SubmissionNotes
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <b>
+                            @previousActivity.ActivitySubmissionDate.ToString("MMMM dd, yyyy")
+                        </b>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        &nbsp;
-    </div>
-}
+        <div class="row">
+            &nbsp;
+        </div>
+    }
+</div>

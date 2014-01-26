@@ -14,8 +14,9 @@
                 </div>
             </div>
             <div class="row">
-                <div id="AdminActivitiesForm">
+                <div id="AdminActivitiesForm" class="col-md-10 darkGrayHeaderList">
                     @Html.Hidden("UrlToApprove", Mvc.BadgeManager.ApproveActivity())
+                    @Html.Hidden("UrlToReject", Mvc.BadgeManager.RejectActivity())
                     @Html.Partial(Mvc.BadgeManager.Views._ActivitiesForApproval, Model.ActivitiesToApprove)
                 </div>
             </div>
@@ -25,3 +26,7 @@
         &nbsp;
     </div>
 </div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/badgeManager")
+}

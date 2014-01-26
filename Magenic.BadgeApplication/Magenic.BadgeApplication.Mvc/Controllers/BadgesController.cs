@@ -21,10 +21,12 @@ namespace Magenic.BadgeApplication.Controllers
         /// <returns></returns>
         public async virtual Task<ActionResult> Index()
         {
-            var corporateBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Corporate);
-            var earnedCorporateBadges = await EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(AuthenticatedUser.EmployeeId, BadgeType.Corporate);
-            var communityBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Community);
-            var earnedCommunityBadges = await EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(AuthenticatedUser.EmployeeId, BadgeType.Community);
+            var allBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Unset);
+            var allEarnedBadges = await EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(AuthenticatedUser.EmployeeId, BadgeType.Unset);
+            var corporateBadges = allBadges.Where(b => b.Type == BadgeType.Corporate);
+            var communityBadges = allBadges.Where(b => b.Type == BadgeType.Community);
+            var earnedCorporateBadges = allEarnedBadges.Where(b => b.Type == BadgeType.Corporate);
+            var earnedCommunityBadges = allEarnedBadges.Where(b => b.Type == BadgeType.Community);
 
             var sortedCorporateBadges = corporateBadges.OrderByDescending(b => b.ApprovedDate);
             var sortedCommunityBadges = communityBadges.OrderByDescending(b => b.ApprovedDate);
