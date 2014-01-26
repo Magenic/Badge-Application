@@ -1,23 +1,39 @@
-﻿h1 {
-    font: normal 30px HelveticaNeue, Arial, sans-serif;
-    color: #222;
+﻿@LargeHeaderFont: normal 30px HelveticaNeue, Arial, sans-serif;
+@MediumHeaderFont: normal 23px Arial, sans-serif;
+@SmallHeaderFont: normal 18px HelveticaNeue, Arial, sans-serif;
+
+@DarkestGray: #333;
+@DarkerGray: #222;
+@MagenicGray: #191919;
+@MagenicLightGreen: #88bf3e;
+@MagenicGreen: #7ab800;
+@White: #fff;
+
+@HeaderGray: #404040;
+@HeaderOffWhite: #f2f2f2;
+
+@GrayLine: #E0E0E0;
+
+h1 {
+    font: @LargeHeaderFont;
+    color: @DarkerGray;
     margin: 0 0 3px;
 }
 
 h2 {
-    font: normal 23px Arial, sans-serif;
-    color: #333;
+    font: @MediumHeaderFont;
+    color: @DarkestGray;
     margin: 0 0 10px;
 }
 
 h3 {
-    font: normal 30px HelveticaNeue, Arial, sans-serif;
-    color: #222;
+    font: @LargeHeaderFont;
+    color: @DarkerGray;
     margin: 0 0 3px;
 }
 
 a {
-    color: #7ab800;
+    color: @MagenicGreen;
 }
 
 form {
@@ -29,7 +45,7 @@ form {
 label {
     font-size: 16px;
     font-weight: 500;
-    color: #333;
+    color: @DarkestGray;
 }
 
 textarea {
@@ -37,9 +53,9 @@ textarea {
 }
 
 .btn-success {
-    background: url('Images/button-gloss.png') repeat-x scroll 0 -31px #7AB800;
+    background: url('Images/button-gloss.png') repeat-x scroll 0 -31px @MagenicGreen;
     border: 1px solid #777;
-    color: #fff;
+    color: @White;
     font-size: 18px;
     margin: 10px 0 0 0;
     padding: 11px 34px;
@@ -55,22 +71,32 @@ textarea {
     .greenEmphasis {
         font-size: 125%;
         font-weight: bold;
-        color: #88bf3e;
+        color: @MagenicLightGreen;
+    }
+}
+
+.darkGrayHeaderList {
+    h3 {
+        font: @SmallHeaderFont;
+        color: @HeaderOffWhite;
+        margin: 0 0 10px;
+        padding: 4px 6px;
+        background-color: @HeaderGray;
     }
 }
 
 .grayHeaderList {
     h3 {
-        font: normal 18px HelveticaNeue, Arial, sans-serif;
-        color: #404040;
+        font: @SmallHeaderFont;
+        color: @HeaderGray;
         margin: 0 0 10px;
         padding: 4px 6px;
-        background-color: #F2F2F2;
+        background-color: @HeaderOffWhite
     }
 }
 
 .grayLine {
-    border-top: 1px solid #E0E0E0;
+    border-top: 1px solid @GrayLine;
     margin-bottom: 15px;
 }
 
@@ -105,7 +131,7 @@ textarea {
 
 .navbar {
     width: 100%;
-    background: #191919 url('Images/header-bg.gif') repeat-y center;
+    background: @MagenicGray url('Images/header-bg.gif') repeat-y center;
 
     .nav {
         margin: 24px 0 0 24px;

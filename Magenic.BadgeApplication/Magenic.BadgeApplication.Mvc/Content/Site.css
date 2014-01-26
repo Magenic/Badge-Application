@@ -1,16 +1,16 @@
 ﻿h1 {
   font: normal 30px HelveticaNeue, Arial, sans-serif;
-  color: #222;
+  color: #222222;
   margin: 0 0 3px;
 }
 h2 {
   font: normal 23px Arial, sans-serif;
-  color: #333;
+  color: #333333;
   margin: 0 0 10px;
 }
 h3 {
   font: normal 30px HelveticaNeue, Arial, sans-serif;
-  color: #222;
+  color: #222222;
   margin: 0 0 3px;
 }
 a {
@@ -22,7 +22,7 @@ form .editor-field {
 label {
   font-size: 16px;
   font-weight: 500;
-  color: #333;
+  color: #333333;
 }
 textarea {
   height: auto;
@@ -30,7 +30,7 @@ textarea {
 .btn-success {
   background: url('Images/button-gloss.png') repeat-x scroll 0 -31px #7ab800;
   border: 1px solid #777;
-  color: #fff;
+  color: #ffffff;
   font-size: 18px;
   margin: 10px 0 0 0;
   padding: 11px 34px;
@@ -49,15 +49,22 @@ textarea {
   font-weight: bold;
   color: #88bf3e;
 }
+.darkGrayHeaderList h3 {
+  font: normal 18px HelveticaNeue, Arial, sans-serif;
+  color: #f2f2f2;
+  margin: 0 0 10px;
+  padding: 4px 6px;
+  background-color: #404040;
+}
 .grayHeaderList h3 {
   font: normal 18px HelveticaNeue, Arial, sans-serif;
   color: #404040;
   margin: 0 0 10px;
   padding: 4px 6px;
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
 }
 .grayLine {
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #e0e0e0;
   margin-bottom: 15px;
 }
 /* Set padding to keep content from hitting the edges */

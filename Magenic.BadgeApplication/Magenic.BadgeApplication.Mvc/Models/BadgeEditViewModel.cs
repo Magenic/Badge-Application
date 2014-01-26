@@ -1,4 +1,7 @@
-﻿using Magenic.BadgeApplication.Common.Interfaces;
+﻿using Magenic.BadgeApplication.BusinessLogic.Badge;
+using Magenic.BadgeApplication.Common.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Magenic.BadgeApplication.Models
@@ -13,16 +16,32 @@ namespace Magenic.BadgeApplication.Models
         /// </summary>
         public BadgeEditViewModel()
         {
-
+            SelectedActivityIds = new List<int>();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BadgeEditViewModel"/> class.
+        /// Initializes a new instance of the <see cref="BadgeEditViewModel" /> class.
         /// </summary>
         /// <param name="allActivities">All activities.</param>
         public BadgeEditViewModel(IActivityCollection allActivities)
         {
             AllActivities = new MultiSelectList(allActivities, "Id", "Name");
+            SelectedActivityIds = new List<int>();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BadgeEditViewModel" /> class.
+        /// </summary>
+        /// <param name="allActivities">All activities.</param>
+        /// <param name="badgeActivities">The badge activities.</param>
+        public BadgeEditViewModel(IActivityCollection allActivities, IBadgeActivityEditCollection badgeActivities)
+        {
+            SelectedActivityIds = badgeActivities.Select(bae => bae.ActivityId).ToList();
+            var selectedValues = badgeActivities
+                .Join(allActivities, bae => bae.ActivityId, ai => ai.Id, (bae, ai) => new { ai = ai })
+                .Select(anon => anon.ai);
+
+            AllActivities = new MultiSelectList(allActivities, "Id", "Name", selectedValues);
         }
 
         /// <summary>
@@ -34,11 +53,19 @@ namespace Magenic.BadgeApplication.Models
         public MultiSelectList AllActivities { get; private set; }
 
         /// <summary>
+        /// Gets or sets the selected activity ids.
+        /// </summary>
+        /// <value>
+        /// The selected activity ids.
+        /// </value>
+        public List<int> SelectedActivityIds { get; set; }
+
+        /// <summary>
         /// Gets or sets the badge.
         /// </summary>
         /// <value>
         /// The badge.
         /// </value>
-        public IBadgeEdit Badge { get; set; }
+        public BadgeEdit Badge { get; set; }
     }
 }

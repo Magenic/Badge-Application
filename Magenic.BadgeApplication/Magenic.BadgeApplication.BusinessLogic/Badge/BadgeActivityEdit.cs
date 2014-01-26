@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Autofac;
 using Csla;
+using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.Interfaces;
+using System;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Badge
 {
@@ -14,7 +16,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         {
             this.MarkAsChild();
         }
-        
+
         public static readonly PropertyInfo<int> BadgeActivityIdProperty = RegisterProperty<int>(c => c.BadgeActivityId);
         public int BadgeActivityId
         {
@@ -27,6 +29,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         {
             get { return GetProperty(ActivityIdProperty); }
             set { SetProperty(ActivityIdProperty, value); }
+        }
+
+        public static IBadgeActivityEdit CreateBadgeActivity()
+        {
+            return IoC.Container.Resolve<IObjectFactory<IBadgeActivityEdit>>().Create();
         }
 
         internal void LoadData(Common.DTO.BadgeActivityEditDTO badgeActivity)
