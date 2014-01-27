@@ -20,7 +20,7 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// <summary>
         /// The ID of the queue item
         /// </summary>
-        public int QueueItemId { get; set; }
+        public int BadgeAwardId { get; set; }
 
         /// <summary>
         /// The date the Queue Event Log was created

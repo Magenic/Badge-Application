@@ -103,7 +103,9 @@
     <Compile Include="Interfaces\IEarnedBadgeCollectionDAL.cs" />
     <Compile Include="Interfaces\IEarnedBadgeItem.cs" />
     <Compile Include="Interfaces\IIdentityCriteria.cs" />
+    <Compile Include="Interfaces\IItemProcessor.cs" />
     <Compile Include="Interfaces\IObjectFactory.cs" />
+    <Compile Include="Interfaces\IPublisher.cs" />
     <Compile Include="Interfaces\IQueueEventLogDAL.cs" />
     <Compile Include="Interfaces\IQueueItemDAL.cs" />
     <Compile Include="Interfaces\IDTORepository.cs" />

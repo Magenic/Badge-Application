@@ -22,6 +22,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Framework
             var adapters = Assembly.Load("Magenic.BadgeApplication.Yammer");
             builder.RegisterAssemblyTypes(adapters).AsImplementedInterfaces();
 
+            var processors = Assembly.Load("Magenic.BadgeApplication.Processor");
+            builder.RegisterAssemblyTypes(processors).AsImplementedInterfaces();
+
             builder.RegisterGeneric(typeof(ObjectFactory<>)).As(typeof(IObjectFactory<>));
 
             IoC.Container = builder.Build();

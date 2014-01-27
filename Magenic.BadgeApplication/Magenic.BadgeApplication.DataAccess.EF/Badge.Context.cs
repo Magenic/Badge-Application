@@ -39,7 +39,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public virtual DbSet<CurrentActiveBadge> CurrentActiveBadges { get; set; }
         public virtual DbSet<EarnedBadge> EarnedBadges { get; set; }
         public virtual DbSet<QueueEvent> QueueEvents { get; set; }
-        public virtual DbSet<QueueEventLog> QueueEventLogs { get; set; }
         public virtual DbSet<QueueItem> QueueItems { get; set; }
+        public virtual DbSet<QueueEventLog> QueueEventLogs { get; set; }
     }
 }

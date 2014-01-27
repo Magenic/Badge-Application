@@ -16,10 +16,8 @@ namespace Magenic.BadgeApplication.Console
 
                 AutofacBootstrapper.Init();
 
-                IQueueEventLogDAL queueEventLogDAL = IoC.Container.Resolve<IQueueEventLogDAL>();
-                IQueueItemDAL queueItemDAL = IoC.Container.Resolve<IQueueItemDAL>();
-
-                QueueProcessor.Start(queueItemDAL, queueEventLogDAL);
+                QueueProcessor processor = new QueueProcessor();
+                processor.Start();
 
                 System.Console.WriteLine("Completed queue processor");
             }

@@ -21,7 +21,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
 
                 QueueEventLogDTO addedItem = AddQueueEventLogRecord(queueEventLogDAL, queueItemDAL);
 
-                Assert.IsTrue(addedItem.QueueItemId > 0);
+                Assert.IsTrue(addedItem.BadgeAwardId > 0);
             });
         }       
 
@@ -73,7 +73,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
                 Message = "Test Message",
                 QueueEventCreated = DateTime.Now,
                 QueueEventId = 1,
-                QueueItemId = queueItemDTO.QueueItemId
+                BadgeAwardId = queueItemDTO.QueueItemId
             };
 
             QueueEventLogDTO addedItem = queueEventLogDAL.Add(queueEventLogItem);

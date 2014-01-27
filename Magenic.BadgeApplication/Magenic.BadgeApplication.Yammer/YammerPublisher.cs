@@ -1,5 +1,5 @@
 ﻿using Magenic.BadgeApplication.Common.DTO;
-using Magenic.BadgeApplication.Processor;
+using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Yammer.Helpers;
 using System;
 using System.Configuration;
@@ -49,10 +49,15 @@ namespace Magenic.BadgeApplication.Yammer
             //let's post a message now to this group
             bool broadcastToAll = false;
 
-            string msg = string.Format("body=Attention Magenincons [[user:{0}]] has earned the {1} badge!" + "&broadcast={2}",
+            string msg = string.Format(
+                "body=Attention Magenincons [[user:{0}]] has earned the {1} badge!&broadcast={2}&og_url={3}&og_image={4}&og_title={5}&og_description={6}",
                 yammerUser.UserID,
                 earnedBadge.Name,
-                broadcastToAll.ToString());
+                broadcastToAll.ToString(),
+                "http://magenic.com",
+                earnedBadge.ImagePath,
+                earnedBadge.Name,
+                earnedBadge.Tagline);
 
             //try adding the message
             response = MakePostRequest(msg, MessageUrl, Token);

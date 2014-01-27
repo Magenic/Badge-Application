@@ -27,7 +27,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                     QueueEventCreated = item.QueueEventCreated,
                     QueueEventId = item.QueueEventId,
                     QueueEventLogId = item.QueueEventLogId,
-                    QueueItemId = item.QueueItemId
+                    BadgeAwardId = item.BadgeAwardId
                 };
             }
         }
@@ -41,8 +41,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                     {
                         Message = item.Message,
                         QueueEventCreated = item.QueueEventCreated,
-                        QueueEventId = item.QueueEventId,                    
-                        QueueItemId = item.QueueItemId
+                        QueueEventId = item.QueueEventId,
+                        BadgeAwardId = item.BadgeAwardId
                     });
                 
                 context.SaveChanges();
@@ -53,7 +53,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                     QueueEventCreated = addedItem.QueueEventCreated,
                     QueueEventId = addedItem.QueueEventId,
                     QueueEventLogId = addedItem.QueueEventLogId,
-                    QueueItemId = addedItem.QueueItemId
+                    BadgeAwardId = addedItem.BadgeAwardId
                 };
             }
         }
@@ -68,7 +68,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                     QueueEventCreated = item.QueueEventCreated,
                     QueueEventId = item.QueueEventId,
                     QueueEventLogId = item.QueueEventLogId,
-                    QueueItemId = item.QueueItemId
+                    BadgeAwardId = item.BadgeAwardId
                 };
 
                 context.QueueEventLogs.Attach(itemToUpdate);
