@@ -83,6 +83,10 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         DateTime? ApprovedDate { get; }
         /// <summary>
+        /// The status of the badge.
+        /// </summary>
+        Enums.BadgeStatus BadgeStatus { get; }
+        /// <summary>
         /// A collection of prerequisite activities needed to be awarded this badge.
         /// </summary>
         IBadgeActivityEditCollection BadgeActivities { get; }

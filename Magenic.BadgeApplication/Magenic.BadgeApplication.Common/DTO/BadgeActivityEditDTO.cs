@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.Common.DTO
 {
     /// <summary>
     /// Class for data transfer persist operations.
     /// </summary>
-    [Serializable]
-    public class BadgeActivityEditDTO
+    public sealed class BadgeActivityEditDTO
     {
         /// <summary>
         /// The id for this relationship between a badge and an activity.

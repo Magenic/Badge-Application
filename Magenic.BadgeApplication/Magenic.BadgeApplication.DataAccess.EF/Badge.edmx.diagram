@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.BadgeType" Width="1.5" PointX="3.75" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.Employee" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.EmployeePermission" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.ItemStatu" Width="1.5" PointX="0.75" PointY="16.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.Permission" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_BadgeActivity_Activity" ManuallyRouted="false" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_Employee_ApprovingManager1" ManuallyRouted="false" />
@@ -26,7 +25,6 @@
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_ActivitySubmission_Activity" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_ActivitySubmission_Employee" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_ActivitySubmission_EmployeeApproval" />
-        <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_ActivitySubmission_ItemStatus" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_Badge_BadgeType" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_Badge_Employee" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_BadgeActivity_Badge" />
@@ -41,6 +39,9 @@
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_QueueItem_BadgeAward" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_QueueEventLog_QueueEvent" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_QueueEventLog_QueueItem" />
+        <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.ItemStatu" Width="1.5" PointX="0.75" PointY="11.375" />
+        <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_ActivitySubmission_ItemStatus" />
+        <AssociationConnector Association="Magenic.BadgeApplication.DBModel.FK_Badge_ItemStatus" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

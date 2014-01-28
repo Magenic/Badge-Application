@@ -39,6 +39,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public int BadgeAwardValueAmount { get; set; }
         public Nullable<int> BadgeApprovedById { get; set; }
         public Nullable<System.DateTime> BadgeApprovedDate { get; set; }
+        public int BadgeStatusId { get; set; }
     
         public virtual BadgeType BadgeType { get; set; }
         public virtual Employee Employee { get; set; }
@@ -46,5 +47,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public virtual ICollection<BadgeAward> BadgeAwards { get; set; }
         public virtual ICollection<BadgePrerequisite> BadgePrerequisites { get; set; }
         public virtual ICollection<BadgePrerequisite> BadgePrerequisites1 { get; set; }
+        public virtual ItemStatu ItemStatu { get; set; }
     }
 }

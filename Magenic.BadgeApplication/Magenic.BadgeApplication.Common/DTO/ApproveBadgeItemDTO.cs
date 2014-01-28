@@ -5,20 +5,24 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// <summary>
     /// Class for data transfer persist operations.
     /// </summary>
-    public sealed class BadgeItemDTO
+    public sealed class ApproveBadgeItemDTO
     {
         /// <summary>
         /// The id of the badge.
         /// </summary>
-        public int Id { get; set; }
+        public int BadgeId { get; set; }
         /// <summary>
-        /// Gets the activity identifier.
-        /// </summary>
-        public int? ActivityId { get; set; }
-        /// <summary>
-        /// The name of the activity used to identify it.
+        /// The name of a badge.
         /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// A quip or funny phrase about the badge.
+        /// </summary>
+        public string Tagline { get; set; }
+        /// <summary>
+        /// The long description of the badge.
+        /// </summary>
+        public string Description { get; set; }
         /// <summary>
         /// The type of the badge, corporate or community.
         /// </summary>
@@ -29,12 +33,20 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public string ImagePath { get; set; }
         /// <summary>
+        /// Check with Steve.
+        /// </summary>
+        public int AwardValueAmount { get; set; }
+        /// <summary>
+        /// The id of the person who approved this badge so it can be awarded.
+        /// </summary>
+        public int ApprovedById { get; set; }
+        /// <summary>
         /// The date and time of when this badge was approved to be awarded.
         /// </summary>
         public DateTime? ApprovedDate { get; set; }
         /// <summary>
-        /// The priority order to display the badges in, lowest to highest.
+        /// The status of the badge.
         /// </summary>
-        public int BadgePriority { get; set; }
+        public Enums.BadgeStatus BadgeStatus { get; set; }
     }
 }

@@ -37,7 +37,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 
                 return activityList;
             }
-
         }
 
         public IEnumerable<ApproveActivityItemDTO> Update(IEnumerable<ApproveActivityItemDTO> data)
@@ -69,6 +68,5 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             };
             return badgeEntity;
         }
-
     }
 }

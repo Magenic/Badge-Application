@@ -33,7 +33,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
                     if (potentialBadge.BadgeActivities.Any(ba => ba.ActivityId == activityInfo.ActivityId)
                         & AllowedToBeAwarded(potentialBadge, earnedBadges)
                         & BadgeValidForDate(activityApprovalTime, potentialBadge)
-                        & potentialBadge.ApprovedById > 0
+                        & potentialBadge.BadgeStatus == BadgeStatus.Approved
                         & CorrectNumberOfEarnedBadges(activityInfo.ActivityId, potentialBadge, previousActivities))
                     {
                         returnValue.Add(CreateNewBadgeAward(activityInfo, potentialBadge));

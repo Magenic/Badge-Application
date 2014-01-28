@@ -5,7 +5,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// <summary>
     /// Represents a record of an activity performed on a queue item
     /// </summary>
-    public class QueueEventLogDTO
+    public sealed class QueueEventLogDTO
     {
         /// <summary>
         /// The ID of the queue event log
