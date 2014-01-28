@@ -18,7 +18,7 @@ namespace Magenic.BadgeApplication
         {
             Arg.IsNotNull(() => bundles);
 
-            bundles.Add(new StyleBundle("~/Content/themes/base").IncludeT4MVC(
+            bundles.Add(new StyleBundle("~/Content/themes/base/css").IncludeT4MVC(
                 Links.Content.themes.@base.jquery_ui_all_css
             ));
 
