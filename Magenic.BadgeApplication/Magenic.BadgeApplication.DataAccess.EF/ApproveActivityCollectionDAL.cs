@@ -31,6 +31,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                               ActivityName = a.ActivityName,
                                               ApprovedById = t.SubmissionApprovedById ?? 0,
                                               EmployeeId = t.EmployeeId,
+                                              EmployeeADName = e.ADName,
                                               Status = (ActivitySubmissionStatus)t.SubmissionStatusId,
                                               SubmissionNotes = t.SubmissionDescription
                                           }).ToArrayAsync();
