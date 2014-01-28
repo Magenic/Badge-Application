@@ -577,7 +577,6 @@
     <Content Include="Views\Account\LogOn.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\LogOnViewModel.cshtml" />
     <Content Include="Views\BadgeManager\ManageActivities.cshtml" />
-    <Content Include="Views\BadgeManager\_CommunityBadgesForApproval.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">

@@ -15,9 +15,12 @@
             </div>
             <div class="row">
                 <div id="AdminActivitiesForm" class="col-md-10 darkGrayHeaderList">
-                    @Html.Hidden("UrlToApprove", Mvc.BadgeManager.ApproveActivity())
-                    @Html.Hidden("UrlToReject", Mvc.BadgeManager.RejectActivity())
-                    @Html.Partial(Mvc.BadgeManager.Views._ActivitiesForApproval, Model.ActivitiesToApprove)
+                    @Html.Hidden("UrlToList", Url.Action(Mvc.BadgeManager.ApproveActivitiesList()))
+                    @Html.Hidden("UrlToApprove", Url.Action(Mvc.BadgeManager.ApproveActivity()))
+                    @Html.Hidden("UrlToReject", Url.Action(Mvc.BadgeManager.RejectActivity()))
+                    <div id="activitiesForApproval">
+                        @Html.Partial(Mvc.BadgeManager.Views._ActivitiesForApproval, Model.ActivitiesToApprove)
+                    </div>
                 </div>
             </div>
         </div>
