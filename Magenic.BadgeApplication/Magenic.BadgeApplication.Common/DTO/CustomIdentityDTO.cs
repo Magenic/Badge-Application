@@ -6,8 +6,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// <summary>
     /// Data Transfer Object for the CustomIdentity
     /// </summary>
-    [Serializable]
-    public class CustomIdentityDTO
+    public sealed class CustomIdentityDTO
     {
         /// <summary>
         /// Creates a new instance of the <see cref="CustomIdentityDTO"/>.

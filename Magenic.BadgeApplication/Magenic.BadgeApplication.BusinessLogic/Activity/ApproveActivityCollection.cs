@@ -83,6 +83,5 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
 
 
         #endregion Data Access
-
     }
 }

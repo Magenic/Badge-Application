@@ -50,6 +50,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 AwardValueAmount = badge.BadgeAwardValueAmount,
                 ApprovedById = badge.BadgeApprovedById ?? 0,
                 ApprovedDate = badge.BadgeApprovedDate,
+                BadgeStatus = (Common.Enums.BadgeStatus)badge.BadgeStatusId,
                 BadgeActivities = new List<BadgeActivityEditDTO>()
             };
             foreach (var badgeActivity in badge.BadgeActivities)
@@ -90,6 +91,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeAwardValueAmount");
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeApprovedById");
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeApprovedDate");
+                objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeStatus");
 
                 AttachChildren(ctx, data, saveBadge.BadgeId);
                 ctx.SaveChanges();
@@ -175,6 +177,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 ActivityPointsAmount = data.ActivityPointsAmount,
                 BadgeAwardValueAmount = data.AwardValueAmount,
                 BadgeApprovedById = data.ApprovedById == 0 ? null : (int?)data.ApprovedById,
+                BadgeStatusId = (int)data.BadgeStatus,
                 BadgeApprovedDate = data.ApprovedDate
             };
             return badgeEntity;
@@ -236,6 +239,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 var badgeList = (from t in ctx.Badges.Include("BadgeActivities")
                                 join ba in ctx.BadgeActivities on t.BadgeId equals ba.BadgeId
                                 where ba.ActivityId == activityId
+                                where t.BadgeStatusId == (int)Common.Enums.BadgeStatus.Approved
                                 select t).Distinct();
 
                 foreach (var badge in badgeList)

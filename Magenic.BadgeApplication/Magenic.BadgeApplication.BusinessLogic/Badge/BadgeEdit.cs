@@ -144,6 +144,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             private set { LoadProperty(BadgeActivitiesProperty, value); }
         }
 
+        public static readonly PropertyInfo<BadgeStatus> BadgeStatusProperty = RegisterProperty<BadgeStatus>(c => c.BadgeStatus);
+        public BadgeStatus BadgeStatus
+        {
+            get { return GetProperty(BadgeStatusProperty); }
+            private set { LoadProperty(BadgeStatusProperty, value); }
+        }
+
         public static readonly PropertyInfo<byte[]> ImageProperty = RegisterProperty<byte[]>(c => c.Image);
         private byte[] Image
         {
@@ -200,6 +207,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, AwardValueAmountProperty, PermissionType.Administrator.ToString()));
 
             this.BusinessRules.AddRule(new Rules.CanSetBadgeType(AuthorizationActions.WriteProperty, TypeProperty, BadgeType.Corporate, PermissionType.Administrator.ToString()));
+            this.BusinessRules.AddRule(new Rules.DefaultBadgeStatus(TypeProperty, BadgeStatusProperty, ApprovedByIdProperty));
         }
 
         #endregion Rules
@@ -272,6 +280,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
                     AwardValueAmount = this.AwardValueAmount,
                     ApprovedById = this.ApprovedById,
                     ApprovedDate = this.ApprovedDate,
+                    BadgeStatus = this.BadgeStatus,
                     BadgeImage = this.Image
                 };
                 this.UnLoadChildren(returnValue);
@@ -306,6 +315,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
                 this.AwardValueAmount = data.AwardValueAmount;
                 this.ApprovedById = data.ApprovedById;
                 this.ApprovedDate = data.ApprovedDate;
+                this.BadgeStatus = data.BadgeStatus;
                 this.Image = null;
                 this.LoadChildren(data);
             }

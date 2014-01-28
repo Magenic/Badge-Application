@@ -5,8 +5,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// <summary>
     /// Data Transfer Object for the CustomIdentity
     /// </summary>
-    [Serializable]
-    public class SubmitActivityDTO
+    public sealed class SubmitActivityDTO
     {
         /// <summary>
         /// The Id for this activity submission.  Zero if new.

@@ -5,8 +5,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// <summary>
     /// Class for data transfer persist operations.
     /// </summary>
-    [Serializable]
-    public class ActivityEditDTO
+    public sealed class ActivityEditDTO
     {
         /// <summary>
         /// The id of the activity.  Zero if new.

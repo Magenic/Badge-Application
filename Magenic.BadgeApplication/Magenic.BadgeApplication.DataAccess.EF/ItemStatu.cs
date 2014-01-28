@@ -17,11 +17,14 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public ItemStatu()
         {
             this.ActivitySubmissions = new HashSet<ActivitySubmission>();
+            this.Badges = new HashSet<Badge>();
         }
     
         public int ItemStatusId { get; set; }
         public string StatusName { get; set; }
     
         public virtual ICollection<ActivitySubmission> ActivitySubmissions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Badge> Badges { get; set; }
     }
 }

@@ -68,6 +68,7 @@
     <Compile Include="CanSetBadgeTypeRuleTests.cs" />
     <Compile Include="DateOrderRuleTests.cs" />
     <Compile Include="DefaultActivityStatusTests.cs" />
+    <Compile Include="DefaultBadgeStatusTests.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HelperMethods\ContainerBuilder.cs" />
     <Compile Include="HelperMethods\Reflection.cs" />

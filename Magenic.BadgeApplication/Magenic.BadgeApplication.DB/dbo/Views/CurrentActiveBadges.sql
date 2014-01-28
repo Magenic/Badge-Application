@@ -6,5 +6,5 @@ SELECT     dbo.BadgeType.BadgeTypeName, dbo.BadgeType.PayrollEligible, dbo.Badge
                       dbo.Badge.ActivityPointsAmount, dbo.Badge.BadgeAwardValueAmount, dbo.Badge.BadgeApprovedById, dbo.Badge.BadgeApprovedDate
 FROM         dbo.Badge INNER JOIN
                       dbo.BadgeType ON dbo.Badge.BadgeTypeId = dbo.BadgeType.BadgeTypeId
-WHERE     (GETDATE() <= dbo.Badge.BadgeEffectiveEnd OR dbo.Badge.BadgeEffectiveEnd IS NULL) AND (GETDATE() >= dbo.Badge.BadgeEffectiveStart OR dbo.Badge.BadgeEffectiveEnd IS NULL) AND (dbo.Badge.BadgeApprovedById IS NOT NULL)
+WHERE     (GETDATE() <= dbo.Badge.BadgeEffectiveEnd OR dbo.Badge.BadgeEffectiveEnd IS NULL) AND (GETDATE() >= dbo.Badge.BadgeEffectiveStart OR dbo.Badge.BadgeEffectiveEnd IS NULL) AND (dbo.Badge.BadgeStatusId = 2)
 GO
