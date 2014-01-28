@@ -56,6 +56,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
                 Id = 1,
                 ImagePath = ImagePath
             };
+            dto.BadgeActivities = new List<BadgeActivityEditDTO>();
             return Task.FromResult(dto);
         }
 

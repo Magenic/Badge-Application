@@ -16,5 +16,7 @@
     [BadgeAwardValueAmount]      INT             NOT NULL,
     [BadgeApprovedById]          INT             NULL,
     [BadgeApprovedDate]          DATETIME2 (7)   CONSTRAINT [df_Badge_BadgeApprovedDate] DEFAULT getdate() NULL,
-	CONSTRAINT [fk_Badge_Employee] FOREIGN KEY ([BadgeApprovedById]) REFERENCES [dbo].[Employee] ([EmployeeId])
+	[BadgeStatusId] INT NOT NULL, 
+    CONSTRAINT [fk_Badge_Employee] FOREIGN KEY ([BadgeApprovedById]) REFERENCES [dbo].[Employee] ([EmployeeId]), 
+    CONSTRAINT [FK_Badge_ItemStatus] FOREIGN KEY ([BadgeStatusId]) REFERENCES [dbo].[ItemStatus] ([ItemStatusId])
 );

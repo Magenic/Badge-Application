@@ -1,8 +1,6 @@
-﻿using Autofac;
-using Csla;
+﻿using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;
-using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;

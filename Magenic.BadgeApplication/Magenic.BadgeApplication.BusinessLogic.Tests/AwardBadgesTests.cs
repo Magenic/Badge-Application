@@ -176,6 +176,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
                 EffectiveEndDate = DateTime.Parse("1/1/2015", CultureInfo.CurrentCulture),
                 ApprovedById = 1,
                 ActivityPointsAmount = 1,
+                BadgeStatus = BadgeStatus.Approved,
                 BadgeActivities = new List<BadgeActivityEditDTO> { new BadgeActivityEditDTO { ActivityId = targetActivityId } }
             });
             var earnedBadges = new List<BadgeAwardDTO>();
@@ -266,6 +267,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
                 EffectiveEndDate = DateTime.Parse("1/1/2015", CultureInfo.CurrentCulture),
                 ApprovedById = 1,
                 ActivityPointsAmount = 1,
+                BadgeStatus = BadgeStatus.Approved,
                 BadgeActivities = new List<BadgeActivityEditDTO> { new BadgeActivityEditDTO { ActivityId = targetActivityId } }
             });
             potentialBadges.Add(new BadgeEditDTO
@@ -276,6 +278,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
                 EffectiveEndDate = DateTime.Parse("1/1/2015", CultureInfo.CurrentCulture),
                 ApprovedById = 1,
                 ActivityPointsAmount = 1,
+                BadgeStatus = BadgeStatus.Approved,
                 BadgeActivities = new List<BadgeActivityEditDTO> { new BadgeActivityEditDTO { ActivityId = targetActivityId } }
             });
 

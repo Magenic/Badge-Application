@@ -61,6 +61,7 @@
     <Compile Include="DTO\ActivityEditDTO.cs" />
     <Compile Include="DTO\ActivityItemDTO.cs" />
     <Compile Include="DTO\ApproveActivityItemDTO.cs" />
+    <Compile Include="DTO\ApproveBadgeItemDTO.cs" />
     <Compile Include="DTO\BadgeActivityEditDTO.cs" />
     <Compile Include="DTO\BadgeAwardDTO.cs" />
     <Compile Include="DTO\BadgeEditDTO.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="DTO\SubmitActivityDTO.cs" />
     <Compile Include="DTO\SubmittedActivityItemDTO.cs" />
     <Compile Include="Enums\ActivitySubmissionStatus.cs" />
+    <Compile Include="Enums\BadgeStatus.cs" />
     <Compile Include="Enums\BadgeType.cs" />
     <Compile Include="Enums\PermissionType.cs" />
     <Compile Include="Enums\QueueEventType.cs" />
@@ -88,6 +90,9 @@
     <Compile Include="Interfaces\IApproveActivityCollection.cs" />
     <Compile Include="Interfaces\IApproveActivityCollectionDAL.cs" />
     <Compile Include="Interfaces\IApproveActivityItem.cs" />
+    <Compile Include="Interfaces\IApproveBadgeCollection.cs" />
+    <Compile Include="Interfaces\IApproveBadgeCollectionDAL.cs" />
+    <Compile Include="Interfaces\IApproveBadgeItem.cs" />
     <Compile Include="Interfaces\IAwardBadgesDAL.cs" />
     <Compile Include="Interfaces\IBadgeActivityEdit.cs" />
     <Compile Include="Interfaces\IBadgeActivityEditCollection.cs" />

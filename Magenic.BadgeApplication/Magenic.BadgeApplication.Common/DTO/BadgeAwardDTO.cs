@@ -5,7 +5,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// <summary>
     /// Class for data transfer persist operations.
     /// </summary>
-    public class BadgeAwardDTO
+    public sealed class BadgeAwardDTO
     {
         /// <summary>
         /// The id of the badge awarded.

@@ -16,7 +16,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 ctx.Database.Connection.Open();
                 var badgeList = await (from t in ctx.CurrentActiveBadges
                                        where t.BadgeTypeId == (badgeType == Common.Enums.BadgeType.Unset ? t.BadgeTypeId : (int)badgeType)
-                                       select new Common.DTO.BadgeItemDTO
+                                       select new BadgeItemDTO
                                        {
                                            Id = t.BadgeId,
                                            Name = t.BadgeName,
@@ -37,7 +37,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 var badgeList = await (from t in ctx.CurrentActiveBadges
                                        join ba in ctx.BadgeActivities on t.BadgeId equals ba.BadgeId
                                        where activityIds.Contains(ba.ActivityId)
-                                       select new Common.DTO.BadgeItemDTO
+                                       select new BadgeItemDTO
                                        {
                                            Id = t.BadgeId,
                                            ActivityId = ba.ActivityId,

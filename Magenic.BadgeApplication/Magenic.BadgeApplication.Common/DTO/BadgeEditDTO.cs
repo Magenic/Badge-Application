@@ -6,8 +6,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// <summary>
     /// Class for data transfer persist operations.
     /// </summary>
-    [Serializable]
-    public class BadgeEditDTO
+    public sealed class BadgeEditDTO
     {
         /// <summary>
         /// The id of the badge.
@@ -85,6 +84,10 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         public byte[] BadgeImage { get; set; }
+        /// <summary>
+        /// The status of the badge.
+        /// </summary>
+        public Enums.BadgeStatus BadgeStatus { get; set; }
         /// <summary>
         /// A list of activities that are required for this badge to be awarded.
         /// </summary>

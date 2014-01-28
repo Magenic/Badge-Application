@@ -122,6 +122,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
             ruleRunner.Execute(ruleContext);
 
             Assert.IsNotNull(newRule);
+            Assert.IsNull(ruleContext.OutputPropertyValues);
         }
 
         [TestMethod]

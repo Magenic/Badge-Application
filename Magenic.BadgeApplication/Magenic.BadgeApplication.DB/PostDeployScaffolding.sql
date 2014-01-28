@@ -120,15 +120,34 @@ WHEN NOT MATCHED BY TARGET THEN
 
 SET IDENTITY_INSERT [dbo].[BadgeType]  OFF
 
+SET IDENTITY_INSERT [dbo].[ItemStatus]  ON
+MERGE INTO [dbo].[ItemStatus]  AS Target
+USING (VALUES
+    (1, 'Awaiting Approval'),
+    (2, 'Approved'),
+    (3, 'Denied'),
+	(4, 'Complete'),
+    (5, 'Error')
+)
+AS Source ([item_status_id], [item_status_name]) 
+ON Target.[ItemStatusId] = Source.[item_status_id]
+WHEN MATCHED THEN 
+    UPDATE SET [StatusName] = Source.[item_status_name]
+WHEN NOT MATCHED BY TARGET THEN 
+    INSERT ([ItemStatusId], [StatusName])
+    VALUES ([item_status_id], [item_status_name]);
+
+SET IDENTITY_INSERT [dbo].[ItemStatus]  OFF
+
 SET IDENTITY_INSERT [dbo].[Badge]  ON
 MERGE INTO [dbo].[Badge]  AS Target
 USING (VALUES
-    (1, 'AT BAT', 'At bat for Magenic', 'Recognized employees who provide referrals for new business.', 1, '9/1/2013', '10/1/2013', null, 1, 1, 1, 1, 1, 20, 1, '9/1/2013'),
-    (2, 'SPEAKER', 'And now for the vocal stylings of...', 'Awarded for employees who speak at user groups, webinars, conferences, educational events or has their work published in a magazine or journal.', 1, '9/1/2013', '10/1/2013', null, 2, 1, 1, 1, 1, 50, 1, '9/1/2013'),
-    (3, 'SILVER SPEAKER', 'You silver tongued devil...', 'Awarded for employees who speak five times at user groups, webinars, conferences, educational events or has their work published in a magazine or journal.', 1, '9/1/2013', '10/1/2013', null, 3, 1, 1, 1, 5, 0, 1, '9/1/2013'),
-    (4, 'ATTENDED CODE DOJO', 'The zen of code...', 'Awarded for attending Code Dojo sessions.', 2, '1/1/2013', '1/1/2013', null, 4, 0, 1, 0, 1, 0, 3, '1/1/2013')
+    (1, 'AT BAT', 'At bat for Magenic', 'Recognized employees who provide referrals for new business.', 1, '9/1/2013', '10/1/2013', null, 1, 1, 1, 1, 1, 20, 1, '9/1/2013', 2),
+    (2, 'SPEAKER', 'And now for the vocal stylings of...', 'Awarded for employees who speak at user groups, webinars, conferences, educational events or has their work published in a magazine or journal.', 1, '9/1/2013', '10/1/2013', null, 2, 1, 1, 1, 1, 50, 1, '9/1/2013', 2),
+    (3, 'SILVER SPEAKER', 'You silver tongued devil...', 'Awarded for employees who speak five times at user groups, webinars, conferences, educational events or has their work published in a magazine or journal.', 1, '9/1/2013', '10/1/2013', null, 3, 1, 1, 1, 5, 0, 1, '9/1/2013', 2),
+    (4, 'ATTENDED CODE DOJO', 'The zen of code...', 'Awarded for attending Code Dojo sessions.', 2, '1/1/2013', '1/1/2013', null, 4, 0, 1, 0, 1, 0, 3, '1/1/2013', 2)
 )
-AS Source ([badge_id], [badge_name], [badge_tag_line], [badge_description], [badge_type_id], [badge_created], [badge_effective_start], [badge_effective_end], [badge_priority], [multiple_awards_possible], [display_once], [management_approval_required], [activity_points_amount], [badge_award_value_amount], [badge_approved_by_id], [badge_approved_date]) 
+AS Source ([badge_id], [badge_name], [badge_tag_line], [badge_description], [badge_type_id], [badge_created], [badge_effective_start], [badge_effective_end], [badge_priority], [multiple_awards_possible], [display_once], [management_approval_required], [activity_points_amount], [badge_award_value_amount], [badge_approved_by_id], [badge_approved_date], [badge_status_id]) 
 ON Target.[BadgeId] = Source.[badge_id]
 WHEN MATCHED THEN 
     UPDATE SET [BadgeName] = Source.[badge_name],
@@ -145,10 +164,11 @@ WHEN MATCHED THEN
                [ActivityPointsAmount] = Source.[activity_points_amount],
                [BadgeAwardValueAmount] = Source.[badge_award_value_amount],
                [BadgeApprovedById] = Source.[badge_approved_by_id],
-               [BadgeApprovedDate] = Source.[badge_approved_date]
+               [BadgeApprovedDate] = Source.[badge_approved_date],
+			   [BadgeStatusId] = Source.[badge_status_id]
 WHEN NOT MATCHED BY TARGET THEN 
-    INSERT ([BadgeId], [BadgeName], [BadgeTagLine], [BadgeDescription], [BadgeTypeId], [BadgeCreated], [BadgeEffectiveStart], [BadgeEffectiveEnd], [BadgePriority], [MultipleAwardPossible], [DisplayOnce], [ManagementApprovalRequired], [ActivityPointsAmount], [BadgeAwardValueAmount], [BadgeApprovedById], [BadgeApprovedDate])
-    VALUES ([badge_id], [badge_name], [badge_tag_line], [badge_description], [badge_type_id], [badge_created], [badge_effective_start], [badge_effective_end], [badge_priority], [multiple_awards_possible], [display_once], [management_approval_required], [activity_points_amount], [badge_award_value_amount], [badge_approved_by_id], [badge_approved_date]);
+    INSERT ([BadgeId], [BadgeName], [BadgeTagLine], [BadgeDescription], [BadgeTypeId], [BadgeCreated], [BadgeEffectiveStart], [BadgeEffectiveEnd], [BadgePriority], [MultipleAwardPossible], [DisplayOnce], [ManagementApprovalRequired], [ActivityPointsAmount], [BadgeAwardValueAmount], [BadgeApprovedById], [BadgeApprovedDate], [BadgeStatusId])
+    VALUES ([badge_id], [badge_name], [badge_tag_line], [badge_description], [badge_type_id], [badge_created], [badge_effective_start], [badge_effective_end], [badge_priority], [multiple_awards_possible], [display_once], [management_approval_required], [activity_points_amount], [badge_award_value_amount], [badge_approved_by_id], [badge_approved_date], [badge_status_id]);
 
 SET IDENTITY_INSERT [dbo].[Badge]  OFF
 
@@ -171,26 +191,6 @@ WHEN NOT MATCHED BY TARGET THEN
     VALUES ([badge_activity_id], [badge_id], [activity_id], [points_awarded]);
 
 SET IDENTITY_INSERT [dbo].[BadgeActivity]  OFF
-
-SET IDENTITY_INSERT [dbo].[ItemStatus]  ON
-MERGE INTO [dbo].[ItemStatus]  AS Target
-USING (VALUES
-    (1, 'Awaiting Approval'),
-    (2, 'Approved'),
-    (3, 'Denied'),
-	(4, 'Complete'),
-    (5, 'Error')
-)
-AS Source ([item_status_id], [item_status_name]) 
-ON Target.[ItemStatusId] = Source.[item_status_id]
-WHEN MATCHED THEN 
-    UPDATE SET [StatusName] = Source.[item_status_name]
-WHEN NOT MATCHED BY TARGET THEN 
-    INSERT ([ItemStatusId], [StatusName])
-    VALUES ([item_status_id], [item_status_name]);
-
-SET IDENTITY_INSERT [dbo].[ItemStatus]  OFF
-
 
 SET IDENTITY_INSERT [dbo].[ActivitySubmission]  ON
 MERGE INTO [dbo].[ActivitySubmission]  AS Target

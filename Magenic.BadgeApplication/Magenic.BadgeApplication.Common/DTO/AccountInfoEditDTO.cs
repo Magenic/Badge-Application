@@ -5,8 +5,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// <summary>
     /// Class for data transfer persist operations.
     /// </summary>
-    [Serializable]
-    public class AccountInfoEditDTO
+    public sealed class AccountInfoEditDTO
     {
         /// <summary>
         /// The employee id of the person whose account information this is for.

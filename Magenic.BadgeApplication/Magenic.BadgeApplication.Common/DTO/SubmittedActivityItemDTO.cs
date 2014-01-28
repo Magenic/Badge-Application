@@ -5,8 +5,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// <summary>
     /// Data Transfer Object for the SubmitedActivityItem
     /// </summary>
-    [Serializable]
-    public class SubmittedActivityItemDTO
+    public sealed class SubmittedActivityItemDTO
     {
         /// <summary>
         /// The Id for this activity submission.

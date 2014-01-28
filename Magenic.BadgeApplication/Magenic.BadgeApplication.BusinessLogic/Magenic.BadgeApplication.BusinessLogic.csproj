@@ -71,6 +71,8 @@
     <Compile Include="Activity\SubmitActivity.cs" />
     <Compile Include="Activity\SubmittedActivityCollection.cs" />
     <Compile Include="Activity\SubmittedActivityItem.cs" />
+    <Compile Include="Badge\ApproveBadgeCollection.cs" />
+    <Compile Include="Badge\ApproveBadgeItem.cs" />
     <Compile Include="Badge\AwardBadges.cs" />
     <Compile Include="Badge\BadgeActivityEdit.cs" />
     <Compile Include="Badge\BadgeActivityEditCollection.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Rules\CanSetBadgeType.cs" />
     <Compile Include="Rules\DateOrder.cs" />
     <Compile Include="Rules\DefaultActivityStatus.cs" />
+    <Compile Include="Rules\DefaultBadgeStatus.cs" />
     <Compile Include="Rules\NoDuplicates.cs" />
     <Compile Include="Security\CustomIdentity.cs" />
     <Compile Include="Security\CustomPrincipal.cs" />
