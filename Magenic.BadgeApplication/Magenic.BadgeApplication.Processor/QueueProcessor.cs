@@ -1,104 +1,72 @@
 ﻿using Autofac;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.DTO;
-using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Threading;
 
 namespace Magenic.BadgeApplication.Processor
 {
-    public static class QueueProcessor
+    public class QueueProcessor
     {
-        private static bool _isStopRequested = false;
+        private IContainer _factory;
 
-        private static int SleepInterval 
+        private IItemProcessor _itemProcessor;
+        private IQueueItemDAL _queueItemDAL;        
+
+        private int SleepInterval
         {
-            get { return int.Parse(ConfigurationManager.AppSettings["SleepIntervalInMilliseconds"]); }    
+            get { return int.Parse(ConfigurationManager.AppSettings["SleepIntervalInMilliseconds"]); }
         }
+
+        public QueueProcessor() : this(IoC.Container)
+        {
+            
+        }
+
+        public QueueProcessor(IContainer factory)
+        {
+            _factory = factory;
+
+            _itemProcessor = _factory.Resolve<IItemProcessor>();
+            _queueItemDAL = _factory.Resolve<IQueueItemDAL>();  
+        }        
 
         /// <summary>
         /// This method runs the queue process
         /// </summary>
-        public static void Start(IQueueItemDAL queueItemDAL, IQueueEventLogDAL queueEventLogDAL)
+        public void Start()
         {
+            Logger.Info<QueueProcessor>("The Queue Processor was started");
+
             while (true)
             {
                 try
                 {
-                    QueueItemDTO latestItem = queueItemDAL.Peek();
+                    QueueItemDTO latestItem = _queueItemDAL.Peek();
 
                     if (latestItem != null)
                     {
-                        ProcessItem(latestItem, queueEventLogDAL, queueItemDAL);
+                        Logger.InfoFormat<QueueProcessor>("Processor peeked item with QueueItemId: {0} and BadgeAwardId: {1}, processing...",
+                            latestItem.QueueItemId,
+                            latestItem.BadgeAwardId);
+
+                        _itemProcessor.ProcessItem(latestItem);
                     }
                     else
                     {
-                        Thread.Sleep(SleepInterval);
-                    }
+                        Logger.InfoFormat<QueueProcessor>("No items found in the queue, sleeping for {0} seconds", SleepInterval/1000);  
 
-                    if (_isStopRequested)
-                    {
-                        break;
+                        Thread.Sleep(SleepInterval);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
+                    Logger.Error<QueueProcessor>(ex.Message, ex);
                 }
-            }
-        }
-
-        private static void ProcessItem(QueueItemDTO latestItem, IQueueEventLogDAL queueEventLogDAL, IQueueItemDAL queueItemDAL)
-        {
-            try
-            {
-                EarnedBadgeItemDTO earnedBadge = GetEarnedBadge(latestItem);
-
-                RegisterQueueItemProgress(QueueEventType.Processing, latestItem, queueEventLogDAL);
-
-                PublishUpdates(earnedBadge);
-
-                queueItemDAL.Delete(latestItem.QueueItemId);
-
-                RegisterQueueItemProgress(QueueEventType.Processed, latestItem, queueEventLogDAL);
-            }
-            catch
-            {
-                RegisterQueueItemProgress(QueueEventType.Failed, latestItem, queueEventLogDAL);
-                throw;
-            }
-        }
-
-        private static void PublishUpdates(EarnedBadgeItemDTO earnedBadge)
-        {
-            IEnumerable<IPublisher> publishers = IoC.Container.Resolve<IEnumerable<IPublisher>>();
-            foreach (IPublisher publiser in publishers)
-            {
-                publiser.Publish(earnedBadge);
-            }
-        }
-
-        private static EarnedBadgeItemDTO GetEarnedBadge(QueueItemDTO latestItem)
-        {
-            IEarnedBadgeCollectionDAL earnedBadgeDAL = IoC.Container.Resolve<IEarnedBadgeCollectionDAL>();
-            EarnedBadgeItemDTO earnedBadge = earnedBadgeDAL.GetEarnedBadge(latestItem.BadgeAwardId);
-            return earnedBadge;
-        }
-
-        private static void RegisterQueueItemProgress(QueueEventType eventType, QueueItemDTO latestItem, IQueueEventLogDAL queueEventLogDAL)
-        {
-            QueueEventLogDTO eventLogItem = new QueueEventLogDTO
-            {
-                Message = string.Format("Queue Data Item {0} is {1}", eventType.ToString()),
-                QueueEventCreated = DateTime.Now,
-                QueueEventId = (int)eventType,
-                QueueItemId = latestItem.QueueItemId
-            };
-
-            queueEventLogDAL.Add(eventLogItem);
-        }
+            }            
+        }        
     }
 }

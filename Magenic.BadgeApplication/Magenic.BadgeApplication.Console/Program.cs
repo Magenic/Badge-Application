@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Processor;
 using System;
@@ -12,20 +13,14 @@ namespace Magenic.BadgeApplication.Console
         {
             try
             {
-                System.Console.WriteLine("Started queue processor");
-
                 AutofacBootstrapper.Init();
 
-                IQueueEventLogDAL queueEventLogDAL = IoC.Container.Resolve<IQueueEventLogDAL>();
-                IQueueItemDAL queueItemDAL = IoC.Container.Resolve<IQueueItemDAL>();
-
-                QueueProcessor.Start(queueItemDAL, queueEventLogDAL);
-
-                System.Console.WriteLine("Completed queue processor");
+                QueueProcessor processor = new QueueProcessor();
+                processor.Start();             
             }
             catch (Exception ex)
             {
-                System.Console.WriteLine(ex);
+                Logger.Fatal<Program>(ex.Message, ex);
             }
         }
     }
