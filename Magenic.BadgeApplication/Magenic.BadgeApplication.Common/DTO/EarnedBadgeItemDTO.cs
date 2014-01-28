@@ -48,5 +48,9 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// Indicates if the same badge should be displayed only once or multiple times.
         /// </summary>
         public bool DisplayOnce { get; set; }
+        /// <summary>
+        /// The email of the employee who earned the badge
+        /// </summary>
+        public string EmployeeADName { get; set; }
     }
 }

@@ -1,0 +1,121 @@
+﻿@using Magenic.BadgeApplication.Common.Enums
+@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Models
+@model BadgeEditViewModel
+
+<div class="row">
+    <div class="col-md-12">
+        @ApplicationResources.BadgeEditDescription
+    </div>
+    <br />
+</div>
+
+@Html.HiddenFor(bevm => bevm.Badge.Id)
+<div class="row">
+    <div class="col-md-5">
+        <div class="editor-label">
+            @Html.LabelFor(bevm => bevm.Badge.Name, ApplicationResources.BadgeNameLabel)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(bevm => bevm.Badge.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(bevm => bevm.Badge.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(bevm => bevm.Badge.Tagline, ApplicationResources.BadgeTaglineLabel)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(bevm => bevm.Badge.Tagline, new { @class = "form-control" })
+            @Html.ValidationMessageFor(bevm => bevm.Badge.Tagline)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(bevm => bevm.Badge.Description, ApplicationResources.BadgeDescriptionLabel)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(bevm => bevm.Badge.Description, new { @class = "form-control", rows = "6", cols = "10" })
+            @Html.ValidationMessageFor(bevm => bevm.Badge.Description)
+        </div>
+
+        <label>@ApplicationResources.BadgeTypeLabel</label><br />
+        <label>
+            @Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Corporate)
+            @ApplicationResources.BadgeCorporateLabel
+        </label>
+        &nbsp;&nbsp;
+        <label>
+            @Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Community)
+            @ApplicationResources.BadgeCommunityLabel
+        </label>
+        <br /><br />
+        <div class="editor-label">
+            @Html.Label(ApplicationResources.RequiredActivitiesLabel)
+        </div>
+        <div class="editor-field">
+            @Html.ListBoxFor(bevm => bevm.SelectedActivityIds, Model.AllActivities, new { @class = "form-control selectpicker" })
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        <div class="editor-label">
+            @Html.LabelFor(bevm => bevm.Badge.ImagePath, ApplicationResources.BadgeNameLabel)
+        </div>
+        <div class="editor-field">
+            <input name="badgeImage" type="file" class="filestyle" data-classbutton="btn btn-primary" data-classinput="form-control pull-left">
+            @Html.ValidationMessageFor(bevm => bevm.Badge.ImagePath)
+        </div>
+        <div class="pull-left">
+            <div class="editor-label">
+                @Html.LabelFor(bevm => bevm.Badge.EffectiveStartDate, ApplicationResources.BadgeStartDateLabel)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(bevm => bevm.Badge.EffectiveStartDate, new { @class = "form-control datepicker" })
+                @Html.ValidationMessageFor(bevm => bevm.Badge.EffectiveStartDate)
+            </div>
+        </div>
+        <div class="pull-left">
+            <div class="editor-label">
+                @Html.LabelFor(bevm => bevm.Badge.EffectiveEndDate, ApplicationResources.BadgeEndDateLabel)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(bevm => bevm.Badge.EffectiveEndDate, new { @class = "form-control datepicker" })
+                @Html.ValidationMessageFor(bevm => bevm.Badge.EffectiveEndDate)
+            </div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        <label>
+            @Html.CheckBoxFor(bevm => bevm.Badge.MultipleAwardsPossible)
+            @ApplicationResources.BadgeMultipleAwardsLabel
+        </label>
+        <br /><br />
+        <label>
+            @Html.CheckBoxFor(bevm => bevm.Badge.ManagementApprovalRequired)
+            @ApplicationResources.BadgeManagementApprovalRequiredLabel
+        </label>
+        <br /><br />
+        <div class="editor-label">
+            @Html.LabelFor(bevm => bevm.Badge.AwardValueAmount, ApplicationResources.BadgePointsReceievedLabel)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(bevm => bevm.Badge.AwardValueAmount, new { @class = "form-control" })
+            @Html.ValidationMessageFor(bevm => bevm.Badge.AwardValueAmount)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(bevm => bevm.Badge.Priority, ApplicationResources.BadgePriorityLabel)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(bevm => bevm.Badge.Priority, new { @class = "form-control" })
+            @Html.ValidationMessageFor(bevm => bevm.Badge.Priority)
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    &nbsp;
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <input type="submit" class="btn btn-success" value="@ApplicationResources.SubmitButton" />
+    </div>
+</div>

@@ -18,9 +18,14 @@ namespace Magenic.BadgeApplication
         {
             Arg.IsNotNull(() => bundles);
 
+            bundles.Add(new StyleBundle("~/Content/jquery").IncludeT4MVC(
+                Links.Content.themes.@base.jquery_ui_all_css
+            ));
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").IncludeT4MVC(
                 Links.Scripts.jquery_1_10_2_js,
                 Links.Scripts.jquery_unobtrusive_ajax_js,
+                Links.Scripts.jquery_ui_1_10_4_js,
                 Links.Scripts.MicrosoftAjax_debug_js,
                 Links.Scripts.MicrosoftMvcAjax_debug_js,
                 Links.Scripts.MicrosoftMvcValidation_debug_js));
@@ -46,6 +51,15 @@ namespace Magenic.BadgeApplication
                 Links.Content.slider_css,
                 Links.Content.Site_css));
 
+            bundles.Add(new ScriptBundle("~/bundles/jtable").IncludeT4MVC(
+                Links.Scripts.jtable.jquery_jtable_js,
+                Links.Scripts.activitiesManagement_js
+            ));
+
+            bundles.Add(new StyleBundle("~/Content/jtable").IncludeT4MVC(
+                Links.Scripts.jtable.themes.metro.green.jtable_css
+            ));
+
             bundles.Add(new ScriptBundle("~/bundles/knockout").IncludeT4MVC(
                 Links.Scripts.knockout_3_0_0_debug_js
             ));
@@ -63,7 +77,8 @@ namespace Magenic.BadgeApplication
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/badgeManager").IncludeT4MVC(
-                Links.Scripts.badgeEditorPages_js
+                Links.Scripts.badgeEditorPages_js,
+                Links.Scripts.approveActivities_js
             ));
         }
     }

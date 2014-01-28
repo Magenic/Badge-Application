@@ -14,7 +14,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     
     public partial class QueueEvent
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public QueueEvent()
         {
             this.QueueEventLogs = new HashSet<QueueEventLog>();
@@ -23,8 +22,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public int QueueEventId { get; set; }
         public string QueueEventName { get; set; }
         public string QueueEventDescription { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    
         public virtual ICollection<QueueEventLog> QueueEventLogs { get; set; }
     }
 }

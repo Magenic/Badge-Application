@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Csla;
+﻿using Csla;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
@@ -34,7 +33,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             }
             foreach (var badgeActivityEdit in this.DeletedList)
             {
-                var newDTO = ((BadgeActivityEdit) badgeActivityEdit).UnloadData();
+                var newDTO = ((BadgeActivityEdit)badgeActivityEdit).UnloadData();
                 newDTO.IsDeleted = true;
                 returnValue.Add(newDTO);
             }

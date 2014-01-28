@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>jTable</id>
+    <version>2.3.1</version>
+    <title>jTable - A JQuery plugin to create AJAX based CRUD tables.</title>
+    <authors>Halil ibrahim Kalkan</authors>
+    <owners>Halil ibrahim Kalkan</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>http://www.jtable.org/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>jTable is a jQuery plugin that is used to create AJAX based CRUD tables without coding HTML or Javascript.
+
+It supports paging, sorting, master/child tables, selecting rows, resizing columns, show/hide columns and so on. Also creates create/edit forms and dialogs automatically from your model.</description>
+    <summary>jTable is a jQuery plugin that is used to create AJAX based CRUD tables/grids without coding HTML or Javascript.</summary>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <tags>jtable jquery ajax table crud</tags>
+    <dependencies>
+      <dependency id="jQuery" version="1.6.4" />
+      <dependency id="jQuery.UI.Combined" version="1.8.16" />
+    </dependencies>
+  </metadata>
+</package>

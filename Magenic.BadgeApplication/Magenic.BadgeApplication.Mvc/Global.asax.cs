@@ -92,10 +92,15 @@ namespace Magenic.BadgeApplication
         /// <param name="e"></param>
         protected async Task Application_AuthenticateRequest(object sender, EventArgs e)
         {
-            if (ApplicationContext.User != null && ApplicationContext.User.Identity.IsAuthenticated && ApplicationContext.User.Identity is FormsIdentity)
+            var formsCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+            if (formsCookie != null)
             {
-                var customPrincipal = await CustomPrincipal.LoadAsync(ApplicationContext.User.Identity.Name);
-                ApplicationContext.User = customPrincipal;
+                var authenticationToken = FormsAuthentication.Decrypt(formsCookie.Value);
+                if (authenticationToken != null)
+                {
+                    var customPrincipal = await CustomPrincipal.LoadAsync(authenticationToken.Name);
+                    ApplicationContext.User = customPrincipal;
+                }
             }
         }
     }

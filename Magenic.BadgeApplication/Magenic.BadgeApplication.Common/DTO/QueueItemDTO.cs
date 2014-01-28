@@ -5,7 +5,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// <summary>
     /// Represents a badge award item in the integration queue
     /// </summary>
-    public sealed class QueueItemDTO
+    public class QueueItemDTO : DTOBase
     {
         /// <summary>
         /// Initializes a default instance
