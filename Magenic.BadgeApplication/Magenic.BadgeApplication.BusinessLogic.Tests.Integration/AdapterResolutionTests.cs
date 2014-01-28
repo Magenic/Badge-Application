@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Processor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;

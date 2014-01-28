@@ -25,7 +25,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DocumentationFile>bin\Debug\Magenic.BadgeApplication.Common.XML</DocumentationFile>
     <CodeAnalysisRuleSet>..\Magenic.BadgeApplication.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -46,6 +47,9 @@
     <Reference Include="Csla, Version=4.5.501.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CSLA-Core.4.5.501\lib\net45\Csla.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -108,7 +112,9 @@
     <Compile Include="Interfaces\IEarnedBadgeCollectionDAL.cs" />
     <Compile Include="Interfaces\IEarnedBadgeItem.cs" />
     <Compile Include="Interfaces\IIdentityCriteria.cs" />
+    <Compile Include="Interfaces\IItemProcessor.cs" />
     <Compile Include="Interfaces\IObjectFactory.cs" />
+    <Compile Include="Interfaces\IPublisher.cs" />
     <Compile Include="Interfaces\IQueueEventLogDAL.cs" />
     <Compile Include="Interfaces\IQueueItemDAL.cs" />
     <Compile Include="Interfaces\IDTORepository.cs" />
@@ -117,6 +123,7 @@
     <Compile Include="Interfaces\ISubmittedActivityCollection.cs" />
     <Compile Include="Interfaces\ISubmittedActivityCollectionDAL.cs" />
     <Compile Include="Interfaces\ISubmittedActivityItem.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ApplicationResources.Designer.cs">
       <AutoGen>True</AutoGen>
