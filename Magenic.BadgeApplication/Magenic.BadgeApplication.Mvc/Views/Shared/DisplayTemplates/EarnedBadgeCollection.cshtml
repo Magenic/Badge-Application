@@ -31,11 +31,7 @@
                 <td>
                     @if (badgeHistoryItem.PaidOut)
                     {
-                        <text>Yes</text>
-                    }
-                    else
-                    {
-                        <text>No</text>
+                        <img src="@Url.Content(Links.Content.Images.checkmark_png)" alt="checkmark.png" title="@badgeHistoryItem.Name" />
                     }
                 </td>
             </tr>

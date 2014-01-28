@@ -1,6 +1,5 @@
 ﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
-using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Extensions;
 using Magenic.BadgeApplication.Models;
@@ -17,6 +16,38 @@ namespace Magenic.BadgeApplication.Controllers
     public partial class BadgeManagerController
         : BaseController
     {
+        private static void SetActivitiesToAdd(BadgeEditViewModel badgeEditViewModel)
+        {
+            var activityIdsToAdd = badgeEditViewModel.SelectedActivityIds
+                .Except(badgeEditViewModel.Badge.BadgeActivities
+                .Select(bae => bae.ActivityId));
+
+            foreach (var activityId in activityIdsToAdd)
+            {
+                var badgeActivityEdit = BadgeActivityEdit.CreateBadgeActivity();
+                badgeActivityEdit.ActivityId = activityId;
+
+                badgeEditViewModel.Badge.BadgeActivities.Add(badgeActivityEdit);
+            }
+        }
+
+        private static void SetActivitiesToRemove(BadgeEditViewModel badgeEditViewModel)
+        {
+            var activityIdsToRemove = badgeEditViewModel.Badge.BadgeActivities
+                .Select(bae => bae.ActivityId)
+                .Except(badgeEditViewModel.SelectedActivityIds)
+                .ToList();
+
+            foreach (var activityId in activityIdsToRemove)
+            {
+                var badgeActivityEdit = badgeEditViewModel.Badge.BadgeActivities
+                    .Where(bae => bae.ActivityId == activityId)
+                    .Single();
+
+                badgeEditViewModel.Badge.BadgeActivities.Remove(badgeActivityEdit);
+            }
+        }
+
         /// <summary>
         /// Handles the /Home/Index action.
         /// </summary>
@@ -133,38 +164,6 @@ namespace Magenic.BadgeApplication.Controllers
             return await EditBadge(id);
         }
 
-        private static void SetActivitiesToAdd(BadgeEditViewModel badgeEditViewModel)
-        {
-            var activityIdsToAdd = badgeEditViewModel.SelectedActivityIds
-                .Except(badgeEditViewModel.Badge.BadgeActivities
-                .Select(bae => bae.ActivityId));
-
-            foreach (var activityId in activityIdsToAdd)
-            {
-                var badgeActivityEdit = BadgeActivityEdit.CreateBadgeActivity();
-                badgeActivityEdit.ActivityId = activityId;
-
-                badgeEditViewModel.Badge.BadgeActivities.Add(badgeActivityEdit);
-            }
-        }
-
-        private static void SetActivitiesToRemove(BadgeEditViewModel badgeEditViewModel)
-        {
-            var activityIdsToRemove = badgeEditViewModel.Badge.BadgeActivities
-                .Select(bae => bae.ActivityId)
-                .Except(badgeEditViewModel.SelectedActivityIds)
-                .ToList();
-
-            foreach (var activityId in activityIdsToRemove)
-            {
-                var badgeActivityEdit = badgeEditViewModel.Badge.BadgeActivities
-                    .Where(bae => bae.ActivityId == activityId)
-                    .Single();
-
-                badgeEditViewModel.Badge.BadgeActivities.Remove(badgeActivityEdit);
-            }
-        }
-
         /// <summary>
         /// Approves the community badges.
         /// </summary>
@@ -198,29 +197,52 @@ namespace Magenic.BadgeApplication.Controllers
         }
 
         /// <summary>
-        /// Admins the activity.
+        /// Approves the activities list.
         /// </summary>
-        /// <param name="approveActivityItem">The approve activity item.</param>
         /// <returns></returns>
-        [HttpPost]
-        public virtual ActionResult ApproveActivity(ApproveActivityItem approveActivityItem)
+        [HttpGet]
+        public async virtual Task<ActionResult> ApproveActivitiesList()
         {
-            Arg.IsNotNull(() => approveActivityItem);
-
-            approveActivityItem.ApproveActivitySubmission(AuthenticatedUser.EmployeeId);
-            return Json(new { Success = true });
+            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
+            return PartialView(Mvc.BadgeManager.Views._ActivitiesForApproval, activitiesToApprove);
         }
 
         /// <summary>
         /// Admins the activity.
         /// </summary>
-        /// <param name="approveActivityItem">The approve activity item.</param>
+        /// <param name="submissionId">The submission identifier.</param>
         /// <returns></returns>
         [HttpPost]
-        public virtual ActionResult RejectActivity(ApproveActivityItem approveActivityItem)
+        public async virtual Task<ActionResult> ApproveActivity(int submissionId)
         {
-            // TODO: need the approveActivityItem.RejectActivitySubmission(...)
-            return Json(new { Success = true });
+            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
+            var activityItem = activitiesToApprove.Where(aai => aai.SubmissionId == submissionId).Single();
+            activityItem.ApproveActivitySubmission(AuthenticatedUser.EmployeeId);
+            if (await SaveObjectAsync(activitiesToApprove, true))
+            {
+                return Json(new { Success = true });
+            }
+
+            return Json(new { Success = false, Message = ModelState.Values.SelectMany(ms => ms.Errors).Select(me => me.ErrorMessage) });
+        }
+
+        /// <summary>
+        /// Admins the activity.
+        /// </summary>
+        /// <param name="submissionId">The submission identifier.</param>
+        /// <returns></returns>
+        [HttpPost]
+        public async virtual Task<ActionResult> RejectActivity(int submissionId)
+        {
+            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
+            var activityItem = activitiesToApprove.Where(aai => aai.SubmissionId == submissionId).Single();
+            activityItem.DenyActivitySubmission();
+            if (await SaveObjectAsync(activitiesToApprove, true))
+            {
+                return Json(new { Success = true });
+            }
+
+            return Json(new { Success = false, Message = ModelState.Values.SelectMany(ms => ms.Errors).Select(me => me.ErrorMessage) });
         }
     }
 }
