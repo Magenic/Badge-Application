@@ -17,6 +17,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public BadgeAward()
         {
             this.QueueItems = new HashSet<QueueItem>();
+            this.QueueEventLogs = new HashSet<QueueEventLog>();
         }
     
         public int BadgeAwardId { get; set; }
@@ -33,5 +34,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public virtual Employee Employee { get; set; }
         public virtual Employee Employee1 { get; set; }
         public virtual ICollection<QueueItem> QueueItems { get; set; }
+        public virtual ICollection<QueueEventLog> QueueEventLogs { get; set; }
     }
 }
