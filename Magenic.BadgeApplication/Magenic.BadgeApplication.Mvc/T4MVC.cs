@@ -515,6 +515,7 @@ namespace Links
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
             public static readonly string button_gloss_png = Url("button-gloss.png");
+            public static readonly string checkmark_png = Url("checkmark.png");
             public static readonly string header_bg_gif = Url("header-bg.gif");
             public static readonly string header_shadow_png = Url("header-shadow.png");
             public static readonly string magenic_badges_logo_png = Url("magenic-badges-logo.png");

@@ -245,6 +245,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\button-gloss.png" />
+    <Content Include="Content\Images\checkmark.png" />
     <Content Include="Content\Images\header-bg.gif" />
     <Content Include="Content\Images\header-shadow.png" />
     <Content Include="Content\Images\magenic-badges-logo.png" />
@@ -576,7 +577,6 @@
     <Content Include="Views\Account\LogOn.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\LogOnViewModel.cshtml" />
     <Content Include="Views\BadgeManager\ManageActivities.cshtml" />
-    <Content Include="Views\BadgeManager\_CommunityBadgesForApproval.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">
