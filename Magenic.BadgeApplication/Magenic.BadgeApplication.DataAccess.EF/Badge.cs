@@ -43,10 +43,10 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     
         public virtual BadgeType BadgeType { get; set; }
         public virtual Employee Employee { get; set; }
+        public virtual ItemStatu ItemStatu { get; set; }
         public virtual ICollection<BadgeActivity> BadgeActivities { get; set; }
         public virtual ICollection<BadgeAward> BadgeAwards { get; set; }
         public virtual ICollection<BadgePrerequisite> BadgePrerequisites { get; set; }
         public virtual ICollection<BadgePrerequisite> BadgePrerequisites1 { get; set; }
-        public virtual ItemStatu ItemStatu { get; set; }
     }
 }
