@@ -35,19 +35,13 @@ namespace Magenic.BadgeApplication.Controllers
         /// <summary>
         /// Creates the activity.
         /// </summary>
+        /// <param name="formCollection">The form.</param>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async virtual Task<ActionResult> SubmitActivityForm()
+        public async virtual Task<ActionResult> SubmitActivityForm(FormCollection formCollection)
         {
             var submittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.EmployeeId);
-            var activityIndexViewModel = new ActivityIndexViewModel()
-            {
-                SubmittedActivity = submittedActivity,
-            };
-
-            TryUpdateModel(activityIndexViewModel);
-            if (await SaveObjectAsync(submittedActivity, true))
+            if (await SaveObjectAsync(submittedActivity, sa => TryUpdateModel(sa, formCollection.ToValueProvider()), true))
             {
                 return RedirectToAction(await Mvc.Activities.Actions.Index());
             }

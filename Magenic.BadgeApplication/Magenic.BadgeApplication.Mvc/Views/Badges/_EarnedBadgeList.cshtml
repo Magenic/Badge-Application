@@ -2,11 +2,11 @@
 @model IEnumerable<IEarnedBadgeItem>
 
 @{
-    var list = Model.ToList();
+    var earnedBadges = Model.ToList();
     var maxColumns = 5;
 }
 
-@for (int row = 0; row <= list.Count() / maxColumns; row++)
+@for (int row = 0; row <= earnedBadges.Count() / maxColumns; row++)
 {
     var className = "row";
     if (row % 2 == 1)
@@ -17,10 +17,13 @@
     <div class="@className">
         @for (int col = row * maxColumns; col < (row * maxColumns) + maxColumns; col++)
         {
-            if (col < Model.Count())
+            if (col < earnedBadges.Count())
             {
-                var item = list[col];
-                @Html.DisplayFor(m => item);
+                var earnedBadge = earnedBadges[col];
+                <a href="#EarnedBadgeWindow-@earnedBadge.Id" data-toggle="modal">
+                    @Html.DisplayFor(m => earnedBadge)
+                </a>
+                @Html.Partial(Mvc.Shared.Views._EarnedBadgeWindow, earnedBadge)
             }
         }
     </div>
