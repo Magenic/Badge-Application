@@ -1,0 +1,39 @@
+﻿@using Magenic.BadgeApplication.BusinessLogic.Badge
+@using Magenic.BadgeApplication.Extensions
+@using Magenic.BadgeApplication.Resources
+@model BadgeItem
+
+<div id="BadgeWindow-@Model.Id" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">@ApplicationResources.BadgeWindowTitle</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        @Html.DisplayFor(m => m)
+                    </div>
+                    <div class="col-md-8">
+                        @MvcHtmlString.Create(String.Format(ApplicationResources.BadgeTitle, String.Format("<b>{0}</b>", Model.Name)))
+                    </div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        Not Complete yet, need to get list of activities required for this badge.
+                    </div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

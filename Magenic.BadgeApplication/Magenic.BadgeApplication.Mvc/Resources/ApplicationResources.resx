@@ -297,4 +297,19 @@
   <data name="ManageActivitiesLink" xml:space="preserve">
     <value>Manage Activities</value>
   </data>
+  <data name="BadgeAwardedLabel" xml:space="preserve">
+    <value>Awarded: </value>
+  </data>
+  <data name="BadgeWindowTitle" xml:space="preserve">
+    <value>Badge Information</value>
+  </data>
+  <data name="PointsEarnedLabel" xml:space="preserve">
+    <value>Points Earned:</value>
+  </data>
+  <data name="UnlockedAwardTitle" xml:space="preserve">
+    <value>You've unlocked the {0} award!</value>
+  </data>
+  <data name="BadgeTitle" xml:space="preserve">
+    <value>Requirements for the {0} badge</value>
+  </data>
 </root>
