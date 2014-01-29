@@ -85,7 +85,7 @@ namespace Magenic.BadgeApplication.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_SubmitActivityForm
         {
-            public readonly string form = "form";
+            public readonly string formCollection = "formCollection";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -119,13 +119,13 @@ namespace Magenic.BadgeApplication.Controllers
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
-        partial void SubmitActivityFormOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Web.Mvc.FormCollection form);
+        partial void SubmitActivityFormOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Web.Mvc.FormCollection formCollection);
 
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> SubmitActivityForm(System.Web.Mvc.FormCollection form)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> SubmitActivityForm(System.Web.Mvc.FormCollection formCollection)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SubmitActivityForm);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "form", form);
-            SubmitActivityFormOverride(callInfo, form);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "formCollection", formCollection);
+            SubmitActivityFormOverride(callInfo, formCollection);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
