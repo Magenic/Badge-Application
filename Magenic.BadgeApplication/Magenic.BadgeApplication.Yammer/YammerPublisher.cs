@@ -1,5 +1,5 @@
 ﻿using Magenic.BadgeApplication.Common.DTO;
-using Magenic.BadgeApplication.Processor;
+using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Yammer.Helpers;
 using System;
 using System.Configuration;
@@ -16,6 +16,11 @@ namespace Magenic.BadgeApplication.Yammer
         private static HttpWebResponse _response = null;
         private static HttpWebRequest _request = null;
         private static CookieContainer _cookieContainer = null;
+
+        private string YammerMessageText
+        {
+            get { return ConfigurationManager.AppSettings["YammerMessage"]; }
+        }
 
         private string Token
         {
@@ -49,10 +54,14 @@ namespace Magenic.BadgeApplication.Yammer
             //let's post a message now to this group
             bool broadcastToAll = false;
 
-            string msg = string.Format("body=Attention Magenincons [[user:{0}]] has earned the {1} badge!" + "&broadcast={2}",
+            string msg = string.Format(YammerMessageText,
                 yammerUser.UserID,
                 earnedBadge.Name,
-                broadcastToAll.ToString());
+                broadcastToAll.ToString(),
+                "http://magenic.com",
+                earnedBadge.ImagePath,
+                earnedBadge.Name,
+                earnedBadge.Tagline);
 
             //try adding the message
             response = MakePostRequest(msg, MessageUrl, Token);

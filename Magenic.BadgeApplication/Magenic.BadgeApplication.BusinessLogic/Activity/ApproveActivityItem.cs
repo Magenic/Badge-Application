@@ -66,6 +66,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             private set { LoadProperty(EmployeeIdProperty, value); }
         }
 
+        public static readonly PropertyInfo<string> EmployeeADNameProperty = RegisterProperty<string>(c => c.EmployeeADName);
+        public string EmployeeADName
+        {
+            get { return GetProperty(EmployeeADNameProperty); }
+            private set { LoadProperty(EmployeeADNameProperty, value); }
+        }
+
         public static readonly PropertyInfo<ActivitySubmissionStatus> StatusProperty = RegisterProperty<ActivitySubmissionStatus>(c => c.Status);
         public ActivitySubmissionStatus Status
         {
@@ -132,6 +139,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                 this.ActivityDescription = item.ActivityDescription;
                 this.SubmissionNotes = item.SubmissionNotes;
                 this.EmployeeId = item.EmployeeId;
+                this.EmployeeADName = item.EmployeeADName;
                 this.Status = item.Status;
                 this.ApprovedById = item.ApprovedById;
             }
@@ -153,6 +161,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                     ActivityDescription = this.ActivityDescription,
                     SubmissionNotes = this.SubmissionNotes,
                     EmployeeId = this.EmployeeId,
+                    EmployeeADName = this.EmployeeADName,
                     Status = this.Status,
                     ApprovedById = this.ApprovedById,
                 };

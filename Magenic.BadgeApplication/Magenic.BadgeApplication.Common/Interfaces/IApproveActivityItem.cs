@@ -37,6 +37,10 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         int EmployeeId { get; }
         /// <summary>
+        /// The employee's active directory name.
+        /// </summary>
+        string EmployeeADName { get; }
+        /// <summary>
         /// The current status of this activity submission.
         /// </summary>
         Enums.ActivitySubmissionStatus Status { get; }
