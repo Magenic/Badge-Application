@@ -109,9 +109,8 @@ namespace Magenic.BadgeApplication.Controllers
                 badgeEditViewModel.Badge.SetBadgeImage(bytes);
             }
 
-            TryUpdateModel(badgeEditViewModel);
             SetActivitiesToAdd(badgeEditViewModel);
-            if (await SaveObjectAsync(badgeEditViewModel.Badge, true))
+            if (await SaveObjectAsync(badgeEditViewModel.Badge, be => UpdateModel(be, "Badge"), true))
             {
                 return RedirectToAction(Mvc.BadgeManager.Index().Result);
             }
@@ -152,11 +151,10 @@ namespace Magenic.BadgeApplication.Controllers
                 badgeEditViewModel.Badge.SetBadgeImage(bytes);
             }
 
-            TryUpdateModel(badgeEditViewModel);
             SetActivitiesToAdd(badgeEditViewModel);
             SetActivitiesToRemove(badgeEditViewModel);
 
-            if (await SaveObjectAsync(badgeEditViewModel.Badge, true))
+            if (await SaveObjectAsync(badgeEditViewModel.Badge, be => UpdateModel(be, "Badge"), true))
             {
                 return RedirectToAction(Mvc.BadgeManager.Index().Result);
             }
