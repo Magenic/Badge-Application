@@ -62,6 +62,7 @@
       <Link>GlobalSuppressions.cs</Link>
     </Compile>
     <Compile Include="AccountInfo\AccountInfoEdit.cs" />
+    <Compile Include="Activity\ActivityEditCollection.cs" />
     <Compile Include="Activity\ActivityCollection.cs" />
     <Compile Include="Activity\ActivityEdit.cs" />
     <Compile Include="Activity\ActivityItem.cs" />
