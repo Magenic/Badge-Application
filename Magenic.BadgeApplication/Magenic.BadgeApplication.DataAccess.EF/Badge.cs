@@ -48,6 +48,5 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public virtual ICollection<BadgePrerequisite> BadgePrerequisites { get; set; }
         public virtual ICollection<BadgePrerequisite> BadgePrerequisites1 { get; set; }
         public virtual ItemStatu ItemStatu { get; set; }
-        public virtual ItemStatu ItemStatu1 { get; set; }
     }
 }

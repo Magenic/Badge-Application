@@ -16,13 +16,11 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     {
         public int QueueEventLogId { get; set; }
         public int QueueEventId { get; set; }
-        public int QueueItemId { get; set; }
+        public int BadgeAwardId { get; set; }
         public System.DateTime QueueEventCreated { get; set; }
         public string Message { get; set; }
-        public Nullable<int> BadgeAwardId { get; set; }
     
-        public virtual QueueEvent QueueEvent { get; set; }
-        public virtual QueueItem QueueItem { get; set; }
         public virtual BadgeAward BadgeAward { get; set; }
+        public virtual QueueEvent QueueEvent { get; set; }
     }
 }
