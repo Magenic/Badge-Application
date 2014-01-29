@@ -349,6 +349,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Requirements for the {0} badge.
+        /// </summary>
+        public static string BadgeTitle {
+            get {
+                return ResourceManager.GetString("BadgeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Badge Type.
         /// </summary>
         public static string BadgeTypeLabel {

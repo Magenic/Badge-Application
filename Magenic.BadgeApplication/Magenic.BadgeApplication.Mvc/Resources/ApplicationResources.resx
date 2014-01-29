@@ -309,4 +309,7 @@
   <data name="UnlockedAwardTitle" xml:space="preserve">
     <value>You've unlocked the {0} award!</value>
   </data>
+  <data name="BadgeTitle" xml:space="preserve">
+    <value>Requirements for the {0} badge</value>
+  </data>
 </root>

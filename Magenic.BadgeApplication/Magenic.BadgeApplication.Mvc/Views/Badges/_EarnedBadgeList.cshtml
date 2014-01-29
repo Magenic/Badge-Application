@@ -20,7 +20,7 @@
             if (col < earnedBadges.Count())
             {
                 var earnedBadge = earnedBadges[col];
-                <a href="#" data-toggle="modal" data-target="EarnedBadgeWindow-@earnedBadge.Id">
+                <a href="#EarnedBadgeWindow-@earnedBadge.Id" data-toggle="modal">
                     @Html.DisplayFor(m => earnedBadge)
                 </a>
                 @Html.Partial(Mvc.Shared.Views._EarnedBadgeWindow, earnedBadge)

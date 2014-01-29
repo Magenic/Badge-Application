@@ -21,7 +21,7 @@
             if (col < badgeItems.Count())
             {
                 var badge = badgeItems[col];
-                <a href="#" data-toggle="modal" data-target="BadgeWindow-@badge.Id">
+                <a href="#BadgeWindow-@badge.Id" data-toggle="modal">
                     @Html.DisplayFor(m => badge)
                 </a>
                 @Html.Partial(Mvc.Shared.Views._BadgeWindow, badge)
