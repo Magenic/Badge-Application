@@ -1,4 +1,5 @@
 ﻿using Csla;
+using Csla.Web.Mvc;
 using Magenic.BadgeApplication.BusinessLogic.Security;
 using System;
 using System.Threading;
@@ -30,7 +31,7 @@ namespace Magenic.BadgeApplication
         /// </summary>
         protected void Application_Start()
         {
-            ModelBinders.Binders.DefaultBinder = new Csla.Web.Mvc.CslaModelBinder();
+            ModelBinders.Binders.DefaultBinder = new CslaModelBinder();
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

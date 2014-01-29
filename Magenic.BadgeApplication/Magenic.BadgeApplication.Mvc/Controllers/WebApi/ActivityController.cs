@@ -1,9 +1,5 @@
-﻿using Magenic.BadgeApplication.Common.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using Magenic.BadgeApplication.Common;
+using Magenic.BadgeApplication.Common.DTO;
 using System.Web.Http;
 
 namespace Magenic.BadgeApplication.Controllers.WebApi
@@ -19,7 +15,7 @@ namespace Magenic.BadgeApplication.Controllers.WebApi
         /// <param name="value"></param>
         public void Post([FromBody]SubmitActivityDTO value)
         {
-
-        }       
+            Arg.IsNotNull(() => value);
+        }
     }
 }

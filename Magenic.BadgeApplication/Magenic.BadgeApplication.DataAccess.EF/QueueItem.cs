@@ -14,10 +14,16 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     
     public partial class QueueItem
     {
+        public QueueItem()
+        {
+            this.QueueEventLogs = new HashSet<QueueEventLog>();
+        }
+    
         public int QueueItemId { get; set; }
         public int BadgeAwardId { get; set; }
         public System.DateTime QueueItemCreated { get; set; }
     
         public virtual BadgeAward BadgeAward { get; set; }
+        public virtual ICollection<QueueEventLog> QueueEventLogs { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Exceptions;
 using Magenic.BadgeApplication.Common.Interfaces;
-using System;
 using System.Linq;
 
 namespace Magenic.BadgeApplication.DataAccess.EF
@@ -21,13 +20,13 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                     throw new NotFoundException(string.Format("QueueEventLog with Id {0} could not be found", id));
                 }
 
-                return new QueueEventLogDTO 
+                return new QueueEventLogDTO
                 {
                     Message = item.Message,
                     QueueEventCreated = item.QueueEventCreated,
                     QueueEventId = item.QueueEventId,
                     QueueEventLogId = item.QueueEventLogId,
-                    BadgeAwardId = item.BadgeAwardId
+                    BadgeAwardId = item.BadgeAwardId.Value,
                 };
             }
         }
@@ -44,7 +43,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                         QueueEventId = item.QueueEventId,
                         BadgeAwardId = item.BadgeAwardId
                     });
-                
+
                 context.SaveChanges();
 
                 return new QueueEventLogDTO
@@ -53,7 +52,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                     QueueEventCreated = addedItem.QueueEventCreated,
                     QueueEventId = addedItem.QueueEventId,
                     QueueEventLogId = addedItem.QueueEventLogId,
-                    BadgeAwardId = addedItem.BadgeAwardId
+                    BadgeAwardId = addedItem.BadgeAwardId.Value,
                 };
             }
         }
@@ -86,8 +85,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             {
                 QueueEventLog item = context
                     .QueueEventLogs
-                    .SingleOrDefault(e => e.QueueEventLogId == id);                    
-                    
+                    .SingleOrDefault(e => e.QueueEventLogId == id);
+
                 if (item == null)
                 {
                     throw new NotFoundException(string.Format("QueueEventLog with Id {0} could not be found so it was not deleted", id));
