@@ -1,7 +1,6 @@
 ﻿using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Exceptions;
 using Magenic.BadgeApplication.Common.Interfaces;
-using System;
 using System.Linq;
 
 namespace Magenic.BadgeApplication.DataAccess.EF

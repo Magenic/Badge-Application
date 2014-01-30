@@ -15,15 +15,16 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             {
                 ctx.Database.Connection.Open();
                 var activityList = await (from e in ctx.Employees
-                                         join b in ctx.BadgeAwards on e.EmployeeId equals b.EmployeeId
+                                         join b in ctx.BadgeAwards on e.EmployeeId equals b.EmployeeId into ba
+                                         from nba in ba.DefaultIfEmpty()
                                           where e.EmployeeId == employeeId
-                                         group b by new { e.EmployeeId, e.ADName, e.AwardPayoutThreshold } into g
+                                          group nba by new { e.EmployeeId, e.ADName, e.AwardPayoutThreshold } into g
                                          select new AccountInfoEditDTO
                                          {
                                              EmployeeId = g.Key.EmployeeId,
                                              UserName = g.Key.ADName,
                                              PointPayoutThreshold = g.Key.AwardPayoutThreshold,
-                                             TotalPointsEarned = g.Sum(t => t.AwardAmount),
+                                             TotalPointsEarned =  g.Sum(t => (int?)t.AwardAmount) ?? 0,
                                              TotalPointsPaidOut = g.Any(t => t.PaidOut) ? g.Where(t => t.PaidOut).Sum(t => t.AwardAmount) : 0
                                          }).ToArrayAsync();
 

@@ -16,7 +16,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 ctx.Database.Connection.Open();
                 var employeeList = await (from t in ctx.Employees
                     where t.ADName == userName
-                    select new Common.DTO.CustomIdentityDTO
+                    select new CustomIdentityDTO
                     {
                         Id = t.EmployeeId,
                         Name = t.ADName
