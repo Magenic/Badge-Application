@@ -1,6 +1,7 @@
 ﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.Common.Enums;
+using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Extensions;
 using Magenic.BadgeApplication.Models;
 using System.Linq;
@@ -76,8 +77,14 @@ namespace Magenic.BadgeApplication.Controllers
         [HttpGet]
         public async virtual Task<ActionResult> ManageActivities()
         {
-            var allActivities = await ActivityCollection.GetAllActivitiesAsync();
-            return View(allActivities);
+            var allActivities = await ActivityEditCollection.GetAllActivitiesAsync();
+            IActivityEdit firstActivity = new ActivityEdit();
+            if (allActivities.Count() > 0)
+            {
+                firstActivity = allActivities.First();
+            }
+
+            return View(firstActivity);
         }
 
         /// <summary>
