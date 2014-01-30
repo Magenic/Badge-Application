@@ -87,6 +87,8 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interfaces\IAccountInfoEdit.cs" />
     <Compile Include="Interfaces\IAccountInfoEditDAL.cs" />
+    <Compile Include="Interfaces\IActivityEditCollectionDAL.cs" />
+    <Compile Include="Interfaces\IActivityEditCollection.cs" />
     <Compile Include="Interfaces\IActivityCollection.cs" />
     <Compile Include="Interfaces\IActivityEdit.cs" />
     <Compile Include="Interfaces\IActivityEditDAL.cs" />

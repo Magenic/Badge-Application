@@ -106,6 +106,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to # Activities Required.
+        /// </summary>
+        public static string ActivityPointsAmountLabel {
+            get {
+                return ResourceManager.GetString("ActivityPointsAmountLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string ActivitySubmissionDateLabel {
@@ -183,6 +192,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string BadgeActivityCompletedLabel {
             get {
                 return ResourceManager.GetString("BadgeActivityCompletedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Awarded: .
+        /// </summary>
+        public static string BadgeAwardedLabel {
+            get {
+                return ResourceManager.GetString("BadgeAwardedLabel", resourceCulture);
             }
         }
         
@@ -340,6 +358,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Requirements for the {0} badge.
+        /// </summary>
+        public static string BadgeTitle {
+            get {
+                return ResourceManager.GetString("BadgeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Badge Type.
         /// </summary>
         public static string BadgeTypeLabel {
@@ -354,6 +381,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string BadgeTypeRowHeader {
             get {
                 return ResourceManager.GetString("BadgeTypeRowHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badge Information.
+        /// </summary>
+        public static string BadgeWindowTitle {
+            get {
+                return ResourceManager.GetString("BadgeWindowTitle", resourceCulture);
             }
         }
         
@@ -430,6 +466,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log Off.
+        /// </summary>
+        public static string LogOffLink {
+            get {
+                return ResourceManager.GetString("LogOffLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Magenic Badge Application Logo.
         /// </summary>
         public static string LogoTitle {
@@ -480,6 +525,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string PointsAwardedRowHeader {
             get {
                 return ResourceManager.GetString("PointsAwardedRowHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Points Earned:.
+        /// </summary>
+        public static string PointsEarnedLabel {
+            get {
+                return ResourceManager.GetString("PointsEarnedLabel", resourceCulture);
             }
         }
         
@@ -588,6 +642,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string SubmitCompletedActivityHeader {
             get {
                 return ResourceManager.GetString("SubmitCompletedActivityHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve unlocked the {0} award!.
+        /// </summary>
+        public static string UnlockedAwardTitle {
+            get {
+                return ResourceManager.GetString("UnlockedAwardTitle", resourceCulture);
             }
         }
         

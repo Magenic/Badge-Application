@@ -50,6 +50,14 @@ namespace Magenic.BadgeApplication.Models
         public IEnumerable<SelectListItem> PossibleActivities { get; set; }
 
         /// <summary>
+        /// Gets or sets the earned badge ListView model.
+        /// </summary>
+        /// <value>
+        /// The earned badge ListView model.
+        /// </value>
+        public EarnedBadgeListViewModel EarnedBadgeListViewModel { get; set; }
+
+        /// <summary>
         /// Gets or sets the new activity.
         /// </summary>
         /// <value>
