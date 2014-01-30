@@ -1,6 +1,9 @@
-﻿@using Magenic.BadgeApplication.Common.Enums
+﻿@using Magenic.BadgeApplication.BusinessLogic.Badge
+@using Magenic.BadgeApplication.Common.Enums
 @using Magenic.BadgeApplication.Resources
 @using Magenic.BadgeApplication.Models
+@using Csla.Web.Mvc
+@using Csla.Rules
 @model BadgeEditViewModel
 
 <div class="row">
@@ -39,7 +42,7 @@
 
         <label>@ApplicationResources.BadgeTypeLabel</label><br />
         <label>
-            @Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Corporate)
+            @Html.HasPermission(AuthorizationActions.WriteProperty, Model.Badge, BadgeEdit.TypeProperty, @Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Corporate), @Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Corporate, new { disabled = "disabled" }))
             @ApplicationResources.BadgeCorporateLabel
         </label>
         &nbsp;&nbsp;

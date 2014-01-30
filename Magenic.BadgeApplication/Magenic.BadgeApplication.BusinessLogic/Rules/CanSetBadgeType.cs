@@ -17,7 +17,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Rules
             {
                 throw new ArgumentException("Parameter element must be of type IPropertyInfo.");
             }
-            
+
             AllowedRole = allowedRole;
             BadgeType = badgeType;
         }
@@ -28,7 +28,12 @@ namespace Magenic.BadgeApplication.BusinessLogic.Rules
             {
                 throw new ArgumentException("Context cannot be null.");
             }
-            context.HasPermission = ((IBadgeEdit)context.Target).Type != BadgeType || ApplicationContext.User.IsInRole(AllowedRole);
+
+            context.HasPermission = ApplicationContext.User.IsInRole(AllowedRole);
+            if (context.HasPermission)
+            {
+                context.HasPermission = ((IBadgeEdit)context.Target).Type != BadgeType;
+            }
         }
     }
 }

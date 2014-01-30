@@ -457,6 +457,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log Off.
+        /// </summary>
+        public static string LogOffLink {
+            get {
+                return ResourceManager.GetString("LogOffLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Magenic Badge Application Logo.
         /// </summary>
         public static string LogoTitle {

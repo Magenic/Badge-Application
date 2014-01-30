@@ -312,4 +312,7 @@
   <data name="BadgeTitle" xml:space="preserve">
     <value>Requirements for the {0} badge</value>
   </data>
+  <data name="LogOffLink" xml:space="preserve">
+    <value>Log Off</value>
+  </data>
 </root>
