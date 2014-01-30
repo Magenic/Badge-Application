@@ -14,8 +14,10 @@
         @Html.Partial("_Navbar")
     </nav>
 
-    <div class="container body-content">
-        @RenderBody()
+    <div class="body-content">
+        <div class="container">
+            @RenderBody()
+        </div>
     </div>
 
     <footer>

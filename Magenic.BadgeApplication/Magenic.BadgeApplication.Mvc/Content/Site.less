@@ -8,11 +8,21 @@
 @MagenicLightGreen: #88bf3e;
 @MagenicGreen: #7ab800;
 @White: #fff;
+@Gray: #F2F2F2;
 
 @HeaderGray: #404040;
 @HeaderOffWhite: #f2f2f2;
 
 @GrayLine: #E0E0E0;
+
+html { 
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background-color: @Gray;
+}
 
 h1 {
     font: @LargeHeaderFont;
@@ -100,10 +110,14 @@ textarea {
     margin-bottom: 15px;
 }
 
-/* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-top:21px;
+    padding-bottom: 21px;
+    background-color: @White;
+    
+    .container {
+        background-color: @White;
+    }
 }
 
 .no-padding {
@@ -132,6 +146,7 @@ textarea {
 .navbar {
     width: 100%;
     background: @MagenicGray url('Images/header-bg.gif') repeat-y center;
+    margin-bottom: 0;
 
     .nav {
         margin: 24px 0 0 24px;
@@ -175,8 +190,7 @@ textarea {
 
 footer {
     width: 100%;
-    height: 72px;
-    background-color: #F2F2F2;
+    background-color: @Gray;
     border-top: 1px solid #DCDCDC;
 
     p {
