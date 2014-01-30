@@ -91,7 +91,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeAwardValueAmount");
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeApprovedById");
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeApprovedDate");
-                objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeStatus");
+                objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeStatusId");
 
                 AttachChildren(ctx, data, saveBadge.BadgeId);
                 ctx.SaveChanges();
@@ -186,6 +186,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
         public BadgeEditDTO Insert(BadgeEditDTO data)
         {
+            this.SaveToBlobStorage(data);
+
             using (var ctx = new Entities())
             {
                 ctx.Database.Connection.Open();
