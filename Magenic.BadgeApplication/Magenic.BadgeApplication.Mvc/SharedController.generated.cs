@@ -36,11 +36,15 @@ namespace T4Mvc
             public class _ViewNamesClass
             {
                 public readonly string _AdminNavbar = "_AdminNavbar";
+                public readonly string _BadgeWindow = "_BadgeWindow";
+                public readonly string _EarnedBadgeWindow = "_EarnedBadgeWindow";
                 public readonly string _Layout = "_Layout";
                 public readonly string _Navbar = "_Navbar";
                 public readonly string Error = "Error";
             }
             public readonly string _AdminNavbar = "~/Views/Shared/_AdminNavbar.cshtml";
+            public readonly string _BadgeWindow = "~/Views/Shared/_BadgeWindow.cshtml";
+            public readonly string _EarnedBadgeWindow = "~/Views/Shared/_EarnedBadgeWindow.cshtml";
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
             public readonly string _Navbar = "~/Views/Shared/_Navbar.cshtml";
             public readonly string Error = "~/Views/Shared/Error.cshtml";

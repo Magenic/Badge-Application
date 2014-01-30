@@ -70,6 +70,7 @@ namespace Magenic.BadgeApplication.Controllers
             public readonly string Index = "Index";
             public readonly string SubmitPayout = "SubmitPayout";
             public readonly string LogOn = "LogOn";
+            public readonly string LogOff = "LogOff";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -78,6 +79,7 @@ namespace Magenic.BadgeApplication.Controllers
             public const string Index = "Index";
             public const string SubmitPayout = "SubmitPayout";
             public const string LogOn = "LogOn";
+            public const string LogOff = "LogOff";
         }
 
 
@@ -160,6 +162,15 @@ namespace Magenic.BadgeApplication.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
             LogOnOverride(callInfo, logOnViewModel, returnUrl);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        partial void LogOffOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult LogOff()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LogOff);
+            LogOffOverride(callInfo);
+            return callInfo;
         }
 
     }

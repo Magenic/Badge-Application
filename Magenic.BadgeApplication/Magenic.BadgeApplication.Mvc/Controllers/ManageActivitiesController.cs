@@ -19,7 +19,7 @@ namespace Magenic.BadgeApplication.Controllers
         [HttpPost]
         public async Task<JsonResult> List(int jtStartIndex, int jtPageSize)
         {
-            var activities = await ActivityCollection.GetAllActivitiesAsync();
+            var activities = await ActivityEditCollection.GetAllActivitiesAsync();
 
             var totalRecourds = activities.Count();
             var pagedActivities = activities.Skip(jtStartIndex).Take(jtPageSize);
@@ -36,7 +36,6 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var activityEdit = ActivityEdit.CreateActivity();
             TryUpdateModel(activityEdit);
-
             if (await SaveObjectAsync(activityEdit, true))
             {
                 return Json(new { Result = "OK", Record = activityEdit });
@@ -55,7 +54,6 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var activityEdit = await ActivityEdit.GetActivityEditByIdAsync(id);
             TryUpdateModel(activityEdit);
-
             if (await SaveObjectAsync(activityEdit, true))
             {
                 return Json(new { Result = "OK" });

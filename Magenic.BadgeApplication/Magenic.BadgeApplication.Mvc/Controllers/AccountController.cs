@@ -89,5 +89,17 @@ namespace Magenic.BadgeApplication.Controllers
 
             return View(logOnViewModel);
         }
+
+        /// <summary>
+        /// Logs the out.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public virtual ActionResult LogOff()
+        {
+            CustomPrincipal.LogOff();
+            FormsAuthentication.SignOut();
+            return RedirectToAction(Mvc.Account.LogOn());
+        }
     }
 }

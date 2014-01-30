@@ -1,6 +1,9 @@
-﻿@using Magenic.BadgeApplication.Common.Enums
+﻿@using Magenic.BadgeApplication.BusinessLogic.Badge
+@using Magenic.BadgeApplication.Common.Enums
 @using Magenic.BadgeApplication.Resources
 @using Magenic.BadgeApplication.Models
+@using Csla.Web.Mvc
+@using Csla.Rules
 @model BadgeEditViewModel
 
 <div class="row">
@@ -39,7 +42,7 @@
 
         <label>@ApplicationResources.BadgeTypeLabel</label><br />
         <label>
-            @Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Corporate)
+            @Html.HasPermission(AuthorizationActions.WriteProperty, Model.Badge, BadgeEdit.TypeProperty, Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Corporate), Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Corporate, new { disabled = "disabled" }))
             @ApplicationResources.BadgeCorporateLabel
         </label>
         &nbsp;&nbsp;
@@ -88,16 +91,18 @@
             @ApplicationResources.BadgeMultipleAwardsLabel
         </label>
         <br /><br />
-        <label>
-            @Html.CheckBoxFor(bevm => bevm.Badge.ManagementApprovalRequired)
-            @ApplicationResources.BadgeManagementApprovalRequiredLabel
-        </label>
-        <br /><br />
+        <div class="editor-label">
+            @Html.LabelFor(bevm => bevm.Badge.ActivityPointsAmount, ApplicationResources.ActivityPointsAmountLabel)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(bevm => bevm.Badge.ActivityPointsAmount, new { @class = "form-control" })
+            @Html.ValidationMessageFor(bevm => bevm.Badge.ActivityPointsAmount)
+        </div>
         <div class="editor-label">
             @Html.LabelFor(bevm => bevm.Badge.AwardValueAmount, ApplicationResources.BadgePointsReceievedLabel)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(bevm => bevm.Badge.AwardValueAmount, new { @class = "form-control" })
+            @Html.HasPermission(AuthorizationActions.WriteProperty, Model.Badge, BadgeEdit.AwardValueAmountProperty, Html.TextBoxFor(bevm => bevm.Badge.AwardValueAmount, new { @class = "form-control" }), @Html.TextBoxFor(bevm => bevm.Badge.AwardValueAmount, new { @class = "form-control", disabled = "disabled" }))
             @Html.ValidationMessageFor(bevm => bevm.Badge.AwardValueAmount)
         </div>
         <div class="editor-label">

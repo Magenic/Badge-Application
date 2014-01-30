@@ -9,12 +9,11 @@ using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Threading.Tasks;
-using NuGet;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
     [Serializable]
-    public sealed class ActivityEdit : BusinessBase<ActivityEdit> , IActivityEdit
+    public sealed class ActivityEdit : BusinessBase<ActivityEdit>, IActivityEdit
     {
         #region Properties
 
@@ -71,7 +70,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             this.BusinessRules.AddRule(new MaxLength(NameProperty, 100));
             this.BusinessRules.AddRule(new Required(NameProperty));
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, RequiresApprovalProperty, PermissionType.Administrator.ToString()));
-            
+
             // Only run this rule if the associated properties are otherwise valid.
             this.BusinessRules.AddRule(new NoDuplicates(NameProperty, IdProperty, NameExists) { Priority = 1 });
         }
@@ -84,7 +83,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         {
             return ActivityNameExists.NameAlreadyExists(id, name);
         }
-        
+
         [RunLocal]
         protected override void DataPortal_Create()
         {
@@ -147,6 +146,14 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                 this.Name = data.Name;
                 this.RequiresApproval = data.RequiresApproval;
             }
+        }
+
+        internal void Load(ActivityEditDTO item)
+        {
+            this.Id = item.Id;
+            this.Name = item.Name;
+            this.Description = item.Description;
+            this.RequiresApproval = item.RequiresApproval;
         }
 
         [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]

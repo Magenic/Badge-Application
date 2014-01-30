@@ -1,12 +1,13 @@
-﻿@using Magenic.BadgeApplication.Common.Interfaces
+﻿@using Magenic.BadgeApplication.Models
+@using Magenic.BadgeApplication.Common.Interfaces
 @model IEnumerable<IBadgeItem>
 
 @{
-    var list = Model.ToList();
+    var badgeItems = Model.ToList();
     var maxColumns = 5;
 }
 
-@for (int row = 0; row <= list.Count() / maxColumns; row++)
+@for (int row = 0; row <= badgeItems.Count() / maxColumns; row++)
 {
     var className = "row";
     if (row % 2 == 1)
@@ -17,10 +18,13 @@
     <div class="@className">
         @for (int col = row * maxColumns; col < (row * maxColumns) + maxColumns; col++)
         {
-            if (col < Model.Count())
+            if (col < badgeItems.Count())
             {
-                var item = list[col];
-                @Html.DisplayFor(m => item);
+                var badge = badgeItems[col];
+                <a href="#BadgeWindow-@badge.Id" data-toggle="modal">
+                    @Html.DisplayFor(m => badge)
+                </a>
+                @Html.Partial(Mvc.Shared.Views._BadgeWindow, badge)
             }
         }
     </div>

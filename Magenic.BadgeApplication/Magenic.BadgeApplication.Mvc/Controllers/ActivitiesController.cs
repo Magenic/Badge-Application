@@ -1,5 +1,7 @@
 ﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.Models;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,16 +39,12 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async virtual Task<ActionResult> SubmitActivityForm()
         {
             var submittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.EmployeeId);
-            var activityIndexViewModel = new ActivityIndexViewModel()
-            {
-                SubmittedActivity = submittedActivity,
-            };
-
-            TryUpdateModel(activityIndexViewModel);
+            var properties = new List<string>() { "ActivitySubmissionDate", "Notes" };
+            submittedActivity.ActivityId = Convert.ToInt32(Request.Form["SubmittedActivity.ActivityId"]);
+            TryUpdateModel(submittedActivity, "SubmittedActivity", properties.ToArray());
             if (await SaveObjectAsync(submittedActivity, true))
             {
                 return RedirectToAction(await Mvc.Activities.Actions.Index());

@@ -1,11 +1,18 @@
 ﻿@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Common.Enums
+@using Csla
 
 @Html.ActionLink(ApplicationResources.AddEditBadges, Mvc.BadgeManager.Index())
 &nbsp;|&nbsp;
 @Html.ActionLink(ApplicationResources.ManageActivitiesLink, Mvc.BadgeManager.ManageActivities())
 &nbsp;|&nbsp;
-@Html.ActionLink(ApplicationResources.CommunityBadgesForApproval, Mvc.BadgeManager.ApproveCommunityBadges())
+@if (ApplicationContext.User.IsInRole(PermissionType.Administrator.ToString()))
+{
+    @Html.ActionLink(ApplicationResources.CommunityBadgesForApproval, Mvc.BadgeManager.ApproveCommunityBadges())
+<text>
 &nbsp;|&nbsp;
+</text>
+}
 @Html.ActionLink(ApplicationResources.PointsReport, Mvc.BadgeManager.PointsReport())
 &nbsp;|&nbsp;
 @Html.ActionLink(ApplicationResources.ActivitiesForApproval, Mvc.BadgeManager.ApproveActivities())
