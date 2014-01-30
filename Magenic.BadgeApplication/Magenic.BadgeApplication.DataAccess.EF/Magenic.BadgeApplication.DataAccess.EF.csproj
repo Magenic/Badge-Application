@@ -144,6 +144,7 @@
     <Compile Include="Permission.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
+    <Compile Include="PointsReportCollectionDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueueEvent.cs">
       <DependentUpon>Badge.tt</DependentUpon>
