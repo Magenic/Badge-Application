@@ -16,6 +16,9 @@ namespace Magenic.BadgeApplication.Controllers
     public partial class BadgeManagerController
         : BaseController
     {
+        // TODO: figure out how to get this to not be constant. There is a way, but it's ugly.
+        private const string Administrator = "Administrator";
+
         private static void SetActivitiesToAdd(BadgeEditViewModel badgeEditViewModel)
         {
             var activityIdsToAdd = badgeEditViewModel.SelectedActivityIds
@@ -167,6 +170,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize(Roles = Administrator)]
         public virtual ActionResult ApproveCommunityBadges()
         {
             return View();
