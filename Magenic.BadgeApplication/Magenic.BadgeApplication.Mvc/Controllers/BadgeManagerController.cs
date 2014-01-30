@@ -156,8 +156,9 @@ namespace Magenic.BadgeApplication.Controllers
 
             SetActivitiesToAdd(badgeEditViewModel);
             SetActivitiesToRemove(badgeEditViewModel);
+            TryUpdateModel(badgeEditViewModel.Badge, "Badge");
 
-            if (await SaveObjectAsync(badgeEditViewModel.Badge, be => UpdateModel(be, "Badge"), true))
+            if (await SaveObjectAsync(badgeEditViewModel.Badge, true))
             {
                 return RedirectToAction(Mvc.BadgeManager.Index().Result);
             }
