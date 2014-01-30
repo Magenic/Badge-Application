@@ -19,7 +19,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 var badgeList = await (from eb in ctx.EarnedBadges
                                        where eb.EmployeeId == employeeId
                                        where eb.BadgeTypeId == (badgeType == Common.Enums.BadgeType.Unset ? eb.BadgeTypeId : (int)badgeType)
-                                       select new Common.DTO.EarnedBadgeItemDTO
+                                       select new EarnedBadgeItemDTO
                                        {
                                            Id = eb.BadgeId,
                                            Name = eb.BadgeName,
@@ -47,7 +47,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                     throw new NotFoundException(string.Format("Badge award with id {0} was not found", badgeAwardId));
                 }
                
-                EarnedBadgeItemDTO earnedBadge = new EarnedBadgeItemDTO()
+                var earnedBadge = new EarnedBadgeItemDTO
                 {
                     AwardDate = badgeAward.AwardDate,
                     AwardPoints = badgeAward.Badge.BadgeAwardValueAmount,

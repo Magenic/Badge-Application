@@ -1,6 +1,5 @@
 ﻿using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
