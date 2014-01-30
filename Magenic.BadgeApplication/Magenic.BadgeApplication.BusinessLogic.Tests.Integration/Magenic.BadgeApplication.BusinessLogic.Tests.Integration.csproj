@@ -107,6 +107,7 @@
     <Compile Include="BadgeTests.cs" />
     <Compile Include="EarnedBadgeCollectionTests.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="PointsReportCollectionTests.cs" />
     <Compile Include="QueueEventLogDALTests.cs" />
     <Compile Include="SecurityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
