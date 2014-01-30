@@ -22,10 +22,10 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="badges" data-bind="visible: showCorporateBadgeAllTab">
+        <div class="badges" data-bind="visible: showCommunityBadgeAllTab">
             @Html.Partial(Mvc.Badges.Views._BadgeList, Model.CommunityBadges)
         </div>
-        <div data-bind="visible: showCorporateBadgeEarnedTab">
+        <div data-bind="visible: showCommunityBadgeEarnedTab">
             @Html.Partial(Mvc.Badges.Views._EarnedBadgeList, Model.CommunityEarnedBadges)
         </div>
     </div>

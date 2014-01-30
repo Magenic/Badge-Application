@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Threading.Tasks;
 using Autofac;
 using Csla.Core;
 using Csla.Rules;
@@ -50,7 +51,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Rules
             this.AffectedProperties.Add(activityStatusProperty);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "ex"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         protected override void Execute(RuleContext context)
         {
             var activityIdValue = (int)context.InputPropertyValues[PrimaryProperty];
@@ -66,7 +67,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Rules
             {
                 try
                 {
-                    var activityTask = IoC.Container.Resolve<IObjectFactory<IActivityEdit>>().FetchAsync(activityIdValue);
+                    var activityTask = Task.Run(() => IoC.Container.Resolve<IObjectFactory<IActivityEdit>>().FetchAsync(activityIdValue));
                     var activity = activityTask.Result;
                     context.AddOutValue(activityStatusProperty,
                         activity.RequiresApproval
