@@ -106,6 +106,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to # Activities Required.
+        /// </summary>
+        public static string ActivityPointsAmountLabel {
+            get {
+                return ResourceManager.GetString("ActivityPointsAmountLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string ActivitySubmissionDateLabel {

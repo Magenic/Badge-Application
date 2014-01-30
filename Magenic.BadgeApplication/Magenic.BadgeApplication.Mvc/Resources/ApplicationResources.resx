@@ -315,4 +315,7 @@
   <data name="LogOffLink" xml:space="preserve">
     <value>Log Off</value>
   </data>
+  <data name="ActivityPointsAmountLabel" xml:space="preserve">
+    <value># Activities Required</value>
+  </data>
 </root>

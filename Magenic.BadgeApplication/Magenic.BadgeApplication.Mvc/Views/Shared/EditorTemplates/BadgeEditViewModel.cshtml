@@ -92,6 +92,13 @@
         </label>
         <br /><br />
         <div class="editor-label">
+            @Html.LabelFor(bevm => bevm.Badge.ActivityPointsAmount, ApplicationResources.ActivityPointsAmountLabel)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(bevm => bevm.Badge.ActivityPointsAmount, new { @class = "form-control" })
+            @Html.ValidationMessageFor(bevm => bevm.Badge.ActivityPointsAmount)
+        </div>
+        <div class="editor-label">
             @Html.LabelFor(bevm => bevm.Badge.AwardValueAmount, ApplicationResources.BadgePointsReceievedLabel)
         </div>
         <div class="editor-field">
