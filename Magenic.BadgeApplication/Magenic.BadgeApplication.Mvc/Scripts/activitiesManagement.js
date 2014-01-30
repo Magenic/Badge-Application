@@ -25,8 +25,8 @@
             },
             RequiresApproval: {
                 title: 'Requires Approval',
-                create: false,
-                edit: false,
+                create: true,
+                edit: true,
             }
         }
     });
