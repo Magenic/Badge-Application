@@ -21,7 +21,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                        where s.EmployeeId == employeeId
                                        where s.SubmissionDate >= (startDate.HasValue ? startDate.Value : DateTime.MinValue)
                                        where s.SubmissionDate <= (endDate.HasValue ? endDate.Value : DateTime.MaxValue)
-                                       select new Common.DTO.SubmittedActivityItemDTO
+                                       select new SubmittedActivityItemDTO
                                        {
                                            Id = s.ActivitySubmissionId,
                                            ActivityId = s.ActivityId,
