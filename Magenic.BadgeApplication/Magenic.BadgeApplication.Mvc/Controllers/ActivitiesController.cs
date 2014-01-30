@@ -1,7 +1,5 @@
 ﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.Models;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,9 +40,7 @@ namespace Magenic.BadgeApplication.Controllers
         public async virtual Task<ActionResult> SubmitActivityForm()
         {
             var submittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.EmployeeId);
-            var properties = new List<string>() { "ActivitySubmissionDate", "Notes" };
-            submittedActivity.ActivityId = Convert.ToInt32(Request.Form["SubmittedActivity.ActivityId"]);
-            TryUpdateModel(submittedActivity, "SubmittedActivity", properties.ToArray());
+            TryUpdateModel(submittedActivity, "SubmittedActivity");
             if (await SaveObjectAsync(submittedActivity, true))
             {
                 return RedirectToAction(await Mvc.Activities.Actions.Index());
