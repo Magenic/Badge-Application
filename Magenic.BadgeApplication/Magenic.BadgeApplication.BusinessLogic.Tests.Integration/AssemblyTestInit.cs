@@ -1,4 +1,4 @@
-﻿using Magenic.BadgeApplication.BusinessLogic.Framework;
+﻿using Magenic.BadgeApplication.Processor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 
