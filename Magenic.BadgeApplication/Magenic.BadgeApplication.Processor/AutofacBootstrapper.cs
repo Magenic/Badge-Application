@@ -1,8 +1,9 @@
 ﻿using Autofac;
+using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System.Reflection;
 
-namespace Magenic.BadgeApplication.BusinessLogic.Framework
+namespace Magenic.BadgeApplication.Processor
 {
     public static class AutofacBootstrapper
     {
@@ -18,6 +19,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Framework
 
             var dals = Assembly.Load("Magenic.BadgeApplication.DataAccess.EF");
             builder.RegisterAssemblyTypes(dals).AsImplementedInterfaces();
+
+            var processor = Assembly.Load("Magenic.BadgeApplication.Processor");
+            builder.RegisterAssemblyTypes(processor).AsImplementedInterfaces();
 
             var adapters = Assembly.Load("Magenic.BadgeApplication.Yammer");
             builder.RegisterAssemblyTypes(adapters).AsImplementedInterfaces();
