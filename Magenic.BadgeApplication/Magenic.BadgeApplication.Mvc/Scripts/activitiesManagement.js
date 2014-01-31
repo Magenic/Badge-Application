@@ -29,6 +29,7 @@
                 title: 'Requires Approval',
                 type: 'checkbox',
                 defaultValue: false,
+                values: { 'false': 'Approval not required', 'true': 'Approval required' },
                 create: canEditRequiresApproval,
                 edit: canEditRequiresApproval,
             }
