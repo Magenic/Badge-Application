@@ -1,7 +1,4 @@
-﻿using Autofac;
-using Magenic.BadgeApplication.BusinessLogic.Framework;
-using Magenic.BadgeApplication.Common;
-using Magenic.BadgeApplication.Common.Interfaces;
+﻿using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Processor;
 using System;
 
