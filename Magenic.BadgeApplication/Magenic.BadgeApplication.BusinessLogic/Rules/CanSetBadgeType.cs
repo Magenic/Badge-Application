@@ -29,11 +29,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Rules
                 throw new ArgumentException("Context cannot be null.");
             }
 
-            context.HasPermission = ApplicationContext.User.IsInRole(AllowedRole);
-            if (context.HasPermission)
-            {
-                context.HasPermission = ((IBadgeEdit)context.Target).Type != BadgeType;
-            }
+            context.HasPermission = ((IBadgeEdit)context.Target).Type != BadgeType || ApplicationContext.User.IsInRole(AllowedRole);
         }
     }
 }
