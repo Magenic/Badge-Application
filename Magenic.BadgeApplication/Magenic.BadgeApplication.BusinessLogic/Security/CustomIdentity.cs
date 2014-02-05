@@ -1,12 +1,11 @@
-﻿using System;
-using Autofac;
+﻿using Autofac;
 using Csla.Core;
 using Csla.Security;
+using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Magenic.BadgeApplication.Common.Interfaces;
-using Magenic.BadgeApplication.BusinessLogic.Framework;
-using Csla;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Security
 {
@@ -56,15 +55,20 @@ namespace Magenic.BadgeApplication.BusinessLogic.Security
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         private async Task DataPortal_Fetch(IdentityCriteria criteria)
         {
-            var dal = IoC.Container.Resolve<ICustomIdentityDAL>();
+            var adDal = IoC.Container.Resolve<IAuthorizeLogins>();
 
-            var result = await dal.LogOnIdentityAsync(criteria.UserName, criteria.Password);
-            if (result == null)
+            if (adDal.ValidateLogin(criteria.UserName, criteria.Password))
             {
-                throw new System.Security.SecurityException("Unable to logon with these credentials");
+                var dal = IoC.Container.Resolve<ICustomIdentityDAL>();
+
+                var result = await dal.LogOnIdentityAsync(criteria.UserName, criteria.Password);
+                this.Load(result.Id, result.Name, result.Roles);
+                this.IsAuthenticated = true;
             }
-            this.Load(result.Id, result.Name, result.Roles);
-            this.IsAuthenticated = true;
+            else
+            {
+                throw new System.Security.SecurityException("Unable to login with these credentials");
+            }
         }
 
         #endregion  Data Portal
