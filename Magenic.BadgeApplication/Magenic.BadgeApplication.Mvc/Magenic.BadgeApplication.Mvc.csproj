@@ -583,6 +583,10 @@
     <Content Include="Views\Shared\_EarnedBadgeWindow.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Magenic.BadgeApplication.Authorization\Magenic.BadgeApplication.Authorization.csproj">
+      <Project>{39db7f76-2c30-4cd1-8fac-239aaba17ea9}</Project>
+      <Name>Magenic.BadgeApplication.Authorization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">
       <Project>{0274f325-95a1-43c8-b1d7-f81adfc0a535}</Project>
       <Name>Magenic.BadgeApplication.BusinessLogic</Name>
