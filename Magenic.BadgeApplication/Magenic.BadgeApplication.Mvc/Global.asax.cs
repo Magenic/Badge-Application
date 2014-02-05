@@ -1,4 +1,5 @@
-﻿using Csla;
+﻿using Autofac;
+using Csla;
 using Magenic.BadgeApplication.BusinessLogic.Security;
 using System;
 using System.Threading;

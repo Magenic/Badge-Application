@@ -47,6 +47,7 @@
           <Property Name="BadgeAwardValueAmount" Type="int" Nullable="false" />
           <Property Name="BadgeApprovedById" Type="int" />
           <Property Name="BadgeApprovedDate" Type="datetime2" Precision="7" />
+          <Property Name="BadgeStatusId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="BadgeActivity">
           <Key>
@@ -313,6 +314,18 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Badge_ItemStatus">
+          <End Role="ItemStatus" Type="Self.ItemStatus" Multiplicity="1" />
+          <End Role="Badge" Type="Self.Badge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemStatus">
+              <PropertyRef Name="ItemStatusId" />
+            </Principal>
+            <Dependent Role="Badge">
+              <PropertyRef Name="BadgeStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_BadgeActivity_Activity">
           <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
           <End Role="BadgeActivity" Type="Self.BadgeActivity" Multiplicity="*" />
@@ -572,6 +585,10 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           </AssociationSet>
           <AssociationSet Name="fk_Badge_Employee" Association="Self.fk_Badge_Employee">
             <End Role="Employee" EntitySet="Employee" />
+            <End Role="Badge" EntitySet="Badge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Badge_ItemStatus" Association="Self.FK_Badge_ItemStatus">
+            <End Role="ItemStatus" EntitySet="ItemStatus" />
             <End Role="Badge" EntitySet="Badge" />
           </AssociationSet>
           <AssociationSet Name="fk_BadgeActivity_Activity" Association="Self.fk_BadgeActivity_Activity">
@@ -859,6 +876,10 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
             <End Role="ItemStatu" EntitySet="ItemStatus" />
             <End Role="Badge" EntitySet="Badges" />
           </AssociationSet>
+          <AssociationSet Name="FK_Badge_ItemStatus1" Association="Magenic.BadgeApplication.DBModel.FK_Badge_ItemStatus1">
+            <End Role="ItemStatu" EntitySet="ItemStatus" />
+            <End Role="Badge" EntitySet="Badges" />
+          </AssociationSet>
           <EntitySet Name="QueueEventLogs" EntityType="Magenic.BadgeApplication.DBModel.QueueEventLog" />
           <AssociationSet Name="fk_QueueEventLog_BadgeAward" Association="Magenic.BadgeApplication.DBModel.fk_QueueEventLog_BadgeAward">
             <End Role="BadgeAward" EntitySet="BadgeAwards" />
@@ -922,8 +943,10 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <NavigationProperty Name="BadgeAwards" Relationship="Magenic.BadgeApplication.DBModel.fk_BadgeAward_Badge" FromRole="Badge" ToRole="BadgeAward" />
           <NavigationProperty Name="BadgePrerequisites" Relationship="Magenic.BadgeApplication.DBModel.FK_BadgePrerequisite_Badge" FromRole="Badge" ToRole="BadgePrerequisite" />
           <NavigationProperty Name="BadgePrerequisites1" Relationship="Magenic.BadgeApplication.DBModel.FK_BadgePrerequisite_Badge1" FromRole="Badge" ToRole="BadgePrerequisite" />
-          <Property Name="BadgeStatusId" Type="Int32" Nullable="false" />
+          
           <NavigationProperty Name="ItemStatu" Relationship="Magenic.BadgeApplication.DBModel.FK_Badge_ItemStatus" FromRole="Badge" ToRole="ItemStatu" />
+          <Property Name="BadgeStatusId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ItemStatu1" Relationship="Magenic.BadgeApplication.DBModel.FK_Badge_ItemStatus1" FromRole="Badge" ToRole="ItemStatu" />
         </EntityType>
         <EntityType Name="BadgeAward">
           <Key>
@@ -1199,6 +1222,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <Property Name="StatusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ActivitySubmissions" Relationship="Magenic.BadgeApplication.DBModel.fk_ActivitySubmission_ItemStatus" FromRole="ItemStatu" ToRole="ActivitySubmission" />
           <NavigationProperty Name="Badges" Relationship="Magenic.BadgeApplication.DBModel.FK_Badge_ItemStatus" FromRole="ItemStatu" ToRole="Badge" />
+          <NavigationProperty Name="Badges1" Relationship="Magenic.BadgeApplication.DBModel.FK_Badge_ItemStatus1" FromRole="ItemStatu" ToRole="Badge" />
         </EntityType>
         <Association Name="fk_ActivitySubmission_ItemStatus">
           <End Type="Magenic.BadgeApplication.DBModel.ItemStatu" Role="ItemStatu" Multiplicity="1" />
@@ -1213,6 +1237,18 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Badge_ItemStatus">
+          <End Type="Magenic.BadgeApplication.DBModel.ItemStatu" Role="ItemStatu" Multiplicity="1" />
+          <End Type="Magenic.BadgeApplication.DBModel.Badge" Role="Badge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemStatu">
+              <PropertyRef Name="ItemStatusId" />
+            </Principal>
+            <Dependent Role="Badge">
+              <PropertyRef Name="BadgeStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Badge_ItemStatus1">
           <End Type="Magenic.BadgeApplication.DBModel.ItemStatu" Role="ItemStatu" Multiplicity="1" />
           <End Type="Magenic.BadgeApplication.DBModel.Badge" Role="Badge" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1355,6 +1391,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <EntitySetMapping Name="Badges">
             <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.Badge">
               <MappingFragment StoreEntitySet="Badge">
+                <ScalarProperty Name="BadgeStatusId" ColumnName="BadgeStatusId" />
                 <ScalarProperty Name="BadgeApprovedDate" ColumnName="BadgeApprovedDate" />
                 <ScalarProperty Name="BadgeApprovedById" ColumnName="BadgeApprovedById" />
                 <ScalarProperty Name="BadgeAwardValueAmount" ColumnName="BadgeAwardValueAmount" />

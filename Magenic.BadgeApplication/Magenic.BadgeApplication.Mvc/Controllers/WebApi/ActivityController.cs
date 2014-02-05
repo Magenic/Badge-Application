@@ -13,6 +13,16 @@ namespace Magenic.BadgeApplication.Controllers.WebApi
     /// </summary>
     public class ActivityController : ApiController
     {
+        // GET api/<controller>
+        /// <summary>
+        /// Gets this instance.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
+
         /// <summary>
         /// 
         /// </summary>

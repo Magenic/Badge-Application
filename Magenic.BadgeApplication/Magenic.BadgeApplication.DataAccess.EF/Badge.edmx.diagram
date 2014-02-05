@@ -39,6 +39,7 @@
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.ItemStatu" Width="1.5" PointX="0.75" PointY="11.375" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_ActivitySubmission_ItemStatus" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.FK_Badge_ItemStatus" />
+        <AssociationConnector Association="Magenic.BadgeApplication.DBModel.FK_Badge_ItemStatus1" />
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.QueueEventLog" Width="1.5" PointX="15.75" PointY="8" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_QueueEventLog_BadgeAward" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.fk_QueueEventLog_QueueEvent" />
