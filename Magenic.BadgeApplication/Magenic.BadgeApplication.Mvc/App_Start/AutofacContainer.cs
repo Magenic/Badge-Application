@@ -58,7 +58,8 @@ namespace Magenic.BadgeApplication
             builder.RegisterType(typeof(CustomIdentity.IdentityCriteria)).As(typeof(IIdentityCriteria));
             builder.RegisterType(typeof(CustomPrincipal)).As(typeof(ICslaPrincipal));
             builder.RegisterType(typeof(Security.SecurityContextLocator)).As(typeof(Security.ISecurityContextLocator));
-            builder.RegisterType(typeof(AuthorizeLogins)).As(typeof(IAuthorizeLogins));
+            //builder.RegisterType(typeof(AuthorizeLogins)).As(typeof(IAuthorizeLogins));
+            builder.RegisterType(typeof(DummyAuthorizeLogins)).As(typeof(IAuthorizeLogins));
         }
     }
 }
