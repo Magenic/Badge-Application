@@ -37,8 +37,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Security
 
         public static async Task<ICslaPrincipal> LoadAsync(string userName)
         {
-            var criteria = IoC.Container.Resolve<IIdentityCriteria>(new NamedParameter("userName", userName), new NamedParameter("password", null));
-            var identity = await IoC.Container.Resolve<IObjectFactory<ICustomIdentity>>().FetchAsync(criteria);
+            var identity = await IoC.Container.Resolve<IObjectFactory<ICustomIdentity>>().FetchAsync(userName);
 
             return IoC.Container.Resolve<ICslaPrincipal>(new NamedParameter("identity", identity));
         }

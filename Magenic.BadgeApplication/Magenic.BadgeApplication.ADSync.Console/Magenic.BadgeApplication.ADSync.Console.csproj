@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4C8E2136-2AB8-402B-8FC8-9E806D61454F}</ProjectGuid>
+    <ProjectGuid>{1AA1246C-D3EF-433C-B293-8D4A20DE4D6B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Magenic.BadgeApplication.Console</RootNamespace>
-    <AssemblyName>Magenic.BadgeApplication.Console</AssemblyName>
+    <RootNamespace>Magenic.BadgeApplication.ADSync.Console</RootNamespace>
+    <AssemblyName>Magenic.BadgeApplication.ADSync.Console</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -37,12 +37,10 @@
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.3.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Csla, Version=4.5.501.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Csla">
       <HintPath>..\packages\CSLA-Core.4.5.501\lib\net45\Csla.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
@@ -72,6 +70,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Magenic.BadgeApplication.Authorization\Magenic.BadgeApplication.Authorization.csproj">
+      <Project>{39db7f76-2c30-4cd1-8fac-239aaba17ea9}</Project>
+      <Name>Magenic.BadgeApplication.Authorization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">
       <Project>{0274f325-95a1-43c8-b1d7-f81adfc0a535}</Project>
       <Name>Magenic.BadgeApplication.BusinessLogic</Name>
@@ -87,10 +89,6 @@
     <ProjectReference Include="..\Magenic.BadgeApplication.Processor\Magenic.BadgeApplication.Processor.csproj">
       <Project>{0d8c2715-a9b5-4e95-885b-3928063bc61e}</Project>
       <Name>Magenic.BadgeApplication.Processor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Magenic.BadgeApplication.Yammer\Magenic.BadgeApplication.Yammer.csproj">
-      <Project>{7a376d75-249b-4a1d-bd7f-b80f720036c1}</Project>
-      <Name>Magenic.BadgeApplication.Yammer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,6 +2,7 @@
 using Autofac.Integration.Mvc;
 using Csla.Core;
 using Csla.Security;
+using Magenic.BadgeApplication.Authorization;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.BusinessLogic.Security;
 using Magenic.BadgeApplication.Common.Interfaces;
@@ -57,6 +58,7 @@ namespace Magenic.BadgeApplication
             builder.RegisterType(typeof(CustomIdentity.IdentityCriteria)).As(typeof(IIdentityCriteria));
             builder.RegisterType(typeof(CustomPrincipal)).As(typeof(ICslaPrincipal));
             builder.RegisterType(typeof(Security.SecurityContextLocator)).As(typeof(Security.ISecurityContextLocator));
+            builder.RegisterType(typeof(AuthorizeLogOn)).As(typeof(IAuthorizeLogOn));
         }
     }
 }

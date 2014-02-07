@@ -16,31 +16,35 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     {
         public Employee()
         {
-            this.EmployeePermissions = new HashSet<EmployeePermission>();
             this.ActivitySubmissions = new HashSet<ActivitySubmission>();
             this.ActivitySubmissions1 = new HashSet<ActivitySubmission>();
+            this.Badges = new HashSet<Badge>();
             this.BadgeAwards = new HashSet<BadgeAward>();
             this.BadgeAwards1 = new HashSet<BadgeAward>();
-            this.Badges = new HashSet<Badge>();
+            this.Employee1 = new HashSet<Employee>();
+            this.Employee11 = new HashSet<Employee>();
+            this.EmployeePermissions = new HashSet<EmployeePermission>();
         }
     
         public int EmployeeId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ADName { get; set; }
-        public System.DateTime EmploymentStartDate { get; set; }
+        public Nullable<System.DateTime> EmploymentStartDate { get; set; }
         public Nullable<System.DateTime> EmploymentEndDate { get; set; }
-        public Nullable<System.DateTime> EmploymentStartDate2 { get; set; }
-        public Nullable<System.DateTime> EmploymentEndDate2 { get; set; }
-        public int ApprovingManagerId1 { get; set; }
+        public Nullable<int> ApprovingManagerId1 { get; set; }
         public Nullable<int> ApprovingManagerId2 { get; set; }
         public Nullable<int> AwardPayoutThreshold { get; set; }
     
-        public virtual ICollection<EmployeePermission> EmployeePermissions { get; set; }
         public virtual ICollection<ActivitySubmission> ActivitySubmissions { get; set; }
         public virtual ICollection<ActivitySubmission> ActivitySubmissions1 { get; set; }
+        public virtual ICollection<Badge> Badges { get; set; }
         public virtual ICollection<BadgeAward> BadgeAwards { get; set; }
         public virtual ICollection<BadgeAward> BadgeAwards1 { get; set; }
-        public virtual ICollection<Badge> Badges { get; set; }
+        public virtual ICollection<Employee> Employee1 { get; set; }
+        public virtual Employee Employee2 { get; set; }
+        public virtual ICollection<Employee> Employee11 { get; set; }
+        public virtual Employee Employee3 { get; set; }
+        public virtual ICollection<EmployeePermission> EmployeePermissions { get; set; }
     }
 }

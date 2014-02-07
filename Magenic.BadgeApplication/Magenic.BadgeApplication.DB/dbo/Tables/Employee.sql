@@ -3,11 +3,9 @@
     [FirstName]             VARCHAR (100) NOT NULL,
     [LastName]              VARCHAR (100) NOT NULL,
     [ADName]                VARCHAR (100) NOT NULL,
-    [EmploymentStartDate]   DATE          NOT NULL,
+    [EmploymentStartDate]   DATE          NULL,
     [EmploymentEndDate]     DATE          NULL,
-    [EmploymentStartDate2]  DATE          NULL,
-    [EmploymentEndDate2]    DATE          NULL,
-    [ApprovingManagerId1]   INT           NOT NULL CONSTRAINT [fk_Employee_ApprovingManager1] FOREIGN KEY ([ApprovingManagerId1]) REFERENCES [dbo].[Employee] ([EmployeeId]),
+    [ApprovingManagerId1]   INT           NULL CONSTRAINT [fk_Employee_ApprovingManager1] FOREIGN KEY ([ApprovingManagerId1]) REFERENCES [dbo].[Employee] ([EmployeeId]),
     [ApprovingManagerId2]   INT           NULL CONSTRAINT [fk_Employee_ApprovingManager2] FOREIGN KEY ([ApprovingManagerId2]) REFERENCES [dbo].[Employee] ([EmployeeId]),
     [AwardPayoutThreshold] INT           CONSTRAINT [df_Employee_AwardPayoutThreshhold] DEFAULT 50 NULL
 );
