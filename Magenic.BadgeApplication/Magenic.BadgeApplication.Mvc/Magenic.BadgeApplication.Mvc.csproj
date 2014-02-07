@@ -186,7 +186,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageActivitiesController.cs" />
     <Compile Include="Controllers\WebApi\AccountsController.cs" />
-    <Compile Include="Controllers\WebApi\ActivityController.cs" />
     <Compile Include="Extensions\BundleExtensions.cs" />
     <Compile Include="Extensions\CustomIdentityExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
