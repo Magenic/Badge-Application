@@ -1,5 +1,4 @@
-﻿using Magenic.BadgeApplication.Authorization;
-using Magenic.BadgeApplication.Common;
+﻿using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Processor;
 using System;
 
