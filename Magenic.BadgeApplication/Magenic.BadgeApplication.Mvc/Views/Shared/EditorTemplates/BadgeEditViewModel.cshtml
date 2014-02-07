@@ -47,7 +47,7 @@
         </label>
         &nbsp;&nbsp;
         <label>
-            @Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Community)
+            @Html.HasPermission(AuthorizationActions.WriteProperty, Model.Badge, BadgeEdit.TypeProperty, Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Community), Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Community, new { onclick = "removeCorporateBadgeValue();" }))
             @ApplicationResources.BadgeCommunityLabel
         </label>
         <br /><br />

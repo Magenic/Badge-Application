@@ -1,4 +1,8 @@
-﻿$(document).ready(function () {
+﻿function removeCorporateBadgeValue() {
+    $('#NotBoundType').prop('checked', false);
+}
+
+$(document).ready(function () {
     $(':file').filestyle();
     $('.datepicker').datepicker();
 
