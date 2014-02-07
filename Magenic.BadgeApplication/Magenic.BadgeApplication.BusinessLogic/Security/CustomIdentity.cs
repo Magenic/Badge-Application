@@ -2,6 +2,7 @@
 using Csla.Core;
 using Csla.Security;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -55,20 +56,37 @@ namespace Magenic.BadgeApplication.BusinessLogic.Security
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         private async Task DataPortal_Fetch(IdentityCriteria criteria)
         {
-            var adDal = IoC.Container.Resolve<IAuthorizeLogins>();
+            var adDal = IoC.Container.Resolve<IAuthorizeLogOn>();
 
             if (adDal.ValidateLogin(criteria.UserName, criteria.Password))
             {
                 var dal = IoC.Container.Resolve<ICustomIdentityDAL>();
 
-                var result = await dal.LogOnIdentityAsync(criteria.UserName, criteria.Password);
-                this.Load(result.Id, result.Name, result.Roles);
+                var result = await dal.RetrieveIdentityAsync(criteria.UserName) ??
+                             InsertUserInfoFromAD(adDal, dal, criteria.UserName);
+                this.Load(result.Id, result.ADName, result.Roles);
                 this.IsAuthenticated = true;
             }
             else
             {
                 throw new System.Security.SecurityException("Unable to login with these credentials");
             }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        private async Task DataPortal_Fetch(string userName)
+        {
+            var dal = IoC.Container.Resolve<ICustomIdentityDAL>();
+
+            var result = await dal.RetrieveIdentityAsync(userName);
+            this.Load(result.Id, result.ADName, result.Roles);
+            this.IsAuthenticated = true;
+        }
+
+        private CustomIdentityDTO InsertUserInfoFromAD(IAuthorizeLogOn adDal, ICustomIdentityDAL dal, string userName)
+        {
+            var userADInfo = adDal.RetrieveUserInformation(userName);
+            return dal.SaveIdentity(userADInfo);
         }
 
         #endregion  Data Portal

@@ -75,8 +75,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Spatial, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Spatial.5.6.0\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
@@ -103,6 +106,7 @@
     <Compile Include="ApproveActivityCollectionTests.cs" />
     <Compile Include="ApproveBadgeCollectionTests.cs" />
     <Compile Include="AssemblyTestInit.cs" />
+    <Compile Include="AuthorizeLogOnTests.cs" />
     <Compile Include="BadgeCollectionTests.cs" />
     <Compile Include="BadgeTests.cs" />
     <Compile Include="EarnedBadgeCollectionTests.cs" />
@@ -123,6 +127,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Magenic.BadgeApplication.Authorization\Magenic.BadgeApplication.Authorization.csproj">
+      <Project>{39db7f76-2c30-4cd1-8fac-239aaba17ea9}</Project>
+      <Name>Magenic.BadgeApplication.Authorization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">
       <Project>{0274f325-95a1-43c8-b1d7-f81adfc0a535}</Project>
       <Name>Magenic.BadgeApplication.BusinessLogic</Name>

@@ -5,7 +5,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// <summary>
     /// Class for data transfer authorization operations.
     /// </summary>
-    public class AuthorizeLoginDTO
+    public class AuthorizeLogOnDTO
     {
         /// <summary>
         /// The AD user name of the user
@@ -20,20 +20,20 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public string LastName { get; set; }
         /// <summary>
-        /// Information about the user's primary manager.
+        /// AD name of the user's primary manager.
         /// </summary>
-        public AuthorizeLoginDTO Manager1 { get; set; }
+        public string Manager1ADName { get; set; }
         /// <summary>
-        /// Information about the user's secondary manager.
+        /// AD name of the user's secondary manager.
         /// </summary>
-        public AuthorizeLoginDTO Manager2 { get; set; }
+        public string Manager2ADName { get; set; }
         /// <summary>
         /// The employee's start date.
         /// </summary>
-        public DateTime EmployementStartDate { get; set; }
+        public DateTime? EmployementStartDate { get; set; }
         /// <summary>
         /// The employee's end date.
         /// </summary>
-        public DateTime EmployementEndDate { get; set; }
+        public DateTime? EmployementEndDate { get; set; }
     }
 }
