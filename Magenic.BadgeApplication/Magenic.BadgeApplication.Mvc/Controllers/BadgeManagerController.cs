@@ -4,6 +4,7 @@ using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Extensions;
 using Magenic.BadgeApplication.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -98,6 +99,7 @@ namespace Magenic.BadgeApplication.Controllers
             var badgeEdit = BadgeEdit.CreateBadge();
             var badgeEditViewModel = new BadgeEditViewModel(allActivities);
             badgeEditViewModel.Badge = badgeEdit as BadgeEdit;
+            badgeEditViewModel.Badge.Priority = 0;
 
             return View(Mvc.BadgeManager.Views.AddBadge, badgeEditViewModel);
         }
@@ -120,7 +122,14 @@ namespace Magenic.BadgeApplication.Controllers
             }
 
             SetActivitiesToAdd(badgeEditViewModel);
-            if (await SaveObjectAsync(badgeEditViewModel.Badge, be => UpdateModel(be, "Badge"), true))
+            if (await SaveObjectAsync(badgeEditViewModel.Badge, be =>
+            {
+                UpdateModel(be, "Badge");
+                if (be.Priority == 0)
+                {
+                    be.Priority = Int32.MaxValue;
+                }
+            }, true))
             {
                 return RedirectToAction(Mvc.BadgeManager.Index().Result);
             }
