@@ -42,6 +42,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.Ya
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.Authorization", "Magenic.BadgeApplication.Authorization\Magenic.BadgeApplication.Authorization.csproj", "{39DB7F76-2C30-4CD1-8FAC-239AABA17EA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.ADSync.Console", "Magenic.BadgeApplication.ADSync.Console\Magenic.BadgeApplication.ADSync.Console.csproj", "{1AA1246C-D3EF-433C-B293-8D4A20DE4D6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.Authorization.Mock", "Magenic.BadgeApplication.Authorization.Mock\Magenic.BadgeApplication.Authorization.Mock.csproj", "{D377B660-115A-4C50-84B0-672BE243547D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +102,14 @@ Global
 		{39DB7F76-2C30-4CD1-8FAC-239AABA17EA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39DB7F76-2C30-4CD1-8FAC-239AABA17EA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39DB7F76-2C30-4CD1-8FAC-239AABA17EA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AA1246C-D3EF-433C-B293-8D4A20DE4D6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AA1246C-D3EF-433C-B293-8D4A20DE4D6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AA1246C-D3EF-433C-B293-8D4A20DE4D6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AA1246C-D3EF-433C-B293-8D4A20DE4D6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D377B660-115A-4C50-84B0-672BE243547D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D377B660-115A-4C50-84B0-672BE243547D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D377B660-115A-4C50-84B0-672BE243547D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D377B660-115A-4C50-84B0-672BE243547D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

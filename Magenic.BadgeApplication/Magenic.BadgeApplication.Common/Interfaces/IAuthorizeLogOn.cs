@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.Common.DTO;
+﻿using System.Collections.Generic;
+using Magenic.BadgeApplication.Common.DTO;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -6,7 +7,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
     /// Validates if the supplied user credentials are valid and returns back information
     /// about the user.
     /// </summary>
-    public interface IAuthorizeLogins
+    public interface IAuthorizeLogOn
     {
         /// <summary>
         /// Validates that the supplied credentials are correct. 
@@ -24,7 +25,12 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <param name="userName">The user name to retrieve information for.</param>
         /// <param name="domainName">An optional parameter specify the domain name.  Currently 
         /// unneeded.</param>
-        /// <returns>Returns a <see cref="AuthorizeLoginDTO"/> with information about the user</returns>
-        AuthorizeLoginDTO RetrieveUserInformation(string userName, string domainName = "");
+        /// <returns>Returns a <see cref="AuthorizeLogOnDTO"/> with information about the user</returns>
+        AuthorizeLogOnDTO RetrieveUserInformation(string userName, string domainName = "");
+        /// <summary>
+        /// Retrives a list of active users from active directory.
+        /// </summary>
+        /// <returns>An enumerable list of AD user names.</returns>
+        IEnumerable<string> RetrieveActiveUsers();
     }
 }
