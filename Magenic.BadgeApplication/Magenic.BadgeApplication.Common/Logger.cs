@@ -4,7 +4,7 @@ using System;
 namespace Magenic.BadgeApplication.Common
 {
     /// <summary>
-    /// Logging utility for the Badge Application.  This is inteded to provide a single point of contact with the chosen logging
+    /// Logging utility for the Badge Application.  This is intended to provide a single point of contact with the chosen logging
     /// framework for the application.  Currently the framework being used is log4Net
     /// </summary>
     public static class Logger

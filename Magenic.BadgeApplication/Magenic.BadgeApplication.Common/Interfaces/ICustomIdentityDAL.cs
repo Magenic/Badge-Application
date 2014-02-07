@@ -10,12 +10,33 @@ namespace Magenic.BadgeApplication.Common.Interfaces
     public interface ICustomIdentityDAL
     {
         /// <summary>
-        /// Logs on a Custom Identity.
+        /// retrieves information needed to load a Custom Identity.  Returns
+        /// null if not found.
         /// </summary>
-        /// <param name="userName">The user name to log in with.</param>
-        /// <param name="password">The unencrypted password to use.</param>
+        /// <param name="userName">The user name to retrieve.</param>
         /// <returns>A <see cref="CustomIdentityDTO"/> with the information needed to 
         /// load the custom identity.</returns>
-        Task<CustomIdentityDTO> LogOnIdentityAsync(string userName, string password);
+        Task<CustomIdentityDTO> RetrieveIdentityAsync(string userName);
+
+        /// <summary>
+        /// Saves information about the current identity.  If the identity is not found
+        /// it will add it to the database.
+        /// </summary>
+        /// <param name="customIdentity">Information about the identity to insert.</param>
+        /// <returns>A <see cref="CustomIdentityDTO"/> with information about the user that
+        /// was saved or inserted.</returns>
+        CustomIdentityDTO SaveIdentity(AuthorizeLogOnDTO customIdentity);
+        /// <summary>
+        /// Saves manager information for a given employee.
+        /// </summary>
+        /// <param name="customIdentity">Information about an employee, including their manager informaiton.</param>
+        void SaveManagerInfo(AuthorizeLogOnDTO customIdentity);
+        /// <summary>
+        /// Checks to see if any other employees list the given employee as a manager.  If so
+        /// the manager permission is added.
+        /// </summary>
+        /// <param name="employeeADName">The active directory name of the person to check
+        /// to see if he is a manager.</param>
+        void SetManagerPermission(string employeeADName);
     }
 }

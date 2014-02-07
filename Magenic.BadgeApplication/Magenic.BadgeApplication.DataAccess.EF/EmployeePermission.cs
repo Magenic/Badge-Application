@@ -18,7 +18,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public int EmployeeId { get; set; }
         public int PermissionId { get; set; }
     
-        public virtual Employee Employee { get; set; }
         public virtual Permission Permission { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

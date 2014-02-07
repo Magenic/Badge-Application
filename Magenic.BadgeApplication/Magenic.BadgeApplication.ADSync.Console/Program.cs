@@ -1,9 +1,8 @@
-﻿using Magenic.BadgeApplication.Authorization;
-using Magenic.BadgeApplication.Common;
+﻿using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Processor;
 using System;
 
-namespace Magenic.BadgeApplication.Console
+namespace Magenic.BadgeApplication.ADSync.Console
 {
     class Program
     {
@@ -13,8 +12,8 @@ namespace Magenic.BadgeApplication.Console
             {
                 AutofacBootstrapper.Init();
 
-                QueueProcessor processor = new QueueProcessor();
-                processor.Start();
+                var adProcessor = new ADProcessor();
+                adProcessor.Start();
             }
             catch (Exception ex)
             {

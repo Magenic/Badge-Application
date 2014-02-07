@@ -21,9 +21,9 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public int Id { get; set; }
         /// <summary>
-        /// The name for the identity.
+        /// The AD name for the identity.
         /// </summary>
-        public string Name { get; set; }
+        public string ADName { get; set; }
         /// <summary>
         /// An enumerable of <see cref="string"/> for all the roles the user is in.
         /// </summary>

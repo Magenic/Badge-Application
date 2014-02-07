@@ -23,8 +23,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public int SubmissionStatusId { get; set; }
     
         public virtual Activity Activity { get; set; }
+        public virtual ItemStatu ItemStatu { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual Employee Employee1 { get; set; }
-        public virtual ItemStatu ItemStatu { get; set; }
     }
 }
