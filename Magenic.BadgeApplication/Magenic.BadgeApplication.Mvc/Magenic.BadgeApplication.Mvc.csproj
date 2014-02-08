@@ -253,6 +253,7 @@
     <Content Include="Content\Images\header-bg.gif" />
     <Content Include="Content\Images\header-shadow.png" />
     <Content Include="Content\Images\magenic-badges-logo.png" />
+    <Content Include="Content\Images\unknown.png" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.less</DependentUpon>
     </Content>
