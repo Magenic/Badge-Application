@@ -16,7 +16,7 @@
 
 @GrayLine: #E0E0E0;
 
-html { 
+html {
     height: 100%;
 }
 
@@ -102,7 +102,7 @@ textarea {
         color: @HeaderGray;
         margin: 0 0 10px;
         padding: 4px 6px;
-        background-color: @HeaderOffWhite
+        background-color: @HeaderOffWhite;
     }
 }
 
@@ -112,10 +112,10 @@ textarea {
 }
 
 .body-content {
-    padding-top:21px;
+    padding-top: 21px;
     padding-bottom: 21px;
     background-color: @White;
-    
+
     .container {
         background-color: @White;
     }
@@ -179,6 +179,15 @@ textarea {
         }
     }
 
+    .navbar-nav {
+        & > li {
+            & > a:hover, & > a:focus {
+                color: @White !important;
+                background-color: @MagenicGreen !important;
+            }
+        }
+    }
+
     .navbar-collapse {
         background: url('Images/header-shadow.png') 140px 0 no-repeat;
     }
@@ -197,6 +206,10 @@ footer {
 
     p {
         font-size: smaller;
+    }
+
+    .container {
+        padding-top: 10px;
     }
 }
 
