@@ -4,6 +4,7 @@
 @using Magenic.BadgeApplication.Models
 @using Csla.Web.Mvc
 @using Csla.Rules
+@using Csla
 @model BadgeEditViewModel
 
 <div class="row">
@@ -42,12 +43,36 @@
 
         <label>@ApplicationResources.BadgeTypeLabel</label><br />
         <label>
-            @Html.HasPermission(AuthorizationActions.WriteProperty, Model.Badge, BadgeEdit.TypeProperty, Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Corporate), Html.RadioButton("NotBoundType", BadgeType.Corporate, Model.Badge.Type == BadgeType.Corporate, new { disabled = "disabled" }))
+            @* Have to do this manually because business rule only handles property, not the UI Elements. *@
+            @if (ApplicationContext.User.IsInRole(PermissionType.Administrator.ToString()))
+            {
+                <text>
+                    @Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Corporate)
+                </text>
+            }
+            else
+            {
+                <text>
+                    @Html.RadioButton("NotBoundType", BadgeType.Corporate, Model.Badge.Type == BadgeType.Corporate, new { disabled = "disabled" })
+                </text>
+            }
             @ApplicationResources.BadgeCorporateLabel
         </label>
         &nbsp;&nbsp;
         <label>
-            @Html.HasPermission(AuthorizationActions.WriteProperty, Model.Badge, BadgeEdit.TypeProperty, Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Community), Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Community, new { onclick = "removeCorporateBadgeValue();" }))
+            @* Have to do this manually because business rule only handles property, not the UI Elements. *@
+            @if (ApplicationContext.User.IsInRole(PermissionType.Administrator.ToString()))
+            {
+                <text>
+                    @Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Community)
+                </text>
+            }
+            else
+            {
+                <text>
+                    @Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Community, new { onclick = "removeCorporateBadgeValue();" })
+                </text>
+            }
             @ApplicationResources.BadgeCommunityLabel
         </label>
         <br /><br />

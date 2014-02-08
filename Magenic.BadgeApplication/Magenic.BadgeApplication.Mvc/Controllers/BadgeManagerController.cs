@@ -134,7 +134,7 @@ namespace Magenic.BadgeApplication.Controllers
                 return RedirectToAction(Mvc.BadgeManager.Index().Result);
             }
 
-            return await EditBadge(badgeEditViewModel.Badge.Id);
+            return await AddBadge();
         }
 
         /// <summary>
