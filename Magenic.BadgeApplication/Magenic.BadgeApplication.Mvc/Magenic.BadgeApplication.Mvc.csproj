@@ -191,6 +191,7 @@
     <Compile Include="Extensions\BundleExtensions.cs" />
     <Compile Include="Extensions\CustomIdentityExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Extensions\ImageActionLinkExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
