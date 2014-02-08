@@ -40,6 +40,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.Yammer", "Magenic.BadgeApplication.Yammer\Magenic.BadgeApplication.Yammer.csproj", "{7A376D75-249B-4A1D-BD7F-B80F720036C1}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Magenic.BadgeApplication.WebApi.DB", "Magenic.BadgeApplication.WebApi.DB\Magenic.BadgeApplication.WebApi.DB.sqlproj", "{431163BC-42A5-41C6-84B4-9E8338585A24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.WebApi", "Magenic.BadgeApplication.WebApi\Magenic.BadgeApplication.WebApi.csproj", "{5D1B4960-C747-4BE9-86E2-D85858958CB7}"
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.Authorization", "Magenic.BadgeApplication.Authorization\Magenic.BadgeApplication.Authorization.csproj", "{39DB7F76-2C30-4CD1-8FAC-239AABA17EA9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.ADSync.Console", "Magenic.BadgeApplication.ADSync.Console\Magenic.BadgeApplication.ADSync.Console.csproj", "{1AA1246C-D3EF-433C-B293-8D4A20DE4D6B}"
@@ -98,6 +101,16 @@ Global
 		{7A376D75-249B-4A1D-BD7F-B80F720036C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A376D75-249B-4A1D-BD7F-B80F720036C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A376D75-249B-4A1D-BD7F-B80F720036C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{431163BC-42A5-41C6-84B4-9E8338585A24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{431163BC-42A5-41C6-84B4-9E8338585A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{431163BC-42A5-41C6-84B4-9E8338585A24}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{431163BC-42A5-41C6-84B4-9E8338585A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{431163BC-42A5-41C6-84B4-9E8338585A24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{431163BC-42A5-41C6-84B4-9E8338585A24}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5D1B4960-C747-4BE9-86E2-D85858958CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D1B4960-C747-4BE9-86E2-D85858958CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D1B4960-C747-4BE9-86E2-D85858958CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D1B4960-C747-4BE9-86E2-D85858958CB7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{39DB7F76-2C30-4CD1-8FAC-239AABA17EA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{39DB7F76-2C30-4CD1-8FAC-239AABA17EA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39DB7F76-2C30-4CD1-8FAC-239AABA17EA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
