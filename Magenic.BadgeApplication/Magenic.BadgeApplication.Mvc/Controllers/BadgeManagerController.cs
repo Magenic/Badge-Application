@@ -210,7 +210,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
         public async virtual Task<ActionResult> ApproveActivities()
         {
             var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
@@ -223,7 +223,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
         public async virtual Task<ActionResult> ApproveActivitiesList()
         {
             var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
@@ -236,7 +236,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="submissionId">The submission identifier.</param>
         /// <returns></returns>
         [HttpPost]
-        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
         public async virtual Task<ActionResult> ApproveActivity(int submissionId)
         {
             var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
@@ -256,7 +256,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="submissionId">The submission identifier.</param>
         /// <returns></returns>
         [HttpPost]
-        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
         public async virtual Task<ActionResult> RejectActivity(int submissionId)
         {
             var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
