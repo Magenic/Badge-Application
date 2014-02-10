@@ -150,10 +150,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
 
         internal void Load(ActivityEditDTO item)
         {
-            this.Id = item.Id;
-            this.Name = item.Name;
-            this.Description = item.Description;
-            this.RequiresApproval = item.RequiresApproval;
+            using (this.BypassPropertyChecks)
+            {
+                this.Id = item.Id;
+                this.Name = item.Name;
+                this.Description = item.Description;
+                this.RequiresApproval = item.RequiresApproval;
+            }
         }
 
         [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]
