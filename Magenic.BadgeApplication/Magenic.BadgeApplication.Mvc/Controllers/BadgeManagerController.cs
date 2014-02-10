@@ -1,8 +1,12 @@
-﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
+﻿using Csla.Rules;
+using Csla.Web.Mvc;
+using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.Common.Enums;
+using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Extensions;
 using Magenic.BadgeApplication.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -76,8 +80,14 @@ namespace Magenic.BadgeApplication.Controllers
         [HttpGet]
         public async virtual Task<ActionResult> ManageActivities()
         {
-            var allActivities = await ActivityCollection.GetAllActivitiesAsync();
-            return View(allActivities);
+            var allActivities = await ActivityEditCollection.GetAllActivitiesAsync();
+            IActivityEdit firstActivity = new ActivityEdit();
+            if (allActivities.Count() > 0)
+            {
+                firstActivity = allActivities.First();
+            }
+
+            return View(firstActivity);
         }
 
         /// <summary>
@@ -91,6 +101,7 @@ namespace Magenic.BadgeApplication.Controllers
             var badgeEdit = BadgeEdit.CreateBadge();
             var badgeEditViewModel = new BadgeEditViewModel(allActivities);
             badgeEditViewModel.Badge = badgeEdit as BadgeEdit;
+            badgeEditViewModel.Badge.Priority = 0;
 
             return View(Mvc.BadgeManager.Views.AddBadge, badgeEditViewModel);
         }
@@ -113,12 +124,19 @@ namespace Magenic.BadgeApplication.Controllers
             }
 
             SetActivitiesToAdd(badgeEditViewModel);
-            if (await SaveObjectAsync(badgeEditViewModel.Badge, be => UpdateModel(be, "Badge"), true))
+            if (await SaveObjectAsync(badgeEditViewModel.Badge, be =>
+            {
+                UpdateModel(be, "Badge");
+                if (be.Priority == 0)
+                {
+                    be.Priority = Int32.MaxValue;
+                }
+            }, true))
             {
                 return RedirectToAction(Mvc.BadgeManager.Index().Result);
             }
 
-            return await EditBadge(badgeEditViewModel.Badge.Id);
+            return await AddBadge();
         }
 
         /// <summary>
@@ -171,7 +189,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize(Roles = Administrator)]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
         public virtual ActionResult ApproveCommunityBadges()
         {
             return View();
@@ -192,6 +210,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
         public async virtual Task<ActionResult> ApproveActivities()
         {
             var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
@@ -204,6 +223,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
         public async virtual Task<ActionResult> ApproveActivitiesList()
         {
             var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
@@ -216,6 +236,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="submissionId">The submission identifier.</param>
         /// <returns></returns>
         [HttpPost]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
         public async virtual Task<ActionResult> ApproveActivity(int submissionId)
         {
             var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
@@ -235,6 +256,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="submissionId">The submission identifier.</param>
         /// <returns></returns>
         [HttpPost]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
         public async virtual Task<ActionResult> RejectActivity(int submissionId)
         {
             var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);

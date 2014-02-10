@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+    var canEditRequiresApproval = $('#CanEditRequiresApproval').val() === 'true';
+
     //Prepare jtable plugin
     $('#ActivitiesTable').jtable({
         title: 'Activity Management',
@@ -25,8 +27,11 @@
             },
             RequiresApproval: {
                 title: 'Requires Approval',
-                create: true,
-                edit: true,
+                type: 'checkbox',
+                defaultValue: false,
+                values: { 'false': 'Approval not required', 'true': 'Approval required' },
+                create: canEditRequiresApproval,
+                edit: canEditRequiresApproval,
             }
         }
     });

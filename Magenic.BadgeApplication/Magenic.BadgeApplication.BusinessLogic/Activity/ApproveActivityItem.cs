@@ -177,6 +177,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         {
             base.AddBusinessRules();
 
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.GetObject, PermissionType.Manager.ToString()));
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, ApproveActivitySubmissionMethod, PermissionType.Manager.ToString()));
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, DenyActivitySubmissionMethod, PermissionType.Manager.ToString()));
         }
