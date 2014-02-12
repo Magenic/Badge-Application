@@ -204,7 +204,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
 
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedByIdProperty, PermissionType.Administrator.ToString()));
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedDateProperty, PermissionType.Administrator.ToString()));
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ActivityPointsAmountProperty, PermissionType.Administrator.ToString()));
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, AwardValueAmountProperty, PermissionType.Administrator.ToString()));
 
             this.BusinessRules.AddRule(new Rules.CanSetBadgeType(AuthorizationActions.WriteProperty, TypeProperty, BadgeType.Corporate, PermissionType.Administrator.ToString()));
