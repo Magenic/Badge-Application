@@ -85,6 +85,9 @@ textarea {
 .no-padding {
   padding: 0;
 }
+.no-margin {
+  margin: 0;
+}
 .disabled_anchor {
   color: gray;
 }
