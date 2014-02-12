@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;
@@ -15,10 +14,30 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
     {
         #region Properties
 
-        private bool   PaidOut;
         private IList<int> BadgeAwardIds;
-        private int? PayoutById;
-        private DateTime? PayoutDate;
+
+        public static readonly PropertyInfo<bool> PaidOutProperty = RegisterProperty<bool>(c => c.PaidOut);
+        private bool PaidOut
+        {
+            get { return GetProperty(PaidOutProperty); }
+            set { SetProperty(PaidOutProperty, value); }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        public static readonly PropertyInfo<int?> PayoutByIdProperty = RegisterProperty<int?>(c => c.PayoutById);
+        private int? PayoutById
+        {
+            get { return GetProperty(PayoutByIdProperty); }
+            set { SetProperty(PayoutByIdProperty, value); }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        public static readonly PropertyInfo<DateTime?> PayoutDateProperty = RegisterProperty<DateTime?>(c => c.PayoutDate);
+        private DateTime? PayoutDate
+        {
+            get { return GetProperty(PayoutDateProperty); }
+            set { SetProperty(PayoutDateProperty, value); }
+        }
 
         public static readonly PropertyInfo<int> EmployeeIdProperty = RegisterProperty<int>(c => c.EmployeeId);
         public int EmployeeId
