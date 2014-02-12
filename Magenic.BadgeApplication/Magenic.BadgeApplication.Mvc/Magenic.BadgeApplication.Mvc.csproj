@@ -584,6 +584,7 @@
     <Content Include="Views\BadgeManager\ManageActivities.cshtml" />
     <Content Include="Views\Shared\_BadgeWindow.cshtml" />
     <Content Include="Views\Shared\_EarnedBadgeWindow.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\PointsReportCollection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.Authorization.Mock\Magenic.BadgeApplication.Authorization.Mock.csproj">

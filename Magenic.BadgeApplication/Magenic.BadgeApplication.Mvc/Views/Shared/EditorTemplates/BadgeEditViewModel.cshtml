@@ -120,7 +120,7 @@
             @Html.LabelFor(bevm => bevm.Badge.ActivityPointsAmount, ApplicationResources.ActivityPointsAmountLabel)
         </div>
         <div class="editor-field">
-            @Html.HasPermission(AuthorizationActions.WriteProperty, Model.Badge, BadgeEdit.ActivityPointsAmountProperty, Html.TextBoxFor(bevm => bevm.Badge.ActivityPointsAmount, new { @class = "form-control" }), Html.TextBox("NotBoundActivityPointsAmount", Model.Badge.ActivityPointsAmount, new { @class = "form-control" }))
+            @Html.HasPermission(AuthorizationActions.WriteProperty, Model.Badge, BadgeEdit.ActivityPointsAmountProperty, Html.TextBoxFor(bevm => bevm.Badge.ActivityPointsAmount, new { @class = "form-control" }), Html.TextBox("NotBoundActivityPointsAmount", Model.Badge.ActivityPointsAmount, new { @class = "form-control", disabled = "disabled" }))
             @Html.ValidationMessageFor(bevm => bevm.Badge.ActivityPointsAmount)
         </div>
         <div class="editor-label">

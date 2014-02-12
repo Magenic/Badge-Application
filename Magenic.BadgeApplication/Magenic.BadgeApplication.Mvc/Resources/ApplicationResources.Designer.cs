@@ -430,6 +430,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm Payout of Selected User(s).
+        /// </summary>
+        public static string ConfirmPayoutSelectedUsers {
+            get {
+                return ResourceManager.GetString("ConfirmPayoutSelectedUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Corporate Badges.
         /// </summary>
         public static string CorporateBadgeHeader {
@@ -547,11 +556,38 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current points for a user are calculated by summing the points values for all User Badge records that are marked as not being paid out..
+        /// </summary>
+        public static string PointsReportDescription {
+            get {
+                return ResourceManager.GetString("PointsReportDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Points Report.
         /// </summary>
         public static string PointsReportHeader {
             get {
                 return ResourceManager.GetString("PointsReportHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string PointsReportNameHeader {
+            get {
+                return ResourceManager.GetString("PointsReportNameHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Points Total.
+        /// </summary>
+        public static string PointsReportPointsTotalHeader {
+            get {
+                return ResourceManager.GetString("PointsReportPointsTotalHeader", resourceCulture);
             }
         }
         
