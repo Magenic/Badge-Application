@@ -35,5 +35,32 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 return badgeList;
             }
         }
+
+
+        public async Task<IEnumerable<SubmittedActivityItemDTO>> GetSubmittedActivitiesForEmployeeIdByActivityIdAsync(int employeeId, int activityId, DateTime? startDate, DateTime? endDate)
+        {
+            using (var ctx = new Entities())
+            {
+                ctx.Database.Connection.Open();
+                var badgeList = await(from s in ctx.ActivitySubmissions
+                                      join a in ctx.Activities on s.ActivityId equals a.ActivityId
+                                      where s.EmployeeId == employeeId
+                                      where a.ActivityId == activityId
+                                      where s.SubmissionDate >= (startDate.HasValue ? startDate.Value : DateTime.MinValue)
+                                      where s.SubmissionDate <= (endDate.HasValue ? endDate.Value : DateTime.MaxValue)
+                                      select new SubmittedActivityItemDTO
+                                      {
+                                          Id = s.ActivitySubmissionId,
+                                          ActivityId = s.ActivityId,
+                                          ActivityName = a.ActivityName,
+                                          ActivitySubmissionDate = s.SubmissionDate,
+                                          ApprovedById = s.SubmissionApprovedById ?? 0,
+                                          Status = (ActivitySubmissionStatus)s.SubmissionStatusId,
+                                          SubmissionNotes = s.SubmissionDescription,
+                                          EmployeeId = s.EmployeeId
+                                      }).ToArrayAsync();
+                return badgeList;
+            }
+        }
     }
 }
