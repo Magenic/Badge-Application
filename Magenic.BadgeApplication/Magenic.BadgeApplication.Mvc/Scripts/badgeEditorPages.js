@@ -1,4 +1,9 @@
-﻿function removeCorporateBadgeValue() {
+﻿function checkAllBoxes(element) {
+    var allChecked = $(element).is(':checked');
+    $('.table tbody [type="checkbox"]').prop('checked', allChecked);
+}
+
+function removeCorporateBadgeValue() {
     $('#NotBoundType').prop('checked', false);
 }
 
