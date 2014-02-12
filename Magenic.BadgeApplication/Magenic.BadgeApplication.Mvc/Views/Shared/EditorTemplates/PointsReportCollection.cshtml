@@ -1,0 +1,42 @@
+﻿@using Magenic.BadgeApplication.Common.Interfaces
+@using Magenic.BadgeApplication.Resources
+@model IPointsReportCollection
+
+@using (Html.BeginForm("PointsReport", "BadgeManager"))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@Html.CheckBox("SelectAll", new { onclick = "checkAllBoxes(this);" })</th>
+                        <th>@ApplicationResources.PointsReportNameHeader</th>
+                        <th>@ApplicationResources.PointsReportPointsTotalHeader</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pointsReport in Model)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="CheckedValues" value="@pointsReport.EmployeeId" />
+                            </td>
+                            <td>
+                                @pointsReport.EmployeeADName
+                            </td>
+                            <td>
+                                @pointsReport.TotalPoints
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" value="@ApplicationResources.ConfirmPayoutSelectedUsers" class="btn btn-success" />
+        </div>
+    </div>
+}

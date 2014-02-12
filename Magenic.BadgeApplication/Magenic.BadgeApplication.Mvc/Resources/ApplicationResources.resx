@@ -318,4 +318,16 @@
   <data name="ActivityPointsAmountLabel" xml:space="preserve">
     <value># Activities Required</value>
   </data>
+  <data name="ConfirmPayoutSelectedUsers" xml:space="preserve">
+    <value>Confirm Payout of Selected User(s)</value>
+  </data>
+  <data name="PointsReportDescription" xml:space="preserve">
+    <value>Current points for a user are calculated by summing the points values for all User Badge records that are marked as not being paid out.</value>
+  </data>
+  <data name="PointsReportNameHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="PointsReportPointsTotalHeader" xml:space="preserve">
+    <value>Points Total</value>
+  </data>
 </root>

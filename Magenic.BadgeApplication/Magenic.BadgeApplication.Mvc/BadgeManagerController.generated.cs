@@ -154,6 +154,14 @@ namespace Magenic.BadgeApplication.Controllers
             public readonly string badgeEditViewModel = "badgeEditViewModel";
             public readonly string badgeImage = "badgeImage";
         }
+        static readonly ActionParamsClass_PointsReport s_params_PointsReport = new ActionParamsClass_PointsReport();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_PointsReport PointsReportParams { get { return s_params_PointsReport; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_PointsReport
+        {
+            public readonly string formCollection = "formCollection";
+        }
         static readonly ActionParamsClass_ApproveActivity s_params_ApproveActivity = new ActionParamsClass_ApproveActivity();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_ApproveActivity ApproveActivityParams { get { return s_params_ApproveActivity; } }
@@ -278,11 +286,21 @@ namespace Magenic.BadgeApplication.Controllers
 
         partial void PointsReportOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
-        public override System.Web.Mvc.ActionResult PointsReport()
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> PointsReport()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PointsReport);
             PointsReportOverride(callInfo);
-            return callInfo;
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        partial void PointsReportOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Web.Mvc.FormCollection formCollection);
+
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> PointsReport(System.Web.Mvc.FormCollection formCollection)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PointsReport);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "formCollection", formCollection);
+            PointsReportOverride(callInfo, formCollection);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
         partial void ApproveActivitiesOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
