@@ -16,5 +16,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration.TestSupport
         internal const string ScottDUserName = "scottd";
         internal const int ReneeBUserId = 1;
         internal const string ReneeBUserName = "reneeb";
+        internal const int ActivityId = 4;
     }
 }

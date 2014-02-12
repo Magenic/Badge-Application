@@ -29,6 +29,24 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             public DateTime? EndDate { get; set; }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible"), Serializable]
+        public class SubmittedActivityByIdCriteria : CriteriaBase<SubmittedActivityCriteria>
+        {
+            public SubmittedActivityByIdCriteria(int employeeId, int activityId, DateTime? startDate, DateTime? endDate)
+            {
+                this.EmployeeId = employeeId;
+                this.ActivityId = activityId;
+                this.StartDate = startDate;
+                this.EndDate = endDate;
+            }
+
+            public int EmployeeId { get; set; }
+
+            public int ActivityId { get; set; }
+            public DateTime? StartDate { get; set; }
+            public DateTime? EndDate { get; set; }
+        }
+
         #endregion Criteria
 
         #region Factory Methods
@@ -36,6 +54,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         public async static Task<ISubmittedActivityCollection> GetSubmittedActivitiesByEmployeeIdAsync(int employeeId, DateTime? startDate, DateTime? endDate)
         {
             return await IoC.Container.Resolve<IObjectFactory<ISubmittedActivityCollection>>().FetchAsync(new SubmittedActivityCriteria(employeeId, startDate, endDate));
+        }
+
+        public async static Task<ISubmittedActivityCollection> GetSubmittedActivitiesByEmployeeIdAsync(int employeeId, int activityId, DateTime? startDate, DateTime? endDate)
+        {
+            return await IoC.Container.Resolve<IObjectFactory<ISubmittedActivityCollection>>().FetchAsync(new SubmittedActivityByIdCriteria(employeeId, activityId, startDate, endDate));
         }
 
         #endregion Factory Methods
@@ -48,6 +71,15 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             var dal = IoC.Container.Resolve<ISubmittedActivityCollectionDAL>();
 
             var result = await dal.GetSubmittedActivitiesForEmployeeIdAsync(criteria.EmployeeId, criteria.StartDate, criteria.EndDate);
+            this.LoadData(result);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        private async Task DataPortal_Fetch(SubmittedActivityByIdCriteria criteria)
+        {
+            var dal = IoC.Container.Resolve<ISubmittedActivityCollectionDAL>();
+
+            var result = await dal.GetSubmittedActivitiesForEmployeeIdByActivityIdAsync(criteria.EmployeeId, criteria.ActivityId, criteria.StartDate, criteria.EndDate);
             this.LoadData(result);
         }
 
