@@ -26,6 +26,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration.TestSupport
             var adapters = Assembly.Load("Magenic.BadgeApplication.Yammer");
             builder.RegisterAssemblyTypes(adapters).AsImplementedInterfaces();
 
+            var authorization = Assembly.Load("Magenic.BadgeApplication.Authorization");
+            builder.RegisterAssemblyTypes(authorization).AsImplementedInterfaces();
+
             builder.RegisterGeneric(typeof(ObjectFactory<>)).As(typeof(IObjectFactory<>));
 
             IoC.Container = builder.Build();
