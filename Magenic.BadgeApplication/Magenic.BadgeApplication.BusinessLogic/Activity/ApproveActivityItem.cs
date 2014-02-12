@@ -1,4 +1,5 @@
-﻿using Csla;
+﻿using System.Threading;
+using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;
 using Magenic.BadgeApplication.Common.DTO;
@@ -73,6 +74,20 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             private set { LoadProperty(EmployeeADNameProperty, value); }
         }
 
+        public static readonly PropertyInfo<string> EmployeeFirstNameProperty = RegisterProperty<string>(c => c.EmployeeFirstName);
+        public string EmployeeFirstName
+        {
+            get { return GetProperty(EmployeeFirstNameProperty); }
+            private set { LoadProperty(EmployeeFirstNameProperty, value); }
+        }
+
+        public static readonly PropertyInfo<string> EmployeeLastNameProperty = RegisterProperty<string>(c => c.EmployeeLastName);
+        public string EmployeeLastName
+        {
+            get { return GetProperty(EmployeeLastNameProperty); }
+            private set { LoadProperty(EmployeeLastNameProperty, value); }
+        }
+
         public static readonly PropertyInfo<ActivitySubmissionStatus> StatusProperty = RegisterProperty<ActivitySubmissionStatus>(c => c.Status);
         public ActivitySubmissionStatus Status
         {
@@ -140,6 +155,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                 this.SubmissionNotes = item.SubmissionNotes;
                 this.EmployeeId = item.EmployeeId;
                 this.EmployeeADName = item.EmployeeADName;
+                this.EmployeeFirstName = item.EmployeeFirstName;
+                this.EmployeeLastName = item.EmployeeLastName;
                 this.Status = item.Status;
                 this.ApprovedById = item.ApprovedById;
             }
@@ -162,6 +179,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                     SubmissionNotes = this.SubmissionNotes,
                     EmployeeId = this.EmployeeId,
                     EmployeeADName = this.EmployeeADName,
+                    EmployeeFirstName = this.EmployeeFirstName,
+                    EmployeeLastName = this.EmployeeFirstName,
                     Status = this.Status,
                     ApprovedById = this.ApprovedById,
                 };
