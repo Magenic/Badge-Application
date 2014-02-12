@@ -3,7 +3,7 @@
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
     /// <summary>
-    /// Custom identity to use with applicaiton security.
+    /// Custom identity to use with application security.
     /// </summary>
     public interface ICustomIdentity : ICslaIdentity
     {
