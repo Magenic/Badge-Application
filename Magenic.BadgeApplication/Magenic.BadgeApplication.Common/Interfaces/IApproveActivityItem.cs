@@ -41,6 +41,14 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         string EmployeeADName { get; }
         /// <summary>
+        /// The user's first name as reported by AD
+        /// </summary>
+        string EmployeeFirstName { get; }
+        /// <summary>
+        /// The user's last name.
+        /// </summary>
+        string EmployeeLastName { get; }
+        /// <summary>
         /// The current status of this activity submission.
         /// </summary>
         Enums.ActivitySubmissionStatus Status { get; }

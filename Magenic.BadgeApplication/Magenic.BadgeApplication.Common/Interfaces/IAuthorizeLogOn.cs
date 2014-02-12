@@ -28,7 +28,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <returns>Returns a <see cref="AuthorizeLogOnDTO"/> with information about the user</returns>
         AuthorizeLogOnDTO RetrieveUserInformation(string userName, string domainName = "");
         /// <summary>
-        /// Retrives a list of active users from active directory.
+        /// Retrieves a list of active users from active directory.
         /// </summary>
         /// <returns>An enumerable list of AD user names.</returns>
         IEnumerable<string> RetrieveActiveUsers();
