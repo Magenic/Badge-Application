@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using Csla;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.DTO;
-using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Badge
 {
     [Serializable]
-    public sealed class ApproveBadgeCollection : BusinessListBase<ApproveBadgeCollection, IApproveBadgeItem>, IApproveBadgeCollection
+    public sealed class ApproveBadgeCollection : ReadOnlyListBase<ApproveBadgeCollection, IApproveBadgeItem>, IApproveBadgeCollection
     {
         
         #region Factory Methods
@@ -36,33 +33,20 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         {
             var dal = IoC.Container.Resolve<IApproveBadgeCollectionDAL>();
 
-            var result = await dal.GetActivitiesToApproveForAdministratorAsync();
+            var result = await dal.GetBadgesToApproveAsync();
             this.LoadData(result);
         }
 
         private void LoadData(IEnumerable<ApproveBadgeItemDTO> data)
         {
+            this.IsReadOnly = false;
             foreach (ApproveBadgeItemDTO item in data)
             {
                 var newItem = new ApproveBadgeItem();
-                newItem.Load(item);
+                newItem.Load(item, true);
                 this.Add(newItem);
             }
-        }
-
-        [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]
-        protected override void DataPortal_Update()
-        {
-            var saveList = new List<ApproveBadgeItemDTO>();
-            foreach (ApproveBadgeItem i in this)
-            {
-                saveList.Add(i.Unload());
-            }
-            var dal = IoC.Container.Resolve<IApproveBadgeCollectionDAL>();
-            var results = dal.Update(saveList);
-            this.Clear();
-            this.DeletedList.Clear();
-            this.LoadData(results);
+            this.IsReadOnly = true;
         }
 
         #endregion Data Access
