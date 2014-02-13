@@ -10,20 +10,26 @@ namespace Magenic.BadgeApplication.Common.Interfaces
     public interface IApproveBadgeCollectionDAL
     {
         /// <summary>
-        /// Asynchronously returns a <see cref="System.Collections.Generic.IEnumerable&lt;ApproveBadgeItemDTO&gt;" />
-        /// for the specified badge type.
+        /// Asynchronously returns a <see cref="System.Collections.Generic.IEnumerable&lt;ApproveBadgeItemDTO&gt;" />.
         /// </summary>
         /// <returns>
         /// A <see cref="System.Collections.Generic.IEnumerable&lt;ApproveBadgeItemDTO&gt;" />.
         /// </returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
-        Task<IEnumerable<ApproveBadgeItemDTO>> GetActivitiesToApproveForAdministratorAsync();
+        Task<IEnumerable<ApproveBadgeItemDTO>> GetBadgesToApproveAsync();
         /// <summary>
-        /// Updates list of approved or denied community badges 
+        /// Asynchronously returns a <see cref="ApproveBadgeItemDTO" />
+        /// for the specified badge id.
+        /// </summary>
+        /// <param name="badgeId">The badge id to look for</param>
+        /// <returns>A <see cref="ApproveBadgeItemDTO"/> with the badge information.</returns>
+        Task<ApproveBadgeItemDTO> GetBadgeToApproveByIdAsync(int badgeId);
+        /// <summary>
+        /// Updates an approved or denied community badge 
         /// based on information passed in via the DTO.
         /// </summary>
-        /// <param name="data">The values to update.</param>
+        /// <param name="data">The badge to update.</param>
         /// <returns>A DTO with updated values after the save.</returns>
-        IEnumerable<ApproveBadgeItemDTO> Update(IEnumerable<ApproveBadgeItemDTO> data);
+        ApproveBadgeItemDTO Update(ApproveBadgeItemDTO data);
     }
 }
