@@ -107,6 +107,7 @@
     <Compile Include="ApproveBadgeCollectionTests.cs" />
     <Compile Include="AssemblyTestInit.cs" />
     <Compile Include="AuthorizeLogOnTests.cs" />
+    <Compile Include="TestSupport\AutofacBootstrapper.cs" />
     <Compile Include="BadgeCollectionTests.cs" />
     <Compile Include="BadgeTests.cs" />
     <Compile Include="EarnedBadgeCollectionTests.cs" />
@@ -127,9 +128,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Magenic.BadgeApplication.Authorization\Magenic.BadgeApplication.Authorization.csproj">
-      <Project>{39db7f76-2c30-4cd1-8fac-239aaba17ea9}</Project>
-      <Name>Magenic.BadgeApplication.Authorization</Name>
+    <ProjectReference Include="..\Magenic.BadgeApplication.Authorization.Mock\Magenic.BadgeApplication.Authorization.Mock.csproj">
+      <Project>{d377b660-115a-4c50-84b0-672be243547d}</Project>
+      <Name>Magenic.BadgeApplication.Authorization.Mock</Name>
     </ProjectReference>
     <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">
       <Project>{0274f325-95a1-43c8-b1d7-f81adfc0a535}</Project>

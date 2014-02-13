@@ -65,6 +65,7 @@ namespace T4Mvc
             {
                 public readonly string BadgeEditViewModel = "BadgeEditViewModel";
                 public readonly string LogOnViewModel = "LogOnViewModel";
+                public readonly string PointsReportCollection = "PointsReportCollection";
                 public readonly string SubmitActivity = "SubmitActivity";
             }
         }

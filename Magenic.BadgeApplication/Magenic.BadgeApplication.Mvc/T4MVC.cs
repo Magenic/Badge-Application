@@ -519,6 +519,7 @@ namespace Links
             public static readonly string header_bg_gif = Url("header-bg.gif");
             public static readonly string header_shadow_png = Url("header-shadow.png");
             public static readonly string magenic_badges_logo_png = Url("magenic-badges-logo.png");
+            public static readonly string unknown_png = Url("unknown.png");
         }
 
         public static readonly string Site_less = Url("Site.less");

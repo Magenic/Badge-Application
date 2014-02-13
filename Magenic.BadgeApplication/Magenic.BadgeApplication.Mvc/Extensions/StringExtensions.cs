@@ -21,7 +21,7 @@ namespace Magenic.BadgeApplication.Extensions
                 return uri.AbsolutePath.Split('/').Last();
             }
 
-            return String.Empty;
+            return "unknown.png";
         }
     }
 }

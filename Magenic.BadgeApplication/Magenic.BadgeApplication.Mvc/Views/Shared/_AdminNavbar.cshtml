@@ -1,22 +1,31 @@
-﻿@using Magenic.BadgeApplication.Resources
+﻿@using Magenic.BadgeApplication.BusinessLogic.PointsReport
+@using Magenic.BadgeApplication.BusinessLogic.Badge
+@using Magenic.BadgeApplication.BusinessLogic.Activity
+@using Magenic.BadgeApplication.Extensions
+@using Magenic.BadgeApplication.Resources
 @using Magenic.BadgeApplication.Common.Enums
+@using Csla.Web.Mvc
+@using Csla.Rules
 @using Csla
 
-@Html.ActionLink(ApplicationResources.AddEditBadges, Mvc.BadgeManager.Index())
-&nbsp;|&nbsp;
-@Html.ActionLink(ApplicationResources.ManageActivitiesLink, Mvc.BadgeManager.ManageActivities())
-&nbsp;|&nbsp;
-@if (ApplicationContext.User.IsInRole(PermissionType.Administrator.ToString()))
-{
-    @Html.ActionLink(ApplicationResources.CommunityBadgesForApproval, Mvc.BadgeManager.ApproveCommunityBadges())
-<text>
-&nbsp;|&nbsp;
-</text>
+@{
+    // Need to do this to fire off AddBusinessRules so HasPermission works.
+    var fakeBadgeItem = new ApproveBadgeItem();
+    var fakeActivityItem = new ApproveActivityItem();
 }
-@Html.ActionLink(ApplicationResources.PointsReport, Mvc.BadgeManager.PointsReport())
-&nbsp;|&nbsp;
-@Html.ActionLink(ApplicationResources.ActivitiesForApproval, Mvc.BadgeManager.ApproveActivities())
 
-<div class="row">
-    &nbsp;
-</div>
+<ul class="nav nav-pills">
+    <li>
+        @Html.ActionLink(ApplicationResources.AddEditBadges, Mvc.BadgeManager.Index())
+    </li>
+
+    <li>
+        @Html.ActionLink(ApplicationResources.ManageActivitiesLink, Mvc.BadgeManager.ManageActivities())
+    </li>
+
+    @Html.HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem), Html.GenerateConditionalNavigation(ApplicationResources.CommunityBadgesForApproval, Mvc.BadgeManager.ApproveCommunityBadges()), String.Empty)
+
+    @Html.HasPermission(AuthorizationActions.GetObject, typeof(PointsReportCollection), Html.GenerateConditionalNavigation(ApplicationResources.PointsReport, Mvc.BadgeManager.PointsReport().Result), String.Empty)
+
+    @Html.HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem), Html.GenerateConditionalNavigation(ApplicationResources.ActivitiesForApproval, Mvc.BadgeManager.ApproveActivities().Result), String.Empty)
+</ul>

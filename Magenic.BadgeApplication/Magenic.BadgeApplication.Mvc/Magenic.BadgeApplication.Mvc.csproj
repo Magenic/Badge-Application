@@ -191,6 +191,7 @@
     <Compile Include="Extensions\BundleExtensions.cs" />
     <Compile Include="Extensions\CustomIdentityExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Extensions\ImageActionLinkExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -252,6 +253,7 @@
     <Content Include="Content\Images\header-bg.gif" />
     <Content Include="Content\Images\header-shadow.png" />
     <Content Include="Content\Images\magenic-badges-logo.png" />
+    <Content Include="Content\Images\unknown.png" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.less</DependentUpon>
     </Content>
@@ -582,6 +584,7 @@
     <Content Include="Views\BadgeManager\ManageActivities.cshtml" />
     <Content Include="Views\Shared\_BadgeWindow.cshtml" />
     <Content Include="Views\Shared\_EarnedBadgeWindow.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\PointsReportCollection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.Authorization.Mock\Magenic.BadgeApplication.Authorization.Mock.csproj">
