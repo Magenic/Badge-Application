@@ -324,11 +324,11 @@ namespace Magenic.BadgeApplication.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="submissionId"></param>
+        /// <param name="badgeId"></param>
         /// <returns></returns>
         [HttpPost]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
-        public async virtual Task<ActionResult> ApproveBadgeSubmission(int submissionId)
+        public async virtual Task<ActionResult> ApproveBadgeSubmission(int badgeId)
         {
             var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
             return Json(new { Success = true });
@@ -337,11 +337,11 @@ namespace Magenic.BadgeApplication.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="submissionId"></param>
+        /// <param name="badgeId"></param>
         /// <returns></returns>
         [HttpPost]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
-        public async virtual Task<ActionResult> RejectBadgeSubmission(int submissionId)
+        public async virtual Task<ActionResult> RejectBadgeSubmission(int badgeId)
         {
             var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
             return Json(new { Success = true });
