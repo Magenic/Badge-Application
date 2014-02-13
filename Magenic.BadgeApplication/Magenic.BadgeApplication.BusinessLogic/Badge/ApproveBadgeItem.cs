@@ -1,6 +1,9 @@
-﻿using Csla;
+﻿using System.Threading.Tasks;
+using Autofac;
+using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;
+using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
@@ -85,6 +88,19 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         }
         #endregion Properties
 
+        #region Factory Methods
+
+        /// <summary>
+        /// Asynchronously returns a list of all activities awaiting approval for a specific manager.
+        /// </summary>
+        /// <returns>A list of activities to approve.</returns>
+        public async static Task<IApproveBadgeItem> GetBadgesToApproveByIdAsync(int badgeId)
+        {
+            return await IoC.Container.Resolve<IObjectFactory<IApproveBadgeItem>>().FetchAsync(badgeId);
+        }
+
+        #endregion Factory Methods
+
         #region Methods
 
         public static readonly MethodInfo ApproveBadgeMethod = RegisterMethod(typeof(ApproveBadgeItem), "ApproveBadge");
@@ -125,6 +141,28 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
 
         #endregion Rules
 
+        #region Data Access
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        private async Task DataPortal_Fetch(int badgeId)
+        {
+            var dal = IoC.Container.Resolve<IApproveBadgeCollectionDAL>();
+
+            var result = await dal.GetBadgeToApproveByIdAsync(badgeId);
+            this.Load(result, false);
+        }
+
+        [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]
+        protected override void DataPortal_Update()
+        {
+            var saveItem = this.Unload();
+            var dal = IoC.Container.Resolve<IApproveBadgeCollectionDAL>();
+            var result = dal.Update(saveItem);
+            this.Load(result, false);
+        }
+
+
+
         internal ApproveBadgeItemDTO Unload()
         {
             using (this.BypassPropertyChecks)
@@ -146,7 +184,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             }
         }
 
-        internal void Load(ApproveBadgeItemDTO data)
+        internal void Load(ApproveBadgeItemDTO data, bool inCollection)
         {
             using (this.BypassPropertyChecks)
             {
@@ -163,7 +201,12 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             }
             this.MarkClean();
             this.MarkOld();
-            this.MarkAsChild();
+            if (inCollection)
+            {
+                this.MarkAsChild();
+            }
         }
+
+        #endregion Data Access
     }
 }

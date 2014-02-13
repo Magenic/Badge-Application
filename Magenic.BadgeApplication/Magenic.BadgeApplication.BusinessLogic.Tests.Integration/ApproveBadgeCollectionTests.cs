@@ -21,17 +21,26 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         }
 
         [TestMethod]
+        public async Task GetSingleBadgesToApprove()
+        {
+            var approveBadgeCollection = await ApproveBadgeCollection.GetAllBadgesToApproveAsync();
+
+            var approveBadgeItem = await ApproveBadgeItem.GetBadgesToApproveByIdAsync(approveBadgeCollection[0].BadgeId);
+
+            Assert.IsNotNull(approveBadgeItem);
+        }
+
+        [TestMethod]
         public async Task ApproveBadge()
         {
             Csla.ApplicationContext.User = await CustomPrincipal.LogOnAsync(Constants.ReneeBUserName, "");
 
-            var approveBadgeCollection = await ApproveBadgeCollection.GetAllBadgesToApproveAsync();
-            approveBadgeCollection[0].ApproveBadge(Constants.ReneeBUserId);
-            var count = approveBadgeCollection.Count;
+            var approveBadgeItem = await ApproveBadgeItem.GetBadgesToApproveByIdAsync(1);
+            approveBadgeItem.ApproveBadge(Constants.ReneeBUserId);
 
-            approveBadgeCollection = (IApproveBadgeCollection)approveBadgeCollection.Save();
+            approveBadgeItem = (IApproveBadgeItem)approveBadgeItem.Save();
 
-            Assert.IsTrue((approveBadgeCollection.Count + 1) == count);
+            Assert.IsNotNull(approveBadgeItem);
             Csla.ApplicationContext.User = new UnauthenticatedPrincipal();
         }
     }
