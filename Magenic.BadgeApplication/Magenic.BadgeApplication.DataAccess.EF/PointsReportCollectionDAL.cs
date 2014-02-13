@@ -17,6 +17,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 ctx.Database.Connection.Open();
                 var badgeAwardList = await (from ba in ctx.BadgeAwards
                     join e in ctx.Employees on ba.EmployeeId equals e.EmployeeId
+                    where !ba.PaidOut
                     group ba by new {e.EmployeeId, e.ADName, e.AwardPayoutThreshold} into g
                     where g.Key.AwardPayoutThreshold <= g.Sum(t => t.AwardAmount)
                     select new PointsReportItemDTO
