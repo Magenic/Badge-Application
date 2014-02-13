@@ -61,6 +61,14 @@ namespace Magenic.BadgeApplication.Models
         public List<int> SelectedActivityIds { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether [has permission].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [has permission]; otherwise, <c>false</c>.
+        /// </value>
+        public bool HasPermission { get; set; }
+
+        /// <summary>
         /// Gets or sets the badge.
         /// </summary>
         /// <value>

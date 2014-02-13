@@ -2,6 +2,14 @@
 @using Magenic.BadgeApplication.Extensions
 @model BadgeItem
 
+@{
+    var imagePath = Model.ImagePath;
+    if (String.IsNullOrWhiteSpace(imagePath))
+    {
+        imagePath = Url.Content(Links.Content.Images.unknown_png);
+    }
+}
+
 <div class="col-md-2">
-    <img src="@Model.ImagePath" alt="@Model.ImagePath.GetFileNameFromPath()" title="@Model.Name" />
+    <img src="@imagePath" alt="@Model.ImagePath.GetFileNameFromPath()" title="@Model.Name" />
 </div>

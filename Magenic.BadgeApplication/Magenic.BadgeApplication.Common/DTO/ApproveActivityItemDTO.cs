@@ -41,6 +41,14 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public string EmployeeADName { get; set; }
         /// <summary>
+        /// The user's first name as reported by AD
+        /// </summary>
+        public string EmployeeFirstName { get; set; }
+        /// <summary>
+        /// The user's last name.
+        /// </summary>
+        public string EmployeeLastName { get; set; }
+        /// <summary>
         /// The current status of this activity submission.
         /// </summary>
         public Enums.ActivitySubmissionStatus Status { get; set; }

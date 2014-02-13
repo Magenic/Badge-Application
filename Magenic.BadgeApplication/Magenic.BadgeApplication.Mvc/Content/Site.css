@@ -85,6 +85,9 @@ textarea {
 .no-padding {
   padding: 0;
 }
+.no-margin {
+  margin: 0;
+}
 .disabled_anchor {
   color: gray;
 }
@@ -123,6 +126,11 @@ textarea {
   margin: 24px 0 10px 32px;
   float: left;
 }
+.navbar .navbar-nav > li > a:hover,
+.navbar .navbar-nav > li > a:focus {
+  color: #ffffff !important;
+  background-color: #7ab800 !important;
+}
 .navbar .navbar-collapse {
   background: url('Images/header-shadow.png') 140px 0 no-repeat;
 }
@@ -138,6 +146,9 @@ footer {
 }
 footer p {
   font-size: smaller;
+}
+footer .container {
+  padding-top: 10px;
 }
 .bootstrap-filestyle input {
   max-width: 300px;
@@ -160,4 +171,7 @@ input[type="checkbox"].input-validation-error {
 }
 .validation-summary-valid {
   display: none;
+}
+.datepicker {
+  padding-left: 18px;
 }

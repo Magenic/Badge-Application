@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.WindowsRuntime;
-using Autofac;
+﻿using Autofac;
 using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;

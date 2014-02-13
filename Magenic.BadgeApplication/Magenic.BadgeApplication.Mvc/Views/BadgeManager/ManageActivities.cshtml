@@ -1,6 +1,8 @@
-﻿@using Magenic.BadgeApplication.Resources
+﻿@using Magenic.BadgeApplication.BusinessLogic.Activity
+@using Magenic.BadgeApplication.Resources
 @using Csla.Web.Mvc
 @using Csla.Rules
+@model ActivityEdit
 
 @section content {
     @Styles.Render("~/Scripts/jtable/themes/metro/green/css")
@@ -10,6 +12,7 @@
 @Html.Hidden("CreateAction", Url.Action("Create", "ManageActivities"))
 @Html.Hidden("UpdateAction", Url.Action("Update", "ManageActivities"))
 @Html.Hidden("DeleteAction", Url.Action("Delete", "ManageActivities"))
+@Html.Hidden("CanEditRequiresApproval", Html.HasPermission(AuthorizationActions.WriteProperty, Model, ActivityEdit.RequiresApprovalProperty, MvcHtmlString.Create("true"), MvcHtmlString.Create("false")))
 
 <div class="container">
     <div class="row">
