@@ -37,6 +37,10 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public int AwardValueAmount { get; set; }
         /// <summary>
+        /// The date and time when the badge was created.
+        /// </summary>
+        public DateTime Created { get; set; }
+        /// <summary>
         /// The id of the person who approved this badge so it can be awarded.
         /// </summary>
         public int ApprovedById { get; set; }

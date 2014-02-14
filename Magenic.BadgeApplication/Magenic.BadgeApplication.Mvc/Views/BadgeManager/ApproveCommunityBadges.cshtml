@@ -10,12 +10,12 @@
     <div class="row">
         <div class="col-md-12 grayBox">
             <div class="row">
-                <div class="col-md-12">
+                <div id="badge-container" class="col-md-12">
                     <h2>@ApplicationResources.CommunityBadgesForApprovalHeader</h2>
                     
                     <br/>
 
-                    @Html.Hidden("UrlToList", Url.Action(Mvc.BadgeManager.ApproveCommunityBadgesList()))
+                    @Html.Hidden("UrlToList", Url.Action(Mvc.BadgeManager.ApproveCommunityBadges()))
                     @Html.Hidden("UrlToApprove", Url.Action(Mvc.BadgeManager.ApproveBadgeSubmission()))
                     @Html.Hidden("UrlToReject", Url.Action(Mvc.BadgeManager.RejectBadgeSubmission()))
 
@@ -34,7 +34,7 @@
 <script type="text/javascript">
     function refreshPreviousBadgesList() {
         var listUrl = $('#UrlToList').val();
-        $('#badgesForApproval').load(listUrl);
+        window.location = listUrl;
     }
 
     function approveBadge(element, activityId) {

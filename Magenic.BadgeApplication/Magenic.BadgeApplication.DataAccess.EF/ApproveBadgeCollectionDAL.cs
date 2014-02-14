@@ -27,6 +27,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                              Tagline = t.BadgeTagLine,
                                              Type = (Common.Enums.BadgeType)t.BadgeTypeId,
                                              AwardValueAmount = t.BadgeAwardValueAmount,
+                                             Created = t.BadgeCreated,
                                              ApprovedById = t.BadgeApprovedById ?? 0,
                                              ApprovedDate = t.BadgeApprovedDate,
                                              BadgeStatus = (BadgeStatus)t.BadgeStatusId
@@ -53,6 +54,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                              Tagline = t.BadgeTagLine,
                                              Type = (Common.Enums.BadgeType)t.BadgeTypeId,
                                              AwardValueAmount = t.BadgeAwardValueAmount,
+                                             Created = t.BadgeCreated,
                                              ApprovedById = t.BadgeApprovedById ?? 0,
                                              ApprovedDate = t.BadgeApprovedDate,
                                              BadgeStatus = (BadgeStatus)t.BadgeStatusId
