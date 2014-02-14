@@ -112,6 +112,7 @@
     <Compile Include="Interfaces\IBadgeEditDAL.cs" />
     <Compile Include="Interfaces\IBadgeCollectionDAL.cs" />
     <Compile Include="Interfaces\IBadgeItem.cs" />
+    <Compile Include="Interfaces\ICreateEmployee.cs" />
     <Compile Include="Interfaces\ICustomIdentity.cs" />
     <Compile Include="Interfaces\ICustomIdentityDAL.cs" />
     <Compile Include="Interfaces\ICustomPrincipal.cs" />

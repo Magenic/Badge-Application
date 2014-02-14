@@ -89,6 +89,10 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public Enums.BadgeStatus BadgeStatus { get; set; }
         /// <summary>
+        /// The id of the employee that created the badge.
+        /// </summary>
+        public int CreateEmployeeId { get; set; }
+        /// <summary>
         /// A list of activities that are required for this badge to be awarded.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

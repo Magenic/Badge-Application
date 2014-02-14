@@ -25,5 +25,9 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// to be counted towards badges and awards?
         /// </summary>
         public bool RequiresApproval { get; set; }
+        /// <summary>
+        /// The id of the employee that created the activity.
+        /// </summary>
+        public int CreateEmployeeId { get; set; }
     }
 }
