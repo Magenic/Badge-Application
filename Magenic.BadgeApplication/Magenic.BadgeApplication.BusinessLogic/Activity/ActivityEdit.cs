@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
     [Serializable]
-    public sealed class ActivityEdit : BusinessBase<ActivityEdit>, IActivityEdit
+    public sealed class ActivityEdit : BusinessBase<ActivityEdit>, IActivityEdit, ICreateEmployee
     {
         #region Properties
 
@@ -45,6 +45,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             set { SetProperty(RequiresApprovalProperty, value); }
         }
 
+        public static readonly PropertyInfo<int> CreateEmployeeIdProperty = RegisterProperty<int>(c => c.CreateEmployeeId);
+        public int CreateEmployeeId
+        {
+            get { return GetProperty(CreateEmployeeIdProperty); }
+            private set { SetProperty(CreateEmployeeIdProperty, value); }
+        }
+
         #endregion Properties
 
         #region Factory Methods
@@ -70,10 +77,17 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             this.BusinessRules.AddRule(new MaxLength(NameProperty, 100));
             this.BusinessRules.AddRule(new Required(NameProperty));
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, RequiresApprovalProperty, PermissionType.Administrator.ToString()));
+            this.BusinessRules.AddRule(new MinValue<int>(CreateEmployeeIdProperty, 1));
 
             // Only run this rule if the associated properties are otherwise valid.
             this.BusinessRules.AddRule(new NoDuplicates(NameProperty, IdProperty, NameExists) { Priority = 1 });
         }
+
+        public static void AddObjectAuthorizationRules()
+        {
+            BusinessRules.AddRule(typeof (IActivityEdit), new CanDelete(PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof (ActivityEdit), new CanDelete(PermissionType.Administrator.ToString()));
+        } 
 
         #endregion Rules
 
@@ -88,6 +102,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         protected override void DataPortal_Create()
         {
             base.DataPortal_Create();
+            this.LoadProperty(CreateEmployeeIdProperty, ((ICustomPrincipal)ApplicationContext.User).CustomIdentity().EmployeeId);
         }
 
         private async Task DataPortal_Fetch(int activityEditId)
@@ -133,22 +148,12 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                 returnValue.Description = this.Description;
                 returnValue.Name = this.Name;
                 returnValue.RequiresApproval = this.RequiresApproval;
+                returnValue.CreateEmployeeId = this.CreateEmployeeId;
             }
             return returnValue;
         }
 
-        private void LoadData(ActivityEditDTO data)
-        {
-            using (this.BypassPropertyChecks)
-            {
-                this.Id = data.Id;
-                this.Description = data.Description;
-                this.Name = data.Name;
-                this.RequiresApproval = data.RequiresApproval;
-            }
-        }
-
-        internal void Load(ActivityEditDTO item)
+        internal void LoadData(ActivityEditDTO item)
         {
             using (this.BypassPropertyChecks)
             {
@@ -156,6 +161,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                 this.Name = item.Name;
                 this.Description = item.Description;
                 this.RequiresApproval = item.RequiresApproval;
+                this.CreateEmployeeId = item.CreateEmployeeId;
             }
         }
 
