@@ -1,5 +1,6 @@
 ﻿@using Magenic.BadgeApplication.Resources
 @using Magenic.BadgeApplication.Common.Interfaces
+@using System
 
 @model IApproveBadgeCollection
 
@@ -19,7 +20,7 @@
             <img src="@item.ImagePath" />
         </li>
         <li class="details">
-            <p class="date">Date goes here...</p>
+            <p class="date">@TimeZoneInfo.ConvertTimeFromUtc(item.Created, TimeZoneInfo.Local).ToString("MMMM dd, yyyy")</p>
             <p>@item.Description</p>
         </li>
     </ul>
