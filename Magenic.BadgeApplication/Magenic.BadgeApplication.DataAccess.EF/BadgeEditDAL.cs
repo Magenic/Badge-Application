@@ -51,6 +51,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 ApprovedById = badge.BadgeApprovedById ?? 0,
                 ApprovedDate = badge.BadgeApprovedDate,
                 BadgeStatus = (Common.Enums.BadgeStatus)badge.BadgeStatusId,
+                CreateEmployeeId = badge.CreateEmployeeId,
                 BadgeActivities = new List<BadgeActivityEditDTO>()
             };
             foreach (var badgeActivity in badge.BadgeActivities)
@@ -92,6 +93,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeApprovedById");
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeApprovedDate");
                 objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgeStatusId");
+                objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("CreateEmployeeId");
 
                 AttachChildren(ctx, data, saveBadge.BadgeId);
                 ctx.SaveChanges();
@@ -178,7 +180,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 BadgeAwardValueAmount = data.AwardValueAmount,
                 BadgeApprovedById = data.ApprovedById == 0 ? null : (int?)data.ApprovedById,
                 BadgeStatusId = (int)data.BadgeStatus,
-                BadgeApprovedDate = data.ApprovedDate
+                BadgeApprovedDate = data.ApprovedDate,
+                CreateEmployeeId = data.CreateEmployeeId
             };
             return badgeEntity;
         }

@@ -9,35 +9,6 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-SET IDENTITY_INSERT [dbo].[Activity]  ON
-MERGE INTO [dbo].[Activity]  AS Target
-USING (VALUES
-    (1, 'Business Referral', 'Provided a referral for new business.', 1),
-    (2, 'Speaking Engagement', 'Spoke at a user group, webinar, conference, educational event or had work published in a magazine or journal.', 1),
-    (3, 'Closed Business Referral', 'A new business referral was closed upon.', 1),
-    (4, 'Achieved Spot Recognition', 'Given a spot recognition by your manager', 1),
-    (5, 'Passed a Microsoft Certification', 'Achieved one of Microsoft''s certifications.', 0),
-    (6, 'Passed a QA Certification', 'Successfully completed a QA assurance certification from ISTQB, QAI or IIST.', 0),
-    (7, 'Named a MS MVP', 'Become a named Microsoft MVP.', 1),
-    (8, 'Named a Magenic MVP', 'Become a named Magenic MVP.', 1),
-    (9, 'Named Consultant of the Quarter', 'Named consultant of the quarter.', 1),
-    (10, 'Named Consultant of the Year', 'Named consultant of the year.', 1),
-    (11, 'Single Year of Service', 'Achieve another year of service.', 1),
-    (12, 'Refer an Employee', 'Referral of an outside candidate that results in full-time employment.', 1),
-    (13, 'Conduct a Code Dojo Session', 'Conduct or be the facilitator at a code dojo session.', 0),
-    (14, 'Attend a Code Dojo Session', 'Attend a code dojo session.', 0)
-)
-AS Source ([activity_id], [activity_name], [activity_description], [requires_approval]) 
-ON Target.[ActivityId] = Source.[activity_id]
-WHEN MATCHED THEN 
-    UPDATE SET [ActivityName] = Source.[activity_name],
-               [ActivityDescription] = Source.[activity_description],
-               [RequiresApproval] = Source.[requires_approval]
-WHEN NOT MATCHED BY TARGET THEN 
-    INSERT ([ActivityId], [ActivityName], [ActivityDescription], [RequiresApproval])
-    VALUES ([activity_id], [activity_name], [activity_description], [requires_approval]);
-
-SET IDENTITY_INSERT [dbo].[Activity]  OFF
 
 SET IDENTITY_INSERT [dbo].[Employee]  ON
 MERGE INTO [dbo].[Employee]  AS Target
@@ -103,6 +74,37 @@ WHEN NOT MATCHED BY TARGET THEN
 
 SET IDENTITY_INSERT [dbo].[EmployeePermission]  OFF
 
+SET IDENTITY_INSERT [dbo].[Activity]  ON
+MERGE INTO [dbo].[Activity]  AS Target
+USING (VALUES
+    (1, 'Business Referral', 'Provided a referral for new business.', 1, 1),
+    (2, 'Speaking Engagement', 'Spoke at a user group, webinar, conference, educational event or had work published in a magazine or journal.', 1, 1),
+    (3, 'Closed Business Referral', 'A new business referral was closed upon.', 1, 1),
+    (4, 'Achieved Spot Recognition', 'Given a spot recognition by your manager', 1, 1),
+    (5, 'Passed a Microsoft Certification', 'Achieved one of Microsoft''s certifications.', 0, 1),
+    (6, 'Passed a QA Certification', 'Successfully completed a QA assurance certification from ISTQB, QAI or IIST.', 0, 1),
+    (7, 'Named a MS MVP', 'Become a named Microsoft MVP.', 1, 1),
+    (8, 'Named a Magenic MVP', 'Become a named Magenic MVP.', 1, 1),
+    (9, 'Named Consultant of the Quarter', 'Named consultant of the quarter.', 1, 1),
+    (10, 'Named Consultant of the Year', 'Named consultant of the year.', 1, 1),
+    (11, 'Single Year of Service', 'Achieve another year of service.', 1, 1),
+    (12, 'Refer an Employee', 'Referral of an outside candidate that results in full-time employment.', 1, 1),
+    (13, 'Conduct a Code Dojo Session', 'Conduct or be the facilitator at a code dojo session.', 0, 1),
+    (14, 'Attend a Code Dojo Session', 'Attend a code dojo session.', 0, 1)
+)
+AS Source ([activity_id], [activity_name], [activity_description], [requires_approval], [create_employee_id]) 
+ON Target.[ActivityId] = Source.[activity_id]
+WHEN MATCHED THEN 
+    UPDATE SET [ActivityName] = Source.[activity_name],
+               [ActivityDescription] = Source.[activity_description],
+               [RequiresApproval] = Source.[requires_approval],
+			   [CreateEmployeeId] = Source.[create_employee_id]
+WHEN NOT MATCHED BY TARGET THEN 
+    INSERT ([ActivityId], [ActivityName], [ActivityDescription], [RequiresApproval], [CreateEmployeeId])
+    VALUES ([activity_id], [activity_name], [activity_description], [requires_approval], [create_employee_id]);
+
+SET IDENTITY_INSERT [dbo].[Activity]  OFF
+
 SET IDENTITY_INSERT [dbo].[BadgeType]  ON
 MERGE INTO [dbo].[BadgeType]  AS Target
 USING (VALUES
@@ -142,12 +144,12 @@ SET IDENTITY_INSERT [dbo].[ItemStatus]  OFF
 SET IDENTITY_INSERT [dbo].[Badge]  ON
 MERGE INTO [dbo].[Badge]  AS Target
 USING (VALUES
-    (1, 'AT BAT', 'At bat for Magenic', 'Recognized employees who provide referrals for new business.', 1, '9/1/2013', '10/1/2013', null, 1, 1, 1, 1, 1, 20, 1, '9/1/2013', 2),
-    (2, 'SPEAKER', 'And now for the vocal stylings of...', 'Awarded for employees who speak at user groups, webinars, conferences, educational events or has their work published in a magazine or journal.', 1, '9/1/2013', '10/1/2013', null, 2, 1, 1, 1, 1, 50, 1, '9/1/2013', 2),
-    (3, 'SILVER SPEAKER', 'You silver tongued devil...', 'Awarded for employees who speak five times at user groups, webinars, conferences, educational events or has their work published in a magazine or journal.', 1, '9/1/2013', '10/1/2013', null, 3, 1, 1, 1, 5, 0, 1, '9/1/2013', 2),
-    (4, 'ATTENDED CODE DOJO', 'The zen of code...', 'Awarded for attending Code Dojo sessions.', 2, '1/1/2013', '1/1/2013', null, 4, 0, 1, 0, 1, 0, 3, '1/1/2013', 2)
+    (1, 'AT BAT', 'At bat for Magenic', 'Recognized employees who provide referrals for new business.', 1, '9/1/2013', '10/1/2013', null, 1, 1, 1, 1, 1, 20, 1, '9/1/2013', 2, 1),
+    (2, 'SPEAKER', 'And now for the vocal stylings of...', 'Awarded for employees who speak at user groups, webinars, conferences, educational events or has their work published in a magazine or journal.', 1, '9/1/2013', '10/1/2013', null, 2, 1, 1, 1, 1, 50, 1, '9/1/2013', 2, 1),
+    (3, 'SILVER SPEAKER', 'You silver tongued devil...', 'Awarded for employees who speak five times at user groups, webinars, conferences, educational events or has their work published in a magazine or journal.', 1, '9/1/2013', '10/1/2013', null, 3, 1, 1, 1, 5, 0, 1, '9/1/2013', 2, 1),
+    (4, 'ATTENDED CODE DOJO', 'The zen of code...', 'Awarded for attending Code Dojo sessions.', 2, '1/1/2013', '1/1/2013', null, 4, 0, 1, 0, 1, 0, 3, '1/1/2013', 2, 1)
 )
-AS Source ([badge_id], [badge_name], [badge_tag_line], [badge_description], [badge_type_id], [badge_created], [badge_effective_start], [badge_effective_end], [badge_priority], [multiple_awards_possible], [display_once], [management_approval_required], [activity_points_amount], [badge_award_value_amount], [badge_approved_by_id], [badge_approved_date], [badge_status_id]) 
+AS Source ([badge_id], [badge_name], [badge_tag_line], [badge_description], [badge_type_id], [badge_created], [badge_effective_start], [badge_effective_end], [badge_priority], [multiple_awards_possible], [display_once], [management_approval_required], [activity_points_amount], [badge_award_value_amount], [badge_approved_by_id], [badge_approved_date], [badge_status_id], [create_employee_id]) 
 ON Target.[BadgeId] = Source.[badge_id]
 WHEN MATCHED THEN 
     UPDATE SET [BadgeName] = Source.[badge_name],
@@ -165,10 +167,11 @@ WHEN MATCHED THEN
                [BadgeAwardValueAmount] = Source.[badge_award_value_amount],
                [BadgeApprovedById] = Source.[badge_approved_by_id],
                [BadgeApprovedDate] = Source.[badge_approved_date],
-			   [BadgeStatusId] = Source.[badge_status_id]
+			   [BadgeStatusId] = Source.[badge_status_id],
+			   [CreateEmployeeId] = Source.[create_employee_id]
 WHEN NOT MATCHED BY TARGET THEN 
-    INSERT ([BadgeId], [BadgeName], [BadgeTagLine], [BadgeDescription], [BadgeTypeId], [BadgeCreated], [BadgeEffectiveStart], [BadgeEffectiveEnd], [BadgePriority], [MultipleAwardPossible], [DisplayOnce], [ManagementApprovalRequired], [ActivityPointsAmount], [BadgeAwardValueAmount], [BadgeApprovedById], [BadgeApprovedDate], [BadgeStatusId])
-    VALUES ([badge_id], [badge_name], [badge_tag_line], [badge_description], [badge_type_id], [badge_created], [badge_effective_start], [badge_effective_end], [badge_priority], [multiple_awards_possible], [display_once], [management_approval_required], [activity_points_amount], [badge_award_value_amount], [badge_approved_by_id], [badge_approved_date], [badge_status_id]);
+    INSERT ([BadgeId], [BadgeName], [BadgeTagLine], [BadgeDescription], [BadgeTypeId], [BadgeCreated], [BadgeEffectiveStart], [BadgeEffectiveEnd], [BadgePriority], [MultipleAwardPossible], [DisplayOnce], [ManagementApprovalRequired], [ActivityPointsAmount], [BadgeAwardValueAmount], [BadgeApprovedById], [BadgeApprovedDate], [BadgeStatusId], [CreateEmployeeId])
+    VALUES ([badge_id], [badge_name], [badge_tag_line], [badge_description], [badge_type_id], [badge_created], [badge_effective_start], [badge_effective_end], [badge_priority], [multiple_awards_possible], [display_once], [management_approval_required], [activity_points_amount], [badge_award_value_amount], [badge_approved_by_id], [badge_approved_date], [badge_status_id], [create_employee_id]);
 
 SET IDENTITY_INSERT [dbo].[Badge]  OFF
 
