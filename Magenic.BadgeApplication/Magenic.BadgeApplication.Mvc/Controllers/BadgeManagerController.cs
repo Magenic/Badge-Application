@@ -330,8 +330,14 @@ namespace Magenic.BadgeApplication.Controllers
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
         public async virtual Task<ActionResult> ApproveBadgeSubmission(int badgeId)
         {
-            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
-            return Json(new { Success = true });
+            var badgeToApprove = await ApproveBadgeItem.GetBadgesToApproveByIdAsync(badgeId);
+            badgeToApprove.ApproveBadge(AuthenticatedUser.EmployeeId);
+
+            if (await (SaveObjectAsync(badgeToApprove, true)))
+            {
+                return Json(new { Success = true });    
+            }            
+            return Json(new { Success = false, Message = ModelState.Values.SelectMany(ms => ms.Errors).Select(me => me.ErrorMessage) });
         }
 
         /// <summary>
@@ -343,8 +349,14 @@ namespace Magenic.BadgeApplication.Controllers
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
         public async virtual Task<ActionResult> RejectBadgeSubmission(int badgeId)
         {
-            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
-            return Json(new { Success = true });
+            var badgeToReject = await ApproveBadgeItem.GetBadgesToApproveByIdAsync(badgeId);
+            badgeToReject.DenyBadge();
+
+            if (await (SaveObjectAsync(badgeToReject, true)))
+            {
+                return Json(new { Success = true });   
+            }            
+            return Json(new { Success = false, Message = ModelState.Values.SelectMany(ms => ms.Errors).Select(me => me.ErrorMessage) });
         }
     }
 }
