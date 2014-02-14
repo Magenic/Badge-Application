@@ -39,14 +39,14 @@
 
     function approveBadge(element, activityId) {
         var approvalUrl = $('#UrlToApprove').val();
-        $.post(approvalUrl, { SubmissionId: activityId }, function (data) {
+        $.post(approvalUrl, { badgeId: activityId }, function (data) {
             refreshPreviousBadgesList();
         });
     }
 
     function rejectBadge(element, activityId) {
         var rejectionUrl = $('#UrlToReject').val();
-        $.post(rejectionUrl, { SubmissionId: activityId }, function (data) {
+        $.post(rejectionUrl, { badgeId: activityId }, function (data) {
             refreshPreviousBadgesList();
         });
     }
