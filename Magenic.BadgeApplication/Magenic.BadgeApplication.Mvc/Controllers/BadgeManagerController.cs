@@ -209,9 +209,16 @@ namespace Magenic.BadgeApplication.Controllers
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
         public virtual async Task<ActionResult> ApproveCommunityBadgesList()
         {
-            var approveBadgeCollection = await ApproveBadgeCollection.GetAllBadgesToApproveAsync();
+            try
+            {
+                var approveBadgeCollection = await ApproveBadgeCollection.GetAllBadgesToApproveAsync();
 
-            return PartialView(approveBadgeCollection);
+                return PartialView(Mvc.BadgeManager.Views._BadgesForApproval, approveBadgeCollection);
+            }
+            catch (Exception ex)
+            {
+                throw ex;  
+            }
         }
 
         /// <summary>
