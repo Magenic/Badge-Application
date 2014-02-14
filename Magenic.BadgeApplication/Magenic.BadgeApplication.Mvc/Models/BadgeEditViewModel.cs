@@ -17,6 +17,7 @@ namespace Magenic.BadgeApplication.Models
         public BadgeEditViewModel()
         {
             SelectedActivityIds = new List<int>();
+            this.Badge = ((BadgeEdit)BadgeEdit.CreateBadge());
         }
 
         /// <summary>
