@@ -1,0 +1,27 @@
+﻿@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Common.Interfaces
+
+@model IApproveBadgeCollection
+
+@foreach (IApproveBadgeItem item in Model)
+{
+    <h3 class="reverse">@item.Name</h3>
+    <ul class="lrBox badgeApproval">
+        <li class="actions">
+            <p>
+                <a href="#" onclick="approveBadge(this, @item.BadgeId); return false;">Approve</a>
+            </p>
+            <p>
+                <a href="#" onclick="rejectBadge(this, @item.BadgeId); return false;">Reject</a>
+            </p>
+        </li>
+        <li class="badge">
+            <img src="@item.ImagePath" />
+        </li>
+        <li class="details">
+            <p class="date">Date goes here...</p>
+            <p>@item.Description</p>
+        </li>
+    </ul>
+    <br />
+}

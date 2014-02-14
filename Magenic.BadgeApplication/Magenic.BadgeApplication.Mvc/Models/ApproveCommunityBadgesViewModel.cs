@@ -11,9 +11,9 @@ namespace Magenic.BadgeApplication.Models
         /// Initializes a new instance of the <see cref="ApproveCommunityBadgesViewModel"/> class.
         /// </summary>
         /// <param name="approveActivityCollection">The approve activity collection.</param>
-        public ApproveCommunityBadgesViewModel(IApproveActivityCollection approveActivityCollection)
+        public ApproveCommunityBadgesViewModel(IApproveBadgeCollection approveActivityCollection)
         {
-            this.ActivitiesToApprove = approveActivityCollection;
+            BadgesToApprove = approveActivityCollection;
         }
 
         /// <summary>
@@ -22,6 +22,6 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// The activities to approve.
         /// </value>
-        public IApproveActivityCollection ActivitiesToApprove { get; private set; }
+        public IApproveBadgeCollection BadgesToApprove { get; private set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿@using Magenic.BadgeApplication.Resources
 @using Magenic.BadgeApplication.Models
+@using Magenic.BadgeApplication.Common.Interfaces;
 @model ApproveCommunityBadgesViewModel
 
 <div class="container">
@@ -11,6 +12,16 @@
             <div class="row">
                 <div class="col-md-12">
                     <h2>@ApplicationResources.CommunityBadgesForApprovalHeader</h2>
+                    
+                    <br/>
+
+                    @Html.Hidden("UrlToList", Url.Action(Mvc.BadgeManager.ApproveCommunityBadgesList()))
+                    @Html.Hidden("UrlToApprove", Url.Action(Mvc.BadgeManager.ApproveBadgeSubmission()))
+                    @Html.Hidden("UrlToReject", Url.Action(Mvc.BadgeManager.RejectBadgeSubmission()))
+
+                    <div id="badgesForApproval">
+                        @Html.Partial(Mvc.BadgeManager.Views._BadgesForApproval, Model.BadgesToApprove)
+                    </div>
                 </div>
             </div>
         </div>
@@ -19,3 +30,24 @@
         &nbsp;
     </div>
 </div>
+
+<script type="text/javascript">
+    function refreshPreviousBadgesList() {
+        var listUrl = $('#UrlToList').val();
+        $('#badgesForApproval').load(listUrl);
+    }
+
+    function approveBadge(element, activityId) {
+        var approvalUrl = $('#UrlToApprove').val();
+        $.post(approvalUrl, { SubmissionId: activityId }, function (data) {
+            refreshPreviousBadgesList();
+        });
+    }
+
+    function rejectBadge(element, activityId) {
+        var rejectionUrl = $('#UrlToReject').val();
+        $.post(rejectionUrl, { SubmissionId: activityId }, function (data) {
+            refreshPreviousBadgesList();
+        });
+    }
+</script>
