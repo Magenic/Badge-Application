@@ -28,7 +28,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         public int Id
         {
             get { return GetProperty(IdProperty); }
-            private set { LoadProperty(IdProperty, value); }
+            private set { SetProperty(IdProperty, value); }
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         public ActivitySubmissionStatus Status
         {
             get { return GetProperty(StatusProperty); }
-            private set { LoadProperty(StatusProperty, value); }
+            private set { SetProperty(StatusProperty, value); }
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         public int ApprovedById
         {
             get { return GetProperty(ApprovedByIdProperty); }
-            private set { LoadProperty(ApprovedByIdProperty, value); }
+            private set { SetProperty(ApprovedByIdProperty, value); }
         }
 
         #endregion Properties
