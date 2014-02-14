@@ -55,7 +55,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         public string ImagePath
         {
             get { return GetProperty(ImagePathProperty); }
-            private set { LoadProperty(ImagePathProperty, value); }
+            private set { SetProperty(ImagePathProperty, value); }
         }
 
         public static readonly PropertyInfo<int> AwardValueAmountProperty = RegisterProperty<int>(c => c.AwardValueAmount);
@@ -77,14 +77,14 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         public DateTime? ApprovedDate
         {
             get { return GetProperty(ApprovedDateProperty); }
-            private set { LoadProperty(ApprovedDateProperty, value); }
+            private set { SetProperty(ApprovedDateProperty, value); }
         }
 
         public static readonly PropertyInfo<BadgeStatus> BadgeStatusProperty = RegisterProperty<BadgeStatus>(c => c.BadgeStatus);
         public BadgeStatus BadgeStatus
         {
             get { return GetProperty(BadgeStatusProperty); }
-            private set { LoadProperty(BadgeStatusProperty, value); }
+            private set { SetProperty(BadgeStatusProperty, value); }
         }
         #endregion Properties
 

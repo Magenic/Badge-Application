@@ -18,28 +18,28 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
         public int EmployeeId
         {
             get { return GetProperty(EmployeeIdProperty); }
-            private set { LoadProperty(EmployeeIdProperty, value); }
+            private set { SetProperty(EmployeeIdProperty, value); }
         }
 
         public static readonly PropertyInfo<string> UserNameProperty = RegisterProperty<string>(c => c.UserName);
         public string UserName
         {
             get { return GetProperty(UserNameProperty); }
-            private set { LoadProperty(UserNameProperty, value); }
+            private set { SetProperty(UserNameProperty, value); }
         }
 
         public static readonly PropertyInfo<int> TotalPointsEarnedProperty = RegisterProperty<int>(c => c.TotalPointsEarned);
         public int TotalPointsEarned
         {
             get { return GetProperty(TotalPointsEarnedProperty); }
-            private set { LoadProperty(TotalPointsEarnedProperty, value); }
+            private set { SetProperty(TotalPointsEarnedProperty, value); }
         }
 
         public static readonly PropertyInfo<int> TotalPointsPaidOutProperty = RegisterProperty<int>(c => c.TotalPointsPaidOut);
         public int TotalPointsPaidOut
         {
             get { return GetProperty(TotalPointsPaidOutProperty); }
-            private set { LoadProperty(TotalPointsPaidOutProperty, value); }
+            private set { SetProperty(TotalPointsPaidOutProperty, value); }
         }
 
         public static readonly PropertyInfo<int> TotalRemainingPointsProperty = RegisterProperty<int>(c => c.TotalRemainingPoints);
