@@ -57,14 +57,14 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         public string ImagePath
         {
             get { return GetProperty(ImagePathProperty); }
-            private set { LoadProperty(ImagePathProperty, value); }
+            private set { SetProperty(ImagePathProperty, value); }
         }
 
         public static readonly PropertyInfo<DateTime> CreatedProperty = RegisterProperty<DateTime>(c => c.Created);
         public DateTime Created
         {
             get { return GetProperty(CreatedProperty); }
-            private set { LoadProperty(CreatedProperty, value); }
+            private set { SetProperty(CreatedProperty, value); }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
