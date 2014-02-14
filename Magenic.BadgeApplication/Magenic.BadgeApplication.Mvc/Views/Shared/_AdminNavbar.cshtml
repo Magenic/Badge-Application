@@ -23,7 +23,7 @@
         @Html.ActionLink(ApplicationResources.ManageActivitiesLink, Mvc.BadgeManager.ManageActivities())
     </li>
 
-    @Html.HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem), Html.GenerateConditionalNavigation(ApplicationResources.CommunityBadgesForApproval, Mvc.BadgeManager.ApproveCommunityBadges()), String.Empty)
+    @Html.HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem), Html.GenerateConditionalNavigation(ApplicationResources.CommunityBadgesForApproval, Mvc.BadgeManager.ApproveCommunityBadges().Result), String.Empty)
 
     @Html.HasPermission(AuthorizationActions.GetObject, typeof(PointsReportCollection), Html.GenerateConditionalNavigation(ApplicationResources.PointsReport, Mvc.BadgeManager.PointsReport().Result), String.Empty)
 
