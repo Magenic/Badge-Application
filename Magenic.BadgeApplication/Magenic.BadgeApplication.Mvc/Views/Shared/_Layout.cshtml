@@ -16,6 +16,17 @@
 
     <div class="body-content">
         <div class="container">
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-warning fade in">
+                    <button class="close" aria-hidden="true" type="button" data-dismiss="alert">×</button>
+                    <h4>There were validation issues!</h4>
+                    <p>
+                        @Html.ValidationSummary(false)
+                    </p>
+                </div>
+            }
+            
             @RenderBody()
         </div>
     </div>
