@@ -210,8 +210,7 @@ namespace Magenic.BadgeApplication.Controllers
         public virtual async Task<ActionResult> ApproveCommunityBadgesList()
         {
             var approveBadgeCollection = await ApproveBadgeCollection.GetAllBadgesToApproveAsync();
-
-            return PartialView(approveBadgeCollection);
+            return PartialView(Mvc.BadgeManager.Views._BadgesForApproval, approveBadgeCollection);           
         }
 
         /// <summary>

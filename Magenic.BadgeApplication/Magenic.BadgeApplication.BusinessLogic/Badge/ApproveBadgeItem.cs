@@ -65,6 +65,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             private set { SetProperty(AwardValueAmountProperty, value); }
         }
 
+        public static readonly PropertyInfo<DateTime> CreatedProperty = RegisterProperty<DateTime>(c => c.Created);
+        public DateTime Created
+        {
+            get { return GetProperty(CreatedProperty); }
+            private set { SetProperty(CreatedProperty, value); }
+        }
+
         public static readonly PropertyInfo<int> ApprovedByIdProperty = RegisterProperty<int>(c => c.ApprovedById);
         public int ApprovedById
         {
@@ -175,6 +182,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
                     Tagline = this.Tagline,
                     Type = this.Type,
                     AwardValueAmount = this.AwardValueAmount,
+                    Created = this.Created,
                     ImagePath = this.ImagePath,
                     BadgeStatus = this.BadgeStatus,
                     ApprovedById = this.ApprovedById,
@@ -194,6 +202,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
                 this.Tagline = data.Tagline;
                 this.Type = data.Type;
                 this.AwardValueAmount = data.AwardValueAmount;
+                this.Created = data.Created;
                 this.ImagePath = data.ImagePath;
                 this.BadgeStatus = data.BadgeStatus;
                 this.ApprovedById = data.ApprovedById;

@@ -37,6 +37,10 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         int AwardValueAmount { get; }
         /// <summary>
+        /// The date and time when the badge was created.
+        /// </summary>
+        DateTime Created { get; }
+        /// <summary>
         /// The id of the person who approved this badge so it can be awarded.
         /// </summary>
         int ApprovedById { get; }
