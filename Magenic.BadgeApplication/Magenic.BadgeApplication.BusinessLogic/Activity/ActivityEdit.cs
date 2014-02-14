@@ -21,7 +21,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         public int Id
         {
             get { return GetProperty(IdProperty); }
-            private set { LoadProperty(IdProperty, value); }
+            private set { SetProperty(IdProperty, value); }
         }
 
         public static readonly PropertyInfo<string> NameProperty = RegisterProperty<string>(c => c.Name);
