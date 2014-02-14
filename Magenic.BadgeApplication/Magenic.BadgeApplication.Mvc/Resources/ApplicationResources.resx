@@ -330,4 +330,10 @@
   <data name="PointsReportPointsTotalHeader" xml:space="preserve">
     <value>Points Total</value>
   </data>
+  <data name="BadgeTemplateHeader" xml:space="preserve">
+    <value>Badge Template</value>
+  </data>
+  <data name="BadgeTemplateText" xml:space="preserve">
+    <value>Right click this image and save it to your desktop to use as a badge template.</value>
+  </data>
 </root>

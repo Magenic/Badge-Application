@@ -1,7 +1,10 @@
 ﻿using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.Common.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Magenic.BadgeApplication.Models
@@ -67,6 +70,49 @@ namespace Magenic.BadgeApplication.Models
         ///   <c>true</c> if [has permission]; otherwise, <c>false</c>.
         /// </value>
         public bool HasPermission { get; set; }
+
+        /// <summary>
+        /// Gets the default corporate badge URI.
+        /// </summary>
+        /// <value>
+        /// The default corporate badge URI.
+        /// </value>
+        public Uri DefaultCorporateBadgeUri
+        {
+            get
+            {
+                var defaultCorporateBadgeUriString = ConfigurationManager.AppSettings["DefaultCorporateBadge"];
+                if (!String.IsNullOrWhiteSpace(defaultCorporateBadgeUriString))
+                {
+                    return new Uri(defaultCorporateBadgeUriString);
+                }
+
+                var httpContextBase = DependencyResolver.Current.GetService<HttpContextBase>();
+                return new Uri(httpContextBase.Request.Url, new Uri(Links.Content.Images.unknown_png, UriKind.Relative)); ;
+            }
+        }
+
+        /// <summary>
+        /// Gets the default communit badge URI.
+        /// </summary>
+        /// <value>
+        /// The default communit badge URI.
+        /// </value>
+        public Uri DefaultCommunitBadgeUri
+        {
+            get
+            {
+                var httpContextBase = DependencyResolver.Current.GetService<HttpContextBase>();
+                var defaultUri = httpContextBase.Server.MapPath(Links.Content.Images.unknown_png);
+                var defaultCommunityBadgeUriString = ConfigurationManager.AppSettings["DefaultCommunityBadge"];
+                if (!String.IsNullOrWhiteSpace(defaultCommunityBadgeUriString))
+                {
+                    return new Uri(defaultCommunityBadgeUriString);
+                }
+
+                return new Uri(defaultUri, UriKind.RelativeOrAbsolute);
+            }
+        }
 
         /// <summary>
         /// Gets or sets the badge.
