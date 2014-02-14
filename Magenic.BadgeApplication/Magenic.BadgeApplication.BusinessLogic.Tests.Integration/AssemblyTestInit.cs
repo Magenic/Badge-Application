@@ -11,7 +11,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         [AssemblyInitialize]
         public static void AssemblyInitialize(TestContext context)
         {
-            AutofacBootstrapper.Init();
+            //AutofacBootstrapper.Init();
         }
     }
 }

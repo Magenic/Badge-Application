@@ -192,9 +192,26 @@ namespace Magenic.BadgeApplication.Controllers
         /// <returns></returns>
         [HttpGet]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
-        public virtual ActionResult ApproveCommunityBadges()
+        public virtual async Task<ActionResult> ApproveCommunityBadges()
         {
-            return View();
+            var approveBadgeCollection = await ApproveBadgeCollection.GetAllBadgesToApproveAsync();
+
+            ApproveCommunityBadgesViewModel model = new ApproveCommunityBadgesViewModel(approveBadgeCollection);
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
+        public virtual async Task<ActionResult> ApproveCommunityBadgesList()
+        {
+            var approveBadgeCollection = await ApproveBadgeCollection.GetAllBadgesToApproveAsync();
+
+            return PartialView(approveBadgeCollection);
         }
 
         /// <summary>
@@ -302,6 +319,32 @@ namespace Magenic.BadgeApplication.Controllers
             }
 
             return Json(new { Success = false, Message = ModelState.Values.SelectMany(ms => ms.Errors).Select(me => me.ErrorMessage) });
+       }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="badgeId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
+        public async virtual Task<ActionResult> ApproveBadgeSubmission(int badgeId)
+        {
+            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
+            return Json(new { Success = true });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="badgeId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
+        public async virtual Task<ActionResult> RejectBadgeSubmission(int badgeId)
+        {
+            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
+            return Json(new { Success = true });
         }
     }
 }

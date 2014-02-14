@@ -91,4 +91,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="BadgeStatusId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="ec31f411-3317-436e-b6f2-ed83b79e3025" ChangeDateTime="02/14/2014 04:31:29">
+    <Property Name="ElementName" Value="[dbo].[Badge].[CreateADName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Badge]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CreateEmployeeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ea92d44a-3899-4e44-9b1a-fa14021d01fc" ChangeDateTime="02/14/2014 04:34:09">
+    <Property Name="ElementName" Value="[dbo].[Activity].[CreateADName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Activity]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CreateEmployeeId" />
+  </Operation>
 </Operations>

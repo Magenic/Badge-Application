@@ -75,6 +75,7 @@
     <Compile Include="DTO\CustomIdentityDTO.cs" />
     <Compile Include="DTO\DTOBase.cs" />
     <Compile Include="DTO\EarnedBadgeItemDTO.cs" />
+    <Compile Include="DTO\ExternalActivitySubmissionDTO.cs" />
     <Compile Include="DTO\PointsReportItemDTO.cs" />
     <Compile Include="DTO\QueueEventLogDTO.cs" />
     <Compile Include="DTO\QueueItemDTO.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Interfaces\IBadgeEditDAL.cs" />
     <Compile Include="Interfaces\IBadgeCollectionDAL.cs" />
     <Compile Include="Interfaces\IBadgeItem.cs" />
+    <Compile Include="Interfaces\ICreateEmployee.cs" />
     <Compile Include="Interfaces\ICustomIdentity.cs" />
     <Compile Include="Interfaces\ICustomIdentityDAL.cs" />
     <Compile Include="Interfaces\ICustomPrincipal.cs" />

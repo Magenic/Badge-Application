@@ -38,7 +38,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             foreach (ActivityEditDTO item in data)
             {
                 var newItem = new ActivityEdit();
-                newItem.Load(item);
+                newItem.LoadData(item);
                 this.Add(newItem);
             }
             this.IsReadOnly = true;

@@ -21,7 +21,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                         Id = t.ActivityId,
                         Name = t.ActivityName,
                         Description = t.ActivityDescription,
-                        RequiresApproval = t.RequiresApproval
+                        RequiresApproval = t.RequiresApproval,
+                        CreateEmployeeId = t.CreateEmployeeId
                     }).ToArrayAsync();
 
                 var activity = activityList.Single();
@@ -42,6 +43,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 objectState.GetObjectStateEntry(saveActivity).SetModifiedProperty("ActivityName");
                 objectState.GetObjectStateEntry(saveActivity).SetModifiedProperty("ActivityDescription");
                 objectState.GetObjectStateEntry(saveActivity).SetModifiedProperty("RequiresApproval");
+                objectState.GetObjectStateEntry(saveActivity).SetModifiedProperty("CreateEmployeeId");
 
                 ctx.SaveChanges();
                 data.Id = saveActivity.ActivityId;
@@ -56,7 +58,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 ActivityId = data.Id,
                 ActivityName = data.Name,
                 ActivityDescription = data.Description,
-                RequiresApproval = data.RequiresApproval
+                RequiresApproval = data.RequiresApproval,
+                CreateEmployeeId = data.CreateEmployeeId
             };
             return activityEntity;
         }
