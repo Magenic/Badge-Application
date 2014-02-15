@@ -92,6 +92,11 @@
             <input name="badgeImage" type="file" class="filestyle" data-classbutton="btn btn-primary" data-classinput="form-control pull-left">
             @Html.ValidationMessageFor(bevm => bevm.Badge.ImagePath)
         </div>
+        <div class="editor-field">
+            @Html.Partial(Mvc.Shared.Views._CorporateBadgeTemplate)
+            &nbsp;|&nbsp;
+            @Html.Partial(Mvc.Shared.Views._CommunityBadgeTemplate)
+        </div>
         <div class="pull-left">
             <div class="editor-label">
                 @Html.LabelFor(bevm => bevm.Badge.EffectiveStartDate, ApplicationResources.BadgeStartDateLabel)

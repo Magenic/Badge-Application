@@ -86,3 +86,4 @@
 /// <reference path="jtable/localization/jquery.jtable.zh-cn.js" />
 /// <reference path="activitiesmanagement.js" />
 /// <reference path="approveactivities.js" />
+/// <reference path="approvebadges.js" />

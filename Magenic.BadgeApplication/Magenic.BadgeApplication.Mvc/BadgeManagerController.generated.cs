@@ -93,6 +93,13 @@ namespace Magenic.BadgeApplication.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.RejectBadgeSubmission);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> DownloadImageTemplate()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.DownloadImageTemplate);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public BadgeManagerController Actions { get { return Mvc.BadgeManager; } }
@@ -124,6 +131,7 @@ namespace Magenic.BadgeApplication.Controllers
             public readonly string RejectActivity = "RejectActivity";
             public readonly string ApproveBadgeSubmission = "ApproveBadgeSubmission";
             public readonly string RejectBadgeSubmission = "RejectBadgeSubmission";
+            public readonly string DownloadImageTemplate = "DownloadImageTemplate";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -144,6 +152,7 @@ namespace Magenic.BadgeApplication.Controllers
             public const string RejectActivity = "RejectActivity";
             public const string ApproveBadgeSubmission = "ApproveBadgeSubmission";
             public const string RejectBadgeSubmission = "RejectBadgeSubmission";
+            public const string DownloadImageTemplate = "DownloadImageTemplate";
         }
 
 
@@ -204,7 +213,7 @@ namespace Magenic.BadgeApplication.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_ApproveBadgeSubmission
         {
-            public readonly string submissionId = "submissionId";
+            public readonly string badgeId = "badgeId";
         }
         static readonly ActionParamsClass_RejectBadgeSubmission s_params_RejectBadgeSubmission = new ActionParamsClass_RejectBadgeSubmission();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -212,7 +221,15 @@ namespace Magenic.BadgeApplication.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_RejectBadgeSubmission
         {
-            public readonly string submissionId = "submissionId";
+            public readonly string badgeId = "badgeId";
+        }
+        static readonly ActionParamsClass_DownloadImageTemplate s_params_DownloadImageTemplate = new ActionParamsClass_DownloadImageTemplate();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_DownloadImageTemplate DownloadImageTemplateParams { get { return s_params_DownloadImageTemplate; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_DownloadImageTemplate
+        {
+            public readonly string imageTemplatePath = "imageTemplatePath";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -388,23 +405,33 @@ namespace Magenic.BadgeApplication.Controllers
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
-        partial void ApproveBadgeSubmissionOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int submissionId);
+        partial void ApproveBadgeSubmissionOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int badgeId);
 
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ApproveBadgeSubmission(int submissionId)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ApproveBadgeSubmission(int badgeId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ApproveBadgeSubmission);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "submissionId", submissionId);
-            ApproveBadgeSubmissionOverride(callInfo, submissionId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "badgeId", badgeId);
+            ApproveBadgeSubmissionOverride(callInfo, badgeId);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
-        partial void RejectBadgeSubmissionOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int submissionId);
+        partial void RejectBadgeSubmissionOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int badgeId);
 
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> RejectBadgeSubmission(int submissionId)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> RejectBadgeSubmission(int badgeId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.RejectBadgeSubmission);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "submissionId", submissionId);
-            RejectBadgeSubmissionOverride(callInfo, submissionId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "badgeId", badgeId);
+            RejectBadgeSubmissionOverride(callInfo, badgeId);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        partial void DownloadImageTemplateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string imageTemplatePath);
+
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> DownloadImageTemplate(string imageTemplatePath)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.DownloadImageTemplate);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "imageTemplatePath", imageTemplatePath);
+            DownloadImageTemplateOverride(callInfo, imageTemplatePath);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
