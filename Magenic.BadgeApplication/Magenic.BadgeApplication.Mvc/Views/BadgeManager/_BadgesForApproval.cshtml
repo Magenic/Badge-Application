@@ -14,21 +14,21 @@
             </div>
             <div class="row">
                 <div class="col-md-2">
-                    <a href="#" onclick="approveActivity(this, @badgeForApproval.BadgeId); return false;">
+                    <a href="#" onclick="approveBadge(this, @badgeForApproval.BadgeId); return false;">
                         @ApplicationResources.ApproveActivityLink
                     </a>
                     <br />
-                    <a href="#" onclick="rejectActivity(this, @badgeForApproval.BadgeId); return false;">
+                    <a href="#" onclick="rejectBadge(this, @badgeForApproval.BadgeId); return false;">
                         @ApplicationResources.RejectActivityLink
                     </a>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <img src="@badgeForApproval.ImagePath" />
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     @badgeForApproval.Description
                 </div>
-                <div class="col-md-3 col-md-offset-1 text-right">
+                <div class="col-md-3 text-right">
                     <b>
                         @badgeForApproval.Created.ToString("MMMM dd, yyyy")
                     </b>

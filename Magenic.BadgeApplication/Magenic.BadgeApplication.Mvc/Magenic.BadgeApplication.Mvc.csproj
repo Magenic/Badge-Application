@@ -331,6 +331,7 @@
     <Content Include="Scripts\activitiesManagement.js" />
     <Content Include="Scripts\activityPage.js" />
     <Content Include="Scripts\approveActivities.js" />
+    <Content Include="Scripts\approveBadges.js" />
     <Content Include="Scripts\badgeEditorPages.js" />
     <Content Include="Scripts\badgePage.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />

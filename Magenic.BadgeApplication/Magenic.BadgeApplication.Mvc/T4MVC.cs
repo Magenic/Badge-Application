@@ -72,6 +72,7 @@ namespace Links
         public static readonly string activitiesManagement_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/activitiesManagement.min.js") ? Url("activitiesManagement.min.js") : Url("activitiesManagement.js");
         public static readonly string activityPage_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/activityPage.min.js") ? Url("activityPage.min.js") : Url("activityPage.js");
         public static readonly string approveActivities_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/approveActivities.min.js") ? Url("approveActivities.min.js") : Url("approveActivities.js");
+        public static readonly string approveBadges_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/approveBadges.min.js") ? Url("approveBadges.min.js") : Url("approveBadges.js");
         public static readonly string badgeEditorPages_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/badgeEditorPages.min.js") ? Url("badgeEditorPages.min.js") : Url("badgeEditorPages.js");
         public static readonly string badgePage_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/badgePage.min.js") ? Url("badgePage.min.js") : Url("badgePage.js");
         public static readonly string bootstrap_datepicker_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-datepicker.min.js") ? Url("bootstrap-datepicker.min.js") : Url("bootstrap-datepicker.js");
