@@ -93,41 +93,9 @@
             @Html.ValidationMessageFor(bevm => bevm.Badge.ImagePath)
         </div>
         <div class="editor-field">
-            <a href="#" data-toggle="modal" data-target=".corporate-badge-modal">Corporate Badge Template</a>
-            <div class="modal fade corporate-badge-modal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">@ApplicationResources.BadgeTemplateHeader</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="pull-right">
-                                <img src="@Model.DefaultCorporateBadgeUri" alt="@Model.DefaultCorporateBadgeUri.Segments.Last()" />
-                            </div>
-                            @ApplicationResources.BadgeTemplateText
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @Html.Partial(Mvc.Shared.Views._CorporateBadgeTemplate)
             &nbsp;|&nbsp;
-            <a href="#" data-toggle="modal" data-target=".community-badge-modal">Community Badge Template</a>
-            <div class="modal fade community-badge-modal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">@ApplicationResources.BadgeTemplateHeader</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="pull-right">
-                                <img src="@Model.DefaultCorporateBadgeUri" alt="@Model.DefaultCorporateBadgeUri.Segments.Last()" class="pull-right" />
-                            </div>
-                            @ApplicationResources.BadgeTemplateText
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @Html.Partial(Mvc.Shared.Views._CommunityBadgeTemplate)
         </div>
         <div class="pull-left">
             <div class="editor-label">

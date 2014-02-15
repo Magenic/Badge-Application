@@ -358,15 +358,6 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Badge Template.
-        /// </summary>
-        public static string BadgeTemplateHeader {
-            get {
-                return ResourceManager.GetString("BadgeTemplateHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Right click this image and save it to your desktop to use as a badge template..
         /// </summary>
         public static string BadgeTemplateText {
@@ -448,6 +439,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Community Badge Template.
+        /// </summary>
+        public static string CommunityBadgeTemplate {
+            get {
+                return ResourceManager.GetString("CommunityBadgeTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm Payout of Selected User(s).
         /// </summary>
         public static string ConfirmPayoutSelectedUsers {
@@ -462,6 +462,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string CorporateBadgeHeader {
             get {
                 return ResourceManager.GetString("CorporateBadgeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Corporate Badge Template.
+        /// </summary>
+        public static string CorporateBadgeTemplate {
+            get {
+                return ResourceManager.GetString("CorporateBadgeTemplate", resourceCulture);
             }
         }
         

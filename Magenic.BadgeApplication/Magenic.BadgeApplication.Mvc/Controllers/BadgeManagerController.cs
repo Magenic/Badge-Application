@@ -10,6 +10,8 @@ using Magenic.BadgeApplication.Extensions;
 using Magenic.BadgeApplication.Models;
 using System;
 using System.Linq;
+using System.Net;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -210,7 +212,7 @@ namespace Magenic.BadgeApplication.Controllers
         public virtual async Task<ActionResult> ApproveCommunityBadgesList()
         {
             var approveBadgeCollection = await ApproveBadgeCollection.GetAllBadgesToApproveAsync();
-            return PartialView(Mvc.BadgeManager.Views._BadgesForApproval, approveBadgeCollection);           
+            return PartialView(Mvc.BadgeManager.Views._BadgesForApproval, approveBadgeCollection);
         }
 
         /// <summary>
@@ -318,12 +320,12 @@ namespace Magenic.BadgeApplication.Controllers
             }
 
             return Json(new { Success = false, Message = ModelState.Values.SelectMany(ms => ms.Errors).Select(me => me.ErrorMessage) });
-       }
+        }
 
         /// <summary>
-        /// 
+        /// Approves the badge submission.
         /// </summary>
-        /// <param name="badgeId"></param>
+        /// <param name="badgeId">The badge identifier.</param>
         /// <returns></returns>
         [HttpPost]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
@@ -334,15 +336,15 @@ namespace Magenic.BadgeApplication.Controllers
 
             if (await (SaveObjectAsync(badgeToApprove, true)))
             {
-                return Json(new { Success = true });    
-            }            
+                return Json(new { Success = true });
+            }
             return Json(new { Success = false, Message = ModelState.Values.SelectMany(ms => ms.Errors).Select(me => me.ErrorMessage) });
         }
 
         /// <summary>
-        /// 
+        /// Rejects the badge submission.
         /// </summary>
-        /// <param name="badgeId"></param>
+        /// <param name="badgeId">The badge identifier.</param>
         /// <returns></returns>
         [HttpPost]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
@@ -353,9 +355,30 @@ namespace Magenic.BadgeApplication.Controllers
 
             if (await (SaveObjectAsync(badgeToReject, true)))
             {
-                return Json(new { Success = true });   
-            }            
+                return Json(new { Success = true });
+            }
             return Json(new { Success = false, Message = ModelState.Values.SelectMany(ms => ms.Errors).Select(me => me.ErrorMessage) });
+        }
+
+        /// <summary>
+        /// Downloads the image template.
+        /// </summary>
+        /// <param name="imageTemplatePath">The image template URI.</param>
+        /// <returns></returns>
+        public async virtual Task<ActionResult> DownloadImageTemplate(string imageTemplatePath)
+        {
+            var contentDisposition = new ContentDisposition()
+            {
+                FileName = imageTemplatePath,
+                Inline = false,
+            };
+
+            var webClient = new WebClient();
+            webClient.UseDefaultCredentials = true;
+            var fileData = await webClient.DownloadDataTaskAsync(new Uri(imageTemplatePath, UriKind.Absolute));
+
+            Response.AppendHeader("Content-Disposition", contentDisposition.ToString());
+            return File(fileData, "image/png");
         }
     }
 }
