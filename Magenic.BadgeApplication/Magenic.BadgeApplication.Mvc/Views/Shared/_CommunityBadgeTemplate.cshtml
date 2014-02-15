@@ -1,4 +1,7 @@
-﻿@using Magenic.BadgeApplication.Resources
+﻿@using Magenic.BadgeApplication.BusinessLogic.Badge
+@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Models
+@model BadgeEditViewModel
 
 <a href="#" data-toggle="modal" data-target=".community-badge-modal">@ApplicationResources.CommunityBadgeTemplate</a>
 <div class="modal fade community-badge-modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -10,7 +13,9 @@
             </div>
             <div class="modal-body">
                 <div class="pull-right">
-                    <img src="@Model.DefaultCorporateBadgeUri" alt="@Model.DefaultCorporateBadgeUri" class="pull-right" />
+                    <a href="../@Mvc.BadgeManager.ActionNames.DownloadImageTemplate?imageTemplatePath=@Model.DefaultCommunityBadgeUri">
+                        <img src="@Model.DefaultCommunityBadgeUri" alt="@Model.DefaultCommunityBadgeUri" class="pull-right" />
+                    </a>
                 </div>
                 @ApplicationResources.BadgeTemplateText
             </div>

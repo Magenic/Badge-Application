@@ -367,15 +367,16 @@ namespace Magenic.BadgeApplication.Controllers
         /// <returns></returns>
         public async virtual Task<ActionResult> DownloadImageTemplate(string imageTemplatePath)
         {
+            var uri = new Uri(imageTemplatePath, UriKind.Absolute);
             var contentDisposition = new ContentDisposition()
             {
-                FileName = imageTemplatePath,
+                FileName = uri.Segments.Last(),
                 Inline = false,
             };
 
             var webClient = new WebClient();
             webClient.UseDefaultCredentials = true;
-            var fileData = await webClient.DownloadDataTaskAsync(new Uri(imageTemplatePath, UriKind.Absolute));
+            var fileData = await webClient.DownloadDataTaskAsync(uri);
 
             Response.AppendHeader("Content-Disposition", contentDisposition.ToString());
             return File(fileData, "image/png");

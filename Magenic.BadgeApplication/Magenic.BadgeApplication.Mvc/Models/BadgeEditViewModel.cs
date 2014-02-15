@@ -99,19 +99,18 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// The default communit badge URI.
         /// </value>
-        public Uri DefaultCommunitBadgeUri
+        public Uri DefaultCommunityBadgeUri
         {
             get
             {
-                var httpContextBase = DependencyResolver.Current.GetService<HttpContextBase>();
-                var defaultUri = httpContextBase.Server.MapPath(Links.Content.Images.unknown_png);
-                var defaultCommunityBadgeUriString = ConfigurationManager.AppSettings["DefaultCommunityBadge"];
-                if (!String.IsNullOrWhiteSpace(defaultCommunityBadgeUriString))
+                var defaultCorporateBadgeUriString = ConfigurationManager.AppSettings["DefaultCommunityBadge"];
+                if (!String.IsNullOrWhiteSpace(defaultCorporateBadgeUriString))
                 {
-                    return new Uri(defaultCommunityBadgeUriString);
+                    return new Uri(defaultCorporateBadgeUriString);
                 }
 
-                return new Uri(defaultUri, UriKind.RelativeOrAbsolute);
+                var httpContextBase = DependencyResolver.Current.GetService<HttpContextBase>();
+                return new Uri(httpContextBase.Request.Url, new Uri(Links.Content.Images.unknown_png, UriKind.Relative)); ;
             }
         }
 
