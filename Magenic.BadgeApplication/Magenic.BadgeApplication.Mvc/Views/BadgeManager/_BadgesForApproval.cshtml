@@ -3,26 +3,40 @@
 @using System
 
 @model IApproveBadgeCollection
-
-@foreach (IApproveBadgeItem item in Model)
+@foreach (var badgeForApproval in Model)
 {
-    <h3 class="reverse">@item.Name</h3>
-    <ul class="lrBox badgeApproval">
-        <li class="actions">
-            <p>
-                <a href="#" onclick="approveBadge(this, @item.BadgeId); return false;">Approve</a>
-            </p>
-            <p>
-                <a href="#" onclick="rejectBadge(this, @item.BadgeId); return false;">Reject</a>
-            </p>
-        </li>
-        <li class="badge">
-            <img src="@item.ImagePath" />
-        </li>
-        <li class="details">
-            <p class="date">@TimeZoneInfo.ConvertTimeFromUtc(item.Created, TimeZoneInfo.Local).ToString("MMMM dd, yyyy")</p>
-            <p>@item.Description</p>
-        </li>
-    </ul>
-    <br />
+    <div class="row no-margin">
+        <div class="col-md-10">
+            <div class="row">
+                <h3>
+                    @badgeForApproval.Name
+                </h3>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="#" onclick="approveBadge(this, @badgeForApproval.BadgeId); return false;">
+                        @ApplicationResources.ApproveActivityLink
+                    </a>
+                    <br />
+                    <a href="#" onclick="rejectBadge(this, @badgeForApproval.BadgeId); return false;">
+                        @ApplicationResources.RejectActivityLink
+                    </a>
+                </div>
+                <div class="col-md-2">
+                    <img src="@badgeForApproval.ImagePath" />
+                </div>
+                <div class="col-md-5">
+                    @badgeForApproval.Description
+                </div>
+                <div class="col-md-3 text-right">
+                    <b>
+                        @badgeForApproval.Created.ToString("MMMM dd, yyyy")
+                    </b>
+                </div>
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+        </div>
+    </div>
 }

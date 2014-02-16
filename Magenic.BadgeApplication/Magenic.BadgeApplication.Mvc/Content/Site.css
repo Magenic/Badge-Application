@@ -20,7 +20,6 @@ h3 {
   color: #222222;
   margin: 0 0 3px;
 }
-h3.reverse{background:#404040;color:#F2F2F2; padding: 5px; font-size:18px;}
 a {
   color: #7ab800;
 }
@@ -176,27 +175,8 @@ input[type="checkbox"].input-validation-error {
 .datepicker {
   padding-left: 18px;
 }
-
-ul.activity li.details{width:460px;float:right;}
-ul.activity li.details p.date{font-weight:bold;text-align:right;margin-bottom:5px;}
-
-ul.approval li.details{width:680px;float:right;}
-ul.approval li.details p.date{font-weight:bold;text-align:right;margin-bottom:5px;}
-
-ul.activity li.badge{width:86px;text-align:center; font-style:italic;}
-ul.activity li.badge img{margin-bottom:3px;}
-ul.approval li.badge{width:86px;text-align:center}
-
-li.actions{width:100px;text-align:center;padding:23px 0 0;}
-
-ul.lrBox{list-style:none;margin:0;padding:0;}
-ul.lrBox li{padding:0;float:left;}
-ul.lrBox li.rt, ul.lrBox li.rtRt{float:right;}
-ul.lrBox li.rtRt{text-align:right;}
-
-ul.lrBox:after{content: "."; display: block; height: 0; clear: both; visibility: hidden;}
-ul.lrBox {display: inline-block;}
-
-/* Hides from IE-mac \*/
-* html ul.lrBox{height: 1%;}
-ul.lrBox{display: block;}
+@media all and (min-width: 768px) {
+  .modal-sm {
+    width: 300px;
+  }
+}
