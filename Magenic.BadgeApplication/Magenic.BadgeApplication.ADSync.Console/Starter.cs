@@ -1,6 +1,7 @@
 ﻿
 
 using System;
+using System.Threading.Tasks;
 using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Processor;
 
@@ -15,7 +16,7 @@ namespace Magenic.BadgeApplication.ADSync.Console
                 AutofacBootstrapper.Init();
 
                 var adProcessor = new ADProcessor();
-                adProcessor.Start();
+                Task.Run(() => adProcessor.Start());
             }
             catch (Exception ex)
             {

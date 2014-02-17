@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using System.Globalization;
+using log4net;
 using System;
 
 namespace Magenic.BadgeApplication.Common
@@ -25,6 +26,7 @@ namespace Magenic.BadgeApplication.Common
         /// <typeparam name="T">The type of the class logging the message</typeparam>
         /// <param name="message">The message to log</param>
         /// <param name="ex">The exception to log</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public static void Debug<T>(string message, Exception ex)
         {
             ILog logger = GetLogger<T>();
@@ -37,6 +39,7 @@ namespace Magenic.BadgeApplication.Common
         /// </summary>
         /// <typeparam name="T">The type of the class logging the message</typeparam>
         /// <param name="message">The message to log</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public static void Info<T>(string message)
         {
             Info<T>(message, null);
@@ -48,6 +51,7 @@ namespace Magenic.BadgeApplication.Common
         /// <typeparam name="T">The type of the class logging the message</typeparam>
         /// <param name="message">The message to log</param>
         /// <param name="ex">The exception to log</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public static void Info<T>(string message, Exception ex)
         {
             ILog logger = GetLogger<T>();
@@ -61,9 +65,10 @@ namespace Magenic.BadgeApplication.Common
         /// <typeparam name="T"></typeparam>
         /// <param name="message">A formatted string</param>
         /// <param name="args">The argument array</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public static void InfoFormat<T>(string message, params object[] args)
         { 
-            Info<T>(string.Format(message, args));
+            Info<T>(string.Format(CultureInfo.CurrentCulture, message, args));
         }
 
         /// <summary>
@@ -71,6 +76,7 @@ namespace Magenic.BadgeApplication.Common
         /// </summary>
         /// <typeparam name="T">The type of the class logging the message</typeparam>
         /// <param name="message">The message to log</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public static void Warn<T>(string message)
         {
             Warn<T>(message, null);
@@ -82,6 +88,7 @@ namespace Magenic.BadgeApplication.Common
         /// <typeparam name="T">The type of the class logging the message</typeparam>
         /// <param name="message">The message to log</param>
         /// <param name="ex">The exception to log</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public static void Warn<T>(string message, Exception ex)
         {
             ILog logger = GetLogger<T>();

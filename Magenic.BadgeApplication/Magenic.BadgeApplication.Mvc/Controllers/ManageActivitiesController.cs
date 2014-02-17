@@ -16,7 +16,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// Lists this instance.
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "jt"), HttpPost]
         public async Task<JsonResult> List(int jtStartIndex, int jtPageSize)
         {
             var activities = await ActivityEditCollection.GetAllActivitiesAsync();

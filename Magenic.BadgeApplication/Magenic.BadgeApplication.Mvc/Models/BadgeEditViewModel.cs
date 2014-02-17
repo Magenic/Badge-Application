@@ -78,6 +78,7 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// The default corporate badge URI.
         /// </value>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public Uri DefaultCorporateBadgeUri
         {
             get
@@ -99,6 +100,7 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// The default communit badge URI.
         /// </value>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public Uri DefaultCommunityBadgeUri
         {
             get
