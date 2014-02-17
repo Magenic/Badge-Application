@@ -16,6 +16,7 @@ namespace Magenic.BadgeApplication.Extensions
         /// <param name="bundle">The bundle.</param>
         /// <param name="virtualPaths">The virtual paths.</param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "MVC")]
         public static Bundle IncludeT4MVC(this Bundle bundle, params string[] virtualPaths)
         {
             Arg.IsNotNull(() => bundle);
