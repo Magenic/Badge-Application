@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
@@ -56,10 +57,22 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             using (var ctx = new Entities())
             {
                 ctx.Database.Connection.Open();
+                var badgeAwards = new List<BadgeAward>();
                 foreach (var badge in badges)
                 {
                     var saveBadge = LoadData(badge);
-                    ctx.BadgeAwards.Add(saveBadge);                    
+                    ctx.BadgeAwards.Add(saveBadge);
+                    badgeAwards.Add(saveBadge);
+                }
+                ctx.SaveChanges();
+                foreach (var badgeAward in badgeAwards)
+                {
+                    var queueItem = new QueueItem
+                    {
+                        BadgeAwardId = badgeAward.BadgeAwardId,
+                        QueueItemCreated = badgeAward.AwardDate
+                    };
+                    ctx.QueueItems.Add(queueItem);
                 }
                 ctx.SaveChanges();
             }
