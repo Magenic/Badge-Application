@@ -589,6 +589,9 @@
     <Content Include="Views\BadgeManager\_BadgesForApproval.cshtml" />
     <Content Include="Views\Shared\_CorporateBadgeTemplate.cshtml" />
     <Content Include="Views\Shared\_CommunityBadgeTemplate.cshtml" />
+    <None Include="Web.QA.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.Authorization.Mock\Magenic.BadgeApplication.Authorization.Mock.csproj">
