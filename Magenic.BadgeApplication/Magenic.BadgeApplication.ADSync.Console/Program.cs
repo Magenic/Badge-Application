@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.Common;
+﻿using System.ServiceProcess;
+using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Processor;
 using System;
 
@@ -8,16 +9,17 @@ namespace Magenic.BadgeApplication.ADSync.Console
     {
         static void Main(string[] args)
         {
-            try
+            if (args.Length == 0)
             {
-                AutofacBootstrapper.Init();
-
-                var adProcessor = new ADProcessor();
-                adProcessor.Start();
+                var servicesToRun = new ServiceBase[]
+                {
+                    new ADSync()
+                };
+                ServiceBase.Run(servicesToRun);
             }
-            catch (Exception ex)
+            else
             {
-                Logger.Fatal<Program>(ex.Message, ex);
+                Starter.Start();
             }
         }
     }
