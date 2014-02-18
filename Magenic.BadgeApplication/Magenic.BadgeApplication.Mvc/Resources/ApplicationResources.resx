@@ -339,4 +339,7 @@
   <data name="CorporateBadgeTemplate" xml:space="preserve">
     <value>Corporate Badge Template</value>
   </data>
+  <data name="ActivitiesRequiredForBadgeLabel" xml:space="preserve">
+    <value>These activities are required for this badge:</value>
+  </data>
 </root>

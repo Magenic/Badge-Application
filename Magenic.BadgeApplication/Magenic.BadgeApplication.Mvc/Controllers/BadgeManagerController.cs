@@ -9,6 +9,7 @@ using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Extensions;
 using Magenic.BadgeApplication.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mime;
@@ -24,14 +25,17 @@ namespace Magenic.BadgeApplication.Controllers
     public partial class BadgeManagerController
         : BaseController
     {
-        // TODO: figure out how to get this to not be constant. There is a way, but it's ugly.
-        private const string Administrator = "Administrator";
-
         private static void SetActivitiesToAdd(BadgeEditViewModel badgeEditViewModel)
         {
-            var activityIdsToAdd = badgeEditViewModel.SelectedActivityIds
-                .Except(badgeEditViewModel.Badge.BadgeActivities
-                .Select(bae => bae.ActivityId));
+            //var activityIdsToAdd = badgeEditViewModel.SelectedActivityIds
+            //    .Except(badgeEditViewModel.Badge.BadgeActivities
+            //    .Select(bae => bae.ActivityId));
+
+            var activityIdsToAdd = new List<int>();
+            if (badgeEditViewModel.SelectedActivityId.HasValue)
+            {
+                activityIdsToAdd = new List<int>() { badgeEditViewModel.SelectedActivityId.Value };
+            }
 
             foreach (var activityId in activityIdsToAdd)
             {
@@ -44,9 +48,14 @@ namespace Magenic.BadgeApplication.Controllers
 
         private static void SetActivitiesToRemove(BadgeEditViewModel badgeEditViewModel)
         {
+            //var activityIdsToRemove = badgeEditViewModel.Badge.BadgeActivities
+            //    .Select(bae => bae.ActivityId)
+            //    .Except(badgeEditViewModel.SelectedActivityIds)
+            //    .ToList();
+
             var activityIdsToRemove = badgeEditViewModel.Badge.BadgeActivities
+                .Where(bae => bae.ActivityId != badgeEditViewModel.SelectedActivityId)
                 .Select(bae => bae.ActivityId)
-                .Except(badgeEditViewModel.SelectedActivityIds)
                 .ToList();
 
             foreach (var activityId in activityIdsToRemove)

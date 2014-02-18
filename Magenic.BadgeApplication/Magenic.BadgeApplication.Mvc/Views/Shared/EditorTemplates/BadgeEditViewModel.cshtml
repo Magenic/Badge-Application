@@ -80,7 +80,8 @@
             @Html.Label(ApplicationResources.RequiredActivitiesLabel)
         </div>
         <div class="editor-field">
-            @Html.ListBoxFor(bevm => bevm.SelectedActivityIds, Model.AllActivities, new { @class = "form-control selectpicker" })
+            @*@Html.ListBoxFor(bevm => bevm.SelectedActivityIds, Model.AllActivities, new { @class = "form-control selectpicker show-tick" })*@
+            @Html.DropDownListFor(bevm => bevm.SelectedActivityId, Model.AllActivities, new { @class = "form-control selectpicker show-tick" })
         </div>
     </div>
 
@@ -121,13 +122,6 @@
             @ApplicationResources.BadgeMultipleAwardsLabel
         </label>
         <br /><br />
-        <div class="editor-label">
-            @Html.LabelFor(bevm => bevm.Badge.ActivityPointsAmount, ApplicationResources.ActivityPointsAmountLabel)
-        </div>
-        <div class="editor-field">
-            @Html.HasPermission(AuthorizationActions.WriteProperty, Model.Badge, BadgeEdit.ActivityPointsAmountProperty, Html.TextBoxFor(bevm => bevm.Badge.ActivityPointsAmount, new { @class = "form-control" }), Html.TextBox("NotBoundActivityPointsAmount", Model.Badge.ActivityPointsAmount, new { @class = "form-control", disabled = "disabled" }))
-            @Html.ValidationMessageFor(bevm => bevm.Badge.ActivityPointsAmount)
-        </div>
         <div class="editor-label">
             @Html.LabelFor(bevm => bevm.Badge.AwardValueAmount, ApplicationResources.BadgePointsReceievedLabel)
         </div>

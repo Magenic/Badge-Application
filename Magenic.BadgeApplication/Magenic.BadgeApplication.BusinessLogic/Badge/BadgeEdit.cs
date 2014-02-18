@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Autofac;
+﻿using Autofac;
 using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;
@@ -208,7 +207,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.BusinessRules.AddRule(new MaxLength(TaglineProperty, 200));
             this.BusinessRules.AddRule(new MaxLength(ApprovedByIdProperty, 100));
             this.BusinessRules.AddRule(new Rules.DateOrder(EffectiveStartDateProperty, EffectiveEndDateProperty));
-            this.BusinessRules.AddRule(new MinValue<int>(ActivityPointsAmountProperty, 1));
+            //this.BusinessRules.AddRule(new MinValue<int>(ActivityPointsAmountProperty, 1));
             this.BusinessRules.AddRule(new MinValue<int>(CreateEmployeeIdProperty, 1));
 
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedByIdProperty, PermissionType.Administrator.ToString()));
@@ -221,9 +220,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
 
         public static void AddObjectAuthorizationRules()
         {
-            BusinessRules.AddRule(typeof (IBadgeEdit), new CanDelete(PermissionType.Administrator.ToString()));
-            BusinessRules.AddRule(typeof (BadgeEdit), new CanDelete(PermissionType.Administrator.ToString()));
-        } 
+            BusinessRules.AddRule(typeof(IBadgeEdit), new CanDelete(PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(BadgeEdit), new CanDelete(PermissionType.Administrator.ToString()));
+        }
 
 
         #endregion Rules

@@ -58,6 +58,14 @@ namespace Magenic.BadgeApplication.Models
         public EarnedBadgeListViewModel EarnedBadgeListViewModel { get; set; }
 
         /// <summary>
+        /// Gets or sets all activities.
+        /// </summary>
+        /// <value>
+        /// All activities.
+        /// </value>
+        public IActivityCollection AllActivities { get; set; }
+
+        /// <summary>
         /// Gets or sets the new activity.
         /// </summary>
         /// <value>
