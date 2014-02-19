@@ -15,11 +15,12 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             {
                 ctx.Database.Connection.Open();
                 var activityList = await (from t in ctx.Activities
-                    select new ActivityItemDTO
-                    {
-                        Id = t.ActivityId,
-                        Name = t.ActivityName
-                    }).ToArrayAsync();
+                                          select new ActivityItemDTO
+                                          {
+                                              Id = t.ActivityId,
+                                              Name = t.ActivityName,
+                                              BadgeIds = t.BadgeActivities.Select(ba => ba.BadgeId),
+                                          }).ToArrayAsync();
 
                 return activityList;
             }
