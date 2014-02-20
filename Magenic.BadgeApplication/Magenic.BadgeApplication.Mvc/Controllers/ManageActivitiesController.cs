@@ -1,4 +1,6 @@
-﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
+﻿using Csla.Rules;
+using Csla.Web.Mvc;
+using Magenic.BadgeApplication.BusinessLogic.Activity;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +19,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "jt"), HttpPost]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ActivityEditCollection))]
         public async Task<JsonResult> List(int jtStartIndex, int jtPageSize)
         {
             var activities = await ActivityEditCollection.GetAllActivitiesAsync();
@@ -32,6 +35,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [HasPermission(AuthorizationActions.CreateObject, typeof(ActivityEdit))]
         public async Task<JsonResult> Create()
         {
             var activityEdit = ActivityEdit.CreateActivity();
@@ -50,6 +54,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
         [HttpPost]
+        [HasPermission(AuthorizationActions.EditObject, typeof(ActivityEdit))]
         public async Task<JsonResult> Update(int id)
         {
             var activityEdit = await ActivityEdit.GetActivityEditByIdAsync(id);
@@ -67,6 +72,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
+        [HasPermission(AuthorizationActions.DeleteObject, typeof(ActivityEdit))]
         public async virtual Task<JsonResult> Delete(int id)
         {
             var activityEdit = await ActivityEdit.GetActivityEditByIdAsync(id);

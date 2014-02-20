@@ -1,4 +1,6 @@
 ﻿using Csla;
+using Csla.Rules;
+using Csla.Web.Mvc;
 using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.BusinessLogic.Security;
@@ -22,6 +24,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// Handles the /Home/Index action.
         /// </summary>
         /// <returns></returns>
+        [HasPermission(AuthorizationActions.GetObject, typeof(EarnedBadgeCollection))]
         public async virtual Task<ActionResult> Index()
         {
             var accountInfo = await AccountInfoEdit.GetAccountInfoForEmployee(AuthenticatedUser.EmployeeId);
@@ -41,6 +44,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="pointPayoutThreshold">The point payout threshold.</param>
         /// <returns></returns>
         [HttpPost]
+        [HasPermission(AuthorizationActions.EditObject, typeof(AccountInfoEdit))]
         public async virtual Task<ActionResult> SubmitPayout(int pointPayoutThreshold)
         {
             var accountInfo = await AccountInfoEdit.GetAccountInfoForEmployee(AuthenticatedUser.EmployeeId);

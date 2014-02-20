@@ -72,6 +72,8 @@ namespace Magenic.BadgeApplication.Controllers
         /// Handles the /Home/Index action.
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
+        [HasPermission(AuthorizationActions.GetObject, typeof(BadgeCollection))]
         public async virtual Task<ActionResult> Index()
         {
             var corporateBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Corporate);
@@ -91,6 +93,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ActivityEditCollection))]
         public async virtual Task<ActionResult> ManageActivities()
         {
             var allActivities = await ActivityEditCollection.GetAllActivitiesAsync();
@@ -108,6 +111,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [HasPermission(AuthorizationActions.GetObject, typeof(BadgeEdit))]
         public async virtual Task<ActionResult> AddBadge()
         {
             var allActivities = await ActivityCollection.GetAllActivitiesAsync();
@@ -126,6 +130,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="badgeImage">The badge image.</param>
         /// <returns></returns>
         [HttpPost]
+        [HasPermission(AuthorizationActions.CreateObject, typeof(BadgeEdit))]
         public virtual async Task<ActionResult> AddBadgePost(BadgeEditViewModel badgeEditViewModel, HttpPostedFileBase badgeImage)
         {
             var badgeEdit = BadgeEdit.CreateBadge();
@@ -158,6 +163,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
         [HttpGet]
+        [HasPermission(AuthorizationActions.GetObject, typeof(BadgeEdit))]
         public virtual async Task<ActionResult> EditBadge(int id)
         {
             var allActivities = await ActivityCollection.GetAllActivitiesAsync();
@@ -181,6 +187,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="badgeImage">The badge image.</param>
         /// <returns></returns>
         [HttpPost]
+        [HasPermission(AuthorizationActions.EditObject, typeof(BadgeEdit))]
         public virtual async Task<ActionResult> EditBadgePost(int id, BadgeEditViewModel badgeEditViewModel, HttpPostedFileBase badgeImage)
         {
             badgeEditViewModel.Badge = await BadgeEdit.GetBadgeEditByIdAsync(id) as BadgeEdit;
@@ -234,6 +241,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [HasPermission(AuthorizationActions.GetObject, typeof(PointsReportCollection))]
         public async virtual Task<ActionResult> PointsReport()
         {
             var pointsReportCollection = await PointsReportCollection.GetAllPayoutsToApproveAsync();
@@ -246,6 +254,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="formCollection">The form collection.</param>
         /// <returns></returns>
         [HttpPost]
+        [HasPermission(AuthorizationActions.EditObject, typeof(PointsReportCollection))]
         public async virtual Task<ActionResult> PointsReport(FormCollection formCollection)
         {
             Arg.IsNotNull(() => formCollection);
@@ -379,6 +388,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <param name="imageTemplatePath">The image template URI.</param>
         /// <returns></returns>
+        [HasPermission(AuthorizationActions.GetObject, typeof(BadgeEdit))]
         public async virtual Task<ActionResult> DownloadImageTemplate(string imageTemplatePath)
         {
             var uri = new Uri(imageTemplatePath, UriKind.Absolute);

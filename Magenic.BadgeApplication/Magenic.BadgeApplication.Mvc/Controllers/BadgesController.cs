@@ -1,4 +1,6 @@
-﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
+﻿using Csla.Rules;
+using Csla.Web.Mvc;
+using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Models;
@@ -19,6 +21,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// Handles the /Home/Index action.
         /// </summary>
         /// <returns></returns>
+        [HasPermission(AuthorizationActions.GetObject, typeof(BadgeCollection))]
         public async virtual Task<ActionResult> Index()
         {
             var allBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Unset);
