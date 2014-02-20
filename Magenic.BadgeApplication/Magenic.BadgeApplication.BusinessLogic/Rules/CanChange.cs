@@ -5,13 +5,13 @@ using System;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Rules
 {
-    public sealed class CanDelete : Csla.Rules.AuthorizationRule
+    public sealed class CanChange : Csla.Rules.AuthorizationRule
     {
         private string AllowedRole { get; set; }
 
-        public CanDelete(string allowedRole) : base(Csla.Rules.AuthorizationActions.DeleteObject)
+        public CanChange(Csla.Rules.AuthorizationActions authorizationAction, string allowedRole)
+            : base(authorizationAction)
         {
-
             AllowedRole = allowedRole;
         }
 
