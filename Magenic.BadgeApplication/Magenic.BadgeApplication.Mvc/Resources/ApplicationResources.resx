@@ -342,4 +342,7 @@
   <data name="ActivitiesRequiredForBadgeLabel" xml:space="preserve">
     <value>These activities are required for this badge:</value>
   </data>
+  <data name="BadgeDisplayOnceLabel" xml:space="preserve">
+    <value>Should it be displayed only once?</value>
+  </data>
 </root>

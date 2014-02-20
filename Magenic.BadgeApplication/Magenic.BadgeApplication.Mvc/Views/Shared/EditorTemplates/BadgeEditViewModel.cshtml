@@ -122,6 +122,11 @@
             @ApplicationResources.BadgeMultipleAwardsLabel
         </label>
         <br /><br />
+        <label>
+            @Html.CheckBoxFor(bevm => bevm.Badge.DisplayOnce)
+            @ApplicationResources.BadgeDisplayOnceLabel
+        </label>
+        <br /><br />
         <div class="editor-label">
             @Html.LabelFor(bevm => bevm.Badge.AwardValueAmount, ApplicationResources.BadgePointsReceievedLabel)
         </div>

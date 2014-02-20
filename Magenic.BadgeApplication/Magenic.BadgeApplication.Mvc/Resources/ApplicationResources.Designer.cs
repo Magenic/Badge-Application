@@ -241,6 +241,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Should it be displayed only once?.
+        /// </summary>
+        public static string BadgeDisplayOnceLabel {
+            get {
+                return ResourceManager.GetString("BadgeDisplayOnceLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Badge Earned.
         /// </summary>
         public static string BadgeEarnedRowHeader {
