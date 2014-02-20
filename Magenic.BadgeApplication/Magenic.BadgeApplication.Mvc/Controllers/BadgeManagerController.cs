@@ -169,7 +169,8 @@ namespace Magenic.BadgeApplication.Controllers
 
                 return View(Mvc.BadgeManager.Views.EditBadge, badgeEditViewModel);
             }
-            return RedirectToAction("Index");
+
+            return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
         }
 
         /// <summary>
