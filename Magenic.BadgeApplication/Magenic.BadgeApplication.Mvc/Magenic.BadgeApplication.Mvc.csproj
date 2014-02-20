@@ -185,6 +185,7 @@
     </Compile>
     <Compile Include="Controllers\BadgesController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageActivitiesController.cs" />
     <Compile Include="Controllers\WebApi\AccountsController.cs" />
@@ -591,6 +592,9 @@
     <Content Include="Views\BadgeManager\_BadgesForApproval.cshtml" />
     <Content Include="Views\Shared\_CorporateBadgeTemplate.cshtml" />
     <Content Include="Views\Shared\_CommunityBadgeTemplate.cshtml" />
+    <Content Include="Views\Error\Default.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\AccessDenied.cshtml" />
     <None Include="Web.QA.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
