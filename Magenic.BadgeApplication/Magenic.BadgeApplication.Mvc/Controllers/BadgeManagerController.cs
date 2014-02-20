@@ -162,10 +162,14 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var allActivities = await ActivityCollection.GetAllActivitiesAsync();
             var badgeEdit = await BadgeEdit.GetBadgeEditByIdAsync(id);
-            var badgeEditViewModel = new BadgeEditViewModel(allActivities, badgeEdit.BadgeActivities);
-            badgeEditViewModel.Badge = badgeEdit as BadgeEdit;
+            if (BusinessRules.HasPermission(AuthorizationActions.EditObject, badgeEdit))
+            {
+                var badgeEditViewModel = new BadgeEditViewModel(allActivities, badgeEdit.BadgeActivities);
+                badgeEditViewModel.Badge = badgeEdit as BadgeEdit;
 
-            return View(Mvc.BadgeManager.Views.EditBadge, badgeEditViewModel);
+                return View(Mvc.BadgeManager.Views.EditBadge, badgeEditViewModel);
+            }
+            return RedirectToAction("Index");
         }
 
         /// <summary>

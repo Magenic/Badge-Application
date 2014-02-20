@@ -220,8 +220,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
 
         public static void AddObjectAuthorizationRules()
         {
-            BusinessRules.AddRule(typeof(IBadgeEdit), new CanDelete(PermissionType.Administrator.ToString()));
-            BusinessRules.AddRule(typeof(BadgeEdit), new CanDelete(PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(IBadgeEdit), new CanChange(AuthorizationActions.DeleteObject, PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(BadgeEdit), new CanChange(AuthorizationActions.DeleteObject, PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(IBadgeEdit), new CanChange(AuthorizationActions.EditObject, PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(BadgeEdit), new CanChange(AuthorizationActions.EditObject, PermissionType.Administrator.ToString()));
         }
 
 
