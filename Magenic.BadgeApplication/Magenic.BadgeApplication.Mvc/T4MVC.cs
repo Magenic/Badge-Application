@@ -21,6 +21,7 @@ public static class Mvc
     public static Magenic.BadgeApplication.Controllers.ActivitiesController Activities = new Magenic.BadgeApplication.Controllers.T4MVC_ActivitiesController();
     public static Magenic.BadgeApplication.Controllers.BadgeManagerController BadgeManager = new Magenic.BadgeApplication.Controllers.T4MVC_BadgeManagerController();
     public static Magenic.BadgeApplication.Controllers.BadgesController Badges = new Magenic.BadgeApplication.Controllers.T4MVC_BadgesController();
+    public static Magenic.BadgeApplication.Controllers.ErrorController Error = new Magenic.BadgeApplication.Controllers.T4MVC_ErrorController();
     public static Magenic.BadgeApplication.Controllers.HomeController Home = new Magenic.BadgeApplication.Controllers.T4MVC_HomeController();
     public static Magenic.BadgeApplication.Controllers.ManageActivitiesController ManageActivities = new Magenic.BadgeApplication.Controllers.T4MVC_ManageActivitiesController();
     public static T4Mvc.SharedController Shared = new T4Mvc.SharedController();

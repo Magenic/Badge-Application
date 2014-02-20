@@ -5,14 +5,14 @@ namespace Magenic.BadgeApplication.Controllers
     /// <summary>
     /// 
     /// </summary>
-    public class ErrorController
+    public partial class ErrorController
         : Controller
     {
         /// <summary>
         /// The default error page
         /// </summary>
         /// <returns></returns>
-        public ActionResult Default()
+        public virtual ActionResult Index()
         {
             return this.View();
         }
@@ -21,7 +21,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// Handles 404 error
         /// </summary>
         /// <returns></returns>
-        public ActionResult NotFound()
+        public virtual ActionResult NotFound()
         {
             return this.View();
         }
@@ -30,7 +30,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// Handles 403 error
         /// </summary>
         /// <returns></returns>
-        public ActionResult AccessDenied()
+        public virtual ActionResult AccessDenied()
         {
             return this.View();
         }
