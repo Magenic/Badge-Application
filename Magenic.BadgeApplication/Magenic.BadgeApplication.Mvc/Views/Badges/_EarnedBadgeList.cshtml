@@ -2,7 +2,7 @@
 @model IEnumerable<IEarnedBadgeItem>
 
 @{
-    var earnedBadges = Model.ToList();
+    var earnedBadges = Model.OrderBy(b => b.BadgePriority).ToList();
     var maxColumns = 5;
 }
 

@@ -4,7 +4,7 @@
 @model IEnumerable<IBadgeItem>
 
 @{
-    var badgeItems = Model.ToList();
+    var badgeItems = Model.OrderBy(b => b.BadgePriority).ToList();
     var maxColumns = 5;
 }
 
