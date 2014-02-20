@@ -313,7 +313,7 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Badge title.
+        ///   Looks up a localized string similar to Badge image.
         /// </summary>
         public static string BadgeNameLabel {
             get {
