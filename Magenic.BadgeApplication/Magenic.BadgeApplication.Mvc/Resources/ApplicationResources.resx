@@ -229,7 +229,7 @@
     <value>Badge image</value>
   </data>
   <data name="BadgeNameLabel" xml:space="preserve">
-    <value>Badge image</value>
+    <value>Badge name</value>
   </data>
   <data name="BadgeTaglineLabel" xml:space="preserve">
     <value>Quip or funny saying about the badge</value>
