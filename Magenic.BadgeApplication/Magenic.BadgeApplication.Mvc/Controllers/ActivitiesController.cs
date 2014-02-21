@@ -1,4 +1,6 @@
-﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
+﻿using Csla.Rules;
+using Csla.Web.Mvc;
+using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.Models;
 using System.Globalization;
 using System.Linq;
@@ -17,6 +19,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// Handles the /Home/Index action.
         /// </summary>
         /// <returns></returns>
+        [HasPermission(AuthorizationActions.GetObject, typeof(SubmittedActivityCollection))]
         public async virtual Task<ActionResult> Index()
         {
             var submittedActivities = await SubmittedActivityCollection.GetSubmittedActivitiesByEmployeeIdAsync(AuthenticatedUser.EmployeeId, null, null);
@@ -37,6 +40,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [HasPermission(AuthorizationActions.CreateObject, typeof(SubmitActivity))]
         public async virtual Task<ActionResult> SubmitActivityForm()
         {
             var submittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.EmployeeId);
