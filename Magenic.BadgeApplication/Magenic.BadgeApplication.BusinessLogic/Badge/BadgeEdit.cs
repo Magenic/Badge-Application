@@ -207,7 +207,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.BusinessRules.AddRule(new MaxLength(TaglineProperty, 200));
             this.BusinessRules.AddRule(new MaxLength(ApprovedByIdProperty, 100));
             this.BusinessRules.AddRule(new Rules.DateOrder(EffectiveStartDateProperty, EffectiveEndDateProperty));
-            //this.BusinessRules.AddRule(new MinValue<int>(ActivityPointsAmountProperty, 1));
+            this.BusinessRules.AddRule(new MinValue<int>(ActivityPointsAmountProperty, 1));
             this.BusinessRules.AddRule(new MinValue<int>(CreateEmployeeIdProperty, 1));
 
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedByIdProperty, PermissionType.Administrator.ToString()));
