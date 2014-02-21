@@ -1,11 +1,13 @@
 ﻿using Csla.Rules;
 using Csla.Web.Mvc;
+using Magenic.BadgeApplication.Attributes;
 using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.BusinessLogic.PointsReport;
 using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
+using Magenic.BadgeApplication.Exceptions;
 using Magenic.BadgeApplication.Extensions;
 using Magenic.BadgeApplication.Models;
 using System;
@@ -130,7 +132,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="badgeImage">The badge image.</param>
         /// <returns></returns>
         [HttpPost]
-        [HasPermission(AuthorizationActions.CreateObject, typeof(BadgeEdit))]
+        [HasPermission(AuthorizationActions.GetObject, typeof(BadgeEdit))]
         public virtual async Task<ActionResult> AddBadgePost(BadgeEditViewModel badgeEditViewModel, HttpPostedFileBase badgeImage)
         {
             var badgeEdit = BadgeEdit.CreateBadge();
@@ -187,7 +189,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="badgeImage">The badge image.</param>
         /// <returns></returns>
         [HttpPost]
-        [HasPermission(AuthorizationActions.EditObject, typeof(BadgeEdit))]
+        [HasPermission(AuthorizationActions.GetObject, typeof(BadgeEdit))]
         public virtual async Task<ActionResult> EditBadgePost(int id, BadgeEditViewModel badgeEditViewModel, HttpPostedFileBase badgeImage)
         {
             badgeEditViewModel.Badge = await BadgeEdit.GetBadgeEditByIdAsync(id) as BadgeEdit;
@@ -229,6 +231,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [NoCache]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
         public virtual async Task<ActionResult> ApproveCommunityBadgesList()
         {
@@ -254,7 +257,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="formCollection">The form collection.</param>
         /// <returns></returns>
         [HttpPost]
-        [HasPermission(AuthorizationActions.EditObject, typeof(PointsReportCollection))]
+        [HasPermission(AuthorizationActions.GetObject, typeof(PointsReportCollection))]
         public async virtual Task<ActionResult> PointsReport(FormCollection formCollection)
         {
             Arg.IsNotNull(() => formCollection);
@@ -298,6 +301,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [NoCache]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
         public async virtual Task<ActionResult> ApproveActivitiesList()
         {
@@ -311,6 +315,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="submissionId">The submission identifier.</param>
         /// <returns></returns>
         [HttpPost]
+        [HandleModelStateException]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
         public async virtual Task<ActionResult> ApproveActivity(int submissionId)
         {
@@ -322,7 +327,7 @@ namespace Magenic.BadgeApplication.Controllers
                 return Json(new { Success = true });
             }
 
-            return Json(new { Success = false, Message = ModelState.Values.SelectMany(ms => ms.Errors).Select(me => me.ErrorMessage) });
+            throw new ModelStateException(ModelState);
         }
 
         /// <summary>
@@ -331,6 +336,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="submissionId">The submission identifier.</param>
         /// <returns></returns>
         [HttpPost]
+        [HandleModelStateException]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
         public async virtual Task<ActionResult> RejectActivity(int submissionId)
         {

@@ -174,6 +174,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attributes\HandleModelStateExceptionAttribute.cs" />
+    <Compile Include="Attributes\NoCacheAttribute.cs" />
     <Compile Include="BadgeManagerController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -191,6 +193,7 @@
     <Compile Include="ErrorController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Exceptions\ModelStateException.cs" />
     <Compile Include="Extensions\BundleExtensions.cs" />
     <Compile Include="Extensions\CustomIdentityExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
