@@ -96,7 +96,12 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 AttachChildren(ctx, data, saveBadge.BadgeId);
                 ctx.SaveChanges();
 
+                data.Id = saveBadge.BadgeId;
                 this.SaveToBlobStorage(data);
+                saveBadge.BadgePath = data.ImagePath;
+                objectState = ((IObjectContextAdapter)ctx).ObjectContext.ObjectStateManager;
+                objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgePath");
+                ctx.SaveChanges();
 
                 var badge = GetRefreshedBadgeInfo(ctx, saveBadge.BadgeId);
                 data = LoadReturnData(badge);
