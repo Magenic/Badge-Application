@@ -24,15 +24,12 @@ namespace Magenic.BadgeApplication.Controllers
     /// <summary>
     /// 
     /// </summary>
+    [Authorize]
     public partial class BadgeManagerController
         : BaseController
     {
         private static void SetActivitiesToAdd(BadgeEditViewModel badgeEditViewModel)
         {
-            //var activityIdsToAdd = badgeEditViewModel.SelectedActivityIds
-            //    .Except(badgeEditViewModel.Badge.BadgeActivities
-            //    .Select(bae => bae.ActivityId));
-
             var activityIdsToAdd = new List<int>();
             if (badgeEditViewModel.SelectedActivityId.HasValue)
             {
@@ -50,11 +47,6 @@ namespace Magenic.BadgeApplication.Controllers
 
         private static void SetActivitiesToRemove(BadgeEditViewModel badgeEditViewModel)
         {
-            //var activityIdsToRemove = badgeEditViewModel.Badge.BadgeActivities
-            //    .Select(bae => bae.ActivityId)
-            //    .Except(badgeEditViewModel.SelectedActivityIds)
-            //    .ToList();
-
             var activityIdsToRemove = badgeEditViewModel.Badge.BadgeActivities
                 .Where(bae => bae.ActivityId != badgeEditViewModel.SelectedActivityId)
                 .Select(bae => bae.ActivityId)
@@ -170,15 +162,10 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var allActivities = await ActivityCollection.GetAllActivitiesAsync();
             var badgeEdit = await BadgeEdit.GetBadgeEditByIdAsync(id);
-            if (BusinessRules.HasPermission(AuthorizationActions.EditObject, badgeEdit))
-            {
-                var badgeEditViewModel = new BadgeEditViewModel(allActivities, badgeEdit.BadgeActivities);
-                badgeEditViewModel.Badge = badgeEdit as BadgeEdit;
+            var badgeEditViewModel = new BadgeEditViewModel(allActivities, badgeEdit.BadgeActivities);
+            badgeEditViewModel.Badge = badgeEdit as BadgeEdit;
 
-                return View(Mvc.BadgeManager.Views.EditBadge, badgeEditViewModel);
-            }
-
-            return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            return View(Mvc.BadgeManager.Views.EditBadge, badgeEditViewModel);
         }
 
         /// <summary>
