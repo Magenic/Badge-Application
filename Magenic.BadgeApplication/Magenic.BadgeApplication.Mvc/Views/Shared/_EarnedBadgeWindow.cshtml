@@ -3,7 +3,11 @@
 @using Magenic.BadgeApplication.Resources
 @model EarnedBadgeItem
 
-<div id="EarnedBadgeWindow-@Model.Id" class="modal fade">
+@{
+    var uniqueIdentifier = String.Format("{0}-{1}", Model.AwardDate.ToString("yyyyMMddHHmmss"), Model.Id);
+}
+
+<div id="EarnedBadgeWindow-@uniqueIdentifier" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
