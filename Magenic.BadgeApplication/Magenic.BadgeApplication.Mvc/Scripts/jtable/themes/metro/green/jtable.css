@@ -311,7 +311,8 @@ div.jtable-main-container > div.jtable-title div.jtable-title-text {
   line-height: 34px;
   color: #fff;
 }
-div.jtable-main-container > div.jtable-title .jtable-close-button {
+div.jtable-main-container > div.jtable-title .jtable-close-button,
+.ui-dialog-titlebar-close {
   right: 8px;
   top: 8px;
   bottom: 8px;
