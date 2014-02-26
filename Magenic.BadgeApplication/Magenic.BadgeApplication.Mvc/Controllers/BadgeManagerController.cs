@@ -164,6 +164,10 @@ namespace Magenic.BadgeApplication.Controllers
             var badgeEdit = await BadgeEdit.GetBadgeEditByIdAsync(id);
             var badgeEditViewModel = new BadgeEditViewModel(allActivities, badgeEdit.BadgeActivities);
             badgeEditViewModel.Badge = badgeEdit as BadgeEdit;
+            if (badgeEditViewModel.Badge.Priority == Int32.MaxValue)
+            {
+                badgeEditViewModel.Badge.Priority = 0;
+            }
 
             return View(Mvc.BadgeManager.Views.EditBadge, badgeEditViewModel);
         }
