@@ -56,7 +56,7 @@ namespace Magenic.BadgeApplication
                 Links.Scripts.activitiesManagement_js
             ));
 
-            bundles.Add(new StyleBundle("~/Scripts/jtable/themes/metro/greencss").IncludeT4MVC(
+            bundles.Add(new StyleBundle("~/Scripts/jtable/themes/metro/green/css").IncludeT4MVC(
                 Links.Scripts.jtable.themes.metro.green.jtable_css
             ));
 
