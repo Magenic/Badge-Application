@@ -62,6 +62,19 @@ namespace Magenic.BadgeApplication.Controllers
             }
         }
 
+        private void CheckForValidImage(BadgeEdit be)
+        {
+            // We need to handle it this way because the CSLA Model Binder doesn't handle private setters.
+            if (be.BrokenRulesCollection.Any())
+            {
+                var imagePathRules = be.BrokenRulesCollection.Where(br => br.OriginProperty == BadgeEdit.ImagePathProperty.Name);
+                foreach (var imagePathRule in imagePathRules)
+                {
+                    ModelState.AddModelError(imagePathRule.Property, imagePathRule.Description);
+                }
+            }
+        }
+
         /// <summary>
         /// Handles the /Home/Index action.
         /// </summary>
@@ -139,6 +152,8 @@ namespace Magenic.BadgeApplication.Controllers
             if (await SaveObjectAsync(badgeEditViewModel.Badge, be =>
             {
                 UpdateModel(be, "Badge");
+                CheckForValidImage(be);
+
                 if (be.Priority == 0)
                 {
                     be.Priority = Int32.MaxValue;
@@ -162,14 +177,19 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var allActivities = await ActivityCollection.GetAllActivitiesAsync();
             var badgeEdit = await BadgeEdit.GetBadgeEditByIdAsync(id);
-            var badgeEditViewModel = new BadgeEditViewModel(allActivities, badgeEdit.BadgeActivities);
-            badgeEditViewModel.Badge = badgeEdit as BadgeEdit;
-            if (badgeEditViewModel.Badge.Priority == Int32.MaxValue)
+            if (BusinessRules.HasPermission(AuthorizationActions.EditObject, badgeEdit))
             {
-                badgeEditViewModel.Badge.Priority = 0;
+                var badgeEditViewModel = new BadgeEditViewModel(allActivities, badgeEdit.BadgeActivities);
+                badgeEditViewModel.Badge = badgeEdit as BadgeEdit;
+                if (badgeEditViewModel.Badge.Priority == Int32.MaxValue)
+                {
+                    badgeEditViewModel.Badge.Priority = 0;
+                }
+
+                return View(Mvc.BadgeManager.Views.EditBadge, badgeEditViewModel);
             }
 
-            return View(Mvc.BadgeManager.Views.EditBadge, badgeEditViewModel);
+            return RedirectToAction(Mvc.Error.AccessDenied());
         }
 
         /// <summary>
@@ -193,6 +213,7 @@ namespace Magenic.BadgeApplication.Controllers
             SetActivitiesToAdd(badgeEditViewModel);
             SetActivitiesToRemove(badgeEditViewModel);
             TryUpdateModel(badgeEditViewModel.Badge, "Badge");
+            CheckForValidImage(badgeEditViewModel.Badge);
 
             if (await SaveObjectAsync(badgeEditViewModel.Badge, true))
             {
@@ -211,10 +232,8 @@ namespace Magenic.BadgeApplication.Controllers
         public virtual async Task<ActionResult> ApproveCommunityBadges()
         {
             var approveBadgeCollection = await ApproveBadgeCollection.GetAllBadgesToApproveAsync();
-
-            ApproveCommunityBadgesViewModel model = new ApproveCommunityBadgesViewModel(approveBadgeCollection);
-
-            return View(model);
+            var approveCommunityBadgesViewModel = new ApproveCommunityBadgesViewModel(approveBadgeCollection);
+            return View(approveCommunityBadgesViewModel);
         }
 
         /// <summary>

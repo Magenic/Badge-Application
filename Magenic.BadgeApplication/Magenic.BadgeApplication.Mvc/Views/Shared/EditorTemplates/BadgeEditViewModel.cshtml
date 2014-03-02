@@ -90,7 +90,8 @@
             @Html.LabelFor(bevm => bevm.Badge.ImagePath, ApplicationResources.BadgeImageLabel)
         </div>
         <div class="editor-field">
-            <input name="badgeImage" type="file" class="filestyle" data-classbutton="btn btn-primary" data-classinput="form-control pull-left">
+            <input name="badgeImage" type="file" class="filestyle" onchange="setImagePath()" data-classbutton="btn btn-primary" data-classinput="form-control pull-left">
+            @Html.HiddenFor(bevm => bevm.Badge.ImagePath)
             @Html.ValidationMessageFor(bevm => bevm.Badge.ImagePath)
         </div>
         <div class="editor-field">
