@@ -217,7 +217,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.BusinessRules.AddRule(new CanSetBadgeType(AuthorizationActions.WriteProperty, TypeProperty, BadgeType.Corporate, PermissionType.Administrator.ToString()));
             this.BusinessRules.AddRule(new DefaultBadgeStatus(TypeProperty, BadgeStatusProperty, ApprovedByIdProperty));
 
-            this.BusinessRules.AddRule(new ImageProperSize(ImageProperty));
+            this.BusinessRules.AddRule(new ImageProperSize(ImagePathProperty, ImageProperty));
         }
 
         public static void AddObjectAuthorizationRules()
