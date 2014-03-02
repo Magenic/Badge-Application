@@ -7,6 +7,11 @@ function removeCorporateBadgeValue() {
     $('#NotBoundType').prop('checked', false);
 }
 
+function setImagePath() {
+    // TODO: could have knockout do this...
+    $('#Badge_ImagePath').val($('#badgeImage').val());
+}
+
 $(document).ready(function () {
     $(':file').filestyle();
     $('.datepicker').datepicker();

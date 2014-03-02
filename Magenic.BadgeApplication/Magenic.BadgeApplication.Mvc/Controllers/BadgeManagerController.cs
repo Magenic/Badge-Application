@@ -62,6 +62,19 @@ namespace Magenic.BadgeApplication.Controllers
             }
         }
 
+        private void CheckForValidImage(BadgeEdit be)
+        {
+            // We need to handle it this way because the CSLA Model Binder doesn't handle private setters.
+            if (be.BrokenRulesCollection.Any())
+            {
+                var imagePathRules = be.BrokenRulesCollection.Where(br => br.OriginProperty == BadgeEdit.ImagePathProperty.Name);
+                foreach (var imagePathRule in imagePathRules)
+                {
+                    ModelState.AddModelError(imagePathRule.Property, imagePathRule.Description);
+                }
+            }
+        }
+
         /// <summary>
         /// Handles the /Home/Index action.
         /// </summary>
@@ -139,6 +152,8 @@ namespace Magenic.BadgeApplication.Controllers
             if (await SaveObjectAsync(badgeEditViewModel.Badge, be =>
             {
                 UpdateModel(be, "Badge");
+                CheckForValidImage(be);
+
                 if (be.Priority == 0)
                 {
                     be.Priority = Int32.MaxValue;
@@ -193,6 +208,7 @@ namespace Magenic.BadgeApplication.Controllers
             SetActivitiesToAdd(badgeEditViewModel);
             SetActivitiesToRemove(badgeEditViewModel);
             TryUpdateModel(badgeEditViewModel.Badge, "Badge");
+            CheckForValidImage(badgeEditViewModel.Badge);
 
             if (await SaveObjectAsync(badgeEditViewModel.Badge, true))
             {
@@ -211,10 +227,8 @@ namespace Magenic.BadgeApplication.Controllers
         public virtual async Task<ActionResult> ApproveCommunityBadges()
         {
             var approveBadgeCollection = await ApproveBadgeCollection.GetAllBadgesToApproveAsync();
-
-            ApproveCommunityBadgesViewModel model = new ApproveCommunityBadgesViewModel(approveBadgeCollection);
-
-            return View(model);
+            var approveCommunityBadgesViewModel = new ApproveCommunityBadgesViewModel(approveBadgeCollection);
+            return View(approveCommunityBadgesViewModel);
         }
 
         /// <summary>
