@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Magenic.BadgeApplication.BusinessLogic.Badge
 {
     [Serializable]
-    public sealed class BadgeEdit : BusinessBase<BadgeEdit>, IBadgeEdit, ICreateEmployee
+    public sealed class BadgeEdit : BusinessBase<BadgeEdit>, IBadgeEdit, ICreateEmployee, IHaveBadgeStatus
     {
         #region Properties
 
@@ -206,7 +206,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.BusinessRules.AddRule(new Required(NameProperty));
             this.BusinessRules.AddRule(new MaxLength(TaglineProperty, 200));
             this.BusinessRules.AddRule(new MaxLength(ApprovedByIdProperty, 100));
-            this.BusinessRules.AddRule(new Rules.DateOrder(EffectiveStartDateProperty, EffectiveEndDateProperty));
+            this.BusinessRules.AddRule(new DateOrder(EffectiveStartDateProperty, EffectiveEndDateProperty));
             this.BusinessRules.AddRule(new MinValue<int>(ActivityPointsAmountProperty, 1));
             this.BusinessRules.AddRule(new MinValue<int>(CreateEmployeeIdProperty, 1));
 
@@ -214,8 +214,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, ApprovedDateProperty, PermissionType.Administrator.ToString()));
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, AwardValueAmountProperty, PermissionType.Administrator.ToString()));
 
-            this.BusinessRules.AddRule(new Rules.CanSetBadgeType(AuthorizationActions.WriteProperty, TypeProperty, BadgeType.Corporate, PermissionType.Administrator.ToString()));
-            this.BusinessRules.AddRule(new Rules.DefaultBadgeStatus(TypeProperty, BadgeStatusProperty, ApprovedByIdProperty));
+            this.BusinessRules.AddRule(new CanSetBadgeType(AuthorizationActions.WriteProperty, TypeProperty, BadgeType.Corporate, PermissionType.Administrator.ToString()));
+            this.BusinessRules.AddRule(new DefaultBadgeStatus(TypeProperty, BadgeStatusProperty, ApprovedByIdProperty));
+
+            this.BusinessRules.AddRule(new ImageProperSize(ImageProperty));
         }
 
         public static void AddObjectAuthorizationRules()

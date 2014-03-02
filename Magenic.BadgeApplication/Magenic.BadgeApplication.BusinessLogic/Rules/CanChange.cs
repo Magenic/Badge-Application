@@ -1,5 +1,6 @@
 ﻿using Csla;
 using Csla.Core;
+using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 
@@ -22,7 +23,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Rules
                 throw new ArgumentException("Context cannot be null.");
             }
 
-            context.HasPermission = ((ICreateEmployee)context.Target).CreateEmployeeId == ((ICustomPrincipal)ApplicationContext.User).CustomIdentity().EmployeeId 
+            var badgeStatus = context.Target as IHaveBadgeStatus;
+            var validStatus = true;
+            if (badgeStatus != null)
+            {
+                validStatus = (badgeStatus.BadgeStatus == BadgeStatus.AwaitingApproval);
+            }
+            context.HasPermission = (((ICreateEmployee)context.Target).CreateEmployeeId == ((ICustomPrincipal)ApplicationContext.User).CustomIdentity().EmployeeId && validStatus)
                 || ApplicationContext.User.IsInRole(AllowedRole);
         }
     }

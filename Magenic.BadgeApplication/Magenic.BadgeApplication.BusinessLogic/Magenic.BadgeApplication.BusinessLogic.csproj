@@ -60,6 +60,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -102,6 +103,7 @@
     <Compile Include="Rules\DateOrder.cs" />
     <Compile Include="Rules\DefaultActivityStatus.cs" />
     <Compile Include="Rules\DefaultBadgeStatus.cs" />
+    <Compile Include="Rules\ImageProperSize.cs" />
     <Compile Include="Rules\NoDuplicates.cs" />
     <Compile Include="Security\CustomIdentity.cs" />
     <Compile Include="Security\CustomPrincipal.cs" />
