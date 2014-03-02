@@ -1,0 +1,6 @@
+﻿@using Magenic.BadgeApplication.Common.Interfaces
+@model IBadgeItem
+
+<a href="@Url.Action(Mvc.BadgeManager.EditBadge(Model.Id))">
+    @Html.DisplayFor(m => Model)
+</a>

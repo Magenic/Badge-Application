@@ -10,7 +10,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Rules
     {
         private IPropertyInfo ImageProptery { get; set; }
 
-        public ImageProperSize(IPropertyInfo imagePathProperty, IPropertyInfo imageProperty) : base(imagePathProperty)
+        public ImageProperSize(IPropertyInfo imagePathProperty, IPropertyInfo imageProperty)
+            : base(imagePathProperty)
         {
 
             if (imagePathProperty == null)
@@ -46,11 +47,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Rules
             {
                 try
                 {
-                    var ms = new MemoryStream(imageArray);
-                    var image = System.Drawing.Image.FromStream(ms);
-                    if (image.Height != 100 || image.Width != 85)
+                    using (var ms = new MemoryStream(imageArray))
                     {
-                        context.AddErrorResult("The supplied image must have a height of 100 and a width of 85.");
+                        var image = System.Drawing.Image.FromStream(ms);
+                        if (image.Height != 100 || image.Width != 85)
+                        {
+                            context.AddErrorResult("The supplied image must have a height of 100 and a width of 85.");
+                        }
                     }
                 }
                 catch (ArgumentException)

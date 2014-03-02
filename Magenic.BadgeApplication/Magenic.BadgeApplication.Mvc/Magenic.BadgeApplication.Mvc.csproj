@@ -596,6 +596,7 @@
     <Content Include="Views\Error\Default.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
+    <Content Include="Views\BadgeManager\_EditBadgeItem.cshtml" />
     <None Include="Web.QA.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
