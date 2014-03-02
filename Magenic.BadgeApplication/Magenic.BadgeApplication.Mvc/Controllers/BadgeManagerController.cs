@@ -177,14 +177,19 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var allActivities = await ActivityCollection.GetAllActivitiesAsync();
             var badgeEdit = await BadgeEdit.GetBadgeEditByIdAsync(id);
-            var badgeEditViewModel = new BadgeEditViewModel(allActivities, badgeEdit.BadgeActivities);
-            badgeEditViewModel.Badge = badgeEdit as BadgeEdit;
-            if (badgeEditViewModel.Badge.Priority == Int32.MaxValue)
+            if (BusinessRules.HasPermission(AuthorizationActions.EditObject, badgeEdit))
             {
-                badgeEditViewModel.Badge.Priority = 0;
+                var badgeEditViewModel = new BadgeEditViewModel(allActivities, badgeEdit.BadgeActivities);
+                badgeEditViewModel.Badge = badgeEdit as BadgeEdit;
+                if (badgeEditViewModel.Badge.Priority == Int32.MaxValue)
+                {
+                    badgeEditViewModel.Badge.Priority = 0;
+                }
+
+                return View(Mvc.BadgeManager.Views.EditBadge, badgeEditViewModel);
             }
 
-            return View(Mvc.BadgeManager.Views.EditBadge, badgeEditViewModel);
+            return RedirectToAction(Mvc.Error.AccessDenied());
         }
 
         /// <summary>
