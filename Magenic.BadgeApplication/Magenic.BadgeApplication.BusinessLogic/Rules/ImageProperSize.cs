@@ -1,8 +1,10 @@
-﻿using Csla.Core;
+﻿using System.Globalization;
+using Csla.Core;
 using Csla.Rules;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Magenic.BadgeApplication.Common.Constants;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Rules
 {
@@ -50,9 +52,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Rules
                     using (var ms = new MemoryStream(imageArray))
                     {
                         var image = System.Drawing.Image.FromStream(ms);
-                        if (image.Height != 100 || image.Width != 85)
+                        if (image.Height != ImageConstants.AllowedHeight || image.Width != ImageConstants.AllowedHeight)
                         {
-                            context.AddErrorResult("The supplied image must have a height of 100 and a width of 85.");
+                            context.AddErrorResult(string.Format(CultureInfo.CurrentCulture, "The supplied image must have a height of {0} px and a width of {1} px.", ImageConstants.AllowedHeight, ImageConstants.AllowedWidth));
                         }
                     }
                 }

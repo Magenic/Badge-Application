@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Arg.cs" />
     <Compile Include="Constants\EmployeeConstants.cs" />
+    <Compile Include="Constants\ImageConstants.cs" />
     <Compile Include="DTO\AccountInfoEditDTO.cs" />
     <Compile Include="DTO\ActivityEditDTO.cs" />
     <Compile Include="DTO\ActivityItemDTO.cs" />
