@@ -1,4 +1,5 @@
 ﻿using Csla;
+using System.Collections.Generic;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -16,5 +17,9 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// Multiple activities are not allowed to use the same name.
         /// </summary>
         string Name { get; }
+        /// <summary>
+        /// Gets the badge ids.
+        /// </summary>
+        IEnumerable<int> BadgeIds { get; }
     }
 }

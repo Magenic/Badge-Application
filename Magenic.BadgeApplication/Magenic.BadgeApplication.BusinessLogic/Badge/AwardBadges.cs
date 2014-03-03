@@ -65,9 +65,14 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1")]
         public static bool CorrectNumberOfEarnedBadges(int activityId, BadgeEditDTO potentialBadge, IList<SubmittedActivityItemDTO> previousActivities)
         {
-            var returnValue = ((previousActivities.Count(pa => pa.Status == ActivitySubmissionStatus.Complete
-                                                    && pa.ActivityId == activityId) + 1) %
-                    potentialBadge.ActivityPointsAmount == 0);
+            var returnValue = false;
+            if (potentialBadge.ActivityPointsAmount != 0)
+            {
+                returnValue = ((previousActivities.Count(pa => pa.Status == ActivitySubmissionStatus.Complete
+                                                         && pa.ActivityId == activityId) + 1) %
+                         potentialBadge.ActivityPointsAmount == 0);
+            }
+
             return returnValue;
         }
 

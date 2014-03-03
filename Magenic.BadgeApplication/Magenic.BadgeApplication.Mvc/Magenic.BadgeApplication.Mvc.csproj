@@ -174,6 +174,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attributes\HandleModelStateExceptionAttribute.cs" />
+    <Compile Include="Attributes\NoCacheAttribute.cs" />
     <Compile Include="BadgeManagerController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -185,9 +187,13 @@
     </Compile>
     <Compile Include="Controllers\BadgesController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ManageActivitiesController.cs" />
     <Compile Include="Controllers\WebApi\AccountsController.cs" />
+    <Compile Include="ErrorController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Exceptions\ModelStateException.cs" />
     <Compile Include="Extensions\BundleExtensions.cs" />
     <Compile Include="Extensions\CustomIdentityExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
@@ -200,9 +206,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="HomeController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="ManageActivitiesController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -331,6 +334,7 @@
     <Content Include="Scripts\activitiesManagement.js" />
     <Content Include="Scripts\activityPage.js" />
     <Content Include="Scripts\approveActivities.js" />
+    <Content Include="Scripts\approveBadges.js" />
     <Content Include="Scripts\badgeEditorPages.js" />
     <Content Include="Scripts\badgePage.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
@@ -341,6 +345,8 @@
     <Content Include="Scripts\bootstrap-slider.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\Badge.QA.pubxml" />
+    <None Include="Properties\PublishProfiles\Magenic Badge Application - Magenic Prod.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -552,7 +558,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <None Include="T4MVC.tt.hooks.t4" />
@@ -586,6 +591,15 @@
     <Content Include="Views\Shared\_EarnedBadgeWindow.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\PointsReportCollection.cshtml" />
     <Content Include="Views\BadgeManager\_BadgesForApproval.cshtml" />
+    <Content Include="Views\Shared\_CorporateBadgeTemplate.cshtml" />
+    <Content Include="Views\Shared\_CommunityBadgeTemplate.cshtml" />
+    <Content Include="Views\Error\Default.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\AccessDenied.cshtml" />
+    <Content Include="Views\BadgeManager\_EditBadgeItem.cshtml" />
+    <None Include="Web.QA.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.Authorization.Mock\Magenic.BadgeApplication.Authorization.Mock.csproj">
@@ -625,6 +639,18 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'QA|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>CODE_ANALYSIS;TRACE</DefineConstants>
+    <DocumentationFile>bin\Magenic.BadgeApplication.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

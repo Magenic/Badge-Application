@@ -1,4 +1,5 @@
-﻿@using Magenic.BadgeApplication.Resources
+﻿@using Magenic.BadgeApplication.BusinessLogic.Activity
+@using Magenic.BadgeApplication.Resources
 @using Magenic.BadgeApplication.Models
 @model BadgeIndexViewModel
 
@@ -23,10 +24,10 @@
 <div class="row">
     <div class="col-md-12">
         <div class="badges" data-bind="visible: showCommunityBadgeAllTab">
-            @Html.Partial(Mvc.Badges.Views._BadgeList, Model.CommunityBadges)
+            @Html.Partial(Mvc.Badges.Views._BadgeList, Model.CommunityBadges, new ViewDataDictionary() { { "AllActivities", Model.AllActivities } })
         </div>
         <div data-bind="visible: showCommunityBadgeEarnedTab">
-            @Html.Partial(Mvc.Badges.Views._EarnedBadgeList, Model.CommunityEarnedBadges)
+            @Html.Partial(Mvc.Badges.Views._EarnedBadgeList, Model.CommunityEarnedBadges, new ViewDataDictionary() { { "AllActivities", Model.AllActivities } })
         </div>
     </div>
 </div>

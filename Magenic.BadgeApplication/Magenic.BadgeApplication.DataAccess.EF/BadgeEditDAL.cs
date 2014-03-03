@@ -68,8 +68,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
         public BadgeEditDTO Update(BadgeEditDTO data)
         {
-            this.SaveToBlobStorage(data);
-
             using (var ctx = new Entities())
             {
                 ctx.Database.Connection.Open();
@@ -97,9 +95,18 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 
                 AttachChildren(ctx, data, saveBadge.BadgeId);
                 ctx.SaveChanges();
+
+                data.Id = saveBadge.BadgeId;
+                this.SaveToBlobStorage(data);
+                saveBadge.BadgePath = data.ImagePath;
+                objectState = ((IObjectContextAdapter)ctx).ObjectContext.ObjectStateManager;
+                objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgePath");
+                ctx.SaveChanges();
+
                 var badge = GetRefreshedBadgeInfo(ctx, saveBadge.BadgeId);
                 data = LoadReturnData(badge);
             }
+
             return data;
         }
 
@@ -189,8 +196,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
         public BadgeEditDTO Insert(BadgeEditDTO data)
         {
-            this.SaveToBlobStorage(data);
-
             using (var ctx = new Entities())
             {
                 ctx.Database.Connection.Open();
@@ -201,9 +206,18 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 AttachChildren(ctx, data, saveBadge.BadgeId);
                 ctx.SaveChanges();
 
+                data.Id = saveBadge.BadgeId;
+                this.SaveToBlobStorage(data);
+                saveBadge.BadgePath = data.ImagePath;
+                var objectState = ((IObjectContextAdapter)ctx).ObjectContext.ObjectStateManager;
+                objectState.GetObjectStateEntry(saveBadge).SetModifiedProperty("BadgePath");
+                ctx.SaveChanges();
+
                 var badge = GetRefreshedBadgeInfo(ctx, saveBadge.BadgeId);
                 data = LoadReturnData(badge);
             }
+
+
             return data;
         }
 

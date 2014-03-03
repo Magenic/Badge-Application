@@ -22,13 +22,13 @@ using System.Web.Routing;
 using T4Mvc;
 namespace Magenic.BadgeApplication.Controllers
 {
-    public partial class HomeController
+    public partial class ErrorController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public HomeController() { }
+        public ErrorController() { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected HomeController(Dummy d) { }
+        protected ErrorController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -46,13 +46,13 @@ namespace Magenic.BadgeApplication.Controllers
 
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public HomeController Actions { get { return Mvc.Home; } }
+        public ErrorController Actions { get { return Mvc.Error; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Home";
+        public readonly string Name = "Error";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Home";
+        public const string NameConst = "Error";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -61,12 +61,16 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string NotFound = "NotFound";
+            public readonly string AccessDenied = "AccessDenied";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string NotFound = "NotFound";
+            public const string AccessDenied = "AccessDenied";
         }
 
 
@@ -80,16 +84,20 @@ namespace Magenic.BadgeApplication.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string Index = "Index";
+                public readonly string AccessDenied = "AccessDenied";
+                public readonly string Default = "Default";
+                public readonly string NotFound = "NotFound";
             }
-            public readonly string Index = "~/Views/Home/Index.cshtml";
+            public readonly string AccessDenied = "~/Views/Error/AccessDenied.cshtml";
+            public readonly string Default = "~/Views/Error/Default.cshtml";
+            public readonly string NotFound = "~/Views/Error/NotFound.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_HomeController : Magenic.BadgeApplication.Controllers.HomeController
+    public partial class T4MVC_ErrorController : Magenic.BadgeApplication.Controllers.ErrorController
     {
-        public T4MVC_HomeController() : base(Dummy.Instance) { }
+        public T4MVC_ErrorController() : base(Dummy.Instance) { }
 
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
@@ -97,6 +105,24 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void NotFoundOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult NotFound()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.NotFound);
+            NotFoundOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void AccessDeniedOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult AccessDenied()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AccessDenied);
+            AccessDeniedOverride(callInfo);
             return callInfo;
         }
 
