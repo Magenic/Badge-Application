@@ -1,9 +1,10 @@
 ﻿@using Magenic.BadgeApplication.Models
 @using Magenic.BadgeApplication.Common.Interfaces
+@using Magenic.BadgeApplication.BusinessLogic.Activity
 @model IEnumerable<IBadgeItem>
 
 @{
-    var badgeItems = Model.ToList();
+    var badgeItems = Model.OrderBy(b => b.BadgePriority).ToList();
     var maxColumns = 5;
 }
 
@@ -24,7 +25,7 @@
                 <a href="#BadgeWindow-@badge.Id" data-toggle="modal">
                     @Html.DisplayFor(m => badge)
                 </a>
-                @Html.Partial(Mvc.Shared.Views._BadgeWindow, badge)
+                @Html.Partial(Mvc.Shared.Views._BadgeWindow, badge, new ViewDataDictionary() { { "AllActivities", ViewData["AllActivities"] as ActivityCollection } })
             }
         }
     </div>

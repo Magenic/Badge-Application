@@ -1,8 +1,11 @@
 ﻿@using Magenic.BadgeApplication.Common.Interfaces
+@using Magenic.BadgeApplication.BusinessLogic.Badge
+@using Csla.Web.Mvc
+@using Csla.Rules
 @model IEnumerable<IBadgeItem>
 
 @{
-    var list = Model.ToList();
+    var list = Model.OrderBy(b => b.BadgePriority).ToList();
     var maxColumns = 6;
 }
 
@@ -20,9 +23,7 @@
             if (col < Model.Count())
             {
                 var item = list[col];
-                <a href="@Url.Action(Mvc.BadgeManager.EditBadge(item.Id))">
-                    @Html.DisplayFor(m => item)
-                </a>
+                @Html.Partial(Mvc.BadgeManager.Views._EditBadgeItem, item)
             }
         }
     </div>

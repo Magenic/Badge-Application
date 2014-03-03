@@ -40,6 +40,18 @@
     <CodeAnalysisRuleSet>..\Magenic.BadgeApplication.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'QA|AnyCPU'">
+    <OutputPath>bin\QA\</OutputPath>
+    <DefineConstants>CODE_ANALYSIS;TRACE</DefineConstants>
+    <DocumentationFile>bin\Release\Magenic.BadgeApplication.Common.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>..\Magenic.BadgeApplication.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.2.0\lib\net40\Autofac.dll</HintPath>
@@ -62,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Arg.cs" />
     <Compile Include="Constants\EmployeeConstants.cs" />
+    <Compile Include="Constants\ImageConstants.cs" />
     <Compile Include="DTO\AccountInfoEditDTO.cs" />
     <Compile Include="DTO\ActivityEditDTO.cs" />
     <Compile Include="DTO\ActivityItemDTO.cs" />
@@ -119,6 +132,7 @@
     <Compile Include="Interfaces\IEarnedBadgeCollection.cs" />
     <Compile Include="Interfaces\IEarnedBadgeCollectionDAL.cs" />
     <Compile Include="Interfaces\IEarnedBadgeItem.cs" />
+    <Compile Include="Interfaces\IHaveBadgeStatus.cs" />
     <Compile Include="Interfaces\IIdentityCriteria.cs" />
     <Compile Include="Interfaces\IItemProcessor.cs" />
     <Compile Include="Interfaces\IObjectFactory.cs" />

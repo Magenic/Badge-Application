@@ -85,9 +85,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
 
         public static void AddObjectAuthorizationRules()
         {
-            BusinessRules.AddRule(typeof (IActivityEdit), new CanDelete(PermissionType.Administrator.ToString()));
-            BusinessRules.AddRule(typeof (ActivityEdit), new CanDelete(PermissionType.Administrator.ToString()));
-        } 
+            BusinessRules.AddRule(typeof (IActivityEdit), new CanChange(AuthorizationActions.DeleteObject, PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(ActivityEdit), new CanChange(AuthorizationActions.DeleteObject, PermissionType.Administrator.ToString()));
+        }
 
         #endregion Rules
 

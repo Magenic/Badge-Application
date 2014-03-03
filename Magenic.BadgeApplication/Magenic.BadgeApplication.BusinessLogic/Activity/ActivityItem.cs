@@ -2,6 +2,8 @@
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
@@ -24,6 +26,14 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             private set { LoadProperty(NameProperty, value); }
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "We should figure out a better way of doing this")]
+        public static readonly PropertyInfo<IEnumerable<int>> BadgeIdsProperty = RegisterProperty<IEnumerable<int>>(c => c.BadgeIds);
+        public IEnumerable<int> BadgeIds
+        {
+            get { return GetProperty(BadgeIdsProperty); }
+            private set { LoadProperty(BadgeIdsProperty, value); }
+        }
+
         #endregion Properties
 
         #region Methods
@@ -32,6 +42,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         {
             this.Id = item.Id;
             this.Name = item.Name;
+            this.BadgeIds = item.BadgeIds;
         }
 
         #endregion Methods

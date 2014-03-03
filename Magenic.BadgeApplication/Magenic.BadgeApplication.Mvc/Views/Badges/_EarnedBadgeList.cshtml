@@ -2,7 +2,8 @@
 @model IEnumerable<IEarnedBadgeItem>
 
 @{
-    var earnedBadges = Model.ToList();
+    var earnedBadges = Model.OrderBy(b => b.BadgePriority).ToList();
+    var alreadyDisplayedBadgeIds = new List<int>();
     var maxColumns = 5;
 }
 
@@ -20,10 +21,26 @@
             if (col < earnedBadges.Count())
             {
                 var earnedBadge = earnedBadges[col];
-                <a href="#EarnedBadgeWindow-@earnedBadge.Id" data-toggle="modal">
-                    @Html.DisplayFor(m => earnedBadge)
-                </a>
-                @Html.Partial(Mvc.Shared.Views._EarnedBadgeWindow, earnedBadge)
+                var uniqueIdentifier = String.Format("{0}-{1}", earnedBadge.AwardDate.ToString("yyyyMMddHHmmss"), earnedBadge.Id);
+                if (earnedBadge.DisplayOnce)
+                {
+                    if (!alreadyDisplayedBadgeIds.Contains(earnedBadge.Id))
+                    {
+                        <a href="#EarnedBadgeWindow-@uniqueIdentifier" data-toggle="modal">
+                            @Html.DisplayFor(m => earnedBadge)
+                        </a>
+                        @Html.Partial(Mvc.Shared.Views._EarnedBadgeWindow, earnedBadge)
+
+                        alreadyDisplayedBadgeIds.Add(earnedBadge.Id);
+                    }
+                }
+                else
+                {
+                    <a href="#EarnedBadgeWindow-@uniqueIdentifier" data-toggle="modal">
+                        @Html.DisplayFor(m => earnedBadge)
+                    </a>
+                    @Html.Partial(Mvc.Shared.Views._EarnedBadgeWindow, earnedBadge)
+                }
             }
         }
     </div>

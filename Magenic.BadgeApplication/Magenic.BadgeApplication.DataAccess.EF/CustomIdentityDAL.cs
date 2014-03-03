@@ -75,7 +75,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         private void AttachAndSavePermission(Entities ctx, int employeeId, Common.Enums.PermissionType permissionType)
         {
             if (!ctx.EmployeePermissions.Any(ep => ep.EmployeeId == employeeId &&
-                ep.EmployeePermissionId == (int)permissionType))
+                ep.PermissionId == (int)permissionType))
             {
                 var permission = new EmployeePermission
                 {

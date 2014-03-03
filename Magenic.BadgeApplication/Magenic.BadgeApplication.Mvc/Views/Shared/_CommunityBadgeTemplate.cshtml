@@ -1,0 +1,24 @@
+﻿@using Magenic.BadgeApplication.BusinessLogic.Badge
+@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Models
+@model BadgeEditViewModel
+
+<a href="#" data-toggle="modal" data-target=".community-badge-modal">@ApplicationResources.CommunityBadgeTemplate</a>
+<div class="modal fade community-badge-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">@ApplicationResources.CommunityBadgeHeader</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pull-right">
+                    <a href="../@Mvc.BadgeManager.ActionNames.DownloadImageTemplate?imageTemplatePath=@Model.DefaultCommunityBadgeUri">
+                        <img src="@Model.DefaultCommunityBadgeUri" alt="@Model.DefaultCommunityBadgeUri" class="pull-right" />
+                    </a>
+                </div>
+                @ApplicationResources.BadgeTemplateText
+            </div>
+        </div>
+    </div>
+</div>

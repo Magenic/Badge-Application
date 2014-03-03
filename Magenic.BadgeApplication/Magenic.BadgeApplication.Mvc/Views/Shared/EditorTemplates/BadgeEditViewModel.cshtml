@@ -80,17 +80,24 @@
             @Html.Label(ApplicationResources.RequiredActivitiesLabel)
         </div>
         <div class="editor-field">
-            @Html.ListBoxFor(bevm => bevm.SelectedActivityIds, Model.AllActivities, new { @class = "form-control selectpicker" })
+            @*@Html.ListBoxFor(bevm => bevm.SelectedActivityIds, Model.AllActivities, new { @class = "form-control selectpicker show-tick" })*@
+            @Html.DropDownListFor(bevm => bevm.SelectedActivityId, Model.AllActivities, new { @class = "form-control selectpicker show-tick" })
         </div>
     </div>
 
     <div class="col-md-5">
         <div class="editor-label">
-            @Html.LabelFor(bevm => bevm.Badge.ImagePath, ApplicationResources.BadgeNameLabel)
+            @Html.LabelFor(bevm => bevm.Badge.ImagePath, ApplicationResources.BadgeImageLabel)
         </div>
         <div class="editor-field">
-            <input name="badgeImage" type="file" class="filestyle" data-classbutton="btn btn-primary" data-classinput="form-control pull-left">
+            <input name="badgeImage" type="file" class="filestyle" onchange="setImagePath()" data-classbutton="btn btn-primary" data-classinput="form-control pull-left">
+            @Html.HiddenFor(bevm => bevm.Badge.ImagePath)
             @Html.ValidationMessageFor(bevm => bevm.Badge.ImagePath)
+        </div>
+        <div class="editor-field">
+            @Html.Partial(Mvc.Shared.Views._CorporateBadgeTemplate)
+            &nbsp;|&nbsp;
+            @Html.Partial(Mvc.Shared.Views._CommunityBadgeTemplate)
         </div>
         <div class="pull-left">
             <div class="editor-label">
@@ -114,6 +121,11 @@
         <label>
             @Html.CheckBoxFor(bevm => bevm.Badge.MultipleAwardsPossible)
             @ApplicationResources.BadgeMultipleAwardsLabel
+        </label>
+        <br /><br />
+        <label>
+            @Html.CheckBoxFor(bevm => bevm.Badge.DisplayOnce)
+            @ApplicationResources.BadgeDisplayOnceLabel
         </label>
         <br /><br />
         <div class="editor-label">

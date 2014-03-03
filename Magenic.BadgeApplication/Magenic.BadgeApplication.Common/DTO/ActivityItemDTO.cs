@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace Magenic.BadgeApplication.Common.DTO
 {
@@ -15,5 +15,9 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// The name of the activity used to identify it.
         /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// Gets or sets the activity ids.
+        /// </summary>
+        public IEnumerable<int> BadgeIds { get; set; }
     }
 }

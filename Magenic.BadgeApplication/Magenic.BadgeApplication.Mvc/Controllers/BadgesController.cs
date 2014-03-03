@@ -1,4 +1,6 @@
-﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
+﻿using Csla.Rules;
+using Csla.Web.Mvc;
+using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Models;
@@ -19,10 +21,13 @@ namespace Magenic.BadgeApplication.Controllers
         /// Handles the /Home/Index action.
         /// </summary>
         /// <returns></returns>
+        [HasPermission(AuthorizationActions.GetObject, typeof(BadgeCollection))]
         public async virtual Task<ActionResult> Index()
         {
             var allBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Unset);
             var allEarnedBadges = await EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(AuthenticatedUser.EmployeeId, BadgeType.Unset);
+            var allActivities = await ActivityCollection.GetAllActivitiesAsync();
+
             var corporateBadges = allBadges.Where(b => b.Type == BadgeType.Corporate);
             var communityBadges = allBadges.Where(b => b.Type == BadgeType.Community);
             var earnedCorporateBadges = allEarnedBadges.Where(b => b.Type == BadgeType.Corporate);
@@ -39,7 +44,7 @@ namespace Magenic.BadgeApplication.Controllers
                 SubmittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.EmployeeId),
             };
 
-            var allActivities = await ActivityCollection.GetAllActivitiesAsync();
+            badgeIndexViewModel.AllActivities = allActivities;
             badgeIndexViewModel.PossibleActivities = allActivities.Select(ai => new SelectListItem() { Text = ai.Name, Value = ai.Id.ToString(CultureInfo.CurrentCulture) });
 
             return View(badgeIndexViewModel);

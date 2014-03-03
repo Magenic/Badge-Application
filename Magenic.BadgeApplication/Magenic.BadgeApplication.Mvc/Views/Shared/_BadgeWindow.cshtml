@@ -1,7 +1,13 @@
 ﻿@using Magenic.BadgeApplication.BusinessLogic.Badge
+@using Magenic.BadgeApplication.BusinessLogic.Activity
 @using Magenic.BadgeApplication.Extensions
 @using Magenic.BadgeApplication.Resources
 @model BadgeItem
+
+@{
+    var allActivities = ViewData["AllActivities"] as ActivityCollection;
+    var activitiesForBadge = allActivities.Where(ai => ai.BadgeIds.Contains(Model.Id));
+}
 
 <div id="BadgeWindow-@Model.Id" class="modal fade">
     <div class="modal-dialog">
@@ -13,7 +19,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-3">
-                        @Html.DisplayFor(m => m)
+                        @Html.DisplayFor(bi => bi)
                     </div>
                     <div class="col-md-8">
                         @MvcHtmlString.Create(String.Format(ApplicationResources.BadgeTitle, String.Format("<b>{0}</b>", Model.Name)))
@@ -24,7 +30,13 @@
                 </div>
                 <div class="row">
                     <div class="col-md-8">
-                        Not Complete yet, need to get list of activities required for this badge.
+                        @ApplicationResources.ActivitiesRequiredForBadgeLabel
+                        <ul>
+                            @foreach (var activity in activitiesForBadge)
+                            {
+                                <li>@activity.Name</li>
+                            }
+                        </ul>
                     </div>
                 </div>
                 <div class="row">

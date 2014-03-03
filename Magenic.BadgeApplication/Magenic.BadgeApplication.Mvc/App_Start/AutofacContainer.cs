@@ -15,6 +15,7 @@ namespace Magenic.BadgeApplication
     /// <summary>
     /// This registers the autofac injected interfaces
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Autofac")]
     public static class AutofacContainer
     {
         /// <summary>
