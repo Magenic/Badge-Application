@@ -58,7 +58,7 @@ namespace Magenic.BadgeApplication.Yammer
                 yammerUser.UserID,
                 earnedBadge.Name,
                 broadcastToAll.ToString(),
-                "http://magenic.com",
+                "http://magenic.com/" + earnedBadge.Name,
                 earnedBadge.ImagePath,
                 earnedBadge.Name,
                 earnedBadge.Tagline);
