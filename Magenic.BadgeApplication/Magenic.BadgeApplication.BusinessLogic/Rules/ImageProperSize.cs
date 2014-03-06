@@ -52,7 +52,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Rules
                     using (var ms = new MemoryStream(imageArray))
                     {
                         var image = System.Drawing.Image.FromStream(ms);
-                        if (image.Height != ImageConstants.AllowedHeight || image.Width != ImageConstants.AllowedHeight)
+                        if (image.Height != ImageConstants.AllowedHeight || image.Width != ImageConstants.AllowedWidth)
                         {
                             context.AddErrorResult(string.Format(CultureInfo.CurrentCulture, "The supplied image must have a height of {0} px and a width of {1} px.", ImageConstants.AllowedHeight, ImageConstants.AllowedWidth));
                         }

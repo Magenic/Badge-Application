@@ -218,6 +218,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.BusinessRules.AddRule(new DefaultBadgeStatus(TypeProperty, BadgeStatusProperty, ApprovedByIdProperty));
 
             this.BusinessRules.AddRule(new ImageProperSize(ImagePathProperty, ImageProperty));
+            this.BusinessRules.AddRule(new HasImage(ImagePathProperty, ImageProperty));
         }
 
         public static void AddObjectAuthorizationRules()
