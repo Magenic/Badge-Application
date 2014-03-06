@@ -103,6 +103,7 @@
     <Compile Include="Rules\DateOrder.cs" />
     <Compile Include="Rules\DefaultActivityStatus.cs" />
     <Compile Include="Rules\DefaultBadgeStatus.cs" />
+    <Compile Include="Rules\HasImage.cs" />
     <Compile Include="Rules\ImageProperSize.cs" />
     <Compile Include="Rules\NoDuplicates.cs" />
     <Compile Include="Security\CustomIdentity.cs" />
