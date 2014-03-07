@@ -130,6 +130,14 @@ namespace Magenic.BadgeApplication.Controllers
             return View(Mvc.BadgeManager.Views.AddBadge, badgeEditViewModel);
         }
 
+        private void ClearModelErrors()
+        {
+            foreach (var modelValue in ModelState.Values)
+            {
+                modelValue.Errors.Clear();
+            } 
+        }
+        
         /// <summary>
         /// Adds the badge.
         /// </summary>
@@ -140,6 +148,7 @@ namespace Magenic.BadgeApplication.Controllers
         [HasPermission(AuthorizationActions.GetObject, typeof(BadgeEdit))]
         public virtual async Task<ActionResult> AddBadgePost(BadgeEditViewModel badgeEditViewModel, HttpPostedFileBase badgeImage)
         {
+            ClearModelErrors();
             var badgeEdit = BadgeEdit.CreateBadge();
             badgeEditViewModel.Badge = badgeEdit as BadgeEdit;
             if (badgeImage != null)
