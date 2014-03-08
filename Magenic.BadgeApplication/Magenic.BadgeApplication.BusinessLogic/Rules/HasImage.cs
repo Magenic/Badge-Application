@@ -5,10 +5,11 @@ using System.Collections.Generic;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Rules
 {
-    public sealed class HasImage: BusinessRule
+    public sealed class HasImage : BusinessRule
     {
         private IPropertyInfo BadgeImageProperty;
-        public HasImage(IPropertyInfo badgePathProperty, IPropertyInfo badgeImageProperty) : base(badgePathProperty)
+        public HasImage(IPropertyInfo badgePathProperty, IPropertyInfo badgeImageProperty)
+            : base(badgePathProperty)
         {
             if (badgePathProperty == null)
             {
@@ -33,10 +34,15 @@ namespace Magenic.BadgeApplication.BusinessLogic.Rules
 
         protected override void Execute(RuleContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentException("context cannot be null.");
+            }
+
             var badgePath = (string)context.InputPropertyValues[PrimaryProperty];
             var badgeImage = (byte[])context.InputPropertyValues[this.BadgeImageProperty];
 
-            if (badgePath == string.Empty && (badgeImage == null || badgeImage.Length == 0))
+            if (String.IsNullOrEmpty(badgePath) && (badgeImage == null || badgeImage.Length == 0))
             {
                 context.AddErrorResult("There must be an image set for this badge.");
             }
