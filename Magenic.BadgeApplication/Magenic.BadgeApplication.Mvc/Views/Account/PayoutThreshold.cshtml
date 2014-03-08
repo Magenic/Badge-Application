@@ -8,7 +8,7 @@
 <b>
     Payout at
 </b>
-            (25 point increments):
+            (50 point increments):
 <span class="greenEmphasis">
     @Model.PointPayoutThreshold pts
 </span>
@@ -20,7 +20,7 @@
     var htmlAttributes = new RouteValueDictionary();
     htmlAttributes.Add("data-slider-min", minValue);
     htmlAttributes.Add("data-slider-max", maxValue);
-    htmlAttributes.Add("data-slider-step", 25);
+    htmlAttributes.Add("data-slider-step", 50);
     htmlAttributes.Add("data-slider-value", @Model.PointPayoutThreshold);
     htmlAttributes.Add("data-slider-orientation", "horizontal");
     htmlAttributes.Add("class", "slider");
