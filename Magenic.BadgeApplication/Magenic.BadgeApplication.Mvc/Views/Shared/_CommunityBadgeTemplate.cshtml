@@ -1,4 +1,5 @@
 ﻿@using Magenic.BadgeApplication.BusinessLogic.Badge
+@using Magenic.BadgeApplication.Extensions
 @using Magenic.BadgeApplication.Resources
 @using Magenic.BadgeApplication.Models
 @model BadgeEditViewModel
@@ -13,9 +14,7 @@
             </div>
             <div class="modal-body">
                 <div class="pull-right">
-                    <a href="../@Mvc.BadgeManager.ActionNames.DownloadImageTemplate?imageTemplatePath=@Model.DefaultCommunityBadgeUri">
-                        <img src="@Model.DefaultCommunityBadgeUri" alt="@Model.DefaultCommunityBadgeUri" class="pull-right" />
-                    </a>
+                    @Html.ImageActionLink(Model.DefaultCommunityBadgeUri, Model.DefaultCommunityBadgeUri.ToString(), Mvc.BadgeManager.DownloadImageTemplate(@Model.DefaultCommunityBadgeUri.EncryptUri()).Result, new { @class = "pull-right" })
                 </div>
                 @ApplicationResources.BadgeTemplateText
             </div>
