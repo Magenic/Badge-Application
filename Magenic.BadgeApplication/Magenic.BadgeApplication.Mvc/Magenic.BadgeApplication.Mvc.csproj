@@ -68,6 +68,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CSLA-ASP.NET-MVC5.4.5.501\lib\net45\Csla.Web.Mvc5.dll</HintPath>
     </Reference>
+    <Reference Include="EasySec">
+      <HintPath>..\packages\EasySec.1.0\lib\net40\EasySec.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>

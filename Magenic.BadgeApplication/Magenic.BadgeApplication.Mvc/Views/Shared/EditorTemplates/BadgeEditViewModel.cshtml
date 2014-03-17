@@ -80,7 +80,6 @@
             @Html.Label(ApplicationResources.RequiredActivitiesLabel)
         </div>
         <div class="editor-field">
-            @*@Html.ListBoxFor(bevm => bevm.SelectedActivityIds, Model.AllActivities, new { @class = "form-control selectpicker show-tick" })*@
             @Html.DropDownListFor(bevm => bevm.SelectedActivityId, Model.AllActivities, new { @class = "form-control selectpicker show-tick" })
         </div>
     </div>

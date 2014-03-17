@@ -1,5 +1,6 @@
 ﻿using Csla.Rules;
 using Csla.Web.Mvc;
+using EasySec.Encryption;
 using Magenic.BadgeApplication.Attributes;
 using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
@@ -135,9 +136,9 @@ namespace Magenic.BadgeApplication.Controllers
             foreach (var modelValue in ModelState.Values)
             {
                 modelValue.Errors.Clear();
-            } 
+            }
         }
-        
+
         /// <summary>
         /// Adds the badge.
         /// </summary>
@@ -416,7 +417,10 @@ namespace Magenic.BadgeApplication.Controllers
         [HasPermission(AuthorizationActions.GetObject, typeof(BadgeEdit))]
         public async virtual Task<ActionResult> DownloadImageTemplate(string imageTemplatePath)
         {
-            var uri = new Uri(imageTemplatePath, UriKind.Absolute);
+            var encryptor = new DPAPIEncryptor();
+            var uriString = encryptor.Decrypt(imageTemplatePath);
+
+            var uri = new Uri(uriString, UriKind.Absolute);
             var contentDisposition = new ContentDisposition()
             {
                 FileName = uri.Segments.Last(),
