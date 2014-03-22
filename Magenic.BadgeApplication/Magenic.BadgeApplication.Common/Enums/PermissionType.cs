@@ -20,7 +20,7 @@ namespace Magenic.BadgeApplication.Common.Enums
         /// </summary>
         Administrator = 2,
         /// <summary>
-        /// A user with access to managerial funtions within the system.
+        /// A user with access to managerial functions within the system.
         /// </summary>
         Manager = 3
     }

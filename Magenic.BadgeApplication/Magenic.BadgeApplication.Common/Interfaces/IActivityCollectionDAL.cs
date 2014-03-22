@@ -12,8 +12,10 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <summary>
         /// Returns an <see cref="System.Collections.IEnumerable"/> for all activities in the system.
         /// </summary>
+        /// <param name="managerActivities">Return activities that can only be entered by managers.</param>
+        /// <param name="adminActivities">Return activities that can only be entered by people in the administrator role.</param>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-        Task<IEnumerable<ActivityItemDTO>> GetAllActvitiesAsync();
+        Task<IEnumerable<ActivityItemDTO>> GetAllActvitiesAsync(bool managerActivities, bool adminActivities);
     }
 }

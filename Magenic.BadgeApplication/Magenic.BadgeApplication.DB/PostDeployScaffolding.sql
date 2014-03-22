@@ -74,34 +74,53 @@ WHEN NOT MATCHED BY TARGET THEN
 
 SET IDENTITY_INSERT [dbo].[EmployeePermission]  OFF
 
+SET IDENTITY_INSERT [dbo].[ActivityEntryType]  ON
+
+MERGE INTO [dbo].[ActivityEntryType]  AS Target
+USING (VALUES
+    (1, 'Any'),
+    (2, 'Manage'),
+    (3, 'Administrator')
+)
+AS Source ([activity_entry_type_id], [entry_type_name]) 
+ON Target.ActivityEntryTypeId = Source.[activity_entry_type_id]
+WHEN MATCHED THEN 
+    UPDATE SET [EntryTypeName] = Source.[entry_type_name]
+WHEN NOT MATCHED BY TARGET THEN 
+    INSERT ([ActivityEntryTypeId], [EntryTypeName])
+    VALUES ([activity_entry_type_id], [entry_type_name]);
+
+SET IDENTITY_INSERT [dbo].[ActivityEntryType]  OFF
+
 SET IDENTITY_INSERT [dbo].[Activity]  ON
 MERGE INTO [dbo].[Activity]  AS Target
 USING (VALUES
-    (1, 'Business Referral', 'Provided a referral for new business.', 1, 1),
-    (2, 'Speaking Engagement', 'Spoke at a user group, webinar, conference, educational event or had work published in a magazine or journal.', 1, 1),
-    (3, 'Closed Business Referral', 'A new business referral was closed upon.', 1, 1),
-    (4, 'Achieved Spot Recognition', 'Given a spot recognition by your manager', 1, 1),
-    (5, 'Passed a Microsoft Certification', 'Achieved one of Microsoft''s certifications.', 0, 1),
-    (6, 'Passed a QA Certification', 'Successfully completed a QA assurance certification from ISTQB, QAI or IIST.', 0, 1),
-    (7, 'Named a MS MVP', 'Become a named Microsoft MVP.', 1, 1),
-    (8, 'Named a Magenic MVP', 'Become a named Magenic MVP.', 1, 1),
-    (9, 'Named Consultant of the Quarter', 'Named consultant of the quarter.', 1, 1),
-    (10, 'Named Consultant of the Year', 'Named consultant of the year.', 1, 1),
-    (11, 'Single Year of Service', 'Achieve another year of service.', 1, 1),
-    (12, 'Refer an Employee', 'Referral of an outside candidate that results in full-time employment.', 1, 1),
-    (13, 'Conduct a Code Dojo Session', 'Conduct or be the facilitator at a code dojo session.', 0, 1),
-    (14, 'Attend a Code Dojo Session', 'Attend a code dojo session.', 0, 1)
+    (1, 'Business Referral', 'Provided a referral for new business.', 1, 1, 2),
+    (2, 'Speaking Engagement', 'Spoke at a user group, webinar, conference, educational event or had work published in a magazine or journal.', 1, 1, 1),
+    (3, 'Closed Business Referral', 'A new business referral was closed upon.', 1, 1, 2),
+    (4, 'Achieved Spot Recognition', 'Given a spot recognition by your manager', 1, 1, 2),
+    (5, 'Passed a Microsoft Certification', 'Achieved one of Microsoft''s certifications.', 0, 1, 1),
+    (6, 'Passed a QA Certification', 'Successfully completed a QA assurance certification from ISTQB, QAI or IIST.', 0, 1, 1),
+    (7, 'Named a MS MVP', 'Become a named Microsoft MVP.', 1, 1, 1),
+    (8, 'Named a Magenic MVP', 'Become a named Magenic MVP.', 1, 1, 2),
+    (9, 'Named Consultant of the Quarter', 'Named consultant of the quarter.', 1, 1, 2),
+    (10, 'Named Consultant of the Year', 'Named consultant of the year.', 1, 1, 3),
+    (11, 'Single Year of Service', 'Achieve another year of service.', 1, 1, 3),
+    (12, 'Refer an Employee', 'Referral of an outside candidate that results in full-time employment.', 1, 1, 2),
+    (13, 'Conduct a Code Dojo Session', 'Conduct or be the facilitator at a code dojo session.', 0, 1, 1),
+    (14, 'Attend a Code Dojo Session', 'Attend a code dojo session.', 0, 1, 1)
 )
-AS Source ([activity_id], [activity_name], [activity_description], [requires_approval], [create_employee_id]) 
+AS Source ([activity_id], [activity_name], [activity_description], [requires_approval], [create_employee_id], [entry_type_id]) 
 ON Target.[ActivityId] = Source.[activity_id]
 WHEN MATCHED THEN 
     UPDATE SET [ActivityName] = Source.[activity_name],
                [ActivityDescription] = Source.[activity_description],
                [RequiresApproval] = Source.[requires_approval],
-			   [CreateEmployeeId] = Source.[create_employee_id]
+			   [CreateEmployeeId] = Source.[create_employee_id],
+			   [EntryTypeId] = Source.[entry_type_id]
 WHEN NOT MATCHED BY TARGET THEN 
-    INSERT ([ActivityId], [ActivityName], [ActivityDescription], [RequiresApproval], [CreateEmployeeId])
-    VALUES ([activity_id], [activity_name], [activity_description], [requires_approval], [create_employee_id]);
+    INSERT ([ActivityId], [ActivityName], [ActivityDescription], [RequiresApproval], [CreateEmployeeId], [EntryTypeId])
+    VALUES ([activity_id], [activity_name], [activity_description], [requires_approval], [create_employee_id], [entry_type_id]);
 
 SET IDENTITY_INSERT [dbo].[Activity]  OFF
 

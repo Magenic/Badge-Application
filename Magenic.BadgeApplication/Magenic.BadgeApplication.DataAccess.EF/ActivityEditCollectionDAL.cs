@@ -21,6 +21,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                         Name = t.ActivityName,
                         Description = t.ActivityDescription,
                         RequiresApproval = t.RequiresApproval,
+                        CreateEmployeeId = t.CreateEmployeeId,
+                        EntryType = (Common.Enums.ActivityEntryType)t.EntryTypeId
                     }).ToArrayAsync();
 
                 return activityList;

@@ -2,6 +2,7 @@
 using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;
+using Csla.Serialization.Mobile;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.BusinessLogic.Rules;
 using Magenic.BadgeApplication.Common.DTO;
@@ -9,6 +10,7 @@ using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Threading.Tasks;
+using NuGet;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
@@ -52,6 +54,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             private set { SetProperty(CreateEmployeeIdProperty, value); }
         }
 
+        public static readonly PropertyInfo<ActivityEntryType> EntryTypeProperty = RegisterProperty<ActivityEntryType>(c => c.EntryType);
+        public ActivityEntryType EntryType
+        {
+            get { return GetProperty(EntryTypeProperty); }
+            set { SetProperty(EntryTypeProperty, value); }
+        }
+
         #endregion Properties
 
         #region Factory Methods
@@ -78,6 +87,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             this.BusinessRules.AddRule(new Required(NameProperty));
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, RequiresApprovalProperty, PermissionType.Administrator.ToString()));
             this.BusinessRules.AddRule(new MinValue<int>(CreateEmployeeIdProperty, 1));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, EntryTypeProperty, PermissionType.Administrator.ToString()));
 
             // Only run this rule if the associated properties are otherwise valid.
             this.BusinessRules.AddRule(new NoDuplicates(NameProperty, IdProperty, NameExists) { Priority = 1 });
@@ -85,7 +95,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
 
         public static void AddObjectAuthorizationRules()
         {
-            BusinessRules.AddRule(typeof (IActivityEdit), new CanChange(AuthorizationActions.DeleteObject, PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(IActivityEdit), new CanChange(AuthorizationActions.EditObject, PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(ActivityEdit), new CanChange(AuthorizationActions.EditObject, PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(IActivityEdit), new CanChange(AuthorizationActions.DeleteObject, PermissionType.Administrator.ToString()));
             BusinessRules.AddRule(typeof(ActivityEdit), new CanChange(AuthorizationActions.DeleteObject, PermissionType.Administrator.ToString()));
         }
 
@@ -103,6 +115,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         {
             base.DataPortal_Create();
             this.LoadProperty(CreateEmployeeIdProperty, ((ICustomPrincipal)ApplicationContext.User).CustomIdentity().EmployeeId);
+            this.LoadProperty(EntryTypeProperty, ActivityEntryType.Any);
         }
 
         private async Task DataPortal_Fetch(int activityEditId)
@@ -149,6 +162,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                 returnValue.Name = this.Name;
                 returnValue.RequiresApproval = this.RequiresApproval;
                 returnValue.CreateEmployeeId = this.CreateEmployeeId;
+                returnValue.EntryType = this.EntryType;
             }
             return returnValue;
         }
@@ -162,6 +176,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                 this.Description = item.Description;
                 this.RequiresApproval = item.RequiresApproval;
                 this.CreateEmployeeId = item.CreateEmployeeId;
+                this.EntryType = item.EntryType;
             }
         }
 

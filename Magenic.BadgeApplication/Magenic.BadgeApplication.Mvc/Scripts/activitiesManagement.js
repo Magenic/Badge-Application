@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     var canEditRequiresApproval = $('#CanEditRequiresApproval').val() === 'true';
+    var canEditEntryType = $('#CanEditEntryType').val() === 'true';
 
     //Prepare jtable plugin
     $('#ActivitiesTable').jtable({
@@ -31,7 +32,16 @@
                 defaultValue: false,
                 values: { 'false': 'Approval not required', 'true': 'Approval required' },
                 create: canEditRequiresApproval,
-                edit: canEditRequiresApproval,
+                edit: canEditRequiresApproval
+            },
+            EntryType: {
+                title: 'Allowed Role',
+                type: 'combobox',
+                defaultValue: '1',
+                options: { 1: 'All Users', 2: 'Managers Only', 3: 'Administrators' },
+                list: false,
+                create: canEditEntryType,
+                edit: canEditRequiresApproval
             }
         }
     });
