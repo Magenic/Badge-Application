@@ -25,9 +25,11 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public string ActivityDescription { get; set; }
         public bool RequiresApproval { get; set; }
         public int CreateEmployeeId { get; set; }
+        public int EntryTypeId { get; set; }
     
         public virtual ICollection<BadgeActivity> BadgeActivities { get; set; }
         public virtual ICollection<ActivitySubmission> ActivitySubmissions { get; set; }
         public virtual Employee Employee { get; set; }
+        public virtual ActivityEntryType ActivityEntryType { get; set; }
     }
 }

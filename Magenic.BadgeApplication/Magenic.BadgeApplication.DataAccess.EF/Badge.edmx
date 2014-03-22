@@ -14,6 +14,14 @@
           <Property Name="ActivityDescription" Type="varchar(max)" />
           <Property Name="RequiresApproval" Type="bit" Nullable="false" />
           <Property Name="CreateEmployeeId" Type="int" Nullable="false" />
+          <Property Name="EntryTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActivityEntryType">
+          <Key>
+            <PropertyRef Name="ActivityEntryTypeId" />
+          </Key>
+          <Property Name="ActivityEntryTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntryTypeName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="ActivitySubmission">
           <Key>
@@ -242,6 +250,18 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <Property Name="AwardAmount" Type="int" Nullable="false" />
           <Property Name="PaidOut" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Activity_ActivityEntryType">
+          <End Role="ActivityEntryType" Type="Self.ActivityEntryType" Multiplicity="1" />
+          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActivityEntryType">
+              <PropertyRef Name="ActivityEntryTypeId" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="EntryTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Activity_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
           <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
@@ -520,6 +540,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
         </Association>
         <EntityContainer Name="MagenicBadgeApplicationDBModelStoreContainer">
           <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActivityEntryType" EntityType="Self.ActivityEntryType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActivitySubmission" EntityType="Self.ActivitySubmission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Badge" EntityType="Self.Badge" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BadgeActivity" EntityType="Self.BadgeActivity" Schema="dbo" store:Type="Tables" />
@@ -587,6 +608,10 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
     [EarnedBadges].[PaidOut] AS [PaidOut]
     FROM [dbo].[EarnedBadges] AS [EarnedBadges]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_Activity_ActivityEntryType" Association="Self.FK_Activity_ActivityEntryType">
+            <End Role="ActivityEntryType" EntitySet="ActivityEntryType" />
+            <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
           <AssociationSet Name="FK_Activity_Employee" Association="Self.FK_Activity_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Activity" EntitySet="Activity" />
@@ -696,6 +721,8 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <NavigationProperty Name="ActivitySubmissions" Relationship="Magenic.BadgeApplication.DBModel.fk_ActivitySubmission_Activity" FromRole="Activity" ToRole="ActivitySubmission" />
           <Property Name="CreateEmployeeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="Magenic.BadgeApplication.DBModel.FK_Activity_Employee" FromRole="Activity" ToRole="Employee" />
+          <Property Name="EntryTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ActivityEntryType" Relationship="Magenic.BadgeApplication.DBModel.FK_Activity_ActivityEntryType" FromRole="Activity" ToRole="ActivityEntryType" />
         </EntityType>
         <EntityType Name="BadgeActivity">
           <Key>
@@ -868,6 +895,11 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <AssociationSet Name="FK_Badge_ToCreateEmployee" Association="Magenic.BadgeApplication.DBModel.FK_Badge_ToCreateEmployee">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Badge" EntitySet="Badges" />
+          </AssociationSet>
+          <EntitySet Name="ActivityEntryTypes" EntityType="Magenic.BadgeApplication.DBModel.ActivityEntryType" />
+          <AssociationSet Name="FK_Activity_ActivityEntryType" Association="Magenic.BadgeApplication.DBModel.FK_Activity_ActivityEntryType">
+            <End Role="ActivityEntryType" EntitySet="ActivityEntryTypes" />
+            <End Role="Activity" EntitySet="Activities" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="BadgePrerequisite">
@@ -1349,6 +1381,26 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ActivityEntryType">
+          <Key>
+            <PropertyRef Name="ActivityEntryTypeId" />
+          </Key>
+          <Property Name="ActivityEntryTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntryTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activities" Relationship="Magenic.BadgeApplication.DBModel.FK_Activity_ActivityEntryType" FromRole="ActivityEntryType" ToRole="Activity" />
+        </EntityType>
+        <Association Name="FK_Activity_ActivityEntryType">
+          <End Type="Magenic.BadgeApplication.DBModel.ActivityEntryType" Role="ActivityEntryType" Multiplicity="1" />
+          <End Type="Magenic.BadgeApplication.DBModel.Activity" Role="Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActivityEntryType">
+              <PropertyRef Name="ActivityEntryTypeId" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="EntryTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1358,6 +1410,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <EntitySetMapping Name="Activities">
             <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.Activity">
               <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="EntryTypeId" ColumnName="EntryTypeId" />
                 <ScalarProperty Name="CreateEmployeeId" ColumnName="CreateEmployeeId" />
                 <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
                 <ScalarProperty Name="ActivityName" ColumnName="ActivityName" />
@@ -1572,6 +1625,14 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActivityEntryTypes">
+            <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.ActivityEntryType">
+              <MappingFragment StoreEntitySet="ActivityEntryType">
+                <ScalarProperty Name="EntryTypeName" ColumnName="EntryTypeName" />
+                <ScalarProperty Name="ActivityEntryTypeId" ColumnName="ActivityEntryTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

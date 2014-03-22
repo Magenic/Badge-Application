@@ -95,6 +95,9 @@
     <Compile Include="ActivityEditCollectionDAL.cs" />
     <Compile Include="ActivityCollectionDAL.cs" />
     <Compile Include="ActivityEditDAL.cs" />
+    <Compile Include="ActivityEntryType.cs">
+      <DependentUpon>Badge.tt</DependentUpon>
+    </Compile>
     <Compile Include="ActivitySubmission.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>

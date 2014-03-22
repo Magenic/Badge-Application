@@ -54,11 +54,14 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
         [HttpPost]
-        [HasPermission(AuthorizationActions.EditObject, typeof(ActivityEdit))]
         public async Task<JsonResult> Update(int id)
         {
             var activityEdit = await ActivityEdit.GetActivityEditByIdAsync(id);
             TryUpdateModel(activityEdit);
+            if (!BusinessRules.HasPermission(AuthorizationActions.EditObject, activityEdit))
+            {
+                return Json(new { Result = "ERROR", Message = "You do not have access to edit this object." });
+            }
             if (await SaveObjectAsync(activityEdit, true))
             {
                 return Json(new { Result = "OK" });
@@ -72,10 +75,13 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        [HasPermission(AuthorizationActions.DeleteObject, typeof(ActivityEdit))]
         public async virtual Task<JsonResult> Delete(int id)
         {
             var activityEdit = await ActivityEdit.GetActivityEditByIdAsync(id);
+            if (!BusinessRules.HasPermission(AuthorizationActions.DeleteObject, activityEdit))
+            {
+                return Json(new { Result = "ERROR", Message = "You do not have access to delete this object." });
+            }
 
             activityEdit.Delete();
             await SaveObjectAsync(activityEdit, true);

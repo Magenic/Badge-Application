@@ -122,7 +122,7 @@ namespace Magenic.BadgeApplication.Controllers
         [HasPermission(AuthorizationActions.GetObject, typeof(BadgeEdit))]
         public async virtual Task<ActionResult> AddBadge()
         {
-            var allActivities = await ActivityCollection.GetAllActivitiesAsync();
+            var allActivities = await ActivityCollection.GetAllActivitiesAsync(false);
             var badgeEdit = BadgeEdit.CreateBadge();
             var badgeEditViewModel = new BadgeEditViewModel(allActivities);
             badgeEditViewModel.Badge = badgeEdit as BadgeEdit;
@@ -185,7 +185,7 @@ namespace Magenic.BadgeApplication.Controllers
         [HasPermission(AuthorizationActions.GetObject, typeof(BadgeEdit))]
         public virtual async Task<ActionResult> EditBadge(int id)
         {
-            var allActivities = await ActivityCollection.GetAllActivitiesAsync();
+            var allActivities = await ActivityCollection.GetAllActivitiesAsync(false);
             var badgeEdit = await BadgeEdit.GetBadgeEditByIdAsync(id);
             if (BusinessRules.HasPermission(AuthorizationActions.EditObject, badgeEdit))
             {

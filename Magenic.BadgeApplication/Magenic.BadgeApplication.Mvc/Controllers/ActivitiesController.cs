@@ -28,7 +28,7 @@ namespace Magenic.BadgeApplication.Controllers
                 SubmittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.EmployeeId),
             };
 
-            var allActivities = await ActivityCollection.GetAllActivitiesAsync();
+            var allActivities = await ActivityCollection.GetAllActivitiesAsync(true);
             activityIndexViewModel.PossibleActivities = allActivities.Select(ai => new SelectListItem() { Text = ai.Name, Value = ai.Id.ToString(CultureInfo.CurrentCulture) });
             activityIndexViewModel.PreviousActivities = await SubmittedActivityCollection.GetSubmittedActivitiesByEmployeeIdAsync(AuthenticatedUser.EmployeeId, null, null);
 

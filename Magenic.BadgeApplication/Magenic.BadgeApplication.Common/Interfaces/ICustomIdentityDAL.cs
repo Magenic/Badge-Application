@@ -29,7 +29,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <summary>
         /// Saves manager information for a given employee.
         /// </summary>
-        /// <param name="customIdentity">Information about an employee, including their manager informaiton.</param>
+        /// <param name="customIdentity">Information about an employee, including their manager information.</param>
         void SaveManagerInfo(AuthorizeLogOnDTO customIdentity);
         /// <summary>
         /// Checks to see if any other employees list the given employee as a manager.  If so

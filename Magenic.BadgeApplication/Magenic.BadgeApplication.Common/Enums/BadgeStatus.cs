@@ -26,5 +26,4 @@ namespace Magenic.BadgeApplication.Common.Enums
         /// </summary>
         Denied = 3,
     }
-
 }
