@@ -135,5 +135,19 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 }
             }
         }
+
+        public void SetTerminationDate(string employeeADName, System.DateTime? termDate)
+        {
+            using (var ctx = new Entities())
+            {
+                ctx.Database.Connection.Open();
+                var employee = ctx.Employees.SingleOrDefault(e => e.ADName == employeeADName);
+                if (employee != null)
+                {
+                    employee.EmploymentEndDate = termDate;
+                }
+                ctx.SaveChanges();
+            }
+        }
     }
 }

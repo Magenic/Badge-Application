@@ -26,11 +26,12 @@ namespace Magenic.BadgeApplication.Authorization
             var aDPath = ConfigurationManager.AppSettings["EmployeeADPath"];
             var searchString = ConfigurationManager.AppSettings["EmployeeSearchString"];
 
-            var returnValue = new AuthorizeLogOnDTO();
+            AuthorizeLogOnDTO returnValue = null;
             var results = SearchForADUserInfo(string.Format(CultureInfo.CurrentCulture,
-                    "(&(objectCategory=Person)(objectClass=user)(sAMAccountName={0}))", userName), aDPath);
+                    searchString, userName), aDPath);
             if (results.Count > 0)
             {
+                returnValue = new AuthorizeLogOnDTO();
                 var result = results[0];
                 returnValue.LastName = GetPropertyString(result, "sn");
                 returnValue.FirstName = GetPropertyString(result, "givenname");

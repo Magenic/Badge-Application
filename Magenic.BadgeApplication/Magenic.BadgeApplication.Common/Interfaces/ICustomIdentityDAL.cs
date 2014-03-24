@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Magenic.BadgeApplication.Common.DTO;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
@@ -38,5 +39,11 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <param name="employeeADName">The active directory name of the person to check
         /// to see if he is a manager.</param>
         void SetManagerPermission(string employeeADName);
+        /// <summary>
+        /// Set the termination date on the record with the give AD name.
+        /// </summary>
+        /// <param name="employeeADName">The ad name to set the termination date for.</param>
+        /// <param name="termDate">The termination date, send as null to clear the termination date.</param>
+        void SetTerminationDate(string employeeADName, DateTime? termDate);
     }
 }

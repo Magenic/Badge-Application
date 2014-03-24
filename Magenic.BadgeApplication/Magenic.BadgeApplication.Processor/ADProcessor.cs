@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Linq;
 using Autofac;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common;
@@ -22,9 +23,11 @@ namespace Magenic.BadgeApplication.Processor
                     var adDal = IoC.Container.Resolve<IAuthorizeLogOn>();
                     var dal = IoC.Container.Resolve<ICustomIdentityDAL>();
 
-                    var employees = adDal.RetrieveActiveUsers();
+                    var employees = adDal.RetrieveActiveUsers().AsQueryable();
 
                     InsertEmployees(employees, adDal, dal);
+
+                    MarkTermDateForMissingEmployees(adDal, dal);
 
                     SaveManagerInformation(employees, adDal, dal);
 
@@ -44,6 +47,20 @@ namespace Magenic.BadgeApplication.Processor
             }            
         }
 
+        private void MarkTermDateForMissingEmployees(IAuthorizeLogOn adDal, ICustomIdentityDAL dal)
+        {
+            var userCollectionDal = IoC.Container.Resolve<IUserCollectionDAL>();
+            var userCollection = userCollectionDal.GetActiveAdUsers();
+
+            foreach (var userName in userCollection)
+            {
+                if (adDal.RetrieveUserInformation(userName) == null)
+                {
+                    dal.SetTerminationDate(userName, DateTime.UtcNow);
+                }
+            }
+        }
+
         private int SleepInterval
         {
             get { return int.Parse(ConfigurationManager.AppSettings["SleepIntervalInMilliseconds"]); }
@@ -60,18 +77,10 @@ namespace Magenic.BadgeApplication.Processor
 
         private void InsertEmployees(IEnumerable<string> employees, IAuthorizeLogOn adDal, ICustomIdentityDAL dal)
         {
-            try
+            foreach (var employeeADName in employees)
             {
-                foreach (var employeeADName in employees)
-                {
-                    var result = Task.Run(() => dal.RetrieveIdentityAsync(employeeADName)).Result ??
-                                 InsertUserInfoFromAD(adDal, dal, employeeADName);
-                }
-            }
-            catch (Exception ex)
-            {
-                
-                throw ex;
+                var result = Task.Run(() => dal.RetrieveIdentityAsync(employeeADName)).Result ??
+                                InsertUserInfoFromAD(adDal, dal, employeeADName);
             }
         }
 

@@ -26,7 +26,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         string Notes { get; set; }
         /// <summary>
         /// The employee Id of the person who this badge submission is for.  
-        /// This should be the same as the id of the identity.
+        /// This should default to the user id of the current user.
         /// </summary>
         int EmployeeId { get; set; }
         /// <summary>

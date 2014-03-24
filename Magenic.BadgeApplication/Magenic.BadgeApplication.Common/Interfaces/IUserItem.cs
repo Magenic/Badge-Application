@@ -15,14 +15,18 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <summary>
         /// The employee Id of the person.
         /// </summary>
-        int EmployeeId { get; set; }
+        int EmployeeId { get; }
         /// <summary>
         /// The user's first name as reported by AD.
         /// </summary>
-        string EmployeeFirstName { get; set; }
+        string EmployeeFirstName { get; }
         /// <summary>
         /// The user's last name.
         /// </summary>
-        string EmployeeLastName { get; set; }
+        string EmployeeLastName { get; }
+        /// <summary>
+        /// The user's full name
+        /// </summary>
+        string FullName { get; }
     }
 }
