@@ -172,6 +172,7 @@
     <Compile Include="QueueItemDAL.cs" />
     <Compile Include="SubmitActivityDAL.cs" />
     <Compile Include="SubmittedActivityCollecitonDAL.cs" />
+    <Compile Include="UserCollectionDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.Common\Magenic.BadgeApplication.Common.csproj">

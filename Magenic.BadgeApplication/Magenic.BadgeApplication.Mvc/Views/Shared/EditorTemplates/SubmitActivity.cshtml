@@ -23,5 +23,10 @@
         @Html.TextAreaFor(sa => sa.Notes, new { @class = "form-control", rows = "4", cols = "10" })
         @Html.ValidationMessageFor(sa => sa.Notes)
     </div>
+    <div class="form-group">
+        @Html.LabelFor(sa => sa.EmployeeId, ApplicationResources.UserIdLabel)
+        @Html.DropDownListFor(sa => sa.EmployeeId, ViewData["AvailableUsers"] as IEnumerable<SelectListItem>, new { @class = "form-control" })
+        @Html.ValidationMessageFor(sa => sa.EmployeeId)
+    </div>
     <input type="submit" value="@ApplicationResources.SubmitButton" class="btn btn-success" />
 }

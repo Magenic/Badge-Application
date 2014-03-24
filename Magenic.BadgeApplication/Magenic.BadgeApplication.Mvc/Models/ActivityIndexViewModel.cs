@@ -32,5 +32,10 @@ namespace Magenic.BadgeApplication.Models
         /// The previous activities.
         /// </value>
         public IEnumerable<ISubmittedActivityItem> PreviousActivities { get; set; }
+
+        /// <summary>
+        /// A collection of user information that the current user is allowed to enter activities for.
+        /// </summary>
+        public IUserCollection AvailableUsers { get; set; }
     }
 }

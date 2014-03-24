@@ -72,5 +72,10 @@ namespace Magenic.BadgeApplication.Models
         /// The new activity.
         /// </value>
         public ISubmitActivity SubmittedActivity { get; set; }
+
+        /// <summary>
+        /// A collection of user information that the current user is allowed to enter activities for.
+        /// </summary>
+        public IUserCollection AvailableUsers { get; set; }
     }
 }
