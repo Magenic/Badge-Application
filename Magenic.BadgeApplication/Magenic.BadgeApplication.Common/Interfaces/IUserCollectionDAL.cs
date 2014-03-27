@@ -19,6 +19,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <param name="isManager">A <see cref="bool"/> indicating if this is a manager user.</param>
         /// <param name="isAdmin">A <see cref="bool"/> indicating if this is an administrative user.</param>
         /// <returns>A <see cref="System.Collections.Generic.IEnumerable&lt;UserItemDTO&gt;" />.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         Task<IEnumerable<UserItemDTO>> GetUsersForIdAsync(int userId, bool isManager, bool isAdmin);
 
         /// <summary>

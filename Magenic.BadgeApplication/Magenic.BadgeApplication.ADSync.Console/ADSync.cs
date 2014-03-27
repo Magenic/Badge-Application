@@ -11,7 +11,7 @@ namespace Magenic.BadgeApplication.ADSync.Console
 
         protected override void OnStart(string[] args)
         {
-            Starter.Start();
+            Starter.Start(false);
         }
 
         protected override void OnStop()

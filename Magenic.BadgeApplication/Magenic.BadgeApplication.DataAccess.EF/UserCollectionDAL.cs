@@ -38,7 +38,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 var userList = (from t in ctx.Employees
                                   where !t.EmploymentEndDate.HasValue
                                          select t.ADName);
-                return userList;
+                return userList.ToList();
             }
         }
     }
