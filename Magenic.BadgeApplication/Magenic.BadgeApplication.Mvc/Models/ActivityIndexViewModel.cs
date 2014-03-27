@@ -36,6 +36,7 @@ namespace Magenic.BadgeApplication.Models
         /// <summary>
         /// A collection of user information that the current user is allowed to enter activities for.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public IUserCollection AvailableUsers { get; set; }
     }
 }

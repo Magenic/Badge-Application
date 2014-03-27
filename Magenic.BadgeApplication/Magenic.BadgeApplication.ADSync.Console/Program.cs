@@ -19,7 +19,7 @@ namespace Magenic.BadgeApplication.ADSync.Console
             }
             else
             {
-                Starter.Start();
+                Starter.Start(true);
             }
         }
     }

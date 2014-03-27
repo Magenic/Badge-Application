@@ -9,14 +9,21 @@ namespace Magenic.BadgeApplication.ADSync.Console
 {
     public static class Starter
     {
-        public static void Start()
+        public static void Start(bool startAsConsole)
         {
             try
             {
                 AutofacBootstrapper.Init();
 
                 var adProcessor = new ADProcessor();
-                Task.Run(() => adProcessor.Start());
+                if (startAsConsole)
+                {
+                    adProcessor.Start();                    
+                }
+                else
+                {
+                    Task.Run(() => adProcessor.Start());
+                }
             }
             catch (Exception ex)
             {
