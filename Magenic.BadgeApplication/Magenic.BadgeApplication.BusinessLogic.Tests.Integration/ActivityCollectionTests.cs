@@ -12,7 +12,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         [TestMethod]
         public async Task GetActivities()
         {
-            var activityCollection = await Activity.ActivityCollection.GetAllActivitiesAsync();
+            var activityCollection = await Activity.ActivityCollection.GetAllActivitiesAsync(false);
 
             Assert.IsNotNull(activityCollection);
             Assert.IsTrue(activityCollection.Count > 0);

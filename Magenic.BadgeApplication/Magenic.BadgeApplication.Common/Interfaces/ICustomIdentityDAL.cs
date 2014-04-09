@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Magenic.BadgeApplication.Common.DTO;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
@@ -29,7 +30,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <summary>
         /// Saves manager information for a given employee.
         /// </summary>
-        /// <param name="customIdentity">Information about an employee, including their manager informaiton.</param>
+        /// <param name="customIdentity">Information about an employee, including their manager information.</param>
         void SaveManagerInfo(AuthorizeLogOnDTO customIdentity);
         /// <summary>
         /// Checks to see if any other employees list the given employee as a manager.  If so
@@ -38,5 +39,11 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <param name="employeeADName">The active directory name of the person to check
         /// to see if he is a manager.</param>
         void SetManagerPermission(string employeeADName);
+        /// <summary>
+        /// Set the termination date on the record with the give AD name.
+        /// </summary>
+        /// <param name="employeeADName">The ad name to set the termination date for.</param>
+        /// <param name="termDate">The termination date, send as null to clear the termination date.</param>
+        void SetTerminationDate(string employeeADName, DateTime? termDate);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Magenic.BadgeApplication.Common.Enums;
 
 namespace Magenic.BadgeApplication.Common.DTO
 {
@@ -29,5 +30,9 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// The id of the employee that created the activity.
         /// </summary>
         public int CreateEmployeeId { get; set; }
+        /// <summary>
+        /// Indicates what role a user needs to be in to enter activities of this type
+        /// </summary>
+        public ActivityEntryType EntryType { get; set; }
     }
 }

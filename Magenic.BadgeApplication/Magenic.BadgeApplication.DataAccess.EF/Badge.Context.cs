@@ -41,5 +41,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public virtual DbSet<QueueEventLog> QueueEventLogs { get; set; }
         public virtual DbSet<Badge> Badges { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<ActivityEntryType> ActivityEntryTypes { get; set; }
     }
 }

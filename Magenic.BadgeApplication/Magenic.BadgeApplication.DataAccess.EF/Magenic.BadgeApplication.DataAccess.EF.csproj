@@ -95,6 +95,9 @@
     <Compile Include="ActivityEditCollectionDAL.cs" />
     <Compile Include="ActivityCollectionDAL.cs" />
     <Compile Include="ActivityEditDAL.cs" />
+    <Compile Include="ActivityEntryType.cs">
+      <DependentUpon>Badge.tt</DependentUpon>
+    </Compile>
     <Compile Include="ActivitySubmission.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
@@ -169,6 +172,7 @@
     <Compile Include="QueueItemDAL.cs" />
     <Compile Include="SubmitActivityDAL.cs" />
     <Compile Include="SubmittedActivityCollecitonDAL.cs" />
+    <Compile Include="UserCollectionDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.Common\Magenic.BadgeApplication.Common.csproj">

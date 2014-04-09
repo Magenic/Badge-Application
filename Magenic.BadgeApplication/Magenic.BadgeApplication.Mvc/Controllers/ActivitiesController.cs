@@ -1,5 +1,6 @@
 ﻿using Csla.Rules;
 using Csla.Web.Mvc;
+using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
 using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.Models;
 using System.Globalization;
@@ -26,9 +27,10 @@ namespace Magenic.BadgeApplication.Controllers
             var activityIndexViewModel = new ActivityIndexViewModel()
             {
                 SubmittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.EmployeeId),
+                AvailableUsers = await UserCollection.GetAllAvailabileUsersForCurrentUserAsync(),
             };
 
-            var allActivities = await ActivityCollection.GetAllActivitiesAsync();
+            var allActivities = await ActivityCollection.GetAllActivitiesAsync(true);
             activityIndexViewModel.PossibleActivities = allActivities.Select(ai => new SelectListItem() { Text = ai.Name, Value = ai.Id.ToString(CultureInfo.CurrentCulture) });
             activityIndexViewModel.PreviousActivities = await SubmittedActivityCollection.GetSubmittedActivitiesByEmployeeIdAsync(AuthenticatedUser.EmployeeId, null, null);
 

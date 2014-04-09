@@ -13,6 +13,7 @@
 @Html.Hidden("UpdateAction", Url.Action("Update", "ManageActivities"))
 @Html.Hidden("DeleteAction", Url.Action("Delete", "ManageActivities"))
 @Html.Hidden("CanEditRequiresApproval", Html.HasPermission(AuthorizationActions.WriteProperty, Model, ActivityEdit.RequiresApprovalProperty, MvcHtmlString.Create("true"), MvcHtmlString.Create("false")))
+@Html.Hidden("CanEditEntryType", Html.HasPermission(AuthorizationActions.WriteProperty, Model, ActivityEdit.EntryTypeProperty, MvcHtmlString.Create("true"), MvcHtmlString.Create("false")))
 
 <div class="container">
     <div class="row">

@@ -1,5 +1,6 @@
 ﻿using Csla.Rules;
 using Csla.Web.Mvc;
+using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
 using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.Common.Enums;
@@ -26,7 +27,7 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var allBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Unset);
             var allEarnedBadges = await EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(AuthenticatedUser.EmployeeId, BadgeType.Unset);
-            var allActivities = await ActivityCollection.GetAllActivitiesAsync();
+            var allActivities = await ActivityCollection.GetAllActivitiesAsync(true);
 
             var corporateBadges = allBadges.Where(b => b.Type == BadgeType.Corporate);
             var communityBadges = allBadges.Where(b => b.Type == BadgeType.Community);
@@ -42,6 +43,7 @@ namespace Magenic.BadgeApplication.Controllers
                 CommunityBadges = sortedCommunityBadges,
                 CommunityEarnedBadges = earnedCommunityBadges,
                 SubmittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.EmployeeId),
+                AvailableUsers = await UserCollection.GetAllAvailabileUsersForCurrentUserAsync(),
             };
 
             badgeIndexViewModel.AllActivities = allActivities;

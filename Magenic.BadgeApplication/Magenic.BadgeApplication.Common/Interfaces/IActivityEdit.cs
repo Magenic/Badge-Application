@@ -1,4 +1,5 @@
-﻿
+﻿using Magenic.BadgeApplication.Common.Enums;
+
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
     /// <summary>
@@ -27,5 +28,9 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// to be counted towards badges and awards?
         /// </summary>
         bool RequiresApproval { get; set; }
+        /// <summary>
+        /// Indicates what role a user needs to be in to enter activities of this type
+        /// </summary>
+        ActivityEntryType EntryType { get; set; }
     }
 }

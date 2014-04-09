@@ -63,6 +63,7 @@ namespace Magenic.BadgeApplication.Models
         /// <value>
         /// All activities.
         /// </value>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public IActivityCollection AllActivities { get; set; }
 
         /// <summary>
@@ -72,5 +73,11 @@ namespace Magenic.BadgeApplication.Models
         /// The new activity.
         /// </value>
         public ISubmitActivity SubmittedActivity { get; set; }
+
+        /// <summary>
+        /// A collection of user information that the current user is allowed to enter activities for.
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public IUserCollection AvailableUsers { get; set; }
     }
 }
