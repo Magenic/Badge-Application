@@ -141,6 +141,7 @@
     <Compile Include="Interfaces\ILeaderboardCollection.cs" />
     <Compile Include="Interfaces\ILeaderboardCollectionDAL.cs" />
     <Compile Include="Interfaces\ILeaderboardItem.cs" />
+    <Compile Include="Interfaces\ILeaderboardItemDAL.cs" />
     <Compile Include="Interfaces\IObjectFactory.cs" />
     <Compile Include="Interfaces\IPointsReportCollection.cs" />
     <Compile Include="Interfaces\IPointsReportCollectionDAL.cs" />

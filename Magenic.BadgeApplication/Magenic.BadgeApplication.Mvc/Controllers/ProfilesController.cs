@@ -17,7 +17,9 @@ namespace Magenic.BadgeApplication.Controllers
         [HttpGet]
         public virtual async Task<ActionResult> Index()
         {
-            var leaderBoard = await LeaderboardCollection.GetLeaderboard();
+            var leaderBoardItem = await LeaderboardItem.GetLeaderboardForUserId(5);
+
+            var leaderBoardItems = await LeaderboardCollection.GetLeaderboardAsync();
             return View();
         }
 

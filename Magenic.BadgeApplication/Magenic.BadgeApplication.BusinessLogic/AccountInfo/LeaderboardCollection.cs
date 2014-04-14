@@ -19,7 +19,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
         /// Returns a leaderboard containing a list of users with their badges to enable counts and sorting properly.
         /// </summary>
         /// <returns>A <see cref="ILeaderboardCollection"/> of all users and their badges they have earned.</returns>
-        public async static Task<ILeaderboardCollection> GetLeaderboard()
+        public async static Task<ILeaderboardCollection> GetLeaderboardAsync()
         {
             return await IoC.Container.Resolve<IObjectFactory<ILeaderboardCollection>>().FetchAsync();
         }
@@ -33,7 +33,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
         {
             var dal = IoC.Container.Resolve<ILeaderboardCollectionDAL>();
 
-            var result = await dal.GetLeaderBoard();
+            var result = await dal.GetLeaderBoardAsync();
             this.LoadData(result);
         }
 

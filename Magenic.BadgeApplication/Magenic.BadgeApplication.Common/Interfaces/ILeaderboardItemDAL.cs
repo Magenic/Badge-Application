@@ -1,5 +1,4 @@
 ﻿using Magenic.BadgeApplication.Common.DTO;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
@@ -7,12 +6,13 @@ namespace Magenic.BadgeApplication.Common.Interfaces
     /// <summary>
     /// 
     /// </summary>
-    public interface ILeaderboardCollectionDAL
+    public interface ILeaderboardItemDAL
     {
         /// <summary>
-        /// Gets the leader board.
+        /// Gets the leaderboard item for user identifier.
         /// </summary>
+        /// <param name="employeeId">The user identifier.</param>
         /// <returns></returns>
-        Task<IEnumerable<LeaderboardItemDTO>> GetLeaderBoardAsync();
+        Task<LeaderboardItemDTO> GetLeaderboardItemForEmployeeIdAsync(int employeeId);
     }
 }

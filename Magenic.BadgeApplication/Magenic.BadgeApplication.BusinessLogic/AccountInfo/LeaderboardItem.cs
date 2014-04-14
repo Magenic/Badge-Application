@@ -1,8 +1,11 @@
-﻿using Csla;
+﻿using Autofac;
+using Csla;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
+using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
 {
@@ -49,6 +52,20 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
 
         #endregion Properties
 
+        #region Factory Methods
+
+        /// <summary>
+        /// Asynchronously returns the account information for an employee given a supplied employee id.
+        /// </summary>
+        /// <param name="employeeId">The employee id to search for.</param>
+        /// <returns>The account information for this employee.</returns>
+        public static async Task<ILeaderboardItem> GetLeaderboardForUserId(int employeeId)
+        {
+            return await IoC.Container.Resolve<IObjectFactory<ILeaderboardItem>>().FetchAsync(employeeId);
+        }
+
+        #endregion Factory Methods
+
         #region Methods
 
         /// <summary>
@@ -68,5 +85,17 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
         }
 
         #endregion Methods
+
+        #region Data Access
+
+        private async Task DataPortal_Fetch(int userId)
+        {
+            var dal = IoC.Container.Resolve<ILeaderboardItemDAL>();
+
+            var result = await dal.GetLeaderboardItemForEmployeeIdAsync(userId);
+            this.Load(result);
+        }
+
+        #endregion Data Access
     }
 }
