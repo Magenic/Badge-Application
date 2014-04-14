@@ -89,6 +89,7 @@
     <Compile Include="DTO\DTOBase.cs" />
     <Compile Include="DTO\EarnedBadgeItemDTO.cs" />
     <Compile Include="DTO\ExternalActivitySubmissionDTO.cs" />
+    <Compile Include="DTO\LeaderboardItemDTO.cs" />
     <Compile Include="DTO\PointsReportItemDTO.cs" />
     <Compile Include="DTO\QueueEventLogDTO.cs" />
     <Compile Include="DTO\QueueItemDTO.cs" />
@@ -137,6 +138,9 @@
     <Compile Include="Interfaces\IHaveBadgeStatus.cs" />
     <Compile Include="Interfaces\IIdentityCriteria.cs" />
     <Compile Include="Interfaces\IItemProcessor.cs" />
+    <Compile Include="Interfaces\ILeaderboardCollection.cs" />
+    <Compile Include="Interfaces\ILeaderboardCollectionDAL.cs" />
+    <Compile Include="Interfaces\ILeaderboardItem.cs" />
     <Compile Include="Interfaces\IObjectFactory.cs" />
     <Compile Include="Interfaces\IPointsReportCollection.cs" />
     <Compile Include="Interfaces\IPointsReportCollectionDAL.cs" />

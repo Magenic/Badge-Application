@@ -154,6 +154,7 @@
     <Compile Include="ItemStatu.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
+    <Compile Include="LeaderboardCollectionDAL.cs" />
     <Compile Include="Permission.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>

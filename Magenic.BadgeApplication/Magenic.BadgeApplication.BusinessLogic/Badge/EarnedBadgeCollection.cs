@@ -54,7 +54,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.LoadData(result);
         }
 
-        private void LoadData(IEnumerable<EarnedBadgeItemDTO> data)
+        internal void LoadData(IEnumerable<EarnedBadgeItemDTO> data)
         {
             this.IsReadOnly = false;
             foreach (EarnedBadgeItemDTO item in data)
