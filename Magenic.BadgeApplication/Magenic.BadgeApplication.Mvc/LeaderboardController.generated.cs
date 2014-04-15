@@ -22,13 +22,13 @@ using System.Web.Routing;
 using T4Mvc;
 namespace Magenic.BadgeApplication.Controllers
 {
-    public partial class ProfilesController
+    public partial class LeaderboardController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ProfilesController() { }
+        public LeaderboardController() { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected ProfilesController(Dummy d) { }
+        protected LeaderboardController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -46,19 +46,31 @@ namespace Magenic.BadgeApplication.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult ShowProfile()
+        public virtual System.Web.Mvc.ActionResult Search()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ShowProfile);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Search);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Show()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Show);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Compare()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Compare);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ProfilesController Actions { get { return Mvc.Profiles; } }
+        public LeaderboardController Actions { get { return Mvc.Leaderboard; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Profiles";
+        public readonly string Name = "Leaderboard";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Profiles";
+        public const string NameConst = "Leaderboard";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -68,7 +80,8 @@ namespace Magenic.BadgeApplication.Controllers
         {
             public readonly string Index = "Index";
             public readonly string Search = "Search";
-            public readonly string ShowProfile = "ShowProfile";
+            public readonly string Show = "Show";
+            public readonly string Compare = "Compare";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -76,7 +89,8 @@ namespace Magenic.BadgeApplication.Controllers
         {
             public const string Index = "Index";
             public const string Search = "Search";
-            public const string ShowProfile = "ShowProfile";
+            public const string Show = "Show";
+            public const string Compare = "Compare";
         }
 
 
@@ -88,11 +102,19 @@ namespace Magenic.BadgeApplication.Controllers
         {
             public readonly string searchTerm = "searchTerm";
         }
-        static readonly ActionParamsClass_ShowProfile s_params_ShowProfile = new ActionParamsClass_ShowProfile();
+        static readonly ActionParamsClass_Show s_params_Show = new ActionParamsClass_Show();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_ShowProfile ShowProfileParams { get { return s_params_ShowProfile; } }
+        public ActionParamsClass_Show ShowParams { get { return s_params_Show; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_ShowProfile
+        public class ActionParamsClass_Show
+        {
+            public readonly string userName = "userName";
+        }
+        static readonly ActionParamsClass_Compare s_params_Compare = new ActionParamsClass_Compare();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Compare CompareParams { get { return s_params_Compare; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Compare
         {
             public readonly string userName = "userName";
         }
@@ -106,14 +128,16 @@ namespace Magenic.BadgeApplication.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Index = "Index";
             }
+            public readonly string Index = "~/Views/Leaderboard/Index.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_ProfilesController : Magenic.BadgeApplication.Controllers.ProfilesController
+    public partial class T4MVC_LeaderboardController : Magenic.BadgeApplication.Controllers.LeaderboardController
     {
-        public T4MVC_ProfilesController() : base(Dummy.Instance) { }
+        public T4MVC_LeaderboardController() : base(Dummy.Instance) { }
 
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
@@ -122,15 +146,6 @@ namespace Magenic.BadgeApplication.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
-        }
-
-        partial void SearchOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
-
-        public override System.Web.Mvc.ActionResult Search()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Search);
-            SearchOverride(callInfo);
-            return callInfo;
         }
 
         partial void SearchOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string searchTerm);
@@ -143,13 +158,23 @@ namespace Magenic.BadgeApplication.Controllers
             return callInfo;
         }
 
-        partial void ShowProfileOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string userName);
+        partial void ShowOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string userName);
 
-        public override System.Web.Mvc.ActionResult ShowProfile(string userName)
+        public override System.Web.Mvc.ActionResult Show(string userName)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ShowProfile);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Show);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "userName", userName);
-            ShowProfileOverride(callInfo, userName);
+            ShowOverride(callInfo, userName);
+            return callInfo;
+        }
+
+        partial void CompareOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string userName);
+
+        public override System.Web.Mvc.ActionResult Compare(string userName)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Compare);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "userName", userName);
+            CompareOverride(callInfo, userName);
             return callInfo;
         }
 

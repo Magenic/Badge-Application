@@ -7,7 +7,7 @@ namespace Magenic.BadgeApplication.Controllers
     /// <summary>
     /// 
     /// </summary>
-    public partial class ProfilesController
+    public partial class LeaderboardController
         : BaseController
     {
         /// <summary>
@@ -17,20 +17,8 @@ namespace Magenic.BadgeApplication.Controllers
         [HttpGet]
         public virtual async Task<ActionResult> Index()
         {
-            var leaderBoardItem = await LeaderboardItem.GetLeaderboardForUserId(5);
-
-            var leaderBoardItems = await LeaderboardCollection.GetLeaderboardAsync();
-            return View();
-        }
-
-        /// <summary>
-        /// Searches this instance.
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public virtual ActionResult Search()
-        {
-            return View();
+            var leaderboardCollection = await LeaderboardCollection.GetLeaderboardAsync();
+            return View(leaderboardCollection);
         }
 
         /// <summary>
@@ -50,8 +38,18 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <param name="userName">Name of the user.</param>
         /// <returns></returns>
-        [HttpPost]
-        public virtual ActionResult ShowProfile(string userName)
+        public virtual ActionResult Show(string userName)
+        {
+            ViewBag.Test = userName;
+            return View();
+        }
+
+        /// <summary>
+        /// Compares the specified user name.
+        /// </summary>
+        /// <param name="userName">Name of the user.</param>
+        /// <returns></returns>
+        public virtual ActionResult Compare(string userName)
         {
             ViewBag.Test = userName;
             return View();

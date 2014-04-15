@@ -348,7 +348,7 @@
   <data name="BadgeDisplayOnceLabel" xml:space="preserve">
     <value>Should it be displayed only once?</value>
   </data>
-  <data name="ProfileLink" xml:space="preserve">
+  <data name="LeaderboardLink" xml:space="preserve">
     <value>Leaderboard</value>
   </data>
 </root>
