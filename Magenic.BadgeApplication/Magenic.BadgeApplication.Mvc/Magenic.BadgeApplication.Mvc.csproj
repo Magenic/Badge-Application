@@ -226,6 +226,7 @@
     <Compile Include="Models\BadgeIndexViewModel.cs" />
     <Compile Include="Models\EarnedBadgeListViewModel.cs" />
     <Compile Include="Models\BadgeManagerIndexViewModel.cs" />
+    <Compile Include="Models\LeaderboardIndexViewModel.cs" />
     <Compile Include="Models\LogOnViewModel.cs" />
     <Compile Include="Models\SubmitActivityViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
