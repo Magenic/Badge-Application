@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+﻿
 namespace Magenic.BadgeApplication.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class LeaderboardIndexViewModel
     {
     }
