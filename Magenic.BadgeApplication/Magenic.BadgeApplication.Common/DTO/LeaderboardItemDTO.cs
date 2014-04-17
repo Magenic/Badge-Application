@@ -23,6 +23,11 @@ namespace Magenic.BadgeApplication.Common.DTO
         public string EmployeeLastName { get; set; }
 
         /// <summary>
+        /// Gets or sets the name of the employee ad.
+        /// </summary>
+        public string EmployeeADName { get; set; }
+
+        /// <summary>
         /// Gets or sets the earned badges.
         /// </summary>
         public IEnumerable<EarnedBadgeItemDTO> EarnedBadges { get; set; }

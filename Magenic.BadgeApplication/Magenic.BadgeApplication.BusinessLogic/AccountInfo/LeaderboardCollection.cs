@@ -24,6 +24,16 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
             return await IoC.Container.Resolve<IObjectFactory<ILeaderboardCollection>>().FetchAsync();
         }
 
+        /// <summary>
+        /// Searches the leaderboard asynchronous.
+        /// </summary>
+        /// <param name="searchTerm">The search term.</param>
+        /// <returns></returns>
+        public async static Task<ILeaderboardCollection> SearchLeaderboardAsync(string searchTerm)
+        {
+            return await IoC.Container.Resolve<IObjectFactory<ILeaderboardCollection>>().FetchAsync(searchTerm);
+        }
+
         #endregion Factory Methods
 
         #region Data Access
@@ -32,8 +42,15 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
         private async Task DataPortal_Fetch()
         {
             var dal = IoC.Container.Resolve<ILeaderboardCollectionDAL>();
-
             var result = await dal.GetLeaderBoardAsync();
+            this.LoadData(result);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        private async Task DataPortal_Fetch(string searchTerm)
+        {
+            var dal = IoC.Container.Resolve<ILeaderboardCollectionDAL>();
+            var result = await dal.SearchLeaderboardAsync(searchTerm);
             this.LoadData(result);
         }
 

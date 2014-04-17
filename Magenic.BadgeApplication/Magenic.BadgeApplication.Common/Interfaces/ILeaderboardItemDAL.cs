@@ -11,8 +11,8 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <summary>
         /// Gets the leaderboard item for user identifier.
         /// </summary>
-        /// <param name="employeeId">The user identifier.</param>
+        /// <param name="userName">Name of the user.</param>
         /// <returns></returns>
-        Task<LeaderboardItemDTO> GetLeaderboardItemForEmployeeIdAsync(int employeeId);
+        Task<LeaderboardItemDTO> GetLeaderboardItemForUserNameAsync(string userName);
     }
 }

@@ -29,7 +29,7 @@
                         <a href="#EarnedBadgeWindow-@uniqueIdentifier" data-toggle="modal">
                             @Html.DisplayFor(m => earnedBadge)
                         </a>
-                        @Html.Partial(Mvc.Shared.Views._EarnedBadgeWindow, earnedBadge)
+                        @Html.Partial(Mvc.Badges.Views._EarnedBadgeWindow, earnedBadge)
 
                         alreadyDisplayedBadgeIds.Add(earnedBadge.Id);
                     }
@@ -39,7 +39,7 @@
                     <a href="#EarnedBadgeWindow-@uniqueIdentifier" data-toggle="modal">
                         @Html.DisplayFor(m => earnedBadge)
                     </a>
-                    @Html.Partial(Mvc.Shared.Views._EarnedBadgeWindow, earnedBadge)
+                    @Html.Partial(Mvc.Badges.Views._EarnedBadgeWindow, earnedBadge)
                 }
             }
         }

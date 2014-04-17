@@ -3,8 +3,11 @@ using Csla;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.DTO;
+using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
@@ -38,9 +41,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
             private set { LoadProperty(EmployeeLastNameProperty, value); }
         }
 
-        public string FullName
+        public static readonly PropertyInfo<string> EmployeeADNameProperty = RegisterProperty<string>(c => c.EmployeeADName);
+        public string EmployeeADName
         {
-            get { return string.Format(CultureInfo.CurrentCulture, "{0} {1}", EmployeeFirstName, EmployeeLastName); }
+            get { return GetProperty(EmployeeADNameProperty); }
+            private set { LoadProperty(EmployeeADNameProperty, value); }
         }
 
         public static readonly PropertyInfo<IEarnedBadgeCollection> EarnedBadgeCollectionProperty = RegisterProperty<IEarnedBadgeCollection>(c => c.EarnedBadges);
@@ -50,18 +55,76 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
             private set { LoadProperty(EarnedBadgeCollectionProperty, value); }
         }
 
+        public string FullName
+        {
+            get { return string.Format(CultureInfo.CurrentCulture, "{0} {1}", EmployeeFirstName, EmployeeLastName); }
+        }
+
+        public IEnumerable<IEarnedBadgeItem> EarnedCorporateBadges
+        {
+            get
+            {
+                var badges = BuildEarnedBadges(BadgeType.Corporate);
+                return badges.OrderBy(eb => eb.BadgePriority);
+            }
+        }
+
+        public IEnumerable<IEarnedBadgeItem> EarnedCommunityBadges
+        {
+            get
+            {
+                var badges = BuildEarnedBadges(BadgeType.Community);
+                return badges.OrderBy(eb => eb.BadgePriority);
+            }
+        }
+
+        public int EarnedCorporateBadgeCount
+        {
+            get { return EarnedCorporateBadges.Count(); }
+        }
+
+        public int EarnedCommunityBadgeCount
+        {
+            get { return EarnedCommunityBadges.Count(); }
+        }
+
         #endregion Properties
+
+        #region Fields
+
+        private List<IEarnedBadgeItem> BuildEarnedBadges(BadgeType badgeType)
+        {
+            var badges = new List<IEarnedBadgeItem>();
+            var earnedCorporateBadges = EarnedBadges.Where(eb => eb.Type == badgeType);
+            foreach (var earnedBadge in earnedCorporateBadges)
+            {
+                if (earnedBadge.DisplayOnce)
+                {
+                    if (!badges.Where(eb => eb.Id == earnedBadge.Id).Any())
+                    {
+                        badges.Add(earnedBadge);
+                    }
+                }
+                else
+                {
+                    badges.Add(earnedBadge);
+                }
+            }
+            return badges;
+        }
+
+        #endregion
 
         #region Factory Methods
 
         /// <summary>
-        /// Asynchronously returns the account information for an employee given a supplied employee id.
+        /// Gets the name of the leaderboard for user.
         /// </summary>
-        /// <param name="employeeId">The employee id to search for.</param>
-        /// <returns>The account information for this employee.</returns>
-        public static async Task<ILeaderboardItem> GetLeaderboardForUserId(int employeeId)
+        /// <param name="userName">Name of the user.</param>
+        /// <returns></returns>
+        public static async Task<ILeaderboardItem> GetLeaderboardForUserName(string userName)
         {
-            return await IoC.Container.Resolve<IObjectFactory<ILeaderboardItem>>().FetchAsync(employeeId);
+            return await IoC.Container.Resolve<IObjectFactory<ILeaderboardItem>>().FetchAsync(userName);
         }
 
         #endregion Factory Methods
@@ -77,6 +140,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
             this.EmployeeId = item.EmployeeId;
             this.EmployeeFirstName = item.EmployeeFirstName;
             this.EmployeeLastName = item.EmployeeLastName;
+            this.EmployeeADName = item.EmployeeADName;
 
             var earnedBadgeCollection = new EarnedBadgeCollection();
             earnedBadgeCollection.LoadData(item.EarnedBadges);
@@ -88,11 +152,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
 
         #region Data Access
 
-        private async Task DataPortal_Fetch(int userId)
+        private async Task DataPortal_Fetch(string userName)
         {
             var dal = IoC.Container.Resolve<ILeaderboardItemDAL>();
-
-            var result = await dal.GetLeaderboardItemForEmployeeIdAsync(userId);
+            var result = await dal.GetLeaderboardItemForUserNameAsync(userName);
             this.Load(result);
         }
 

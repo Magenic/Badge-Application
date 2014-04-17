@@ -17,19 +17,20 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         /// </summary>
         /// <param name="employeeId">The user identifier.</param>
         /// <returns></returns>
-        public async Task<LeaderboardItemDTO> GetLeaderboardItemForEmployeeIdAsync(int employeeId)
+        public async Task<LeaderboardItemDTO> GetLeaderboardItemForUserNameAsync(string userName)
         {
             using (var dataContext = new Entities())
             {
                 dataContext.Database.Connection.Open();
                 var leaderBoardItem = await (from emp in dataContext.Employees
                                              join eb in dataContext.EarnedBadges on emp.EmployeeId equals eb.EmployeeId into grp
-                                             where emp.EmployeeId == employeeId
+                                             where emp.ADName == userName
                                              select new LeaderboardItemDTO
                                              {
                                                  EmployeeId = emp.EmployeeId,
                                                  EmployeeFirstName = emp.FirstName,
                                                  EmployeeLastName = emp.LastName,
+                                                 EmployeeADName = emp.ADName,
                                                  EarnedBadges = grp.Select(b => new EarnedBadgeItemDTO()
                                                  {
                                                      Id = b.BadgeId,

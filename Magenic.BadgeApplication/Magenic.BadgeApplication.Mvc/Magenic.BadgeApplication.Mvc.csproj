@@ -202,6 +202,7 @@
     <Compile Include="Extensions\CustomIdentityExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
+    <Compile Include="Extensions\ILeaderboardItemExtensions.cs" />
     <Compile Include="Extensions\ImageActionLinkExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Models\BadgeIndexViewModel.cs" />
     <Compile Include="Models\EarnedBadgeListViewModel.cs" />
     <Compile Include="Models\BadgeManagerIndexViewModel.cs" />
+    <Compile Include="Models\LeaderboardCompareViewModel.cs" />
     <Compile Include="Models\LeaderboardIndexViewModel.cs" />
     <Compile Include="Models\LogOnViewModel.cs" />
     <Compile Include="Models\SubmitActivityViewModel.cs" />
@@ -596,7 +598,7 @@
     <Content Include="Views\Shared\EditorTemplates\LogOnViewModel.cshtml" />
     <Content Include="Views\BadgeManager\ManageActivities.cshtml" />
     <Content Include="Views\Shared\_BadgeWindow.cshtml" />
-    <Content Include="Views\Shared\_EarnedBadgeWindow.cshtml" />
+    <Content Include="Views\Badges\_EarnedBadgeWindow.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\PointsReportCollection.cshtml" />
     <Content Include="Views\BadgeManager\_BadgesForApproval.cshtml" />
     <Content Include="Views\Shared\_CorporateBadgeTemplate.cshtml" />
@@ -609,6 +611,8 @@
     <Content Include="Views\Leaderboard\Search.cshtml" />
     <Content Include="Views\Leaderboard\Show.cshtml" />
     <Content Include="Views\Leaderboard\Compare.cshtml" />
+    <Content Include="Views\Leaderboard\_EarnedBadgeList.cshtml" />
+    <Content Include="Views\Leaderboard\_EarnedBadgeWindow.cshtml" />
     <None Include="Web.QA.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

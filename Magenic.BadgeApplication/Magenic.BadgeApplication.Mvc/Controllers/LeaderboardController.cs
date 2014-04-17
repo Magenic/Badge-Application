@@ -1,4 +1,8 @@
 ﻿using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
+using Magenic.BadgeApplication.BusinessLogic.Badge;
+using Magenic.BadgeApplication.Common.Enums;
+using Magenic.BadgeApplication.Models;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -14,11 +18,39 @@ namespace Magenic.BadgeApplication.Controllers
         /// Indexes this instance.
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
         public virtual async Task<ActionResult> Index()
         {
             var leaderboardCollection = await LeaderboardCollection.GetLeaderboardAsync();
-            return View(leaderboardCollection);
+            var leaderboardIndexViewModel = new LeaderboardIndexViewModel();
+            var allBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Unset);
+
+            leaderboardIndexViewModel.TopTenCorporateBadgeHolders = leaderboardCollection
+                .OrderByDescending(li => li.EarnedCorporateBadgeCount)
+                .Take(10);
+
+            leaderboardIndexViewModel.TopTenCommunityBadgeHolders = leaderboardCollection
+                .OrderByDescending(li => li.EarnedCommunityBadgeCount)
+                .Take(10);
+
+            leaderboardIndexViewModel.TotalCorporateBadgeCount = allBadges
+                .Where(bi => bi.Type == BadgeType.Corporate)
+                .Count();
+
+            if (leaderboardIndexViewModel.TotalCorporateBadgeCount == 0)
+            {
+                leaderboardIndexViewModel.TotalCorporateBadgeCount = 1;
+            }
+
+            leaderboardIndexViewModel.TotalCommunityBadgeCount = allBadges
+                .Where(bi => bi.Type == BadgeType.Community)
+                .Count();
+
+            if (leaderboardIndexViewModel.TotalCommunityBadgeCount == 0)
+            {
+                leaderboardIndexViewModel.TotalCommunityBadgeCount = 1;
+            }
+
+            return View(leaderboardIndexViewModel);
         }
 
         /// <summary>
@@ -27,10 +59,10 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="searchTerm">The search term.</param>
         /// <returns></returns>
         [HttpPost]
-        public virtual ActionResult Search(string searchTerm)
+        public virtual async Task<ActionResult> Search(string searchTerm)
         {
-            ViewBag.Test = searchTerm;
-            return View();
+            var leaderboardItems = await LeaderboardCollection.SearchLeaderboardAsync(searchTerm);
+            return View(leaderboardItems);
         }
 
         /// <summary>
@@ -38,10 +70,10 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <param name="userName">Name of the user.</param>
         /// <returns></returns>
-        public virtual ActionResult Show(string userName)
+        public virtual async Task<ActionResult> Show(string userName)
         {
-            ViewBag.Test = userName;
-            return View();
+            var leaderboardItem = await LeaderboardItem.GetLeaderboardForUserName(userName);
+            return View(leaderboardItem);
         }
 
         /// <summary>
@@ -49,10 +81,18 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <param name="userName">Name of the user.</param>
         /// <returns></returns>
-        public virtual ActionResult Compare(string userName)
+        public virtual async Task<ActionResult> Compare(string userName)
         {
-            ViewBag.Test = userName;
-            return View();
+            var leftLeaderboardItem = await LeaderboardItem.GetLeaderboardForUserName(AuthenticatedUser.UserName);
+            var rightLeaderboardItem = await LeaderboardItem.GetLeaderboardForUserName(userName);
+            var allBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Unset);
+
+            var leaderboardCompareViewModel = new LeaderboardCompareViewModel();
+            leaderboardCompareViewModel.LeftLeaderboardItem = leftLeaderboardItem;
+            leaderboardCompareViewModel.RightLeaderboardItem = rightLeaderboardItem;
+            leaderboardCompareViewModel.AllBadges = allBadges;
+
+            return View(leaderboardCompareViewModel);
         }
     }
 }

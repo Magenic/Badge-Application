@@ -46,21 +46,24 @@ namespace Magenic.BadgeApplication.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Search()
+        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Search()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Search);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Search);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Show()
+        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Show()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Show);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Show);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Compare()
+        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Compare()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Compare);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Compare);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -128,9 +131,19 @@ namespace Magenic.BadgeApplication.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _EarnedBadgeList = "_EarnedBadgeList";
+                public readonly string _EarnedBadgeWindow = "_EarnedBadgeWindow";
+                public readonly string Compare = "Compare";
                 public readonly string Index = "Index";
+                public readonly string Search = "Search";
+                public readonly string Show = "Show";
             }
+            public readonly string _EarnedBadgeList = "~/Views/Leaderboard/_EarnedBadgeList.cshtml";
+            public readonly string _EarnedBadgeWindow = "~/Views/Leaderboard/_EarnedBadgeWindow.cshtml";
+            public readonly string Compare = "~/Views/Leaderboard/Compare.cshtml";
             public readonly string Index = "~/Views/Leaderboard/Index.cshtml";
+            public readonly string Search = "~/Views/Leaderboard/Search.cshtml";
+            public readonly string Show = "~/Views/Leaderboard/Show.cshtml";
         }
     }
 
@@ -150,32 +163,32 @@ namespace Magenic.BadgeApplication.Controllers
 
         partial void SearchOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string searchTerm);
 
-        public override System.Web.Mvc.ActionResult Search(string searchTerm)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Search(string searchTerm)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Search);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "searchTerm", searchTerm);
             SearchOverride(callInfo, searchTerm);
-            return callInfo;
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
         partial void ShowOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string userName);
 
-        public override System.Web.Mvc.ActionResult Show(string userName)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Show(string userName)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Show);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "userName", userName);
             ShowOverride(callInfo, userName);
-            return callInfo;
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
         partial void CompareOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string userName);
 
-        public override System.Web.Mvc.ActionResult Compare(string userName)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Compare(string userName)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Compare);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "userName", userName);
             CompareOverride(callInfo, userName);
-            return callInfo;
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
     }

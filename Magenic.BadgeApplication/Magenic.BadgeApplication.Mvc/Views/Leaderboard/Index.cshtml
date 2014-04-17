@@ -1,3 +1,92 @@
-﻿@using Magenic.BadgeApplication.Models
+﻿@using Magenic.BadgeApplication.Extensions
+@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Models
 @model LeaderboardIndexViewModel
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>@ApplicationResources.CorporateBadgeHeader</h2>
+            @foreach (var leaderboardItem in Model.TopTenCorporateBadgeHolders)
+            {
+                <div class="grayBox">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="@leaderboardItem.MediumProfilePhotoLocation()" alt="image.png" title="@leaderboardItem.EmployeeADName" /><br />
+                            <b>@leaderboardItem.FullName</b>
+                        </div>
+                        <div class="col-md-8">
+                            @Html.Partial(Mvc.Leaderboard.Views._EarnedBadgeList, leaderboardItem.EarnedCorporateBadges.Take(3))
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.ActionLink(ApplicationResources.ProfileLink, Mvc.Leaderboard.Show(leaderboardItem.EmployeeADName), new { @class = "btn btn-primary" })
+                            @Html.ActionLink(ApplicationResources.CompareLink, Mvc.Leaderboard.Compare(leaderboardItem.EmployeeADName), new { @class = "btn btn-primary" })
+                        </div>
+                        <div class="col-md-6 text-right">
+                            @leaderboardItem.EarnedCorporateBadgeCount / @Model.TotalCorporateBadgeCount earned corporate badges
+                        </div>
+                    </div>
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="@leaderboardItem.EarnedCorporateBadgeCount" aria-valuemin="0" aria-valuemax="@Model.TotalCorporateBadgeCount" style="width: @(((double) leaderboardItem.EarnedCorporateBadgeCount / Model.TotalCorporateBadgeCount) * 100)%;">
+                                    <span class="sr-only">@leaderboardItem.EarnedCorporateBadgeCount / @Model.TotalCorporateBadgeCount earned corporate badges</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+            }
+        </div>
+
+        <div class="col-md-6">
+            <h2>@ApplicationResources.CommunityBadgeHeader</h2>
+            @foreach (var leaderboardItem in Model.TopTenCommunityBadgeHolders)
+            {
+                <div class="grayBox">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="@leaderboardItem.MediumProfilePhotoLocation()" alt="image.png" title="@leaderboardItem.EmployeeADName" /><br />
+                            <b>@leaderboardItem.FullName</b>
+                        </div>
+                        <div class="col-md-8">
+                            @Html.Partial(Mvc.Leaderboard.Views._EarnedBadgeList, leaderboardItem.EarnedCommunityBadges.Take(3))
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.ActionLink(ApplicationResources.ProfileLink, Mvc.Leaderboard.Show(leaderboardItem.EmployeeADName), new { @class = "btn btn-primary" })
+                            @Html.ActionLink(ApplicationResources.CompareLink, Mvc.Leaderboard.Compare(leaderboardItem.EmployeeADName), new { @class = "btn btn-primary" })
+                        </div>
+                        <div class="col-md-6 text-right">
+                            @leaderboardItem.EarnedCommunityBadgeCount / @Model.TotalCommunityBadgeCount earned corporate badges
+                        </div>
+                    </div>
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="@leaderboardItem.EarnedCommunityBadgeCount" aria-valuemin="0" aria-valuemax="@Model.TotalCommunityBadgeCount" style="width: @(((double) leaderboardItem.EarnedCommunityBadgeCount / Model.TotalCommunityBadgeCount) * 100)%;">
+                                    <span class="sr-only">@leaderboardItem.EarnedCommunityBadgeCount / @Model.TotalCommunityBadgeCount earned corporate badges</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+            }
+        </div>
+    </div>
+</div>

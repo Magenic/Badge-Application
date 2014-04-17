@@ -1,4 +1,5 @@
 ﻿using Csla;
+using System.Collections.Generic;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -29,8 +30,33 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         string FullName { get; }
 
         /// <summary>
+        /// Gets the name of the ad.
+        /// </summary>
+        string EmployeeADName { get; }
+
+        /// <summary>
         /// Gets this employee's earned badges.
         /// </summary>
         IEarnedBadgeCollection EarnedBadges { get; }
+
+        /// <summary>
+        /// Gets the earned corporate badges.
+        /// </summary>
+        IEnumerable<IEarnedBadgeItem> EarnedCorporateBadges { get; }
+
+        /// <summary>
+        /// Gets the earned community badges.
+        /// </summary>
+        IEnumerable<IEarnedBadgeItem> EarnedCommunityBadges { get; }
+
+        /// <summary>
+        /// Gets the earned corporate badge count.
+        /// </summary>
+        int EarnedCorporateBadgeCount { get; }
+
+        /// <summary>
+        /// Gets the earned community badge count.
+        /// </summary>
+        int EarnedCommunityBadgeCount { get; }
     }
 }
