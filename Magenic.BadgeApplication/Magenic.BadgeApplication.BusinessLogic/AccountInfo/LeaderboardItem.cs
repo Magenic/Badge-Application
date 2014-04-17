@@ -95,17 +95,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
         private List<IEarnedBadgeItem> BuildEarnedBadges(BadgeType badgeType)
         {
             var badges = new List<IEarnedBadgeItem>();
-            var earnedCorporateBadges = EarnedBadges.Where(eb => eb.Type == badgeType);
-            foreach (var earnedBadge in earnedCorporateBadges)
+            var earnedBadgesOfType = EarnedBadges.Where(eb => eb.Type == badgeType);
+            foreach (var earnedBadge in earnedBadgesOfType)
             {
-                if (earnedBadge.DisplayOnce)
-                {
-                    if (!badges.Where(eb => eb.Id == earnedBadge.Id).Any())
-                    {
-                        badges.Add(earnedBadge);
-                    }
-                }
-                else
+                if (!badges.Where(eb => eb.Id == earnedBadge.Id).Any())
                 {
                     badges.Add(earnedBadge);
                 }

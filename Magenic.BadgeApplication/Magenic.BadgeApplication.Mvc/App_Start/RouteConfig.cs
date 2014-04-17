@@ -18,7 +18,7 @@ namespace Magenic.BadgeApplication
 
             routes.MapRoute(
                 name: "Profile",
-                url: "{controller}/{action}/{userName}",
+                url: "Leaderboard/{action}/{userName}",
                 defaults: new { controller = "Leaderboard", action = "Index", userName = UrlParameter.Optional }
             );
 
