@@ -1,3 +1,76 @@
-﻿@using Magenic.BadgeApplication.Common.Interfaces
+﻿@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Extensions
+@using Magenic.BadgeApplication.Common.Interfaces
 @model ILeaderboardItem
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="@Model.LargeProfilePhotoLocation()" alt="image.png" title="@Model.EmployeeADName" /><br />
+            <b>@Model.FullName</b>
+        </div>
+        <div class="col-md-8">
+            @if (Model.EarnedCorporateBadges.Count() > 0)
+            {
+                <div class="row">
+                    <h2>@ApplicationResources.CorporateBadgeHeader</h2>
+                    @foreach (var earnedBadge in Model.EarnedCorporateBadges)
+                    {
+                        <div class="grayBox">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    @Html.DisplayFor(m => earnedBadge)
+                                </div>
+                                <div class="col-md-8">
+                                    @MvcHtmlString.Create(String.Format(ApplicationResources.UnlockedAwardTitle, String.Format("<b>{0}</b>", earnedBadge.Name)))
+                                </div>
+                            </div>
+                            <div class="row">
+                                &nbsp;
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    @earnedBadge.Tagline
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            &nbsp;
+                        </div>
+                    }
+                </div>
+            }
+
+            @if (Model.EarnedCommunityBadges.Count() > 0)
+            {
+                <div class="row">
+                    <h2>@ApplicationResources.CommunityBadgeHeader</h2>
+                    @foreach (var earnedBadge in Model.EarnedCommunityBadges)
+                    {
+                        <div class="grayBox">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    @Html.DisplayFor(m => earnedBadge)
+                                </div>
+                                <div class="col-md-8">
+                                    @MvcHtmlString.Create(String.Format(ApplicationResources.UnlockedAwardTitle, String.Format("<b>{0}</b>", earnedBadge.Name)))
+                                </div>
+                            </div>
+                            <div class="row">
+                                &nbsp;
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    @earnedBadge.Tagline
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            &nbsp;
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
