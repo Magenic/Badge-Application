@@ -387,4 +387,10 @@
   <data name="RankTableNameHeader" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="CompareHeader" xml:space="preserve">
+    <value>Compare Users</value>
+  </data>
+  <data name="EarnedBadgesHeader" xml:space="preserve">
+    <value>earned badge(s)</value>
+  </data>
 </root>

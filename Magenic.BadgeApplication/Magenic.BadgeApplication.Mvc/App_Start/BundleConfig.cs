@@ -45,6 +45,7 @@ namespace Magenic.BadgeApplication
 
             bundles.Add(new StyleBundle("~/Content/css").IncludeT4MVC(
                 Links.Content.metro_bootstrap_css,
+                Links.Content.font_awesome_css,
                 Links.Content.bootstrap_datepicker_css,
                 Links.Content.bootstrap_select_css,
                 Links.Content.slider_css,

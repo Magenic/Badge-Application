@@ -21,5 +21,10 @@ namespace Magenic.BadgeApplication.Models
         /// Gets or sets all badges.
         /// </summary>
         public IBadgeCollection AllBadges { get; set; }
+
+        /// <summary>
+        /// Gets or sets all activities.
+        /// </summary>
+        public IActivityCollection AllActivities { get; set; }
     }
 }

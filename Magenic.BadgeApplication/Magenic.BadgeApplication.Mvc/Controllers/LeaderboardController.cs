@@ -1,4 +1,5 @@
 ﻿using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
+using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Models;
@@ -129,11 +130,13 @@ namespace Magenic.BadgeApplication.Controllers
             var leftLeaderboardItem = await LeaderboardItem.GetLeaderboardForUserName(AuthenticatedUser.UserName);
             var rightLeaderboardItem = await LeaderboardItem.GetLeaderboardForUserName(userName);
             var allBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Unset);
+            var allActivities = await ActivityCollection.GetAllActivitiesAsync(false);
 
             var leaderboardCompareViewModel = new LeaderboardCompareViewModel();
             leaderboardCompareViewModel.LeftLeaderboardItem = leftLeaderboardItem;
             leaderboardCompareViewModel.RightLeaderboardItem = rightLeaderboardItem;
             leaderboardCompareViewModel.AllBadges = allBadges;
+            leaderboardCompareViewModel.AllActivities = allActivities;
 
             return View(leaderboardCompareViewModel);
         }

@@ -466,6 +466,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compare Users.
+        /// </summary>
+        public static string CompareHeader {
+            get {
+                return ResourceManager.GetString("CompareHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Compare.
         /// </summary>
         public static string CompareLink {
@@ -507,6 +516,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string DateEarnedRowHeader {
             get {
                 return ResourceManager.GetString("DateEarnedRowHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to earned badge(s).
+        /// </summary>
+        public static string EarnedBadgesHeader {
+            get {
+                return ResourceManager.GetString("EarnedBadgesHeader", resourceCulture);
             }
         }
         
