@@ -1,5 +1,7 @@
 ﻿using Magenic.BadgeApplication.Common.Interfaces;
+using Magenic.BadgeApplication.Resources;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Magenic.BadgeApplication.Models
 {
@@ -27,5 +29,11 @@ namespace Magenic.BadgeApplication.Models
         /// Gets or sets the total community badge count.
         /// </summary>
         public int TotalCommunityBadgeCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the search text.
+        /// </summary>
+        [Display(ResourceType = typeof(ApplicationResources), Name = "SearchTextLabel")]
+        public string SearchText { get; set; }
     }
 }

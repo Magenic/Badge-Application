@@ -54,14 +54,57 @@ namespace Magenic.BadgeApplication.Controllers
         }
 
         /// <summary>
+        /// Lists this instance.
+        /// </summary>
+        /// <returns></returns>
+        public virtual async Task<ActionResult> Rank()
+        {
+            var leaderboardCollection = await LeaderboardCollection.GetLeaderboardAsync();
+            var leaderboardRankViewModel = new LeaderboardRankViewModel();
+            var allBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Unset);
+
+            leaderboardRankViewModel.CorporateBadgeHolders = leaderboardCollection
+                .OrderByDescending(li => li.EarnedCorporateBadgeCount);
+
+            leaderboardRankViewModel.CommunityBadgeHolders = leaderboardCollection
+                .OrderByDescending(li => li.EarnedCommunityBadgeCount);
+
+            leaderboardRankViewModel.TotalCorporateBadgeCount = allBadges
+                .Where(bi => bi.Type == BadgeType.Corporate)
+                .Count();
+
+            if (leaderboardRankViewModel.TotalCorporateBadgeCount == 0)
+            {
+                leaderboardRankViewModel.TotalCorporateBadgeCount = 1;
+            }
+
+            leaderboardRankViewModel.TotalCommunityBadgeCount = allBadges
+                .Where(bi => bi.Type == BadgeType.Community)
+                .Count();
+
+            if (leaderboardRankViewModel.TotalCommunityBadgeCount == 0)
+            {
+                leaderboardRankViewModel.TotalCommunityBadgeCount = 1;
+            }
+
+            return View(leaderboardRankViewModel);
+        }
+
+        /// <summary>
         /// Searches this instance.
         /// </summary>
-        /// <param name="searchTerm">The search term.</param>
+        /// <param name="searchText">The search text.</param>
         /// <returns></returns>
         [HttpPost]
-        public virtual async Task<ActionResult> Search(string searchTerm)
+        public virtual async Task<ActionResult> Search(string searchText)
         {
-            var leaderboardItems = await LeaderboardCollection.SearchLeaderboardAsync(searchTerm);
+            var leaderboardItems = await LeaderboardCollection.SearchLeaderboardAsync(searchText);
+            if (leaderboardItems.Count() == 1)
+            {
+                var leaderboardItem = leaderboardItems.First();
+                return RedirectToAction("Show", new { userName = leaderboardItem.EmployeeADName });
+            }
+
             return View(leaderboardItems);
         }
 

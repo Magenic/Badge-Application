@@ -82,6 +82,7 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string Rank = "Rank";
             public readonly string Search = "Search";
             public readonly string Show = "Show";
             public readonly string Compare = "Compare";
@@ -91,6 +92,7 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string Rank = "Rank";
             public const string Search = "Search";
             public const string Show = "Show";
             public const string Compare = "Compare";
@@ -103,7 +105,7 @@ namespace Magenic.BadgeApplication.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Search
         {
-            public readonly string searchTerm = "searchTerm";
+            public readonly string searchText = "searchText";
         }
         static readonly ActionParamsClass_Show s_params_Show = new ActionParamsClass_Show();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -135,6 +137,7 @@ namespace Magenic.BadgeApplication.Controllers
                 public readonly string _EarnedBadgeWindow = "_EarnedBadgeWindow";
                 public readonly string Compare = "Compare";
                 public readonly string Index = "Index";
+                public readonly string Rank = "Rank";
                 public readonly string Search = "Search";
                 public readonly string Show = "Show";
             }
@@ -142,6 +145,7 @@ namespace Magenic.BadgeApplication.Controllers
             public readonly string _EarnedBadgeWindow = "~/Views/Leaderboard/_EarnedBadgeWindow.cshtml";
             public readonly string Compare = "~/Views/Leaderboard/Compare.cshtml";
             public readonly string Index = "~/Views/Leaderboard/Index.cshtml";
+            public readonly string Rank = "~/Views/Leaderboard/Rank.cshtml";
             public readonly string Search = "~/Views/Leaderboard/Search.cshtml";
             public readonly string Show = "~/Views/Leaderboard/Show.cshtml";
         }
@@ -161,13 +165,22 @@ namespace Magenic.BadgeApplication.Controllers
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
-        partial void SearchOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string searchTerm);
+        partial void RankOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Search(string searchTerm)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Rank()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Rank);
+            RankOverride(callInfo);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        partial void SearchOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string searchText);
+
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Search(string searchText)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Search);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "searchTerm", searchTerm);
-            SearchOverride(callInfo, searchTerm);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "searchText", searchText);
+            SearchOverride(callInfo, searchText);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 

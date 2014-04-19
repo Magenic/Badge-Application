@@ -357,4 +357,34 @@
   <data name="ProfileLink" xml:space="preserve">
     <value>Profile</value>
   </data>
+  <data name="LeaderboardHeader" xml:space="preserve">
+    <value>Leaderboard</value>
+  </data>
+  <data name="SearchTextLabel" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="EarnedCommunityBadgesLabel" xml:space="preserve">
+    <value>earned community badge(s)</value>
+  </data>
+  <data name="EarnedCorporateBadgesLabel" xml:space="preserve">
+    <value>earned corporate badge(s)</value>
+  </data>
+  <data name="LeaderboardRankingHeader" xml:space="preserve">
+    <value>Leaderboard Ranking</value>
+  </data>
+  <data name="SearchResultsHeader" xml:space="preserve">
+    <value>Search Results</value>
+  </data>
+  <data name="RankTableBadgesHeader" xml:space="preserve">
+    <value>Badges</value>
+  </data>
+  <data name="RankTableCompleteHeader" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="RankTableIdHeader" xml:space="preserve">
+    <value>#</value>
+  </data>
+  <data name="RankTableNameHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
 </root>

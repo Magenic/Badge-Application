@@ -511,6 +511,24 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to earned community badge(s).
+        /// </summary>
+        public static string EarnedCommunityBadgesLabel {
+            get {
+                return ResourceManager.GetString("EarnedCommunityBadgesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to earned corporate badge(s).
+        /// </summary>
+        public static string EarnedCorporateBadgesLabel {
+            get {
+                return ResourceManager.GetString("EarnedCorporateBadgesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit a Badge.
         /// </summary>
         public static string EditBadgeHeader {
@@ -531,9 +549,27 @@ namespace Magenic.BadgeApplication.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Leaderboard.
         /// </summary>
+        public static string LeaderboardHeader {
+            get {
+                return ResourceManager.GetString("LeaderboardHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leaderboard.
+        /// </summary>
         public static string LeaderboardLink {
             get {
                 return ResourceManager.GetString("LeaderboardLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leaderboard Ranking.
+        /// </summary>
+        public static string LeaderboardRankingHeader {
+            get {
+                return ResourceManager.GetString("LeaderboardRankingHeader", resourceCulture);
             }
         }
         
@@ -673,6 +709,42 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Badges.
+        /// </summary>
+        public static string RankTableBadgesHeader {
+            get {
+                return ResourceManager.GetString("RankTableBadgesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to %.
+        /// </summary>
+        public static string RankTableCompleteHeader {
+            get {
+                return ResourceManager.GetString("RankTableCompleteHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #.
+        /// </summary>
+        public static string RankTableIdHeader {
+            get {
+                return ResourceManager.GetString("RankTableIdHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string RankTableNameHeader {
+            get {
+                return ResourceManager.GetString("RankTableNameHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reject.
         /// </summary>
         public static string RejectActivityLink {
@@ -696,6 +768,24 @@ namespace Magenic.BadgeApplication.Resources {
         public static string RequiredActivitiesLabel {
             get {
                 return ResourceManager.GetString("RequiredActivitiesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Results.
+        /// </summary>
+        public static string SearchResultsHeader {
+            get {
+                return ResourceManager.GetString("SearchResultsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string SearchTextLabel {
+            get {
+                return ResourceManager.GetString("SearchTextLabel", resourceCulture);
             }
         }
         
