@@ -38,6 +38,19 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         }
 
         /// <summary>
+        /// The description property
+        /// </summary>
+        public static readonly PropertyInfo<string> DescriptionProperty = RegisterProperty<string>(b => b.Description);
+        /// <summary>
+        /// The description of a badge.
+        /// </summary>
+        public string Description
+        {
+            get { return GetProperty(DescriptionProperty); }
+            private set { LoadProperty(DescriptionProperty, value); }
+        }
+
+        /// <summary>
         /// The type property
         /// </summary>
         public static readonly PropertyInfo<BadgeType> TypeProperty = RegisterProperty<BadgeType>(b => b.Type);
@@ -75,7 +88,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             get { return GetProperty(TaglineProperty); }
             private set { LoadProperty(TaglineProperty, value); }
         }
-        
+
         /// <summary>
         /// The award date property
         /// </summary>
@@ -88,7 +101,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             get { return GetProperty(AwardDateProperty); }
             private set { LoadProperty(AwardDateProperty, value); }
         }
-        
+
         /// <summary>
         /// The award points property
         /// </summary>
@@ -111,7 +124,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         /// </summary>
         public bool PaidOut
         {
-            get { return GetProperty(PaidOutProperty);  }
+            get { return GetProperty(PaidOutProperty); }
             private set { LoadProperty(PaidOutProperty, value); }
         }
 
@@ -144,6 +157,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         {
             this.Id = item.Id;
             this.Name = item.Name;
+            this.Description = item.Description;
             this.Type = item.Type;
             this.ImagePath = item.ImagePath;
             this.Tagline = item.Tagline;

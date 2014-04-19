@@ -22,7 +22,7 @@
                                     @Html.DisplayFor(m => earnedBadge)
                                 </div>
                                 <div class="col-md-8">
-                                    @MvcHtmlString.Create(String.Format(ApplicationResources.UnlockedAwardTitle, String.Format("<b>{0}</b>", earnedBadge.Name)))
+                                    @earnedBadge.Description
                                 </div>
                             </div>
                             <div class="row">
@@ -30,7 +30,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-8">
-                                    @earnedBadge.Tagline
+                                    @earnedBadge.Name - @earnedBadge.Tagline
                                 </div>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                                     @Html.DisplayFor(m => earnedBadge)
                                 </div>
                                 <div class="col-md-8">
-                                    @MvcHtmlString.Create(String.Format(ApplicationResources.UnlockedAwardTitle, String.Format("<b>{0}</b>", earnedBadge.Name)))
+                                    @earnedBadge.Description
                                 </div>
                             </div>
                             <div class="row">
@@ -61,7 +61,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-8">
-                                    @earnedBadge.Tagline
+                                    @earnedBadge.Name - @earnedBadge.Tagline
                                 </div>
                             </div>
                         </div>

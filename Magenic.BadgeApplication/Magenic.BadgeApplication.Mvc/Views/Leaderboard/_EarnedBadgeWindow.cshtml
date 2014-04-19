@@ -20,7 +20,7 @@
                         @Html.DisplayFor(m => m)
                     </div>
                     <div class="col-md-8">
-                        @MvcHtmlString.Create(String.Format(ApplicationResources.UnlockedAwardTitle, String.Format("<b>{0}</b>", Model.Name)))
+                        @Model.Description
                     </div>
                 </div>
                 <div class="row">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-8">
-                        @Model.Tagline
+                        @Model.Name - @Model.Tagline
                     </div>
                 </div>
             </div>

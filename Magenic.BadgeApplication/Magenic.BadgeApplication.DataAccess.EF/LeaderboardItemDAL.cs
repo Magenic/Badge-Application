@@ -35,6 +35,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                                  {
                                                      Id = b.BadgeId,
                                                      Name = b.BadgeName,
+                                                     Description = b.BadgeDescription,
                                                      Type = (Common.Enums.BadgeType)b.BadgeTypeId,
                                                      ImagePath = b.BadgePath,
                                                      Tagline = b.BadgeTagLine,
