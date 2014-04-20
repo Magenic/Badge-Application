@@ -2,7 +2,7 @@
   height: 100%;
 }
 body {
-  font-family: "Open Sans", Calibri, Candara, Arial, sans-serif !important;
+  font-family: "Open Sans", Calibri, Candara, Arial, sans-serif;
   height: 100%;
   background-color: #f2f2f2;
 }
@@ -132,7 +132,7 @@ img.profileMediumImage {
 .navbar .nav ul li a:link,
 .navbar .nav ul li a:visited {
   /* TODO: can we make this not px font, but em? */
-  font: 18px/18px Arial, HelveticaNeue, sans-serif !important;
+  font: 18px/18px Arial, HelveticaNeue, sans-serif;
   color: #d3d3d3;
   text-decoration: none;
 }
