@@ -1,0 +1,40 @@
+﻿@using Magenic.BadgeApplication.Models
+@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Extensions
+@using Magenic.BadgeApplication.Common.Interfaces
+@model ILeaderboardCollection
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>@ApplicationResources.SearchResultsHeader</h1>
+        </div>
+    </div>
+    @foreach (var leaderboardItem in Model)
+    {
+        <div class="grayBox">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="@leaderboardItem.MediumProfilePhotoLocation()" class="profileMediumImage" alt="image.png" title="@leaderboardItem.EmployeeADName" /><br />
+                    <b>@leaderboardItem.FullName</b>
+                </div>
+                <div class="col-md-8">
+                    @Html.Partial(Mvc.Leaderboard.Views._EarnedBadgeList, leaderboardItem.EarnedCorporateBadges.Take(8))
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.ActionLink(ApplicationResources.ProfileLink, Mvc.Leaderboard.Show(leaderboardItem.EmployeeADName), new { @class = "btn btn-primary" })
+                    @Html.ActionLink(ApplicationResources.CompareLink, Mvc.Leaderboard.Compare(leaderboardItem.EmployeeADName), new { @class = "btn btn-primary" })
+                </div>
+                <div class="col-md-6 text-right">
+                    @leaderboardItem.EarnedCorporateBadgeCount @ApplicationResources.EarnedCorporateBadgesLabel<br />
+                    @leaderboardItem.EarnedCommunityBadgeCount @ApplicationResources.EarnedCommunityBadgesLabel
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            &nbsp;
+        </div>
+    }
+</div>

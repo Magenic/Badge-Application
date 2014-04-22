@@ -22,6 +22,7 @@ public static class Mvc
     public static Magenic.BadgeApplication.Controllers.BadgeManagerController BadgeManager = new Magenic.BadgeApplication.Controllers.T4MVC_BadgeManagerController();
     public static Magenic.BadgeApplication.Controllers.BadgesController Badges = new Magenic.BadgeApplication.Controllers.T4MVC_BadgesController();
     public static Magenic.BadgeApplication.Controllers.ErrorController Error = new Magenic.BadgeApplication.Controllers.T4MVC_ErrorController();
+    public static Magenic.BadgeApplication.Controllers.LeaderboardController Leaderboard = new Magenic.BadgeApplication.Controllers.T4MVC_LeaderboardController();
     public static Magenic.BadgeApplication.Controllers.ManageActivitiesController ManageActivities = new Magenic.BadgeApplication.Controllers.T4MVC_ManageActivitiesController();
     public static T4Mvc.SharedController Shared = new T4Mvc.SharedController();
 }
@@ -430,6 +431,8 @@ namespace Links
 
         public static readonly string knockout_3_0_0_debug_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/knockout-3.0.0.debug.min.js") ? Url("knockout-3.0.0.debug.min.js") : Url("knockout-3.0.0.debug.js");
         public static readonly string knockout_3_0_0_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/knockout-3.0.0.min.js") ? Url("knockout-3.0.0.min.js") : Url("knockout-3.0.0.js");
+        public static readonly string less_1_5_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/less-1.5.1.min.js") ? Url("less-1.5.1.min.js") : Url("less-1.5.1.js");
+        public static readonly string less_1_5_1_min_js = Url("less-1.5.1.min.js");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class locales
         {
@@ -499,6 +502,54 @@ namespace Links
         private const string URLPATH = "~/Content";
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class bootstrap
+        {
+            private const string URLPATH = "~/Content/bootstrap";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string alerts_less = Url("alerts.less");
+            public static readonly string badges_less = Url("badges.less");
+            public static readonly string bootstrap_less = Url("bootstrap.less");
+            public static readonly string breadcrumbs_less = Url("breadcrumbs.less");
+            public static readonly string button_groups_less = Url("button-groups.less");
+            public static readonly string buttons_less = Url("buttons.less");
+            public static readonly string carousel_less = Url("carousel.less");
+            public static readonly string close_less = Url("close.less");
+            public static readonly string code_less = Url("code.less");
+            public static readonly string component_animations_less = Url("component-animations.less");
+            public static readonly string dropdowns_less = Url("dropdowns.less");
+            public static readonly string forms_less = Url("forms.less");
+            public static readonly string glyphicons_less = Url("glyphicons.less");
+            public static readonly string grid_less = Url("grid.less");
+            public static readonly string input_groups_less = Url("input-groups.less");
+            public static readonly string jumbotron_less = Url("jumbotron.less");
+            public static readonly string labels_less = Url("labels.less");
+            public static readonly string list_group_less = Url("list-group.less");
+            public static readonly string media_less = Url("media.less");
+            public static readonly string mixins_less = Url("mixins.less");
+            public static readonly string modals_less = Url("modals.less");
+            public static readonly string navbar_less = Url("navbar.less");
+            public static readonly string navs_less = Url("navs.less");
+            public static readonly string normalize_less = Url("normalize.less");
+            public static readonly string pager_less = Url("pager.less");
+            public static readonly string pagination_less = Url("pagination.less");
+            public static readonly string panels_less = Url("panels.less");
+            public static readonly string popovers_less = Url("popovers.less");
+            public static readonly string print_less = Url("print.less");
+            public static readonly string progress_bars_less = Url("progress-bars.less");
+            public static readonly string responsive_utilities_less = Url("responsive-utilities.less");
+            public static readonly string scaffolding_less = Url("scaffolding.less");
+            public static readonly string tables_less = Url("tables.less");
+            public static readonly string theme_less = Url("theme.less");
+            public static readonly string thumbnails_less = Url("thumbnails.less");
+            public static readonly string tooltip_less = Url("tooltip.less");
+            public static readonly string type_less = Url("type.less");
+            public static readonly string utilities_less = Url("utilities.less");
+            public static readonly string variables_less = Url("variables.less");
+            public static readonly string wells_less = Url("wells.less");
+        }
+
         public static readonly string bootstrap_datepicker_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-datepicker.min.css") ? Url("bootstrap-datepicker.min.css") : Url("bootstrap-datepicker.css");
 
         public static readonly string bootstrap_select_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-select.min.css") ? Url("bootstrap-select.min.css") : Url("bootstrap-select.css");
@@ -509,6 +560,21 @@ namespace Links
         public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
 
         public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
+        public static readonly string font_awesome_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/font-awesome.min.css") ? Url("font-awesome.min.css") : Url("font-awesome.css");
+
+        public static readonly string font_awesome_min_css = Url("font-awesome.min.css");
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class fonts
+        {
+            private const string URLPATH = "~/Content/fonts";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string glyphicons_halflings_regular_eot = Url("glyphicons-halflings-regular.eot");
+            public static readonly string glyphicons_halflings_regular_svg = Url("glyphicons-halflings-regular.svg");
+            public static readonly string glyphicons_halflings_regular_ttf = Url("glyphicons-halflings-regular.ttf");
+            public static readonly string glyphicons_halflings_regular_woff = Url("glyphicons-halflings-regular.woff");
+        }
+
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class Images
         {
@@ -522,6 +588,25 @@ namespace Links
             public static readonly string magenic_badges_logo_png = Url("magenic-badges-logo.png");
             public static readonly string unknown_png = Url("unknown.png");
         }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class metro_bootstrap
+        {
+            private const string URLPATH = "~/Content/metro-bootstrap";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string alerts_less = Url("alerts.less");
+            public static readonly string checkbox_less = Url("checkbox.less");
+            public static readonly string labels_less = Url("labels.less");
+            public static readonly string metro_bootstrap_less = Url("metro-bootstrap.less");
+            public static readonly string modals_less = Url("modals.less");
+            public static readonly string navbar_side_less = Url("navbar-side.less");
+            public static readonly string radio_less = Url("radio.less");
+            public static readonly string tiles_less = Url("tiles.less");
+            public static readonly string variables_less = Url("variables.less");
+        }
+
+        public static readonly string metro_bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/metro-bootstrap.min.css") ? Url("metro-bootstrap.min.css") : Url("metro-bootstrap.css");
 
         public static readonly string Site_less = Url("Site.less");
         public static readonly string Site_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Site.min.css") ? Url("Site.min.css") : Url("Site.css");

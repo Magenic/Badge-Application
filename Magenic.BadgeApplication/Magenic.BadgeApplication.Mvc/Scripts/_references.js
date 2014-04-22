@@ -87,3 +87,4 @@
 /// <reference path="activitiesmanagement.js" />
 /// <reference path="approveactivities.js" />
 /// <reference path="approvebadges.js" />
+/// <reference path="less-1.5.1.js" />
