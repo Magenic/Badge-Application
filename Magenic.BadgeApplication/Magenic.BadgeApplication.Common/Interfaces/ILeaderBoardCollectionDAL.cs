@@ -13,7 +13,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// Gets the leader board.
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<LeaderboardItemDTO>> GetLeaderBoardAsync();
+        Task<IEnumerable<LeaderboardItemDTO>> GetLeaderboardAsync();
 
         /// <summary>
         /// Gets the leader board based on a search term.

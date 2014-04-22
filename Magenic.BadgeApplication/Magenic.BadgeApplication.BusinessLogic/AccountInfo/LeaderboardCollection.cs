@@ -42,7 +42,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
         private async Task DataPortal_Fetch()
         {
             var dal = IoC.Container.Resolve<ILeaderboardCollectionDAL>();
-            var result = await dal.GetLeaderBoardAsync();
+            var result = await dal.GetLeaderboardAsync();
             this.LoadData(result);
         }
 

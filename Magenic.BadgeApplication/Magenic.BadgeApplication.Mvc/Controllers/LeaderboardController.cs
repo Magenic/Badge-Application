@@ -1,4 +1,6 @@
-﻿using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
+﻿using Csla.Rules;
+using Csla.Web.Mvc;
+using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
 using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.Common.Enums;
@@ -19,6 +21,8 @@ namespace Magenic.BadgeApplication.Controllers
         /// Indexes this instance.
         /// </summary>
         /// <returns></returns>
+        [HasPermission(AuthorizationActions.GetObject, typeof(BadgeCollection))]
+        [HasPermission(AuthorizationActions.GetObject, typeof(LeaderboardCollection))]
         public virtual async Task<ActionResult> Index()
         {
             var leaderboardCollection = await LeaderboardCollection.GetLeaderboardAsync();
@@ -58,6 +62,8 @@ namespace Magenic.BadgeApplication.Controllers
         /// Lists this instance.
         /// </summary>
         /// <returns></returns>
+        [HasPermission(AuthorizationActions.GetObject, typeof(BadgeCollection))]
+        [HasPermission(AuthorizationActions.GetObject, typeof(LeaderboardCollection))]
         public virtual async Task<ActionResult> Rank()
         {
             var leaderboardCollection = await LeaderboardCollection.GetLeaderboardAsync();
@@ -97,6 +103,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="searchText">The search text.</param>
         /// <returns></returns>
         [HttpPost]
+        [HasPermission(AuthorizationActions.GetObject, typeof(LeaderboardCollection))]
         public virtual async Task<ActionResult> Search(string searchText)
         {
             var leaderboardItems = await LeaderboardCollection.SearchLeaderboardAsync(searchText);
@@ -114,6 +121,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <param name="userName">Name of the user.</param>
         /// <returns></returns>
+        [HasPermission(AuthorizationActions.GetObject, typeof(LeaderboardItem))]
         public virtual async Task<ActionResult> Show(string userName)
         {
             var leaderboardItem = await LeaderboardItem.GetLeaderboardForUserName(userName);
@@ -125,6 +133,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <param name="userName">Name of the user.</param>
         /// <returns></returns>
+        [HasPermission(AuthorizationActions.GetObject, typeof(LeaderboardItem))]
         public virtual async Task<ActionResult> Compare(string userName)
         {
             var leftLeaderboardItem = await LeaderboardItem.GetLeaderboardForUserName(AuthenticatedUser.UserName);

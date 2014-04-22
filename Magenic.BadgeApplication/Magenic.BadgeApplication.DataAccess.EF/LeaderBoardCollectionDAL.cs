@@ -17,7 +17,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         /// Gets the leader board.
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<LeaderboardItemDTO>> GetLeaderBoardAsync()
+        public async Task<IEnumerable<LeaderboardItemDTO>> GetLeaderboardAsync()
         {
             using (var dataContext = new Entities())
             {
