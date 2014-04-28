@@ -10,8 +10,7 @@
 namespace Magenic.BadgeApplication.DataAccess.EF
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class EarnedBadge
     {
         public int EmployeeId { get; set; }

@@ -39,7 +39,6 @@ namespace T4Mvc
                 public readonly string _BadgeWindow = "_BadgeWindow";
                 public readonly string _CommunityBadgeTemplate = "_CommunityBadgeTemplate";
                 public readonly string _CorporateBadgeTemplate = "_CorporateBadgeTemplate";
-                public readonly string _EarnedBadgeWindow = "_EarnedBadgeWindow";
                 public readonly string _Layout = "_Layout";
                 public readonly string _Navbar = "_Navbar";
                 public readonly string Error = "Error";
@@ -48,7 +47,6 @@ namespace T4Mvc
             public readonly string _BadgeWindow = "~/Views/Shared/_BadgeWindow.cshtml";
             public readonly string _CommunityBadgeTemplate = "~/Views/Shared/_CommunityBadgeTemplate.cshtml";
             public readonly string _CorporateBadgeTemplate = "~/Views/Shared/_CorporateBadgeTemplate.cshtml";
-            public readonly string _EarnedBadgeWindow = "~/Views/Shared/_EarnedBadgeWindow.cshtml";
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
             public readonly string _Navbar = "~/Views/Shared/_Navbar.cshtml";
             public readonly string Error = "~/Views/Shared/Error.cshtml";

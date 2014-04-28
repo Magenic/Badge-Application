@@ -1,0 +1,76 @@
+﻿@using Magenic.BadgeApplication.Models
+@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Extensions
+@using Magenic.BadgeApplication.BusinessLogic.Activity
+@model LeaderboardCompareViewModel
+
+<div class="container compare">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>@ApplicationResources.CompareHeader</h1>
+        </div>
+    </div>
+    <div class="row">
+        &nbsp;
+    </div>
+    <div class="row grayBox">
+        <div class="col-md-2">
+            <img src="@Model.LeftLeaderboardItem.MediumProfilePhotoLocation()" class="profileMediumImage" alt="image.png" title="@Model.LeftLeaderboardItem.EmployeeADName" /><br />
+            <b>@Model.LeftLeaderboardItem.FullName</b><br />
+            @Html.ActionLink(ApplicationResources.ProfileLink, Mvc.Leaderboard.Show(Model.LeftLeaderboardItem.EmployeeADName), new { @class = "btn btn-primary" })
+        </div>
+        <div class="col-md-6">
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <td>
+                                @Model.LeftLeaderboardItem.FullName
+                            </td>
+                            <td>
+                                @ApplicationResources.BadgeWindowTitle
+                            </td>
+                            <td>
+                                @Model.RightLeaderboardItem.FullName
+                            </td>
+                        </tr>
+                    </thead>
+                    @foreach (var badge in Model.AllBadges)
+                    {
+                        <tr>
+                            <td>
+                                @if (Model.LeftLeaderboardItem.EarnedBadges.Where(eb => eb.Id == badge.Id).Any())
+                                {
+                                    <div class="thumbnail tile tile-green">
+                                        <a href="#" class="fa-links">
+                                            <i class="fa fa-3x fa-check"></i>
+                                        </a>
+                                    </div>
+                                }
+                            </td>
+                            <td>
+                                <a href="#BadgeWindow-@badge.Id" data-toggle="modal">
+                                    @Html.DisplayFor(m => badge)
+                                </a>
+                                @Html.Partial(Mvc.Shared.Views._BadgeWindow, badge, new ViewDataDictionary() { { "AllActivities", Model.AllActivities as ActivityCollection } })
+                            </td>
+                            <td>
+                                @if (Model.RightLeaderboardItem.EarnedBadges.Where(eb => eb.Id == badge.Id).Any())
+                                {
+                                    <div class="thumbnail tile tile-green">
+                                        <i class="fa fa-3x fa-check"></i>
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <div class="col-md-2 text-right">
+            <img src="@Model.RightLeaderboardItem.MediumProfilePhotoLocation()" class="profileMediumImage" alt="image.png" title="@Model.RightLeaderboardItem.EmployeeADName" /><br />
+            <b>@Model.RightLeaderboardItem.FullName</b><br />
+            @Html.ActionLink(ApplicationResources.ProfileLink, Mvc.Leaderboard.Show(Model.RightLeaderboardItem.EmployeeADName), new { @class = "btn btn-primary" })
+        </div>
+    </div>
+</div>

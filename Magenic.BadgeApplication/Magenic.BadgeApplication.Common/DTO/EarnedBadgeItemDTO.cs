@@ -16,6 +16,10 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public string Name { get; set; }
         /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        public string Description { get; set; }
+        /// <summary>
         /// The type of the badge, corporate or community.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]

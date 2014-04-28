@@ -1,5 +1,5 @@
-﻿using System;
-using Csla;
+﻿using Csla;
+using System;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -16,6 +16,10 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// The name of a badge.
         /// </summary>
         string Name { get; }
+        /// <summary>
+        /// Gets the description.
+        /// </summary>
+        string Description { get; }
         /// <summary>
         /// The type of the badge, corporate or community.
         /// </summary>

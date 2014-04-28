@@ -84,12 +84,14 @@ namespace Magenic.BadgeApplication.Controllers
                 public readonly string _CommunityBadgeDisplay = "_CommunityBadgeDisplay";
                 public readonly string _CorporateBadgeDisplay = "_CorporateBadgeDisplay";
                 public readonly string _EarnedBadgeList = "_EarnedBadgeList";
+                public readonly string _EarnedBadgeWindow = "_EarnedBadgeWindow";
                 public readonly string Index = "Index";
             }
             public readonly string _BadgeList = "~/Views/Badges/_BadgeList.cshtml";
             public readonly string _CommunityBadgeDisplay = "~/Views/Badges/_CommunityBadgeDisplay.cshtml";
             public readonly string _CorporateBadgeDisplay = "~/Views/Badges/_CorporateBadgeDisplay.cshtml";
             public readonly string _EarnedBadgeList = "~/Views/Badges/_EarnedBadgeList.cshtml";
+            public readonly string _EarnedBadgeWindow = "~/Views/Badges/_EarnedBadgeWindow.cshtml";
             public readonly string Index = "~/Views/Badges/Index.cshtml";
         }
     }

@@ -1,0 +1,115 @@
+﻿@using Magenic.BadgeApplication.Extensions
+@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Models
+@model LeaderboardRankViewModel
+@{
+    var corporateBadgeRank = 1;
+    var communityBadgeRank = 1;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>@ApplicationResources.LeaderboardRankingHeader</h1>
+        </div>
+    </div>
+    <div class="row">
+        &nbsp;
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>@ApplicationResources.CorporateBadgeHeader</h2>
+                </div>
+                <div class="col-md-6 text-right">
+                    @Html.ActionLink(ApplicationResources.LeaderboardHeader, Mvc.Leaderboard.Index(), new { @class = "btn btn-primary" })
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <td>
+                                @ApplicationResources.RankTableIdHeader
+                            </td>
+                            <td>
+                                @ApplicationResources.RankTableNameHeader
+                            </td>
+                            <td>
+                                @ApplicationResources.RankTableBadgesHeader
+                            </td>
+                            <td>
+                                @ApplicationResources.RankTableCompleteHeader
+                            </td>
+                        </tr>
+                    </thead>
+                    @foreach (var earnedBadge in Model.CorporateBadgeHolders)
+                    {
+                        <tr>
+                            <td>
+                                @(corporateBadgeRank++)
+                            </td>
+                            <td>
+                                @Html.ActionLink(earnedBadge.FullName, Mvc.Leaderboard.Show(earnedBadge.EmployeeADName))
+                            </td>
+                            <td>
+                                @earnedBadge.EarnedCorporateBadgeCount
+                            </td>
+                            <td>
+                                @earnedBadge.PercentageCorporateCompleted(Model.TotalCorporateBadgeCount)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>@ApplicationResources.CommunityBadgeHeader</h2>
+                </div>
+                <div class="col-md-6 text-right">
+                    @Html.ActionLink(ApplicationResources.LeaderboardHeader, Mvc.Leaderboard.Index(), new { @class = "btn btn-primary" })
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <td>
+                                @ApplicationResources.RankTableIdHeader
+                            </td>
+                            <td>
+                                @ApplicationResources.RankTableNameHeader
+                            </td>
+                            <td>
+                                @ApplicationResources.RankTableBadgesHeader
+                            </td>
+                            <td>
+                                @ApplicationResources.RankTableCompleteHeader
+                            </td>
+                        </tr>
+                    </thead>
+                    @foreach (var earnedBadge in Model.CommunityBadgeHolders)
+                    {
+                        <tr>
+                            <td>
+                                @(communityBadgeRank++)
+                            </td>
+                            <td>
+                                @Html.ActionLink(earnedBadge.FullName, Mvc.Leaderboard.Show(earnedBadge.EmployeeADName))
+                            </td>
+                            <td>
+                                @earnedBadge.EarnedCommunityBadgeCount
+                            </td>
+                            <td>
+                                @earnedBadge.PercentageCommunityCompleted(Model.TotalCommunityBadgeCount)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
