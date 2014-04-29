@@ -44,5 +44,17 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         Task<IEnumerable<SubmittedActivityItemDTO>> GetSubmittedActivitiesForEmployeeIdByActivityIdAsync(int employeeId, int activityId, DateTime? startDate, DateTime? endDate);
+
+        /// <summary>
+        /// Asynchronously returns a <see cref="System.Collections.Generic.IEnumerable&lt;SubmittedActivityItemDTO&gt;" />
+        /// for the specified employee AD name for a given activity id.
+        /// </summary>
+        /// <param name="adName">The employee's active directory name</param>
+        /// <param name="activityId">The activity id to look for.</param>
+        /// <returns>
+        /// A <see cref="System.Collections.Generic.IEnumerable&lt;SubmittedActivityItemDTO&gt;" />.
+        /// </returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        Task<IEnumerable<SubmittedActivityItemDTO>> GetSubmittedActivitiesForADNameByActivityIdAsync(string adName, int activityId);
     }
 }
