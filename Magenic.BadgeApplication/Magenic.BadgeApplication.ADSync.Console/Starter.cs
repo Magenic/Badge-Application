@@ -1,9 +1,7 @@
-﻿
-
+﻿using Magenic.BadgeApplication.Common;
+using Magenic.BadgeApplication.Processor;
 using System;
 using System.Threading.Tasks;
-using Magenic.BadgeApplication.Common;
-using Magenic.BadgeApplication.Processor;
 
 namespace Magenic.BadgeApplication.ADSync.Console
 {
@@ -18,7 +16,7 @@ namespace Magenic.BadgeApplication.ADSync.Console
                 var adProcessor = new ADProcessor();
                 if (startAsConsole)
                 {
-                    adProcessor.Start();                    
+                    adProcessor.Start();
                 }
                 else
                 {

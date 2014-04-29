@@ -28,6 +28,8 @@ namespace Magenic.BadgeApplication.Processor
 
                     InsertEmployees(employees, adDal, dal);
 
+                    UploadPhotos(employees, dal);
+
                     MarkTermDateForMissingEmployees(adDal, dal);
 
                     SaveManagerInformation(employees, adDal, dal);
@@ -91,8 +93,9 @@ namespace Magenic.BadgeApplication.Processor
 
             using (var webClient = new WebClient())
             {
+                webClient.UseDefaultCredentials = true;
                 var bytes = webClient.DownloadData(uri);
-                dal.SaveEmployeePhoto(bytes, String.Format("{0}-{1}", employeeADName));
+                dal.SaveEmployeePhoto(bytes, String.Format("{0}-{1}", size, employeeADName));
                 return true;
             }
         }
