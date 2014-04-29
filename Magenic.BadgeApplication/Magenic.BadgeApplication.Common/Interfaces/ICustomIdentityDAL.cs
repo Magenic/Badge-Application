@@ -49,8 +49,8 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <summary>
         /// Saves the employee photo.
         /// </summary>
-        /// <param name="employeePhotoBytes">The employee photo bytes.</param>
+        /// <param name="data">The employee photo bytes.</param>
         /// <param name="fileName">Name of the file.</param>
-        void SaveEmployeePhoto(byte[] employeePhotoBytes, string fileName);
+        void SaveEmployeePhoto(byte[] data, string fileName);
     }
 }
