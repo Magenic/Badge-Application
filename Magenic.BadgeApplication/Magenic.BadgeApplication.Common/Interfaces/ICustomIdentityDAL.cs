@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Magenic.BadgeApplication.Common.DTO;
+using System;
 using System.Threading.Tasks;
-using Magenic.BadgeApplication.Common.DTO;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -45,5 +45,12 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <param name="employeeADName">The ad name to set the termination date for.</param>
         /// <param name="termDate">The termination date, send as null to clear the termination date.</param>
         void SetTerminationDate(string employeeADName, DateTime? termDate);
+
+        /// <summary>
+        /// Saves the employee photo.
+        /// </summary>
+        /// <param name="employeePhotoBytes">The employee photo bytes.</param>
+        /// <param name="fileName">Name of the file.</param>
+        void SaveEmployeePhoto(byte[] employeePhotoBytes, string fileName);
     }
 }
