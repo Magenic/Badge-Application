@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Magenic.BadgeApplicaiton.FileLoader.Console;
 using Magenic.BadgeApplication.Common;
+using System.Threading;
 
 namespace Magenic.BadgeApplication.FileLoader.Console
 {

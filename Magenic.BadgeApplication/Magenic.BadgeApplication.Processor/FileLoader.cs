@@ -1,4 +1,6 @@
-﻿using Magenic.BadgeApplication.Common;
+﻿using Csla.Security;
+using Magenic.BadgeApplication.BusinessLogic.Activity;
+using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Configuration;
@@ -18,34 +20,55 @@ namespace Magenic.BadgeApplication.Processor
                 try
                 {
                     var fileName = FileLocation;
-                    var connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", fileName);
-
-                    var adapter = new OleDbDataAdapter("SELECT * FROM [Data$]", connectionString);
-                    var ds = new DataSet();
-
-                    adapter.Fill(ds, "AnniversaryData");
-
-                    DataTable data = ds.Tables["AnniversaryData"];
-                    var activityId = ActivityId;
-
-                    foreach (DataRow row in data.Rows)
+                    if (System.IO.File.Exists(fileName))
                     {
-                        var adName = row.Field<string>("Magenic Username");
-                        var years = int.Parse(row.Field<string>("Years"));
+                        var connectionString =
+                            string.Format(
+                                "Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;",
+                                fileName);
 
-                        var submittedActivities = await BusinessLogic.Activity.SubmittedActivityCollection.GetSubmittedActivitiesByADNameAsync(adName, activityId);
+                        using (var adapter = new OleDbDataAdapter("SELECT * FROM [Data$]", connectionString))
+                        { 
+                            var ds = new DataSet();
 
-                        if (submittedActivities.Count < years)
-                        {
-                            var employee = await BusinessLogic.Security.CustomPrincipal.LoadAsync(adName);
-                            for (var i = 0; i < (years - submittedActivities.Count); i++)
+                            adapter.Fill(ds, "AnniversaryData");
+
+                            DataTable data = ds.Tables["AnniversaryData"];
+                            var activityId = ActivityId;
+
+                            foreach (DataRow row in data.Rows)
                             {
-                                var activitySubmission = BusinessLogic.Activity.SubmitActivity.CreateActivitySubmission(((ICustomIdentity)employee.Identity).EmployeeId);
-                                activitySubmission.ActivityId = activityId;
-                                activitySubmission.ActivitySubmissionDate = DateTime.UtcNow;
-                                activitySubmission.Notes = "Created by automatic feed.";
+                                var adName = row.Field<string>("Magenic Username");
+                                var years = int.Parse(row.Field<string>("Years"));
+
+                                var submittedActivities = await SubmittedActivityCollection.GetSubmittedActivitiesByADNameAsync(adName, activityId);
+
+                                if (submittedActivities.Count < years)
+                                {
+                                    ICslaPrincipal employee = null;
+                                    try
+                                    {
+                                        employee = await BusinessLogic.Security.CustomPrincipal.LoadAsync(adName);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Logger.Error<ADProcessor>(ex.Message, ex);
+                                    } 
+                                    if (employee != null)
+                                    {
+                                        for (var i = 0; i < (years - submittedActivities.Count); i++)
+                                        {
+                                            var activitySubmission = SubmitActivity.CreateActivitySubmission(((ICustomIdentity) employee.Identity).EmployeeId);
+                                            activitySubmission.ActivityId = activityId;
+                                            activitySubmission.ActivitySubmissionDate = DateTime.UtcNow;
+                                            activitySubmission.Notes = "Created by automatic feed.";
+                                            await activitySubmission.SaveAsync();
+                                        }
+                                    }
+                                }
                             }
                         }
+                        System.IO.File.Delete(fileName);
                     }
                 }
                 catch (Exception ex)
