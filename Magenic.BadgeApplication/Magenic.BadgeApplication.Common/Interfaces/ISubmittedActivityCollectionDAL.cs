@@ -54,6 +54,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <returns>
         /// A <see cref="System.Collections.Generic.IEnumerable&lt;SubmittedActivityItemDTO&gt;" />.
         /// </returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         Task<IEnumerable<SubmittedActivityItemDTO>> GetSubmittedActivitiesForADNameByActivityIdAsync(string adName, int activityId);
     }
 }
