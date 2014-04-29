@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.Mvc", "Magenic.BadgeApplication.Mvc\Magenic.BadgeApplication.Mvc.csproj", "{5C2D04F9-153E-43BE-990B-6D6FCF5831FE}"
 EndProject
@@ -49,6 +49,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.ADSync.Console", "Magenic.BadgeApplication.ADSync.Console\Magenic.BadgeApplication.ADSync.Console.csproj", "{1AA1246C-D3EF-433C-B293-8D4A20DE4D6B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.Authorization.Mock", "Magenic.BadgeApplication.Authorization.Mock\Magenic.BadgeApplication.Authorization.Mock.csproj", "{D377B660-115A-4C50-84B0-672BE243547D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplicaiton.FileLoader.Console", "Magenic.BadgeApplicaiton.FileLoader.Console\Magenic.BadgeApplicaiton.FileLoader.Console.csproj", "{635AABEE-A825-4CAE-9E3C-8082B675CCF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -159,6 +161,12 @@ Global
 		{D377B660-115A-4C50-84B0-672BE243547D}.QA|Any CPU.Build.0 = QA|Any CPU
 		{D377B660-115A-4C50-84B0-672BE243547D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D377B660-115A-4C50-84B0-672BE243547D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{635AABEE-A825-4CAE-9E3C-8082B675CCF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{635AABEE-A825-4CAE-9E3C-8082B675CCF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{635AABEE-A825-4CAE-9E3C-8082B675CCF6}.QA|Any CPU.ActiveCfg = Release|Any CPU
+		{635AABEE-A825-4CAE-9E3C-8082B675CCF6}.QA|Any CPU.Build.0 = Release|Any CPU
+		{635AABEE-A825-4CAE-9E3C-8082B675CCF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{635AABEE-A825-4CAE-9E3C-8082B675CCF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

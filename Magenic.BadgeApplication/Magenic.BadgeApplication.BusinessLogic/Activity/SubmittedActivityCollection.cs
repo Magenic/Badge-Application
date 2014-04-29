@@ -30,7 +30,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible"), Serializable]
-        public class SubmittedActivityByIdCriteria : CriteriaBase<SubmittedActivityCriteria>
+        public class SubmittedActivityByIdCriteria : CriteriaBase<SubmittedActivityByIdCriteria>
         {
             public SubmittedActivityByIdCriteria(int employeeId, int activityId, DateTime? startDate, DateTime? endDate)
             {
@@ -47,6 +47,20 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             public DateTime? EndDate { get; set; }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
+        public class SubmittedActivityByAdNameCriteria : CriteriaBase<SubmittedActivityByAdNameCriteria>
+        {
+            public SubmittedActivityByAdNameCriteria(string adName, int activityId)
+            {
+                this.ADName = adName;
+                this.ActivityId = activityId;
+            }
+
+            public string ADName { get; set; }
+
+            public int ActivityId { get; set; }
+        }
+
         #endregion Criteria
 
         #region Factory Methods
@@ -59,6 +73,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         public async static Task<ISubmittedActivityCollection> GetSubmittedActivitiesByEmployeeIdAsync(int employeeId, int activityId, DateTime? startDate, DateTime? endDate)
         {
             return await IoC.Container.Resolve<IObjectFactory<ISubmittedActivityCollection>>().FetchAsync(new SubmittedActivityByIdCriteria(employeeId, activityId, startDate, endDate));
+        }
+
+        public async static Task<ISubmittedActivityCollection> GetSubmittedActivitiesByADNameAsync(string adName, int activityId)
+        {
+            return await IoC.Container.Resolve<IObjectFactory<ISubmittedActivityCollection>>().FetchAsync(new SubmittedActivityByAdNameCriteria(adName, activityId));
         }
 
         #endregion Factory Methods
@@ -80,6 +99,15 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             var dal = IoC.Container.Resolve<ISubmittedActivityCollectionDAL>();
 
             var result = await dal.GetSubmittedActivitiesForEmployeeIdByActivityIdAsync(criteria.EmployeeId, criteria.ActivityId, criteria.StartDate, criteria.EndDate);
+            this.LoadData(result);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        private async Task DataPortal_Fetch(SubmittedActivityByAdNameCriteria criteria)
+        {
+            var dal = IoC.Container.Resolve<ISubmittedActivityCollectionDAL>();
+
+            var result = await dal.GetSubmittedActivitiesForADNameByActivityIdAsync(criteria.ADName, criteria.ActivityId);
             this.LoadData(result);
         }
 
