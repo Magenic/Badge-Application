@@ -446,6 +446,7 @@
     <None Include="Properties\PublishProfiles\Badge.QA.pubxml" />
     <None Include="Properties\PublishProfiles\Magenic Badge Application - Magenic Prod.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\global.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.js" />
