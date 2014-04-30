@@ -22,6 +22,7 @@ public static class Mvc
     public static Magenic.BadgeApplication.Controllers.BadgeManagerController BadgeManager = new Magenic.BadgeApplication.Controllers.T4MVC_BadgeManagerController();
     public static Magenic.BadgeApplication.Controllers.BadgesController Badges = new Magenic.BadgeApplication.Controllers.T4MVC_BadgesController();
     public static Magenic.BadgeApplication.Controllers.ErrorController Error = new Magenic.BadgeApplication.Controllers.T4MVC_ErrorController();
+    public static Magenic.BadgeApplication.Controllers.ImageController Image = new Magenic.BadgeApplication.Controllers.T4MVC_ImageController();
     public static Magenic.BadgeApplication.Controllers.LeaderboardController Leaderboard = new Magenic.BadgeApplication.Controllers.T4MVC_LeaderboardController();
     public static Magenic.BadgeApplication.Controllers.ManageActivitiesController ManageActivities = new Magenic.BadgeApplication.Controllers.T4MVC_ManageActivitiesController();
     public static T4Mvc.SharedController Shared = new T4Mvc.SharedController();
@@ -583,6 +584,8 @@ namespace Links
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
             public static readonly string button_gloss_png = Url("button-gloss.png");
             public static readonly string checkmark_png = Url("checkmark.png");
+            public static readonly string emptyPhotoL_png = Url("emptyPhotoL.png");
+            public static readonly string emptyPhotoM_png = Url("emptyPhotoM.png");
             public static readonly string header_bg_gif = Url("header-bg.gif");
             public static readonly string header_shadow_png = Url("header-shadow.png");
             public static readonly string magenic_badges_logo_png = Url("magenic-badges-logo.png");
@@ -611,7 +614,7 @@ namespace Links
         public static readonly string Site_less = Url("Site.less");
         public static readonly string Site_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Site.min.css") ? Url("Site.min.css") : Url("Site.css");
 
-        public static readonly string Site_min_css = Url("Site.min.css");
+        public static readonly string Site_css_map = Url("Site.css.map");
         public static readonly string slider_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/slider.min.css") ? Url("slider.min.css") : Url("slider.css");
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

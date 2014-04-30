@@ -46,10 +46,6 @@ textarea {
   padding: 11px 34px;
   width: auto;
 }
-img.profileMediumImage {
-  height: 72px;
-  width: 72px;
-}
 .grayBox,
 .tabGrayBox {
   background-color: #EFEFEF;

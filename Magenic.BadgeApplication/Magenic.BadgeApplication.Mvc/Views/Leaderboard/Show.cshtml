@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <img src="@Model.LargeProfilePhotoLocation()" alt="image.png" title="@Model.EmployeeADName" /><br />
+            <img src="@Url.Action(Mvc.Image.ProfilePhoto("Large", Model.EmployeeADName))" alt="image.png" title="@Model.EmployeeADName" /><br />
             <b>@Model.FullName</b><br />
             @Html.ActionLink(ApplicationResources.CompareLink, Mvc.Leaderboard.Compare(Model.EmployeeADName), new { @class = "btn btn-primary" })
         </div>
@@ -16,7 +16,7 @@
             {
                 <div class="row">
                     <h2>@ApplicationResources.CorporateBadgeHeader</h2>
-                    @foreach (var earnedBadge in Model.EarnedCorporateBadges)
+                    @foreach (var earnedBadge in Model.EarnedCorporateBadges.OrderBy(ebi => ebi.BadgePriority))
                     {
                         <div class="grayBox">
                             <div class="row">
@@ -47,7 +47,7 @@
             {
                 <div class="row">
                     <h2>@ApplicationResources.CommunityBadgeHeader</h2>
-                    @foreach (var earnedBadge in Model.EarnedCommunityBadges)
+                    @foreach (var earnedBadge in Model.EarnedCommunityBadges.OrderBy(ebi => ebi.BadgePriority))
                     {
                         <div class="grayBox">
                             <div class="row">

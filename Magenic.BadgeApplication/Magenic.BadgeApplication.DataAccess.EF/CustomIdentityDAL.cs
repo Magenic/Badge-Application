@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.Common.Constants;
+﻿using Magenic.BadgeApplication.Common;
+using Magenic.BadgeApplication.Common.Constants;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Microsoft.WindowsAzure.Storage;
@@ -98,14 +99,16 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             employee.EmploymentEndDate = customIdentity.EmployementEndDate;
         }
 
-        public void SaveEmployeePhoto(byte[] employeePhotoBytes, string fileName)
+        public void SaveEmployeePhoto(byte[] data, string fileName)
         {
+            Arg.IsNotNull(() => data);
+
             var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["StorageAccountConnectionString"]);
             var blobClient = storageAccount.CreateCloudBlobClient();
             var container = blobClient.GetContainerReference(ConfigurationManager.AppSettings["StorageAccountBlobContainer"]);
             var blockBlob = container.GetBlockBlobReference(fileName);
 
-            blockBlob.UploadFromByteArray(employeePhotoBytes, 0, employeePhotoBytes.Length, null, null, null);
+            blockBlob.UploadFromByteArray(data, 0, data.Length, null, null, null);
         }
 
         public void SaveManagerInfo(AuthorizeLogOnDTO customIdentity)
