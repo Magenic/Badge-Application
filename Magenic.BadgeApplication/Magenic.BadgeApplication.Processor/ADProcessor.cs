@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,7 +27,7 @@ namespace Magenic.BadgeApplication.Processor
 
                     InsertEmployees(employees, adDal, dal);
 
-                    UploadPhotos(employees, dal);
+                    UploadPhotos(employees, adDal, dal);
 
                     MarkTermDateForMissingEmployees(adDal, dal);
 
@@ -78,25 +77,12 @@ namespace Magenic.BadgeApplication.Processor
             }
         }
 
-        private void UploadPhotos(IEnumerable<string> employees, ICustomIdentityDAL dal)
+        private void UploadPhotos(IEnumerable<string> employees, IAuthorizeLogOn adDal, ICustomIdentityDAL dal)
         {
-            foreach (var employeeADName in employees)
+            var allEmployeePhotos = adDal.RetrieveUsersAndPhotos();
+            foreach (var kvp in allEmployeePhotos)
             {
-                var result = Task.Run(() => UploadConnectPhotoToAzure(employeeADName, dal, "Medium") && UploadConnectPhotoToAzure(employeeADName, dal, "Large"));
-            }
-        }
-
-        private bool UploadConnectPhotoToAzure(string employeeADName, ICustomIdentityDAL dal, string size)
-        {
-            var urlFormat = ConfigurationManager.AppSettings[String.Format("{0}ProfilePhoto", size)];
-            var uri = new Uri(String.Format(urlFormat, employeeADName));
-
-            using (var webClient = new WebClient())
-            {
-                webClient.UseDefaultCredentials = true;
-                var bytes = webClient.DownloadData(uri);
-                dal.SaveEmployeePhoto(bytes, String.Format("{0}-{1}", size, employeeADName));
-                return true;
+                dal.SaveEmployeePhoto(kvp.Value, kvp.Key);
             }
         }
 

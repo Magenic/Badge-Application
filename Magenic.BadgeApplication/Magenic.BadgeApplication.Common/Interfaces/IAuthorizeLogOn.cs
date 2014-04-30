@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Magenic.BadgeApplication.Common.DTO;
+﻿using Magenic.BadgeApplication.Common.DTO;
+using System.Collections.Generic;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -34,5 +34,10 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         /// <returns>An enumerable list of AD user names.</returns>
         IEnumerable<string> RetrieveActiveUsers();
+        /// <summary>
+        /// Retrieves the users and photos.
+        /// </summary>
+        /// <returns></returns>
+        IDictionary<string, byte[]> RetrieveUsersAndPhotos();
     }
 }

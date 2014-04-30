@@ -59,6 +59,16 @@ namespace Magenic.BadgeApplication.Authorization
             return returnValue;
         }
 
+        private static byte[] GetPropertyByteArray(SearchResult result, string propertyName)
+        {
+            byte[] returnValue = null;
+            if (result.Properties[propertyName].Count > 0)
+            {
+                returnValue = result.Properties[propertyName][0] as byte[];
+            }
+            return returnValue;
+        }
+
         private static SearchResultCollection SearchForADUserInfo(string searchString, string aDPath)
         {
             var entry = new DirectoryEntry(aDPath);
@@ -71,8 +81,30 @@ namespace Magenic.BadgeApplication.Authorization
             searcher.PropertiesToLoad.Add("sn");
             searcher.PropertiesToLoad.Add("givenname");
             searcher.PropertiesToLoad.Add("manager");
+            searcher.PropertiesToLoad.Add("thumbnailPhoto");
             var results = searcher.FindAll();
             return results;
+        }
+
+        public IDictionary<string, byte[]> RetrieveUsersAndPhotos()
+        {
+            var aDPath = ConfigurationManager.AppSettings["EmployeeListADPath"];
+            var searchString = ConfigurationManager.AppSettings["EmployeeListSearchString"];
+            var results = SearchForADUserInfo(searchString, aDPath);
+
+            var returnValue = new Dictionary<string, byte[]>();
+            foreach (SearchResult result in results)
+            {
+                var adName = GetPropertyString(result, "samaccountname");
+                var photo = GetPropertyByteArray(result, "thumbnailPhoto");
+
+                if (photo != null)
+                {
+                    returnValue.Add(adName, photo);
+                }
+            }
+
+            return returnValue;
         }
 
         public IEnumerable<string> RetrieveActiveUsers()
