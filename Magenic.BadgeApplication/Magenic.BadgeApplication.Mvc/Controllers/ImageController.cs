@@ -27,7 +27,7 @@ namespace Magenic.BadgeApplication.Controllers
             var profileUrlFormat = ConfigurationManager.AppSettings["ProfilePhoto"];
             var profileUrlString = String.Format(CultureInfo.CurrentCulture, profileUrlFormat, userName);
 
-            byte[] emptyPhoto = await FetchEmptyPhoto(photoSize);
+            byte[] emptyPhoto = FetchEmptyPhoto(photoSize);
             byte[] blobBytes = await DownloadProfilePhoto(profileUrlString, emptyPhoto);
 
             var webImage = ResizePhoto(photoSize, blobBytes);
@@ -107,25 +107,20 @@ namespace Magenic.BadgeApplication.Controllers
             return blobBytes;
         }
 
-        private async Task<byte[]> FetchEmptyPhoto(PhotoSize photoSize)
+        private byte[] FetchEmptyPhoto(PhotoSize photoSize)
         {
-            var webClient = new WebClient();
-            webClient.UseDefaultCredentials = true;
-
-            var uri = ControllerContext.HttpContext.Request.Url;
-            var baseUri = new Uri(uri.GetLeftPart(UriPartial.Authority));
             byte[] emptyPhotoBytes = null;
             switch (photoSize)
             {
                 case PhotoSize.Small:
                 case PhotoSize.Medium:
-                    var mediumUri = new Uri(baseUri, Links.Content.Images.emptyPhotoM_png);
-                    emptyPhotoBytes = await webClient.DownloadDataTaskAsync(mediumUri);
+                    var mediumWebImage = new WebImage(ControllerContext.HttpContext.Server.MapPath(Links.Content.Images.emptyPhotoM_png));
+                    emptyPhotoBytes = mediumWebImage.GetBytes();
                     break;
 
                 case PhotoSize.Large:
-                    var largeUri = new Uri(baseUri, Links.Content.Images.emptyPhotoL_png);
-                    emptyPhotoBytes = await webClient.DownloadDataTaskAsync(largeUri);
+                    var largeWebImage = new WebImage(ControllerContext.HttpContext.Server.MapPath(Links.Content.Images.emptyPhotoM_png));
+                    emptyPhotoBytes = largeWebImage.GetBytes();
                     break;
             }
 

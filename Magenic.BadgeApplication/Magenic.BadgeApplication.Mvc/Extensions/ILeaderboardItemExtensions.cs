@@ -20,6 +20,11 @@ namespace Magenic.BadgeApplication.Extensions
         {
             Arg.IsNotNull(() => leaderboardItem);
 
+            if (totalBadgeCount == 0)
+            {
+                totalBadgeCount = 1;
+            }
+
             var percentageCompleted = ((double)leaderboardItem.EarnedCorporateBadgeCount / totalBadgeCount) * 100;
             return (int)Math.Round(percentageCompleted, 0);
         }
@@ -33,6 +38,11 @@ namespace Magenic.BadgeApplication.Extensions
         public static string PercentageCorporateCompletedString(this ILeaderboardItem leaderboardItem, int totalBadgeCount)
         {
             Arg.IsNotNull(() => leaderboardItem);
+
+            if (totalBadgeCount == 0)
+            {
+                totalBadgeCount = 1;
+            }
 
             var percentageCompleted = ((double)leaderboardItem.EarnedCorporateBadgeCount / totalBadgeCount);
             return percentageCompleted.ToString("P0", CultureInfo.CurrentCulture);
@@ -48,6 +58,11 @@ namespace Magenic.BadgeApplication.Extensions
         {
             Arg.IsNotNull(() => leaderboardItem);
 
+            if (totalBadgeCount == 0)
+            {
+                totalBadgeCount = 1;
+            }
+
             var percentageCompleted = ((double)leaderboardItem.EarnedCommunityBadgeCount / totalBadgeCount) * 100;
             return (int)Math.Round(percentageCompleted, 0);
         }
@@ -61,6 +76,11 @@ namespace Magenic.BadgeApplication.Extensions
         public static string PercentageCommunityCompletedString(this ILeaderboardItem leaderboardItem, int totalBadgeCount)
         {
             Arg.IsNotNull(() => leaderboardItem);
+
+            if (totalBadgeCount == 0)
+            {
+                totalBadgeCount = 1;
+            }
 
             var percentageCompleted = ((double)leaderboardItem.EarnedCommunityBadgeCount / totalBadgeCount);
             return percentageCompleted.ToString("P0", CultureInfo.CurrentCulture);

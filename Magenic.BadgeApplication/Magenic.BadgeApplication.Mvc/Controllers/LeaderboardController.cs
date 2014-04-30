@@ -41,19 +41,9 @@ namespace Magenic.BadgeApplication.Controllers
                 .Where(bi => bi.Type == BadgeType.Corporate)
                 .Count();
 
-            if (leaderboardIndexViewModel.TotalCorporateBadgeCount == 0)
-            {
-                leaderboardIndexViewModel.TotalCorporateBadgeCount = 1;
-            }
-
             leaderboardIndexViewModel.TotalCommunityBadgeCount = allBadges
                 .Where(bi => bi.Type == BadgeType.Community)
                 .Count();
-
-            if (leaderboardIndexViewModel.TotalCommunityBadgeCount == 0)
-            {
-                leaderboardIndexViewModel.TotalCommunityBadgeCount = 1;
-            }
 
             return View(leaderboardIndexViewModel);
         }
@@ -80,19 +70,9 @@ namespace Magenic.BadgeApplication.Controllers
                 .Where(bi => bi.Type == BadgeType.Corporate)
                 .Count();
 
-            if (leaderboardRankViewModel.TotalCorporateBadgeCount == 0)
-            {
-                leaderboardRankViewModel.TotalCorporateBadgeCount = 1;
-            }
-
             leaderboardRankViewModel.TotalCommunityBadgeCount = allBadges
                 .Where(bi => bi.Type == BadgeType.Community)
                 .Count();
-
-            if (leaderboardRankViewModel.TotalCommunityBadgeCount == 0)
-            {
-                leaderboardRankViewModel.TotalCommunityBadgeCount = 1;
-            }
 
             return View(leaderboardRankViewModel);
         }
