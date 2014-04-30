@@ -188,6 +188,22 @@ input[type="checkbox"].input-validation-error {
 .datepicker {
   padding-left: 18px;
 }
+/* Fixing for wierd IE 10 WP 8 bug http://getbootstrap.com/getting-started/#support-ie10-width */
+@-webkit-viewport {
+  width: device-width;
+}
+@-moz-viewport {
+  width: device-width;
+}
+@-ms-viewport {
+  width: device-width;
+}
+@-o-viewport {
+  width: device-width;
+}
+@viewport {
+  width: device-width;
+}
 @media all and (min-width: 768px) {
   .modal-sm {
     width: 300px;
