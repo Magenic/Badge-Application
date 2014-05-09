@@ -2,9 +2,9 @@
   height: 100%;
 }
 body {
-  font-family: "Open Sans", Calibri, Candara, Arial, sans-serif !important;
   height: 100%;
   background-color: #f2f2f2;
+  font-family: "Open Sans", Calibri, Candara, Arial, sans-serif;
 }
 h1 {
   font: normal 30px HelveticaNeue, Arial, sans-serif;

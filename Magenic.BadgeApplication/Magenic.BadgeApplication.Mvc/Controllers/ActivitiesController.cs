@@ -47,6 +47,9 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var submittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.EmployeeId);
             TryUpdateModel(submittedActivity, "SubmittedActivity");
+
+            var activityEdit = await ActivityEdit.GetActivityEditByIdAsync(submittedActivity.ActivityId);
+            submittedActivity.EntryType = activityEdit.EntryType;
             if (await SaveObjectAsync(submittedActivity, true))
             {
                 return RedirectToAction(await Mvc.Activities.Actions.Index());

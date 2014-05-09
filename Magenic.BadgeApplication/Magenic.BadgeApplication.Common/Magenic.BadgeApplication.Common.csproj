@@ -136,6 +136,7 @@
     <Compile Include="Interfaces\IEarnedBadgeCollection.cs" />
     <Compile Include="Interfaces\IEarnedBadgeCollectionDAL.cs" />
     <Compile Include="Interfaces\IEarnedBadgeItem.cs" />
+    <Compile Include="Interfaces\IHaveEntryType.cs" />
     <Compile Include="Interfaces\IHaveBadgeStatus.cs" />
     <Compile Include="Interfaces\IIdentityCriteria.cs" />
     <Compile Include="Interfaces\IItemProcessor.cs" />

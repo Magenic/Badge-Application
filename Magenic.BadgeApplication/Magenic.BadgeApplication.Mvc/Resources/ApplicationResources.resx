@@ -223,7 +223,7 @@
     <value>Reject</value>
   </data>
   <data name="BadgeEditDescription" xml:space="preserve">
-    <value>Here we can create new badges and assign them to an activity.</value>
+    <value>Here we can create new badges and assign them to an activity. Community Badges will not appear until they have been approved by Human Resources.</value>
   </data>
   <data name="BadgeImageLabel" xml:space="preserve">
     <value>Badge image</value>
