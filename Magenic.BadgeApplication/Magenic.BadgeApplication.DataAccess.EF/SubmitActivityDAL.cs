@@ -15,17 +15,17 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             {
                 ctx.Database.Connection.Open();
                 var badgeList = await (from t in ctx.ActivitySubmissions
-                    where t.ActivitySubmissionId == activitySubmissionId
-                    select new SubmitActivityDTO
-                    {
-                        Id = t.ActivitySubmissionId,
-                        ActivityId = t.ActivityId,
-                        ActivitySubmissionDate = t.SubmissionDate,
-                        ApprovedById = t.SubmissionApprovedById ?? 0,
-                        Notes = t.SubmissionDescription,
-                        Status = (Common.Enums.ActivitySubmissionStatus) t.SubmissionStatusId,
-                        EmployeeId = t.EmployeeId
-                    }).ToArrayAsync();
+                                       where t.ActivitySubmissionId == activitySubmissionId
+                                       select new SubmitActivityDTO
+                                       {
+                                           Id = t.ActivitySubmissionId,
+                                           ActivityId = t.ActivityId,
+                                           ActivitySubmissionDate = t.SubmissionDate,
+                                           ApprovedById = t.SubmissionApprovedById ?? 0,
+                                           Notes = t.SubmissionDescription,
+                                           Status = (Common.Enums.ActivitySubmissionStatus)t.SubmissionStatusId,
+                                           EmployeeId = t.EmployeeId
+                                       }).ToArrayAsync();
 
                 var badge = badgeList.Single();
 

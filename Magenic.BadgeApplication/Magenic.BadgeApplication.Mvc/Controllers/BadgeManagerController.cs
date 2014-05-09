@@ -76,6 +76,14 @@ namespace Magenic.BadgeApplication.Controllers
             }
         }
 
+        private void ClearModelErrors()
+        {
+            foreach (var modelValue in ModelState.Values)
+            {
+                modelValue.Errors.Clear();
+            }
+        }
+
         /// <summary>
         /// Handles the /Home/Index action.
         /// </summary>
@@ -129,14 +137,6 @@ namespace Magenic.BadgeApplication.Controllers
             badgeEditViewModel.Badge.Priority = 0;
 
             return View(Mvc.BadgeManager.Views.AddBadge, badgeEditViewModel);
-        }
-
-        private void ClearModelErrors()
-        {
-            foreach (var modelValue in ModelState.Values)
-            {
-                modelValue.Errors.Clear();
-            }
         }
 
         /// <summary>
