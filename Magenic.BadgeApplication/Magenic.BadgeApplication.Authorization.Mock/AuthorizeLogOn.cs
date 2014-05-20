@@ -24,5 +24,11 @@ namespace Magenic.BadgeApplication.Authorization
         {
             throw new NotImplementedException();
         }
+
+
+        public IDictionary<string, byte[]> RetrieveUsersAndPhotos()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

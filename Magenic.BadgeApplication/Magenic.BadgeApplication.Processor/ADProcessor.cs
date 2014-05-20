@@ -1,12 +1,12 @@
-﻿using System.Configuration;
-using System.Linq;
-using Autofac;
+﻿using Autofac;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,6 +27,8 @@ namespace Magenic.BadgeApplication.Processor
 
                     InsertEmployees(employees, adDal, dal);
 
+                    UploadPhotos(employees, adDal, dal);
+
                     MarkTermDateForMissingEmployees(adDal, dal);
 
                     SaveManagerInformation(employees, adDal, dal);
@@ -44,7 +46,7 @@ namespace Magenic.BadgeApplication.Processor
                 {
                     Thread.Sleep(SleepInterval);
                 }
-            }            
+            }
         }
 
         private void MarkTermDateForMissingEmployees(IAuthorizeLogOn adDal, ICustomIdentityDAL dal)
@@ -72,6 +74,15 @@ namespace Magenic.BadgeApplication.Processor
             {
                 var employeeADInfo = adDal.RetrieveUserInformation(employeeADName);
                 dal.SaveManagerInfo(employeeADInfo);
+            }
+        }
+
+        private void UploadPhotos(IEnumerable<string> employees, IAuthorizeLogOn adDal, ICustomIdentityDAL dal)
+        {
+            var allEmployeePhotos = adDal.RetrieveUsersAndPhotos();
+            foreach (var kvp in allEmployeePhotos)
+            {
+                dal.SaveEmployeePhoto(kvp.Value, kvp.Key);
             }
         }
 

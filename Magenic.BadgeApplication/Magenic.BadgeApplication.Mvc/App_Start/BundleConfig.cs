@@ -41,7 +41,8 @@ namespace Magenic.BadgeApplication
                 Links.Scripts.bootstrap_filestyle_js,
                 Links.Scripts.bootstrap_slider_js,
                 Links.Scripts.bootstrap_select_js,
-                Links.Scripts.respond_js));
+                Links.Scripts.respond_js,
+                Links.Scripts.global_js));
 
             bundles.Add(new StyleBundle("~/Content/css").IncludeT4MVC(
                 Links.Content.metro_bootstrap_css,

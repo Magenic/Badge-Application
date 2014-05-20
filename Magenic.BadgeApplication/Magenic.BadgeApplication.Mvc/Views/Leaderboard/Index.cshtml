@@ -36,11 +36,11 @@
                 <div class="grayBox">
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="@leaderboardItem.MediumProfilePhotoLocation()" class="profileMediumImage" alt="image.png" title="@leaderboardItem.EmployeeADName" /><br />
+                            <img src="@Url.Action(Mvc.Image.ProfilePhoto("Medium", leaderboardItem.EmployeeADName))" alt="image.png" title="@leaderboardItem.EmployeeADName" /><br />
                             <b>@leaderboardItem.FullName</b>
                         </div>
                         <div class="col-md-8">
-                            @Html.Partial(Mvc.Leaderboard.Views._EarnedBadgeList, leaderboardItem.EarnedCorporateBadges.Take(3))
+                            @Html.Partial(Mvc.Leaderboard.Views._EarnedBadgeList, leaderboardItem.EarnedCorporateBadges.OrderBy(ebi => ebi.BadgePriority).Take(3))
                         </div>
                     </div>
                     <div class="row">
@@ -85,11 +85,11 @@
                 <div class="grayBox">
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="@leaderboardItem.MediumProfilePhotoLocation()" class="profileMediumImage" alt="image.png" title="@leaderboardItem.EmployeeADName" /><br />
+                            <img src="@Url.Action(Mvc.Image.ProfilePhoto("Medium", leaderboardItem.EmployeeADName))" alt="image.png" title="@leaderboardItem.EmployeeADName" /><br />
                             <b>@leaderboardItem.FullName</b>
                         </div>
                         <div class="col-md-8">
-                            @Html.Partial(Mvc.Leaderboard.Views._EarnedBadgeList, leaderboardItem.EarnedCommunityBadges.Take(3))
+                            @Html.Partial(Mvc.Leaderboard.Views._EarnedBadgeList, leaderboardItem.EarnedCommunityBadges.OrderBy(ebi => ebi.BadgePriority).Take(3))
                         </div>
                     </div>
                     <div class="row">

@@ -259,7 +259,7 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Here we can create new badges and assign them to an activity..
+        ///   Looks up a localized string similar to Here we can create new badges and assign them to an activity. Community Badges will not appear until they have been approved by Human Resources..
         /// </summary>
         public static string BadgeEditDescription {
             get {

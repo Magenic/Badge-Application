@@ -1,7 +1,10 @@
-﻿using Magenic.BadgeApplication.Common.Constants;
+﻿using Magenic.BadgeApplication.Common;
+using Magenic.BadgeApplication.Common.Constants;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
+using Microsoft.WindowsAzure.Storage;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,27 +19,27 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             {
                 ctx.Database.Connection.Open();
                 var employeeList = await (from t in ctx.Employees
-                    where t.ADName == userName
-                    select new CustomIdentityDTO
-                    {
-                        Id = t.EmployeeId,
-                        ADName = t.ADName
-                    }).ToArrayAsync();
+                                          where t.ADName == userName
+                                          select new CustomIdentityDTO
+                                          {
+                                              Id = t.EmployeeId,
+                                              ADName = t.ADName
+                                          }).ToArrayAsync();
 
                 var employee = employeeList.SingleOrDefault();
 
                 if (employee != null)
                 {
                     var roles = from r in ctx.EmployeePermissions
-                        where r.EmployeeId == employee.Id
-                        select new
-                        {
-                            r.PermissionId
-                        };
+                                where r.EmployeeId == employee.Id
+                                select new
+                                {
+                                    r.PermissionId
+                                };
 
                     foreach (var role in roles)
                     {
-                        ((List<string>) employee.Roles).Add(((Common.Enums.PermissionType) role.PermissionId).ToString());
+                        ((List<string>)employee.Roles).Add(((Common.Enums.PermissionType)role.PermissionId).ToString());
                     }
                 }
                 return employee;
@@ -94,6 +97,18 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             employee.LastName = customIdentity.LastName;
             employee.EmploymentStartDate = customIdentity.EmployementStartDate;
             employee.EmploymentEndDate = customIdentity.EmployementEndDate;
+        }
+
+        public void SaveEmployeePhoto(byte[] data, string fileName)
+        {
+            Arg.IsNotNull(() => data);
+
+            var storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["StorageAccountConnectionString"]);
+            var blobClient = storageAccount.CreateCloudBlobClient();
+            var container = blobClient.GetContainerReference(ConfigurationManager.AppSettings["StorageAccountBlobContainer"]);
+            var blockBlob = container.GetBlockBlobReference(fileName);
+
+            blockBlob.UploadFromByteArray(data, 0, data.Length, null, null, null);
         }
 
         public void SaveManagerInfo(AuthorizeLogOnDTO customIdentity)

@@ -22,6 +22,7 @@ public static class Mvc
     public static Magenic.BadgeApplication.Controllers.BadgeManagerController BadgeManager = new Magenic.BadgeApplication.Controllers.T4MVC_BadgeManagerController();
     public static Magenic.BadgeApplication.Controllers.BadgesController Badges = new Magenic.BadgeApplication.Controllers.T4MVC_BadgesController();
     public static Magenic.BadgeApplication.Controllers.ErrorController Error = new Magenic.BadgeApplication.Controllers.T4MVC_ErrorController();
+    public static Magenic.BadgeApplication.Controllers.ImageController Image = new Magenic.BadgeApplication.Controllers.T4MVC_ImageController();
     public static Magenic.BadgeApplication.Controllers.LeaderboardController Leaderboard = new Magenic.BadgeApplication.Controllers.T4MVC_LeaderboardController();
     public static Magenic.BadgeApplication.Controllers.ManageActivitiesController ManageActivities = new Magenic.BadgeApplication.Controllers.T4MVC_ManageActivitiesController();
     public static T4Mvc.SharedController Shared = new T4Mvc.SharedController();
@@ -84,6 +85,7 @@ namespace Links
         public static readonly string bootstrap_slider_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-slider.min.js") ? Url("bootstrap-slider.min.js") : Url("bootstrap-slider.js");
         public static readonly string bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.js") ? Url("bootstrap.min.js") : Url("bootstrap.js");
         public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
+        public static readonly string global_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/global.min.js") ? Url("global.min.js") : Url("global.js");
         public static readonly string jquery_1_10_2_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.10.2.intellisense.min.js") ? Url("jquery-1.10.2.intellisense.min.js") : Url("jquery-1.10.2.intellisense.js");
         public static readonly string jquery_1_10_2_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.10.2.min.js") ? Url("jquery-1.10.2.min.js") : Url("jquery-1.10.2.js");
         public static readonly string jquery_1_10_2_min_js = Url("jquery-1.10.2.min.js");
@@ -583,6 +585,8 @@ namespace Links
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
             public static readonly string button_gloss_png = Url("button-gloss.png");
             public static readonly string checkmark_png = Url("checkmark.png");
+            public static readonly string emptyPhotoL_png = Url("emptyPhotoL.png");
+            public static readonly string emptyPhotoM_png = Url("emptyPhotoM.png");
             public static readonly string header_bg_gif = Url("header-bg.gif");
             public static readonly string header_shadow_png = Url("header-shadow.png");
             public static readonly string magenic_badges_logo_png = Url("magenic-badges-logo.png");
@@ -611,7 +615,7 @@ namespace Links
         public static readonly string Site_less = Url("Site.less");
         public static readonly string Site_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Site.min.css") ? Url("Site.min.css") : Url("Site.css");
 
-        public static readonly string Site_min_css = Url("Site.min.css");
+        public static readonly string Site_css_map = Url("Site.css.map");
         public static readonly string slider_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/slider.min.css") ? Url("slider.min.css") : Url("slider.css");
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

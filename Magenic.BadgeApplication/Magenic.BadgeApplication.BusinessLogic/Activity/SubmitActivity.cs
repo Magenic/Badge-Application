@@ -1,13 +1,15 @@
-﻿using System.Linq;
-using Autofac;
+﻿using Autofac;
 using Csla;
+using Csla.Rules;
 using Csla.Rules.CommonRules;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.BusinessLogic.Rules;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
@@ -17,7 +19,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
     /// approve or deny an existing activity submission.
     /// </summary>
     [Serializable]
-    public sealed class SubmitActivity : BusinessBase<SubmitActivity>, ISubmitActivity
+    public sealed class SubmitActivity : BusinessBase<SubmitActivity>, ISubmitActivity, IHaveEntryType
     {
 
         #region Properties
@@ -58,6 +60,16 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         {
             get { return GetProperty(NotesProperty); }
             set { SetProperty(NotesProperty, value); }
+        }
+
+        /// <summary>
+        /// Tracks activity entry type
+        /// </summary>
+        public static readonly PropertyInfo<ActivityEntryType> ActivityEntryTypeProperty = RegisterProperty<ActivityEntryType>(c => c.EntryType);
+        public ActivityEntryType EntryType
+        {
+            get { return GetProperty(ActivityEntryTypeProperty); }
+            set { SetProperty(ActivityEntryTypeProperty, value); }
         }
 
         /// <summary>
@@ -102,10 +114,12 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="SubmitActivity"/> class.
+        /// Creates a new instance of the <see cref="SubmitActivity" /> class.
         /// </summary>
         /// <param name="employeeId">The employee id that the activity submission is for.</param>
-        /// <returns>An instance of a class the implements <see cref="ISubmitActivity"/>.</returns>
+        /// <returns>
+        /// An instance of a class the implements <see cref="ISubmitActivity" />.
+        /// </returns>
         public static ISubmitActivity CreateActivitySubmission(int employeeId)
         {
             return IoC.Container.Resolve<IObjectFactory<ISubmitActivity>>().Create(employeeId);
@@ -122,6 +136,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             this.BusinessRules.AddRule(new MinValue<int>(EmployeeIdProperty, 1));
             this.BusinessRules.AddRule(new MinValue<int>(ActivityIdProperty, 1));
 
+            this.BusinessRules.AddRule(new CanCreateSubmission(AuthorizationActions.CreateObject));
+
             // Only run this rule if the associated properties are otherwise valid.
             this.BusinessRules.AddRule(new Rules.DefaultActivityStatus(ActivityIdProperty, StatusProperty, ApprovedByIdProperty) { Priority = 1 });
         }
@@ -137,6 +153,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             this.LoadProperty(ActivitySubmissionDateProperty, DateTime.UtcNow);
             this.LoadProperty(StatusProperty, ActivitySubmissionStatus.AwaitingApproval);
             this.LoadProperty(EmployeeIdProperty, employeeId);
+            this.LoadProperty(ActivityEntryTypeProperty, ActivityEntryType.Unset);
             this.BusinessRules.CheckRules();
         }
 
@@ -204,7 +221,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             return ((IsNew || IsDirty) && this.Status == ActivitySubmissionStatus.Approved);
         }
 
-        
+
         private SubmitActivityDTO UnloadData()
         {
             using (this.BypassPropertyChecks)

@@ -6,7 +6,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
     /// <summary>
     /// Interface to submit an activity.
     /// </summary>
-    public interface ISubmitActivity : IBusinessBase
+    public interface ISubmitActivity : IBusinessBase, IHaveEntryType
     {
         /// <summary>
         /// The Id for this activity submission.  Zero if new.

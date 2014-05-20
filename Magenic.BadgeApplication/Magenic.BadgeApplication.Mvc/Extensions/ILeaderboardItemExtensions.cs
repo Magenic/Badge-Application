@@ -1,7 +1,6 @@
 ﻿using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
-using System.Configuration;
 using System.Globalization;
 
 namespace Magenic.BadgeApplication.Extensions
@@ -12,32 +11,6 @@ namespace Magenic.BadgeApplication.Extensions
     public static class ILeaderboardItemExtensions
     {
         /// <summary>
-        /// Mediums the profile photo location.
-        /// </summary>
-        /// <param name="leaderboardItem">The leaderboard item.</param>
-        /// <returns></returns>
-        public static string MediumProfilePhotoLocation(this ILeaderboardItem leaderboardItem)
-        {
-            Arg.IsNotNull(() => leaderboardItem);
-
-            var mediumPhotoLocationFormat = ConfigurationManager.AppSettings["MediumProfilePhoto"];
-            return String.Format(CultureInfo.CurrentCulture, mediumPhotoLocationFormat, leaderboardItem.EmployeeADName);
-        }
-
-        /// <summary>
-        /// Larges the profile photo location.
-        /// </summary>
-        /// <param name="leaderboardItem">The leaderboard item.</param>
-        /// <returns></returns>
-        public static string LargeProfilePhotoLocation(this ILeaderboardItem leaderboardItem)
-        {
-            Arg.IsNotNull(() => leaderboardItem);
-
-            var mediumPhotoLocationFormat = ConfigurationManager.AppSettings["LargeProfilePhoto"];
-            return String.Format(CultureInfo.CurrentCulture, mediumPhotoLocationFormat, leaderboardItem.EmployeeADName);
-        }
-
-        /// <summary>
         /// Percentages the completed.
         /// </summary>
         /// <param name="leaderboardItem">The leaderboard item.</param>
@@ -46,6 +19,11 @@ namespace Magenic.BadgeApplication.Extensions
         public static int PercentageCorporateCompleted(this ILeaderboardItem leaderboardItem, int totalBadgeCount)
         {
             Arg.IsNotNull(() => leaderboardItem);
+
+            if (totalBadgeCount == 0)
+            {
+                totalBadgeCount = 1;
+            }
 
             var percentageCompleted = ((double)leaderboardItem.EarnedCorporateBadgeCount / totalBadgeCount) * 100;
             return (int)Math.Round(percentageCompleted, 0);
@@ -61,6 +39,11 @@ namespace Magenic.BadgeApplication.Extensions
         {
             Arg.IsNotNull(() => leaderboardItem);
 
+            if (totalBadgeCount == 0)
+            {
+                totalBadgeCount = 1;
+            }
+
             var percentageCompleted = ((double)leaderboardItem.EarnedCorporateBadgeCount / totalBadgeCount);
             return percentageCompleted.ToString("P0", CultureInfo.CurrentCulture);
         }
@@ -75,6 +58,11 @@ namespace Magenic.BadgeApplication.Extensions
         {
             Arg.IsNotNull(() => leaderboardItem);
 
+            if (totalBadgeCount == 0)
+            {
+                totalBadgeCount = 1;
+            }
+
             var percentageCompleted = ((double)leaderboardItem.EarnedCommunityBadgeCount / totalBadgeCount) * 100;
             return (int)Math.Round(percentageCompleted, 0);
         }
@@ -88,6 +76,11 @@ namespace Magenic.BadgeApplication.Extensions
         public static string PercentageCommunityCompletedString(this ILeaderboardItem leaderboardItem, int totalBadgeCount)
         {
             Arg.IsNotNull(() => leaderboardItem);
+
+            if (totalBadgeCount == 0)
+            {
+                totalBadgeCount = 1;
+            }
 
             var percentageCompleted = ((double)leaderboardItem.EarnedCommunityBadgeCount / totalBadgeCount);
             return percentageCompleted.ToString("P0", CultureInfo.CurrentCulture);

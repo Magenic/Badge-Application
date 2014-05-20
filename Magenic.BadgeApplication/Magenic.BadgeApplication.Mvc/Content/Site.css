@@ -2,9 +2,9 @@
   height: 100%;
 }
 body {
-  font-family: "Open Sans", Calibri, Candara, Arial, sans-serif;
   height: 100%;
   background-color: #f2f2f2;
+  font-family: "Open Sans", Calibri, Candara, Arial, sans-serif;
 }
 h1 {
   font: normal 30px HelveticaNeue, Arial, sans-serif;
@@ -45,10 +45,6 @@ textarea {
   margin: 10px 0 0 0;
   padding: 11px 34px;
   width: auto;
-}
-img.profileMediumImage {
-  height: 72px;
-  width: 72px;
 }
 .grayBox,
 .tabGrayBox {
@@ -191,6 +187,22 @@ input[type="checkbox"].input-validation-error {
 }
 .datepicker {
   padding-left: 18px;
+}
+/* Fixing for wierd IE 10 WP 8 bug http://getbootstrap.com/getting-started/#support-ie10-width */
+@-webkit-viewport {
+  width: device-width;
+}
+@-moz-viewport {
+  width: device-width;
+}
+@-ms-viewport {
+  width: device-width;
+}
+@-o-viewport {
+  width: device-width;
+}
+@viewport {
+  width: device-width;
 }
 @media all and (min-width: 768px) {
   .modal-sm {

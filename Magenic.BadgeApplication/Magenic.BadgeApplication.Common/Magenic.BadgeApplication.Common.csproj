@@ -101,6 +101,7 @@
     <Compile Include="Enums\BadgeStatus.cs" />
     <Compile Include="Enums\BadgeType.cs" />
     <Compile Include="Enums\PermissionType.cs" />
+    <Compile Include="Enums\PhotoSize.cs" />
     <Compile Include="Enums\QueueEventType.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Interfaces\IEarnedBadgeCollection.cs" />
     <Compile Include="Interfaces\IEarnedBadgeCollectionDAL.cs" />
     <Compile Include="Interfaces\IEarnedBadgeItem.cs" />
+    <Compile Include="Interfaces\IHaveEntryType.cs" />
     <Compile Include="Interfaces\IHaveBadgeStatus.cs" />
     <Compile Include="Interfaces\IIdentityCriteria.cs" />
     <Compile Include="Interfaces\IItemProcessor.cs" />
