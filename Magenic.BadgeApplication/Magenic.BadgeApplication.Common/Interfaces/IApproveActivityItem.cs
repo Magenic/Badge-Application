@@ -58,6 +58,10 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         int ApprovedById { get; }
         /// <summary>
+        /// A collection of badges that may be awarded if this activity is approved.
+        /// </summary>
+        IApproveActivityBadgeCollection ApproveActivityBadgeCollection { get; }
+        /// <summary>
         /// Approves this activity submission.  Can only be called by a user with manager permission
         /// and when the status is not denied or error.
         /// </summary>

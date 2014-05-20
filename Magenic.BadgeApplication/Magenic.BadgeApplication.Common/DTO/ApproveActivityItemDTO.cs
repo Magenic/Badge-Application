@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Magenic.BadgeApplication.Common.DTO
 {
@@ -57,5 +58,9 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// activity status is approved and no managerial approval is required.
         /// </summary>
         public int ApprovedById { get; set; }
+        /// <summary>
+        /// A collection of badges that may be awarded.
+        /// </summary>
+        public IEnumerable<ApproveActivityBadgeItemDTO> ApproveActivityBadgeItemCollection { get; set; }
     }
 }
