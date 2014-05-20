@@ -5,23 +5,22 @@
 @foreach (var activityForApproval in Model)
 {
     <div class="row no-margin">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="row">
                 <h3>
                     @activityForApproval.ActivityName
                 </h3>
             </div>
             <div class="row">
-                <div class="col-md-2">
-                    <a href="#" onclick="approveActivity(this, @activityForApproval.SubmissionId); return false;">
+                <div class="col-md-3">
+                    <a href="#" onclick="approveActivity(this, @activityForApproval.SubmissionId); return false;" class="btn btn-magenic">
                         @ApplicationResources.ApproveActivityLink
                     </a>
-                    <br />
-                    <a href="#" onclick="rejectActivity(this, @activityForApproval.SubmissionId); return false;">
+                    <a href="#" onclick="rejectActivity(this, @activityForApproval.SubmissionId); return false;" class="btn btn-warning">
                         @ApplicationResources.RejectActivityLink
                     </a>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <b>
                         @activityForApproval.EmployeeFirstName @activityForApproval.EmployeeLastName
                     </b>
@@ -34,6 +33,27 @@
                     </b>
                 </div>
             </div>
+            <div class="row">
+                &nbsp;
+            </div>
+            @if (activityForApproval.ApproveActivityBadgeCollection.Count() > 0)
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        @activityForApproval.ApproveActivityBadgeCollection.Sum(aabi => aabi.AwardValueAmount) Point(s) Awarded if Approved :
+                        @foreach (var badge in activityForApproval.ApproveActivityBadgeCollection.OrderBy(aabi => aabi.BadgePriority))
+                        {
+                            <text>
+                                @badge.Name - @badge.AwardValueAmount point(s)
+                            </text>
+                            if (badge != activityForApproval.ApproveActivityBadgeCollection.OrderBy(aabi => aabi.BadgePriority).Last())
+                            {
+                                <text>, </text>
+                            }
+                        }
+                    </div>
+                </div>
+            }
             <div class="row">
                 &nbsp;
             </div>

@@ -28,7 +28,7 @@
                     <h2>@ApplicationResources.CorporateBadgeHeader</h2>
                 </div>
                 <div class="col-md-6 text-right">
-                    @Html.ActionLink(ApplicationResources.LeaderboardRankingHeader, Mvc.Leaderboard.Rank(), new { @class = "btn btn-primary" })
+                    @Html.ActionLink(ApplicationResources.LeaderboardRankingHeader, Mvc.Leaderboard.Rank(), new { @class = "btn btn-magenic" })
                 </div>
             </div>
             @foreach (var leaderboardItem in Model.TopTenCorporateBadgeHolders)
@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <img src="@Url.Action(Mvc.Image.ProfilePhoto("Medium", leaderboardItem.EmployeeADName))" alt="image.png" title="@leaderboardItem.EmployeeADName" /><br />
-                            <b>@leaderboardItem.FullName</b>
+                            <b>@leaderboardItem.FullName</b><br /><br />
                         </div>
                         <div class="col-md-8">
                             @Html.Partial(Mvc.Leaderboard.Views._EarnedBadgeList, leaderboardItem.EarnedCorporateBadges.OrderBy(ebi => ebi.BadgePriority).Take(3))
@@ -45,8 +45,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            @Html.ActionLink(ApplicationResources.ProfileLink, Mvc.Leaderboard.Show(leaderboardItem.EmployeeADName), new { @class = "btn btn-primary" })
-                            @Html.ActionLink(ApplicationResources.CompareLink, Mvc.Leaderboard.Compare(leaderboardItem.EmployeeADName), new { @class = "btn btn-primary" })
+                            @Html.ActionLink(ApplicationResources.ProfileLink, Mvc.Leaderboard.Show(leaderboardItem.EmployeeADName), new { @class = "btn btn-magenic" })
+                            @Html.ActionLink(ApplicationResources.CompareLink, Mvc.Leaderboard.Compare(leaderboardItem.EmployeeADName), new { @class = "btn btn-magenic" })
                         </div>
                         <div class="col-md-6 text-right">
                             @leaderboardItem.EarnedCorporateBadgeCount / @Model.TotalCorporateBadgeCount @ApplicationResources.EarnedCorporateBadgesLabel
@@ -58,7 +58,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="@leaderboardItem.EarnedCorporateBadgeCount" aria-valuemin="0" aria-valuemax="@Model.TotalCorporateBadgeCount" style="width: @leaderboardItem.PercentageCorporateCompleted(Model.TotalCorporateBadgeCount)%;">
+                                <div class="progress-bar progress-bar-magenic" role="progressbar" aria-valuenow="@leaderboardItem.EarnedCorporateBadgeCount" aria-valuemin="0" aria-valuemax="@Model.TotalCorporateBadgeCount" style="width: @leaderboardItem.PercentageCorporateCompleted(Model.TotalCorporateBadgeCount)%;">
                                     @leaderboardItem.PercentageCorporateCompletedString(Model.TotalCorporateBadgeCount)
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                     <h2>@ApplicationResources.CommunityBadgeHeader</h2>
                 </div>
                 <div class="col-md-6 text-right">
-                    @Html.ActionLink(ApplicationResources.LeaderboardRankingHeader, Mvc.Leaderboard.Rank(), new { @class = "btn btn-primary" })
+                    @Html.ActionLink(ApplicationResources.LeaderboardRankingHeader, Mvc.Leaderboard.Rank(), new { @class = "btn btn-magenic" })
                 </div>
             </div>
             @foreach (var leaderboardItem in Model.TopTenCommunityBadgeHolders)
@@ -86,7 +86,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <img src="@Url.Action(Mvc.Image.ProfilePhoto("Medium", leaderboardItem.EmployeeADName))" alt="image.png" title="@leaderboardItem.EmployeeADName" /><br />
-                            <b>@leaderboardItem.FullName</b>
+                            <b>@leaderboardItem.FullName</b><br /><br />
                         </div>
                         <div class="col-md-8">
                             @Html.Partial(Mvc.Leaderboard.Views._EarnedBadgeList, leaderboardItem.EarnedCommunityBadges.OrderBy(ebi => ebi.BadgePriority).Take(3))
@@ -94,8 +94,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            @Html.ActionLink(ApplicationResources.ProfileLink, Mvc.Leaderboard.Show(leaderboardItem.EmployeeADName), new { @class = "btn btn-primary" })
-                            @Html.ActionLink(ApplicationResources.CompareLink, Mvc.Leaderboard.Compare(leaderboardItem.EmployeeADName), new { @class = "btn btn-primary" })
+                            @Html.ActionLink(ApplicationResources.ProfileLink, Mvc.Leaderboard.Show(leaderboardItem.EmployeeADName), new { @class = "btn btn-magenic" })
+                            @Html.ActionLink(ApplicationResources.CompareLink, Mvc.Leaderboard.Compare(leaderboardItem.EmployeeADName), new { @class = "btn btn-magenic" })
                         </div>
                         <div class="col-md-6 text-right">
                             @leaderboardItem.EarnedCommunityBadgeCount / @Model.TotalCommunityBadgeCount @ApplicationResources.EarnedCommunityBadgesLabel
@@ -107,7 +107,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="@leaderboardItem.EarnedCommunityBadgeCount" aria-valuemin="0" aria-valuemax="@Model.TotalCommunityBadgeCount" style="width: @leaderboardItem.PercentageCommunityCompleted(Model.TotalCommunityBadgeCount)%;">
+                                <div class="progress-bar progress-bar-magenic" role="progressbar" aria-valuenow="@leaderboardItem.EarnedCommunityBadgeCount" aria-valuemin="0" aria-valuemax="@Model.TotalCommunityBadgeCount" style="width: @leaderboardItem.PercentageCommunityCompleted(Model.TotalCommunityBadgeCount)%;">
                                     @leaderboardItem.PercentageCommunityCompletedString(Model.TotalCommunityBadgeCount)
                                 </div>
                             </div>

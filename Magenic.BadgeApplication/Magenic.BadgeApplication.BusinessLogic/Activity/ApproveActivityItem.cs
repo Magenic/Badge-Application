@@ -1,13 +1,11 @@
-﻿using System.Linq;
-using Autofac;
-using Csla;
+﻿using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;
-using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
@@ -195,6 +193,22 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                     Status = this.Status,
                     ApprovedById = this.ApprovedById,
                 };
+
+                var list = new List<ApproveActivityBadgeItemDTO>();
+                foreach (var item in this.ApproveActivityBadgeCollection)
+                {
+                    list.Add(new ApproveActivityBadgeItemDTO()
+                    {
+                        BadgeId = item.BadgeId,
+                        BadgePriority = item.BadgePriority,
+                        Name = item.Name,
+                        Type = item.Type,
+                        AwardValueAmount = item.AwardValueAmount,
+                        ImagePath = item.ImagePath,
+                    });
+                }
+                returnValue.ApproveActivityBadgeItemCollection = list;
+
                 return returnValue;
             }
         }
