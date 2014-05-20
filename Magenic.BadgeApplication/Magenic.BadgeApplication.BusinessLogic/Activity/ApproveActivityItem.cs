@@ -1,7 +1,9 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using Autofac;
 using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;
+using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
@@ -102,6 +104,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             private set { SetProperty(ApprovedByIdProperty, value); }
         }
 
+        public static readonly PropertyInfo<IApproveActivityBadgeCollection> ApproveActivityBadgeCollectionProperty = RegisterProperty<IApproveActivityBadgeCollection>(c => c.ApproveActivityBadgeCollection);
+        public IApproveActivityBadgeCollection ApproveActivityBadgeCollection
+        {
+            get { return GetProperty(ApproveActivityBadgeCollectionProperty); }
+            private set { SetProperty(ApproveActivityBadgeCollectionProperty, value); }
+        }
+
         #endregion Properties
 
         #region Methods
@@ -160,6 +169,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                 this.Status = item.Status;
                 this.ApprovedById = item.ApprovedById;
             }
+            this.ApproveActivityBadgeCollection = new ApproveActivityBadgeCollection();
+            ((ApproveActivityBadgeCollection)this.ApproveActivityBadgeCollection).LoadData(item.ApproveActivityBadgeItemCollection);
             this.MarkClean();
             this.MarkOld();
             this.MarkAsChild();
