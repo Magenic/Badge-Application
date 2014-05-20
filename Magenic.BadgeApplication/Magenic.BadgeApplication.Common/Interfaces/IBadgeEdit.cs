@@ -71,7 +71,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         int ActivityPointsAmount { get; set; }
         /// <summary>
-        /// Check with Steve.
+        /// The amount of points awarded for the badge.
         /// </summary>
         int AwardValueAmount { get; set; }
         /// <summary>

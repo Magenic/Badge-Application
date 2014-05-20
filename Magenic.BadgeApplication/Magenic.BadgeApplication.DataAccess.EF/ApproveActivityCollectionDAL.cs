@@ -38,6 +38,24 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                               SubmissionNotes = t.SubmissionDescription
                                           }).ToArrayAsync();
 
+                var activityDal = new BadgeEditDAL();
+                foreach (var activity in activityList)
+                {
+                    var potentialBadges = activityDal.GetPotentialBadgesForActivity(activity.ActivityId);
+                    var badgeIds = potentialBadges.Select(pb => pb.Id).ToArray();
+                    activity.ApproveActivityBadgeItemCollection = await (from t in ctx.Badges
+                                                                  where badgeIds.Contains(t.BadgeId)
+                                                                  select new ApproveActivityBadgeItemDTO
+                                                                  {
+                                                                      BadgeId = t.BadgeId,
+                                                                      Name = t.BadgeName,
+                                                                      Type = (Common.Enums.BadgeType)t.BadgeTypeId,
+                                                                      ImagePath = t.BadgePath,
+                                                                      BadgePriority = t.BadgePriority,
+                                                                      AwardValueAmount = t.BadgeAwardValueAmount
+                                                                  }).ToArrayAsync();
+                }
+                
                 return activityList;
             }
         }
