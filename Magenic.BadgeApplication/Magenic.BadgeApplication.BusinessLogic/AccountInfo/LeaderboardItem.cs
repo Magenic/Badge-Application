@@ -48,6 +48,20 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
             private set { LoadProperty(EmployeeADNameProperty, value); }
         }
 
+        public static readonly PropertyInfo<string> EmployeeLocationProperty = RegisterProperty<string>(c => c.EmployeeLocation);
+        public string EmployeeLocation
+        {
+            get { return GetProperty(EmployeeLocationProperty); }
+            private set { LoadProperty(EmployeeLocationProperty, value); }
+        }
+
+        public static readonly PropertyInfo<string> EmployeeDepartmentProperty = RegisterProperty<string>(c => c.EmployeeDepartment);
+        public string EmployeeDepartment
+        {
+            get { return GetProperty(EmployeeDepartmentProperty); }
+            private set { LoadProperty(EmployeeDepartmentProperty, value); }
+        }
+
         public static readonly PropertyInfo<IEarnedBadgeCollection> EarnedBadgeCollectionProperty = RegisterProperty<IEarnedBadgeCollection>(c => c.EarnedBadges);
         public IEarnedBadgeCollection EarnedBadges
         {
@@ -134,6 +148,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
             this.EmployeeFirstName = item.EmployeeFirstName;
             this.EmployeeLastName = item.EmployeeLastName;
             this.EmployeeADName = item.EmployeeADName;
+            this.EmployeeLocation = item.EmployeeLocation;
+            this.EmployeeDepartment = item.EmployeeDepartment;
 
             var earnedBadgeCollection = new EarnedBadgeCollection();
             earnedBadgeCollection.LoadData(item.EarnedBadges);

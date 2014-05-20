@@ -14,7 +14,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     
     public partial class ActivityEntryType
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ActivityEntryType()
         {
             this.Activities = new HashSet<Activity>();

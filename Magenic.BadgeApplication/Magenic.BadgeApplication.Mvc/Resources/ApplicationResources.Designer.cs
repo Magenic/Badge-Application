@@ -673,11 +673,38 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User Name.
+        /// </summary>
+        public static string PointsReportADNameHeader {
+            get {
+                return ResourceManager.GetString("PointsReportADNameHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badges.
+        /// </summary>
+        public static string PointsReportBadgesHeader {
+            get {
+                return ResourceManager.GetString("PointsReportBadgesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current points for a user are calculated by summing the points values for all User Badge records that are marked as not being paid out..
         /// </summary>
         public static string PointsReportDescription {
             get {
                 return ResourceManager.GetString("PointsReportDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Name.
+        /// </summary>
+        public static string PointsReportFirstNameHeader {
+            get {
+                return ResourceManager.GetString("PointsReportFirstNameHeader", resourceCulture);
             }
         }
         
@@ -691,11 +718,20 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
+        ///   Looks up a localized string similar to Last Name.
         /// </summary>
-        public static string PointsReportNameHeader {
+        public static string PointsReportLastNameHeader {
             get {
-                return ResourceManager.GetString("PointsReportNameHeader", resourceCulture);
+                return ResourceManager.GetString("PointsReportLastNameHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location.
+        /// </summary>
+        public static string PointsReportLocationHeader {
+            get {
+                return ResourceManager.GetString("PointsReportLocationHeader", resourceCulture);
             }
         }
         

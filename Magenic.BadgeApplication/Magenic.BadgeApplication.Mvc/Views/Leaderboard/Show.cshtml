@@ -9,6 +9,8 @@
         <div class="col-md-3">
             <img src="@Url.Action(Mvc.Image.ProfilePhoto("Large", Model.EmployeeADName))" alt="image.png" title="@Model.EmployeeADName" /><br />
             <b>@Model.FullName</b><br />
+            @Model.EmployeeDepartment<br />
+            @Model.EmployeeLocation<br /><br />
             @Html.ActionLink(ApplicationResources.CompareLink, Mvc.Leaderboard.Compare(Model.EmployeeADName), new { @class = "btn btn-primary" })
         </div>
         <div class="col-md-8">

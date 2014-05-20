@@ -10,7 +10,10 @@
                 <thead>
                     <tr>
                         <th>@Html.CheckBox("SelectAll", new { onclick = "checkAllBoxes(this);" })</th>
-                        <th>@ApplicationResources.PointsReportNameHeader</th>
+                        <th>@ApplicationResources.PointsReportADNameHeader</th>
+                        <th>@ApplicationResources.PointsReportFirstNameHeader</th>
+                        <th>@ApplicationResources.PointsReportLastNameHeader</th>
+                        <th>@ApplicationResources.PointsReportLocationHeader</th>
                         <th>@ApplicationResources.PointsReportPointsTotalHeader</th>
                     </tr>
                 </thead>
@@ -23,6 +26,15 @@
                             </td>
                             <td>
                                 @pointsReport.EmployeeADName
+                            </td>
+                            <td>
+                                @pointsReport.EmployeeFirstName
+                            </td>
+                            <td>
+                                @pointsReport.EmployeeLastName
+                            </td>
+                            <td>
+                                @pointsReport.EmployeeLocation
                             </td>
                             <td>
                                 @pointsReport.TotalPoints
