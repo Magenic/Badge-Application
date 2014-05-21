@@ -1,4 +1,9 @@
-﻿@LargeHeaderFont: normal 30px HelveticaNeue, Arial, sans-serif;
+﻿@import "bootstrap/variables.less";
+@import "metro-bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+@import "bootstrap/buttons.less";
+
+@LargeHeaderFont: normal 30px HelveticaNeue, Arial, sans-serif;
 @MediumHeaderFont: normal 23px Arial, sans-serif;
 @SmallHeaderFont: normal 18px HelveticaNeue, Arial, sans-serif;
 
@@ -73,6 +78,14 @@ textarea {
     margin: 10px 0 0 0;
     padding: 11px 34px;
     width: auto;
+}
+
+.btn-magenic {
+  .button-variant(@White; @MagenicGreen; @MagenicLightGreen);
+}
+
+.progress-bar-magenic {
+  .progress-bar-variant(@MagenicGreen);
 }
 
 .grayBox, .tabGrayBox {

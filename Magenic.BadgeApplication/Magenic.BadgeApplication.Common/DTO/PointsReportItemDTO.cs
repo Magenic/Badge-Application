@@ -14,9 +14,21 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public int EmployeeId { get; set; }
         /// <summary>
+        /// Gets or sets the first name of the employee.
+        /// </summary>
+        public string EmployeeFirstName { get; set; }
+        /// <summary>
+        /// Gets or sets the last name of the employee.
+        /// </summary>
+        public string EmployeeLastName { get; set; }
+        /// <summary>
         /// The employee's active directory name.
         /// </summary>
         public string EmployeeADName { get; set; }
+        /// <summary>
+        /// Gets or sets the employee location.
+        /// </summary>
+        public string EmployeeLocation { get; set; }
         /// <summary>
         /// The total number of award points that have not been disbursed for this employee
         /// </summary>

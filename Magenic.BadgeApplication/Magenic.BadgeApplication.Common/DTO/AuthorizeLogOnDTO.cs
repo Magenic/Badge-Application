@@ -20,6 +20,14 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public string LastName { get; set; }
         /// <summary>
+        /// The user's location.
+        /// </summary>
+        public string Location { get; set; }
+        /// <summary>
+        /// The user's department.
+        /// </summary>
+        public string Department { get; set; }
+        /// <summary>
         /// AD name of the user's primary manager.
         /// </summary>
         public string Manager1ADName { get; set; }

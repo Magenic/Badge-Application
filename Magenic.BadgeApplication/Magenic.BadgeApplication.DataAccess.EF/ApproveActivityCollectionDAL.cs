@@ -44,18 +44,18 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                     var potentialBadges = activityDal.GetPotentialBadgesForActivity(activity.ActivityId);
                     var badgeIds = potentialBadges.Select(pb => pb.Id).ToArray();
                     activity.ApproveActivityBadgeItemCollection = await (from t in ctx.Badges
-                                                                  where badgeIds.Contains(t.BadgeId)
-                                                                  select new ApproveActivityBadgeItemDTO
-                                                                  {
-                                                                      BadgeId = t.BadgeId,
-                                                                      Name = t.BadgeName,
-                                                                      Type = (Common.Enums.BadgeType)t.BadgeTypeId,
-                                                                      ImagePath = t.BadgePath,
-                                                                      BadgePriority = t.BadgePriority,
-                                                                      AwardValueAmount = t.BadgeAwardValueAmount
-                                                                  }).ToArrayAsync();
+                                                                         where badgeIds.Contains(t.BadgeId)
+                                                                         select new ApproveActivityBadgeItemDTO
+                                                                         {
+                                                                             BadgeId = t.BadgeId,
+                                                                             Name = t.BadgeName,
+                                                                             Type = (Common.Enums.BadgeType)t.BadgeTypeId,
+                                                                             ImagePath = t.BadgePath,
+                                                                             BadgePriority = t.BadgePriority,
+                                                                             AwardValueAmount = t.BadgeAwardValueAmount
+                                                                         }).ToArrayAsync();
                 }
-                
+
                 return activityList;
             }
         }
@@ -85,7 +85,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             var badgeEntity = new ActivitySubmission
             {
                 ActivitySubmissionId = data.SubmissionId,
-                SubmissionStatusId = (int)data.Status
+                SubmissionStatusId = (int)data.Status,
+                SubmissionApprovedById = data.ApprovedById,
             };
             return badgeEntity;
         }

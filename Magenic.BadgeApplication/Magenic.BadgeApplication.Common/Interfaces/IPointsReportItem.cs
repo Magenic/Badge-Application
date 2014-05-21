@@ -17,6 +17,18 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         string EmployeeADName { get; }
         /// <summary>
+        /// The employee's first name.
+        /// </summary>
+        string EmployeeFirstName { get; }
+        /// <summary>
+        /// The employee's last name.
+        /// </summary>
+        string EmployeeLastName { get; }
+        /// <summary>
+        /// The employee's location.
+        /// </summary>
+        string EmployeeLocation { get; }
+        /// <summary>
         /// The total number of award points that have not been disbursed for this employee
         /// </summary>
         int TotalPoints { get; }

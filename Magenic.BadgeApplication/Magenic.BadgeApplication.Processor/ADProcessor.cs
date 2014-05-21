@@ -1,14 +1,12 @@
 ﻿using Autofac;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common;
-using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.Processor
 {
@@ -90,15 +88,17 @@ namespace Magenic.BadgeApplication.Processor
         {
             foreach (var employeeADName in employees)
             {
-                var result = Task.Run(() => dal.RetrieveIdentityAsync(employeeADName)).Result ??
-                                InsertUserInfoFromAD(adDal, dal, employeeADName);
+                InsertUserInfoFromAD(adDal, dal, employeeADName);
             }
         }
 
-        private CustomIdentityDTO InsertUserInfoFromAD(IAuthorizeLogOn adDal, ICustomIdentityDAL dal, string userName)
+        private void InsertUserInfoFromAD(IAuthorizeLogOn adDal, ICustomIdentityDAL dal, string userName)
         {
             var userADInfo = adDal.RetrieveUserInformation(userName);
-            return dal.SaveIdentity(userADInfo);
+            if (userADInfo != null)
+            {
+                dal.SaveIdentity(userADInfo);
+            }
         }
     }
 }

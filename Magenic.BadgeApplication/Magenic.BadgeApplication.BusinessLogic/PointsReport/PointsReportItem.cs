@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using Csla;
+﻿using Csla;
 using Csla.Rules;
 using Csla.Rules.CommonRules;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
 {
@@ -46,11 +46,32 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
             private set { SetProperty(EmployeeIdProperty, value); }
         }
 
+        public static readonly PropertyInfo<string> EmployeeFirstNameProperty = RegisterProperty<string>(c => c.EmployeeFirstName);
+        public string EmployeeFirstName
+        {
+            get { return GetProperty(EmployeeFirstNameProperty); }
+            private set { LoadProperty(EmployeeFirstNameProperty, value); }
+        }
+
+        public static readonly PropertyInfo<string> EmployeeLastNameProperty = RegisterProperty<string>(c => c.EmployeeLastName);
+        public string EmployeeLastName
+        {
+            get { return GetProperty(EmployeeLastNameProperty); }
+            private set { LoadProperty(EmployeeLastNameProperty, value); }
+        }
+
         public static readonly PropertyInfo<string> EmployeeADNameProperty = RegisterProperty<string>(c => c.EmployeeADName);
         public string EmployeeADName
         {
             get { return GetProperty(EmployeeADNameProperty); }
             private set { SetProperty(EmployeeADNameProperty, value); }
+        }
+
+        public static readonly PropertyInfo<string> EmployeeLocationProperty = RegisterProperty<string>(c => c.EmployeeLocation);
+        public string EmployeeLocation
+        {
+            get { return GetProperty(EmployeeLocationProperty); }
+            private set { LoadProperty(EmployeeLocationProperty, value); }
         }
 
         public static readonly PropertyInfo<int> TotalPointsProperty = RegisterProperty<int>(c => c.TotalPoints);
@@ -83,8 +104,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
         protected override void AddBusinessRules()
         {
             base.AddBusinessRules();
-            
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, PayoutMethod, PermissionType.Administrator.ToString()));            
+
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, PayoutMethod, PermissionType.Administrator.ToString()));
         }
 
         #endregion Rules
@@ -96,7 +117,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
                 var returnValue = new PointsReportItemDTO
                 {
                     EmployeeId = this.EmployeeId,
+                    EmployeeFirstName = this.EmployeeFirstName,
+                    EmployeeLastName = this.EmployeeLastName,
                     EmployeeADName = this.EmployeeADName,
+                    EmployeeLocation = this.EmployeeLocation,
                     TotalPoints = this.TotalPoints,
                     PaidOut = this.PaidOut,
                     PayoutById = this.PayoutById,
@@ -112,7 +136,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
             using (this.BypassPropertyChecks)
             {
                 this.EmployeeId = data.EmployeeId;
+                this.EmployeeFirstName = data.EmployeeFirstName;
+                this.EmployeeLastName = data.EmployeeLastName;
                 this.EmployeeADName = data.EmployeeADName;
+                this.EmployeeLocation = data.EmployeeLocation;
                 this.TotalPoints = data.TotalPoints;
                 this.PaidOut = false;
                 this.PayoutById = null;

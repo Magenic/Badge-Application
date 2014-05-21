@@ -327,8 +327,8 @@
   <data name="PointsReportDescription" xml:space="preserve">
     <value>Current points for a user are calculated by summing the points values for all User Badge records that are marked as not being paid out.</value>
   </data>
-  <data name="PointsReportNameHeader" xml:space="preserve">
-    <value>Name</value>
+  <data name="PointsReportADNameHeader" xml:space="preserve">
+    <value>User Name</value>
   </data>
   <data name="PointsReportPointsTotalHeader" xml:space="preserve">
     <value>Points Total</value>
@@ -392,5 +392,17 @@
   </data>
   <data name="EarnedBadgesHeader" xml:space="preserve">
     <value>earned badge(s)</value>
+  </data>
+  <data name="PointsReportBadgesHeader" xml:space="preserve">
+    <value>Badges</value>
+  </data>
+  <data name="PointsReportFirstNameHeader" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="PointsReportLastNameHeader" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="PointsReportLocationHeader" xml:space="preserve">
+    <value>Location</value>
   </data>
 </root>
