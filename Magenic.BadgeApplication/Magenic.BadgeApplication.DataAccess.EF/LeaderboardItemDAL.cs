@@ -31,6 +31,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                                  EmployeeFirstName = emp.FirstName,
                                                  EmployeeLastName = emp.LastName,
                                                  EmployeeADName = emp.ADName,
+                                                 EmployeeLocation = emp.Location,
+                                                 EmployeeDepartment = emp.Department,
                                                  EarnedBadges = grp.Select(b => new EarnedBadgeItemDTO()
                                                  {
                                                      Id = b.BadgeId,

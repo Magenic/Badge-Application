@@ -2,6 +2,8 @@
     [EmployeeId]            INT           IDENTITY (1, 1) NOT NULL CONSTRAINT [pk_User] PRIMARY KEY CLUSTERED ([EmployeeId] ASC),
     [FirstName]             VARCHAR (100) NOT NULL,
     [LastName]              VARCHAR (100) NOT NULL,
+	[Location]				VARCHAR (100) NULL,
+	[Department]			VARCHAR (100) NULL,
     [ADName]                VARCHAR (100) NOT NULL,
     [EmploymentStartDate]   DATE          NULL,
     [EmploymentEndDate]     DATE          NULL,

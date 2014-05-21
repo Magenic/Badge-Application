@@ -37,6 +37,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public Nullable<int> ApprovingManagerId1 { get; set; }
         public Nullable<int> ApprovingManagerId2 { get; set; }
         public Nullable<int> AwardPayoutThreshold { get; set; }
+        public string Location { get; set; }
+        public string Department { get; set; }
     
         public virtual ICollection<ActivitySubmission> ActivitySubmissions { get; set; }
         public virtual ICollection<ActivitySubmission> ActivitySubmissions1 { get; set; }

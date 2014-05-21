@@ -28,6 +28,16 @@ namespace Magenic.BadgeApplication.Common.DTO
         public string EmployeeADName { get; set; }
 
         /// <summary>
+        /// Gets or sets the employee location.
+        /// </summary>
+        public string EmployeeLocation { get; set; }
+
+        /// <summary>
+        /// Gets or sets the employee department.
+        /// </summary>
+        public string EmployeeDepartment { get; set; }
+
+        /// <summary>
         /// Gets or sets the earned badges.
         /// </summary>
         public IEnumerable<EarnedBadgeItemDTO> EarnedBadges { get; set; }

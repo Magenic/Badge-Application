@@ -17,7 +17,7 @@
         <div class="col-md-2">
             <img src="@Url.Action(Mvc.Image.ProfilePhoto("Medium", Model.LeftLeaderboardItem.EmployeeADName))" alt="image.png" title="@Model.LeftLeaderboardItem.EmployeeADName" /><br />
             <b>@Model.LeftLeaderboardItem.FullName</b><br />
-            @Html.ActionLink(ApplicationResources.ProfileLink, Mvc.Leaderboard.Show(Model.LeftLeaderboardItem.EmployeeADName), new { @class = "btn btn-primary" })
+            @Html.ActionLink(ApplicationResources.ProfileLink, Mvc.Leaderboard.Show(Model.LeftLeaderboardItem.EmployeeADName), new { @class = "btn btn-magenic" })
         </div>
         <div class="col-md-6">
             <div class="table-responsive">
@@ -70,7 +70,7 @@
         <div class="col-md-2 text-right">
             <img src="@Url.Action(Mvc.Image.ProfilePhoto("Medium", Model.RightLeaderboardItem.EmployeeADName))" alt="image.png" title="@Model.RightLeaderboardItem.EmployeeADName" /><br />
             <b>@Model.RightLeaderboardItem.FullName</b><br />
-            @Html.ActionLink(ApplicationResources.ProfileLink, Mvc.Leaderboard.Show(Model.RightLeaderboardItem.EmployeeADName), new { @class = "btn btn-primary" })
+            @Html.ActionLink(ApplicationResources.ProfileLink, Mvc.Leaderboard.Show(Model.RightLeaderboardItem.EmployeeADName), new { @class = "btn btn-magenic" })
         </div>
     </div>
 </div>

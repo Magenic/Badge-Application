@@ -35,6 +35,16 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         string EmployeeADName { get; }
 
         /// <summary>
+        /// Gets the location.
+        /// </summary>
+        string EmployeeLocation { get; }
+
+        /// <summary>
+        /// Gets the department.
+        /// </summary>
+        string EmployeeDepartment { get; }
+
+        /// <summary>
         /// Gets this employee's earned badges.
         /// </summary>
         IEarnedBadgeCollection EarnedBadges { get; }

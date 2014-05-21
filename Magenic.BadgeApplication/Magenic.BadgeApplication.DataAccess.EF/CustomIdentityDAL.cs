@@ -95,6 +95,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             employee.ADName = customIdentity.UserName;
             employee.FirstName = customIdentity.FirstName;
             employee.LastName = customIdentity.LastName;
+            employee.Location = customIdentity.Location;
+            employee.Department = customIdentity.Department;
             employee.EmploymentStartDate = customIdentity.EmployementStartDate;
             employee.EmploymentEndDate = customIdentity.EmployementEndDate;
         }

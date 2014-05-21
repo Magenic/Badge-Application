@@ -16,18 +16,21 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             {
                 ctx.Database.Connection.Open();
                 var badgeAwardList = await (from ba in ctx.BadgeAwards
-                    join e in ctx.Employees on ba.EmployeeId equals e.EmployeeId
-                    where !ba.PaidOut
-                    group ba by new {e.EmployeeId, e.ADName, e.AwardPayoutThreshold} into g
-                    where g.Key.AwardPayoutThreshold <= g.Sum(t => t.AwardAmount)
-                    select new PointsReportItemDTO
-                    {
-                        EmployeeId = g.Key.EmployeeId,
-                        EmployeeADName = g.Key.ADName,
-                        PaidOut = false,
-                        TotalPoints = g.Sum(t => t.AwardAmount),
-                        BadgeAwardIds = g.Select(t => t.BadgeAwardId).ToList()
-                    }).ToArrayAsync();
+                                            join e in ctx.Employees on ba.EmployeeId equals e.EmployeeId
+                                            where !ba.PaidOut
+                                            group ba by new { e.EmployeeId, e.FirstName, e.LastName, e.ADName, e.Location, e.AwardPayoutThreshold } into g
+                                            where g.Key.AwardPayoutThreshold <= g.Sum(t => t.AwardAmount)
+                                            select new PointsReportItemDTO
+                                            {
+                                                EmployeeId = g.Key.EmployeeId,
+                                                EmployeeFirstName = g.Key.FirstName,
+                                                EmployeeLastName = g.Key.LastName,
+                                                EmployeeADName = g.Key.ADName,
+                                                EmployeeLocation = g.Key.Location,
+                                                PaidOut = false,
+                                                TotalPoints = g.Sum(t => t.AwardAmount),
+                                                BadgeAwardIds = g.Select(t => t.BadgeAwardId).ToList()
+                                            }).ToArrayAsync();
                 return badgeAwardList;
             }
         }
