@@ -15,6 +15,20 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
     [Serializable]
     public sealed class ApproveActivityCollection : BusinessListBase<ApproveActivityCollection, IApproveActivityItem>, IApproveActivityCollection
     {
+        #region Criteria
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
+        [Serializable]
+        public sealed class ApproveActivityCollectionCriteria : CriteriaBase<ApproveActivityCollectionCriteria>, IApproveActivityCollectionCriteria
+        {
+
+            public int ManagerEmployeeId { get; set; }
+
+            public IAwardBadges AwardBadges { get; set; }
+        }
+
+        #endregion Criteria
+
         #region Factory Methods
 
         /// <summary>
@@ -24,7 +38,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         /// <returns>A list of activities to approve.</returns>
         public async static Task<IApproveActivityCollection> GetAllActivitiesToApproveAsync(int managerEmployeeId)
         {
-            return await IoC.Container.Resolve<IObjectFactory<IApproveActivityCollection>>().FetchAsync(managerEmployeeId);
+            var awardBadges = IoC.Container.Resolve<IAwardBadges>();
+            var criteria = new ApproveActivityCollectionCriteria
+            {
+                ManagerEmployeeId = managerEmployeeId,
+                AwardBadges = awardBadges
+            };
+            return await IoC.Container.Resolve<IObjectFactory<IApproveActivityCollection>>().FetchAsync(criteria);
         }
 
         #endregion Factory Methods
@@ -32,11 +52,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         #region Data Access
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        private async Task DataPortal_Fetch(int managerEmployeeId)
+        private async Task DataPortal_Fetch(ApproveActivityCollectionCriteria criteria)
         {
             var dal = IoC.Container.Resolve<IApproveActivityCollectionDAL>();
 
-            var result = await dal.GetActivitiesToApproveForManagerAsync(managerEmployeeId);
+            var result = await dal.GetActivitiesToApproveForManagerAsync(criteria);
             this.LoadData(result);
         }
 
@@ -55,17 +75,18 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         {
             var saveList = new List<ApproveActivityItemDTO>();
             var badgeList = new List<BadgeAwardDTO>();
+            var awardBadges = IoC.Container.Resolve<IAwardBadges>();
             foreach (ApproveActivityItem i in this)
             {
                 if (i.Status == ActivitySubmissionStatus.Approved)
                 {
-                    var activityInfo = new AwardBadges.ActivityInfo
+                    var activityInfo = new ActivityInfoDTO
                     {
                         ActivityId = i.ActivityId,
                         EmployeeId = i.EmployeeId,
                         Status = i.Status
                     };
-                    badgeList.AddRange(AwardBadges.CreateBadges(activityInfo));
+                    badgeList.AddRange(awardBadges.CreateBadges(activityInfo));
                     if (activityInfo.Status == ActivitySubmissionStatus.Complete)
                     {
                         i.CompleteActivitySubmission();

@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.Common.DTO;
+﻿using System.Threading;
+using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 {
     public class ApproveActivityCollectionDAL : IApproveActivityCollectionDAL
     {
-        public async Task<IEnumerable<ApproveActivityItemDTO>> GetActivitiesToApproveForManagerAsync(int managerEmployeeId)
+        public async Task<IEnumerable<ApproveActivityItemDTO>> GetActivitiesToApproveForManagerAsync(IApproveActivityCollectionCriteria criteria)
         {
             using (var ctx = new Entities())
             {
@@ -20,8 +21,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                           join e in ctx.Employees on t.EmployeeId equals e.EmployeeId
                                           join a in ctx.Activities on t.ActivityId equals a.ActivityId
                                           where t.SubmissionStatusId == (int)ActivitySubmissionStatus.AwaitingApproval
-                                          where (e.ApprovingManagerId1 == managerEmployeeId
-                                          || e.ApprovingManagerId2 == managerEmployeeId)
+                                          where (e.ApprovingManagerId1 == criteria.ManagerEmployeeId
+                                          || e.ApprovingManagerId2 == criteria.ManagerEmployeeId)
                                           select new ApproveActivityItemDTO
                                           {
                                               SubmissionId = t.ActivitySubmissionId,
@@ -38,11 +39,16 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                               SubmissionNotes = t.SubmissionDescription
                                           }).ToArrayAsync();
 
-                var activityDal = new BadgeEditDAL();
                 foreach (var activity in activityList)
                 {
-                    var potentialBadges = activityDal.GetPotentialBadgesForActivity(activity.ActivityId);
-                    var badgeIds = potentialBadges.Select(pb => pb.Id).ToArray();
+                    var activityInfo = new ActivityInfoDTO
+                    {
+                        EmployeeId = activity.EmployeeId,
+                        ActivityId = activity.ActivityId,
+                        Status = ActivitySubmissionStatus.Approved
+                    };
+                    var badgeIds = criteria.AwardBadges.CreateBadges(activityInfo).Select(b => b.BadgeId).ToArray();
+
                     activity.ApproveActivityBadgeItemCollection = await (from t in ctx.Badges
                                                                          where badgeIds.Contains(t.BadgeId)
                                                                          select new ApproveActivityBadgeItemDTO
