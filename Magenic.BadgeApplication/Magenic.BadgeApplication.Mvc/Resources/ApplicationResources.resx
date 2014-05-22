@@ -405,4 +405,13 @@
   <data name="PointsReportLocationHeader" xml:space="preserve">
     <value>Location</value>
   </data>
+  <data name="PossiblePointsAwardLabel" xml:space="preserve">
+    <value>Possible Points Awarded</value>
+  </data>
+  <data name="PossiblePointsDisclaimerLabel" xml:space="preserve">
+    <value>Approving this activity could award the {0} badge for this Employee.</value>
+  </data>
+  <data name="PossiblePointsTotalAwardLabel" xml:space="preserve">
+    <value>Total Possible Badges ({0} total points)</value>
+  </data>
 </root>

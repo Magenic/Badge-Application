@@ -1,0 +1,30 @@
+﻿@using Magenic.BadgeApplication.BusinessLogic.Activity
+@using Magenic.BadgeApplication.Extensions
+@using Magenic.BadgeApplication.Resources
+@model ApproveActivityBadgeItem
+
+@{
+    var uniqueIdentifier = String.Format("{0}", Model.BadgeId);
+}
+
+<div id="EarnedBadgeWindow-@uniqueIdentifier" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">@Model.Name</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        @Html.DisplayFor(m => m)
+                    </div>
+                    <div class="col-md-8">
+                        @MvcHtmlString.Create(String.Format(ApplicationResources.PossiblePointsDisclaimerLabel, Model.Name))<br /><br />
+                        @ApplicationResources.PossiblePointsAwardLabel @Model.AwardValueAmount
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

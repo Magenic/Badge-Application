@@ -705,6 +705,9 @@
     <Content Include="Views\Leaderboard\_EarnedBadgeList.cshtml" />
     <Content Include="Views\Leaderboard\_EarnedBadgeWindow.cshtml" />
     <Content Include="Views\Leaderboard\Rank.cshtml" />
+    <Content Include="Views\BadgeManager\_PossibleBadgeList.cshtml" />
+    <Content Include="Views\BadgeManager\_PossibleBadgeWindow.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ApproveActivityBadgeItem.cshtml" />
     <None Include="Web.QA.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -770,7 +773,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58603</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
