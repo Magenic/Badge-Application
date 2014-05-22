@@ -161,7 +161,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
         public void AllTogetherIsValidWithApprovedStatus()
         {
             var targetActivityId = 1;
-            var activityInfo = new AwardBadges.ActivityInfo
+            var activityInfo = new ActivityInfoDTO
             {
                 ActivityId = targetActivityId,
                 Status = ActivitySubmissionStatus.Approved,
@@ -181,8 +181,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
             });
             var earnedBadges = new List<BadgeAwardDTO>();
             var previousActivities = new List<SubmittedActivityItemDTO>();
-
-            var result = AwardBadges.GetBadgeAwardsForActivity(activityInfo, potentialBadges, earnedBadges, previousActivities, DateTime.Parse("1/1/2014", CultureInfo.CurrentCulture));
+            var awardBadges = new AwardBadges();
+            var result = awardBadges.GetBadgeAwardsForActivity(activityInfo, potentialBadges, earnedBadges, previousActivities, DateTime.Parse("1/1/2014", CultureInfo.CurrentCulture));
 
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.Count());            
@@ -192,7 +192,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
         public void AllTogetherIsNotValidWithoutApprovedStatus()
         {
             var targetActivityId = 1;
-            var activityInfo = new AwardBadges.ActivityInfo
+            var activityInfo = new ActivityInfoDTO
             {
                 ActivityId = targetActivityId,
                 Status = ActivitySubmissionStatus.AwaitingApproval,
@@ -212,7 +212,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
             var earnedBadges = new List<BadgeAwardDTO>();
             var previousActivities = new List<SubmittedActivityItemDTO>();
 
-            var result = AwardBadges.GetBadgeAwardsForActivity(activityInfo, potentialBadges, earnedBadges, previousActivities, DateTime.Parse("1/1/2014", CultureInfo.CurrentCulture));
+            var awardBadges = new AwardBadges();
+            var result = awardBadges.GetBadgeAwardsForActivity(activityInfo, potentialBadges, earnedBadges, previousActivities, DateTime.Parse("1/1/2014", CultureInfo.CurrentCulture));
 
             Assert.IsNotNull(result);
             Assert.AreEqual(0, result.Count());
@@ -222,7 +223,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
         public void AllTogetherIsNotValidWithoutPotentialBadgeApproved()
         {
             var targetActivityId = 1;
-            var activityInfo = new AwardBadges.ActivityInfo
+            var activityInfo = new ActivityInfoDTO
             {
                 ActivityId = targetActivityId,
                 Status = ActivitySubmissionStatus.Approved,
@@ -242,7 +243,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
             var earnedBadges = new List<BadgeAwardDTO>();
             var previousActivities = new List<SubmittedActivityItemDTO>();
 
-            var result = AwardBadges.GetBadgeAwardsForActivity(activityInfo, potentialBadges, earnedBadges, previousActivities, DateTime.Parse("1/1/2014", CultureInfo.CurrentCulture));
+            var awardBadges = new AwardBadges();
+            var result = awardBadges.GetBadgeAwardsForActivity(activityInfo, potentialBadges, earnedBadges, previousActivities, DateTime.Parse("1/1/2014", CultureInfo.CurrentCulture));
 
             Assert.IsNotNull(result);
             Assert.AreEqual(0, result.Count());
@@ -252,7 +254,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
         public void AllTogetherMultiplePotentialBadgesAwardsMultipleBadges()
         {
             var targetActivityId = 1;
-            var activityInfo = new AwardBadges.ActivityInfo
+            var activityInfo = new ActivityInfoDTO
             {
                 ActivityId = targetActivityId,
                 Status = ActivitySubmissionStatus.Approved,
@@ -285,7 +287,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
             var earnedBadges = new List<BadgeAwardDTO>();
             var previousActivities = new List<SubmittedActivityItemDTO>();
 
-            var result = AwardBadges.GetBadgeAwardsForActivity(activityInfo, potentialBadges, earnedBadges, previousActivities, DateTime.Parse("1/1/2014", CultureInfo.CurrentCulture));
+            var awardBadges = new AwardBadges();
+            var result = awardBadges.GetBadgeAwardsForActivity(activityInfo, potentialBadges, earnedBadges, previousActivities, DateTime.Parse("1/1/2014", CultureInfo.CurrentCulture));
 
             Assert.IsNotNull(result);
             Assert.AreEqual(2, result.Count());

@@ -32,11 +32,18 @@ namespace Magenic.BadgeApplication
 
             RegisterDataAccess(builder);
             RegisterAuthentication(builder);
+            RegisterBusinessLogic(builder);
 
             IoC.Container = builder.Build();
             Csla.ApplicationContext.DataPortalActivator = new ObjectActivator();
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(IoC.Container));
+        }
+
+        private static void RegisterBusinessLogic(ContainerBuilder builder)
+        {
+            builder.RegisterAssemblyTypes(Assembly.Load("Magenic.BadgeApplication.BusinessLogic"))
+                .AsImplementedInterfaces();
         }
 
         private static void RegisterDataAccess(ContainerBuilder builder)

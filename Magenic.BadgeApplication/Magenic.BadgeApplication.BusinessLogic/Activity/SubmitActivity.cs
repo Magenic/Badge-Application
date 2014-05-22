@@ -205,13 +205,14 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "submitActivity")]
         private IQueryable<BadgeAwardDTO> CreateBadges(SubmitActivity submitActivity)
         {
-            var activityInfo = new AwardBadges.ActivityInfo
+            var activityInfo = new ActivityInfoDTO
             {
                 ActivityId = this.ActivityId,
                 EmployeeId = this.EmployeeId,
                 Status = this.Status
             };
-            var returnValue = AwardBadges.CreateBadges(activityInfo);
+            var awardBadges = IoC.Container.Resolve<IAwardBadges>();
+            var returnValue = awardBadges.CreateBadges(activityInfo);
             this.LoadProperty(StatusProperty, activityInfo.Status);
             return returnValue;
         }

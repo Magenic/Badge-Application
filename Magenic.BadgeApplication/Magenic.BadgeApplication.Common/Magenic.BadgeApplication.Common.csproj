@@ -77,6 +77,7 @@
     <Compile Include="Constants\ImageConstants.cs" />
     <Compile Include="DTO\AccountInfoEditDTO.cs" />
     <Compile Include="DTO\ActivityEditDTO.cs" />
+    <Compile Include="DTO\ActivityInfoDTO.cs" />
     <Compile Include="DTO\ActivityItemDTO.cs" />
     <Compile Include="DTO\ApproveActivityBadgeItemDTO.cs" />
     <Compile Include="DTO\ApproveActivityItemDTO.cs" />
@@ -118,12 +119,14 @@
     <Compile Include="Interfaces\IApproveActivityBadgeCollection.cs" />
     <Compile Include="Interfaces\IApproveActivityBadgeItem.cs" />
     <Compile Include="Interfaces\IApproveActivityCollection.cs" />
+    <Compile Include="Interfaces\IApproveActivityCollectionCriteria.cs" />
     <Compile Include="Interfaces\IApproveActivityCollectionDAL.cs" />
     <Compile Include="Interfaces\IApproveActivityItem.cs" />
     <Compile Include="Interfaces\IApproveBadgeCollection.cs" />
     <Compile Include="Interfaces\IApproveBadgeCollectionDAL.cs" />
     <Compile Include="Interfaces\IApproveBadgeItem.cs" />
     <Compile Include="Interfaces\IAuthorizeLogOn.cs" />
+    <Compile Include="Interfaces\IAwardBadges.cs" />
     <Compile Include="Interfaces\IAwardBadgesDAL.cs" />
     <Compile Include="Interfaces\IBadgeActivityEdit.cs" />
     <Compile Include="Interfaces\IBadgeActivityEditCollection.cs" />
