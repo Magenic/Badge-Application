@@ -26,42 +26,24 @@ namespace Magenic.BadgeApplication.Authorization
             var aDPath = ConfigurationManager.AppSettings["EmployeeADPath"];
             var searchString = ConfigurationManager.AppSettings["EmployeeSearchString"];
 
-            var testAccountOus = new List<string>() 
-            {
-                "OU=Resources",
-                "OU=Project Service Accounts",
-                "OU=Project Related Mailboxes",
-                "OU=Phone Forwarding Users",
-                "OU=Internal Service Accounts",
-                "OU=Internal Test Users",
-                "OU=General Distribution Groups",
-                "OU=Organizational Groups",
-                "OU=Project Distribution Groups",
-                "OU=Security Groups",
-            };
-
             AuthorizeLogOnDTO returnValue = null;
             var results = SearchForADUserInfo(string.Format(CultureInfo.CurrentCulture, searchString, userName), aDPath);
             if (results.Count > 0)
             {
                 var result = results[0];
-                var parentOu = result.GetDirectoryEntry().Parent;
-                if (!testAccountOus.Contains(parentOu.Name)) // Removes test accounts...
+                returnValue = new AuthorizeLogOnDTO();
+                returnValue.LastName = GetPropertyString(result, "sn");
+                returnValue.FirstName = GetPropertyString(result, "givenname");
+                returnValue.UserName = userName;
+                returnValue.Location = GetPropertyString(result, "physicalDeliveryOfficeName");
+                returnValue.Department = GetPropertyString(result, "department");
+                var managerDistinguishedName = GetPropertyString(result, "manager");
+                if (managerDistinguishedName != string.Empty)
                 {
-                    returnValue = new AuthorizeLogOnDTO();
-                    returnValue.LastName = GetPropertyString(result, "sn");
-                    returnValue.FirstName = GetPropertyString(result, "givenname");
-                    returnValue.UserName = userName;
-                    returnValue.Location = GetPropertyString(result, "physicalDeliveryOfficeName");
-                    returnValue.Department = GetPropertyString(result, "department");
-                    var managerDistinguishedName = GetPropertyString(result, "manager");
-                    if (managerDistinguishedName != string.Empty)
+                    var managerResults = SearchForADUserInfo(string.Format(CultureInfo.CurrentCulture, "(&(objectCategory=Person)(objectClass=user)(distinguishedname={0}))", managerDistinguishedName), aDPath);
+                    if (managerResults.Count > 0)
                     {
-                        var managerResults = SearchForADUserInfo(string.Format(CultureInfo.CurrentCulture, "(&(objectCategory=Person)(objectClass=user)(distinguishedname={0}))", managerDistinguishedName), aDPath);
-                        if (managerResults.Count > 0)
-                        {
-                            returnValue.Manager1ADName = GetPropertyString(managerResults[0], "samaccountname");
-                        }
+                        returnValue.Manager1ADName = GetPropertyString(managerResults[0], "samaccountname");
                     }
                 }
             }
