@@ -9,18 +9,10 @@ using System.Linq;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Badge
 {
-    public static class AwardBadges
+    public sealed class AwardBadges: IAwardBadges
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
-        public class ActivityInfo
-        {
-            public ActivitySubmissionStatus Status { get; set; }
-            public int ActivityId { get; set; }
-            public int EmployeeId { get; set; }
-        }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1")]
-        public static IQueryable<BadgeAwardDTO> GetBadgeAwardsForActivity(ActivityInfo activityInfo,
+        public IQueryable<BadgeAwardDTO> GetBadgeAwardsForActivity(ActivityInfoDTO activityInfo,
             IList<BadgeEditDTO> potentialBadges, IList<BadgeAwardDTO> earnedBadges,
             IList<SubmittedActivityItemDTO> previousActivities, DateTime activityApprovalTime)
         {
@@ -76,7 +68,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             return returnValue;
         }
 
-        private static BadgeAwardDTO CreateNewBadgeAward(ActivityInfo activity, BadgeEditDTO potentialBadge)
+        private BadgeAwardDTO CreateNewBadgeAward(ActivityInfoDTO activity, BadgeEditDTO potentialBadge)
         {
             return new BadgeAwardDTO
             {
@@ -88,7 +80,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
-        public static IQueryable<BadgeAwardDTO> CreateBadges(ActivityInfo activityInfo)
+        public IQueryable<BadgeAwardDTO> CreateBadges(ActivityInfoDTO activityInfo)
         {
             var activityDal = IoC.Container.Resolve<IBadgeEditDAL>();
             var potentialBadges = activityDal.GetPotentialBadgesForActivity(activityInfo.ActivityId);
@@ -96,7 +88,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             var earnedBadges = dal.GetAwardedBadgesForUser(activityInfo.EmployeeId);
             var previousActivities = dal.GetPreviousActivitiesForUser(activityInfo.EmployeeId, activityInfo.ActivityId);
 
-            var returnBadges = AwardBadges.GetBadgeAwardsForActivity(activityInfo, potentialBadges, earnedBadges, previousActivities,
+            var returnBadges = GetBadgeAwardsForActivity(activityInfo, potentialBadges, earnedBadges, previousActivities,
                 DateTime.UtcNow);
             activityInfo.Status = ActivitySubmissionStatus.Complete;
 
