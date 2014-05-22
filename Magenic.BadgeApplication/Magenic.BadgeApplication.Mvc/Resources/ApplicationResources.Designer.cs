@@ -745,6 +745,33 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Possible Points Awarded.
+        /// </summary>
+        public static string PossiblePointsAwardLabel {
+            get {
+                return ResourceManager.GetString("PossiblePointsAwardLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approving this activity could award the {0} badge for this Employee..
+        /// </summary>
+        public static string PossiblePointsDisclaimerLabel {
+            get {
+                return ResourceManager.GetString("PossiblePointsDisclaimerLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Possible Badges ({0} total points).
+        /// </summary>
+        public static string PossiblePointsTotalAwardLabel {
+            get {
+                return ResourceManager.GetString("PossiblePointsTotalAwardLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Previous Activities.
         /// </summary>
         public static string PreviousActivitiesHeader {

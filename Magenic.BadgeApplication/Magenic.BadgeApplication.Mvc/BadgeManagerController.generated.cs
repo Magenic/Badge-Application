@@ -245,6 +245,8 @@ namespace Magenic.BadgeApplication.Controllers
                 public readonly string _AdminBadgeList = "_AdminBadgeList";
                 public readonly string _BadgesForApproval = "_BadgesForApproval";
                 public readonly string _EditBadgeItem = "_EditBadgeItem";
+                public readonly string _PossibleBadgeList = "_PossibleBadgeList";
+                public readonly string _PossibleBadgeWindow = "_PossibleBadgeWindow";
                 public readonly string AddBadge = "AddBadge";
                 public readonly string ApproveActivities = "ApproveActivities";
                 public readonly string ApproveCommunityBadges = "ApproveCommunityBadges";
@@ -257,6 +259,8 @@ namespace Magenic.BadgeApplication.Controllers
             public readonly string _AdminBadgeList = "~/Views/BadgeManager/_AdminBadgeList.cshtml";
             public readonly string _BadgesForApproval = "~/Views/BadgeManager/_BadgesForApproval.cshtml";
             public readonly string _EditBadgeItem = "~/Views/BadgeManager/_EditBadgeItem.cshtml";
+            public readonly string _PossibleBadgeList = "~/Views/BadgeManager/_PossibleBadgeList.cshtml";
+            public readonly string _PossibleBadgeWindow = "~/Views/BadgeManager/_PossibleBadgeWindow.cshtml";
             public readonly string AddBadge = "~/Views/BadgeManager/AddBadge.cshtml";
             public readonly string ApproveActivities = "~/Views/BadgeManager/ApproveActivities.cshtml";
             public readonly string ApproveCommunityBadges = "~/Views/BadgeManager/ApproveCommunityBadges.cshtml";
