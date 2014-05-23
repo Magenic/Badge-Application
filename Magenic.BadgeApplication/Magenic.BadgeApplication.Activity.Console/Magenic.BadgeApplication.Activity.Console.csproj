@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{54C1E80C-96C4-4071-BA53-555AF5E77995}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Magenic.BadgeApplication.Activity.Console</RootNamespace>
     <AssemblyName>Magenic.BadgeApplication.Activity.Console</AssemblyName>
@@ -32,6 +32,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
@@ -73,6 +76,14 @@
     <ProjectReference Include="..\Magenic.BadgeApplication.Common\Magenic.BadgeApplication.Common.csproj">
       <Project>{d7b48f98-7bd5-4e80-8740-6c348a7f9a1e}</Project>
       <Name>Magenic.BadgeApplication.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Magenic.BadgeApplication.DataAccess.EF\Magenic.BadgeApplication.DataAccess.EF.csproj">
+      <Project>{80df9c9b-f946-42b1-87e7-57ef40709382}</Project>
+      <Name>Magenic.BadgeApplication.DataAccess.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Magenic.BadgeApplication.Processor\Magenic.BadgeApplication.Processor.csproj">
+      <Project>{0d8c2715-a9b5-4e95-885b-3928063bc61e}</Project>
+      <Name>Magenic.BadgeApplication.Processor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

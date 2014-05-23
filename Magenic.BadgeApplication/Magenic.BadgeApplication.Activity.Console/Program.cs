@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.Activity.Console
 {
-    static class Program
+    class Program
     {
         /// <summary>
         /// The main entry point for the application.

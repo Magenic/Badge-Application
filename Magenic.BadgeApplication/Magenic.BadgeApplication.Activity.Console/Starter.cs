@@ -11,7 +11,7 @@ namespace Magenic.BadgeApplication.Activity.Console
     {
         public async static Task Start(bool startAsConsole)
         {
-                    try
+            try
             {
                 AutofacBootstrapper.Init();
 

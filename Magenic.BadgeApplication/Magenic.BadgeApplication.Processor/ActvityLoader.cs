@@ -39,9 +39,9 @@ namespace Magenic.BadgeApplication.Processor
                             DataTable data = ds.Tables["ActivityData"];
                             foreach (DataRow row in data.Rows)
                             {
-                                var activityId = row.Field<int>("ActivityId");
+                                var activityId = row.Field<Double>("Activity Id");
                                 var adName = row.Field<string>("Magenic Username");
-                                var dateOccurred = row.Field<string>("Date Occurred");
+                                var dateOccurred = row.Field<DateTime>("Date Occurred");
                                 var comments = row.Field<string>("Comments");
 
                                 ICslaPrincipal employee = null;
@@ -57,7 +57,7 @@ namespace Magenic.BadgeApplication.Processor
                                 if (employee != null)
                                 {
                                     var activitySubmission = SubmitActivity.CreateActivitySubmission(((ICustomIdentity)employee.Identity).EmployeeId);
-                                    activitySubmission.ActivityId = activityId;
+                                    activitySubmission.ActivityId = (int)activityId;
                                     activitySubmission.ActivitySubmissionDate = DateTime.UtcNow;
                                     activitySubmission.Notes = "Created by automatic feed.";
                                     await activitySubmission.SaveAsync();
