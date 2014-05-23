@@ -15,19 +15,19 @@ namespace Magenic.BadgeApplication.Activity.Console
             {
                 AutofacBootstrapper.Init();
 
-                //var adProcessor = new Processor.FileLoader();
-                //if (startAsConsole)
-                //{
-                //    await adProcessor.StartAsync();
-                //}
-                //else
-                //{
-                //    Task.Run(() => adProcessor.StartAsync());
-                //}
+                var activityLoader = new Processor.ActvityLoader();
+                if (startAsConsole)
+                {
+                    await activityLoader.StartAsync();
+                }
+                else
+                {
+                    Task.Run(() => activityLoader.StartAsync());
+                }
             }
             catch (Exception ex)
             {
-                //Logger.Fatal<Program>(ex.Message, ex);
+                Logger.Fatal<Program>(ex.Message, ex);
             }
         }
     }

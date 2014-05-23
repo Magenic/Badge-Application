@@ -18,7 +18,7 @@ namespace Magenic.BadgeApplication.Activity.Console
             {
                 var servicesToRun = new ServiceBase[]
                 {
-                    //new FileLoader(), 
+                    new ActivityLoader(),
                 };
                 ServiceBase.Run(servicesToRun);
             }
