@@ -1,14 +1,13 @@
-﻿using Csla.Security;
+﻿using Csla;
+using Csla.Security;
 using Magenic.BadgeApplication.BusinessLogic.Activity;
+using Magenic.BadgeApplication.BusinessLogic.Security;
 using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,6 +29,8 @@ namespace Magenic.BadgeApplication.Processor
                                 "Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;",
                                 fileName);
 
+                        var administrator = await CustomPrincipal.LoadAsync("JustinW");
+                        ApplicationContext.User = administrator;
                         using (var adapter = new OleDbDataAdapter("SELECT * FROM [Data$]", connectionString))
                         {
                             var ds = new DataSet();
@@ -47,7 +48,8 @@ namespace Magenic.BadgeApplication.Processor
                                 ICslaPrincipal employee = null;
                                 try
                                 {
-                                    employee = await BusinessLogic.Security.CustomPrincipal.LoadAsync(adName);
+                                    employee = await CustomPrincipal.LoadAsync(adName);
+
                                 }
                                 catch (Exception ex)
                                 {
@@ -56,10 +58,11 @@ namespace Magenic.BadgeApplication.Processor
 
                                 if (employee != null)
                                 {
-                                    var activitySubmission = SubmitActivity.CreateActivitySubmission(((ICustomIdentity)employee.Identity).EmployeeId);
+                                    var activitySubmission = SubmitActivity.CreateActivitySubmission(((ICustomIdentity)administrator.Identity).EmployeeId);
                                     activitySubmission.ActivityId = (int)activityId;
-                                    activitySubmission.ActivitySubmissionDate = DateTime.UtcNow;
-                                    activitySubmission.Notes = "Created by automatic feed.";
+                                    activitySubmission.EmployeeId = ((ICustomIdentity)employee.Identity).EmployeeId;
+                                    activitySubmission.ActivitySubmissionDate = dateOccurred;
+                                    activitySubmission.Notes = comments;
                                     await activitySubmission.SaveAsync();
                                 }
                             }
