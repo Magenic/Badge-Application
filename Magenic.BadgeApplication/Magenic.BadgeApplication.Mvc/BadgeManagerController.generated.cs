@@ -243,7 +243,6 @@ namespace Magenic.BadgeApplication.Controllers
                 public readonly string EditBadge = "EditBadge";
                 public readonly string Index = "Index";
                 public readonly string ManageActivities = "ManageActivities";
-                public readonly string PointsReport = "PointsReport";
             }
             public readonly string _ActivitiesForApproval = "~/Views/BadgeManager/_ActivitiesForApproval.cshtml";
             public readonly string _AdminBadgeList = "~/Views/BadgeManager/_AdminBadgeList.cshtml";
@@ -257,7 +256,6 @@ namespace Magenic.BadgeApplication.Controllers
             public readonly string EditBadge = "~/Views/BadgeManager/EditBadge.cshtml";
             public readonly string Index = "~/Views/BadgeManager/Index.cshtml";
             public readonly string ManageActivities = "~/Views/BadgeManager/ManageActivities.cshtml";
-            public readonly string PointsReport = "~/Views/BadgeManager/PointsReport.cshtml";
         }
     }
 

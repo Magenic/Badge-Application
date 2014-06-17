@@ -44,6 +44,20 @@ namespace Magenic.BadgeApplication.Controllers
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> BadgeAwards()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.BadgeAwards);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> UpdateBadgeAwards()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.UpdateBadgeAwards);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public PointsReportController Actions { get { return Mvc.PointsReport; } }
@@ -61,12 +75,16 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string BadgeAwards = "BadgeAwards";
+            public readonly string UpdateBadgeAwards = "UpdateBadgeAwards";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string BadgeAwards = "BadgeAwards";
+            public const string UpdateBadgeAwards = "UpdateBadgeAwards";
         }
 
 
@@ -78,6 +96,22 @@ namespace Magenic.BadgeApplication.Controllers
         {
             public readonly string formCollection = "formCollection";
         }
+        static readonly ActionParamsClass_BadgeAwards s_params_BadgeAwards = new ActionParamsClass_BadgeAwards();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_BadgeAwards BadgeAwardsParams { get { return s_params_BadgeAwards; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_BadgeAwards
+        {
+            public readonly string userName = "userName";
+        }
+        static readonly ActionParamsClass_UpdateBadgeAwards s_params_UpdateBadgeAwards = new ActionParamsClass_UpdateBadgeAwards();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_UpdateBadgeAwards UpdateBadgeAwardsParams { get { return s_params_UpdateBadgeAwards; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_UpdateBadgeAwards
+        {
+            public readonly string badgeAwardEdits = "badgeAwardEdits";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -88,7 +122,11 @@ namespace Magenic.BadgeApplication.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string BadgeAwards = "BadgeAwards";
+                public readonly string Index = "Index";
             }
+            public readonly string BadgeAwards = "~/Views/PointsReport/BadgeAwards.cshtml";
+            public readonly string Index = "~/Views/PointsReport/Index.cshtml";
         }
     }
 
@@ -113,6 +151,26 @@ namespace Magenic.BadgeApplication.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "formCollection", formCollection);
             IndexOverride(callInfo, formCollection);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        partial void BadgeAwardsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string userName);
+
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> BadgeAwards(string userName)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.BadgeAwards);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "userName", userName);
+            BadgeAwardsOverride(callInfo, userName);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        partial void UpdateBadgeAwardsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Collections.Generic.IList<Magenic.BadgeApplication.BusinessLogic.PointsReport.BadgeAwardEdit> badgeAwardEdits);
+
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> UpdateBadgeAwards(System.Collections.Generic.IList<Magenic.BadgeApplication.BusinessLogic.PointsReport.BadgeAwardEdit> badgeAwardEdits)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.UpdateBadgeAwards);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "badgeAwardEdits", badgeAwardEdits);
+            UpdateBadgeAwardsOverride(callInfo, badgeAwardEdits);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 

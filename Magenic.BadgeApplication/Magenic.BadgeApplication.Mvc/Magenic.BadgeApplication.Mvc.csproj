@@ -712,6 +712,9 @@
     <Content Include="Views\BadgeManager\_PossibleBadgeList.cshtml" />
     <Content Include="Views\BadgeManager\_PossibleBadgeWindow.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ApproveActivityBadgeItem.cshtml" />
+    <Content Include="Views\PointsReport\BadgeAwards.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\BadgeAwardEditCollection.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\BadgeAwardEdit.cshtml" />
     <None Include="Web.QA.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

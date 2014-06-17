@@ -1,12 +1,13 @@
 ﻿using Autofac;
 using Csla;
 using Csla.Rules;
+using Csla.Rules.CommonRules;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
-using Magenic.BadgeApplication.BusinessLogic.Rules;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
 {
@@ -20,7 +21,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
         public int Id
         {
             get { return GetProperty(IdProperty); }
-            private set { SetProperty(IdProperty, value); }
+            set { SetProperty(IdProperty, value); }
         }
 
         public static readonly PropertyInfo<int> EmployeeIdProperty = RegisterProperty<int>(c => c.EmployeeId);
@@ -28,6 +29,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
         {
             get { return GetProperty(EmployeeIdProperty); }
             private set { SetProperty(EmployeeIdProperty, value); }
+        }
+
+        public static readonly PropertyInfo<string> EmployeeADNameProperty = RegisterProperty<string>(c => c.EmployeeADName);
+        public string EmployeeADName
+        {
+            get { return GetProperty(EmployeeADNameProperty); }
+            set { SetProperty(EmployeeADNameProperty, value); }
         }
 
         public static readonly PropertyInfo<int> BadgeIdProperty = RegisterProperty<int>(c => c.BadgeId);
@@ -62,6 +70,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
 
         #region Factory Methods
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "activityEdit")]
+        public static async Task<IBadgeAwardEdit> GetBadgeAwardEditByIdAsync(int badgeAwardId)
+        {
+            return await IoC.Container.Resolve<IObjectFactory<IBadgeAwardEdit>>().FetchAsync(badgeAwardId);
+        }
 
         #endregion
 
@@ -74,13 +87,21 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
 
         public static void AddObjectAuthorizationRules()
         {
-            BusinessRules.AddRule(typeof(IBadgeAwardEdit), new CanChange(AuthorizationActions.EditObject, PermissionType.Administrator.ToString()));
-            BusinessRules.AddRule(typeof(BadgeAwardEdit), new CanChange(AuthorizationActions.EditObject, PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(IBadgeAwardEdit), new IsInRole(AuthorizationActions.EditObject, PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(BadgeAwardEdit), new IsInRole(AuthorizationActions.EditObject, PermissionType.Administrator.ToString()));
         }
 
         #endregion Rules
 
         #region Data Access
+
+        private async Task DataPortal_Fetch(int badgeAwardEditId)
+        {
+            var dal = IoC.Container.Resolve<IBadgeAwardEditDAL>();
+
+            var result = await dal.GetBadgeAwardByIdAsync(badgeAwardEditId);
+            this.LoadData(result);
+        }
 
         [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]
         protected override void DataPortal_Update()
@@ -102,6 +123,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
             {
                 returnValue.Id = this.Id;
                 returnValue.EmployeeId = this.EmployeeId;
+                returnValue.EmployeeADName = this.EmployeeADName;
                 returnValue.BadgeId = this.BadgeId;
                 returnValue.BadgeName = this.BadgeName;
                 returnValue.AwardDate = this.AwardDate;
@@ -116,6 +138,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
             {
                 this.Id = item.Id;
                 this.EmployeeId = item.EmployeeId;
+                this.EmployeeADName = item.EmployeeADName;
                 this.BadgeId = item.BadgeId;
                 this.BadgeName = item.BadgeName;
                 this.AwardDate = item.AwardDate;

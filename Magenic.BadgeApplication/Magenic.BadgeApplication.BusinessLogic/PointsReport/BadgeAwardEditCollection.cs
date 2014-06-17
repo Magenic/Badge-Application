@@ -1,7 +1,10 @@
 ﻿using Autofac;
 using Csla;
+using Csla.Rules;
+using Csla.Rules.CommonRules;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.DTO;
+using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -22,6 +25,16 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
         }
 
         #endregion Factory Methods
+
+        #region Rules
+
+        public static void AddObjectAuthorizationRules()
+        {
+            BusinessRules.AddRule(typeof(BadgeAwardEditCollection), new IsInRole(AuthorizationActions.GetObject, PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(BadgeAwardEditCollection), new IsInRole(AuthorizationActions.EditObject, PermissionType.Administrator.ToString()));
+        }
+
+        #endregion Rules
 
         #region Data Access
 

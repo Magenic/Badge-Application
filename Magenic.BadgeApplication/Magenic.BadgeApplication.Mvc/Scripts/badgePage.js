@@ -3,8 +3,9 @@
 ko.bindingHandlers.disableClick = {
     init: function (element, valueAccessor) {
         $(element).click(function (evt) {
-            if (valueAccessor())
+            if (valueAccessor()) {
                 evt.preventDefault();
+            }
         });
     },
 

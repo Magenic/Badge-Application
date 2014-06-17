@@ -24,10 +24,13 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             {
                 ctx.Database.Connection.Open();
                 var badgeAwardList = await (from ba in ctx.BadgeAwards
+                                            where ba.Employee.ADName == userName
+                                                && !ba.PaidOut
                                             select new BadgeAwardEditDTO
                                             {
                                                 Id = ba.BadgeAwardId,
                                                 EmployeeId = ba.Employee.EmployeeId,
+                                                EmployeeADName = ba.Employee.ADName,
                                                 BadgeId = ba.BadgeId,
                                                 BadgeName = ba.Badge.BadgeName,
                                                 AwardDate = ba.AwardDate,

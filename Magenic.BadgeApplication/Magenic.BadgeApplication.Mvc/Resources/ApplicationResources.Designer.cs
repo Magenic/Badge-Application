@@ -214,6 +214,42 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Award Amount.
+        /// </summary>
+        public static string BadgeAwardsAwardAmount {
+            get {
+                return ResourceManager.GetString("BadgeAwardsAwardAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Award Date.
+        /// </summary>
+        public static string BadgeAwardsAwardDate {
+            get {
+                return ResourceManager.GetString("BadgeAwardsAwardDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badge Name.
+        /// </summary>
+        public static string BadgeAwardsBadgeNameHeader {
+            get {
+                return ResourceManager.GetString("BadgeAwardsBadgeNameHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badge Awards for {0}.
+        /// </summary>
+        public static string BadgeAwardsHeader {
+            get {
+                return ResourceManager.GetString("BadgeAwardsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Community.
         /// </summary>
         public static string BadgeCommunityLabel {
@@ -849,6 +885,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string RequiredActivitiesLabel {
             get {
                 return ResourceManager.GetString("RequiredActivitiesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Award Amounts.
+        /// </summary>
+        public static string SaveAwardAmounts {
+            get {
+                return ResourceManager.GetString("SaveAwardAmounts", resourceCulture);
             }
         }
         

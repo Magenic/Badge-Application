@@ -414,4 +414,19 @@
   <data name="PossiblePointsTotalAwardLabel" xml:space="preserve">
     <value>Total Possible Badges ({0} total points)</value>
   </data>
+  <data name="BadgeAwardsAwardAmount" xml:space="preserve">
+    <value>Award Amount</value>
+  </data>
+  <data name="BadgeAwardsAwardDate" xml:space="preserve">
+    <value>Award Date</value>
+  </data>
+  <data name="BadgeAwardsBadgeNameHeader" xml:space="preserve">
+    <value>Badge Name</value>
+  </data>
+  <data name="BadgeAwardsHeader" xml:space="preserve">
+    <value>Badge Awards for {0}</value>
+  </data>
+  <data name="SaveAwardAmounts" xml:space="preserve">
+    <value>Save Award Amounts</value>
+  </data>
 </root>

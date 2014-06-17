@@ -18,6 +18,11 @@ namespace Magenic.BadgeApplication.Common.DTO
         public int EmployeeId { get; set; }
 
         /// <summary>
+        /// Gets or sets the name of the employee ad.
+        /// </summary>
+        public string EmployeeADName { get; set; }
+
+        /// <summary>
         /// Gets or Sets the badge identifier.
         /// </summary>
         public int BadgeId { get; set; }

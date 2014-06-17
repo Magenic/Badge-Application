@@ -2,6 +2,7 @@
 @using Csla.Web.Mvc
 @using Magenic.BadgeApplication.Common.Interfaces
 @using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.BusinessLogic.PointsReport
 @model IPointsReportCollection
 
 @using (Html.BeginForm("Index", "PointsReport"))
@@ -27,8 +28,7 @@
                                 <input type="checkbox" name="CheckedValues" value="@pointsReport.EmployeeId" />
                             </td>
                             <td>
-                                @Html.HasPermission(AuthorizationActions.GetObject, typeof())
-                                @pointsReport.EmployeeADName
+                                @Html.HasPermission(AuthorizationActions.GetObject, typeof(BadgeAwardEditCollection), Html.ActionLink(pointsReport.EmployeeADName, Mvc.PointsReport.BadgeAwards(pointsReport.EmployeeADName)), pointsReport.EmployeeADName)
                             </td>
                             <td>
                                 @pointsReport.EmployeeFirstName

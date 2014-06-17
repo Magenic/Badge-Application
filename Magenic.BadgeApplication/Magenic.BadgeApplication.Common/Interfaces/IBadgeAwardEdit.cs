@@ -20,6 +20,11 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         int EmployeeId { get; }
 
         /// <summary>
+        /// Gets the name of the employee ad.
+        /// </summary>
+        string EmployeeADName { get; }
+
+        /// <summary>
         /// Gets the badge identifier.
         /// </summary>
         int BadgeId { get; }
