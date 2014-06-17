@@ -889,7 +889,7 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save Award Amounts.
+        ///   Looks up a localized string similar to Save Award Amount(s).
         /// </summary>
         public static string SaveAwardAmounts {
             get {

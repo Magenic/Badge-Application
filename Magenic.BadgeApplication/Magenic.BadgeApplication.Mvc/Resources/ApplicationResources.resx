@@ -427,6 +427,6 @@
     <value>Badge Awards for {0}</value>
   </data>
   <data name="SaveAwardAmounts" xml:space="preserve">
-    <value>Save Award Amounts</value>
+    <value>Save Award Amount(s)</value>
   </data>
 </root>

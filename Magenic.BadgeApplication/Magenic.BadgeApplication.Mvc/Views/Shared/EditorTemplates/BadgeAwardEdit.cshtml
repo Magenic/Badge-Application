@@ -1,4 +1,5 @@
-﻿@using Magenic.BadgeApplication.BusinessLogic.PointsReport
+﻿@using Magenic.BadgeApplication.Models
+@using Magenic.BadgeApplication.BusinessLogic.PointsReport
 
 @model BadgeAwardEdit
 @Html.HiddenFor(bae => bae.Id)
@@ -11,6 +12,6 @@
         @Model.AwardDate.ToShortDateString()
     </td>
     <td>
-        @Html.DropDownListFor(bae => bae.AwardAmount, new SelectList(new List<int>() { 0, 100, 150, 200, 250, 300, 500, 750, 1000, 2500, 5000 }), Model.AwardAmount)
+        @Html.DropDownListFor(bae => bae.AwardAmount, new SelectList(ApplicationSettings.BadgeAwardValues()), Model.AwardAmount)
     </td>
 </tr>
