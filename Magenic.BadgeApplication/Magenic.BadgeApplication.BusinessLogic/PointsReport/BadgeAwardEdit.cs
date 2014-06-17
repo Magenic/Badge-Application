@@ -85,7 +85,20 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
         [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]
         protected override void DataPortal_Update()
         {
-            if (IsDirty)
+            if (IsDeleted)
+            {
+                if (!IsNew)
+                {
+                    this.DataPortal_DeleteSelf();
+                }
+                return;
+            }
+
+            if (IsNew)
+            {
+                this.DataPortal_Insert();
+            }
+            else if (IsDirty)
             {
                 var dal = IoC.Container.Resolve<IBadgeAwardEditDAL>();
                 this.LoadData(dal.Update(this.UnloadData()));
