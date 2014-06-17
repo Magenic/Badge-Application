@@ -101,6 +101,8 @@
     <Compile Include="Framework\IoC.cs" />
     <Compile Include="Framework\ObjectActivator.cs" />
     <Compile Include="Framework\ObjectFactory.cs" />
+    <Compile Include="PointsReport\BadgeAwardEditCollection.cs" />
+    <Compile Include="PointsReport\BadgeAwardEdit.cs" />
     <Compile Include="PointsReport\PointsReportCollection.cs" />
     <Compile Include="PointsReport\PointsReportItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
