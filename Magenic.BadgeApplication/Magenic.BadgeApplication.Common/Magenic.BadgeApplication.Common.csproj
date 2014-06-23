@@ -86,6 +86,7 @@
     <Compile Include="DTO\AuthorizeLogOnDTO.cs" />
     <Compile Include="DTO\BadgeActivityEditDTO.cs" />
     <Compile Include="DTO\BadgeAwardDTO.cs" />
+    <Compile Include="DTO\BadgeAwardEditDTO.cs" />
     <Compile Include="DTO\BadgeEditDTO.cs" />
     <Compile Include="DTO\BadgeItemDTO.cs" />
     <Compile Include="DTO\CustomIdentityDTO.cs" />
@@ -131,6 +132,10 @@
     <Compile Include="Interfaces\IAwardBadgesDAL.cs" />
     <Compile Include="Interfaces\IBadgeActivityEdit.cs" />
     <Compile Include="Interfaces\IBadgeActivityEditCollection.cs" />
+    <Compile Include="Interfaces\IBadgeAwardEditCollection.cs" />
+    <Compile Include="Interfaces\IBadgeAwardEdit.cs" />
+    <Compile Include="Interfaces\IBadgeAwardEditCollectionDAL.cs" />
+    <Compile Include="Interfaces\IBadgeAwardEditDAL.cs" />
     <Compile Include="Interfaces\IBadgeCollection.cs" />
     <Compile Include="Interfaces\IBadgeEdit.cs" />
     <Compile Include="Interfaces\IBadgeEditDAL.cs" />

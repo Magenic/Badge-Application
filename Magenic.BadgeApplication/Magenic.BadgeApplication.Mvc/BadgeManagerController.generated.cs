@@ -124,7 +124,6 @@ namespace Magenic.BadgeApplication.Controllers
             public readonly string EditBadgePost = "EditBadgePost";
             public readonly string ApproveCommunityBadges = "ApproveCommunityBadges";
             public readonly string ApproveCommunityBadgesList = "ApproveCommunityBadgesList";
-            public readonly string PointsReport = "PointsReport";
             public readonly string ApproveActivities = "ApproveActivities";
             public readonly string ApproveActivitiesList = "ApproveActivitiesList";
             public readonly string ApproveActivity = "ApproveActivity";
@@ -145,7 +144,6 @@ namespace Magenic.BadgeApplication.Controllers
             public const string EditBadgePost = "EditBadgePost";
             public const string ApproveCommunityBadges = "ApproveCommunityBadges";
             public const string ApproveCommunityBadgesList = "ApproveCommunityBadgesList";
-            public const string PointsReport = "PointsReport";
             public const string ApproveActivities = "ApproveActivities";
             public const string ApproveActivitiesList = "ApproveActivitiesList";
             public const string ApproveActivity = "ApproveActivity";
@@ -182,14 +180,6 @@ namespace Magenic.BadgeApplication.Controllers
             public readonly string id = "id";
             public readonly string badgeEditViewModel = "badgeEditViewModel";
             public readonly string badgeImage = "badgeImage";
-        }
-        static readonly ActionParamsClass_PointsReport s_params_PointsReport = new ActionParamsClass_PointsReport();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_PointsReport PointsReportParams { get { return s_params_PointsReport; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_PointsReport
-        {
-            public readonly string formCollection = "formCollection";
         }
         static readonly ActionParamsClass_ApproveActivity s_params_ApproveActivity = new ActionParamsClass_ApproveActivity();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -253,7 +243,6 @@ namespace Magenic.BadgeApplication.Controllers
                 public readonly string EditBadge = "EditBadge";
                 public readonly string Index = "Index";
                 public readonly string ManageActivities = "ManageActivities";
-                public readonly string PointsReport = "PointsReport";
             }
             public readonly string _ActivitiesForApproval = "~/Views/BadgeManager/_ActivitiesForApproval.cshtml";
             public readonly string _AdminBadgeList = "~/Views/BadgeManager/_AdminBadgeList.cshtml";
@@ -267,7 +256,6 @@ namespace Magenic.BadgeApplication.Controllers
             public readonly string EditBadge = "~/Views/BadgeManager/EditBadge.cshtml";
             public readonly string Index = "~/Views/BadgeManager/Index.cshtml";
             public readonly string ManageActivities = "~/Views/BadgeManager/ManageActivities.cshtml";
-            public readonly string PointsReport = "~/Views/BadgeManager/PointsReport.cshtml";
         }
     }
 
@@ -351,25 +339,6 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ApproveCommunityBadgesList);
             ApproveCommunityBadgesListOverride(callInfo);
-            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
-        }
-
-        partial void PointsReportOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
-
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> PointsReport()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PointsReport);
-            PointsReportOverride(callInfo);
-            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
-        }
-
-        partial void PointsReportOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Web.Mvc.FormCollection formCollection);
-
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> PointsReport(System.Web.Mvc.FormCollection formCollection)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PointsReport);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "formCollection", formCollection);
-            PointsReportOverride(callInfo, formCollection);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 

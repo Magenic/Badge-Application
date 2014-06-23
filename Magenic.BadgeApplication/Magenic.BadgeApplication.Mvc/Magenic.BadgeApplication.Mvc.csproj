@@ -214,6 +214,7 @@
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageActivitiesController.cs" />
     <Compile Include="Controllers\LeaderboardController.cs" />
+    <Compile Include="Controllers\PointsReportController.cs" />
     <Compile Include="Controllers\WebApi\AccountsController.cs" />
     <Compile Include="ErrorController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -244,6 +245,7 @@
     <Compile Include="Models\AccountInfoIndexViewModel.cs" />
     <Compile Include="Models\ActivityIndexViewModel.cs" />
     <Compile Include="Models\AdminActivityViewModel.cs" />
+    <Compile Include="Models\ApplicationSettings.cs" />
     <Compile Include="Models\ApproveActivitiesViewModel.cs" />
     <Compile Include="Models\ApproveCommunityBadgesViewModel.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />
@@ -256,6 +258,9 @@
     <Compile Include="Models\LeaderboardRankViewModel.cs" />
     <Compile Include="Models\LogOnViewModel.cs" />
     <Compile Include="Models\SubmitActivityViewModel.cs" />
+    <Compile Include="PointsReportController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ApplicationResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -679,7 +684,7 @@
     <Content Include="Views\Shared\_AdminNavbar.cshtml" />
     <Content Include="Views\BadgeManager\_AdminBadgeList.cshtml" />
     <Content Include="Views\BadgeManager\ApproveCommunityBadges.cshtml" />
-    <Content Include="Views\BadgeManager\PointsReport.cshtml" />
+    <Content Include="Views\PointsReport\Index.cshtml" />
     <Content Include="Views\BadgeManager\ApproveActivities.cshtml" />
     <Content Include="Views\BadgeManager\_ActivitiesForApproval.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BadgeEditViewModel.cshtml" />
@@ -708,6 +713,9 @@
     <Content Include="Views\BadgeManager\_PossibleBadgeList.cshtml" />
     <Content Include="Views\BadgeManager\_PossibleBadgeWindow.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ApproveActivityBadgeItem.cshtml" />
+    <Content Include="Views\PointsReport\BadgeAwards.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\BadgeAwardEditCollection.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\BadgeAwardEdit.cshtml" />
     <None Include="Web.QA.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
