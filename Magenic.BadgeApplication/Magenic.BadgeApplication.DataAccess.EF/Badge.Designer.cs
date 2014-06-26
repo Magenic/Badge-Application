@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Users\jwendl\Documents\Source\Github\Badge-Application\Magenic.BadgeApplication\Magenic.BadgeApplication.DataAccess.EF\Badge.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Code\GitHub\Badge-Application\Magenic.BadgeApplication\Magenic.BadgeApplication.DataAccess.EF\Badge.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

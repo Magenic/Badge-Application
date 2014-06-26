@@ -289,6 +289,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             this.LoadData(dal.Insert(this.UnloadData()));
             FieldManager.UpdateChildren();
             SaveBadges(badgesToCreate);
+
+            // Notify managers about change.
+            var sendMessageDal = IoC.Container.Resolve<ISendMessageDAL>();
+            sendMessageDal.SendActivityNotification(this.EmployeeId, this.ActivityId);
         }
 
         #endregion Data Access

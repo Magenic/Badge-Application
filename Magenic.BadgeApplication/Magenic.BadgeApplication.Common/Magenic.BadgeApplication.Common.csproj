@@ -164,6 +164,7 @@
     <Compile Include="Interfaces\IQueueEventLogDAL.cs" />
     <Compile Include="Interfaces\IQueueItemDAL.cs" />
     <Compile Include="Interfaces\IDTORepository.cs" />
+    <Compile Include="Interfaces\ISendMessageDAL.cs" />
     <Compile Include="Interfaces\ISubmitActivity.cs" />
     <Compile Include="Interfaces\ISubmitActivityDAL.cs" />
     <Compile Include="Interfaces\ISubmittedActivityCollection.cs" />

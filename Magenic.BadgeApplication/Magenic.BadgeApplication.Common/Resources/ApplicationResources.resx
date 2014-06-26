@@ -117,4 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActivityNotificationBodyFormat" xml:space="preserve">
+    <value>&lt;html&gt;
+    &lt;body&gt;
+        One of your employees has submitted {0} as an activity that they have completed recently.&lt;br /&gt;&lt;br /&gt;
+        Please go to your badge application approval page to approve their activities.&lt;br /&gt;&lt;br /&gt;
+        &lt;a href=""https://badgeapplication.magenic.com/BadgeManager/ApproveActivities""&gt;https://badgeapplication.magenic.com/BadgeManager/ApproveActivities&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
+        Thank you,&lt;br /&gt;
+        -Magenic HR
+    &lt;/body&gt;
+&lt;/html&gt;</value>
+  </data>
+  <data name="ActivityNotificationSubjectFormat" xml:space="preserve">
+    <value>Magenic Badge Application: Approve Activities for {0} {1}.</value>
+  </data>
 </root>
