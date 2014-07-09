@@ -1,4 +1,4 @@
-﻿using Magenic.BadgeApplication.Common.DTO;
+﻿using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Common.Resources;
 using System;
@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.DataAccess.EF
 {
@@ -25,18 +23,24 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         /// <param name="body">The body.</param>
         public void SendMessage(IEnumerable<string> sendToEmailAddresses, string subject, string body)
         {
-            var mailMessage = new MailMessage();
-            foreach (var emailAddress in sendToEmailAddresses)
+            Arg.IsNotNull(() => sendToEmailAddresses);
+
+            using (var mailMessage = new MailMessage())
             {
-                mailMessage.To.Add(emailAddress);
+                foreach (var emailAddress in sendToEmailAddresses)
+                {
+                    mailMessage.To.Add(emailAddress);
+                }
+
+                mailMessage.Subject = subject;
+                mailMessage.Body = body;
+                mailMessage.IsBodyHtml = true;
+
+                using (var smtpClient = new SmtpClient())
+                {
+                    smtpClient.Send(mailMessage);
+                }
             }
-
-            mailMessage.Subject = subject;
-            mailMessage.Body = body;
-            mailMessage.IsBodyHtml = true;
-
-            var smtpClient = new SmtpClient();
-            smtpClient.Send(mailMessage);
         }
 
         /// <summary>
