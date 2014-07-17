@@ -63,26 +63,26 @@ namespace Magenic.BadgeApplication.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to &lt;html&gt;
         ///    &lt;body&gt;
-        ///        One of your employees has submitted {0} as an activity that they have completed recently.&lt;br /&gt;&lt;br /&gt;
+        ///        You have employees who are waiting for you to approve their activities in the Magenic Badge Application.&lt;br /&gt;&lt;br /&gt;
         ///        Please go to your badge application approval page to approve their activities.&lt;br /&gt;&lt;br /&gt;
-        ///        &lt;a href=&quot;&quot;https://badgeapplication.magenic.com/BadgeManager/ApproveActivities&quot;&quot;&gt;https://badgeapplication.magenic.com/BadgeManager/ApproveActivities&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
+        ///        &lt;a href=&quot;https://badgeapplication.magenic.com/BadgeManager/ApproveActivities&quot;&gt;https://badgeapplication.magenic.com/BadgeManager/ApproveActivities&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
         ///        Thank you,&lt;br /&gt;
         ///        -Magenic HR
         ///    &lt;/body&gt;
         ///&lt;/html&gt;.
         /// </summary>
-        public static string ActivityNotificationBodyFormat {
+        public static string ActivityNotificationBody {
             get {
-                return ResourceManager.GetString("ActivityNotificationBodyFormat", resourceCulture);
+                return ResourceManager.GetString("ActivityNotificationBody", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Magenic Badge Application: Approve Activities for {0} {1}..
+        ///   Looks up a localized string similar to Magenic Badge Application - Activities to Approve..
         /// </summary>
-        public static string ActivityNotificationSubjectFormat {
+        public static string ActivityNotificationSubject {
             get {
-                return ResourceManager.GetString("ActivityNotificationSubjectFormat", resourceCulture);
+                return ResourceManager.GetString("ActivityNotificationSubject", resourceCulture);
             }
         }
     }

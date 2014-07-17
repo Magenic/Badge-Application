@@ -1,4 +1,5 @@
 ﻿using Magenic.BadgeApplication.Common;
+using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Common.Resources;
 using System;
@@ -46,48 +47,50 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         /// <summary>
         /// Sends the activity notification.
         /// </summary>
-        /// <param name="employeeId">The employee identifier.</param>
-        /// <param name="activityId">The activity identifier.</param>
-        public void SendActivityNotification(int employeeId, int activityId)
+        public void SendActivityNotifications()
         {
             using (Entities context = new Entities())
             {
-                var employee = context.Employees
-                    .Where(emp => emp.EmployeeId == employeeId)
-                    .Single();
+                var activitySubmissions = context.ActivitySubmissions
+                    .Where(sub => sub.ItemStatu.ItemStatusId == (int)ActivitySubmissionStatus.AwaitingApproval)
+                    .ToList();
 
-                var activity = context.Activities
-                    .Where(a => a.ActivityId == activityId)
-                    .Single();
+                var employees = context.Employees.ToList();
+                var peopleToEmail = activitySubmissions
+                    .Join(employees, asub => asub.EmployeeId, emp => emp.EmployeeId, (asub, emp) => new { asub = asub, emp = emp });
 
                 var emailAddresses = new List<string>();
-                if (employee.ApprovingManagerId1.HasValue)
+                foreach (var person in peopleToEmail)
                 {
-                    var manager = context.Employees
-                        .Where(emp => emp.EmployeeId == employee.ApprovingManagerId1.Value)
-                        .SingleOrDefault();
-
-                    if (manager != null)
+                    if (person.emp.ApprovingManagerId1.HasValue)
                     {
-                        emailAddresses.Add(manager.EmailAddress);
+                        var manager = employees
+                            .Where(emp => emp.EmployeeId == person.emp.ApprovingManagerId1.Value)
+                            .SingleOrDefault();
+
+                        if (manager != null)
+                        {
+                            emailAddresses.Add(manager.EmailAddress);
+                        }
                     }
-                }
 
-                if (employee.ApprovingManagerId2.HasValue)
-                {
-                    var manager = context.Employees
-                        .Where(emp => emp.EmployeeId == employee.ApprovingManagerId2)
-                        .SingleOrDefault();
-
-                    if (manager != null)
+                    if (person.emp.ApprovingManagerId2.HasValue)
                     {
-                        emailAddresses.Add(manager.EmailAddress);
+                        var manager = employees
+                            .Where(emp => emp.EmployeeId == person.emp.ApprovingManagerId2.Value)
+                            .SingleOrDefault();
+
+                        if (manager != null)
+                        {
+                            emailAddresses.Add(manager.EmailAddress);
+                        }
                     }
                 }
 
                 // TODO: figure out a better way to do this. Maybe using RazorEngine?
-                var emailSubject = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationSubjectFormat, employee.FirstName, employee.LastName);
-                var emailBody = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationBodyFormat, activity.ActivityName);
+                emailAddresses = emailAddresses.Distinct().ToList();
+                var emailSubject = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationSubject);
+                var emailBody = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationBody);
 
                 SendMessage(emailAddresses, emailSubject, emailBody);
             }

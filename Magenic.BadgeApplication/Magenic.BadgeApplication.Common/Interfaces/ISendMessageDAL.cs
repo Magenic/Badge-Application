@@ -1,9 +1,4 @@
-﻿using Magenic.BadgeApplication.Common.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -23,8 +18,6 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <summary>
         /// Sends the activity notification.
         /// </summary>
-        /// <param name="employeeId">The employee identifier.</param>
-        /// <param name="activityId">The activity identifier.</param>
-        void SendActivityNotification(int employeeId, int activityId);
+        void SendActivityNotifications();
     }
 }
