@@ -128,6 +128,8 @@
     <Compile Include="BadgeAward.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
+    <Compile Include="BadgeAwardEditCollectionDAL.cs" />
+    <Compile Include="BadgeAwardEditDAL.cs" />
     <Compile Include="BadgeCollectionDAL.cs" />
     <Compile Include="BadgeEditDAL.cs" />
     <Compile Include="BadgePrerequisite.cs">

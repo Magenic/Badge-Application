@@ -39,18 +39,15 @@
             @if (activityForApproval.ApproveActivityBadgeCollection.Count() > 0)
             {
                 <div class="row">
+                    <div class="col-md-8">
+                        <b>
+                            @MvcHtmlString.Create(String.Format(ApplicationResources.PossiblePointsTotalAwardLabel, activityForApproval.ApproveActivityBadgeCollection.Sum(aabi => aabi.AwardValueAmount)))
+                        </b>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-12">
-                        @activityForApproval.ApproveActivityBadgeCollection.Sum(aabi => aabi.AwardValueAmount) Point(s) Awarded if Approved :
-                        @foreach (var badge in activityForApproval.ApproveActivityBadgeCollection.OrderBy(aabi => aabi.BadgePriority))
-                        {
-                            <text>
-                                @badge.Name - @badge.AwardValueAmount point(s)
-                            </text>
-                            if (badge != activityForApproval.ApproveActivityBadgeCollection.OrderBy(aabi => aabi.BadgePriority).Last())
-                            {
-                                <text>, </text>
-                            }
-                        }
+                        @Html.Partial(Mvc.BadgeManager.Views._PossibleBadgeList, activityForApproval.ApproveActivityBadgeCollection)
                     </div>
                 </div>
             }

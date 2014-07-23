@@ -55,6 +55,7 @@ namespace T4Mvc
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _DisplayTemplatesClass
             {
+                public readonly string ApproveActivityBadgeItem = "ApproveActivityBadgeItem";
                 public readonly string BadgeItem = "BadgeItem";
                 public readonly string EarnedBadgeCollection = "EarnedBadgeCollection";
                 public readonly string EarnedBadgeItem = "EarnedBadgeItem";
@@ -65,6 +66,8 @@ namespace T4Mvc
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _EditorTemplatesClass
             {
+                public readonly string BadgeAwardEdit = "BadgeAwardEdit";
+                public readonly string BadgeAwardEditCollection = "BadgeAwardEditCollection";
                 public readonly string BadgeEditViewModel = "BadgeEditViewModel";
                 public readonly string LogOnViewModel = "LogOnViewModel";
                 public readonly string PointsReportCollection = "PointsReportCollection";

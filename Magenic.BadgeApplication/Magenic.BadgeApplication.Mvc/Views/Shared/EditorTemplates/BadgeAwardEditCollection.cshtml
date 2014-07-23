@@ -1,0 +1,34 @@
+﻿@using Csla.Rules
+@using Csla.Web.Mvc
+@using Magenic.BadgeApplication.Common.Interfaces
+@using Magenic.BadgeApplication.Resources
+@model IBadgeAwardEditCollection
+
+@using (Html.BeginForm("UpdateBadgeAwards", "PointsReport"))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@ApplicationResources.BadgeAwardsBadgeNameHeader</th>
+                        <th>@ApplicationResources.BadgeAwardsAwardDate</th>
+                        <th>@ApplicationResources.BadgeAwardsAwardAmount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var index = 0; index < Model.Count(); index++)
+                    {
+                        @Html.EditorFor(m => m[index])
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" value="@ApplicationResources.SaveAwardAmounts" class="btn btn-success" />
+        </div>
+    </div>
+}

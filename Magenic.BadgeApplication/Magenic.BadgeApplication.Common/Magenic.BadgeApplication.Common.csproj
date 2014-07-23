@@ -53,8 +53,9 @@
     <CodeAnalysisRuleSet>..\Magenic.BadgeApplication.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\packages\Autofac.3.2.0\lib\net40\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.3.4.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Csla, Version=4.5.501.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -85,6 +86,7 @@
     <Compile Include="DTO\AuthorizeLogOnDTO.cs" />
     <Compile Include="DTO\BadgeActivityEditDTO.cs" />
     <Compile Include="DTO\BadgeAwardDTO.cs" />
+    <Compile Include="DTO\BadgeAwardEditDTO.cs" />
     <Compile Include="DTO\BadgeEditDTO.cs" />
     <Compile Include="DTO\BadgeItemDTO.cs" />
     <Compile Include="DTO\CustomIdentityDTO.cs" />
@@ -130,6 +132,10 @@
     <Compile Include="Interfaces\IAwardBadgesDAL.cs" />
     <Compile Include="Interfaces\IBadgeActivityEdit.cs" />
     <Compile Include="Interfaces\IBadgeActivityEditCollection.cs" />
+    <Compile Include="Interfaces\IBadgeAwardEditCollection.cs" />
+    <Compile Include="Interfaces\IBadgeAwardEdit.cs" />
+    <Compile Include="Interfaces\IBadgeAwardEditCollectionDAL.cs" />
+    <Compile Include="Interfaces\IBadgeAwardEditDAL.cs" />
     <Compile Include="Interfaces\IBadgeCollection.cs" />
     <Compile Include="Interfaces\IBadgeEdit.cs" />
     <Compile Include="Interfaces\IBadgeEditDAL.cs" />

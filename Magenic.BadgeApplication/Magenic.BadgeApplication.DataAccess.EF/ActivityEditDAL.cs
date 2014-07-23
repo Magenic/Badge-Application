@@ -14,19 +14,17 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             using (var ctx = new Entities())
             {
                 ctx.Database.Connection.Open();
-                var activityList = await (from t in ctx.Activities
-                                          where t.ActivityId == activityEditId
-                    select new ActivityEditDTO
-                    {
-                        Id = t.ActivityId,
-                        Name = t.ActivityName,
-                        Description = t.ActivityDescription,
-                        RequiresApproval = t.RequiresApproval,
-                        CreateEmployeeId = t.CreateEmployeeId,
-                        EntryType = (Common.Enums.ActivityEntryType)t.EntryTypeId
-                    }).ToArrayAsync();
-
-                var activity = activityList.Single();
+                var activity = await (from t in ctx.Activities
+                                      where t.ActivityId == activityEditId
+                                      select new ActivityEditDTO
+                                      {
+                                          Id = t.ActivityId,
+                                          Name = t.ActivityName,
+                                          Description = t.ActivityDescription,
+                                          RequiresApproval = t.RequiresApproval,
+                                          CreateEmployeeId = t.CreateEmployeeId,
+                                          EntryType = (Common.Enums.ActivityEntryType)t.EntryTypeId
+                                      }).SingleAsync();
 
                 return activity;
             }

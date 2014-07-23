@@ -4,8 +4,6 @@ using EasySec.Encryption;
 using Magenic.BadgeApplication.Attributes;
 using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
-using Magenic.BadgeApplication.BusinessLogic.PointsReport;
-using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Exceptions;
@@ -257,50 +255,6 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var approveBadgeCollection = await ApproveBadgeCollection.GetAllBadgesToApproveAsync();
             return PartialView(Mvc.BadgeManager.Views._BadgesForApproval, approveBadgeCollection);
-        }
-
-        /// <summary>
-        /// Pointses the report.
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [HasPermission(AuthorizationActions.GetObject, typeof(PointsReportCollection))]
-        public async virtual Task<ActionResult> PointsReport()
-        {
-            var pointsReportCollection = await PointsReportCollection.GetAllPayoutsToApproveAsync();
-            return View(pointsReportCollection);
-        }
-
-        /// <summary>
-        /// Pointses the report.
-        /// </summary>
-        /// <param name="formCollection">The form collection.</param>
-        /// <returns></returns>
-        [HttpPost]
-        [HasPermission(AuthorizationActions.GetObject, typeof(PointsReportCollection))]
-        public async virtual Task<ActionResult> PointsReport(FormCollection formCollection)
-        {
-            Arg.IsNotNull(() => formCollection);
-
-            var allPayouts = await PointsReportCollection.GetAllPayoutsToApproveAsync();
-            if (formCollection.AllKeys.Any(k => k == "CheckedValues"))
-            {
-                var parts = formCollection["CheckedValues"].Split(',');
-                var values = parts.Select(int.Parse);
-
-                var pointsReports = allPayouts.Where(pri => values.Contains(pri.EmployeeId));
-                foreach (var pointsReport in pointsReports)
-                {
-                    pointsReport.Payout(AuthenticatedUser.EmployeeId, DateTime.UtcNow);
-                }
-
-                if (await SaveObjectAsync(allPayouts, true))
-                {
-                    return RedirectToAction("PointsReport", "BadgeManager");
-                }
-            }
-
-            return View(allPayouts);
         }
 
         /// <summary>

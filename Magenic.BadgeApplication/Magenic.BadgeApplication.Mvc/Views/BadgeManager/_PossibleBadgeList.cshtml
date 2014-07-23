@@ -1,0 +1,12 @@
+﻿@using Magenic.BadgeApplication.Common.Interfaces
+@model IApproveActivityBadgeCollection
+
+@foreach (var approveActivityBadgeItem in Model.OrderBy(b => b.BadgePriority))
+{
+    var uniqueIdentifier = String.Format("{0}", approveActivityBadgeItem.BadgeId);
+
+    <a href="#EarnedBadgeWindow-@uniqueIdentifier" data-toggle="modal">
+        @Html.DisplayFor(m => approveActivityBadgeItem)
+    </a>
+    @Html.Partial(Mvc.BadgeManager.Views._PossibleBadgeWindow, approveActivityBadgeItem)
+}

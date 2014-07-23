@@ -25,6 +25,7 @@ public static class Mvc
     public static Magenic.BadgeApplication.Controllers.ImageController Image = new Magenic.BadgeApplication.Controllers.T4MVC_ImageController();
     public static Magenic.BadgeApplication.Controllers.LeaderboardController Leaderboard = new Magenic.BadgeApplication.Controllers.T4MVC_LeaderboardController();
     public static Magenic.BadgeApplication.Controllers.ManageActivitiesController ManageActivities = new Magenic.BadgeApplication.Controllers.T4MVC_ManageActivitiesController();
+    public static Magenic.BadgeApplication.Controllers.PointsReportController PointsReport = new Magenic.BadgeApplication.Controllers.T4MVC_PointsReportController();
     public static T4Mvc.SharedController Shared = new T4Mvc.SharedController();
 }
 
