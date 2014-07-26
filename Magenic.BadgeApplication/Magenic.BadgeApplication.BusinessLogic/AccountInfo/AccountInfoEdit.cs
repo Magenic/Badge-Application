@@ -28,6 +28,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
             private set { SetProperty(UserNameProperty, value); }
         }
 
+        public static readonly PropertyInfo<string> EmailAddressProperty = RegisterProperty<string>(c => c.EmailAddress);
+        public string EmailAddress
+        {
+            get { return GetProperty(EmailAddressProperty); }
+            private set { SetProperty(EmailAddressProperty, value); }
+        }
+
         public static readonly PropertyInfo<int> TotalPointsEarnedProperty = RegisterProperty<int>(c => c.TotalPointsEarned);
         public int TotalPointsEarned
         {
@@ -113,6 +120,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
             {
                 returnValue.EmployeeId = this.EmployeeId;
                 returnValue.UserName = this.UserName;
+                returnValue.EmailAddress = this.EmailAddress;
                 returnValue.PointPayoutThreshold = this.PointPayoutThreshold;
                 returnValue.TotalPointsEarned = this.TotalPointsEarned;
                 returnValue.TotalPointsPaidOut = this.TotalPointsPaidOut;

@@ -76,6 +76,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Spatial, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -174,6 +175,7 @@
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
     <Compile Include="QueueItemDAL.cs" />
+    <Compile Include="SendMessageDAL.cs" />
     <Compile Include="SubmitActivityDAL.cs" />
     <Compile Include="SubmittedActivityCollecitonDAL.cs" />
     <Compile Include="UserCollectionDAL.cs" />

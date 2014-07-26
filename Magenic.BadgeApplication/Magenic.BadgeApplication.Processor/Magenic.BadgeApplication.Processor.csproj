@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NotificationProcessor.cs" />
     <Compile Include="ActvityLoader.cs" />
     <Compile Include="ADProcessor.cs" />
     <Compile Include="FileLoader.cs" />
