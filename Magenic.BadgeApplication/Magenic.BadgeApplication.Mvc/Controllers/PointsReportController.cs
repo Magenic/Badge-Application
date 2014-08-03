@@ -36,7 +36,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="formCollection">The form collection.</param>
         /// <returns></returns>
         [HttpPost]
-        [HasPermission(AuthorizationActions.GetObject, typeof(PointsReportCollection))]
+        [HasPermission(AuthorizationActions.EditObject, typeof(PointsReportCollection))]
         public async virtual Task<ActionResult> Index(FormCollection formCollection)
         {
             Arg.IsNotNull(() => formCollection);
@@ -60,6 +60,27 @@ namespace Magenic.BadgeApplication.Controllers
             }
 
             return View(allPayouts);
+        }
+
+        /// <summary>
+        /// Exports this instance.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [HasPermission(AuthorizationActions.GetObject, typeof(PointsReportCollection))]
+        public async virtual Task<ActionResult> Export()
+        {
+            var contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            var fileName = "PointsReportExport.xlsx";
+
+            var pointsReportCollection = await PointsReportCollection.GetAllPayoutsToApproveAsync();
+            var badgeAwardCollection = await BadgeAwardEditCollection.GetAllBadgeAwards();
+
+            using (var pointsReportExportModel = new PointsReportExportModel(pointsReportCollection, badgeAwardCollection))
+            {
+                var fileBytes = pointsReportExportModel.CreateSpreadsheet();
+                return File(fileBytes, contentType, fileName);
+            }
         }
 
         /// <summary>

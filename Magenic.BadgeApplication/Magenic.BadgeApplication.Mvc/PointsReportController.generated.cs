@@ -75,6 +75,7 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string Export = "Export";
             public readonly string BadgeAwards = "BadgeAwards";
             public readonly string UpdateBadgeAwards = "UpdateBadgeAwards";
         }
@@ -83,6 +84,7 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string Export = "Export";
             public const string BadgeAwards = "BadgeAwards";
             public const string UpdateBadgeAwards = "UpdateBadgeAwards";
         }
@@ -151,6 +153,15 @@ namespace Magenic.BadgeApplication.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "formCollection", formCollection);
             IndexOverride(callInfo, formCollection);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        partial void ExportOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Export()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Export);
+            ExportOverride(callInfo);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 

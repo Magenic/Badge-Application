@@ -429,4 +429,31 @@
   <data name="SaveAwardAmounts" xml:space="preserve">
     <value>Save Award Amount(s)</value>
   </data>
+  <data name="PointsReportExport" xml:space="preserve">
+    <value>Export to Excel</value>
+  </data>
+  <data name="PointsReportExportHeaderAwardAmount" xml:space="preserve">
+    <value>Award Amount</value>
+  </data>
+  <data name="PointsReportExportHeaderAwardDate" xml:space="preserve">
+    <value>Award Date</value>
+  </data>
+  <data name="PointsReportExportHeaderBadgeName" xml:space="preserve">
+    <value>Badge Name</value>
+  </data>
+  <data name="PointsReportExportHeaderFirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="PointsReportExportHeaderLastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="PointsReportExportHeaderLocation" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="PointsReportExportHeaderTotalPoints" xml:space="preserve">
+    <value>Total Points</value>
+  </data>
+  <data name="PointsReportExportHeaderUserName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
 </root>
