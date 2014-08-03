@@ -10,8 +10,13 @@
     <div class="row">
         <div class="col-md-12 grayBox">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-10">
                     <h2>@ApplicationResources.PointsReportHeader</h2>
+                </div>
+
+                <div class="col-md-2 pull-right">
+                    <i class="glyphicon glyphicon-download"></i>
+                    @Html.ActionLink(ApplicationResources.PointsReportExport, Mvc.PointsReport.Export())
                 </div>
             </div>
 

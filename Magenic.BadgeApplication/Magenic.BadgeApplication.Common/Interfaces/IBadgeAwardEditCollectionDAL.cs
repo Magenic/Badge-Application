@@ -14,7 +14,13 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         /// <param name="userName">Name of the user.</param>
         /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         Task<IEnumerable<BadgeAwardEditDTO>> GetAllBadgeAwardsForUserAsync(string userName);
+
+        /// <summary>
+        /// Gets all badge awards for user asynchronous.
+        /// </summary>
+        /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        Task<IEnumerable<BadgeAwardEditDTO>> GetAllBadgeAwardsAsync();
     }
 }
