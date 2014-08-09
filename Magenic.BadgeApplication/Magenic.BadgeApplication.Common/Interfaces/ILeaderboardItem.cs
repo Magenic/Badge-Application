@@ -60,6 +60,16 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         IEnumerable<IEarnedBadgeItem> EarnedCommunityBadges { get; }
 
         /// <summary>
+        /// Gets the profile earned corporate badges.
+        /// </summary>
+        IEnumerable<IEarnedBadgeItem> ProfileEarnedCorporateBadges { get; }
+
+        /// <summary>
+        /// Gets the profile earned community badges.
+        /// </summary>
+        IEnumerable<IEarnedBadgeItem> ProfileEarnedCommunityBadges { get; }
+
+        /// <summary>
         /// Gets the earned corporate badge count.
         /// </summary>
         int EarnedCorporateBadgeCount { get; }
