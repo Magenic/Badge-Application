@@ -41,7 +41,7 @@
                 options: { 1: 'All Users', 2: 'Managers Only', 3: 'Administrators' },
                 list: false,
                 create: canEditEntryType,
-                edit: canEditRequiresApproval
+                edit: canEditEntryType
             }
         }
     });

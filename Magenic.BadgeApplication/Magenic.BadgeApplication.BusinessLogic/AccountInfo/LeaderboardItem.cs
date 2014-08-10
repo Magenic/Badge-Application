@@ -92,6 +92,24 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
             }
         }
 
+        public IEnumerable<IEarnedBadgeItem> ProfileEarnedCorporateBadges
+        {
+            get
+            {
+                var badges = EarnedBadges.Where(eb => eb.Type == BadgeType.Corporate);
+                return badges.OrderBy(eb => eb.BadgePriority);
+            }
+        }
+
+        public IEnumerable<IEarnedBadgeItem> ProfileEarnedCommunityBadges
+        {
+            get
+            {
+                var badges = EarnedBadges.Where(eb => eb.Type == BadgeType.Community);
+                return badges.OrderBy(eb => eb.BadgePriority);
+            }
+        }
+
         public int EarnedCorporateBadgeCount
         {
             get { return EarnedCorporateBadges.Count(); }
