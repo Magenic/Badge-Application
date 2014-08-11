@@ -5,9 +5,9 @@ SET IDENTITY_INSERT [dbo].[Employee] ON
 GO
 INSERT [dbo].[Employee] ([EmployeeId], [FirstName], [LastName], [Location], [Department], [ADName], [EmploymentStartDate], [EmploymentEndDate], [ApprovingManagerId1], [ApprovingManagerId2], [AwardPayoutThreshold]) values (1, 'Admin', 'Admin', 'Minneapolis', 'Department', 'Admin', '1/1/2013', null, null, null, 150)
 GO
-INSERT [dbo].[Employee] ([EmployeeId], [FirstName], [LastName], [Location], [Department], [ADName], [EmploymentStartDate], [EmploymentEndDate], [ApprovingManagerId1], [ApprovingManagerId2], [AwardPayoutThreshold]) values (2, 'User', 'User', 'Minneapolis', 'Department', 'User', '1/1/2013', null, 3, null, 150)
-GO
 INSERT [dbo].[Employee] ([EmployeeId], [FirstName], [LastName], [Location], [Department], [ADName], [EmploymentStartDate], [EmploymentEndDate], [ApprovingManagerId1], [ApprovingManagerId2], [AwardPayoutThreshold]) values (3, 'Manager', 'Manager', 'Minneapolis', 'Department', 'Manager', '1/1/2013', null, null, null, 150)
+GO
+INSERT [dbo].[Employee] ([EmployeeId], [FirstName], [LastName], [Location], [Department], [ADName], [EmploymentStartDate], [EmploymentEndDate], [ApprovingManagerId1], [ApprovingManagerId2], [AwardPayoutThreshold]) values (2, 'User', 'User', 'Minneapolis', 'Department', 'User', '1/1/2013', null, 3, null, 150)
 GO
 SET IDENTITY_INSERT [dbo].[Employee] OFF
 GO
