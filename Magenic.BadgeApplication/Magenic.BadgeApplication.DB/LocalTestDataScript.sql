@@ -11,7 +11,26 @@ INSERT [dbo].[Employee] ([EmployeeId], [FirstName], [LastName], [Location], [Dep
 GO
 SET IDENTITY_INSERT [dbo].[Employee] OFF
 GO
-
+DECLARE @EmployeePermission TABLE (
+    [EmployeeId]           INT NOT NULL,
+    [PermissionId]         INT NOT NULL
+);
+INSERT INTO @EmployeePermission
+SELECT 1, 2 UNION ALL
+SELECT 2, 1 UNION ALL
+SELECT 3, 3
+;
+MERGE
+	INTO [dbo].[EmployeePermission] AS T
+	USING @EmployeePermission AS S
+	ON T.[EmployeeId] = S.[EmployeeId]
+	WHEN MATCHED THEN
+		UPDATE
+			SET [PermissionId] = S.[PermissionId]
+	WHEN NOT MATCHED THEN
+		INSERT ([EmployeeId], [PermissionId])
+		VALUES (S.[EmployeeId], S.[PermissionId])
+;
 SET IDENTITY_INSERT [dbo].[Activity] ON 
 GO
 INSERT [dbo].[Activity] ([ActivityId], [ActivityName], [ActivityDescription], [RequiresApproval], [CreateEmployeeId], [EntryTypeId]) VALUES (29, N'Referred Business', N'Employee referred business.', 1, 1, 2)
