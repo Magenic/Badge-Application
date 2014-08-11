@@ -58,6 +58,13 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var activityEdit = await ActivityEdit.GetActivityEditByIdAsync(id);
             TryUpdateModel(activityEdit);
+
+            // Fixing issue with JTable where it doesn't send the form field if the value is false.
+            if (!Request.Form.AllKeys.Contains("RequiresApproval"))
+            {
+                activityEdit.RequiresApproval = false;
+            }
+
             if (!BusinessRules.HasPermission(AuthorizationActions.EditObject, activityEdit))
             {
                 return Json(new { Result = "ERROR", Message = "You do not have access to edit this object." });

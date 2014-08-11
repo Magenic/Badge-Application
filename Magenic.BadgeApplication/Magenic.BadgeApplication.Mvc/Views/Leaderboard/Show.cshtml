@@ -14,11 +14,11 @@
             @Html.ActionLink(ApplicationResources.CompareLink, Mvc.Leaderboard.Compare(Model.EmployeeADName), new { @class = "btn btn-magenic" })
         </div>
         <div class="col-md-8">
-            @if (Model.EarnedCorporateBadges.Count() > 0)
+            @if (Model.ProfileEarnedCorporateBadges.Count() > 0)
             {
                 <div class="row">
                     <h2>@ApplicationResources.CorporateBadgeHeader</h2>
-                    @foreach (var earnedBadge in Model.EarnedCorporateBadges.OrderBy(ebi => ebi.BadgePriority))
+                    @foreach (var earnedBadge in Model.ProfileEarnedCorporateBadges.OrderBy(ebi => ebi.BadgePriority))
                     {
                         <div class="grayBox">
                             <div class="row">
@@ -35,6 +35,9 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     @earnedBadge.Name - @earnedBadge.Tagline
+                                </div>
+                                <div class="col-md-4 text-right">
+                                    @earnedBadge.AwardDate.ToString("MM/dd/yyyy")
                                 </div>
                             </div>
                         </div>
@@ -45,11 +48,11 @@
                 </div>
             }
 
-            @if (Model.EarnedCommunityBadges.Count() > 0)
+            @if (Model.ProfileEarnedCommunityBadges.Count() > 0)
             {
                 <div class="row">
                     <h2>@ApplicationResources.CommunityBadgeHeader</h2>
-                    @foreach (var earnedBadge in Model.EarnedCommunityBadges.OrderBy(ebi => ebi.BadgePriority))
+                    @foreach (var earnedBadge in Model.ProfileEarnedCommunityBadges.OrderBy(ebi => ebi.BadgePriority))
                     {
                         <div class="grayBox">
                             <div class="row">
@@ -66,6 +69,9 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     @earnedBadge.Name - @earnedBadge.Tagline
+                                </div>
+                                <div class="col-md-4 text-right">
+                                    @earnedBadge.AwardDate.ToString("MM/dd/yyyy")
                                 </div>
                             </div>
                         </div>
