@@ -98,5 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Magenic.BadgeApplication.DB.publish.xml" />
+    <None Include="LocalSQL2012.publish.xml" />
   </ItemGroup>
 </Project>
