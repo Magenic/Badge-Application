@@ -104,7 +104,8 @@ namespace Magenic.BadgeApplication.Models
             // Data
             var row = 1;
             var column = 1;
-            foreach (var badgeAwardItem in badgeAwardEditCollection)
+            var badgeAwardItems = badgeAwardEditCollection.Where(bae => bae.AwardAmount > 0);
+            foreach (var badgeAwardItem in badgeAwardItems)
             {
                 row++;
                 spreadsheet.SetCellValue(row, column++, badgeAwardItem.EmployeeADName);
@@ -144,19 +145,23 @@ namespace Magenic.BadgeApplication.Models
             // Data
             var row = 1;
             var column = 1;
-            foreach (var badgeAwardItem in badgeAwardEditCollection)
+            var badgeAwardItems = badgeAwardEditCollection.Where(bae => bae.AwardAmount > 0);
+            foreach (var badgeAwardItem in badgeAwardItems)
             {
-                var pointsReportItem = pointsReportCollection.Where(pri => pri.EmployeeADName == badgeAwardItem.EmployeeADName).Single();
+                var pointsReportItem = pointsReportCollection.Where(pri => pri.EmployeeADName == badgeAwardItem.EmployeeADName).SingleOrDefault();
 
-                row++;
-                spreadsheet.SetCellValue(row, column++, pointsReportItem.EmployeeADName);
-                spreadsheet.SetCellValue(row, column++, pointsReportItem.EmployeeFirstName);
-                spreadsheet.SetCellValue(row, column++, pointsReportItem.EmployeeLastName);
-                spreadsheet.SetCellValue(row, column++, pointsReportItem.EmployeeLocation);
-                spreadsheet.SetCellValue(row, column++, badgeAwardItem.BadgeName);
-                spreadsheet.SetCellValue(row, column++, badgeAwardItem.AwardDate);
-                spreadsheet.SetCellValue(row, column++, badgeAwardItem.AwardAmount);
-                column = 1;
+                if (pointsReportItem != null)
+                {
+                    row++;
+                    spreadsheet.SetCellValue(row, column++, pointsReportItem.EmployeeADName);
+                    spreadsheet.SetCellValue(row, column++, pointsReportItem.EmployeeFirstName);
+                    spreadsheet.SetCellValue(row, column++, pointsReportItem.EmployeeLastName);
+                    spreadsheet.SetCellValue(row, column++, pointsReportItem.EmployeeLocation);
+                    spreadsheet.SetCellValue(row, column++, badgeAwardItem.BadgeName);
+                    spreadsheet.SetCellValue(row, column++, badgeAwardItem.AwardDate);
+                    spreadsheet.SetCellValue(row, column++, badgeAwardItem.AwardAmount);
+                    column = 1;
+                }
             }
 
             for (var index = 1; index <= 7; index++)
