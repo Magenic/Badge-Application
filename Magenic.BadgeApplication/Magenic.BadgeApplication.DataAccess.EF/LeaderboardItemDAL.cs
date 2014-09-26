@@ -24,7 +24,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 dataContext.Database.Connection.Open();
                 var leaderBoardItem = await (from emp in dataContext.Employees
                                              join eb in dataContext.EarnedBadges on emp.EmployeeId equals eb.EmployeeId into grp
-                                             where emp.ADName == userName
+                                             where emp.ADName == userName && emp.EmploymentEndDate == null
                                              select new LeaderboardItemDTO
                                              {
                                                  EmployeeId = emp.EmployeeId,
