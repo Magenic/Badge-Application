@@ -24,6 +24,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 dataContext.Database.Connection.Open();
                 var leaderBoardItems = await (from emp in dataContext.Employees
                                               join eb in dataContext.EarnedBadges on emp.EmployeeId equals eb.EmployeeId into grp
+                                              where emp.EmploymentEndDate == null
                                               orderby emp.LastName, emp.FirstName
                                               select new LeaderboardItemDTO
                                               {
@@ -64,7 +65,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 dataContext.Database.Connection.Open();
                 var leaderBoardItems = await (from emp in dataContext.Employees
                                               join eb in dataContext.EarnedBadges on emp.EmployeeId equals eb.EmployeeId into grp
-                                              where emp.ADName.Contains(searchTerm) || emp.FirstName.Contains(searchTerm) || emp.LastName.Contains(searchTerm)
+                                              where (emp.ADName.Contains(searchTerm) || emp.FirstName.Contains(searchTerm) || emp.LastName.Contains(searchTerm))
+                                                    && emp.EmploymentEndDate == null
                                               orderby emp.LastName, emp.FirstName
                                               select new LeaderboardItemDTO
                                               {
