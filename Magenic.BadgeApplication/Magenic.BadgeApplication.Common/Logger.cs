@@ -10,6 +10,11 @@ namespace Magenic.BadgeApplication.Common
     /// </summary>
     public static class Logger
     {
+        static Logger()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+        }
+        
         /// <summary>
         /// Logs a debug message
         /// </summary>
@@ -149,7 +154,7 @@ namespace Magenic.BadgeApplication.Common
         /// <returns>The logger</returns>
         private static ILog GetLogger<T>()
         {
-            return LogManager.GetLogger(typeof(T)); ;
+            return LogManager.GetLogger(typeof(T));
         }
     }
 }

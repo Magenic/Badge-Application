@@ -18,6 +18,7 @@ namespace Magenic.BadgeApplication.Console
             catch (Exception ex)
             {
                 Logger.Fatal<Program>(ex.Message, ex);
+                throw;
             }
         }
     }
