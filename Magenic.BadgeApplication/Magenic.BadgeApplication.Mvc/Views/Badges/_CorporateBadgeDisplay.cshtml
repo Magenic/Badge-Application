@@ -26,7 +26,7 @@
         <div class="badges" data-bind="visible: showCorporateBadgeAllTab">
             @Html.Partial(Mvc.Badges.Views._BadgeList, Model.CorporateBadges, new ViewDataDictionary() { { "AllActivities", Model.AllActivities } })
         </div>
-        <div data-bind="visible: showCorporateBadgeEarnedTab">
+        <div class="badges" data-bind="visible: showCorporateBadgeEarnedTab">
             @Html.Partial(Mvc.Badges.Views._EarnedBadgeList, Model.CorporateEarnedBadges, new ViewDataDictionary() { { "AllActivities", Model.AllActivities } })
         </div>
     </div>

@@ -736,6 +736,87 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export to Excel.
+        /// </summary>
+        public static string PointsReportExport {
+            get {
+                return ResourceManager.GetString("PointsReportExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Award Amount.
+        /// </summary>
+        public static string PointsReportExportHeaderAwardAmount {
+            get {
+                return ResourceManager.GetString("PointsReportExportHeaderAwardAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Award Date.
+        /// </summary>
+        public static string PointsReportExportHeaderAwardDate {
+            get {
+                return ResourceManager.GetString("PointsReportExportHeaderAwardDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badge Name.
+        /// </summary>
+        public static string PointsReportExportHeaderBadgeName {
+            get {
+                return ResourceManager.GetString("PointsReportExportHeaderBadgeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Name.
+        /// </summary>
+        public static string PointsReportExportHeaderFirstName {
+            get {
+                return ResourceManager.GetString("PointsReportExportHeaderFirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Name.
+        /// </summary>
+        public static string PointsReportExportHeaderLastName {
+            get {
+                return ResourceManager.GetString("PointsReportExportHeaderLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location.
+        /// </summary>
+        public static string PointsReportExportHeaderLocation {
+            get {
+                return ResourceManager.GetString("PointsReportExportHeaderLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Points.
+        /// </summary>
+        public static string PointsReportExportHeaderTotalPoints {
+            get {
+                return ResourceManager.GetString("PointsReportExportHeaderTotalPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Name.
+        /// </summary>
+        public static string PointsReportExportHeaderUserName {
+            get {
+                return ResourceManager.GetString("PointsReportExportHeaderUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First Name.
         /// </summary>
         public static string PointsReportFirstNameHeader {

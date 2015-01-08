@@ -14,6 +14,10 @@
         /// </summary>
         string UserName { get; }
         /// <summary>
+        /// Gets the email address.
+        /// </summary>
+        string EmailAddress { get; }
+        /// <summary>
         /// The total points earned by this employee.
         /// </summary>
         int TotalPointsEarned { get; }

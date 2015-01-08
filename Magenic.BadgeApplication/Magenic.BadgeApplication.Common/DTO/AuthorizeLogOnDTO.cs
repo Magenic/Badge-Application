@@ -20,6 +20,10 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public string LastName { get; set; }
         /// <summary>
+        /// Gets or sets the email address.
+        /// </summary>
+        public string EmailAddress { get; set; }
+        /// <summary>
         /// The user's location.
         /// </summary>
         public string Location { get; set; }

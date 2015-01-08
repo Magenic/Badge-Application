@@ -37,6 +37,7 @@ namespace Magenic.BadgeApplication.Authorization
                 returnValue.UserName = userName;
                 returnValue.Location = GetPropertyString(result, "physicalDeliveryOfficeName");
                 returnValue.Department = GetPropertyString(result, "department");
+                returnValue.EmailAddress = GetPropertyString(result, "mail");
                 var managerDistinguishedName = GetPropertyString(result, "manager");
                 if (managerDistinguishedName != string.Empty)
                 {
@@ -81,6 +82,7 @@ namespace Magenic.BadgeApplication.Authorization
             searcher.PropertiesToLoad.Add("samaccountname");
             searcher.PropertiesToLoad.Add("sn");
             searcher.PropertiesToLoad.Add("givenname");
+            searcher.PropertiesToLoad.Add("mail");
             searcher.PropertiesToLoad.Add("manager");
             searcher.PropertiesToLoad.Add("thumbnailPhoto");
             searcher.PropertiesToLoad.Add("physicalDeliveryOfficeName");

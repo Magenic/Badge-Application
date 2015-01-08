@@ -16,6 +16,10 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public string UserName { get; set; }
         /// <summary>
+        /// Gets or sets the email address.
+        /// </summary>
+        public string EmailAddress { get; set; }
+        /// <summary>
         /// The total points earned by this employee.
         /// </summary>
         public int TotalPointsEarned { get; set; }

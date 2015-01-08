@@ -24,6 +24,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
             return await IoC.Container.Resolve<IObjectFactory<IBadgeAwardEditCollection>>().FetchAsync(userName);
         }
 
+        public async static Task<IBadgeAwardEditCollection> GetAllBadgeAwards()
+        {
+            return await IoC.Container.Resolve<IObjectFactory<IBadgeAwardEditCollection>>().FetchAsync();
+        }
+
         #endregion Factory Methods
 
         #region Rules
@@ -44,6 +49,15 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
             var dal = IoC.Container.Resolve<IBadgeAwardEditCollectionDAL>();
 
             var result = await dal.GetAllBadgeAwardsForUserAsync(userName);
+            this.LoadData(result);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        private async Task DataPortal_Fetch()
+        {
+            var dal = IoC.Container.Resolve<IBadgeAwardEditCollectionDAL>();
+
+            var result = await dal.GetAllBadgeAwardsAsync();
             this.LoadData(result);
         }
 

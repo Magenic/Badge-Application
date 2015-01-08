@@ -37,10 +37,13 @@ namespace Magenic.BadgeApplication.Controllers
 
             foreach (var activityId in activityIdsToAdd)
             {
-                var badgeActivityEdit = BadgeActivityEdit.CreateBadgeActivity();
-                badgeActivityEdit.ActivityId = activityId;
+                if (!badgeEditViewModel.Badge.BadgeActivities.Where(bae => bae.ActivityId == activityId).Any())
+                {
+                    var badgeActivityEdit = BadgeActivityEdit.CreateBadgeActivity();
+                    badgeActivityEdit.ActivityId = activityId;
 
-                badgeEditViewModel.Badge.BadgeActivities.Add(badgeActivityEdit);
+                    badgeEditViewModel.Badge.BadgeActivities.Add(badgeActivityEdit);
+                }
             }
         }
 
