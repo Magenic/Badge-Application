@@ -12,6 +12,8 @@ namespace Magenic.BadgeApplication.Processor
     {
         public void Start()
         {
+            var consecutiveErrorCount = 0;
+
             while (true)
             {
                 try
@@ -21,6 +23,16 @@ namespace Magenic.BadgeApplication.Processor
                         var sendMessageDal = IoC.Container.Resolve<ISendMessageDAL>();
                         sendMessageDal.SendActivityNotifications();
                     }
+                    consecutiveErrorCount = 0;
+                    consecutiveErrorCount++;
+                    if (consecutiveErrorCount >= 5)
+                    {
+                        //Continuous logging of an error in a tight loop is bad, go to sleep and see if the system 
+                        //recovers
+                        Logger.InfoFormat<QueueProcessor>("Notification processor consecutive error limit exceeded, sleeping for {0} seconds", ErrorSleepInterval / 1000);
+                        Thread.Sleep(ErrorSleepInterval);
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -36,6 +48,11 @@ namespace Magenic.BadgeApplication.Processor
         private int SleepInterval
         {
             get { return int.Parse(ConfigurationManager.AppSettings["SleepIntervalInMilliseconds"]); }
+        }
+
+        private int ErrorSleepInterval
+        {
+            get { return int.Parse(ConfigurationManager.AppSettings["ErrorSleepIntervalInMilliseconds"]); }
         }
 
         private DayOfWeek NotificationDay

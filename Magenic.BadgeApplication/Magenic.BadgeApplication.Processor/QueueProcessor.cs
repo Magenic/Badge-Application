@@ -21,6 +21,11 @@ namespace Magenic.BadgeApplication.Processor
             get { return int.Parse(ConfigurationManager.AppSettings["SleepIntervalInMilliseconds"]); }
         }
 
+        private int ErrorSleepInterval
+        {
+            get { return int.Parse(ConfigurationManager.AppSettings["ErrorSleepIntervalInMilliseconds"]); }
+        }
+
         public QueueProcessor() : this(IoC.Container)
         {
             
@@ -39,6 +44,7 @@ namespace Magenic.BadgeApplication.Processor
         /// </summary>
         public void Start()
         {
+            var consecutiveErrorCount = 0;
             Logger.Info<QueueProcessor>("The Queue Processor was started");
 
             while (true)
@@ -61,10 +67,19 @@ namespace Magenic.BadgeApplication.Processor
 
                         Thread.Sleep(SleepInterval);
                     }
+                    consecutiveErrorCount = 0;
                 }
                 catch (Exception ex)
                 {
                     Logger.Error<QueueProcessor>(ex.Message, ex);
+                    consecutiveErrorCount ++;
+                    if (consecutiveErrorCount >= 5)
+                    {
+                        //Continuous logging of an error in a tight loop is bad, go to sleep and see if the system 
+                        //recovers
+                        Logger.InfoFormat<QueueProcessor>("Queue processor consecutive error limit exceeded, sleeping for {0} seconds", ErrorSleepInterval / 1000);  
+                        Thread.Sleep(ErrorSleepInterval);
+                    }
                 }
             }            
         }        
