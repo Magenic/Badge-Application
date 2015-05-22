@@ -19,13 +19,14 @@ namespace Magenic.BadgeApplication
             Arg.IsNotNull(() => bundles);
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").IncludeT4MVC(
-                Links.Content.themes.@base.jquery_ui_all_css
+                Links.Content.themes.@base.all_css
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").IncludeT4MVC(
-                Links.Scripts.jquery_1_10_2_js,
+                Links.Scripts.jquery_2_1_4_min_js,
                 Links.Scripts.jquery_unobtrusive_ajax_js,
-                Links.Scripts.jquery_ui_1_10_4_js,
+                Links.Scripts.jquery_ui_1_11_4_min_js,
+                Links.Scripts.tag_it_min_js,
                 Links.Scripts.MicrosoftAjax_debug_js,
                 Links.Scripts.MicrosoftMvcAjax_debug_js,
                 Links.Scripts.MicrosoftMvcValidation_debug_js));
@@ -49,7 +50,8 @@ namespace Magenic.BadgeApplication
                 Links.Content.font_awesome_css,
                 Links.Content.bootstrap_datepicker_css,
                 Links.Content.bootstrap_select_css,
-                Links.Content.slider_css));
+                Links.Content.slider_css,
+                Links.Content.jquery_tagit_css));
 
             bundles.Add(new StyleBundle("~/Content/siteCss").IncludeT4MVC(
                 Links.Content.Site_css));

@@ -2,7 +2,11 @@
 using Csla.Web.Mvc;
 using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
 using Magenic.BadgeApplication.BusinessLogic.Activity;
+using Magenic.BadgeApplication.Extensions;
 using Magenic.BadgeApplication.Models;
+using Magenic.BadgeApplication.Resources;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -48,12 +52,36 @@ namespace Magenic.BadgeApplication.Controllers
             var submittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.EmployeeId);
             TryUpdateModel(submittedActivity, "SubmittedActivity");
 
-            var activityEdit = await ActivityEdit.GetActivityEditByIdAsync(submittedActivity.ActivityId);
-            submittedActivity.EntryType = activityEdit.EntryType;
-            if (await SaveObjectAsync(submittedActivity, true))
-            {
-                return RedirectToAction(await Mvc.Activities.Actions.Index());
+            if (string.IsNullOrWhiteSpace(submittedActivity.EmployeeIds)) {
+                ModelState.AddModelError("SubmittedActivity.EmployeeIds", ApplicationResources.NoEmployeeIdsErrorMsg);
             }
+            else {
+                List<int> empIds = submittedActivity.EmployeeIds.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Convert(delegate(string item, out int result) { return int.TryParse(item.Trim(), out result); });
+
+                bool allSaved = true;
+                foreach (int empId in empIds) {
+                    var singleActivity = SubmitActivity.CreateActivitySubmission(empId);
+                    singleActivity.ActivityId = submittedActivity.ActivityId;
+                    singleActivity.ActivitySubmissionDate = submittedActivity.ActivitySubmissionDate;
+                    singleActivity.Notes = submittedActivity.Notes;
+
+                    var singActEdit = await ActivityEdit.GetActivityEditByIdAsync(singleActivity.ActivityId);
+                    singleActivity.EntryType = singActEdit.EntryType;
+                    if (!await SaveObjectAsync(singleActivity, true))
+                        allSaved = false;
+                }
+
+                if (allSaved)
+                    return RedirectToAction(await Mvc.Activities.Actions.Index());
+            }
+
+            //var activityEdit = await ActivityEdit.GetActivityEditByIdAsync(submittedActivity.ActivityId);
+            //submittedActivity.EntryType = activityEdit.EntryType;
+            //if (await SaveObjectAsync(submittedActivity, true))
+            //{
+            //    return RedirectToAction(await Mvc.Activities.Actions.Index());
+            //}
 
             return await Index();
         }

@@ -1,4 +1,4 @@
-﻿.btn {
+.btn {
   display: inline-block;
   margin-bottom: 0;
   font-weight: normal;
@@ -594,6 +594,22 @@ input[type="checkbox"].input-validation-error {
 .datepicker {
   padding-left: 18px;
 }
+ul.invTagBox li.tagit-choice .tagit-label {
+  color: #ff0000;
+}
+.tagit-autocomplete {
+  max-height: 20em;
+  overflow-y: scroll;
+}
+.invTagBoxLabel {
+  color: #ff0000;
+}
+.invTagClearBtn {
+  color: #ff0000;
+  font-size: 16px;
+  font-weight: 500;
+  box-sizing: border-box;
+}
 /* Fixing for wierd IE 10 WP 8 bug http://getbootstrap.com/getting-started/#support-ie10-width */
 @-webkit-viewport {
   width: device-width;
@@ -615,4 +631,3 @@ input[type="checkbox"].input-validation-error {
     width: 300px;
   }
 }
-/*# sourceMappingURL=Site.css.map */

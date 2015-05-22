@@ -9,6 +9,8 @@ using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -102,6 +104,17 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         {
             get { return GetProperty(ApprovedByIdProperty); }
             private set { SetProperty(ApprovedByIdProperty, value); }
+        }
+
+        /// <summary>
+        /// A CSV list of the employee ids of the people this badge submission is for, if it is a multi submission.
+        /// This property takes priority over EmployeeId if it is not null or white space.
+        /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
+        public static readonly PropertyInfo<string> EmployeeIdsProperty = RegisterProperty<string>(c => c.EmployeeIds);
+        public string EmployeeIds {
+            get { return GetProperty(EmployeeIdsProperty); }
+            set { SetProperty(EmployeeIdsProperty, value); }
         }
 
         #endregion Properties

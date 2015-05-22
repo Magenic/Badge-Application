@@ -9,6 +9,7 @@
     @Styles.Render("~/Content/themes/base/css")
     @Styles.Render("~/Content/siteCss")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
     @RenderSection("content", required: false)
 </head>
 <body>
@@ -39,7 +40,7 @@
         </div>
     </footer>
 
-    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jquery")*@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/knockout")
     @RenderSection("scripts", required: false)

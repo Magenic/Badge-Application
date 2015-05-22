@@ -1,5 +1,6 @@
 ﻿using Csla;
 using System;
+using System.Collections.ObjectModel;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -25,8 +26,9 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         string Notes { get; set; }
         /// <summary>
-        /// The employee Id of the person who this badge submission is for.  
+        /// The employee Id of the person who this badge submission is for, if it is a single submission.
         /// This should default to the user id of the current user.
+        /// It also should be ignored if there are values in the multi-submit property (EmployeeIds).
         /// </summary>
         int EmployeeId { get; set; }
         /// <summary>
@@ -38,5 +40,10 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// activity status is approved and no managerial approval is required.
         /// </summary>
         int ApprovedById { get; }
+        /// <summary>
+        /// A CSV list of the employee ids of the people this badge submission is for, if it is a multi submission.
+        /// This property takes priority over EmployeeId if it is not null or white space.
+        /// </summary>
+        string EmployeeIds { get; set; }
     }
 }

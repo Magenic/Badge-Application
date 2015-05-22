@@ -456,4 +456,13 @@
   <data name="PointsReportExportHeaderUserName" xml:space="preserve">
     <value>User Name</value>
   </data>
+  <data name="InvalidPastedUserIdsLabel" xml:space="preserve">
+    <value>These Pasted Users Are Not Available</value>
+  </data>
+  <data name="NoEmployeeIdsErrorMsg" xml:space="preserve">
+    <value>You must specify one or more people who completed this activity.</value>
+  </data>
+  <data name="UserIdsLabel" xml:space="preserve">
+    <value>User(s)</value>
+  </data>
 </root>
