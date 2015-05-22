@@ -592,6 +592,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to These Pasted Users Are Not Available.
+        /// </summary>
+        public static string InvalidPastedUserIdsLabel {
+            get {
+                return ResourceManager.GetString("InvalidPastedUserIdsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid Payout Threshold.
         /// </summary>
         public static string InvalidPayoutThreshold {
@@ -660,6 +669,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string ManageActivitiesLink {
             get {
                 return ResourceManager.GetString("ManageActivitiesLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must specify one or more people who completed this activity..
+        /// </summary>
+        public static string NoEmployeeIdsErrorMsg {
+            get {
+                return ResourceManager.GetString("NoEmployeeIdsErrorMsg", resourceCulture);
             }
         }
         
@@ -1065,6 +1083,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string UserIdLabel {
             get {
                 return ResourceManager.GetString("UserIdLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User(s).
+        /// </summary>
+        public static string UserIdsLabel {
+            get {
+                return ResourceManager.GetString("UserIdsLabel", resourceCulture);
             }
         }
         
