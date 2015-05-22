@@ -26,8 +26,15 @@ namespace Magenic.BadgeApplication.Controllers
         [HasPermission(AuthorizationActions.GetObject, typeof(PointsReportCollection))]
         public async virtual Task<ActionResult> Index()
         {
-            var pointsReportCollection = await PointsReportCollection.GetAllPayoutsToApproveAsync();
+            var pointsReportCollection = await PointsReportCollection.GetAllPayoutsToApproveAsync(false);
+
             return View(pointsReportCollection);
+        }
+
+        public async virtual Task<ActionResult> ListPayouts(bool displayAll = false)
+        {
+            var pointsReportCollection = await PointsReportCollection.GetAllPayoutsToApproveAsync(displayAll);
+            return PartialView(pointsReportCollection);
         }
 
         /// <summary>
@@ -93,7 +100,8 @@ namespace Magenic.BadgeApplication.Controllers
         public async virtual Task<ActionResult> BadgeAwards(string userName)
         {
             var badgeAwardsForUser = await BadgeAwardEditCollection.GetAllBadgeAwardsForUser(userName);
-            return View(badgeAwardsForUser);
+
+            return PartialView(badgeAwardsForUser);
         }
 
         /// <summary>
@@ -113,7 +121,7 @@ namespace Magenic.BadgeApplication.Controllers
                 item.AwardAmount = badgeAwardEdit.AwardAmount;
                 await SaveObjectAsync(item, true);
             }
-
+            
             return RedirectToAction("Index", "PointsReport");
         }
     }

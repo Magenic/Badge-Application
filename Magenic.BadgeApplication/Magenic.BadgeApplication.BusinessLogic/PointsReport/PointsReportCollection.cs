@@ -20,11 +20,12 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
         /// Asynchronously returns a list of all employees and their points who have enough points to be paid out.
         /// </summary>
         /// <returns>A list of payouts that can be approved.</returns>
-        public async static Task<IPointsReportCollection> GetAllPayoutsToApproveAsync()
+        public async static Task<IPointsReportCollection> GetAllPayoutsToApproveAsync(bool displayAll = false)
         {
             if (BusinessRules.HasPermission(AuthorizationActions.GetObject, typeof(PointsReportCollection)))
             {
-                return await IoC.Container.Resolve<IObjectFactory<IPointsReportCollection>>().FetchAsync();
+
+                return await IoC.Container.Resolve<IObjectFactory<IPointsReportCollection>>().FetchAsync(displayAll);
             }
             else
             {
@@ -49,11 +50,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
         #region Data Access
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        private async Task DataPortal_Fetch()
+        private async Task DataPortal_Fetch(bool displayThreshold)
         {
             var dal = IoC.Container.Resolve<IPointsReportCollectionDAL>();
 
-            var result = await dal.GetPointsReportItemsAsync();
+            var result = await dal.GetPointsReportItemsAsync(displayThreshold);
             this.LoadData(result);
         }
 
@@ -99,6 +100,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
             }
         }
 
+
         #endregion Methods
+
+
+
     }
 }
