@@ -34,7 +34,7 @@ $(document).ready(function () {
             } else if (status == 'timeout') {
                 alert('Request Time out.');
             } else {
-                alert('Unknow Error.\n' + x.responseText);
+                alert('Unknown Error.\n' + x.responseText);
             }
         }
     });

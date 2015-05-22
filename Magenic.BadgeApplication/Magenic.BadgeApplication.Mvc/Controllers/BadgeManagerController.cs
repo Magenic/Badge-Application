@@ -264,15 +264,27 @@ namespace Magenic.BadgeApplication.Controllers
         /// Approves the activities.
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), HttpGet]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
-        public async virtual Task<ActionResult> ApproveActivities()
-        {
-            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
+        public async virtual Task<ActionResult> ApproveActivities(bool showAdminView = false)
+        
+        {           
+            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId, showAdminView);
             var approveActivitiesViewModel = new ApproveActivitiesViewModel(activitiesToApprove);
             return View(approveActivitiesViewModel);
         }
 
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), HttpGet]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
+        public async virtual Task<ActionResult> _ActivitiesForApproval(bool showAdminView = true)
+        {
+            var activitiesToApprove =  await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId, showAdminView);
+            var approveActivitiesViewModel = new ApproveActivitiesViewModel(activitiesToApprove);
+            return PartialView(Mvc.BadgeManager.Views._ActivitiesForApproval, activitiesToApprove);
+        }
+
+       
         /// <summary>
         /// Approves the activities list.
         /// </summary>

@@ -125,6 +125,7 @@ namespace Magenic.BadgeApplication.Controllers
             public readonly string ApproveCommunityBadges = "ApproveCommunityBadges";
             public readonly string ApproveCommunityBadgesList = "ApproveCommunityBadgesList";
             public readonly string ApproveActivities = "ApproveActivities";
+            public readonly string _ActivitiesForApproval = "_ActivitiesForApproval";
             public readonly string ApproveActivitiesList = "ApproveActivitiesList";
             public readonly string ApproveActivity = "ApproveActivity";
             public readonly string RejectActivity = "RejectActivity";
@@ -145,6 +146,7 @@ namespace Magenic.BadgeApplication.Controllers
             public const string ApproveCommunityBadges = "ApproveCommunityBadges";
             public const string ApproveCommunityBadgesList = "ApproveCommunityBadgesList";
             public const string ApproveActivities = "ApproveActivities";
+            public const string _ActivitiesForApproval = "_ActivitiesForApproval";
             public const string ApproveActivitiesList = "ApproveActivitiesList";
             public const string ApproveActivity = "ApproveActivity";
             public const string RejectActivity = "RejectActivity";
@@ -180,6 +182,22 @@ namespace Magenic.BadgeApplication.Controllers
             public readonly string id = "id";
             public readonly string badgeEditViewModel = "badgeEditViewModel";
             public readonly string badgeImage = "badgeImage";
+        }
+        static readonly ActionParamsClass_ApproveActivities s_params_ApproveActivities = new ActionParamsClass_ApproveActivities();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ApproveActivities ApproveActivitiesParams { get { return s_params_ApproveActivities; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ApproveActivities
+        {
+            public readonly string showAdminView = "showAdminView";
+        }
+        static readonly ActionParamsClass__ActivitiesForApproval s_params__ActivitiesForApproval = new ActionParamsClass__ActivitiesForApproval();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass__ActivitiesForApproval _ActivitiesForApprovalParams { get { return s_params__ActivitiesForApproval; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass__ActivitiesForApproval
+        {
+            public readonly string showAdminView = "showAdminView";
         }
         static readonly ActionParamsClass_ApproveActivity s_params_ApproveActivity = new ActionParamsClass_ApproveActivity();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -342,12 +360,23 @@ namespace Magenic.BadgeApplication.Controllers
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
-        partial void ApproveActivitiesOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void ApproveActivitiesOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, bool showAdminView);
 
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ApproveActivities()
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ApproveActivities(bool showAdminView)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ApproveActivities);
-            ApproveActivitiesOverride(callInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "showAdminView", showAdminView);
+            ApproveActivitiesOverride(callInfo, showAdminView);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        partial void _ActivitiesForApprovalOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, bool showAdminView);
+
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> _ActivitiesForApproval(bool showAdminView)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._ActivitiesForApproval);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "showAdminView", showAdminView);
+            _ActivitiesForApprovalOverride(callInfo, showAdminView);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
