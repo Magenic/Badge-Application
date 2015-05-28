@@ -10,7 +10,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 {
     public class PointsReportCollectionDAL : IPointsReportCollectionDAL
     {
-        public async Task<IEnumerable<PointsReportItemDTO>> GetPointsReportItemsAsync()
+        public async Task<IEnumerable<PointsReportItemDTO>> GetPointsReportItemsAsync(bool displayThreshold = false)
         {
             using (var ctx = new Entities())
             {
@@ -19,7 +19,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                             join e in ctx.Employees on ba.EmployeeId equals e.EmployeeId
                                             where !ba.PaidOut
                                             group ba by new { e.EmployeeId, e.FirstName, e.LastName, e.ADName, e.Location, e.AwardPayoutThreshold } into g
-                                            where g.Key.AwardPayoutThreshold <= g.Sum(t => t.AwardAmount)
+                                            where !displayThreshold && g.Key.AwardPayoutThreshold <= g.Sum(t => t.AwardAmount) ||
+                                                  displayThreshold && g.Sum(t => t.AwardAmount) > 0
                                             select new PointsReportItemDTO
                                             {
                                                 EmployeeId = g.Key.EmployeeId,

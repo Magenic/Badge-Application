@@ -5,6 +5,7 @@ using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -26,8 +27,16 @@ namespace Magenic.BadgeApplication.Controllers
         [HasPermission(AuthorizationActions.GetObject, typeof(PointsReportCollection))]
         public async virtual Task<ActionResult> Index()
         {
-            var pointsReportCollection = await PointsReportCollection.GetAllPayoutsToApproveAsync();
+            var pointsReportCollection = await PointsReportCollection.GetAllPayoutsToApproveAsync(false);
+
             return View(pointsReportCollection);
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Yes they should.")]
+        public async virtual Task<ActionResult> ListPayouts(bool displayAll = false)
+        {
+            var pointsReportCollection = await PointsReportCollection.GetAllPayoutsToApproveAsync(displayAll);
+            return PartialView(pointsReportCollection);
         }
 
         /// <summary>
@@ -93,7 +102,8 @@ namespace Magenic.BadgeApplication.Controllers
         public async virtual Task<ActionResult> BadgeAwards(string userName)
         {
             var badgeAwardsForUser = await BadgeAwardEditCollection.GetAllBadgeAwardsForUser(userName);
-            return View(badgeAwardsForUser);
+
+            return PartialView(badgeAwardsForUser);
         }
 
         /// <summary>
@@ -113,7 +123,7 @@ namespace Magenic.BadgeApplication.Controllers
                 item.AwardAmount = badgeAwardEdit.AwardAmount;
                 await SaveObjectAsync(item, true);
             }
-
+            
             return RedirectToAction("Index", "PointsReport");
         }
     }
