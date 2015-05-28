@@ -1,40 +1,64 @@
 ﻿@using Magenic.BadgeApplication.Resources
 @using Magenic.BadgeApplication.Models
 @using Magenic.BadgeApplication.Common.Interfaces
+
 @model IPointsReportCollection
+
+<style>
+html {overflow-y: scroll;}
+</style>
+
+
 
 <div class="container">
     <div class="row">
         @Html.Partial("_AdminNavbar")
+
     </div>
     <div class="row">
         <div class="col-md-12 grayBox">
-            <div class="row">
-                <div class="col-md-10">
-                    <h2>@ApplicationResources.PointsReportHeader</h2>
+           
+            @using (Ajax.BeginForm("ListPayouts", "PointsReport", new { displayAll = true }, 
+                                   new AjaxOptions() 
+                                   { 
+                                        HttpMethod = "POST",
+                                        InsertionMode = InsertionMode.Replace,
+                                        UpdateTargetId = "displayThreshold" 
+                                   }))
+            {
+
+                <div class="row">
+                    <div class="col-md-10">
+                        <h2>@ApplicationResources.PointsReportHeader</h2>
+                    </div>
+
+                    <div class="col-md-2 pull-right">
+                        <i class="glyphicon glyphicon-download"></i>
+                        @Html.ActionLink(ApplicationResources.PointsReportExport, Mvc.PointsReport.Export())
+                    
+                        <div class="checkbox-inline">
+                            <label>
+                                @Html.CheckBox( "displayAll" ,new { onclick="$(this).parents('form:first').find(':submit')[0].click();" }) Display All
+                            </label>
+                        </div>
+
+                    </div>
                 </div>
 
-                <div class="col-md-2 pull-right">
-                    <i class="glyphicon glyphicon-download"></i>
-                    @Html.ActionLink(ApplicationResources.PointsReportExport, Mvc.PointsReport.Export())
+                <div class="row">
+                    <div class="col-md-12">
+                        @ApplicationResources.PointsReportDescription
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    @ApplicationResources.PointsReportDescription
+                <div class="row">
+                    &nbsp;
                 </div>
-            </div>
+               
+                @Html.Partial("ListPayouts", Model)
 
-            <div class="row">
-                &nbsp;
-            </div>
+            }
 
-            <div class="row">
-                <div class="col-md-12">
-                    @Html.EditorFor(m => m)
-                </div>
-            </div>
         </div>
     </div>
     <div class="row">
@@ -43,5 +67,6 @@
 </div>
 
 @section scripts {
+
     @Scripts.Render("~/bundles/badgeManager")
 }

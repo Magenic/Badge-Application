@@ -98,6 +98,7 @@ namespace Links
         public static readonly string jquery_2_1_4_min_map = Url("jquery-2.1.4.min.map");
         public static readonly string jquery_ui_1_11_4_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui-1.11.4.min.js") ? Url("jquery-ui-1.11.4.min.js") : Url("jquery-ui-1.11.4.js");
         public static readonly string jquery_ui_1_11_4_min_js = Url("jquery-ui-1.11.4.min.js");
+        public static readonly string jquery_min_map = Url("jquery.min.map");
         public static readonly string jquery_unobtrusive_ajax_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.unobtrusive-ajax.min.js") ? Url("jquery.unobtrusive-ajax.min.js") : Url("jquery.unobtrusive-ajax.js");
         public static readonly string jquery_unobtrusive_ajax_min_js = Url("jquery.unobtrusive-ajax.min.js");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

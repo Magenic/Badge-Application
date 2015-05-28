@@ -75,6 +75,7 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string ListPayouts = "ListPayouts";
             public readonly string Export = "Export";
             public readonly string BadgeAwards = "BadgeAwards";
             public readonly string UpdateBadgeAwards = "UpdateBadgeAwards";
@@ -84,12 +85,21 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string ListPayouts = "ListPayouts";
             public const string Export = "Export";
             public const string BadgeAwards = "BadgeAwards";
             public const string UpdateBadgeAwards = "UpdateBadgeAwards";
         }
 
 
+        static readonly ActionParamsClass_ListPayouts s_params_ListPayouts = new ActionParamsClass_ListPayouts();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ListPayouts ListPayoutsParams { get { return s_params_ListPayouts; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ListPayouts
+        {
+            public readonly string displayAll = "displayAll";
+        }
         static readonly ActionParamsClass_Index s_params_Index = new ActionParamsClass_Index();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Index IndexParams { get { return s_params_Index; } }
@@ -126,9 +136,11 @@ namespace Magenic.BadgeApplication.Controllers
             {
                 public readonly string BadgeAwards = "BadgeAwards";
                 public readonly string Index = "Index";
+                public readonly string ListPayouts = "ListPayouts";
             }
             public readonly string BadgeAwards = "~/Views/PointsReport/BadgeAwards.cshtml";
             public readonly string Index = "~/Views/PointsReport/Index.cshtml";
+            public readonly string ListPayouts = "~/Views/PointsReport/ListPayouts.cshtml";
         }
     }
 
@@ -143,6 +155,16 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        partial void ListPayoutsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, bool displayAll);
+
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ListPayouts(bool displayAll)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ListPayouts);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "displayAll", displayAll);
+            ListPayoutsOverride(callInfo, displayAll);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 

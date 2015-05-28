@@ -20,7 +20,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// A <see cref="System.Collections.Generic.IEnumerable&lt;PointsReportItemDTO&gt;" />.
         /// </returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
-        Task<IEnumerable<PointsReportItemDTO>> GetPointsReportItemsAsync();
+        Task<IEnumerable<PointsReportItemDTO>> GetPointsReportItemsAsync(bool displayThreshold = false);
 
         /// <summary>
         /// Updates list of approved points for payout.
