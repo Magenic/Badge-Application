@@ -28,7 +28,7 @@ namespace Magenic.BadgeApplication.Extensions
             stringBuilder.Append("</li>");
             return MvcHtmlString.Create(stringBuilder.ToString());
         }
-        
+
         /// <summary>
         /// Creates a tag-style text box with auto-complete and paste funtionality for the given property, with each item in the autoCompleteList as a possible tag to add.
         /// </summary>
@@ -37,13 +37,14 @@ namespace Magenic.BadgeApplication.Extensions
         /// <param name="html">The HtmlHelper object being used to generate markup for the web page.</param>
         /// <param name="expression">An expression that specified the property in the model that the field is for.</param>
         /// <param name="autoCompleteList">An enumerable object of items available for selection.</param>
-        /// <param name="invalidTagBogLabel">A message to display when the user tries to paste in unavailable tags.</param>
+        /// <param name="invalidTagBoxLabel">A message to display when the user tries to paste in unavailable tags.</param>
+        /// <param name="enabled">If false, the user will not be able to modify the tags in the tag box.</param>
         /// <returns>An MvcHtmlString containing the code for the form element.</returns>
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Forces/Encourages proper use of this helper function in page views.")]
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "This is an extension method. Argument 'html' will not be null.")]
-        public static MvcHtmlString TagSelectBoxFor<TModel, TProperty>(this HtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> autoCompleteList, string invalidTagBogLabel) {
-            return TagSelectBoxFor(html, expression, autoCompleteList, invalidTagBogLabel, null);
+        public static MvcHtmlString TagSelectBoxFor<TModel, TProperty>(this HtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> autoCompleteList, string invalidTagBoxLabel, bool enabled) {
+            return TagSelectBoxFor(html, expression, autoCompleteList, invalidTagBoxLabel, null, enabled);
         }
         
         /// <summary>
@@ -54,16 +55,34 @@ namespace Magenic.BadgeApplication.Extensions
         /// <param name="html">The HtmlHelper object being used to generate markup for the web page.</param>
         /// <param name="expression">An expression that specified the property in the model that the field is for.</param>
         /// <param name="autoCompleteList">An enumerable object of items available for selection.</param>
-        /// <param name="invalidTagBogLabel">A message to display when the user tries to paste in unavailable tags.</param>
-        /// <param name="onPasteItemSeparators">An string of characters by which the select box should delimit tags when text of 0 or more tags is pasted into it.
-        /// Regex character classes are recognized (e.g. @"\s" will recognize any white space character as a delimiter).
-        /// Forward slashes '/' must be escaped (e.g. use @"\/" instead of "/").
-        /// Defaults to @"\n,;".</param>
+        /// <param name="invalidTagBoxLabel">A message to display when the user tries to paste in unavailable tags.</param>
         /// <returns>An MvcHtmlString containing the code for the form element.</returns>
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Forces/Encourages proper use of this helper function in page views.")]
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "This is an extension method. Argument 'html' will not be null.")]
-        public static MvcHtmlString TagSelectBoxFor<TModel, TProperty>(this HtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> autoCompleteList, string invalidTagBogLabel, string onPasteItemSeparators) {
+        public static MvcHtmlString TagSelectBoxFor<TModel, TProperty>(this HtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> autoCompleteList, string invalidTagBoxLabel) {
+            return TagSelectBoxFor(html, expression, autoCompleteList, invalidTagBoxLabel, null, true);
+        }
+        
+        /// <summary>
+        /// Creates a tag-style text box with auto-complete and paste funtionality for the given property, with each item in the autoCompleteList as a possible tag to add.
+        /// </summary>
+        /// <typeparam name="TModel">The Type of the model the field is from.</typeparam>
+        /// <typeparam name="TProperty">The Type of the property the field is for. (Should be a collection or enumerable type, since this control is always multi-select.)</typeparam>
+        /// <param name="html">The HtmlHelper object being used to generate markup for the web page.</param>
+        /// <param name="expression">An expression that specified the property in the model that the field is for.</param>
+        /// <param name="autoCompleteList">An enumerable object of items available for selection.</param>
+        /// <param name="invalidTagBoxLabel">A message to display when the user tries to paste in unavailable tags.</param>
+        /// <param name="onPasteItemSeparators">An string of characters by which the select box should delimit tags when text of 0 or more tags is pasted into it.
+        /// Regex character classes are recognized (e.g. @"\s" will recognize any white space character as a delimiter).
+        /// Forward slashes '/' must be escaped (e.g. use @"\/" instead of "/").
+        /// Defaults to @"\n,;".</param>
+        /// <param name="enabled">If false, the user will not be able to modify the tags in the tag box.</param>
+        /// <returns>An MvcHtmlString containing the code for the form element.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
+        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Forces/Encourages proper use of this helper function in page views.")]
+        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "This is an extension method. Argument 'html' will not be null.")]
+        public static MvcHtmlString TagSelectBoxFor<TModel, TProperty>(this HtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> autoCompleteList, string invalidTagBoxLabel, string onPasteItemSeparators, bool enabled) {
             StringBuilder output = new StringBuilder();
 
             //Initialize and calculate values used in code generation.
@@ -116,6 +135,7 @@ namespace Magenic.BadgeApplication.Extensions
             output.Append("tagElmnt.tagit({")//Start of call and args object
                 .Append("'fieldName':'','availableTags':tagList,'allowSpaces':true,'showAutocompleteOnFocus':true,'autocomplete':{'delay':0},'singleField':true")
                 .AppendFormat(",'singleFieldNode':$('#{0}')", tagValBoxId)
+                .AppendFormat(",'readOnly':{0}", enabled ? "false" : "true")
                 .Append(",'beforeTagAdded':function(e,ui){if(validateTag(ui.tagLabel))return true;else{if(pasting)invTagElmnt.tagit(\"createTag\",ui.tagLabel);return false;}}")
                 .Append(",'afterTagAdded':function(e,ui){if(!pasting)refreshValsField();}")
                 .Append(",'afterTagRemoved':function(e,ui){refreshValsField();}")
@@ -197,7 +217,7 @@ namespace Magenic.BadgeApplication.Extensions
             //  Label containing the error message for the invalid tag box.
             fldBldr = new TagBuilder("label");
             fldBldr.AddCssClass("invTagBoxLabel");
-            fldBldr.SetInnerText(invalidTagBogLabel);
+            fldBldr.SetInnerText(invalidTagBoxLabel);
             fldBldr.MergeAttribute("for", invTagBoxId, true);
             output.Append(fldBldr.ToString(TagRenderMode.Normal));
             //  The visible invalid tag widget

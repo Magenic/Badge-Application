@@ -55,7 +55,9 @@ namespace Magenic.BadgeApplication.Controllers
             if (string.IsNullOrWhiteSpace(submittedActivity.EmployeeIds)) {
                 ModelState.AddModelError("SubmittedActivity.EmployeeIds", ApplicationResources.NoEmployeeIdsErrorMsg);
             }
-            else {
+            else
+            {
+                //Parse the list of employee ids the client form sent us.
                 List<int> empIds = submittedActivity.EmployeeIds.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                     .Convert(delegate(string item, out int result) { return int.TryParse(item.Trim(), out result); });
 
@@ -72,9 +74,12 @@ namespace Magenic.BadgeApplication.Controllers
                         allSaved = false;
                 }
 
-                if (allSaved)
+                if (allSaved) {
                     return RedirectToAction(await Mvc.Activities.Actions.Index());
+                }
             }
+
+            return await Index();
 
             //var activityEdit = await ActivityEdit.GetActivityEditByIdAsync(submittedActivity.ActivityId);
             //submittedActivity.EntryType = activityEdit.EntryType;
@@ -82,8 +87,7 @@ namespace Magenic.BadgeApplication.Controllers
             //{
             //    return RedirectToAction(await Mvc.Activities.Actions.Index());
             //}
-
-            return await Index();
+            //return await Index();
         }
     }
 }

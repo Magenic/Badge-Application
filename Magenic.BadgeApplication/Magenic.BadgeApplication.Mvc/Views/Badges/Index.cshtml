@@ -14,7 +14,7 @@
             @Html.Partial(Mvc.Badges.Views._CommunityBadgeDisplay, Model)
         </div>
         <div class="col-md-4 grayBox">
-            @Html.EditorFor(bivm => bivm.SubmittedActivity, new { PossibleActivities = Model.PossibleActivities, AvailableUsers = new SelectList(Model.AvailableUsers.OrderBy(ui => ui.FullName), "EmployeeId", "FullName", Model.AvailableUsers.Count == 1 ? Model.AvailableUsers[0].EmployeeId.ToString() : null) })
+            @Html.EditorFor(bivm => bivm.SubmittedActivity, new { PossibleActivities = Model.PossibleActivities, AvailableUsers = new SelectList(Model.AvailableUsers.OrderBy(ui => ui.FullName), "EmployeeId", "FullName", Model.AvailableUsers.Count == 1 ? Model.AvailableUsers[0].EmployeeId.ToString() : null), UsersEditable = Model.AvailableUsers.Count > 1 })
         </div>
     </div>
 </div>
