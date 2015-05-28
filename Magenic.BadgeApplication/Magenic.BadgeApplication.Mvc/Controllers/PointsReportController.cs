@@ -5,6 +5,7 @@ using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -31,6 +32,7 @@ namespace Magenic.BadgeApplication.Controllers
             return View(pointsReportCollection);
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Yes they should.")]
         public async virtual Task<ActionResult> ListPayouts(bool displayAll = false)
         {
             var pointsReportCollection = await PointsReportCollection.GetAllPayoutsToApproveAsync(displayAll);

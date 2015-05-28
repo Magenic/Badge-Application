@@ -7,6 +7,7 @@ using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
@@ -20,6 +21,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
         /// Asynchronously returns a list of all employees and their points who have enough points to be paid out.
         /// </summary>
         /// <returns>A list of payouts that can be approved.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Yes they should.")]
         public async static Task<IPointsReportCollection> GetAllPayoutsToApproveAsync(bool displayAll = false)
         {
             if (BusinessRules.HasPermission(AuthorizationActions.GetObject, typeof(PointsReportCollection)))
