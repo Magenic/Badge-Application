@@ -13,7 +13,7 @@
     @Model.PointPayoutThreshold pts
 </span>
 <br />
-@using (Ajax.BeginForm(Mvc.Account.Actions.SubmitPayout(), new AjaxOptions() { UpdateTargetId = "PayoutSlider", OnSuccess = "onSuccess" }))
+@using (Ajax.BeginForm(Mvc.Account.Actions.SubmitPayout(), new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "PayoutSlider", OnSuccess = "onSuccess" }))
 {
     var minValue = 50;
     var maxValue = 500;
