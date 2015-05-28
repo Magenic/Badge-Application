@@ -26,10 +26,8 @@ public static class Mvc
 {
     public static Magenic.BadgeApplication.Controllers.AccountController Account = new Magenic.BadgeApplication.Controllers.T4MVC_AccountController();
     public static Magenic.BadgeApplication.Controllers.ActivitiesController Activities = new Magenic.BadgeApplication.Controllers.T4MVC_ActivitiesController();
-    public static Csla.Web.Mvc.AsyncController Async = new Csla.Web.Mvc.T4MVC_AsyncController();
     public static Magenic.BadgeApplication.Controllers.BadgeManagerController BadgeManager = new Magenic.BadgeApplication.Controllers.T4MVC_BadgeManagerController();
     public static Magenic.BadgeApplication.Controllers.BadgesController Badges = new Magenic.BadgeApplication.Controllers.T4MVC_BadgesController();
-    public static Magenic.BadgeApplication.Controllers.BaseController Base = new Magenic.BadgeApplication.Controllers.T4MVC_BaseController();
     public static Magenic.BadgeApplication.Controllers.ErrorController Error = new Magenic.BadgeApplication.Controllers.T4MVC_ErrorController();
     public static Magenic.BadgeApplication.Controllers.ImageController Image = new Magenic.BadgeApplication.Controllers.T4MVC_ImageController();
     public static Magenic.BadgeApplication.Controllers.LeaderboardController Leaderboard = new Magenic.BadgeApplication.Controllers.T4MVC_LeaderboardController();
@@ -100,6 +98,7 @@ namespace Links
         public static readonly string jquery_2_1_4_min_map = Url("jquery-2.1.4.min.map");
         public static readonly string jquery_ui_1_11_4_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui-1.11.4.min.js") ? Url("jquery-ui-1.11.4.min.js") : Url("jquery-ui-1.11.4.js");
         public static readonly string jquery_ui_1_11_4_min_js = Url("jquery-ui-1.11.4.min.js");
+        public static readonly string jquery_min_map = Url("jquery.min.map");
         public static readonly string jquery_unobtrusive_ajax_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.unobtrusive-ajax.min.js") ? Url("jquery.unobtrusive-ajax.min.js") : Url("jquery.unobtrusive-ajax.js");
         public static readonly string jquery_unobtrusive_ajax_min_js = Url("jquery.unobtrusive-ajax.min.js");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
