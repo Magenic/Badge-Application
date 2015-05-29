@@ -14,5 +14,9 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// A reference to an object that can determine what badges may potentially be awarded for an activity.
         /// </summary>
         IAwardBadges AwardBadges { get; set; }
+        /// <summary>
+        /// Whether the admin view is set
+        /// </summary>
+        bool ShowAdminView { get; set; }
     }
 }
