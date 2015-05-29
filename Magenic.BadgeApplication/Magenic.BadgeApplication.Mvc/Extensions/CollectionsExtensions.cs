@@ -48,7 +48,7 @@ namespace Magenic.BadgeApplication.Extensions
             foreach (T item in list) {
                 output.Append(itemSerializer(item)).Append(separator);
             }
-            if (separator.Length > 0) {
+            if (separator.Length > 0 && list.GetEnumerator().MoveNext()) {
                 output.Remove(output.Length - separator.Length, separator.Length);
             }
             output.Append(postpend);
