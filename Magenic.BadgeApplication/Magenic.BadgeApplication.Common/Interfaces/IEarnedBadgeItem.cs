@@ -52,5 +52,9 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// Indicates if the same badge should be displayed only once or multiple times.
         /// </summary>
         bool DisplayOnce { get; }
+        /// <summary>
+        /// The id of the badgeAward.
+        /// </summary>
+        int BadgeAwardId { get; }
     }
 }

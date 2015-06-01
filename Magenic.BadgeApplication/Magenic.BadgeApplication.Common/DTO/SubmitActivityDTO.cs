@@ -37,5 +37,9 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// activity status is approved and no managerial approval is required.
         /// </summary>
         public int ApprovedById { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int AwardValue { get; set; }
     }
 }

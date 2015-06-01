@@ -65,6 +65,13 @@ namespace Magenic.BadgeApplication.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Compare);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Delete()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public LeaderboardController Actions { get { return Mvc.Leaderboard; } }
@@ -86,6 +93,7 @@ namespace Magenic.BadgeApplication.Controllers
             public readonly string Search = "Search";
             public readonly string Show = "Show";
             public readonly string Compare = "Compare";
+            public readonly string Delete = "Delete";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -96,6 +104,7 @@ namespace Magenic.BadgeApplication.Controllers
             public const string Search = "Search";
             public const string Show = "Show";
             public const string Compare = "Compare";
+            public const string Delete = "Delete";
         }
 
 
@@ -122,6 +131,14 @@ namespace Magenic.BadgeApplication.Controllers
         public class ActionParamsClass_Compare
         {
             public readonly string userName = "userName";
+        }
+        static readonly ActionParamsClass_Delete s_params_Delete = new ActionParamsClass_Delete();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Delete DeleteParams { get { return s_params_Delete; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Delete
+        {
+            public readonly string badgeAwardId = "badgeAwardId";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -201,6 +218,16 @@ namespace Magenic.BadgeApplication.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Compare);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "userName", userName);
             CompareOverride(callInfo, userName);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        partial void DeleteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int badgeAwardId);
+
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Delete(int badgeAwardId)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "badgeAwardId", badgeAwardId);
+            DeleteOverride(callInfo, badgeAwardId);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 

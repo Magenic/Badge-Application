@@ -41,5 +41,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public System.DateTime AwardDate { get; set; }
         public int AwardAmount { get; set; }
         public bool PaidOut { get; set; }
+        public int BadgeAwardId { get; set; }
     }
 }

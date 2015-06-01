@@ -2,6 +2,7 @@
 using Csla.Web.Mvc;
 using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
 using Magenic.BadgeApplication.BusinessLogic.Activity;
+using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.Extensions;
 using Magenic.BadgeApplication.Models;
 using Magenic.BadgeApplication.Resources;
@@ -51,8 +52,13 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var submittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.EmployeeId);
             TryUpdateModel(submittedActivity, "SubmittedActivity");
-
-            if (string.IsNullOrWhiteSpace(submittedActivity.EmployeeIds)) {
+            var activities = await ActivityCollection.GetAllActivitiesAsync(false);
+            var badges = await BadgeCollection.GetAllBadgesForActivitiesAsync(activities.Where(x => x.Id == submittedActivity.ActivityId).Select(x => x.Id));
+            var badge = badges.Select(x => new { x.Id, x.BadgeAwardValue, x.BadgeAwardValueMax }).FirstOrDefault();
+            if (submittedActivity.AwardValue > badge.BadgeAwardValueMax || submittedActivity.AwardValue < badge.BadgeAwardValue) {
+                ModelState.AddModelError("SubmittedActivity.AwardValue", "Award Value not within acceptable range.");
+            }
+            else if (string.IsNullOrWhiteSpace(submittedActivity.EmployeeIds)) {
                 ModelState.AddModelError("SubmittedActivity.EmployeeIds", ApplicationResources.NoEmployeeIdsErrorMsg);
             }
             else {
@@ -65,6 +71,7 @@ namespace Magenic.BadgeApplication.Controllers
                     singleActivity.ActivityId = submittedActivity.ActivityId;
                     singleActivity.ActivitySubmissionDate = submittedActivity.ActivitySubmissionDate;
                     singleActivity.Notes = submittedActivity.Notes;
+                    singleActivity.AwardValue = submittedActivity.AwardValue;
 
                     var singActEdit = await ActivityEdit.GetActivityEditByIdAsync(singleActivity.ActivityId);
                     singleActivity.EntryType = singActEdit.EntryType;
@@ -75,13 +82,6 @@ namespace Magenic.BadgeApplication.Controllers
                 if (allSaved)
                     return RedirectToAction(await Mvc.Activities.Actions.Index());
             }
-
-            //var activityEdit = await ActivityEdit.GetActivityEditByIdAsync(submittedActivity.ActivityId);
-            //submittedActivity.EntryType = activityEdit.EntryType;
-            //if (await SaveObjectAsync(submittedActivity, true))
-            //{
-            //    return RedirectToAction(await Mvc.Activities.Actions.Index());
-            //}
 
             return await Index();
         }

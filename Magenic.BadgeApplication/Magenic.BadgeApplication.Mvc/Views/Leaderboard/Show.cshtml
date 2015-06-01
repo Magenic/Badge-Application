@@ -4,6 +4,9 @@
 @using Magenic.BadgeApplication.Common.Interfaces
 @model ILeaderboardItem
 
+@{
+    bool canDelete = Mvc.Leaderboard.Actions.CanDelete(Model.EmployeeId);
+}
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -20,30 +23,60 @@
                     <h2>@ApplicationResources.CorporateBadgeHeader</h2>
                     @foreach (var earnedBadge in Model.ProfileEarnedCorporateBadges.OrderBy(ebi => ebi.BadgePriority))
                     {
-                        <div class="grayBox">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    @Html.DisplayFor(m => earnedBadge)
+                        using (Ajax.BeginForm(Mvc.Leaderboard.Actions.Delete(earnedBadge.BadgeAwardId), new AjaxOptions() { UpdateTargetId = @earnedBadge.BadgeAwardId.ToString() }))
+                        {
+                            <!-- Modal -->
+                            <div class="modal fade" id="@("modal"+@earnedBadge.BadgeAwardId)" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Are You Sure?</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Delete @earnedBadge.Name awarded on @earnedBadge.AwardDate from @Model.FullName?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <input type="submit" class="btn btn-danger" value="Delete" onclick="@String.Format("$(\"#modal{0}\").modal(\"hide\")", earnedBadge.BadgeAwardId)"/>
+                                    </div>
                                 </div>
-                                <div class="col-md-8">
-                                    @earnedBadge.Description
                                 </div>
                             </div>
-                            <div class="row">
-                                &nbsp;
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8">
-                                    @earnedBadge.Name - @earnedBadge.Tagline
+                            <div id ="@earnedBadge.BadgeAwardId">
+                                <div class="grayBox">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            @Html.DisplayFor(m => earnedBadge)
+                                        </div>
+                                        <div class="col-md-7">
+                                            @earnedBadge.Description
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            @earnedBadge.AwardDate.ToString("MM/dd/yyyy")
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        &nbsp;
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            @earnedBadge.Name - @earnedBadge.Tagline
+                                        </div>
+                                        @if(canDelete)
+                                        {
+                                            <!-- Button trigger modal -->
+                                            <div class="col-md-2 text-right">
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="@("#modal"+@earnedBadge.BadgeAwardId)">Delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
-                                <div class="col-md-4 text-right">
-                                    @earnedBadge.AwardDate.ToString("MM/dd/yyyy")
+                                <div class="row">
+                                    &nbsp;
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            &nbsp;
-                        </div>
+                        }
                     }
                 </div>
             }
@@ -54,30 +87,60 @@
                     <h2>@ApplicationResources.CommunityBadgeHeader</h2>
                     @foreach (var earnedBadge in Model.ProfileEarnedCommunityBadges.OrderBy(ebi => ebi.BadgePriority))
                     {
-                        <div class="grayBox">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    @Html.DisplayFor(m => earnedBadge)
+                        using (Ajax.BeginForm(Mvc.Leaderboard.Actions.Delete(earnedBadge.BadgeAwardId), new AjaxOptions() { UpdateTargetId = @earnedBadge.BadgeAwardId.ToString() }))
+                        {
+                            <!-- Modal -->
+                            <div class="modal fade" id="@("modal"+@earnedBadge.BadgeAwardId)" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Are You Sure?</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Delete @earnedBadge.Name awarded on @earnedBadge.AwardDate from @Model.FullName
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <input type="submit" class="btn btn-danger" value="Delete" onclick="@String.Format("$(\"#modal{0}\").modal(\"hide\")", earnedBadge.BadgeAwardId)"/>
+                                    </div>
                                 </div>
-                                <div class="col-md-8">
-                                    @earnedBadge.Description
                                 </div>
                             </div>
-                            <div class="row">
-                                &nbsp;
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8">
-                                    @earnedBadge.Name - @earnedBadge.Tagline
+                            <div id ="@earnedBadge.BadgeAwardId">
+                                <div class="grayBox">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            @Html.DisplayFor(m => earnedBadge)
+                                        </div>
+                                        <div class="col-md-7">
+                                            @earnedBadge.Description
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            @earnedBadge.AwardDate.ToString("MM/dd/yyyy")
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        &nbsp;
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            @earnedBadge.Name - @earnedBadge.Tagline
+                                        </div>
+                                        @if(canDelete)
+                                        {
+                                            <!-- Button trigger modal -->
+                                            <div class="col-md-2 text-right">
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="@("#modal"+@earnedBadge.BadgeAwardId)">Delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
-                                <div class="col-md-4 text-right">
-                                    @earnedBadge.AwardDate.ToString("MM/dd/yyyy")
+                                <div class="row">
+                                    &nbsp;
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            &nbsp;
-                        </div>
+                        }
                     }
                 </div>
             }

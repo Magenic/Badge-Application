@@ -46,9 +46,10 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 { 
                     throw new NotFoundException(string.Format("Badge award with id {0} was not found", badgeAwardId));
                 }
-               
+
                 var earnedBadge = new EarnedBadgeItemDTO
                 {
+                    BadgeAwardId = badgeAward.BadgeAwardId,
                     AwardDate = badgeAward.AwardDate,
                     AwardPoints = badgeAward.Badge.BadgeAwardValueAmount,
                     BadgePriority = badgeAward.Badge.BadgePriority,

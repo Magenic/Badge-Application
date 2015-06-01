@@ -148,6 +148,19 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             private set { LoadProperty(DisplayOnceProperty, value); }
         }
 
+        /// <summary>
+        /// The identifier for the badgeAward.
+        /// </summary>
+        public static readonly PropertyInfo<int> BadgeAwardIdProperty = RegisterProperty<int>(b => b.BadgeAwardId);
+        /// <summary>
+        /// The id of the badge award.
+        /// </summary>
+        public int BadgeAwardId
+        {
+            get { return GetProperty(BadgeAwardIdProperty); }
+            private set { LoadProperty(BadgeAwardIdProperty, value); }
+        }
+
 
         #endregion Properties
 
@@ -155,6 +168,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
 
         internal void Load(EarnedBadgeItemDTO item)
         {
+            this.BadgeAwardId = item.BadgeAwardId;
             this.Id = item.Id;
             this.Name = item.Name;
             this.Description = item.Description;

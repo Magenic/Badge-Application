@@ -33,5 +33,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public int BadgeAwardValueAmount { get; set; }
         public Nullable<int> BadgeApprovedById { get; set; }
         public Nullable<System.DateTime> BadgeApprovedDate { get; set; }
+        public Nullable<int> BadgeAwardValueAmountMax { get; set; }
     }
 }

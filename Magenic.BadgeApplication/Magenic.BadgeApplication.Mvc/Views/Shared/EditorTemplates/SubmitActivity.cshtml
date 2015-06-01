@@ -10,8 +10,13 @@
 @using (Html.BeginForm("SubmitActivityForm", "Activities", FormMethod.Post, new { @role = "form" })) {
     <div class="form-group">
         @Html.LabelFor(sa => sa.ActivityId, ApplicationResources.ActivitySubmissionTypeLabel)
-        @Html.DropDownListFor(sa => sa.ActivityId, ViewData["PossibleActivities"] as IEnumerable<SelectListItem>, new { @class = "form-control" })
+        @Html.DropDownListFor(sa => sa.ActivityId, ViewData["PossibleActivities"] as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "ActivityType" })
         @Html.ValidationMessageFor(sa => sa.ActivityId)
+    </div>
+    <div class="form-group" id="AwardSection" style="display: none;">
+        @Html.LabelFor(sa => sa.AwardValue, ApplicationResources.BadgeAwardsAwardAmount)
+        @Html.TextBoxFor(sa => sa.AwardValue, new { @class = "form-control", @id = "AwardAmount" })
+        @Html.ValidationMessageFor(sa => sa.AwardValue)
     </div>
     <div class="form-group">
         @Html.LabelFor(sa => sa.ActivitySubmissionDate, ApplicationResources.ActivitySubmissionDateLabel)
@@ -27,9 +32,23 @@
         @Html.LabelFor(sa => sa.EmployeeIds, ApplicationResources.UserIdsLabel)
         @Html.TagSelectBoxFor(sa => sa.EmployeeIds, ViewData["AvailableUsers"] as IEnumerable<SelectListItem>, ApplicationResources.InvalidPastedUserIdsLabel)
         @Html.ValidationMessageFor(sa => sa.EmployeeIds)
-        @*@Html.LabelFor(sa => sa.EmployeeId, ApplicationResources.UserIdLabel)*@
-        @*@Html.DropDownListFor(sa => sa.EmployeeId, ViewData["AvailableUsers"] as IEnumerable<SelectListItem>, new { @class = "form-control" })*@
-        @*@Html.ValidationMessageFor(sa => sa.EmployeeId)*@
     </div>
     <input type="submit" value="@ApplicationResources.SubmitButton" class="btn btn-success" />
 }
+<script type="text/javascript">
+    function setAwardValue () {
+        var name = $('#ActivityType')[0][$('#ActivityType')[0].selectedIndex].innerHTML;
+        $.get("/BadgeManager/MaxAwardValue", { BadgeName: name }, function (data) {
+            var obj = JSON.parse(data);
+            $('#AwardAmount').val(obj.minval);
+            if (obj.maxval) {
+                $('#AwardSection').show();
+            }
+            else {
+                $('#AwardSection').hide();
+            }
+        });
+    }
+    $('#ActivityType').change(setAwardValue);
+    $('#ActivityType').ready(setAwardValue);
+</script>

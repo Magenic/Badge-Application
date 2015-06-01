@@ -107,6 +107,26 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         }
 
         /// <summary>
+        /// The point value of the badge awarded.
+        /// </summary>
+        public static PropertyInfo<int> AwardValueProperty = RegisterProperty<int>(c => c.AwardValue);
+        public int AwardValue
+        {
+            get { return GetProperty(AwardValueProperty); }
+            set { SetProperty(AwardValueProperty, value); }
+        }
+
+        /// <summary>
+        /// The max point value awarded for the badge.
+        /// </summary>
+        public static readonly PropertyInfo<int?> MaxAwardValueProperty = RegisterProperty<int?>(c => c.MaxAwardValue);
+        public int? MaxAwardValue
+        {
+            get { return GetProperty(MaxAwardValueProperty); }
+            private set { SetProperty(MaxAwardValueProperty, value); }
+        }
+
+        /// <summary>
         /// A CSV list of the employee ids of the people this badge submission is for, if it is a multi submission.
         /// This property takes priority over EmployeeId if it is not null or white space.
         /// </summary>
@@ -222,7 +242,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             {
                 ActivityId = this.ActivityId,
                 EmployeeId = this.EmployeeId,
-                Status = this.Status
+                Status = this.Status,
+                AwardValue = this.AwardValue
             };
             var awardBadges = IoC.Container.Resolve<IAwardBadges>();
             var returnValue = awardBadges.CreateBadges(activityInfo);
@@ -248,7 +269,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
                     ApprovedById = this.ApprovedById,
                     Notes = this.Notes,
                     Status = this.Status,
-                    EmployeeId = this.EmployeeId
+                    EmployeeId = this.EmployeeId,
+                    AwardValue = this.AwardValue
                 };
                 return returnValue;
             }

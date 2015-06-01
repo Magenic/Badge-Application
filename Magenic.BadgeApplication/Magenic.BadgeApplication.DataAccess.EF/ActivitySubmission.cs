@@ -21,6 +21,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public Nullable<int> SubmissionApprovedById { get; set; }
         public System.DateTime SubmissionDate { get; set; }
         public int SubmissionStatusId { get; set; }
+        public Nullable<int> AwardValue { get; set; }
     
         public virtual Activity Activity { get; set; }
         public virtual ItemStatu ItemStatu { get; set; }

@@ -73,7 +73,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             return new BadgeAwardDTO
             {
                 BadgeId = potentialBadge.Id,
-                AwardAmount = potentialBadge.AwardValueAmount,
+                AwardAmount = activity.AwardValue == 0 ? potentialBadge.AwardValueAmount : activity.AwardValue,
                 EmployeeId = activity.EmployeeId,
                 AwardDate = DateTime.UtcNow
             };

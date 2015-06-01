@@ -36,5 +36,13 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// The priority order to display the badges in, lowest to highest.
         /// </summary>
         public int BadgePriority { get; set; }
+        /// <summary>
+        /// Award value for badge.
+        /// </summary>
+        public int BadgeAwardValue { get; set; }
+        /// <summary>
+        /// Max award value for badge.
+        /// </summary>
+        public int? BadgeAwardValueMax { get; set; }
     }
 }

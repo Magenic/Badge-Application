@@ -12,6 +12,18 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     public class LeaderboardItemDAL
         : ILeaderboardItemDAL
     {
+        public int GetAdminUserPermissions(int employeeId)
+        {
+            using (var ctx = new Entities())
+            {
+                return (from t in ctx.EmployeePermissions
+                        where t.EmployeeId == employeeId
+                        select
+
+                            t.PermissionId).Single();
+            }
+        }
+
         /// <summary>
         /// Gets the leaderboard item for user identifier.
         /// </summary>
@@ -45,11 +57,30 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                                      AwardPoints = b.AwardAmount,
                                                      PaidOut = b.PaidOut,
                                                      BadgePriority = b.BadgePriority,
-                                                     DisplayOnce = b.DisplayOnce
+                                                     DisplayOnce = b.DisplayOnce,
+                                                     BadgeAwardId = b.BadgeAwardId
                                                  })
                                              }).SingleAsync();
 
                 return leaderBoardItem;
+            }
+        }
+
+        /// <summary>
+        /// Deletes a badge from a user.
+        /// </summary>
+        /// <param name="badgeAwardId">The BadgeAward Id to delete.</param>
+        public void Delete(int badgeAwardId)
+        {
+            using (var ctx = new Entities())
+            {
+                ctx.Database.Connection.Open();
+                var badgeAward = ctx.BadgeAwards.Where(ba => ba.BadgeAwardId == badgeAwardId).FirstOrDefault();
+                if (badgeAward != null)
+                {
+                    ctx.BadgeAwards.Remove(badgeAward);
+                    ctx.SaveChanges();
+                }
             }
         }
     }

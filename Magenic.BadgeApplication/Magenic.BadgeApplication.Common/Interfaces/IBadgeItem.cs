@@ -36,5 +36,13 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// The priority order to display the badges in, lowest to highest.
         /// </summary>
         int BadgePriority { get; }
+        /// <summary>
+        /// Award value for badge.
+        /// </summary>
+        int BadgeAwardValue { get; set; }
+        /// <summary>
+        /// Max award value for badge.
+        /// </summary>
+        int? BadgeAwardValueMax { get; }
     }
 }

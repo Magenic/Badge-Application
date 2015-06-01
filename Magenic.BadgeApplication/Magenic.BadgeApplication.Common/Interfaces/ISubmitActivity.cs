@@ -45,5 +45,13 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// This property takes priority over EmployeeId if it is not null or white space.
         /// </summary>
         string EmployeeIds { get; set; }
+        /// <summary>
+        /// Award value of the badge.
+        /// </summary>
+        int AwardValue { get; set; }
+        /// <summary>
+        /// Max award value of the badge.
+        /// </summary>
+        int? MaxAwardValue { get; }
     }
 }

@@ -102,6 +102,26 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             private set { LoadProperty(BadgePriorityProperty, value); }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public static PropertyInfo<int> BadgeAwardValueProperty = RegisterProperty<int>(b => b.BadgeAwardValue);
+        public int BadgeAwardValue
+        {
+            get { return GetProperty(BadgeAwardValueProperty); }
+            set { LoadProperty(BadgeAwardValueProperty, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static readonly PropertyInfo<int?> BadgeAwardValueMaxProperty = RegisterProperty<int?>(b => b.BadgeAwardValueMax);
+        public int? BadgeAwardValueMax
+        {
+            get{ return GetProperty(BadgeAwardValueMaxProperty); }
+            private set { LoadProperty(BadgeAwardValueMaxProperty, value); }
+        }
+
 
         #endregion Properties
 
@@ -116,6 +136,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.ImagePath = item.ImagePath;
             this.ApprovedDate = item.ApprovedDate;
             this.BadgePriority = item.BadgePriority;
+            this.BadgeAwardValue = item.BadgeAwardValue;
+            this.BadgeAwardValueMax = item.BadgeAwardValueMax;
         }
 
         #endregion Methods

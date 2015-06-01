@@ -19,5 +19,9 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// The employee Id of the person who the activity submission is for.  
         /// </summary>
         public int EmployeeId { get; set; }
+        /// <summary>
+        /// Award value for potential badge
+        /// </summary>
+        public int AwardValue { get; set; }
     }
 }

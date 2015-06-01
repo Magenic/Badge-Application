@@ -34,6 +34,7 @@
           <Property Name="SubmissionApprovedById" Type="int" />
           <Property Name="SubmissionDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="SubmissionStatusId" Type="int" Nullable="false" />
+          <Property Name="AwardValue" Type="int" />
         </EntityType>
         <EntityType Name="Badge">
           <Key>
@@ -58,6 +59,7 @@
           <Property Name="BadgeApprovedDate" Type="datetime2" Precision="7" />
           <Property Name="BadgeStatusId" Type="int" Nullable="false" />
           <Property Name="CreateEmployeeId" Type="int" Nullable="false" />
+          <Property Name="BadgeAwardValueAmountMax" Type="int" />
         </EntityType>
         <EntityType Name="BadgeActivity">
           <Key>
@@ -165,7 +167,7 @@
           <Property Name="QueueItemCreated" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.CurrentActiveBadges' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Magenic.BadgeApplication.Prod.dbo.CurrentActiveBadges' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CurrentActiveBadges">
           <Key>
             <PropertyRef Name="BadgeTypeName" />
@@ -200,11 +202,13 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.CurrentActiveBadge
           <Property Name="BadgeAwardValueAmount" Type="int" Nullable="false" />
           <Property Name="BadgeApprovedById" Type="int" />
           <Property Name="BadgeApprovedDate" Type="datetime2" Precision="7" />
+          <Property Name="BadgeAwardValueAmountMax" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Magenic.BadgeApplication.Prod.dbo.EarnedBadges' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EarnedBadges">
           <Key>
+            <PropertyRef Name="BadgeAwardId" />
             <PropertyRef Name="EmployeeId" />
             <PropertyRef Name="FirstName" />
             <PropertyRef Name="LastName" />
@@ -225,6 +229,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
             <PropertyRef Name="AwardAmount" />
             <PropertyRef Name="PaidOut" />
           </Key>
+          <Property Name="BadgeAwardId" Type="int" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -506,7 +511,9 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_QueueEventLog_BadgeAward">
-          <End Role="BadgeAward" Type="Self.BadgeAward" Multiplicity="1" />
+          <End Role="BadgeAward" Type="Self.BadgeAward" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="QueueEventLog" Type="Self.QueueEventLog" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BadgeAward">
@@ -530,7 +537,9 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_QueueItem_BadgeAward">
-          <End Role="BadgeAward" Type="Self.BadgeAward" Multiplicity="1" />
+          <End Role="BadgeAward" Type="Self.BadgeAward" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="QueueItem" Type="Self.QueueItem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BadgeAward">
@@ -577,11 +586,13 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
     [CurrentActiveBadges].[ActivityPointsAmount] AS [ActivityPointsAmount], 
     [CurrentActiveBadges].[BadgeAwardValueAmount] AS [BadgeAwardValueAmount], 
     [CurrentActiveBadges].[BadgeApprovedById] AS [BadgeApprovedById], 
-    [CurrentActiveBadges].[BadgeApprovedDate] AS [BadgeApprovedDate]
+    [CurrentActiveBadges].[BadgeApprovedDate] AS [BadgeApprovedDate], 
+    [CurrentActiveBadges].[BadgeAwardValueAmountMax] AS [BadgeAwardValueAmountMax]
     FROM [dbo].[CurrentActiveBadges] AS [CurrentActiveBadges]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="EarnedBadges" EntityType="Self.EarnedBadges" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [EarnedBadges].[BadgeAwardId] AS [BadgeAwardId], 
     [EarnedBadges].[EmployeeId] AS [EmployeeId], 
     [EarnedBadges].[FirstName] AS [FirstName], 
     [EarnedBadges].[LastName] AS [LastName], 
@@ -930,6 +941,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <NavigationProperty Name="ItemStatu" Relationship="Magenic.BadgeApplication.DBModel.fk_ActivitySubmission_ItemStatus" FromRole="ActivitySubmission" ToRole="ItemStatu" />
           <NavigationProperty Name="Employee" Relationship="Magenic.BadgeApplication.DBModel.fk_ActivitySubmission_Employee" FromRole="ActivitySubmission" ToRole="Employee" />
           <NavigationProperty Name="Employee1" Relationship="Magenic.BadgeApplication.DBModel.fk_ActivitySubmission_EmployeeApproval" FromRole="ActivitySubmission" ToRole="Employee" />
+          <Property Name="AwardValue" Type="Int32" />
         </EntityType>
         <EntityType Name="BadgeAward">
           <Key>
@@ -984,6 +996,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <Property Name="BadgeAwardValueAmount" Type="Int32" Nullable="false" />
           <Property Name="BadgeApprovedById" Type="Int32" />
           <Property Name="BadgeApprovedDate" Type="DateTime" Precision="7" />
+          <Property Name="BadgeAwardValueAmountMax" Type="Int32" />
         </EntityType>
         <EntityType Name="EarnedBadge">
           <Key>
@@ -1006,6 +1019,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
             <PropertyRef Name="AwardDate" />
             <PropertyRef Name="AwardAmount" />
             <PropertyRef Name="PaidOut" />
+            <PropertyRef Name="BadgeAwardId" />
           </Key>
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -1034,6 +1048,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <Property Name="AwardDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="AwardAmount" Type="Int32" Nullable="false" />
           <Property Name="PaidOut" Type="Boolean" Nullable="false" />
+          <Property Name="BadgeAwardId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="fk_ActivitySubmission_Activity">
           <End Type="Magenic.BadgeApplication.DBModel.Activity" Role="Activity" Multiplicity="1" />
@@ -1165,6 +1180,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <NavigationProperty Name="Employee" Relationship="Magenic.BadgeApplication.DBModel.fk_Badge_Employee" FromRole="Badge" ToRole="Employee" />
           <Property Name="CreateEmployeeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Employee1" Relationship="Magenic.BadgeApplication.DBModel.FK_Badge_ToCreateEmployee" FromRole="Badge" ToRole="Employee" />
+          <Property Name="BadgeAwardValueAmountMax" Type="Int32" />
         </EntityType>
         <Association Name="fk_Badge_BadgeType">
           <End Type="Magenic.BadgeApplication.DBModel.BadgeType" Role="BadgeType" Multiplicity="1" />
@@ -1474,6 +1490,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <EntitySetMapping Name="ActivitySubmissions">
             <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.ActivitySubmission">
               <MappingFragment StoreEntitySet="ActivitySubmission">
+                <ScalarProperty Name="AwardValue" ColumnName="AwardValue" />
                 <ScalarProperty Name="SubmissionStatusId" ColumnName="SubmissionStatusId" />
                 <ScalarProperty Name="SubmissionDate" ColumnName="SubmissionDate" />
                 <ScalarProperty Name="SubmissionApprovedById" ColumnName="SubmissionApprovedById" />
@@ -1502,6 +1519,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <EntitySetMapping Name="CurrentActiveBadges">
             <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.CurrentActiveBadge">
               <MappingFragment StoreEntitySet="CurrentActiveBadges">
+                <ScalarProperty Name="BadgeAwardValueAmountMax" ColumnName="BadgeAwardValueAmountMax" />
                 <ScalarProperty Name="BadgeApprovedDate" ColumnName="BadgeApprovedDate" />
                 <ScalarProperty Name="BadgeApprovedById" ColumnName="BadgeApprovedById" />
                 <ScalarProperty Name="BadgeAwardValueAmount" ColumnName="BadgeAwardValueAmount" />
@@ -1527,6 +1545,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <EntitySetMapping Name="EarnedBadges">
             <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.EarnedBadge">
               <MappingFragment StoreEntitySet="EarnedBadges">
+                <ScalarProperty Name="BadgeAwardId" ColumnName="BadgeAwardId" />
                 <ScalarProperty Name="PaidOut" ColumnName="PaidOut" />
                 <ScalarProperty Name="AwardAmount" ColumnName="AwardAmount" />
                 <ScalarProperty Name="AwardDate" ColumnName="AwardDate" />
@@ -1597,6 +1616,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <EntitySetMapping Name="Badges">
             <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.Badge">
               <MappingFragment StoreEntitySet="Badge">
+                <ScalarProperty Name="BadgeAwardValueAmountMax" ColumnName="BadgeAwardValueAmountMax" />
                 <ScalarProperty Name="CreateEmployeeId" ColumnName="CreateEmployeeId" />
                 <ScalarProperty Name="BadgeStatusId" ColumnName="BadgeStatusId" />
                 <ScalarProperty Name="BadgeApprovedDate" ColumnName="BadgeApprovedDate" />

@@ -65,7 +65,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 SubmissionStatusId = (int)data.Status,
                 SubmissionApprovedById = data.ApprovedById == 0 ? null : (int?)data.ApprovedById,
                 SubmissionDate = data.ActivitySubmissionDate,
-                SubmissionDescription = data.Notes
+                SubmissionDescription = data.Notes,
+                AwardValue = data.AwardValue
             };
             return activitySubmission;
         }

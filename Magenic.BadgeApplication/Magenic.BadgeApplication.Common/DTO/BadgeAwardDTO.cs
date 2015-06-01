@@ -23,5 +23,9 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// The number of points awarded for this badge.
         /// </summary>
         public int AwardAmount { get; set; }
+        /// <summary>
+        /// The id of the badgeAward.
+        /// </summary>
+        public int BadgeAwardId { get; set; }
     }
 }

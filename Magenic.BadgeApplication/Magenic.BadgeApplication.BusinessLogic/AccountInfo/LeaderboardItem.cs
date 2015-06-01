@@ -151,6 +151,26 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
         {
             return await IoC.Container.Resolve<IObjectFactory<ILeaderboardItem>>().FetchAsync(userName);
         }
+        
+        /// <summary>
+        /// Deletes a badge from a user.
+        /// </summary>
+        /// <param name="badgeAwardId">The badgeAwardId of the badge to delete</param>
+        public static void Delete(int badgeAwardId)
+        {
+            IoC.Container.Resolve<IObjectFactory<ILeaderboardItem>>().Delete(badgeAwardId);
+        }
+
+        /// <summary>
+        /// Gets the permission level of an employee.
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <returns></returns>
+        public static int GetPermissionLevel(int employeeId)
+        {
+            var dal = IoC.Container.Resolve<ILeaderboardItemDAL>();
+            return dal.GetAdminUserPermissions(employeeId);
+        }
 
         #endregion Factory Methods
 
@@ -184,6 +204,12 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
             var dal = IoC.Container.Resolve<ILeaderboardItemDAL>();
             var result = await dal.GetLeaderboardItemForUserNameAsync(userName);
             this.Load(result);
+        }
+
+        private void DataPortal_Delete(int badgeAwardId)
+        {
+            var dal = IoC.Container.Resolve<ILeaderboardItemDAL>();
+            dal.Delete(badgeAwardId);
         }
 
         #endregion Data Access

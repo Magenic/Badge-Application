@@ -22,7 +22,9 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                            Name = t.BadgeName,
                                            Type = (Common.Enums.BadgeType)t.BadgeTypeId,
                                            ImagePath = t.BadgePath,
-                                           BadgePriority = t.BadgePriority
+                                           BadgePriority = t.BadgePriority,
+                                           BadgeAwardValue = t.BadgeAwardValueAmount,
+                                           BadgeAwardValueMax = t.BadgeAwardValueAmountMax
                                        }).ToArrayAsync();
 
                 return badgeList;
@@ -44,7 +46,9 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                            Name = t.BadgeName,
                                            Type = (Common.Enums.BadgeType)t.BadgeTypeId,
                                            ImagePath = t.BadgePath,
-                                           BadgePriority = t.BadgePriority
+                                           BadgePriority = t.BadgePriority,
+                                           BadgeAwardValue = t.BadgeAwardValueAmount,
+                                           BadgeAwardValueMax = t.BadgeAwardValueAmountMax
                                        }).ToArrayAsync();
 
                 return badgeList;

@@ -18,6 +18,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                 where t.EmployeeId == employeeId
                                 select new BadgeAwardDTO
                                 {
+                                    BadgeAwardId = t.BadgeAwardId,
                                     BadgeId = t.BadgeId,
                                     EmployeeId = t.EmployeeId,
                                     AwardAmount = t.AwardAmount,
@@ -82,6 +83,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         {
             var earnedBadge = new BadgeAward
             {
+                BadgeAwardId = badge.BadgeAwardId,
                 BadgeId = badge.BadgeId,
                 AwardAmount = badge.AwardAmount,
                 AwardDate = badge.AwardDate,

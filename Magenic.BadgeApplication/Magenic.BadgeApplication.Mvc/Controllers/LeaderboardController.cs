@@ -129,5 +129,28 @@ namespace Magenic.BadgeApplication.Controllers
 
             return View(leaderboardCompareViewModel);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HasPermission(AuthorizationActions.DeleteObject, typeof(LeaderboardItem))]
+        public virtual Task<ActionResult> Delete(int badgeAwardId)
+        {
+            LeaderboardItem.Delete(badgeAwardId);
+            return Task.FromResult(null as ActionResult);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="viewedEmployeeId"></param>
+        /// <returns></returns>
+        [HasPermission(AuthorizationActions.GetObject, typeof(int))]
+        public virtual bool CanDelete(int viewedEmployeeId)
+        {
+            int permissionLevel = LeaderboardItem.GetPermissionLevel(AuthenticatedUser.EmployeeId);
+            return permissionLevel == 2;
+        }
     }
 }
