@@ -16,7 +16,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         {
             using (var ctx = new Entities())
             {
-                return await (from t in ctx.EmployeePermissions where t.EmployeeId == employeeId select t.PermissionId).SingleAsync();
+                return await (from t in ctx.EmployeePermissions where t.EmployeeId == employeeId select t.PermissionId).FirstOrDefaultAsync();
             }
         }
 
@@ -26,7 +26,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             {
                 ApproveActivityItemDTO [] activityList;
                 int i = GetAdminUserPermissionsAsync(criteria.ManagerEmployeeId).Result;
-                if (GetAdminUserPermissionsAsync(criteria.ManagerEmployeeId).Result == 3 && criteria.ShowAdminView)
+                if (GetAdminUserPermissionsAsync(criteria.ManagerEmployeeId).Result == 2 && criteria.ShowAdminView)
                 {
                     activityList = await (from t in ctx.ActivitySubmissions
                                               join e in ctx.Employees on t.EmployeeId equals e.EmployeeId
