@@ -26,10 +26,8 @@ public static class Mvc
 {
     public static Magenic.BadgeApplication.Controllers.AccountController Account = new Magenic.BadgeApplication.Controllers.T4MVC_AccountController();
     public static Magenic.BadgeApplication.Controllers.ActivitiesController Activities = new Magenic.BadgeApplication.Controllers.T4MVC_ActivitiesController();
-    public static Csla.Web.Mvc.AsyncController Async = new Csla.Web.Mvc.T4MVC_AsyncController();
     public static Magenic.BadgeApplication.Controllers.BadgeManagerController BadgeManager = new Magenic.BadgeApplication.Controllers.T4MVC_BadgeManagerController();
     public static Magenic.BadgeApplication.Controllers.BadgesController Badges = new Magenic.BadgeApplication.Controllers.T4MVC_BadgesController();
-    public static Magenic.BadgeApplication.Controllers.BaseController Base = new Magenic.BadgeApplication.Controllers.T4MVC_BaseController();
     public static Magenic.BadgeApplication.Controllers.ErrorController Error = new Magenic.BadgeApplication.Controllers.T4MVC_ErrorController();
     public static Magenic.BadgeApplication.Controllers.ImageController Image = new Magenic.BadgeApplication.Controllers.T4MVC_ImageController();
     public static Magenic.BadgeApplication.Controllers.LeaderboardController Leaderboard = new Magenic.BadgeApplication.Controllers.T4MVC_LeaderboardController();
