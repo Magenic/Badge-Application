@@ -12,33 +12,66 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 {
     public class ApproveActivityCollectionDAL : IApproveActivityCollectionDAL
     {
+        public async Task<int> GetAdminUserPermissionsAsync(int employeeId)
+        {
+            using (var ctx = new Entities())
+            {
+                return await (from t in ctx.EmployeePermissions where t.EmployeeId == employeeId select t.PermissionId).FirstOrDefaultAsync();
+            }
+        }
+
         public async Task<IEnumerable<ApproveActivityItemDTO>> GetActivitiesToApproveForManagerAsync(IApproveActivityCollectionCriteria criteria)
         {
             using (var ctx = new Entities())
             {
-                ctx.Database.Connection.Open();
-                var activityList = await (from t in ctx.ActivitySubmissions
-                                          join e in ctx.Employees on t.EmployeeId equals e.EmployeeId
-                                          join a in ctx.Activities on t.ActivityId equals a.ActivityId
-                                          where t.SubmissionStatusId == (int)ActivitySubmissionStatus.AwaitingApproval
-                                          where (e.ApprovingManagerId1 == criteria.ManagerEmployeeId
-                                          || e.ApprovingManagerId2 == criteria.ManagerEmployeeId)
-                                          select new ApproveActivityItemDTO
-                                          {
-                                              SubmissionId = t.ActivitySubmissionId,
-                                              SubmissionDate = t.SubmissionDate,
-                                              ActivityId = t.ActivityId,
-                                              ActivityDescription = a.ActivityDescription,
-                                              ActivityName = a.ActivityName,
-                                              ApprovedById = t.SubmissionApprovedById ?? 0,
-                                              EmployeeId = t.EmployeeId,
-                                              EmployeeADName = e.ADName,
-                                              EmployeeFirstName = e.FirstName,
-                                              EmployeeLastName = e.LastName,
-                                              Status = (ActivitySubmissionStatus)t.SubmissionStatusId,
-                                              SubmissionNotes = t.SubmissionDescription
-                                          }).ToArrayAsync();
-
+                ApproveActivityItemDTO [] activityList;
+                int i = GetAdminUserPermissionsAsync(criteria.ManagerEmployeeId).Result;
+                if (GetAdminUserPermissionsAsync(criteria.ManagerEmployeeId).Result == 2 && criteria.ShowAdminView)
+                {
+                    activityList = await (from t in ctx.ActivitySubmissions
+                                              join e in ctx.Employees on t.EmployeeId equals e.EmployeeId
+                                              join a in ctx.Activities on t.ActivityId equals a.ActivityId
+                                              where t.SubmissionStatusId == (int)ActivitySubmissionStatus.AwaitingApproval
+                                              select new ApproveActivityItemDTO
+                                              {
+                                                  SubmissionId = t.ActivitySubmissionId,
+                                                  SubmissionDate = t.SubmissionDate,
+                                                  ActivityId = t.ActivityId,
+                                                  ActivityDescription = a.ActivityDescription,
+                                                  ActivityName = a.ActivityName,
+                                                  ApprovedById = t.SubmissionApprovedById ?? 0,
+                                                  EmployeeId = t.EmployeeId,
+                                                  EmployeeADName = e.ADName,
+                                                  EmployeeFirstName = e.FirstName,
+                                                  EmployeeLastName = e.LastName,
+                                                  Status = (ActivitySubmissionStatus)t.SubmissionStatusId,
+                                                  SubmissionNotes = t.SubmissionDescription
+                                              }).ToArrayAsync();
+                }
+                else
+                {
+                    activityList = await (from t in ctx.ActivitySubmissions
+                                              join e in ctx.Employees on t.EmployeeId equals e.EmployeeId
+                                              join a in ctx.Activities on t.ActivityId equals a.ActivityId
+                                              where t.SubmissionStatusId == (int)ActivitySubmissionStatus.AwaitingApproval
+                                              where (e.ApprovingManagerId1 == criteria.ManagerEmployeeId
+                                              || e.ApprovingManagerId2 == criteria.ManagerEmployeeId)
+                                              select new ApproveActivityItemDTO
+                                              {
+                                                  SubmissionId = t.ActivitySubmissionId,
+                                                  SubmissionDate = t.SubmissionDate,
+                                                  ActivityId = t.ActivityId,
+                                                  ActivityDescription = a.ActivityDescription,
+                                                  ActivityName = a.ActivityName,
+                                                  ApprovedById = t.SubmissionApprovedById ?? 0,
+                                                  EmployeeId = t.EmployeeId,
+                                                  EmployeeADName = e.ADName,
+                                                  EmployeeFirstName = e.FirstName,
+                                                  EmployeeLastName = e.LastName,
+                                                  Status = (ActivitySubmissionStatus)t.SubmissionStatusId,
+                                                  SubmissionNotes = t.SubmissionDescription
+                                              }).ToArrayAsync();
+                }
                 foreach (var activity in activityList)
                 {
                     var activityInfo = new ActivityInfoDTO

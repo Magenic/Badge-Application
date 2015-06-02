@@ -25,6 +25,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             public int ManagerEmployeeId { get; set; }
 
             public IAwardBadges AwardBadges { get; set; }
+
+            public bool ShowAdminView { get; set; }
         }
 
         #endregion Criteria
@@ -36,15 +38,31 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         /// </summary>
         /// <param name="managerEmployeeId">The employee Id of the manager to retrieve all activities for.</param>
         /// <returns>A list of activities to approve.</returns>
-        public async static Task<IApproveActivityCollection> GetAllActivitiesToApproveAsync(int managerEmployeeId)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+        public async static Task<IApproveActivityCollection> GetAllActivitiesToApproveAsync(int managerEmployeeId, bool showAdminView = false)
         {
             var awardBadges = IoC.Container.Resolve<IAwardBadges>();
             var criteria = new ApproveActivityCollectionCriteria
             {
                 ManagerEmployeeId = managerEmployeeId,
-                AwardBadges = awardBadges
+                AwardBadges = awardBadges,
+                ShowAdminView = showAdminView
             };
             return await IoC.Container.Resolve<IObjectFactory<IApproveActivityCollection>>().FetchAsync(criteria);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+        public static IApproveActivityCollection GetAllActivitiesToApproveSync(int managerEmployeeId, bool showAdminView = false)
+        {
+            var awardBadges = IoC.Container.Resolve<IAwardBadges>();
+            var criteria = new ApproveActivityCollectionCriteria
+            {
+                ManagerEmployeeId = managerEmployeeId,
+                AwardBadges = awardBadges,
+                ShowAdminView = showAdminView
+            };
+            return IoC.Container.Resolve<IObjectFactory<IApproveActivityCollection>>().Fetch(criteria);
+            //return await IoC.Container.Resolve<IObjectFactory<IApproveActivityCollection>>().FetchAsync(criteria);
         }
 
         #endregion Factory Methods

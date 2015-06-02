@@ -702,6 +702,7 @@
     <Content Include="Views\PointsReport\BadgeAwards.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BadgeAwardEditCollection.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BadgeAwardEdit.cshtml" />
+    <Content Include="Views\PointsReport\ListPayouts.cshtml" />
     <None Include="Web.QA.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

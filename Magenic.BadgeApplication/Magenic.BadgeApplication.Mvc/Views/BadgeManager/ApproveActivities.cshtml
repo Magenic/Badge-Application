@@ -2,34 +2,70 @@
 @using Magenic.BadgeApplication.Models
 @model ApproveActivitiesViewModel
 
-<div class="container">
-    <div class="row">
-        @Html.Partial("_AdminNavbar")
-    </div>
-    <div class="row">
-        <div class="col-md-12 grayBox">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>@ApplicationResources.ActivitiesForApprovalHeader</h2>
+@using (Ajax.BeginForm("_ApproveActivities", "BadgeManager", new { showAdminView = true },
+    new AjaxOptions { UpdateTargetId = "activitiesForApproval", HttpMethod = "POST", InsertionMode = InsertionMode.Replace}
+))
+
+{
+    <div class="container">
+        <div class="row">
+            @Html.Partial("_AdminNavbar")
+        </div>
+        <div class="row">
+            <div class="col-md-12 grayBox">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2>@ApplicationResources.ActivitiesForApprovalHeader</h2>
+                    </div>
+                    <div class="checkbox-inline">
+                        <label>
+                            @*.parents('form:first').find(':submit')[0].click();*@
+                            @Html.CheckBox("showAdminView", new { onchange = "Test();" }) Display All
+                        </label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div id="AdminActivitiesForm" class="col-md-10 darkGrayHeaderList">
-                    @Html.Hidden("UrlToList", Url.Action(Mvc.BadgeManager.ApproveActivitiesList()))
-                    @Html.Hidden("UrlToApprove", Url.Action(Mvc.BadgeManager.ApproveActivity()))
-                    @Html.Hidden("UrlToReject", Url.Action(Mvc.BadgeManager.RejectActivity()))
-                    <div id="activitiesForApproval">
-                        @Html.Partial(Mvc.BadgeManager.Views._ActivitiesForApproval, Model.ActivitiesToApprove)
+                <div class="row">
+                    <div id="AdminActivitiesForm" class="col-md-10 darkGrayHeaderList">
+                        @Html.Hidden("UrlToList", Url.Action(Mvc.BadgeManager.ApproveActivitiesList()))
+                        @Html.Hidden("UrlToApprove", Url.Action(Mvc.BadgeManager.ApproveActivity()))
+                        @Html.Hidden("UrlToReject", Url.Action(Mvc.BadgeManager.RejectActivity()))
+                        <div id="activitiesForApproval">
+                            @Html.Partial("_ActivitiesForApproval", Model.ActivitiesToApprove)
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row">
+            &nbsp;
+        </div>
     </div>
-    <div class="row">
-        &nbsp;
-    </div>
-</div>
+}
 
 @section scripts {
+    <script type="text/javascript">
+        var approveActivitiesUrl = '@Url.Action("_ActivitiesForApproval", "BadgeManager")';
+        function Test() {
+            $.ajax({
+                url: '@Url.Action("_ActivitiesForApproval", "BadgeManager")',
+                data: {
+                    showAdminView: $('#showAdminView').prop('checked')
+                //    id: id
+                },
+                contentType: "application/json; charset=utf-8",
+                //data will be your return content (the rendered html from your Partial View)
+                success: function (data) {
+                    //Outputs your data into a specific <div> element (This can be your original TreeView container)
+                    $('#activitiesForApproval').html(data);
+                },
+                failure: function (data) {
+                    alert ($('#showAdminView').val())
+                }
+
+            });
+
+        }
+    </script>
     @Scripts.Render("~/bundles/badgeManager")
 }
+
