@@ -105,7 +105,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         /// <summary>
         /// 
         /// </summary>
-        public static PropertyInfo<int> BadgeAwardValueProperty = RegisterProperty<int>(b => b.BadgeAwardValue);
+        public static readonly PropertyInfo<int> BadgeAwardValueProperty = RegisterProperty<int>(b => b.BadgeAwardValue);
         public int BadgeAwardValue
         {
             get { return GetProperty(BadgeAwardValueProperty); }

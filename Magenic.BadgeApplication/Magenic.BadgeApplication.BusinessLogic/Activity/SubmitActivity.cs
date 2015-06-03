@@ -109,7 +109,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         /// <summary>
         /// The point value of the badge awarded.
         /// </summary>
-        public static PropertyInfo<int> AwardValueProperty = RegisterProperty<int>(c => c.AwardValue);
+        public static readonly PropertyInfo<int> AwardValueProperty = RegisterProperty<int>(c => c.AwardValue);
         public int AwardValue
         {
             get { return GetProperty(AwardValueProperty); }

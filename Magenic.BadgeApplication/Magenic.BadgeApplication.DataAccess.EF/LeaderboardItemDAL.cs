@@ -12,15 +12,11 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     public class LeaderboardItemDAL
         : ILeaderboardItemDAL
     {
-        public int GetAdminUserPermissions(int employeeId)
+        public bool GetAdminUserPermissions(int employeeId)
         {
             using (var ctx = new Entities())
             {
-                return (from t in ctx.EmployeePermissions
-                        where t.EmployeeId == employeeId
-                        select
-
-                            t.PermissionId).Single();
+                return (from t in ctx.EmployeePermissions where t.EmployeeId == employeeId select t).Any(t => t.PermissionId == 2);
             }
         }
 

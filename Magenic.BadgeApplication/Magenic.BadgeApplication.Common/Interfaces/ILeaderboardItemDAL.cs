@@ -26,6 +26,6 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         /// <param name="employeeId">Id of the user.</param>
         /// <returns></returns>
-        int GetAdminUserPermissions(int employeeId);
+        bool GetAdminUserPermissions(int employeeId);
     }
 }
