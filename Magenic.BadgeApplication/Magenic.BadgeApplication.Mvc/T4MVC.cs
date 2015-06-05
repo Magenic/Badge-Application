@@ -476,6 +476,7 @@ namespace Links
         public static readonly string MicrosoftMvcValidation_debug_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/MicrosoftMvcValidation.debug.min.js") ? Url("MicrosoftMvcValidation.debug.min.js") : Url("MicrosoftMvcValidation.debug.js");
         public static readonly string MicrosoftMvcValidation_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/MicrosoftMvcValidation.min.js") ? Url("MicrosoftMvcValidation.min.js") : Url("MicrosoftMvcValidation.js");
         public static readonly string modernizr_2_6_2_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/modernizr-2.6.2.min.js") ? Url("modernizr-2.6.2.min.js") : Url("modernizr-2.6.2.js");
+        public static readonly string pointsReport_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/pointsReport.min.js") ? Url("pointsReport.min.js") : Url("pointsReport.js");
         public static readonly string respond_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/respond.min.js") ? Url("respond.min.js") : Url("respond.js");
         public static readonly string respond_min_js = Url("respond.min.js");
         public static readonly string tag_it_min_js = Url("tag-it.min.js");
@@ -573,7 +574,7 @@ namespace Links
         }
     
         public static readonly string jquery_tagit_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.tagit.min.css") ? Url("jquery.tagit.min.css") : Url("jquery.tagit.css");
-
+             
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class metro_bootstrap {
             private const string URLPATH = "~/Content/metro-bootstrap";
@@ -746,7 +747,7 @@ namespace Links
                 public static readonly string theme_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/theme.min.css") ? Url("theme.min.css") : Url("theme.css");
                      
                 public static readonly string tooltip_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/tooltip.min.css") ? Url("tooltip.min.css") : Url("tooltip.css");
-
+                     
             }
         
         }

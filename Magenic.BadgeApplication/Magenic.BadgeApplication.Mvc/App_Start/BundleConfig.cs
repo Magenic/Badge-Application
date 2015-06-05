@@ -84,7 +84,8 @@ namespace Magenic.BadgeApplication
             bundles.Add(new ScriptBundle("~/bundles/badgeManager").IncludeT4MVC(
                 Links.Scripts.badgeEditorPages_js,
                 Links.Scripts.approveActivities_js,
-                Links.Scripts.approveBadges_js
+                Links.Scripts.approveBadges_js,
+                Links.Scripts.pointsReport_js
             ));
         }
     }

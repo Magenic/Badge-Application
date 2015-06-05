@@ -17,16 +17,6 @@ html {overflow-y: scroll;}
     </div>
     <div class="row">
         <div class="col-md-12 grayBox">
-           
-            @using (Ajax.BeginForm("ListPayouts", "PointsReport", new { displayAll = true }, 
-                                   new AjaxOptions() 
-                                   { 
-                                        HttpMethod = "POST",
-                                        InsertionMode = InsertionMode.Replace,
-                                        UpdateTargetId = "displayThreshold" 
-                                   }))
-            {
-
                 <div class="row">
                     <div class="col-md-10">
                         <h2>@ApplicationResources.PointsReportHeader</h2>
@@ -38,7 +28,7 @@ html {overflow-y: scroll;}
                     
                         <div class="checkbox-inline">
                             <label>
-                                @Html.CheckBox( "displayAll" ,new { onclick="$(this).parents('form:first').find(':submit')[0].click();" }) Display All
+                                @Html.CheckBox( "displayAll" ,new { onclick="PointsReport();" }) Display All
                             </label>
                         </div>
 
@@ -57,8 +47,6 @@ html {overflow-y: scroll;}
                
                 @Html.Partial("ListPayouts", Model)
 
-            }
-
         </div>
     </div>
     <div class="row">
@@ -67,6 +55,11 @@ html {overflow-y: scroll;}
 </div>
 
 @section scripts {
-
-    @Scripts.Render("~/bundles/badgeManager")
+    <script type="text/javascript">
+        var UrlSettings = {
+            ApproveActivitiesUrl : '@Url.Action("ListPayouts", "PointsReport")'
+        }
+    </script>
 }
+
+@Scripts.Render("~/bundles/badgeManager")

@@ -32,7 +32,11 @@ namespace Magenic.BadgeApplication.Controllers
             return View(pointsReportCollection);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Yes they should.")]
+        /// <summary>
+        /// Modifies data for /PointsReport/ListPayouts
+        /// </summary>
+        /// <param name="displayAll">Display all names or just the ones above threshold.</param>
+        /// <returns></returns>
         public async virtual Task<ActionResult> ListPayouts(bool displayAll = false)
         {
             var pointsReportCollection = await PointsReportCollection.GetAllPayoutsToApproveAsync(displayAll);
