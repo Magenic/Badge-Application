@@ -17,8 +17,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             using (var ctx = new Entities())
             {
                 return (from t in ctx.EmployeePermissions where t.EmployeeId == employeeId select t).Any(t => t.PermissionId == 2);
-
-              //  return ((from t in ctx.EmployeePermissions where t.EmployeeId == employeeId && t.PermissionId == 2 select t.EmployeeId).Any()) ? true : false;
             }
         }
 
