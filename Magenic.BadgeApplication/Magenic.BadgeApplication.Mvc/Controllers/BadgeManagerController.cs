@@ -404,9 +404,9 @@ namespace Magenic.BadgeApplication.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Gets the minimum and optional maximum badge value.
         /// </summary>
-        /// <param name="BadgeName"></param>
+        /// <param name="BadgeName">Name of the badge to get the value for.</param>
         /// <returns></returns>
         public async virtual Task<string> MaxAwardValue(string BadgeName)
         {

@@ -38,7 +38,7 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public int ApprovedById { get; set; }
         /// <summary>
-        /// 
+        /// Badge Value for the badge that may be awarded for the activity.
         /// </summary>
         public int AwardValue { get; set; }
     }
