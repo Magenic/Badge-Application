@@ -149,8 +149,7 @@ namespace Magenic.BadgeApplication.Controllers
         [HasPermission(AuthorizationActions.GetObject, typeof(int))]
         public virtual bool CanDelete(int viewedEmployeeId)
         {
-            int permissionLevel = LeaderboardItem.GetPermissionLevel(AuthenticatedUser.EmployeeId);
-            return permissionLevel == 2;
+            return LeaderboardItem.IsAdmin(AuthenticatedUser.EmployeeId);
         }
     }
 }
