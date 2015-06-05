@@ -12,11 +12,11 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 {
     public class ApproveActivityCollectionDAL : IApproveActivityCollectionDAL
     {
-        public async Task<int> GetAdminUserPermissionsAsync(int employeeId)
+        public bool GetAdminUserPermissionsAsync(int employeeId)
         {
             using (var ctx = new Entities())
             {
-                return await (from t in ctx.EmployeePermissions where t.EmployeeId == employeeId select t.PermissionId).FirstOrDefaultAsync();
+                return (from t in ctx.EmployeePermissions where t.EmployeeId == employeeId select t).Any(t => t.PermissionId == 2);
             }
         }
 
@@ -25,8 +25,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             using (var ctx = new Entities())
             {
                 ApproveActivityItemDTO [] activityList;
-                int i = GetAdminUserPermissionsAsync(criteria.ManagerEmployeeId).Result;
-                if (GetAdminUserPermissionsAsync(criteria.ManagerEmployeeId).Result == 2 && criteria.ShowAdminView)
+                if (GetAdminUserPermissionsAsync(criteria.ManagerEmployeeId) && criteria.ShowAdminView)
                 {
                     activityList = await (from t in ctx.ActivitySubmissions
                                               join e in ctx.Employees on t.EmployeeId equals e.EmployeeId

@@ -20,7 +20,7 @@
                     <div class="checkbox-inline">
                         <label>
                             @*.parents('form:first').find(':submit')[0].click();*@
-                            @Html.CheckBox("showAdminView", new { onchange = "Test();" }) Display All
+                            @Html.CheckBox("showAdminView", new { onchange = "ShowAdminView();" }) Display All
                         </label>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
 @section scripts {
     <script type="text/javascript">
         var approveActivitiesUrl = '@Url.Action("_ActivitiesForApproval", "BadgeManager")';
-        function Test() {
+        function ShowAdminView() {
             $.ajax({
                 url: '@Url.Action("_ActivitiesForApproval", "BadgeManager")',
                 data: {

@@ -479,6 +479,7 @@ namespace Links
         public static readonly string pointsReport_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/pointsReport.min.js") ? Url("pointsReport.min.js") : Url("pointsReport.js");
         public static readonly string respond_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/respond.min.js") ? Url("respond.min.js") : Url("respond.js");
         public static readonly string respond_min_js = Url("respond.min.js");
+        public static readonly string submitActivity_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/submitActivity.min.js") ? Url("submitActivity.min.js") : Url("submitActivity.js");
         public static readonly string tag_it_min_js = Url("tag-it.min.js");
     }
 

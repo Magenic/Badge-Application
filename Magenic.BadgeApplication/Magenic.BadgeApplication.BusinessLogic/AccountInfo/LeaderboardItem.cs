@@ -166,7 +166,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
         /// </summary>
         /// <param name="employeeId"></param>
         /// <returns></returns>
-        public static int GetPermissionLevel(int employeeId)
+        public static bool IsAdmin(int employeeId)
         {
             var dal = IoC.Container.Resolve<ILeaderboardItemDAL>();
             return dal.GetAdminUserPermissions(employeeId);

@@ -131,8 +131,9 @@ namespace Magenic.BadgeApplication.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Deletes a badge from a user.
         /// </summary>
+        /// <param name="badgeAwardId">BadgeAward id that needs to be deleted.</param>
         /// <returns></returns>
         [HasPermission(AuthorizationActions.DeleteObject, typeof(LeaderboardItem))]
         public virtual Task<ActionResult> Delete(int badgeAwardId)
@@ -142,15 +143,14 @@ namespace Magenic.BadgeApplication.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Checks if a logged in user is able to delete badges.
         /// </summary>
-        /// <param name="viewedEmployeeId"></param>
+        /// <param name="viewedEmployeeId">Employee Id of the logged in user.</param>
         /// <returns></returns>
         [HasPermission(AuthorizationActions.GetObject, typeof(int))]
         public virtual bool CanDelete(int viewedEmployeeId)
         {
-            int permissionLevel = LeaderboardItem.GetPermissionLevel(AuthenticatedUser.EmployeeId);
-            return permissionLevel == 2;
+            return LeaderboardItem.IsAdmin(AuthenticatedUser.EmployeeId);
         }
     }
 }

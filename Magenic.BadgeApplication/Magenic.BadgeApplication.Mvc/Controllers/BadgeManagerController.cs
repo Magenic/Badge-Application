@@ -267,14 +267,16 @@ namespace Magenic.BadgeApplication.Controllers
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), HttpGet]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
         public async virtual Task<ActionResult> ApproveActivities(bool showAdminView = false)
-        
         {           
             var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId, showAdminView);
             var approveActivitiesViewModel = new ApproveActivitiesViewModel(activitiesToApprove);
             return View(approveActivitiesViewModel);
         }
 
-
+        /// <summary>
+        /// Approves the activities
+        /// </summary>
+        /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), HttpGet]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
         public async virtual Task<ActionResult> _ActivitiesForApproval(bool showAdminView = true)
@@ -405,9 +407,9 @@ namespace Magenic.BadgeApplication.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Gets the minimum and optional maximum badge value.
         /// </summary>
-        /// <param name="BadgeName"></param>
+        /// <param name="BadgeName">Name of the badge to get the value for.</param>
         /// <returns></returns>
         public async virtual Task<string> MaxAwardValue(string BadgeName)
         {

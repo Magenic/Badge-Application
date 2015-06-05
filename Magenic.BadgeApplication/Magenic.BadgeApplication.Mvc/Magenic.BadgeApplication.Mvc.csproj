@@ -607,6 +607,7 @@
     <Content Include="Scripts\pointsReport.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\submitActivity.js" />
     <Content Include="Scripts\tag-it.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="T4MVC.tt">

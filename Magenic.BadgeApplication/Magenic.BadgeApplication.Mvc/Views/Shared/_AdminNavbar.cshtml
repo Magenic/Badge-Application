@@ -27,5 +27,5 @@
 
     @Html.HasPermission(AuthorizationActions.GetObject, typeof(PointsReportCollection), Html.GenerateConditionalNavigation(ApplicationResources.PointsReport, Mvc.PointsReport.Index().Result), String.Empty)
 
-    @Html.HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem), Html.GenerateConditionalNavigation(ApplicationResources.ActivitiesForApproval, Mvc.BadgeManager.ApproveActivities().Result), String.Empty)
+    @Html.HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem), Html.GenerateConditionalNavigation(ApplicationResources.ActivitiesForApproval, Mvc.BadgeManager.ApproveActivities(true).Result), String.Empty)
 </ul>
