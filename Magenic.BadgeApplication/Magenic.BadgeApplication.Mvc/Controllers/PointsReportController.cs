@@ -107,7 +107,7 @@ namespace Magenic.BadgeApplication.Controllers
         {
             var badgeAwardsForUser = await BadgeAwardEditCollection.GetAllBadgeAwardsForUser(userName);
 
-            return PartialView(badgeAwardsForUser);
+            return View(badgeAwardsForUser);
         }
 
         /// <summary>
