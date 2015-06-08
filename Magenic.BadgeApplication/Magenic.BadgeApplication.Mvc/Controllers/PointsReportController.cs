@@ -37,6 +37,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <param name="displayAll">Display all names or just the ones above threshold.</param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public async virtual Task<ActionResult> ListPayouts(bool displayAll = false)
         {
             var pointsReportCollection = await PointsReportCollection.GetAllPayoutsToApproveAsync(displayAll);

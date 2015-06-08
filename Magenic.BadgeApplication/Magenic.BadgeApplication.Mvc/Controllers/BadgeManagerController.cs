@@ -254,6 +254,7 @@ namespace Magenic.BadgeApplication.Controllers
         [HttpGet]
         [NoCache]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveBadgeItem))]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public virtual async Task<ActionResult> ApproveCommunityBadgesList()
         {
             var approveBadgeCollection = await ApproveBadgeCollection.GetAllBadgesToApproveAsync();
@@ -265,6 +266,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
         public async virtual Task<ActionResult> ApproveActivities(bool showAdminView = false)
         {           
@@ -276,8 +278,10 @@ namespace Magenic.BadgeApplication.Controllers
         /// <summary>
         /// Approves the activities
         /// </summary>
+        /// /// <param name="showAdminView">Whether to show all badges pending approval (showAdminView=true) or only the ones for employees you manage (showAdminView=false)</param>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
         public async virtual Task<ActionResult> _ActivitiesForApproval(bool showAdminView = true)
         {
@@ -294,6 +298,7 @@ namespace Magenic.BadgeApplication.Controllers
         [HttpGet]
         [NoCache]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public async virtual Task<ActionResult> ApproveActivitiesList()
         {
             var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
@@ -310,7 +315,7 @@ namespace Magenic.BadgeApplication.Controllers
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
         public async virtual Task<ActionResult> ApproveActivity(int submissionId)
         {
-            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
+            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId, true);
             var activityItem = activitiesToApprove.Where(aai => aai.SubmissionId == submissionId).Single();
             activityItem.ApproveActivitySubmission(AuthenticatedUser.EmployeeId);
             if (await SaveObjectAsync(activitiesToApprove, true))
@@ -331,7 +336,7 @@ namespace Magenic.BadgeApplication.Controllers
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
         public async virtual Task<ActionResult> RejectActivity(int submissionId)
         {
-            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
+            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId, true);
             var activityItem = activitiesToApprove.Where(aai => aai.SubmissionId == submissionId).Single();
             activityItem.DenyActivitySubmission();
             if (await SaveObjectAsync(activitiesToApprove, true))
