@@ -54,7 +54,7 @@ namespace Magenic.BadgeApplication.Controllers
         {
             Arg.IsNotNull(() => formCollection);
 
-            var allPayouts = await PointsReportCollection.GetAllPayoutsToApproveAsync();
+            var allPayouts = await PointsReportCollection.GetAllPayoutsToApproveAsync(true);
             if (formCollection.AllKeys.Any(k => k == "CheckedValues"))
             {
                 var parts = formCollection["CheckedValues"].Split(',');
