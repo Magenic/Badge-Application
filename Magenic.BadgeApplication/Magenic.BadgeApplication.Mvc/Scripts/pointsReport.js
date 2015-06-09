@@ -2,6 +2,7 @@
 function PointsReport() {
     $.ajax({
         url: UrlSettings.ApproveActivitiesUrl,
+        cache: false,
         data: {
             displayAll: $('#displayAll').prop('checked')
             //    id: id

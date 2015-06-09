@@ -28,7 +28,7 @@ html {overflow-y: scroll;}
                     
                         <div class="checkbox-inline">
                             <label>
-                                @Html.CheckBox( "displayAll" ,new { onclick="PointsReport();" }) Display All
+                                @Html.CheckBox( "displayAll" ,new { Value = @ViewBag.DisplayAll, onclick="PointsReport();" }) Display All
                             </label>
                         </div>
 

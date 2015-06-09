@@ -27,8 +27,11 @@ namespace Magenic.BadgeApplication.Controllers
         [HasPermission(AuthorizationActions.GetObject, typeof(PointsReportCollection))]
         public async virtual Task<ActionResult> Index()
         {
-            var pointsReportCollection = await PointsReportCollection.GetAllPayoutsToApproveAsync(false);
+            var displayAll = Session["DisplayAll"] != null ? (bool)Session["DisplayAll"] : false;
 
+            var pointsReportCollection = await PointsReportCollection.GetAllPayoutsToApproveAsync(displayAll);
+
+            ViewBag.DisplayAll = displayAll;
             return View(pointsReportCollection);
         }
 
@@ -37,8 +40,10 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <param name="displayAll">Display all names or just the ones above threshold.</param>
         /// <returns></returns>
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public async virtual Task<ActionResult> ListPayouts(bool displayAll = false)
         {
+            Session["DisplayAll"] = displayAll;
             var pointsReportCollection = await PointsReportCollection.GetAllPayoutsToApproveAsync(displayAll);
             return PartialView(pointsReportCollection);
         }
@@ -53,6 +58,7 @@ namespace Magenic.BadgeApplication.Controllers
         public async virtual Task<ActionResult> Index(FormCollection formCollection)
         {
             Arg.IsNotNull(() => formCollection);
+            var displayAll = formCollection["SelectAll"];
 
             var allPayouts = await PointsReportCollection.GetAllPayoutsToApproveAsync(true);
             if (formCollection.AllKeys.Any(k => k == "CheckedValues"))
