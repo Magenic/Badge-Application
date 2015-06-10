@@ -148,7 +148,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="viewedEmployeeId">Employee Id of the logged in user.</param>
         /// <returns></returns>
         [HasPermission(AuthorizationActions.GetObject, typeof(int))]
-        public virtual bool CanDelete(int viewedEmployeeId)
+        public virtual bool isAdmin(int viewedEmployeeId)
         {
             return LeaderboardItem.IsAdmin(AuthenticatedUser.EmployeeId);
         }

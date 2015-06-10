@@ -222,8 +222,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             base.AddBusinessRules();
 
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.GetObject, new string[] { PermissionType.Manager.ToString(), PermissionType.Administrator.ToString() }));
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, ApproveActivitySubmissionMethod, PermissionType.Manager.ToString()));
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, DenyActivitySubmissionMethod, PermissionType.Manager.ToString()));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, ApproveActivitySubmissionMethod, new string[] { PermissionType.Manager.ToString(), PermissionType.Administrator.ToString() }));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, DenyActivitySubmissionMethod, new string[] { PermissionType.Manager.ToString(), PermissionType.Administrator.ToString() }));
         }
 
         #endregion Rules

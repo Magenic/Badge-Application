@@ -5,7 +5,7 @@
 @model ILeaderboardItem
 
 @{
-    bool canDelete = Mvc.Leaderboard.Actions.CanDelete(Model.EmployeeId);
+    bool canDelete = Mvc.Leaderboard.Actions.isAdmin(Model.EmployeeId);
 }
 <div class="container">
     <div class="row">

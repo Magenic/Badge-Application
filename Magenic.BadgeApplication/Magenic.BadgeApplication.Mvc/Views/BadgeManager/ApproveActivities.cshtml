@@ -1,6 +1,7 @@
 ﻿@using Magenic.BadgeApplication.Resources
 @using Magenic.BadgeApplication.Models
 @model ApproveActivitiesViewModel
+@{bool isadmin = Mvc.Leaderboard.Actions.isAdmin(AuthenticatedUser.EmployeeId);}
 
 @using (Ajax.BeginForm("_ApproveActivities", "BadgeManager", new { showAdminView = true },
     new AjaxOptions { UpdateTargetId = "activitiesForApproval", HttpMethod = "POST", InsertionMode = InsertionMode.Replace}
@@ -17,12 +18,15 @@
                     <div class="col-md-8">
                         <h2>@ApplicationResources.ActivitiesForApprovalHeader</h2>
                     </div>
+                    @if(isadmin)
+                    {
                     <div class="checkbox-inline">
                         <label>
                             @*.parents('form:first').find(':submit')[0].click();*@
-                            @Html.CheckBox("showAdminView", new { onchange = "ShowAdminView();" }) Display All
+                            @Html.CheckBox("showAdminView", new { @checked = "true", onchange = "ShowAdminView();" }) Display All
                         </label>
                     </div>
+                    }
                 </div>
                 <div class="row">
                     <div id="AdminActivitiesForm" class="col-md-10 darkGrayHeaderList">
