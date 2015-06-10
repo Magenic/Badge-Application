@@ -1,5 +1,6 @@
 ﻿function refreshPreviousActivitiesList() {
     var listUrl = $('#UrlToList').val();
+    listUrl = listUrl.substr(0, listUrl.length - 4)  + $('#showAdminView').prop('checked');
     $('#activitiesForApproval').load(listUrl);
 }
 

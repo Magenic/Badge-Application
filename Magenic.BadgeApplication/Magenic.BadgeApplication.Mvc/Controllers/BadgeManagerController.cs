@@ -299,9 +299,9 @@ namespace Magenic.BadgeApplication.Controllers
         [NoCache]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-        public async virtual Task<ActionResult> ApproveActivitiesList()
+        public async virtual Task<ActionResult> ApproveActivitiesList(bool showAdminView = true)
         {
-            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
+            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId, showAdminView);
             return PartialView(Mvc.BadgeManager.Views._ActivitiesForApproval, activitiesToApprove);
         }
 

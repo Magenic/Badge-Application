@@ -199,6 +199,14 @@ namespace Magenic.BadgeApplication.Controllers
         {
             public readonly string showAdminView = "showAdminView";
         }
+        static readonly ActionParamsClass_ApproveActivitiesList s_params_ApproveActivitiesList = new ActionParamsClass_ApproveActivitiesList();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ApproveActivitiesList ApproveActivitiesListParams { get { return s_params_ApproveActivitiesList; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ApproveActivitiesList
+        {
+            public readonly string showAdminView = "showAdminView";
+        }
         static readonly ActionParamsClass_ApproveActivity s_params_ApproveActivity = new ActionParamsClass_ApproveActivity();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_ApproveActivity ApproveActivityParams { get { return s_params_ApproveActivity; } }
@@ -380,12 +388,13 @@ namespace Magenic.BadgeApplication.Controllers
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
-        partial void ApproveActivitiesListOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void ApproveActivitiesListOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, bool showAdminView);
 
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ApproveActivitiesList()
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ApproveActivitiesList(bool showAdminView)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ApproveActivitiesList);
-            ApproveActivitiesListOverride(callInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "showAdminView", showAdminView);
+            ApproveActivitiesListOverride(callInfo, showAdminView);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
