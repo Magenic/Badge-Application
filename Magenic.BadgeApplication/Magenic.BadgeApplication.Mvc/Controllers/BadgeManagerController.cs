@@ -268,7 +268,7 @@ namespace Magenic.BadgeApplication.Controllers
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
-        public async virtual Task<ActionResult> ApproveActivities(bool showAdminView = false)
+        public async virtual Task<ActionResult> ApproveActivities(bool showAdminView = true)
         {           
             var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId, showAdminView);
             var approveActivitiesViewModel = new ApproveActivitiesViewModel(activitiesToApprove);
