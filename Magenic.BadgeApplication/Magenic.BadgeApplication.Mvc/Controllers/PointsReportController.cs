@@ -30,7 +30,6 @@ namespace Magenic.BadgeApplication.Controllers
             var displayAll = Session["DisplayAll"] != null ? (bool)Session["DisplayAll"] : false;
 
             var pointsReportCollection = await PointsReportCollection.GetAllPayoutsToApproveAsync(displayAll);
-
             ViewBag.DisplayAll = displayAll;
             return View(pointsReportCollection);
         }
@@ -109,11 +108,13 @@ namespace Magenic.BadgeApplication.Controllers
         /// <returns></returns>
         [HttpGet]
         [HasPermission(AuthorizationActions.EditObject, typeof(BadgeAwardEditCollection))]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public async virtual Task<ActionResult> BadgeAwards(string userName)
         {
             var badgeAwardsForUser = await BadgeAwardEditCollection.GetAllBadgeAwardsForUser(userName);
 
-            return View(badgeAwardsForUser);
+            //return RedirectToAction("Index");
+            return PartialView(badgeAwardsForUser);
         }
 
         /// <summary>

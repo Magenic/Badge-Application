@@ -5,9 +5,22 @@
 @model IPointsReportCollection
 
 <style>
-html {overflow-y: scroll;}
+    html 
+    {
+        overflow-y: scroll;
+    }
+    .modal-content 
+    {
+        width: 600px !important;
+        margin: 30px auto !important;
+    }
 </style>
 
+
+<div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-content">
+    </div>
+</div>
 
 
 <div class="container">

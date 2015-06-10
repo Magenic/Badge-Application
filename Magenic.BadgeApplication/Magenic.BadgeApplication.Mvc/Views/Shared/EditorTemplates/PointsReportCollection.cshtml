@@ -28,7 +28,7 @@
                                 <input type="checkbox" name="CheckedValues" value="@pointsReport.EmployeeId" />
                             </td>
                             <td>
-                                @Html.HasPermission(AuthorizationActions.GetObject, typeof(BadgeAwardEditCollection), Html.ActionLink(pointsReport.EmployeeADName, Mvc.PointsReport.BadgeAwards(pointsReport.EmployeeADName)), pointsReport.EmployeeADName)
+                                @Html.HasPermission(AuthorizationActions.GetObject, typeof(BadgeAwardEditCollection), Html.ActionLink(pointsReport.EmployeeADName, Mvc.PointsReport.BadgeAwards(pointsReport.EmployeeADName), new { @class = "modal-link" }), pointsReport.EmployeeADName)
                             </td>
                             <td>
                                 @pointsReport.EmployeeFirstName
