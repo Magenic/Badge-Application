@@ -295,7 +295,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// Approves the activities list.
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), HttpGet]
         [NoCache]
         [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
