@@ -12,6 +12,6 @@
         @Model.AwardDate.ToShortDateString()
     </td>
     <td>
-        @Html.DropDownListFor(bae => bae.AwardAmount, new SelectList(ApplicationSettings.BadgeAwardValues()), Model.AwardAmount)
+        @Html.TextBoxFor(bae => bae.AwardAmount, Model.AwardAmount)
     </td>
 </tr>
