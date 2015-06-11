@@ -20,7 +20,6 @@ function PointsReport() {
 }
 
 (function () {
-
     $('body').on('click', '.modal-link', function (e) {
         e.preventDefault();
         $(this).attr('data-target', '#modal-container');
@@ -35,7 +34,6 @@ function PointsReport() {
     $('#CancelModal').on('click', function () {
         return false;
     });
-
 })();
 
 (function () {
