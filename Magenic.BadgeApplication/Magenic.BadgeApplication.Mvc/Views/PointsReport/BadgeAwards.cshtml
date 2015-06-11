@@ -4,25 +4,21 @@
 @model IBadgeAwardEditCollection
 
 
-<div class="modal-body">
+<div class="modal-body row col-md-12 grayBox">
     <div class="row">
-        <div class="col-md-12 grayBox">
-            <div class="row">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h2>@String.Format(ApplicationResources.BadgeAwardsHeader, Model.First().EmployeeADName)</h2>
-                </div>
-            </div>
-
-            <div class="row">
-                &nbsp;
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    @Html.EditorFor(m => m)
-                </div>
-            </div>
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h2>@String.Format(ApplicationResources.BadgeAwardsHeader, Model.First().EmployeeADName)</h2>
         </div>
     </div>
+
+    <div class="row">
+        &nbsp;
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @Html.EditorFor(m => m)
+        </div>
+    </div> 
 </div>
