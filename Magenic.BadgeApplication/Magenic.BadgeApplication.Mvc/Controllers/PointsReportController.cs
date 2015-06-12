@@ -39,7 +39,7 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <param name="displayAll">Display all names or just the ones above threshold.</param>
         /// <returns></returns>
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public async virtual Task<ActionResult> ListPayouts(bool displayAll = false)
         {
             Session["DisplayAll"] = displayAll;

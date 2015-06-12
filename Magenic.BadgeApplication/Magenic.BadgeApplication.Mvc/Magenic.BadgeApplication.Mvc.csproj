@@ -51,11 +51,10 @@
   <ItemGroup>
     <Reference Include="Autofac, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Autofac.3.4.0\lib\net40\Autofac.dll</HintPath>
+      <HintPath>..\packages\Autofac.3.4.1\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac.Integration.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Autofac.Mvc5.3.3.1\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    <Reference Include="Autofac.Integration.Mvc">
+      <HintPath>..\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Csla, Version=4.5.501.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -126,7 +125,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -136,9 +135,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -146,19 +145,19 @@
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.1.2\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
@@ -329,19 +328,6 @@
     <Content Include="Content\themes\base\datepicker.css" />
     <Content Include="Content\themes\base\dialog.css" />
     <Content Include="Content\themes\base\draggable.css" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\themes\base\menu.css" />
     <Content Include="Content\themes\base\progressbar.css" />
     <Content Include="Content\themes\base\resizable.css" />
@@ -442,113 +428,30 @@
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jtable\extensions\jquery.jtable.aspnetpagemethods.js" />
     <Content Include="Scripts\jtable\extensions\jquery.jtable.aspnetpagemethods.min.js" />
-    <Content Include="Scripts\jtable\external\json2.js" />
     <Content Include="Scripts\jtable\external\json2.min.js" />
-    <Content Include="Scripts\jtable\jquery.jtable.js" />
     <Content Include="Scripts\jtable\jquery.jtable.min.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.ca.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.de.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.es.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.fa.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.fr.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.hr.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.hu.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.id.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.it.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.lt.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.nl-NL.js" />
     <Content Include="Scripts\jtable\localization\jquery.jtable.pl.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.pt-BR.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.pt-PT.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.ro.js" />
     <Content Include="Scripts\jtable\localization\jquery.jtable.ru.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.se.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.tr.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.vi.js" />
-    <Content Include="Scripts\jtable\localization\jquery.jtable.zh-CN.js" />
-    <Content Include="Scripts\jtable\themes\basic\close.png" />
-    <Content Include="Scripts\jtable\themes\basic\column-asc.png" />
-    <Content Include="Scripts\jtable\themes\basic\column-desc.png" />
-    <Content Include="Scripts\jtable\themes\basic\column-sortable.png" />
-    <Content Include="Scripts\jtable\themes\basic\delete.png" />
-    <Content Include="Scripts\jtable\themes\basic\edit.png" />
     <Content Include="Scripts\jtable\themes\basic\jtable_basic.css" />
-    <Content Include="Scripts\jtable\themes\basic\jtable_basic.min.css" />
-    <Content Include="Scripts\jtable\themes\jqueryui\add.png" />
-    <Content Include="Scripts\jtable\themes\jqueryui\bg-thead.png" />
-    <Content Include="Scripts\jtable\themes\jqueryui\close.png" />
-    <Content Include="Scripts\jtable\themes\jqueryui\column-asc.png" />
-    <Content Include="Scripts\jtable\themes\jqueryui\column-desc.png" />
-    <Content Include="Scripts\jtable\themes\jqueryui\column-sortable.png" />
-    <Content Include="Scripts\jtable\themes\jqueryui\delete.png" />
-    <Content Include="Scripts\jtable\themes\jqueryui\edit.png" />
     <Content Include="Scripts\jtable\themes\jqueryui\jtable_jqueryui.css" />
-    <Content Include="Scripts\jtable\themes\jqueryui\jtable_jqueryui.min.css" />
-    <Content Include="Scripts\jtable\themes\jqueryui\loading.gif" />
-    <Content Include="Scripts\jtable\themes\lightcolor\add.png" />
-    <Content Include="Scripts\jtable\themes\lightcolor\bg-thead.png" />
     <Content Include="Scripts\jtable\themes\lightcolor\blue\jtable.css" />
-    <Content Include="Scripts\jtable\themes\lightcolor\blue\jtable.min.css" />
-    <Content Include="Scripts\jtable\themes\lightcolor\blue\loading.gif" />
-    <Content Include="Scripts\jtable\themes\lightcolor\close.png" />
-    <Content Include="Scripts\jtable\themes\lightcolor\column-asc.png" />
-    <Content Include="Scripts\jtable\themes\lightcolor\column-desc.png" />
-    <Content Include="Scripts\jtable\themes\lightcolor\column-sortable.png" />
-    <Content Include="Scripts\jtable\themes\lightcolor\delete.png" />
-    <Content Include="Scripts\jtable\themes\lightcolor\edit.png" />
     <Content Include="Scripts\jtable\themes\lightcolor\gray\jtable.css" />
-    <Content Include="Scripts\jtable\themes\lightcolor\gray\jtable.min.css" />
-    <Content Include="Scripts\jtable\themes\lightcolor\gray\loading.gif" />
     <Content Include="Scripts\jtable\themes\lightcolor\green\jtable.css" />
-    <Content Include="Scripts\jtable\themes\lightcolor\green\jtable.min.css" />
-    <Content Include="Scripts\jtable\themes\lightcolor\green\loading.gif" />
     <Content Include="Scripts\jtable\themes\lightcolor\orange\jtable.css" />
-    <Content Include="Scripts\jtable\themes\lightcolor\orange\jtable.min.css" />
-    <Content Include="Scripts\jtable\themes\lightcolor\orange\loading.gif" />
     <Content Include="Scripts\jtable\themes\lightcolor\red\jtable.css" />
-    <Content Include="Scripts\jtable\themes\lightcolor\red\jtable.min.css" />
-    <Content Include="Scripts\jtable\themes\lightcolor\red\loading.gif" />
-    <Content Include="Scripts\jtable\themes\metro\add.png" />
     <Content Include="Scripts\jtable\themes\metro\blue\jtable.css" />
-    <Content Include="Scripts\jtable\themes\metro\blue\jtable.min.css" />
-    <Content Include="Scripts\jtable\themes\metro\blue\loading.gif" />
     <Content Include="Scripts\jtable\themes\metro\brown\jtable.css" />
-    <Content Include="Scripts\jtable\themes\metro\brown\jtable.min.css" />
-    <Content Include="Scripts\jtable\themes\metro\brown\loading.gif" />
-    <Content Include="Scripts\jtable\themes\metro\close.png" />
-    <Content Include="Scripts\jtable\themes\metro\column-asc.png" />
-    <Content Include="Scripts\jtable\themes\metro\column-desc.png" />
-    <Content Include="Scripts\jtable\themes\metro\column-sortable.png" />
     <Content Include="Scripts\jtable\themes\metro\crimson\jtable.css" />
-    <Content Include="Scripts\jtable\themes\metro\crimson\jtable.min.css" />
-    <Content Include="Scripts\jtable\themes\metro\crimson\loading.gif" />
     <Content Include="Scripts\jtable\themes\metro\darkgray\jtable.css" />
-    <Content Include="Scripts\jtable\themes\metro\darkgray\jtable.min.css" />
-    <Content Include="Scripts\jtable\themes\metro\darkgray\loading.gif" />
     <Content Include="Scripts\jtable\themes\metro\darkorange\jtable.css" />
-    <Content Include="Scripts\jtable\themes\metro\darkorange\jtable.min.css" />
-    <Content Include="Scripts\jtable\themes\metro\darkorange\loading.gif" />
-    <Content Include="Scripts\jtable\themes\metro\delete.png" />
-    <Content Include="Scripts\jtable\themes\metro\edit.png" />
     <Content Include="Scripts\jtable\themes\metro\green\jtable.css" />
     <Content Include="Scripts\jtable\themes\metro\green\jtable.min.css" />
-    <Content Include="Scripts\jtable\themes\metro\green\loading.gif" />
     <Content Include="Scripts\jtable\themes\metro\jtable_metro_base.css" />
-    <Content Include="Scripts\jtable\themes\metro\jtable_metro_base.min.css" />
     <Content Include="Scripts\jtable\themes\metro\lightgray\jtable.css" />
-    <Content Include="Scripts\jtable\themes\metro\lightgray\jtable.min.css" />
-    <Content Include="Scripts\jtable\themes\metro\lightgray\loading.gif" />
     <Content Include="Scripts\jtable\themes\metro\pink\jtable.css" />
-    <Content Include="Scripts\jtable\themes\metro\pink\jtable.min.css" />
-    <Content Include="Scripts\jtable\themes\metro\pink\loading.gif" />
     <Content Include="Scripts\jtable\themes\metro\purple\jtable.css" />
-    <Content Include="Scripts\jtable\themes\metro\purple\jtable.min.css" />
-    <Content Include="Scripts\jtable\themes\metro\purple\loading.gif" />
     <Content Include="Scripts\jtable\themes\metro\red\jtable.css" />
-    <Content Include="Scripts\jtable\themes\metro\red\jtable.min.css" />
-    <Content Include="Scripts\jtable\themes\metro\red\loading.gif" />
     <Content Include="Scripts\knockout-3.0.0.debug.js" />
     <Content Include="Scripts\knockout-3.0.0.js" />
     <Content Include="Scripts\less-1.5.1.js" />
@@ -614,26 +517,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\jtable\themes\metro\red\jtable.less" />
-    <Content Include="Scripts\jtable\themes\metro\purple\jtable.less" />
-    <Content Include="Scripts\jtable\themes\metro\pink\jtable.less" />
-    <Content Include="Scripts\jtable\themes\metro\lightgray\jtable.less" />
-    <Content Include="Scripts\jtable\themes\metro\jtable_metro_base.less" />
-    <Content Include="Scripts\jtable\themes\metro\green\jtable.less" />
-    <Content Include="Scripts\jtable\themes\metro\darkorange\jtable.less" />
-    <Content Include="Scripts\jtable\themes\metro\darkgray\jtable.less" />
-    <Content Include="Scripts\jtable\themes\metro\crimson\jtable.less" />
-    <Content Include="Scripts\jtable\themes\metro\brown\jtable.less" />
-    <Content Include="Scripts\jtable\themes\metro\blue\jtable.less" />
-    <Content Include="Scripts\jtable\themes\lightcolor\red\jtable.less" />
-    <Content Include="Scripts\jtable\themes\lightcolor\orange\jtable.less" />
-    <Content Include="Scripts\jtable\themes\lightcolor\jtable_lightcolor_base.less" />
-    <Content Include="Scripts\jtable\themes\lightcolor\green\jtable.less" />
-    <Content Include="Scripts\jtable\themes\lightcolor\gray\jtable.less" />
-    <Content Include="Scripts\jtable\themes\lightcolor\blue\jtable.less" />
-    <Content Include="Scripts\jtable\themes\jtable_theme_base.less" />
-    <Content Include="Scripts\jtable\themes\jqueryui\jtable_jqueryui.less" />
-    <Content Include="Scripts\jtable\themes\basic\jtable_basic.less" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Scripts\jquery.min.map" />
     <None Include="T4MVC.tt.settings.xml" />
@@ -744,6 +627,9 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

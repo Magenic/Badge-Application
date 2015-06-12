@@ -21,7 +21,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         [Serializable]
         public sealed class ApproveActivityCollectionCriteria : CriteriaBase<ApproveActivityCollectionCriteria>, IApproveActivityCollectionCriteria
         {
-
             public int ManagerEmployeeId { get; set; }
 
             public IAwardBadges AwardBadges { get; set; }
@@ -73,8 +72,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         private async Task DataPortal_Fetch(ApproveActivityCollectionCriteria criteria)
         {
             var dal = IoC.Container.Resolve<IApproveActivityCollectionDAL>();
-
-            var result = await dal.GetActivitiesToApproveForManagerAsync(criteria);
+            var result = ApplicationContext.User.IsInRole(PermissionType.Administrator.ToString()) && criteria.ShowAdminView ?
+                await dal.GetActivitiesToApproveForAdministratorAsync(criteria) : 
+                await dal.GetActivitiesToApproveForManagerAsync(criteria);
             this.LoadData(result);
         }
 

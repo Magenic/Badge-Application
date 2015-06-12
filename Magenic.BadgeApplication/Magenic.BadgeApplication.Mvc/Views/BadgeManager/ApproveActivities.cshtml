@@ -1,7 +1,11 @@
-﻿@using Magenic.BadgeApplication.Resources
+﻿@using Csla.Web.Mvc
+@using Csla.Rules
+@using Csla
+@using Magenic.BadgeApplication.Resources
 @using Magenic.BadgeApplication.Models
+@using Magenic.BadgeApplication.Common.Enums
+
 @model ApproveActivitiesViewModel
-@{bool isadmin = Mvc.Leaderboard.Actions.isAdmin(AuthenticatedUser.EmployeeId);}
 
 @using (Ajax.BeginForm("_ApproveActivities", "BadgeManager", new { showAdminView = true },
     new AjaxOptions { UpdateTargetId = "activitiesForApproval", HttpMethod = "POST", InsertionMode = InsertionMode.Replace}
@@ -18,7 +22,7 @@
                     <div class="col-md-8">
                         <h2>@ApplicationResources.ActivitiesForApprovalHeader</h2>
                     </div>
-                    @if(isadmin)
+                    @if(ApplicationContext.User.IsInRole(PermissionType.Administrator.ToString()))
                     {
                     <div class="checkbox-inline">
                         <label>

@@ -15,7 +15,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         IAwardBadges AwardBadges { get; set; }
         /// <summary>
-        /// Whether the admin view is set
+        /// Whether the admin view checkbox is active
         /// </summary>
         bool ShowAdminView { get; set; }
     }
