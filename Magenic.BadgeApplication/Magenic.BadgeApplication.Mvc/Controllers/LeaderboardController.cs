@@ -135,22 +135,11 @@ namespace Magenic.BadgeApplication.Controllers
         /// </summary>
         /// <param name="badgeAwardId">BadgeAward id that needs to be deleted.</param>
         /// <returns></returns>
-        [HasPermission(AuthorizationActions.DeleteObject, typeof(LeaderboardItem))]
+        [HasPermission(AuthorizationActions.EditObject, typeof(BadgeDelete))]
         public virtual Task<ActionResult> Delete(int badgeAwardId)
         {
-            LeaderboardItem.Delete(badgeAwardId);
+            BadgeDelete.DeleteBadge(badgeAwardId);
             return Task.FromResult(null as ActionResult);
-        }
-
-        /// <summary>
-        /// Checks if a logged in user is able to delete badges.
-        /// </summary>
-        /// <param name="viewedEmployeeId">Employee Id of the logged in user.</param>
-        /// <returns></returns>
-        [HasPermission(AuthorizationActions.GetObject, typeof(int))]
-        public virtual bool isAdmin(int viewedEmployeeId)
-        {
-            return LeaderboardItem.IsAdmin(AuthenticatedUser.EmployeeId);
         }
     }
 }

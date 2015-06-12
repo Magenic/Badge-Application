@@ -20,12 +20,5 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         /// <param name="badgeAwardId">The BadgeAward Id to delete.</param>
         void Delete(int badgeAwardId);
-
-        /// <summary>
-        /// Gets the permission level for a user.
-        /// </summary>
-        /// <param name="employeeId">Id of the user.</param>
-        /// <returns></returns>
-        bool GetAdminUserPermissions(int employeeId);
     }
 }

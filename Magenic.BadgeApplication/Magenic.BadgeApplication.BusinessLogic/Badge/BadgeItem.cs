@@ -103,7 +103,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         }
 
         /// <summary>
-        /// 
+        /// The default award value for a badge.
         /// </summary>
         public static readonly PropertyInfo<int> BadgeAwardValueProperty = RegisterProperty<int>(b => b.BadgeAwardValue);
         public int BadgeAwardValue
@@ -113,7 +113,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         }
 
         /// <summary>
-        /// 
+        /// The maximum award value for varibale worth badges.
         /// </summary>
         public static readonly PropertyInfo<int?> BadgeAwardValueMaxProperty = RegisterProperty<int?>(b => b.BadgeAwardValueMax);
         public int? BadgeAwardValueMax

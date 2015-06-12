@@ -2,10 +2,12 @@
 @using Magenic.BadgeApplication.Resources
 @using Magenic.BadgeApplication.Extensions
 @using Magenic.BadgeApplication.Common.Interfaces
+@using Csla
+@using Magenic.BadgeApplication.Common.Enums
 @model ILeaderboardItem
 
 @{
-    bool canDelete = Mvc.Leaderboard.Actions.isAdmin(Model.EmployeeId);
+    bool canDelete = ApplicationContext.User.IsInRole(PermissionType.Administrator.ToString());
 }
 <div class="container">
     <div class="row">
