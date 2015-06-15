@@ -136,10 +136,10 @@ namespace Magenic.BadgeApplication.Controllers
         /// <param name="badgeAwardId">BadgeAward id that needs to be deleted.</param>
         /// <returns></returns>
         [HasPermission(AuthorizationActions.EditObject, typeof(BadgeDelete))]
-        public virtual Task<ActionResult> Delete(int badgeAwardId)
+        public virtual async Task<ActionResult> Delete(int badgeAwardId)
         {
-            BadgeDelete.DeleteBadge(badgeAwardId);
-            return Task.FromResult(null as ActionResult);
+            await BadgeDelete.DeleteBadgeAsync(badgeAwardId);
+            return null;
         }
     }
 }

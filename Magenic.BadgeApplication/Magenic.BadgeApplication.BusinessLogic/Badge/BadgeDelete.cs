@@ -23,10 +23,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
 
         #region Factory Methods
 
-        public static void DeleteBadge(int id)
+        public static async Task DeleteBadgeAsync(int id)
         {
             var badgeDeleteCommand = new BadgeDelete { badgeAwardId = id };
-            IoC.Container.Resolve<IObjectFactory<BadgeDelete>>().Execute(badgeDeleteCommand);
+            await IoC.Container.Resolve<IObjectFactory<BadgeDelete>>().ExecuteAsync(badgeDeleteCommand);
         }
 
         #endregion
