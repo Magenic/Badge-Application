@@ -74,6 +74,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BadgeDeleteTests.cs" />
     <Compile Include="BadgeTests.cs" />
     <Compile Include="CanSetBadgeTypeRuleTests.cs" />
     <Compile Include="DateOrderRuleTests.cs" />
