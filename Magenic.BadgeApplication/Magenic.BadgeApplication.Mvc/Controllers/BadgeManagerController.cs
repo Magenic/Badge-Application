@@ -1,4 +1,6 @@
-﻿using Csla.Rules;
+﻿using Csla;
+using Csla.Rules;
+using Csla.Rules.CommonRules;
 using Csla.Web.Mvc;
 using EasySec.Encryption;
 using Magenic.BadgeApplication.Attributes;
@@ -267,12 +269,21 @@ namespace Magenic.BadgeApplication.Controllers
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
-        public async virtual Task<ActionResult> ApproveActivities(bool showAdminView = true)
-        {           
-            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId, showAdminView);
-            var approveActivitiesViewModel = new ApproveActivitiesViewModel(activitiesToApprove);
-            return View(approveActivitiesViewModel);
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItemForManager))]
+        public async virtual Task<ActionResult> ApproveActivities(bool showAdminView = false)
+        {
+            if (ApplicationContext.User.IsInRole(PermissionType.Administrator.ToString()) && showAdminView)
+            {
+                var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
+                var approveActivitiesViewModel = new ApproveActivitiesViewModel(activitiesToApprove);
+                return View(approveActivitiesViewModel);
+            }
+            else
+            {
+                var activitiesToApprove = await ApproveActivityManagerCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId, showAdminView);
+                var approveActivitiesViewModel = new ApproveActivitiesViewModel(activitiesToApprove);
+                return View(approveActivitiesViewModel);
+            }
         }
 
         /// <summary>
@@ -282,12 +293,19 @@ namespace Magenic.BadgeApplication.Controllers
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItemForManager))]
         public async virtual Task<ActionResult> _ActivitiesForApproval(bool showAdminView = true)
         {
-            var activitiesToApprove =  await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId, showAdminView);
-            var approveActivitiesViewModel = new ApproveActivitiesViewModel(activitiesToApprove);
-            return PartialView(Mvc.BadgeManager.Views._ActivitiesForApproval, activitiesToApprove);
+            if (ApplicationContext.User.IsInRole(PermissionType.Administrator.ToString()) && showAdminView)
+            {
+                var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
+                return PartialView(Mvc.BadgeManager.Views._ActivitiesForApproval, activitiesToApprove);
+            }
+            else
+            {
+                var activitiesToApprove = await ApproveActivityManagerCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
+                return PartialView(Mvc.BadgeManager.Views._ActivitiesForApproval, new ApproveActivityCollection(activitiesToApprove));
+            }
         }
 
        
@@ -297,12 +315,20 @@ namespace Magenic.BadgeApplication.Controllers
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), HttpGet]
         [NoCache]
-        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItemForManager))]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public async virtual Task<ActionResult> ApproveActivitiesList(bool showAdminView = true)
         {
-            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId, showAdminView);
-            return PartialView(Mvc.BadgeManager.Views._ActivitiesForApproval, activitiesToApprove);
+            if (ApplicationContext.User.IsInRole(PermissionType.Administrator.ToString()) && showAdminView)
+            {
+                var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
+                return PartialView(Mvc.BadgeManager.Views._ActivitiesForApproval, activitiesToApprove);
+            }
+            else
+            {
+                var activitiesToApprove = await ApproveActivityManagerCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
+                return PartialView(Mvc.BadgeManager.Views._ActivitiesForApproval, new ApproveActivityCollection(activitiesToApprove));
+            }
         }
 
         /// <summary>
@@ -312,10 +338,10 @@ namespace Magenic.BadgeApplication.Controllers
         /// <returns></returns>
         [HttpPost]
         [HandleModelStateException]
-        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItemForManager))]
         public async virtual Task<ActionResult> ApproveActivity(int submissionId)
         {
-            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId, true);
+            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
             var activityItem = activitiesToApprove.Where(aai => aai.SubmissionId == submissionId).Single();
             activityItem.ApproveActivitySubmission(AuthenticatedUser.EmployeeId);
             if (await SaveObjectAsync(activitiesToApprove, true))
@@ -333,10 +359,10 @@ namespace Magenic.BadgeApplication.Controllers
         /// <returns></returns>
         [HttpPost]
         [HandleModelStateException]
-        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItem))]
+        [HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItemForManager))]
         public async virtual Task<ActionResult> RejectActivity(int submissionId)
         {
-            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId, true);
+            var activitiesToApprove = await ApproveActivityCollection.GetAllActivitiesToApproveAsync(AuthenticatedUser.EmployeeId);
             var activityItem = activitiesToApprove.Where(aai => aai.SubmissionId == submissionId).Single();
             activityItem.DenyActivitySubmission();
             if (await SaveObjectAsync(activitiesToApprove, true))

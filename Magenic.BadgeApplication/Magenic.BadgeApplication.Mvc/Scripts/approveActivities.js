@@ -29,7 +29,7 @@ $(document).ready(function () {
             } else if (xhr.status === 400) {
                 alert(xhr.responseText);
             } else if (xhr.status === 500) {
-                alert('Internel Server Error.');
+                alert('Internal Server Error.');
             } else if (status == 'parsererror') {
                 alert('Error.\nParsing JSON Request failed.');
             } else if (status == 'timeout') {

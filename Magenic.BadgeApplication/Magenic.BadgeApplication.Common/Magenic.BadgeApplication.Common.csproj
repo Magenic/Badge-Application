@@ -125,7 +125,10 @@
     <Compile Include="Interfaces\IApproveActivityCollection.cs" />
     <Compile Include="Interfaces\IApproveActivityCollectionCriteria.cs" />
     <Compile Include="Interfaces\IApproveActivityCollectionDAL.cs" />
+    <Compile Include="Interfaces\IApproveActivityCollectionForManager.cs" />
     <Compile Include="Interfaces\IApproveActivityItem.cs" />
+    <Compile Include="Interfaces\IApproveActivityItemForManager.cs" />
+    <Compile Include="Interfaces\IApproveActivityManagerCollectionDAL.cs" />
     <Compile Include="Interfaces\IApproveBadgeCollection.cs" />
     <Compile Include="Interfaces\IApproveBadgeCollectionDAL.cs" />
     <Compile Include="Interfaces\IApproveBadgeItem.cs" />

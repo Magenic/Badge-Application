@@ -103,6 +103,7 @@
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
     <Compile Include="ApproveActivityCollectionDAL.cs" />
+    <Compile Include="ApproveActivityManagerCollectionDAL.cs" />
     <Compile Include="ApproveBadgeCollectionDAL.cs" />
     <Compile Include="AwardBadgesDAL.cs" />
     <Compile Include="Badge.Context.cs">

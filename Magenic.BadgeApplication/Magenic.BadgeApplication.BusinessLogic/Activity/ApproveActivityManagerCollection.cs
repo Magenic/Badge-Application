@@ -13,18 +13,8 @@ using System.Threading.Tasks;
 namespace Magenic.BadgeApplication.BusinessLogic.Activity
 {
     [Serializable]
-    public sealed class ApproveActivityCollection : BusinessListBase<ApproveActivityCollection, IApproveActivityItem>, IApproveActivityCollection
+    public sealed class ApproveActivityManagerCollection : BusinessListBase<ApproveActivityManagerCollection, IApproveActivityItemForManager>, IApproveActivityManagerCollection
     {
-        public ApproveActivityCollection(IApproveActivityManagerCollection activitiesToApprove)
-        {
-            foreach(var activity in activitiesToApprove)
-            {
-                this.Add(new ApproveActivityItem(activity));
-            }
-        }
-
-        public ApproveActivityCollection()  { }
-
         #region Criteria
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
@@ -34,6 +24,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             public int ManagerEmployeeId { get; set; }
 
             public IAwardBadges AwardBadges { get; set; }
+
+            public bool ShowAdminView { get; set; }
         }
 
         #endregion Criteria
@@ -46,27 +38,31 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         /// <param name="managerEmployeeId">The employee Id of the manager to retrieve all activities for.</param>
         /// <returns>A list of activities to approve.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        public async static Task<IApproveActivityCollection> GetAllActivitiesToApproveAsync(int managerEmployeeId)
+        public async static Task<IApproveActivityManagerCollection> GetAllActivitiesToApproveAsync(int managerEmployeeId, bool showAdminView = false)
         {
             var awardBadges = IoC.Container.Resolve<IAwardBadges>();
             var criteria = new ApproveActivityCollectionCriteria
             {
                 ManagerEmployeeId = managerEmployeeId,
-                AwardBadges = awardBadges
+                AwardBadges = awardBadges,
+                ShowAdminView = showAdminView
             };
-            return await IoC.Container.Resolve<IObjectFactory<IApproveActivityCollection>>().FetchAsync(criteria);
+            var temp = await IoC.Container.Resolve<IObjectFactory<IApproveActivityManagerCollection>>().FetchAsync(criteria);
+            return temp;
+            //return await IoC.Container.Resolve<IObjectFactory<IApproveActivityManagerCollection>>().FetchAsync(criteria);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        public static IApproveActivityCollection GetAllActivitiesToApproveSync(int managerEmployeeId)
+        public static IApproveActivityManagerCollection GetAllActivitiesToApproveSync(int managerEmployeeId, bool showAdminView = false)
         {
             var awardBadges = IoC.Container.Resolve<IAwardBadges>();
             var criteria = new ApproveActivityCollectionCriteria
             {
                 ManagerEmployeeId = managerEmployeeId,
-                AwardBadges = awardBadges
+                AwardBadges = awardBadges,
+                ShowAdminView = showAdminView
             };
-            return IoC.Container.Resolve<IObjectFactory<IApproveActivityCollection>>().Fetch(criteria);
+            return IoC.Container.Resolve<IObjectFactory<IApproveActivityManagerCollection>>().Fetch(criteria);
             //return await IoC.Container.Resolve<IObjectFactory<IApproveActivityCollection>>().FetchAsync(criteria);
         }
 
@@ -77,13 +73,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private async Task DataPortal_Fetch(ApproveActivityCollectionCriteria criteria)
         {
-            var dal = IoC.Container.Resolve<IApproveActivityCollectionDAL>();
-
-            //var result = ApplicationContext.User.IsInRole(PermissionType.Administrator.ToString()) && criteria.ShowAdminView ?
-            //    await dal.GetActivitiesToApproveForAdministratorAsync(criteria) : 
-            //    await dal.GetActivitiesToApproveForManagerAsync(criteria);
-
-            var result = await dal.GetActivitiesToApproveForAdministratorAsync(criteria);
+            var dal = IoC.Container.Resolve<IApproveActivityManagerCollectionDAL>();
+            var result = await dal.GetActivitiesToApproveForManagerAsync(criteria);
             this.LoadData(result);
         }
 
@@ -91,7 +82,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         {
             foreach (ApproveActivityItemDTO item in data)
             {
-                var newItem = new ApproveActivityItem();
+                var newItem = new ApproveActivityItemForManager();
                 newItem.Load(item);
                 this.Add(newItem);
             }
@@ -103,7 +94,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
             var saveList = new List<ApproveActivityItemDTO>();
             var badgeList = new List<BadgeAwardDTO>();
             var awardBadges = IoC.Container.Resolve<IAwardBadges>();
-            foreach (ApproveActivityItem i in this)
+            foreach (ApproveActivityItemForManager i in this)
             {
                 if (i.Status == ActivitySubmissionStatus.Approved)
                 {

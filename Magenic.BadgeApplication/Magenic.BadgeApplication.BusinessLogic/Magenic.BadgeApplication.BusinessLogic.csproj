@@ -84,7 +84,9 @@
     <Compile Include="Activity\ApproveActivityBadgeCollection.cs" />
     <Compile Include="Activity\ApproveActivityBadgeItem.cs" />
     <Compile Include="Activity\ApproveActivityCollection.cs" />
+    <Compile Include="Activity\ApproveActivityManagerCollection.cs" />
     <Compile Include="Activity\ApproveActivityItem.cs" />
+    <Compile Include="Activity\ApproveActivityItemForManager.cs" />
     <Compile Include="Activity\SubmitActivity.cs" />
     <Compile Include="Activity\SubmittedActivityCollection.cs" />
     <Compile Include="Activity\SubmittedActivityItem.cs" />

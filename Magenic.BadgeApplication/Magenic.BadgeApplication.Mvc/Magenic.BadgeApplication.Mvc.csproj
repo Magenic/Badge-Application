@@ -256,6 +256,7 @@
     <Compile Include="Models\ActivityIndexViewModel.cs" />
     <Compile Include="Models\AdminActivityViewModel.cs" />
     <Compile Include="Models\ApplicationSettings.cs" />
+    <Compile Include="Models\ApproveActivitiesForManagerViewModel.cs" />
     <Compile Include="Models\ApproveActivitiesViewModel.cs" />
     <Compile Include="Models\ApproveCommunityBadgesViewModel.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />

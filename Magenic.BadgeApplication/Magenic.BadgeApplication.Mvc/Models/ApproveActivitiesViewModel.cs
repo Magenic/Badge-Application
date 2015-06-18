@@ -1,4 +1,5 @@
-﻿using Magenic.BadgeApplication.Common.Interfaces;
+﻿using Magenic.BadgeApplication.BusinessLogic.Activity;
+using Magenic.BadgeApplication.Common.Interfaces;
 
 namespace Magenic.BadgeApplication.Models
 {
@@ -7,6 +8,8 @@ namespace Magenic.BadgeApplication.Models
     /// </summary>
     public class ApproveActivitiesViewModel
     {
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ApproveActivitiesViewModel"/> class.
         /// </summary>
@@ -16,6 +19,19 @@ namespace Magenic.BadgeApplication.Models
             ActivitiesToApprove = activitiesToApprove;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApproveActivitiesViewModel"/> class.
+        /// </summary>
+        /// <param name="activitiesToApprove">The activities to approve.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
+        public ApproveActivitiesViewModel(IApproveActivityManagerCollection activitiesToApprove)
+        {
+            this.ActivitiesToApprove = new ApproveActivityCollection();
+            foreach (ApproveActivityItemForManager t in activitiesToApprove)
+            {
+                ActivitiesToApprove.Add( new ApproveActivityItem(t));
+            }
+        }
         /// <summary>
         /// Gets or sets the admin activities.
         /// </summary>

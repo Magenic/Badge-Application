@@ -14,7 +14,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
     /// and then either approve or deny the activity.
     /// </summary>
     [Serializable]
-    public sealed class ApproveActivityItem : BusinessBase<ApproveActivityItem>, IApproveActivityItem
+    public sealed class ApproveActivityItemForManager : BusinessBase<ApproveActivityItemForManager>, IApproveActivityItemForManager
     {
         #region Properties
 
@@ -133,29 +133,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         /// and when the status is not approved or error.
         /// </summary>
         public static readonly MethodInfo DenyActivitySubmissionMethod = RegisterMethod(typeof(ApproveActivityItem), "DenyActivitySubmission");
-
-        public ApproveActivityItem() {  }
-
-        public ApproveActivityItem(IApproveActivityItemForManager item)
-        {
-            this.SubmissionId = item.SubmissionId;
-            this.SubmissionDate = item.SubmissionDate;
-            this.ActivityId = item.ActivityId;
-            this.ActivityName = item.ActivityName;
-            this.ActivityDescription = item.ActivityDescription;
-            this.SubmissionNotes = item.SubmissionNotes;
-            this.EmployeeId = item.EmployeeId;
-            this.EmployeeADName = item.EmployeeADName;
-            this.EmployeeFirstName = item.EmployeeFirstName;
-            this.EmployeeLastName = item.EmployeeLastName;
-            this.Status = item.Status;
-            this.ApprovedById = item.ApprovedById;
-            this.ApproveActivityBadgeCollection = item.ApproveActivityBadgeCollection;
-            this.MarkAsChild();
-            this.MarkClean();
-        }
-
-
         public void DenyActivitySubmission()
         {
             if (CanExecuteMethod(DenyActivitySubmissionMethod))
@@ -244,9 +221,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         {
             base.AddBusinessRules();
 
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.GetObject, new string[] { PermissionType.Administrator.ToString() }));
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, ApproveActivitySubmissionMethod, new string[] { PermissionType.Administrator.ToString() }));
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, DenyActivitySubmissionMethod, new string[] { PermissionType.Administrator.ToString() }));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.GetObject, new string[] { PermissionType.Manager.ToString(), PermissionType.Administrator.ToString() }));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, ApproveActivitySubmissionMethod, new string[] { PermissionType.Manager.ToString(), PermissionType.Administrator.ToString() }));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, DenyActivitySubmissionMethod, new string[] { PermissionType.Manager.ToString(), PermissionType.Administrator.ToString() }));
         }
 
         #endregion Rules
