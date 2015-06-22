@@ -45,6 +45,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.PointsReport
             BusinessRules.AddRule(typeof(PointsReportCollection), new IsInRole(AuthorizationActions.EditObject, Common.Enums.PermissionType.Administrator.ToString()));
             BusinessRules.AddRule(typeof(PointsReportCollection), new IsInRole(AuthorizationActions.CreateObject, string.Empty));
             BusinessRules.AddRule(typeof(PointsReportCollection), new IsInRole(AuthorizationActions.DeleteObject, string.Empty));
+
+            BusinessRules.AddRule(typeof(IPointsReportCollection), new IsInRole(AuthorizationActions.GetObject, Common.Enums.PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(IPointsReportCollection), new IsInRole(AuthorizationActions.EditObject, Common.Enums.PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(IPointsReportCollection), new IsInRole(AuthorizationActions.CreateObject, string.Empty));
+            BusinessRules.AddRule(typeof(IPointsReportCollection), new IsInRole(AuthorizationActions.DeleteObject, string.Empty));
         }
 
         #endregion Rules

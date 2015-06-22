@@ -140,12 +140,15 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         protected override void AddBusinessRules()
         {
             base.AddBusinessRules();
-
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.GetObject, PermissionType.Administrator.ToString()));
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, ApproveBadgeMethod, PermissionType.Administrator.ToString()));
             this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, DenyBadgeMethod, PermissionType.Administrator.ToString()));
         }
 
+        public static void AddObjectAuthorizationRules()
+        {
+            BusinessRules.AddRule(typeof(IApproveBadgeItem), new IsInRole(AuthorizationActions.GetObject, PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(ApproveBadgeItem), new IsInRole(AuthorizationActions.GetObject, PermissionType.Administrator.ToString()));
+        }
         #endregion Rules
 
         #region Data Access
