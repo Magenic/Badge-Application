@@ -14,9 +14,9 @@ namespace Magenic.BadgeApplication.Yammer.Tests
 			var dto = new EarnedBadgeItemDTO
 			{
 				EmployeeADName = "billzi",
-				Name = "testBadgeName2",
-				ImagePath = "testImagePath2",
-				Tagline = "testTagLine2"
+				Name = "testBadgeName3",
+				ImagePath = "testImagePath3",
+				Tagline = "testTagLine3"
 			};
 
 			YammerPublisher yp = new YammerPublisher();
