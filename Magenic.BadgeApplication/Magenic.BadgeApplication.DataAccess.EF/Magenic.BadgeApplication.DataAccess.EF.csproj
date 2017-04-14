@@ -140,6 +140,7 @@
     <Compile Include="BadgeType.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
+    <Compile Include="Config.cs" />
     <Compile Include="CurrentActiveBadge.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
@@ -160,6 +161,7 @@
     </Compile>
     <Compile Include="LeaderboardCollectionDAL.cs" />
     <Compile Include="LeaderboardItemDAL.cs" />
+    <Compile Include="Partials\SendMessageDAL.cs" />
     <Compile Include="Permission.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
@@ -188,7 +190,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="Badge.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Badge.Designer.cs</LastGenOutput>
@@ -211,6 +215,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

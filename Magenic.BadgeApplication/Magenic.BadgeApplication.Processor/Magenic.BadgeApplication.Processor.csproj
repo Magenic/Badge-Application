@@ -63,6 +63,7 @@
     <Compile Include="ActvityLoader.cs" />
     <Compile Include="ADProcessor.cs" />
     <Compile Include="FileLoader.cs" />
+    <Compile Include="Partials\_ADProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueueItemProcessor.cs" />
     <Compile Include="QueueProcessor.cs" />

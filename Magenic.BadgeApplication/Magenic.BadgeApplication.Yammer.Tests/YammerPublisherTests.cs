@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Magenic.BadgeApplication.Yammer;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Magenic.BadgeApplication.Common.DTO;
 
 namespace Magenic.BadgeApplication.Yammer.Tests
@@ -22,8 +20,6 @@ namespace Magenic.BadgeApplication.Yammer.Tests
 			YammerPublisher yp = new YammerPublisher();
 
 			yp.Publish(dto);
-			
-
 		}
 	}
 }

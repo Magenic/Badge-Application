@@ -4,17 +4,19 @@ using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Common.Resources;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net.Mail;
+using System.Text.RegularExpressions;
+
 
 namespace Magenic.BadgeApplication.DataAccess.EF
 {
     /// <summary>
     /// 
     /// </summary>
-    public class SendMessageDAL
-        : ISendMessageDAL
+    public partial class SendMessageDAL : ISendMessageDAL
     {
         /// <summary>
         /// Sends the message.
@@ -28,17 +30,32 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 
             using (var mailMessage = new MailMessage())
             {
-                foreach (var emailAddress in sendToEmailAddresses)
-                {
-                    mailMessage.To.Add(emailAddress);
-                }
+	            foreach ( var emailAddress in sendToEmailAddresses )
+	            {
+					if ( String.IsNullOrWhiteSpace( emailAddress ) )
+			            continue;
 
-                mailMessage.Subject = subject;
+					bool isValidEmailAddr = Regex.IsMatch(emailAddress,
+								@"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+								@"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
+								RegexOptions.IgnoreCase);
+
+		            if ( false == isValidEmailAddr )
+			            continue;
+
+					mailMessage.To.Add(emailAddress);
+				}
+		        
+	            mailMessage.Subject = subject;
                 mailMessage.Body = body;
                 mailMessage.IsBodyHtml = true;
+	            mailMessage.From = new MailAddress( "no-reply@magenic.com", "Magenic Badge Application" );
 
                 using (var smtpClient = new SmtpClient())
                 {
+	                smtpClient.EnableSsl = Config.EnableSslForSMTP;
+	                smtpClient.Port = Config.SMTPPort;
+	                smtpClient.Host = Config.SMTPAddress;
                     smtpClient.Send(mailMessage);
                 }
             }
@@ -51,49 +68,59 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         {
             using (Entities context = new Entities())
             {
-                var activitySubmissions = context.ActivitySubmissions
-                    .Where(sub => sub.ItemStatu.ItemStatusId == (int)ActivitySubmissionStatus.AwaitingApproval)
-                    .ToList();
+	            IList<Employee> peopleToEmail = getPeopleToEmail( context );
 
-                var employees = context.Employees.ToList();
-                var peopleToEmail = activitySubmissions
-                    .Join(employees, asub => asub.EmployeeId, emp => emp.EmployeeId, (asub, emp) => new { asub = asub, emp = emp });
+	            if ( 0 == peopleToEmail.Count )
+		            return;
 
-                var emailAddresses = new List<string>();
-                foreach (var person in peopleToEmail)
-                {
-                    if (person.emp.ApprovingManagerId1.HasValue)
-                    {
-                        var manager = employees
-                            .Where(emp => emp.EmployeeId == person.emp.ApprovingManagerId1.Value)
-                            .SingleOrDefault();
+				IList<Employee> employees = getEmployees( context );
 
-                        if (manager != null)
-                        {
-                            emailAddresses.Add(manager.EmailAddress);
-                        }
-                    }
+	            IList<string> emailAddresses = getEmailAddresses( peopleToEmail, employees );
 
-                    if (person.emp.ApprovingManagerId2.HasValue)
-                    {
-                        var manager = employees
-                            .Where(emp => emp.EmployeeId == person.emp.ApprovingManagerId2.Value)
-                            .SingleOrDefault();
-
-                        if (manager != null)
-                        {
-                            emailAddresses.Add(manager.EmailAddress);
-                        }
-                    }
-                }
-
-                // TODO: figure out a better way to do this. Maybe using RazorEngine?
-                emailAddresses = emailAddresses.Distinct().ToList();
                 var emailSubject = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationSubject);
                 var emailBody = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationBody);
 
                 SendMessage(emailAddresses, emailSubject, emailBody);
             }
         }
+
+	    private static IList<string> getEmailAddresses(IList<Employee> peopleToEmail, IList<Employee> employees)
+	    {
+			IList<string> emailAddresses = new List<string>();
+			foreach (Employee person in peopleToEmail)
+			{
+				Debug.Assert(person.ApprovingManagerId1.HasValue || person.ApprovingManagerId2.HasValue);
+
+				addEmailAddress( employees, person.ApprovingManagerId1, emailAddresses );
+				addEmailAddress( employees, person.ApprovingManagerId2, emailAddresses );
+			}
+			return emailAddresses.Distinct().ToList();
+		}
+
+		private static void addEmailAddress(IList<Employee> employees, int? managerId, IList<string> emailAddresses  )
+		{
+			if ( false == managerId.HasValue ) return;
+
+			Employee manager = employees.SingleOrDefault(emp => emp.EmployeeId == managerId);
+
+			if (manager != null)
+				emailAddresses.Add(manager.EmailAddress);
+	    }
+
+	    private static IList<Employee> getEmployees( Entities context )
+	    {
+		    IList<Employee> employees = context.Employees.ToList();
+		    return employees;
+	    }
+
+	    private static IList<Employee> getPeopleToEmail( Entities context )
+	    {
+		    IList<Employee> peopleToEmail = ( from asub in context.ActivitySubmissions
+								join emp in context.Employees on asub.EmployeeId equals emp.EmployeeId
+								where asub.ItemStatu.ItemStatusId == (int)ActivitySubmissionStatus.AwaitingApproval
+								select emp ).ToList();
+
+		    return peopleToEmail;
+	    }
     }
 }
