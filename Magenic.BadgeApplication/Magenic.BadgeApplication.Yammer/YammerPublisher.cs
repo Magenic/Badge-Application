@@ -59,8 +59,8 @@ namespace Magenic.BadgeApplication.Yammer
                 string msg = string.Format(YammerMessageText,
                     yammerUser.UserID,
                     earnedBadge.Name,
-                    broadcastToAll.ToString(),
-					"https://badgeapplication.magenic.com/Leaderboard/show/" + earnedBadge.EmployeeADName,
+                    broadcastToAll,
+                    "https://badgeapplication.magenic.com/Leaderboard/show/" + earnedBadge.EmployeeADName,
                     earnedBadge.ImagePath,
                     earnedBadge.Name,
                     earnedBadge.Tagline);

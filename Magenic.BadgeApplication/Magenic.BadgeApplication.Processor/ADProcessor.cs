@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace Magenic.BadgeApplication.Processor
 {
-    public class ADProcessor
+    public partial class ADProcessor
     {
         public void Start()
         {
@@ -18,23 +18,7 @@ namespace Magenic.BadgeApplication.Processor
             {
                 try
                 {
-                    var adDal = IoC.Container.Resolve<IAuthorizeLogOn>();
-                    var dal = IoC.Container.Resolve<ICustomIdentityDAL>();
-
-                    var employees = adDal.RetrieveActiveUsers().AsQueryable();
-
-                    InsertEmployees(employees, adDal, dal);
-
-                    UploadPhotos(employees, adDal, dal);
-
-                    MarkTermDateForMissingEmployees(adDal, dal);
-
-                    SaveManagerInformation(employees, adDal, dal);
-
-                    foreach (var employeeADName in employees)
-                    {
-                        dal.SetManagerPermission(employeeADName);
-                    }
+	                adCycle();
                 }
                 catch (Exception ex)
                 {
@@ -42,13 +26,34 @@ namespace Magenic.BadgeApplication.Processor
                 }
                 finally
                 {
-                    Thread.Sleep(SleepInterval);
+                    Thread.Sleep(sleepInterval);
                 }
             }
         }
 
-        private void MarkTermDateForMissingEmployees(IAuthorizeLogOn adDal, ICustomIdentityDAL dal)
+        public void adCycle()
         {
+            IAuthorizeLogOn adDal = IoC.Container.Resolve<IAuthorizeLogOn>();
+            ICustomIdentityDAL dbDal = IoC.Container.Resolve<ICustomIdentityDAL>();
+
+            IQueryable<string> employees = adDal.RetrieveActiveUsers().AsQueryable();
+
+            insertEmployees( employees, adDal, dbDal );
+
+            uploadPhotos( adDal, dbDal );
+
+            markTermDateForMissingEmployees( adDal, dbDal );
+
+            saveManagerInformation( employees, adDal, dbDal );
+
+            foreach ( string employeeADName in employees )
+                dbDal.SetManagerPermission( employeeADName );
+        }
+
+
+        private void markTermDateForMissingEmployees(IAuthorizeLogOn adDal, ICustomIdentityDAL dal)
+        {
+			// ZISS: this code should be replaced by property injection.0
             var userCollectionDal = IoC.Container.Resolve<IUserCollectionDAL>();
             var userCollection = userCollectionDal.GetActiveAdUsers();
 
@@ -61,12 +66,12 @@ namespace Magenic.BadgeApplication.Processor
             }
         }
 
-        private int SleepInterval
+        private int sleepInterval
         {
             get { return int.Parse(ConfigurationManager.AppSettings["SleepIntervalInMilliseconds"]); }
         }
 
-        private static void SaveManagerInformation(IEnumerable<string> employees, IAuthorizeLogOn adDal, ICustomIdentityDAL dal)
+        private static void saveManagerInformation(IEnumerable<string> employees, IAuthorizeLogOn adDal, ICustomIdentityDAL dal)
         {
             foreach (var employeeADName in employees)
             {
@@ -75,24 +80,31 @@ namespace Magenic.BadgeApplication.Processor
             }
         }
 
-        private void UploadPhotos(IEnumerable<string> employees, IAuthorizeLogOn adDal, ICustomIdentityDAL dal)
+        private void uploadPhotos(IAuthorizeLogOn adDal, ICustomIdentityDAL dal)
         {
             var allEmployeePhotos = adDal.RetrieveUsersAndPhotos();
             foreach (var kvp in allEmployeePhotos)
             {
-                dal.SaveEmployeePhoto(kvp.Value, kvp.Key);
+	            try
+	            {
+		            dal.SaveEmployeePhoto( kvp.Value, kvp.Key );
+	            }
+	            catch ( Exception ex )
+	            {
+		            break;
+	            }
             }
         }
 
-        private void InsertEmployees(IEnumerable<string> employees, IAuthorizeLogOn adDal, ICustomIdentityDAL dal)
+        private void insertEmployees(IEnumerable<string> employees, IAuthorizeLogOn adDal, ICustomIdentityDAL dal)
         {
             foreach (var employeeADName in employees)
             {
-                InsertUserInfoFromAD(adDal, dal, employeeADName);
+                insertUserInfoFromAD(adDal, dal, employeeADName);
             }
         }
 
-        private void InsertUserInfoFromAD(IAuthorizeLogOn adDal, ICustomIdentityDAL dal, string userName)
+        private void insertUserInfoFromAD(IAuthorizeLogOn adDal, ICustomIdentityDAL dal, string userName)
         {
             var userADInfo = adDal.RetrieveUserInformation(userName);
             if (userADInfo != null)
