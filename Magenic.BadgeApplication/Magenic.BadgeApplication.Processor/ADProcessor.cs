@@ -31,26 +31,24 @@ namespace Magenic.BadgeApplication.Processor
             }
         }
 
-	    public void adCycle()
-	    {
-			IAuthorizeLogOn adDal = IoC.Container.Resolve<IAuthorizeLogOn>();
-			ICustomIdentityDAL dbDal = IoC.Container.Resolve<ICustomIdentityDAL>();
+        public void adCycle()
+        {
+            IAuthorizeLogOn adDal = IoC.Container.Resolve<IAuthorizeLogOn>();
+            ICustomIdentityDAL dbDal = IoC.Container.Resolve<ICustomIdentityDAL>();
 
-			IQueryable<string> employees = adDal.RetrieveActiveUsers().AsQueryable();
+            IQueryable<string> employees = adDal.RetrieveActiveUsers().AsQueryable();
 
-			insertEmployees(employees, adDal, dbDal);
+            insertEmployees( employees, adDal, dbDal );
 
-			uploadPhotos(adDal, dbDal);
+            uploadPhotos( adDal, dbDal );
 
-			markTermDateForMissingEmployees(adDal, dbDal);
+            markTermDateForMissingEmployees( adDal, dbDal );
 
-			saveManagerInformation(employees, adDal, dbDal);
+            saveManagerInformation( employees, adDal, dbDal );
 
-			foreach (string employeeADName in employees)
-			{
-				dbDal.SetManagerPermission(employeeADName);
-			}
-		}
+            foreach ( string employeeADName in employees )
+                dbDal.SetManagerPermission( employeeADName );
+        }
 
 
         private void markTermDateForMissingEmployees(IAuthorizeLogOn adDal, ICustomIdentityDAL dal)
