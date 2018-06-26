@@ -41,7 +41,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         {
             using (var ctx = new Entities())
             {
-                BadgeAward badgeAward = ctx.BadgeAwards.SingleOrDefault(badges => badges.BadgeAwardId == badgeAwardId);
+                BadgeAward badgeAward = ctx.BadgeAwards.Include(b => b.Badge).SingleOrDefault(badges => badges.BadgeAwardId == badgeAwardId);
                 if (badgeAward == null)
                 { 
                     throw new NotFoundException(string.Format("Badge award with id {0} was not found", badgeAwardId));
