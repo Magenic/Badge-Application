@@ -3,6 +3,7 @@ using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Teams.Messages;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -19,14 +20,24 @@ namespace Magenic.BadgeApplication.Teams
         private IRestClientFactory _restClientFactory;
         private IRestClient _restClient;
 
-        private string TeamsMessageText
+        private string FlowEndpoint
         {
-            get { return ConfigurationManager.AppSettings["TeamsMessage"]; }
+            get { return ConfigurationManager.AppSettings["FlowEndpoint"]; }
+        }
+
+        private string TeamsBaseUrl
+        {
+            get { return ConfigurationManager.AppSettings["TeamsBaseURL"]; }
         }
 
         private string TeamsWebhookEndpoint
         {
             get { return ConfigurationManager.AppSettings["TeamsWebhookEndpoint"]; }
+        }
+
+        private string TeamsMessageText
+        {
+            get { return ConfigurationManager.AppSettings["TeamsMessage"]; }
         }
 
         public TeamsPublisher() : this(IoC.Container)
@@ -39,8 +50,8 @@ namespace Magenic.BadgeApplication.Teams
 
             _restClientFactory = _factory.Resolve<IRestClientFactory>();
 
-            var teamsBaseUrl = ConfigurationManager.AppSettings["TeamsBaseURL"];
-            _restClient = _restClientFactory.Create(new Uri(teamsBaseUrl));
+            var flowBaseUrl = ConfigurationManager.AppSettings["FlowBaseURL"];
+            _restClient = _restClientFactory.Create(new Uri(flowBaseUrl));
         }
 
         public void Publish(EarnedBadgeItemDTO earnedBadge)
@@ -66,9 +77,15 @@ namespace Magenic.BadgeApplication.Teams
                 {
                     text = msg
                 };
+                var flowMessageRequest = new FlowMessageRequest
+                {
+                    webhookUrl = $"{TeamsBaseUrl}/{TeamsWebhookEndpoint}",
+                    messageSubject = "Badge Award!", // TODO: do we need a subject?
+                    messageBody = JsonConvert.SerializeObject(postMessage)
+                };
 
                 //try adding the message
-                MakePostRequest(postMessage, TeamsWebhookEndpoint);
+                MakePostRequest(flowMessageRequest, FlowEndpoint);
             }
             catch (Exception)
             {
@@ -85,7 +102,7 @@ namespace Magenic.BadgeApplication.Teams
                 ParameterType.RequestBody);
 
             var response = RetryRestRequest(request, TimeSpan.FromSeconds(1));
-            if (response.StatusCode != HttpStatusCode.OK)
+            if ((int)response.StatusCode < 200)
             {
                 throw new Exception("Error in POST");
             }
