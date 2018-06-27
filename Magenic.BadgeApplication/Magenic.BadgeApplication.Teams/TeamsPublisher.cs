@@ -40,6 +40,11 @@ namespace Magenic.BadgeApplication.Teams
             get { return ConfigurationManager.AppSettings["TeamsMessage"]; }
         }
 
+        private string LeaderboardUrl
+        {
+            get { return ConfigurationManager.AppSettings["LeaderboardURL"]; }
+        }
+
         public TeamsPublisher() : this(IoC.Container)
         {
         }
@@ -65,11 +70,13 @@ namespace Magenic.BadgeApplication.Teams
                 //let's post a message now to this group
                 var broadcastToAll = false;
 
+                var leaderboardUrl = string.Format(LeaderboardUrl, earnedBadge.EmployeeADName);
+
                 var msg = string.Format(TeamsMessageText,
                     "12345", // TODO: Find a way to get the "yammerUser.UserID"
                     earnedBadge.Name,
                     broadcastToAll,
-                    "https://badgeapplication.magenic.com/Leaderboard/show/" + earnedBadge.EmployeeADName,
+                    leaderboardUrl,
                     earnedBadge.ImagePath,
                     earnedBadge.Name,
                     earnedBadge.Tagline);
@@ -102,7 +109,7 @@ namespace Magenic.BadgeApplication.Teams
                 ParameterType.RequestBody);
 
             var response = RetryRestRequest(request, TimeSpan.FromSeconds(1));
-            if ((int)response.StatusCode < 200)
+            if ((int)response.StatusCode < 200 || (int)response.StatusCode > 206)
             {
                 throw new Exception("Error in POST");
             }
