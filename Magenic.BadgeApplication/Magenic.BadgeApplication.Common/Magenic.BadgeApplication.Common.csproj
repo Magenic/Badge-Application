@@ -66,6 +66,9 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -169,6 +172,7 @@
     <Compile Include="Interfaces\IQueueEventLogDAL.cs" />
     <Compile Include="Interfaces\IQueueItemDAL.cs" />
     <Compile Include="Interfaces\IDTORepository.cs" />
+    <Compile Include="Interfaces\IRestClientFactory.cs" />
     <Compile Include="Interfaces\ISendMessageDAL.cs" />
     <Compile Include="Interfaces\ISubmitActivity.cs" />
     <Compile Include="Interfaces\ISubmitActivityDAL.cs" />
@@ -198,7 +202,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
