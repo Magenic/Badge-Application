@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common.DTO;
+using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Teams.Messages;
 using Newtonsoft.Json;
@@ -38,6 +39,11 @@ namespace Magenic.BadgeApplication.Teams
         private string TeamsMessageText
         {
             get { return ConfigurationManager.AppSettings["TeamsMessage"]; }
+        }
+
+        private string MessageText
+        {
+            get { return ConfigurationManager.AppSettings["Message"]; }
         }
 
         private string LeaderboardUrl
@@ -84,11 +90,22 @@ namespace Magenic.BadgeApplication.Teams
                 {
                     text = msg
                 };
+
+                // TODO: Add logic to handle event type, using MS Teams for now
+
+                var body = string.Format(MessageText,
+                    "12345", // TODO: Get user details
+                    earnedBadge.Name);
+
                 var flowMessageRequest = new FlowMessageRequest
                 {
-                    webhookUrl = $"{TeamsBaseUrl}/{TeamsWebhookEndpoint}",
-                    messageSubject = "Badge Award!", // TODO: do we need a subject?
-                    messageBody = JsonConvert.SerializeObject(postMessage)
+                    eventType = EventType.TeamsEventType.ToString(),
+                    summary = "Badge Award!", // TODO: Think about how to construct summary text
+                    body = body,
+                    ogImage = earnedBadge.ImagePath,
+                    ogTitle = earnedBadge.Name,
+                    ogDescription = earnedBadge.Tagline,
+                    ogUrl = leaderboardUrl
                 };
 
                 //try adding the message

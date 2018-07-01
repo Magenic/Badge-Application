@@ -2,10 +2,18 @@
 {
     public class FlowMessageRequest : Message
     {
-        public string webhookUrl { get; set; }
+        public string eventType { get; set; }
 
-        public string messageSubject { get; set; }
+        public string summary { get; set; }
 
-        public string messageBody { get; set; }
+        public string body { get; set; }
+
+        public string ogImage { get; set; }
+
+        public string ogTitle { get; set; }
+
+        public string ogDescription { get; set; }
+
+        public string ogUrl { get; set; }
     }
 }

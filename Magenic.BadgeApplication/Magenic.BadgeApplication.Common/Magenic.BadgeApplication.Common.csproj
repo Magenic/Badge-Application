@@ -109,6 +109,7 @@
     <Compile Include="Enums\ActivitySubmissionStatus.cs" />
     <Compile Include="Enums\BadgeStatus.cs" />
     <Compile Include="Enums\BadgeType.cs" />
+    <Compile Include="Enums\EventType.cs" />
     <Compile Include="Enums\PermissionType.cs" />
     <Compile Include="Enums\PhotoSize.cs" />
     <Compile Include="Enums\QueueEventType.cs" />
