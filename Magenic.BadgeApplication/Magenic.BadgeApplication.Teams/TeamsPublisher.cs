@@ -4,11 +4,13 @@ using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Teams.Messages;
+using MagenicDataModel;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Net;
 using System.Threading;
 
@@ -51,6 +53,21 @@ namespace Magenic.BadgeApplication.Teams
             get { return ConfigurationManager.AppSettings["LeaderboardURL"]; }
         }
 
+        private string DataServiceUrl
+        {
+            get { return ConfigurationManager.AppSettings["ITDataServiceURL"]; }
+        }
+
+        private string DataServiceUsername
+        {
+            get { return ConfigurationManager.AppSettings["ITDataServiceUsername"]; }
+        }
+
+        private string DataServicePassword
+        {
+            get { return ConfigurationManager.AppSettings["ITDataServicePassword"]; }
+        }
+
         public TeamsPublisher() : this(IoC.Container)
         {
         }
@@ -67,11 +84,17 @@ namespace Magenic.BadgeApplication.Teams
 
         public void Publish(EarnedBadgeItemDTO earnedBadge)
         {
-            // TODO: Form user url from Yammer
+            var userEmail = $"{earnedBadge.EmployeeADName}@magenic.com";
 
             try
             {
-                // TODO: Get the user that earned the badge using user url
+                // Get the user that earned the badge from IT's service endpoint
+                var dataServiceUri = new Uri(DataServiceUrl, UriKind.Absolute);
+                var context = new MagenicDataEntities(dataServiceUri)
+                {
+                    Credentials = new NetworkCredential(DataServiceUsername, DataServicePassword)
+                };
+                var employee = context.vwODataEmployees.Where(e => e.EMailAddress == userEmail).FirstOrDefault();
 
                 //let's post a message now to this group
                 var broadcastToAll = false;
@@ -79,7 +102,7 @@ namespace Magenic.BadgeApplication.Teams
                 var leaderboardUrl = string.Format(LeaderboardUrl, earnedBadge.EmployeeADName);
 
                 var msg = string.Format(TeamsMessageText,
-                    "12345", // TODO: Find a way to get the "yammerUser.UserID"
+                    employee.EmployeeUserID,
                     earnedBadge.Name,
                     broadcastToAll,
                     leaderboardUrl,
@@ -94,7 +117,7 @@ namespace Magenic.BadgeApplication.Teams
                 // TODO: Add logic to handle event type, using MS Teams for now
 
                 var body = string.Format(MessageText,
-                    "12345", // TODO: Get user details
+                    employee.EmployeeUserID,
                     earnedBadge.Name);
 
                 var flowMessageRequest = new FlowMessageRequest
