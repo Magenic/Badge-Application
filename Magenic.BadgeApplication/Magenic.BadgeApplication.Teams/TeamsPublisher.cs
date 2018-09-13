@@ -92,7 +92,7 @@ namespace Magenic.BadgeApplication.Teams
                 var dataServiceUri = new Uri(DataServiceUrl, UriKind.Absolute);
                 var context = new MagenicDataEntities(dataServiceUri)
                 {
-                    Credentials = new NetworkCredential(DataServiceUsername, DataServicePassword)
+                    Credentials = CredentialCache.DefaultCredentials
                 };
                 var employee = context.vwODataEmployees.Where(e => e.EMailAddress == userEmail).FirstOrDefault();
 
