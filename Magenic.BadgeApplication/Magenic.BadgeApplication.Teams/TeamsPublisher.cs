@@ -102,7 +102,7 @@ namespace Magenic.BadgeApplication.Teams
                 var leaderboardUrl = string.Format(LeaderboardUrl, earnedBadge.EmployeeADName);
 
                 var msg = string.Format(TeamsMessageText,
-                    employee.EmployeeUserID,
+                    employee.EmployeeFullName,
                     earnedBadge.Name,
                     broadcastToAll,
                     leaderboardUrl,
@@ -134,7 +134,7 @@ namespace Magenic.BadgeApplication.Teams
                 //try adding the message
                 MakePostRequest(flowMessageRequest, FlowEndpoint);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // TODO: handle error responses
                 throw;
