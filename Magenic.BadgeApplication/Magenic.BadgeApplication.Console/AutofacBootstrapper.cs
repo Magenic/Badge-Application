@@ -26,6 +26,9 @@ namespace Magenic.BadgeApplication.Console
             var adapters = Assembly.Load("Magenic.BadgeApplication.Yammer");
             builder.RegisterAssemblyTypes(adapters).AsImplementedInterfaces();
 
+            var teamsAdapter = Assembly.Load("Magenic.BadgeApplication.Teams");
+            builder.RegisterAssemblyTypes(teamsAdapter).AsImplementedInterfaces();
+
             builder.RegisterGeneric(typeof(ObjectFactory<>)).As(typeof(IObjectFactory<>));
 
             IoC.Container = builder.Build();
