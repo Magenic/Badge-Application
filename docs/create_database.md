@@ -6,7 +6,7 @@
 
 2. Delete the _CurrentActiveBadges_ and _EarnedBadges_ views
 
-3. Run _drop_create_db_from_edmx_singularized.sql_
+3. Run _drop_create_db_from_edmx_singularized.sql_ (see `files`)
 
 4. Run _PostDeployScaffolding.sql_ (can be found in the .sqlproj directory)
 

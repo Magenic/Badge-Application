@@ -2,6 +2,8 @@
 
 ### Emulating a Badge Award on your database
 
+_Prerequisite: [Creating the database][createDatabase]_
+
 1. Verify if the required data exists:  
 ```sql
 -- Verify if there are existing records
@@ -71,3 +73,5 @@ INSERT INTO [dbo].[QueueItem]
 
 GO
 ```
+
+[createDatabase]: create_database.md
