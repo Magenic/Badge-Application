@@ -12,6 +12,7 @@
 
 1. Clone the project from the Github repository.
 2. Build the solution. Make sure that no errors are encountered.
+3. Run the different projects to make sure that all are working.
 
 Important note related to Nuget Packages under the Mvc and WebApi projects:
 * Update Microsoft.AspNet.Mvc to version 5.2.6
