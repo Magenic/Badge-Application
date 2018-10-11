@@ -11,6 +11,7 @@ _Prerequisite: [Posting to Microsoft Teams][postingToTeams]_
 2. Once in the _Manage your flows_ page, click on _Create from blank_
 
    ![Create from blank][flow1Create1]
+
    ![Create from blank again][flow1Create2]
 
 3. You'll be asked to search for connectors and triggers. In the search box, you can just type _http_, and you should see the HTTP trigger in the suggestions that will appear. Select it.
