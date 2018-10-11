@@ -18,6 +18,8 @@
 
    ![Webhook generated URL][webhookGeneratedUrl]
 
+   Don't forget to Save.
+
 ### Sending a message to the team channel
 
 You can try sending a message directly to the channel via Postman:
