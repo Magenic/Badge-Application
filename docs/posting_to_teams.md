@@ -60,7 +60,7 @@ Messages sent to the webhook must follow the [MessageCard][messageCard] format. 
 }
 ```
 
-Note though that in our implementation, we are not directly calling the Teams webhook URL. Instead, we have set up a Flow that does that, providing flexibility as to where the notification message should be sent, depending on certain provided parameters in the request body formed in code.
+Note though that in our implementation, we are not directly calling the Teams webhook URL. Instead, we have set up a Flow that does that, providing flexibility as to where the notification message should be sent, depending on certain provided parameters in the request body formed in code. See _[Creating the Flow][createFlow]_.
 
 [channelConnectorsOption]: files/channel_connectors_option.jpg
 [channelConnectors]: files/channel_connectors.jpg
@@ -68,3 +68,4 @@ Note though that in our implementation, we are not directly calling the Teams we
 [webhookGeneratedUrl]: files/webhook_generated_url.jpg
 [messageCard]: https://docs.microsoft.com/en-us/outlook/actionable-messages/actionable-messages-via-connectors
 [sendToTeamsViaPostman]: files/send_to_teams_via_postman.jpg
+[createFlow]: create_flow.md
