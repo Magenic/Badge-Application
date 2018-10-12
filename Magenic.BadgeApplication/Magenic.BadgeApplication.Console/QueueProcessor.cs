@@ -1,4 +1,6 @@
-﻿using System.ServiceProcess;
+﻿using System;
+using System.ServiceProcess;
+using System.Threading;
 
 namespace Magenic.BadgeApplication.Console
 {
@@ -17,6 +19,17 @@ namespace Magenic.BadgeApplication.Console
         protected override void OnStop()
         {
             // TODO: Add code here to perform any tear-down necessary to stop your service.
+        }
+
+        internal void RunAsConsole(string[] args)
+        {
+            OnStart(args);
+
+            System.Console.ReadLine();
+
+            OnStop();
+
+            Thread.Sleep(TimeSpan.FromSeconds(10d));
         }
     }
 }
