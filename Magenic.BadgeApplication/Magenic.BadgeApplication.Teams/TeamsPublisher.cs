@@ -5,7 +5,6 @@ using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Teams.Messages;
 using MagenicDataModel;
-using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -28,21 +27,6 @@ namespace Magenic.BadgeApplication.Teams
             get { return ConfigurationManager.AppSettings["FlowEndpoint"]; }
         }
 
-        private string TeamsBaseUrl
-        {
-            get { return ConfigurationManager.AppSettings["TeamsBaseURL"]; }
-        }
-
-        private string TeamsWebhookEndpoint
-        {
-            get { return ConfigurationManager.AppSettings["TeamsWebhookEndpoint"]; }
-        }
-
-        private string TeamsMessageText
-        {
-            get { return ConfigurationManager.AppSettings["TeamsMessage"]; }
-        }
-
         private string MessageText
         {
             get { return ConfigurationManager.AppSettings["Message"]; }
@@ -56,16 +40,6 @@ namespace Magenic.BadgeApplication.Teams
         private string DataServiceUrl
         {
             get { return ConfigurationManager.AppSettings["ITDataServiceURL"]; }
-        }
-
-        private string DataServiceUsername
-        {
-            get { return ConfigurationManager.AppSettings["ITDataServiceUsername"]; }
-        }
-
-        private string DataServicePassword
-        {
-            get { return ConfigurationManager.AppSettings["ITDataServicePassword"]; }
         }
 
         public TeamsPublisher() : this(IoC.Container)
@@ -96,33 +70,15 @@ namespace Magenic.BadgeApplication.Teams
                 };
                 var employee = context.vwODataEmployees.Where(e => e.EMailAddress == userEmail).FirstOrDefault();
 
-                //let's post a message now to this group
-                var broadcastToAll = false;
-
                 var leaderboardUrl = string.Format(LeaderboardUrl, earnedBadge.EmployeeADName);
 
-                var msg = string.Format(TeamsMessageText,
-                    employee.EmployeeFullName,
-                    earnedBadge.Name,
-                    broadcastToAll,
-                    leaderboardUrl,
-                    earnedBadge.ImagePath,
-                    earnedBadge.Name,
-                    earnedBadge.Tagline);
-                var postMessage = new PostWebhookMessage
-                {
-                    text = msg
-                };
-
-                // TODO: Add logic to handle event type, using MS Teams for now
-
                 var body = string.Format(MessageText,
-                    employee.EmployeeUserID,
+                    employee.EmployeeFullName,
                     earnedBadge.Name);
 
                 var flowMessageRequest = new FlowMessageRequest
                 {
-                    eventType = EventType.TeamsEventType.ToString(),
+                    eventType = EventType.TeamsEventType.ToString(), // TODO: Add logic to handle event type, using MS Teams for now
                     summary = "Badge Award!", // TODO: Think about how to construct summary text
                     body = body,
                     ogImage = earnedBadge.ImagePath,
@@ -134,7 +90,7 @@ namespace Magenic.BadgeApplication.Teams
                 //try adding the message
                 MakePostRequest(flowMessageRequest, FlowEndpoint);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO: handle error responses
                 throw;
