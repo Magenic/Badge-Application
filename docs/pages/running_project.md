@@ -31,7 +31,7 @@ _Note: URLs necessary for running the project are already set up, but you may re
 [emulateAward]: emulate_award.md
 [postingToTeams]: posting_to_teams.md
 [createFlow]: create_flow.md
-[refToTeams]: files/add_ref_to_teams.png
-[processItemsForTeams]: files/process_items_for_teams.png
-[preventDataFromClearing]: files/prevent_test_data_from_clearing.png
-[sampleOnTeams]: files/sample_on_teams.PNG
+[refToTeams]: ./../files/add_ref_to_teams.png
+[processItemsForTeams]: ./../files/process_items_for_teams.png
+[preventDataFromClearing]: ./../files/prevent_test_data_from_clearing.png
+[sampleOnTeams]: ./../files/sample_on_teams.PNG
