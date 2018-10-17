@@ -1,4 +1,5 @@
-﻿using System.ServiceProcess;
+﻿using System;
+using System.ServiceProcess;
 
 namespace Magenic.BadgeApplication.Console
 {
@@ -6,19 +7,27 @@ namespace Magenic.BadgeApplication.Console
     {
         static void Main(string[] args)
         {
-            if (args.Length == 0)
+            if (Environment.UserInteractive)
             {
-                var servicesToRun = new ServiceBase[]
-                {
-                    new QueueProcessor(),
-                    new NotificationProcessor()
-                };
-                ServiceBase.Run(servicesToRun);
+                var queueProcessor = new QueueProcessor();
+                queueProcessor.RunAsConsole(args);
             }
             else
             {
-                NotificationStarter.Start();
-                Starter.Start();
+                if (args.Length == 0)
+                {
+                    var servicesToRun = new ServiceBase[]
+                    {
+                    new QueueProcessor(),
+                    new NotificationProcessor()
+                    };
+                    ServiceBase.Run(servicesToRun);
+                }
+                else
+                {
+                    NotificationStarter.Start();
+                    Starter.Start();
+                }
             }
         }
     }
