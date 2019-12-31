@@ -157,3 +157,4 @@ $RECYCLE.BIN/
 
 # SQL Project file use to avoid data loss
 *.jfm
+/Magenic.BadgeApplication/.vs/Magenic.BadgeApplication
