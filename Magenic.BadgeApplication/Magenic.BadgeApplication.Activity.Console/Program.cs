@@ -24,7 +24,7 @@ namespace Magenic.BadgeApplication.Activity.Console
             }
             else
             {
-                Starter.Start(true);
+                _ = Starter.Start(true);
                 System.Console.WriteLine("Press any key when done debugging...");
 
                 System.Console.ReadKey(true);
