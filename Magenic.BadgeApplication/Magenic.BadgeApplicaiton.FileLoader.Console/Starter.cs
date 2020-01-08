@@ -21,7 +21,7 @@ namespace Magenic.BadgeApplication.FileLoader.Console
                 }
                 else
                 {
-                    Task.Run(() => adProcessor.StartAsync());
+                    _ = Task.Run(() => adProcessor.StartAsync());
                 }
             }
             catch (Exception ex)

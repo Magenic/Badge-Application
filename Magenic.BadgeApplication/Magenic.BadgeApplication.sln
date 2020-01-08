@@ -1,12 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2026
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magenic.BadgeApplication.Mvc", "Magenic.BadgeApplication.Mvc\Magenic.BadgeApplication.Mvc.csproj", "{5C2D04F9-153E-43BE-990B-6D6FCF5831FE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A6B06300-2261-4136-A86F-2BE3DD434CD0}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		CodeDictionary.xml = CodeDictionary.xml
 		Magenic.BadgeApplication.ruleset = Magenic.BadgeApplication.ruleset
 		..\README.md = ..\README.md

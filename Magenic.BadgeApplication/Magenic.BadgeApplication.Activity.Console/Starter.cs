@@ -22,7 +22,7 @@ namespace Magenic.BadgeApplication.Activity.Console
                 }
                 else
                 {
-                    Task.Run(() => activityLoader.StartAsync());
+                    _ = Task.Run(() => activityLoader.StartAsync());
                 }
             }
             catch (Exception ex)

@@ -89,7 +89,7 @@ namespace Magenic.BadgeApplication.Processor
 	            {
 		            dal.SaveEmployeePhoto( kvp.Value, kvp.Key );
 	            }
-	            catch ( Exception ex )
+	            catch ( Exception )
 	            {
 		            break;
 	            }

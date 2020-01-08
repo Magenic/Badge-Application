@@ -27,7 +27,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF.Test
                     IList<Employee> peopleToEmail = sm._GetPeopleToEmail( context );
                     Assert.IsTrue( true );
                 }
-                catch ( Exception e )
+                catch ( Exception )
                 {
                     Assert.IsTrue( false );
                 }
