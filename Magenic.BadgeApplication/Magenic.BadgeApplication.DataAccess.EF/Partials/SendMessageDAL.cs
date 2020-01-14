@@ -5,16 +5,16 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 #if DEBUG
     public partial class SendMessageDAL
     {
-        internal IList<string> _GetEmailAddresses( IList<Employee> peopleToEmail, IList<Employee> employees )
+        internal IList<string> GetEmailAddresses( IList<Employee> peopleToEmail, IList<Employee> employees )
             => getEmailAddresses( peopleToEmail, employees );
 
-        internal void _AddEmailAddress( IList<Employee> employees, int? managerId, IList<string> emailAddresses )
+        internal void AddEmailAddress( IList<Employee> employees, int? managerId, IList<string> emailAddresses )
             => addEmailAddress( employees, managerId, emailAddresses );
 
-        internal IList<Employee> _GetEmployees( Entities context )
+        internal IList<Employee> GetEmployees( Entities context )
             => getEmployees( context );
 
-        internal IList<Employee> _GetPeopleToEmail( Entities context )
+        internal IList<Employee> GetPeopleToEmail( Entities context )
             => getPeopleToEmail( context );
     }
 #endif

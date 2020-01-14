@@ -38,7 +38,7 @@ namespace Magenic.BadgeApplication.Processor.Tests
             Mock<ICustomIdentityDAL> dbDalMock = new Mock<ICustomIdentityDAL>();
             dbDalMock.Setup( d => d.SaveIdentity( It.IsAny<AuthorizeLogOnDTO>() ) );
             dbDalMock.Setup( d => d.SaveIdentity( It.IsAny<AuthorizeLogOnDTO>() ) );
-            adp._insertEmployees( employees, adDalMock.Object, dbDalMock.Object );
+            adp.InsertEmployees( employees, adDalMock.Object, dbDalMock.Object );
 
             adDalMock.VerifyAll();
             dbDalMock.VerifyAll();
@@ -59,7 +59,7 @@ namespace Magenic.BadgeApplication.Processor.Tests
             dbDalMock.Setup( d => d.SaveIdentity( It.IsAny<AuthorizeLogOnDTO>() ) );
 
             foreach ( string s in new List<string> { "emp1", "emp2", "emp3" } )
-                adp._insertUserInfoFromAD( adDalMock.Object, dbDalMock.Object, s );
+                adp.InsertUserInfoFromAD( adDalMock.Object, dbDalMock.Object, s );
 
             adDalMock.VerifyAll();
             dbDalMock.VerifyAll();
@@ -88,7 +88,7 @@ namespace Magenic.BadgeApplication.Processor.Tests
             dbDalMock.Setup( d => d.SetTerminationDate( "adUser2", It.IsAny<DateTime>() ) );
             dbDalMock.Setup( d => d.SetTerminationDate( "adUser4", It.IsAny<DateTime>() ) );
 
-            adp._markTermDateForMissingEmployees( adDalMock.Object, dbDalMock.Object );
+            adp.MarkTermDateForMissingEmployees( adDalMock.Object, dbDalMock.Object );
 
             adDalMock.VerifyAll();
             dbDalMock.VerifyAll();
@@ -116,7 +116,7 @@ namespace Magenic.BadgeApplication.Processor.Tests
             dbDalMock.Setup( d => d.SaveEmployeePhoto( It.IsAny<byte[]>(), "emp4" ) );
             dbDalMock.Setup( d => d.SaveEmployeePhoto( It.IsAny<byte[]>(), "emp5" ) );
 
-            new ADProcessor()._uploadPhotos( adDalMock.Object, dbDalMock.Object );
+            new ADProcessor().UploadPhotos( adDalMock.Object, dbDalMock.Object );
 
             adDalMock.VerifyAll();
             dbDalMock.VerifyAll();
@@ -138,7 +138,7 @@ namespace Magenic.BadgeApplication.Processor.Tests
                 dbDalMock.Setup( d => d.SaveManagerInfo( It.IsAny<AuthorizeLogOnDTO>() ) );
             }
 
-            ADProcessor._saveManagerInformation( employees, adDalMock.Object, dbDalMock.Object );
+            ADProcessor.SaveManagerInformation( employees, adDalMock.Object, dbDalMock.Object );
             adDalMock.VerifyAll();
             dbDalMock.VerifyAll();
         }

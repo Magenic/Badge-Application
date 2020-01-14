@@ -24,7 +24,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF.Test
             {
                 try
                 {
-                    IList<Employee> peopleToEmail = sm._GetPeopleToEmail( context );
+                    IList<Employee> peopleToEmail = sm.GetPeopleToEmail( context );
                     Assert.IsTrue( true );
                 }
                 catch ( Exception )
@@ -41,7 +41,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF.Test
             IList<Employee> employees = new List<Employee>();
             int? managerId = 88;
             IList<string> emailAddress = new List<string>();
-            sm._AddEmailAddress( employees, managerId, emailAddress );
+            sm.AddEmailAddress( employees, managerId, emailAddress );
         }
 
         //[TestMethod]
