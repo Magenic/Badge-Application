@@ -30,7 +30,9 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 
             using ( MailMessage mailMessage = new MailMessage() )
             {
+#pragma warning disable CA1062 // Validate arguments of public methods
                 foreach (string emailAddress in sendToEmailAddresses)
+#pragma warning restore CA1062 // Validate arguments of public methods
                 {
                     if ( string.IsNullOrWhiteSpace( emailAddress ) )
                         continue;
