@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Magenic.BadgeApplication.DataAccess.EF.Test
 {
-    [TestClass]
+    [TestClass, Ignore]
     public class SendMessageDALTest
     {
         [TestMethod]

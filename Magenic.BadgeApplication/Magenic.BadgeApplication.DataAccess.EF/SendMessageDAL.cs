@@ -30,7 +30,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 
             using ( MailMessage mailMessage = new MailMessage() )
             {
-                foreach ( string emailAddress in sendToEmailAddresses )
+                foreach (string emailAddress in sendToEmailAddresses)
                 {
                     if ( string.IsNullOrWhiteSpace( emailAddress ) )
                         continue;

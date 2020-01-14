@@ -226,7 +226,6 @@
     <Compile Include="Controllers\ManageActivitiesController.cs" />
     <Compile Include="Controllers\LeaderboardController.cs" />
     <Compile Include="Controllers\PointsReportController.cs" />
-    <Compile Include="Controllers\WebApi\AccountsController.cs" />
     <Compile Include="ErrorController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>

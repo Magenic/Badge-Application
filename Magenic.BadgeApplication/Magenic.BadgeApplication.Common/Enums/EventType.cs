@@ -6,9 +6,9 @@
     public enum EventType
     {
         /// <summary>
-        /// A placeholder value that indicates an event for Microsoft Teams notification.
+        /// A placeholder value that indicates an event for Microsoft Teams notification for testing.
         /// </summary>
-        TeamsEventType = 0,
+        TeamsTestingEventType = 0,
         /// <summary>
         /// A placeholder value that indicates an event for Outlook notification using the configured Incoming Webhook.
         /// </summary>
@@ -16,6 +16,10 @@
         /// <summary>
         /// A placeholder value that indicates an event for Outlook notification using the Send an Email Flow action.
         /// </summary>
-        OutlookEventType2 = 2
+        OutlookEventType2 = 2,
+        /// <summary>
+        /// A placeholder value that indicates an event for Microsoft Teams notification for production.
+        /// </summary>
+        TeamsEventType = 3
     }
 }
