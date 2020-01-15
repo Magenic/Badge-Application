@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
 {
-    [TestClass]
+    [TestClass, Ignore]
     public class QueueItemDALTests : TransactionalTest
     {
         [TestMethod]

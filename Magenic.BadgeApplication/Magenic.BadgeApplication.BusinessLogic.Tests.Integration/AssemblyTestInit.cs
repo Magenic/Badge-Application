@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
 {
     [SuppressMessage("Microsoft.Design", "CA1053:StaticHolderTypesShouldNotHaveConstructors")]
-    [TestClass]
+    [TestClass, Ignore]
     public sealed class AssemblyTestInit
     {
         [AssemblyInitialize]
