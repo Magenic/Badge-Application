@@ -1,4 +1,4 @@
 ﻿[*.cs]
 
-# CS0628: New protected member declared in sealed class
-dotnet_diagnostic.CS0628.severity = none
+# CA1062: Validate arguments of public methods
+dotnet_diagnostic.CA1062.severity = none

@@ -78,7 +78,7 @@ namespace Magenic.BadgeApplication.Teams
 
                 var flowMessageRequest = new FlowMessageRequest
                 {
-                    eventType = EventType.TeamsEventType.ToString(), // TODO: Add logic to handle event type, using MS Teams for now
+                    eventType = EventType.TeamsTestingEventType.ToString(), // TODO: Add logic to handle event type, using MS Teams for now
                     summary = "Badge Award!", // TODO: Think about how to construct summary text
                     body = body,
                     ogImage = earnedBadge.ImagePath,

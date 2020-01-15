@@ -3,7 +3,7 @@ using Magenic.BadgeApplication.Common.DTO;
 
 namespace Magenic.BadgeApplication.Yammer.Tests
 {
-    [TestClass]
+    [TestClass, Ignore]
     public class YammerPublisherTests
     {
         [TestMethod]

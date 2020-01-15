@@ -57,9 +57,9 @@ namespace Magenic.BadgeApplication.Processor
 
         public void PublishUpdates(EarnedBadgeItemDTO earnedBadge)
         {
-            foreach (IPublisher publiser in _publishers)
+            foreach (IPublisher publisher in _publishers)
             {
-                publiser.Publish(earnedBadge);
+                publisher.Publish(earnedBadge);
             }
         }
 

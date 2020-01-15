@@ -43,7 +43,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
 
         #region Rules
 
-        protected static void AddObjectAuthorizationRules()
+        internal static void AddObjectAuthorizationRules()
         {
             BusinessRules.AddRule(typeof(BadgeDelete), new Csla.Rules.CommonRules.IsInRole(AuthorizationActions.EditObject, PermissionType.Administrator.ToString()));
         }

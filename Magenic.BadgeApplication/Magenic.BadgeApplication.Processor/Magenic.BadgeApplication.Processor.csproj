@@ -80,6 +80,10 @@
       <Project>{80df9c9b-f946-42b1-87e7-57ef40709382}</Project>
       <Name>Magenic.BadgeApplication.DataAccess.EF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Magenic.BadgeApplication.Teams\Magenic.BadgeApplication.Teams.csproj">
+      <Project>{ed0e0579-1178-4197-bab7-7b29b425cca2}</Project>
+      <Name>Magenic.BadgeApplication.Teams</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
