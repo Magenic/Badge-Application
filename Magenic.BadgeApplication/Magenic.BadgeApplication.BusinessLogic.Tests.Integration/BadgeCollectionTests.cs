@@ -8,7 +8,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
     /// <summary>
     /// Summary description for ActivityCollectionTests
     /// </summary>
-    [TestClass]
+    [TestClass, Ignore]
     public class BadgeCollectionTests
     {
         [TestMethod]

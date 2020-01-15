@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
 {
-    [TestClass]
+    [TestClass, Ignore]
     public class AdapterResolutionTests
     {
         [TestMethod]

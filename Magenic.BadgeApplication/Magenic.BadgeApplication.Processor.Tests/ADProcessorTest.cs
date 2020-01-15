@@ -12,7 +12,7 @@ using Moq;
 namespace Magenic.BadgeApplication.Processor.Tests
 {
 #if DEBUG
-    [TestClass]
+    [TestClass, Ignore]
     public class ADProcessorTest
     {
         [TestMethod]

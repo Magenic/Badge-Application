@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
 {
-    [TestClass]
+    [TestClass, Ignore]
     public class SecurityTests
     {
         [TestMethod]

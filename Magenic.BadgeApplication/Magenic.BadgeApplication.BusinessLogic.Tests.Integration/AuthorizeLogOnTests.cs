@@ -5,7 +5,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
     [TestClass]
     public class AuthorizeLogOnTests
     {
-        [TestMethod]
+        [TestMethod, Ignore]
         public void GetUserInfoTest()
         {
             var userInfo = new Authorization.AuthorizeLogOn();
