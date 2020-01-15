@@ -11,6 +11,7 @@ using Moq;
 
 namespace Magenic.BadgeApplication.Processor.Tests
 {
+#if DEBUG
     [TestClass]
     public class ADProcessorTest
     {
@@ -31,14 +32,14 @@ namespace Magenic.BadgeApplication.Processor.Tests
 
             IEnumerable<string> employees = new List<string> { "emp1", "emp2", "emp3" };
             Mock<IAuthorizeLogOn> adDalMock = new Mock<IAuthorizeLogOn>();
-            adDalMock.Setup( a => a.RetrieveUserInformation( "emp1", It.IsAny<string>() ) ).Returns( new AuthorizeLogOnDTO { UserName = "adEmp1" } );
-            adDalMock.Setup( a => a.RetrieveUserInformation( "emp2", It.IsAny<string>() ) ).Returns( (AuthorizeLogOnDTO)null );
-            adDalMock.Setup( a => a.RetrieveUserInformation( "emp3", It.IsAny<string>() ) ).Returns( new AuthorizeLogOnDTO { UserName = "adEmp3" } );
+            adDalMock.Setup(a => a.RetrieveUserInformation("emp1", It.IsAny<string>())).Returns(new AuthorizeLogOnDTO { UserName = "adEmp1" });
+            adDalMock.Setup(a => a.RetrieveUserInformation("emp2", It.IsAny<string>())).Returns((AuthorizeLogOnDTO)null);
+            adDalMock.Setup(a => a.RetrieveUserInformation("emp3", It.IsAny<string>())).Returns(new AuthorizeLogOnDTO { UserName = "adEmp3" });
 
             Mock<ICustomIdentityDAL> dbDalMock = new Mock<ICustomIdentityDAL>();
-            dbDalMock.Setup( d => d.SaveIdentity( It.IsAny<AuthorizeLogOnDTO>() ) );
-            dbDalMock.Setup( d => d.SaveIdentity( It.IsAny<AuthorizeLogOnDTO>() ) );
-            adp.InsertEmployees( employees, adDalMock.Object, dbDalMock.Object );
+            dbDalMock.Setup(d => d.SaveIdentity(It.IsAny<AuthorizeLogOnDTO>()));
+            dbDalMock.Setup(d => d.SaveIdentity(It.IsAny<AuthorizeLogOnDTO>()));
+            adp.InsertEmployees(employees, adDalMock.Object, dbDalMock.Object);
 
             adDalMock.VerifyAll();
             dbDalMock.VerifyAll();
@@ -143,4 +144,5 @@ namespace Magenic.BadgeApplication.Processor.Tests
             dbDalMock.VerifyAll();
         }
     }
+#endif
 }

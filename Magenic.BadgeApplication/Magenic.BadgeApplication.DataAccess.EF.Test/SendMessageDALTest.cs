@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Magenic.BadgeApplication.DataAccess.EF.Test
 {
+#if DEBUG
     [TestClass, Ignore]
     public class SendMessageDALTest
     {
@@ -44,6 +45,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF.Test
             sm.AddEmailAddress( employees, managerId, emailAddress );
         }
 
+
         //[TestMethod]
         //public void addEmailAddresses_Test()
         //{
@@ -64,4 +66,5 @@ namespace Magenic.BadgeApplication.DataAccess.EF.Test
         //    // sm._GetEmployees()
         //}
     }
+#endif
 }
