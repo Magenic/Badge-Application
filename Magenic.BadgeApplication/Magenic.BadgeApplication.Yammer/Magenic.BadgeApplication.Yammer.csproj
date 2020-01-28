@@ -80,6 +80,9 @@
       <Name>Magenic.BadgeApplication.Processor</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /y $(ProjectDir)$(OutDir)$(TargetFileName)  $(ProjectDir)\..\Magenic.BadgeApplication.BusinessLogic.Tests.Integration\bin\Debug
