@@ -64,10 +64,6 @@
     <Reference Include="Csla.Web">
       <HintPath>..\packages\CSLA-ASP.NET.4.5.501\lib\net45\Csla.Web.dll</HintPath>
     </Reference>
-    <Reference Include="Csla.Web.Mvc5, Version=4.5.501.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CSLA-ASP.NET-MVC5.4.5.501\lib\net45\Csla.Web.Mvc5.dll</HintPath>
-    </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\DocumentFormat.OpenXml.dll</HintPath>
@@ -427,6 +423,9 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\Badge.QA.pubxml" />
+    <None Include="Properties\PublishProfiles\Badge.Release.pubxml" />
+    <None Include="Properties\PublishProfiles\BadgeAppTest.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Magenic Badge Application - Magenic Prod.pubxml" />
     <Content Include="Scripts\global.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
@@ -708,6 +707,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Csla.Web.Mvc\Csla.Web.Mvc.csproj">
+      <Project>{9ca7d5ac-5e65-4c98-8b76-003ca8075139}</Project>
+      <Name>Csla.Web.Mvc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Magenic.BadgeApplication.Authorization.Mock\Magenic.BadgeApplication.Authorization.Mock.csproj">
       <Project>{d377b660-115a-4c50-84b0-672be243547d}</Project>
       <Name>Magenic.BadgeApplication.Authorization.Mock</Name>
