@@ -424,6 +424,7 @@
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\Badge.QA.pubxml" />
     <None Include="Properties\PublishProfiles\Badge.Release.pubxml" />
+    <None Include="Properties\PublishProfiles\BadgeAppTest.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Magenic Badge Application - Magenic Prod.pubxml" />
     <Content Include="Scripts\global.js" />
