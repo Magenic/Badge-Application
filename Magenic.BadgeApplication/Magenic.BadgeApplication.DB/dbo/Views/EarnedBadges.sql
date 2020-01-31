@@ -5,7 +5,7 @@ SELECT     TOP (100) PERCENT dbo.Employee.EmployeeId, dbo.Employee.FirstName, db
                       dbo.Badge.BadgeCreated, dbo.Badge.BadgeEffectiveStart, dbo.Badge.BadgeEffectiveEnd, dbo.Badge.BadgePriority, dbo.Badge.MultipleAwardPossible, 
                       dbo.Badge.DisplayOnce, dbo.Badge.ManagementApprovalRequired, dbo.Badge.ActivityPointsAmount, dbo.Badge.BadgeAwardValueAmount, 
                       dbo.Badge.BadgeApprovedById, dbo.Badge.BadgeApprovedDate, dbo.BadgeType.BadgeTypeName, dbo.BadgeType.PayrollEligible,
-					  dbo.BadgeAward.AwardDate, dbo.BadgeAward.AwardAmount, dbo.BadgeAward.PaidOut
+					  dbo.BadgeAward.AwardDate, dbo.BadgeAward.AwardAmount, dbo.BadgeAward.PaidOut, dbo.BadgeAward.BadgeAwardId
 FROM         dbo.BadgeAward INNER JOIN
 					  dbo.Badge ON dbo.BadgeAward.BadgeId = dbo.Badge.BadgeId INNER JOIN
                       dbo.BadgeType ON dbo.Badge.BadgeTypeId = dbo.BadgeType.BadgeTypeId INNER JOIN
