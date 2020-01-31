@@ -110,5 +110,6 @@
     <None Include="Magenic.BadgeApplication.DB.publish.xml" />
     <None Include="LocalTestDataScript.sql" />
     <None Include="LocalSQL2012.publish.xml" />
+    <None Include="Test.publish.xml" />
   </ItemGroup>
 </Project>
