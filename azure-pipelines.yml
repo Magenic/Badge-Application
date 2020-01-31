@@ -28,6 +28,12 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)\Magenic.BadgeApplication.DB\bin\Output'
+    Contents: 'Magenic.BadgeApplication.DB.dacpac'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
