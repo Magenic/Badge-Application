@@ -30,9 +30,9 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)\Magenic.BadgeApplication.DB\bin\Output'
+    SourceFolder: '$(Build.SourcesDirectory)\Magenic.BadgeApplication\Magenic.BadgeApplication.DB\bin\Output'
     Contents: 'Magenic.BadgeApplication.DB.dacpac'
-    TargetFolder: '$(build.artifactstagingdirectory)'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: VSTest@2
   inputs:
