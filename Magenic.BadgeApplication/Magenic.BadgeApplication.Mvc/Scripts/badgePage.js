@@ -17,10 +17,10 @@ ko.bindingHandlers.disableClick = {
 
 $(document).ready(function () {
     var BadgePageViewModel = {
-        showCorporateBadgeAllTab: ko.observable(true),
-        showCorporateBadgeEarnedTab: ko.observable(false),
-        showCommunityBadgeAllTab: ko.observable(true),
-        showCommunityBadgeEarnedTab: ko.observable(false),
+        showCorporateBadgeAllTab: ko.observable(false),
+        showCorporateBadgeEarnedTab: ko.observable(true),
+        showCommunityBadgeAllTab: ko.observable(false),
+        showCommunityBadgeEarnedTab: ko.observable(true),
 
         showAllCorporateBadges: function () {
             this.showCorporateBadgeAllTab(true);
