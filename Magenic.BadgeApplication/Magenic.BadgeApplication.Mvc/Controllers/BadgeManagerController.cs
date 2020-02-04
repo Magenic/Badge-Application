@@ -448,8 +448,15 @@ namespace Magenic.BadgeApplication.Controllers
             var activityIds = allActivities.Where(x => x.Name == BadgeName).Select(x => x.Id);
             var allBadges = await BadgeCollection.GetAllBadgesForActivitiesAsync(activityIds);
             var Badge = allBadges.Select(x => new { x.Id, x.BadgeAwardValue, x.BadgeAwardValueMax }).FirstOrDefault();
-            var valueObject = new { minval = Badge.BadgeAwardValue, maxval = Badge.BadgeAwardValueMax };
-            return Newtonsoft.Json.JsonConvert.SerializeObject(valueObject);;
+            if (Badge != null)
+            {
+                var valueObject = new { minval = Badge.BadgeAwardValue, maxval = Badge.BadgeAwardValueMax };
+                return Newtonsoft.Json.JsonConvert.SerializeObject(valueObject);
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
     }
 }

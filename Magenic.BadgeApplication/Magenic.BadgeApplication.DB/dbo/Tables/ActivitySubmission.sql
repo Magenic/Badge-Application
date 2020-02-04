@@ -6,6 +6,7 @@
     [SubmissionApprovedById]  INT           NULL,
     [SubmissionDate]        DATETIME2 (7) CONSTRAINT [df_ActivitySubmission_SubmissionDate] DEFAULT (getdate()) NOT NULL,
     [SubmissionStatusId]    INT           NOT NULL,
+    [AwardValue]            INT,
     CONSTRAINT [pk_ActivitySubmission] PRIMARY KEY CLUSTERED ([ActivitySubmissionId] ASC),
     CONSTRAINT [fk_ActivitySubmission_Activity] FOREIGN KEY ([ActivityId]) REFERENCES [dbo].[Activity] ([ActivityId]),
     CONSTRAINT [fk_ActivitySubmission_Employee] FOREIGN KEY ([EmployeeId]) REFERENCES [dbo].[Employee] ([EmployeeId]),
