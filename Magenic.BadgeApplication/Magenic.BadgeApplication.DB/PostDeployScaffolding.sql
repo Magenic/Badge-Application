@@ -99,3 +99,35 @@ WHEN NOT MATCHED BY TARGET THEN
     VALUES ([QueueEventId], [QueueEventName], [QueueEventDescription]);
 
 SET IDENTITY_INSERT [dbo].[QueueEvent]  OFF
+
+SET IDENTITY_INSERT [dbo].[BadgeActivity] ON
+
+MERGE INTO [dbo].[BadgeActivity] AS TARGET
+USING (VALUES
+    (1, 36, 29, 50),
+    (2, 37, 31, 50),
+    (3, 38, 33, 50),
+    (4, 39, 34, 50),
+    (5, 40, 31, 50),
+    (6, 41, 32, 50),
+    (7, 42, 41, 50),
+    (8, 43, 41, 50),
+    (9, 47, 45, 50),
+    (10, 48, 45, 50),
+    (11, 49, 45, 50),
+    (12, 50, 40, 50),
+    (13, 51, 40, 50),
+    (14, 52, 40, 50),
+    (15, 53, 40, 50)
+)
+as source (BadgeActivityId, BadgeId, ActivityId, PointsAwarded)
+on target.BadgeActivityId = source.BadgeActivityId
+when matched then
+    update set BadgeId = source.BadgeId,
+    ActivityId = source.ActivityId,
+    PointsAwarded = source.PointsAwarded
+when not matched by target then
+insert (BadgeActivityId, BadgeId, ActivityId, PointsAwarded)
+values (source.BadgeActivityId, source.BadgeId, source.ActivityId, source.PointsAwarded);
+
+SET IDENTITY_INSERT [dbo].[BadgeActivity] OFF
