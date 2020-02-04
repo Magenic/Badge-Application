@@ -23,7 +23,7 @@
             {
                 <div class="row">
                     <h2>@ApplicationResources.CorporateBadgeHeader</h2>
-                    @foreach (var earnedBadge in Model.ProfileEarnedCorporateBadges.OrderBy(ebi => ebi.BadgePriority))
+                    @foreach (var earnedBadge in Model.ProfileEarnedCorporateBadges.OrderByDescending(ebi => ebi.AwardDate))
                     {
                         using (Ajax.BeginForm(Mvc.Leaderboard.Actions.Delete(earnedBadge.BadgeAwardId), new AjaxOptions() { UpdateTargetId = @earnedBadge.BadgeAwardId.ToString() }))
                         {
@@ -87,7 +87,7 @@
             {
                 <div class="row">
                     <h2>@ApplicationResources.CommunityBadgeHeader</h2>
-                    @foreach (var earnedBadge in Model.ProfileEarnedCommunityBadges.OrderBy(ebi => ebi.BadgePriority))
+                    @foreach (var earnedBadge in Model.ProfileEarnedCommunityBadges.OrderByDescending(ebi => ebi.AwardDate))
                     {
                         using (Ajax.BeginForm(Mvc.Leaderboard.Actions.Delete(earnedBadge.BadgeAwardId), new AjaxOptions() { UpdateTargetId = @earnedBadge.BadgeAwardId.ToString() }))
                         {
