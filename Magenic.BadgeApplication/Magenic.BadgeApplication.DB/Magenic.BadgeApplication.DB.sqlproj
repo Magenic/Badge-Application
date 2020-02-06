@@ -121,5 +121,6 @@
     <None Include="LocalTestDataScript.sql" />
     <None Include="LocalSQL2012.publish.xml" />
     <None Include="Test.publish.xml" />
+    <None Include="Prod.publish.xml" />
   </ItemGroup>
 </Project>
