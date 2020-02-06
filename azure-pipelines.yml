@@ -48,6 +48,12 @@ steps:
     Contents: 'Test.publish.xml'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)\Magenic.BadgeApplication\Magenic.BadgeApplication.DB'
+    Contents: 'Prod.publish.xml'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
