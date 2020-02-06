@@ -31,7 +31,7 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)\Magenic.BadgeApplication.Mvc.Prod.zip"'
+    msbuildArgs: '/t:Magenic.BadgeApplication.Mvc /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)\Magenic.BadgeApplication.Mvc.Prod.zip"'
     platform: '$(buildPlatform)'
     configuration: 'Prod'
 
