@@ -29,6 +29,11 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)\Magenic.BadgeApplication\Magenic.BadgeApplication.Console\bin\$(buildConfiguration)'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\Magenic.BadgeApplication.Console'
+
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
