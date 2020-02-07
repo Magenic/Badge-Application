@@ -36,8 +36,20 @@ steps:
 
 - task: CopyFiles@2
   inputs:
+    SourceFolder: '$(Build.SourcesDirectory)\Magenic.BadgeApplication\Magenic.BadgeApplication.Console'
+    Contents: 'App.$(buildConfiguration).config'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\Magenic.BadgeApplication.Console_$(buildConfiguration)\App.config'
+
+- task: CopyFiles@2
+  inputs:
     SourceFolder: '$(Build.SourcesDirectory)\Magenic.BadgeApplication\Magenic.BadgeApplication.Console\bin\$(buildConfiguration)'
     TargetFolder: '$(Build.ArtifactStagingDirectory)\Magenic.BadgeApplication.Console_$(prodBuildConfiguration)'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)\Magenic.BadgeApplication\Magenic.BadgeApplication.Console'
+    Contents: 'App.$(prodBuildConfiguration).config'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\Magenic.BadgeApplication.Console_$(buildConfiguration)\App.config'
 
 - task: VSBuild@1
   inputs:
