@@ -36,13 +36,6 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(prodBuildConfiguration)'
 
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/t:Magenic_BadgeApplication_Console'
-    platform: '$(buildPlatform)'
-    configuration: 'Release'
-
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)\Magenic.BadgeApplication\Magenic.BadgeApplication.DB\bin\Output'
