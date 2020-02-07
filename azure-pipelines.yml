@@ -39,16 +39,9 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/t:Magenic_BadgeApplication_Console /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)\Magenic.BadgeApplication.Console.zip"'
+    msbuildArgs: '/t:Magenic_BadgeApplication_Console'
     platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/t:Magenic_BadgeApplication_Console /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)\Magenic.BadgeApplication.Console.Prod.zip"'
-    platform: '$(buildPlatform)'
-    configuration: '$(prodBuildConfiguration)'
+    configuration: 'Release'
 
 - task: CopyFiles@2
   inputs:
