@@ -13,6 +13,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Test'
+  prodBuildConfiguration: 'Prod'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -33,7 +34,21 @@ steps:
     solution: '$(solution)'
     msbuildArgs: '/t:Magenic_BadgeApplication_Mvc /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)\Magenic.BadgeApplication.Mvc.Prod.zip"'
     platform: '$(buildPlatform)'
-    configuration: 'Prod'
+    configuration: '$(prodBuildConfiguration)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/t:Magenic_BadgeApplication_Console /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)\Magenic.BadgeApplication.Console.zip"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/t:Magenic_BadgeApplication_Console /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)\Magenic.BadgeApplication.Console.Prod.zip"'
+    platform: '$(buildPlatform)'
+    configuration: '$(prodBuildConfiguration)'
 
 - task: CopyFiles@2
   inputs:
