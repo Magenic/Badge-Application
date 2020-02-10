@@ -44,46 +44,46 @@ namespace Magenic.BadgeApplication.Yammer
 
         public void Publish(EarnedBadgeItemDTO earnedBadge)
         {
-            //Get the user that earned the badge
-            string userEmail = string.Format("{0}@magenic.com", earnedBadge.EmployeeADName); 
-            string userUrl = GetUserUrl(userEmail);
+            ////Get the user that earned the badge
+            //string userEmail = string.Format("{0}@magenic.com", earnedBadge.EmployeeADName); 
+            //string userUrl = GetUserUrl(userEmail);
 
-            try
-            {
-                var response = MakeGetRequest(userUrl, Token);
-                YammerUser yammerUser = YammerUser.GetInstanceFromJson(response.Substring(1, response.Length - 2));
+            //try
+            //{
+            //    var response = MakeGetRequest(userUrl, Token);
+            //    YammerUser yammerUser = YammerUser.GetInstanceFromJson(response.Substring(1, response.Length - 2));
 
-                //let's post a message now to this group
-                bool broadcastToAll = false;
+            //    //let's post a message now to this group
+            //    bool broadcastToAll = false;
 
-                string msg = string.Format(YammerMessageText,
-                    yammerUser.UserID,
-                    earnedBadge.Name,
-                    broadcastToAll,
-                    "https://badgeapplication.magenic.com/Leaderboard/show/" + earnedBadge.EmployeeADName,
-                    earnedBadge.ImagePath,
-                    earnedBadge.Name,
-                    earnedBadge.Tagline);
+            //    string msg = string.Format(YammerMessageText,
+            //        yammerUser.UserID,
+            //        earnedBadge.Name,
+            //        broadcastToAll,
+            //        "https://badgeapplication.magenic.com/Leaderboard/show/" + earnedBadge.EmployeeADName,
+            //        earnedBadge.ImagePath,
+            //        earnedBadge.Name,
+            //        earnedBadge.Tagline);
 
-                //try adding the message
-                response = MakePostRequest(msg, MessageUrl, Token);
-                if (!string.IsNullOrEmpty(response))
-                {
-                    YammerMessage newMsg = YammerMessage.GetInstanceFromJson(response);
-                }
-            }
-            catch (WebException ex)
-            {
-                var httpResponse = ex.Response as HttpWebResponse;
-                if (httpResponse != null && httpResponse.StatusCode == HttpStatusCode.NotFound)
-                {
-                    Logger.Warn<YammerPublisher>(string.Format("Problem getting Yammer information for URL: {0}.  Most likely cause is the user was not setup in Yammer, continuing to process.", userUrl));                    
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            //    //try adding the message
+            //    response = MakePostRequest(msg, MessageUrl, Token);
+            //    if (!string.IsNullOrEmpty(response))
+            //    {
+            //        YammerMessage newMsg = YammerMessage.GetInstanceFromJson(response);
+            //    }
+            //}
+            //catch (WebException ex)
+            //{
+            //    var httpResponse = ex.Response as HttpWebResponse;
+            //    if (httpResponse != null && httpResponse.StatusCode == HttpStatusCode.NotFound)
+            //    {
+            //        Logger.Warn<YammerPublisher>(string.Format("Problem getting Yammer information for URL: {0}.  Most likely cause is the user was not setup in Yammer, continuing to process.", userUrl));                    
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
         }
 
         private string MakeGetRequest(string url, string token)

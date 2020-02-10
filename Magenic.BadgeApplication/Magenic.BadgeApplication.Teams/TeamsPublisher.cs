@@ -9,6 +9,7 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -58,6 +59,13 @@ namespace Magenic.BadgeApplication.Teams
 
         public void Publish(EarnedBadgeItemDTO earnedBadge)
         {
+            const string log_name = "Magenic Badge App Log";
+            var environment = ConfigurationManager.AppSettings["Environment"];
+            if (string.IsNullOrWhiteSpace(environment))
+            {
+                environment = "Debug";
+            }
+            var eventSource = $"Badge Notifications - {environment}";
             var userEmail = $"{earnedBadge.EmployeeADName}@magenic.com";
 
             try
@@ -90,10 +98,13 @@ namespace Magenic.BadgeApplication.Teams
                 //try adding the message
                 MakePostRequest(flowMessageRequest, FlowEndpoint);
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                // TODO: handle error responses
-                throw;
+                if (!EventLog.SourceExists(eventSource))
+                {
+                    EventLog.CreateEventSource(eventSource, log_name);
+                }
+                EventLog.WriteEntry(eventSource, exception.ToString(), EventLogEntryType.Error);
             }
         }
 

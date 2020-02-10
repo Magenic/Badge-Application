@@ -126,6 +126,8 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="App.Prod.config" />
+    <None Include="App.Test.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
