@@ -38,6 +38,8 @@ steps:
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)\Magenic.BadgeApplication\Magenic.BadgeApplication.Console\bin\$(buildConfiguration)'
     TargetFolder: '$(Build.ArtifactStagingDirectory)\Magenic.BadgeApplication.Console_$(prodBuildConfiguration)'
+
+
     
 - task: VSBuild@1
   inputs:
