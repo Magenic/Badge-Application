@@ -59,13 +59,6 @@ namespace Magenic.BadgeApplication.Teams
 
         public void Publish(EarnedBadgeItemDTO earnedBadge)
         {
-            const string log_name = "Magenic Badge App Log";
-            var environment = ConfigurationManager.AppSettings["Environment"];
-            if (string.IsNullOrWhiteSpace(environment))
-            {
-                environment = "Debug";
-            }
-            var eventSource = $"Badge Notifications - {environment}";
             var userEmail = $"{earnedBadge.EmployeeADName}@magenic.com";
 
             try
@@ -100,11 +93,7 @@ namespace Magenic.BadgeApplication.Teams
             }
             catch (Exception exception)
             {
-                if (!EventLog.SourceExists(eventSource))
-                {
-                    EventLog.CreateEventSource(eventSource, log_name);
-                }
-                EventLog.WriteEntry(eventSource, exception.ToString(), EventLogEntryType.Error);
+                throw exception;
             }
         }
 
