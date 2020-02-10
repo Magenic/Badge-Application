@@ -47,7 +47,7 @@ namespace Magenic.BadgeApplication.Controllers
             };
 
             badgeIndexViewModel.AllActivities = allActivities;
-            badgeIndexViewModel.PossibleActivities = allActivities.Select(ai => new SelectListItem() { Text = ai.Name, Value = ai.Id.ToString(CultureInfo.CurrentCulture) });
+            badgeIndexViewModel.PossibleActivities = allActivities.Where(act => act.BadgeIds.Count() > 0).Select(ai => new SelectListItem() { Text = ai.Name, Value = ai.Id.ToString(CultureInfo.CurrentCulture) });
 
             return View(badgeIndexViewModel);
         }

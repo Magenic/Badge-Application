@@ -244,14 +244,14 @@ namespace Magenic.BadgeApplication.BusinessLogic.Activity
         {
             base.AddBusinessRules();
 
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, ApproveActivitySubmissionMethod, PermissionType.Administrator.ToString() ));
-            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, DenyActivitySubmissionMethod, PermissionType.Administrator.ToString() ));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, ApproveActivitySubmissionMethod, new string[] { PermissionType.Manager.ToString(), PermissionType.Administrator.ToString() }));
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.ExecuteMethod, DenyActivitySubmissionMethod, new string[] { PermissionType.Manager.ToString(), PermissionType.Administrator.ToString() }));
         }
 
         public static void AddObjectAuthorizationRules()
         {
-            BusinessRules.AddRule(typeof(IApproveActivityItem), new IsInRole(AuthorizationActions.GetObject, PermissionType.Administrator.ToString() ));
-            BusinessRules.AddRule(typeof(ApproveActivityItem), new IsInRole(AuthorizationActions.GetObject, PermissionType.Administrator.ToString() ));
+            BusinessRules.AddRule(typeof(IApproveActivityItem), new IsInRole(AuthorizationActions.GetObject, new string[] { PermissionType.Administrator.ToString() }));
+            BusinessRules.AddRule(typeof(ApproveActivityItem), new IsInRole(AuthorizationActions.GetObject, new string[] { PermissionType.Administrator.ToString() }));
 
         }
 
