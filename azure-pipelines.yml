@@ -39,7 +39,10 @@ steps:
     SourceFolder: '$(Build.SourcesDirectory)\Magenic.BadgeApplication\Magenic.BadgeApplication.Console\bin\$(buildConfiguration)'
     TargetFolder: '$(Build.ArtifactStagingDirectory)\Magenic.BadgeApplication.Console_$(prodBuildConfiguration)'
 
-
+- task: DeleteFiles@1
+  inputs:
+    SourceFolder: '$(Build.ArtifactStagingDirectory)\Magenic.BadgeApplication.Console_$(buildConfiguration)'
+    Contents: 'Magenic.BadgeApplication.Console.exe.config'
     
 - task: VSBuild@1
   inputs:
