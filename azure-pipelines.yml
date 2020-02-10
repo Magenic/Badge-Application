@@ -44,11 +44,9 @@ steps:
     SourceFolder: '$(Build.ArtifactStagingDirectory)\Magenic.BadgeApplication.Console_$(buildConfiguration)'
     Contents: 'Magenic.BadgeApplication.Console.exe.config'
 
-- task: CopyFiles@2
+- task: CmdLine@2
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)\Magenic.BadgeApplication\Magenic.BadgeApplication.Console'
-    Contents: 'App.$(buildConfiguration).config'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)\Magenic.BadgeApplication.Console_$(buildConfiguration)\Magenic.BadgeApplication.Console.exe.config'
+    script: copy "$(Build.SourcesDirectory)\Magenic.BadgeApplication\Magenic.BadgeApplication.Console\App.$(buildConfiguration).config" "$(Build.ArtifactStagingDirectory)\Magenic.BadgeApplication.Console_$(buildConfiguration)\Magenic.BadgeApplication.Console.exe.config" /Y
 
 - task: DeleteFiles@1
   inputs:
