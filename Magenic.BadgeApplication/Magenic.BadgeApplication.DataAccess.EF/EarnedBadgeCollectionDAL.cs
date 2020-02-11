@@ -56,6 +56,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                     BadgePriority = badgeAward.Badge.BadgePriority,
                     DisplayOnce = badgeAward.Badge.DisplayOnce,
                     EmployeeADName = badgeAward.Employee.ADName,
+                    EmployeeEmailAddr = badgeAward.Employee.EmailAddress,
                     Id = badgeAward.BadgeAwardId,
                     ImagePath = badgeAward.Badge.BadgePath,
                     Name = badgeAward.Badge.BadgeName,
