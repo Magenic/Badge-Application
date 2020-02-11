@@ -57,6 +57,10 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public string EmployeeADName { get; set; }
         /// <summary>
+        /// The email address of the employee who earned the badge
+        /// </summary>
+        public string EmployeeEmailAddr { get; set; }
+        /// <summary>
         /// The id of the badgeAward.
         /// </summary>
         public int BadgeAwardId { get; set; }
