@@ -71,7 +71,8 @@ namespace Magenic.BadgeApplication.Teams
                 };
                 var employee = context.vwODataEmployees.Where(e => e.EMailAddress == userEmail).FirstOrDefault();
 
-                var leaderboardUrl = string.Format(LeaderboardUrl, earnedBadge.EmployeeADName);
+                var adName = earnedBadge.EmployeeADName.Substring(earnedBadge.EmployeeADName.IndexOf("\\") + 1);
+                var leaderboardUrl = string.Format(LeaderboardUrl, adName);
 
                 var body = string.Format(MessageText,
                     employee.EmployeeFullName,
