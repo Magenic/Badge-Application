@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
@@ -113,6 +114,8 @@ namespace Magenic.BadgeApplication.Teams
                 ParameterType.RequestBody);
 
             var response = RetryRestRequest(request, TimeSpan.FromSeconds(1));
+
+            Logger.InfoFormat<TeamsPublisher>("Teams publisher published with response status {0} to endpoint {1}", response.StatusCode, endpoint);
 
             if ((int)response.StatusCode < 200 || (int)response.StatusCode > 206)
             {
