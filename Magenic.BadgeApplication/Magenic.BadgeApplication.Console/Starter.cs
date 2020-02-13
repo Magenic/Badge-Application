@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Magenic.BadgeApplication.Common;
+﻿using Magenic.BadgeApplication.Common;
 using System;
 
 namespace Magenic.BadgeApplication.Console
@@ -13,7 +12,7 @@ namespace Magenic.BadgeApplication.Console
                 AutofacBootstrapper.Init();
 
                 var processor = new Processor.QueueProcessor();
-                Task.Run(() => processor.Start());
+                processor.Start();
             }
             catch (Exception ex)
             {

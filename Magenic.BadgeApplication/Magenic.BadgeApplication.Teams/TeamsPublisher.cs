@@ -9,7 +9,6 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -26,6 +25,11 @@ namespace Magenic.BadgeApplication.Teams
         private string FlowEndpoint
         {
             get { return ConfigurationManager.AppSettings["FlowEndpoint"]; }
+        }
+
+        private string FlowBaseURL
+        {
+            get { return ConfigurationManager.AppSettings["FlowBaseURL"]; }
         }
 
         private string MessageText
@@ -90,6 +94,7 @@ namespace Magenic.BadgeApplication.Teams
                 };
 
                 //try adding the message
+                //var flowEndPoint = $"{FlowBaseURL}/{FlowEndpoint}";
                 MakePostRequest(flowMessageRequest, FlowEndpoint);
             }
             catch (Exception exception)
@@ -100,12 +105,15 @@ namespace Magenic.BadgeApplication.Teams
 
         private void MakePostRequest(Message message, string endpoint, string authHeader = null, string contentType = null)
         {
+            System.Net.ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+
             var request = new RestRequest(endpoint, Method.POST);
             var json = request.JsonSerializer.Serialize(message);
             request.AddParameter("application/json; charset=utf-8", json,
                 ParameterType.RequestBody);
 
             var response = RetryRestRequest(request, TimeSpan.FromSeconds(1));
+
             if ((int)response.StatusCode < 200 || (int)response.StatusCode > 206)
             {
                 throw new Exception("Error in POST");
