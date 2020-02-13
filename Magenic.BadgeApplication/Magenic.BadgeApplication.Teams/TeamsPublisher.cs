@@ -95,7 +95,6 @@ namespace Magenic.BadgeApplication.Teams
                 };
 
                 //try adding the message
-                //var flowEndPoint = $"{FlowBaseURL}/{FlowEndpoint}";
                 MakePostRequest(flowMessageRequest, FlowEndpoint);
             }
             catch (Exception exception)
@@ -112,6 +111,8 @@ namespace Magenic.BadgeApplication.Teams
             var json = request.JsonSerializer.Serialize(message);
             request.AddParameter("application/json; charset=utf-8", json,
                 ParameterType.RequestBody);
+
+            Logger.InfoFormat<TeamsPublisher>("Teams JSON: {0}", json);
 
             var response = RetryRestRequest(request, TimeSpan.FromSeconds(1));
 
