@@ -1,4 +1,5 @@
 ﻿using Magenic.BadgeApplication.Common;
+using System.Configuration;
 
 namespace Magenic.BadgeApplication.Console
 {
@@ -8,7 +9,7 @@ namespace Magenic.BadgeApplication.Console
         {
             Logger.Info<Processor.QueueProcessor>($"{nameof(Starter)} initialized.");
             AutofacBootstrapper.Init();
-            BadgeSchedulerFactory.StartJob<Processor.QueueProcessor>("0/5 * * * * ?");
+            BadgeSchedulerFactory.StartJob<Processor.QueueProcessor>(ConfigurationManager.AppSettings["QueueCronSchedule"]);
         }
     }
 }

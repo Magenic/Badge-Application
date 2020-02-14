@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 
 namespace Magenic.BadgeApplication.Console
 {
@@ -16,8 +17,8 @@ namespace Magenic.BadgeApplication.Console
             {
                 if (args.Length == 0)
                 {
-                    BadgeSchedulerFactory.StartJob<Processor.NotificationProcessor>("0 0 12 ? * MON");
-                    BadgeSchedulerFactory.StartJob<Processor.QueueProcessor>("0/5 * * * * ?");
+                    BadgeSchedulerFactory.StartJob<Processor.NotificationProcessor>(ConfigurationManager.AppSettings["NotificationCronSchedule"]);
+                    BadgeSchedulerFactory.StartJob<Processor.QueueProcessor>(ConfigurationManager.AppSettings["QueueCronSchedule"]);
                 }
                 else
                 {
