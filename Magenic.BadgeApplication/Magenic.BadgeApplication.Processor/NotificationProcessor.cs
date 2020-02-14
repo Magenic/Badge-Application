@@ -11,10 +11,6 @@ namespace Magenic.BadgeApplication.Processor
     [DisallowConcurrentExecution]
     public sealed class NotificationProcessor : IJob
     {
-        public void Start()
-        {
-        }
-
         public void Execute(IJobExecutionContext context)
         {
             try
