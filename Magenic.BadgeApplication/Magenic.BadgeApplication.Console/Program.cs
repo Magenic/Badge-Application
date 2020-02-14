@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ServiceProcess;
 
 namespace Magenic.BadgeApplication.Console
 {
@@ -7,26 +6,23 @@ namespace Magenic.BadgeApplication.Console
     {
         static void Main(string[] args)
         {
+            AutofacBootstrapper.Init();
+
             if (Environment.UserInteractive)
             {
-                var queueProcessor = new QueueProcessor();
-                queueProcessor.RunAsConsole(args);
+                BadgeSchedulerFactory.StartJob<Processor.QueueProcessor>();
             }
             else
             {
                 if (args.Length == 0)
                 {
-                    var servicesToRun = new ServiceBase[]
-                    {
-                    new QueueProcessor(),
-                    new NotificationProcessor()
-                    };
-                    ServiceBase.Run(servicesToRun);
+                    BadgeSchedulerFactory.StartJob<Processor.NotificationProcessor>("0 0 12 ? * MON");
+                    BadgeSchedulerFactory.StartJob<Processor.QueueProcessor>("0/5 * * * * ?");
                 }
                 else
                 {
-                    NotificationStarter.Start();
-                    Starter.Start();
+                    BadgeSchedulerFactory.StartJob<Processor.QueueProcessor>();
+                    BadgeSchedulerFactory.StartJob<Processor.NotificationProcessor>();
                 }
             }
         }

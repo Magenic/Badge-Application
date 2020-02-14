@@ -1,6 +1,4 @@
 ﻿using Magenic.BadgeApplication.Common;
-using System;
-using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.Console
 {
@@ -8,18 +6,9 @@ namespace Magenic.BadgeApplication.Console
     {
         public static void Start()
         {
-            try
-            {
-                AutofacBootstrapper.Init();
-
-                var processor = new Processor.QueueProcessor();
-                Task.Factory.StartNew(() => processor.Start());
-            }
-            catch (Exception ex)
-            {
-                Logger.Fatal<Program>(ex.Message, ex);
-                throw;
-            }
+            Logger.Info<Processor.QueueProcessor>($"{nameof(Starter)} initialized.");
+            AutofacBootstrapper.Init();
+            BadgeSchedulerFactory.StartJob<Processor.QueueProcessor>("0/5 * * * * ?");
         }
     }
 }
