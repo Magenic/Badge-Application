@@ -76,26 +76,33 @@ namespace Magenic.BadgeApplication.Teams
                 };
                 var employee = context.vwODataEmployees.Where(e => e.EMailAddress == userEmail).FirstOrDefault();
 
-                var adName = earnedBadge.EmployeeADName.Substring(earnedBadge.EmployeeADName.IndexOf("\\") + 1);
-                var leaderboardUrl = string.Format(LeaderboardUrl, adName);
-
-                var body = string.Format(MessageText,
-                    employee.EmployeeFullName,
-                    earnedBadge.Name);
-
-                var flowMessageRequest = new FlowMessageRequest
+                if (employee != null)
                 {
-                    eventType = EventType.TeamsTestingEventType.ToString(), // TODO: Add logic to handle event type, using MS Teams for now
-                    summary = "Badge Award!", // TODO: Think about how to construct summary text
-                    body = body,
-                    ogImage = earnedBadge.ImagePath,
-                    ogTitle = earnedBadge.Name,
-                    ogDescription = earnedBadge.Tagline,
-                    ogUrl = leaderboardUrl
-                };
+                    var adName = earnedBadge.EmployeeADName.Substring(earnedBadge.EmployeeADName.IndexOf("\\") + 1);
+                    var leaderboardUrl = string.Format(LeaderboardUrl, adName);
 
-                //try adding the message
-                MakePostRequest(flowMessageRequest, FlowEndpoint);
+                    var body = string.Format(MessageText,
+                        employee.EmployeeFullName,
+                        earnedBadge.Name);
+
+                    var flowMessageRequest = new FlowMessageRequest
+                    {
+                        eventType = EventType.TeamsTestingEventType.ToString(), // TODO: Add logic to handle event type, using MS Teams for now
+                        summary = "Badge Award!", // TODO: Think about how to construct summary text
+                        body = body,
+                        ogImage = earnedBadge.ImagePath,
+                        ogTitle = earnedBadge.Name,
+                        ogDescription = earnedBadge.Tagline,
+                        ogUrl = leaderboardUrl
+                    };
+
+                    //try adding the message
+                    MakePostRequest(flowMessageRequest, FlowEndpoint);
+                }
+                else
+                {
+                    Logger.Error<TeamsPublisher>($"Employee {userEmail} does not exist for publishing to Teams.");
+                }
             }
             catch (Exception exception)
             {
