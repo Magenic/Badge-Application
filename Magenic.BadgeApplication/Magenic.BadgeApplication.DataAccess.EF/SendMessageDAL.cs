@@ -79,19 +79,19 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 IList<Employee> employees = getEmployees( context );
 
                 IList<string> emailAddresses = getEmailAddresses( peopleToEmail, employees );
-
-                var emailSubject = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationSubject);
-
-                string emailBody;
+                string emailSubject;
                 var environment = ConfigurationManager.AppSettings["Environment"];
                 if (!string.IsNullOrWhiteSpace(environment) && environment.Trim().ToLower(CultureInfo.CurrentCulture) == "prod")
                 {
-                    emailBody = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationBody);
+                    emailSubject = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationSubject);
                 }
                 else
                 {
-                    emailBody = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationSubjectTest);
+                    emailSubject = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationSubjectTest);
                 }
+
+                var emailBody = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationBody);
+
                 
 
                 SendMessage(emailAddresses, emailSubject, emailBody);
