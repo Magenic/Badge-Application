@@ -131,4 +131,7 @@
   <data name="ActivityNotificationSubject" xml:space="preserve">
     <value>Magenic Badge Application - Activities to Approve.</value>
   </data>
+  <data name="ActivityNotificationSubjectTest" xml:space="preserve">
+    <value>Magenic Badge Application - Activities to Approve (TEST ENVIRONMENT).</value>
+  </data>
 </root>
