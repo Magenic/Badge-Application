@@ -4,6 +4,7 @@ using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Common.Resources;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -78,9 +79,20 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 IList<Employee> employees = getEmployees( context );
 
                 IList<string> emailAddresses = getEmailAddresses( peopleToEmail, employees );
+                string emailSubject;
+                var environment = ConfigurationManager.AppSettings["Environment"];
+                if (!string.IsNullOrWhiteSpace(environment) && environment.Trim().ToLower(CultureInfo.CurrentCulture) == "prod")
+                {
+                    emailSubject = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationSubject);
+                }
+                else
+                {
+                    emailSubject = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationSubjectTest);
+                }
 
-                var emailSubject = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationSubject);
                 var emailBody = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationBody);
+
+                
 
                 SendMessage(emailAddresses, emailSubject, emailBody);
             }
