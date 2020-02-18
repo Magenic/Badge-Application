@@ -2,27 +2,34 @@
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.Interfaces;
-using Quartz;
 using System;
 using System.Configuration;
+using System.Threading;
 
 namespace Magenic.BadgeApplication.Processor
 {
-    [DisallowConcurrentExecution]
-    public sealed class NotificationProcessor : IJob
+    public class NotificationProcessor
     {
-        public void Execute(IJobExecutionContext context)
+        public void Start()
         {
-            try
+            while (true)
             {
-                Logger.Info<NotificationProcessor>($"Executing Job {nameof(NotificationProcessor)}.");
-                var sendMessageDal = IoC.Container.Resolve<ISendMessageDAL>();
-                sendMessageDal.SendActivityNotifications();
-                Logger.Info<NotificationProcessor>($"Executed Job {nameof(NotificationProcessor)}.");
-            }
-            catch (Exception exception)
-            {
-                Logger.Error<NotificationProcessor>(exception.Message, exception);
+                try
+                {
+                    if (DateTime.Now.DayOfWeek == NotificationDay && DateTime.Now.Hour == NotificationHourOfDay && DateTime.Now.Minute == 0)
+                    {
+                        var sendMessageDal = IoC.Container.Resolve<ISendMessageDAL>();
+                        sendMessageDal.SendActivityNotifications();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error<ADProcessor>(ex.Message, ex);
+                }
+                finally
+                {
+                    Thread.Sleep(SleepInterval);
+                }
             }
         }
 
