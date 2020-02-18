@@ -9,21 +9,23 @@ namespace Magenic.BadgeApplication.Console
         {
             AutofacBootstrapper.Init();
 
+            var badgeSchedulerFactory = new BadgeSchedulerFactory();
+
             if (Environment.UserInteractive)
             {
-                BadgeSchedulerFactory.StartJob<Processor.QueueProcessor>();
+                badgeSchedulerFactory.StartJob<Processor.QueueProcessor>();
             }
             else
             {
                 if (args.Length == 0)
                 {
-                    BadgeSchedulerFactory.StartJob<Processor.NotificationProcessor>(ConfigurationManager.AppSettings["NotificationCronSchedule"]);
-                    BadgeSchedulerFactory.StartJob<Processor.QueueProcessor>(ConfigurationManager.AppSettings["QueueCronSchedule"]);
+                    badgeSchedulerFactory.StartJob<Processor.NotificationProcessor>(ConfigurationManager.AppSettings["NotificationCronSchedule"]);
+                    badgeSchedulerFactory.StartJob<Processor.QueueProcessor>(ConfigurationManager.AppSettings["QueueCronSchedule"]);
                 }
                 else
                 {
-                    BadgeSchedulerFactory.StartJob<Processor.QueueProcessor>();
-                    BadgeSchedulerFactory.StartJob<Processor.NotificationProcessor>();
+                    badgeSchedulerFactory.StartJob<Processor.QueueProcessor>();
+                    badgeSchedulerFactory.StartJob<Processor.NotificationProcessor>();
                 }
             }
         }
