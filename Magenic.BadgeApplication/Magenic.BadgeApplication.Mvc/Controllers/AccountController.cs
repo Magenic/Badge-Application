@@ -87,8 +87,10 @@ namespace Magenic.BadgeApplication.Controllers
             }
             catch (DataPortalException dataPortalException)
             {
-                // TODO: do we add logging here?
-                ModelState.AddModelError("*", dataPortalException.BusinessException.Message);
+                // TODO: deep dive error message and send it to whatever logging system is created for advising Tech Support. 
+                //ModelState.AddModelError("*", dataPortalException.BusinessException.Message)
+                ModelState.AddModelError("*", "Please check your user name (just the name e.g. robertS without the domain or email tail) and password as you try again to log in. Attempts with the correct user name but bad password may lock you out of the system.  Contact Technical support if the error persists" );
+
             }
 
             return View(logOnViewModel);
