@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.ServiceProcess;
 
 namespace Magenic.BadgeApplication.Console
 {
@@ -19,8 +20,12 @@ namespace Magenic.BadgeApplication.Console
             {
                 if (args.Length == 0)
                 {
-                    badgeSchedulerFactory.StartJob<Processor.NotificationProcessor>(ConfigurationManager.AppSettings["NotificationCronSchedule"]);
-                    badgeSchedulerFactory.StartJob<Processor.QueueProcessor>(ConfigurationManager.AppSettings["QueueCronSchedule"]);
+                    var servicesToRun = new ServiceBase[]
+                    {
+                        new QueueProcessor(),
+                        new NotificationProcessor()
+                    };
+                    ServiceBase.Run(servicesToRun);
                 }
                 else
                 {
