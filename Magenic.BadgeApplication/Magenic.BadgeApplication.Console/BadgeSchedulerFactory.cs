@@ -8,7 +8,7 @@ namespace Magenic.BadgeApplication.Console
 {
     public sealed class BadgeSchedulerFactory
     {
-        private const int SECONDS_TO_START_FROM = 5;
+        private const int SECONDS_TO_START_FROM = 60;
         private const string GROUP = "ScheduleGroup";
         private static readonly Lazy<StdSchedulerFactory> _SchedulerFactory = new Lazy<StdSchedulerFactory>(GetSchedulerFactory, true);
 
