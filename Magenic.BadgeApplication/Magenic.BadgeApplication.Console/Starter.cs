@@ -9,7 +9,7 @@ namespace Magenic.BadgeApplication.Console
         {
             Logger.Info<Processor.QueueProcessor>($"{nameof(Starter)} initialized.");
             AutofacBootstrapper.Init();
-            BadgeSchedulerFactory.StartJob<Processor.QueueProcessor>(ConfigurationManager.AppSettings["QueueCronSchedule"]);
+            new BadgeSchedulerFactory().StartJob<Processor.QueueProcessor>(ConfigurationManager.AppSettings["QueueCronSchedule"]);
         }
     }
 }

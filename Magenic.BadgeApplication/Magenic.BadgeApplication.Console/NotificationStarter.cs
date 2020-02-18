@@ -9,7 +9,7 @@ namespace Magenic.BadgeApplication.Console
         {
             Logger.Info<Processor.NotificationProcessor>($"{nameof(NotificationStarter)} initialized.");
             AutofacBootstrapper.Init();
-            BadgeSchedulerFactory.StartJob<Processor.NotificationProcessor>(ConfigurationManager.AppSettings["NotificationCronSchedule"]);
+            new BadgeSchedulerFactory().StartJob<Processor.NotificationProcessor>(ConfigurationManager.AppSettings["NotificationCronSchedule"]);
         }
     }
 }
