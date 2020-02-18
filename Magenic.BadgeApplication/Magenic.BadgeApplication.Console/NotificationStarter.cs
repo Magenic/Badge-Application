@@ -1,5 +1,6 @@
 ﻿using Magenic.BadgeApplication.Common;
 using System.Configuration;
+using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.Console
 {
@@ -9,7 +10,7 @@ namespace Magenic.BadgeApplication.Console
         {
             Logger.Info<Processor.NotificationProcessor>($"{nameof(NotificationStarter)} initialized.");
             AutofacBootstrapper.Init();
-            new BadgeSchedulerFactory().StartJob<Processor.NotificationProcessor>(ConfigurationManager.AppSettings["NotificationCronSchedule"]);
+            Task.Factory.StartNew(() => new Processor.NotificationProcessor().Start());
         }
     }
 }

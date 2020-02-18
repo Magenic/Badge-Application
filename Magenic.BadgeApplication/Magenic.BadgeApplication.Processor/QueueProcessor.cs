@@ -10,8 +10,7 @@ using System.Threading;
 
 namespace Magenic.BadgeApplication.Processor
 {
-    [DisallowConcurrentExecution]
-    public sealed class QueueProcessor : IJob
+    public sealed class QueueProcessor
     {
         private IContainer _factory;
 
@@ -84,36 +83,6 @@ namespace Magenic.BadgeApplication.Processor
                     }
                 }
             }            
-        }
-
-        public void Execute(IJobExecutionContext context)
-        {
-            Logger.Info<NotificationProcessor>($"Executing Job {nameof(QueueItemProcessor)}.");
-            try
-            {
-                QueueItemDTO latestItem = null;
-                latestItem = _queueItemDAL.Peek();
-
-                if (latestItem != null)
-                {
-                    do
-                    {
-                        Logger.InfoFormat<QueueProcessor>("Processor peeked item with QueueItemId: {0} and BadgeAwardId: {1}, processing...",
-                            latestItem.QueueItemId,
-                            latestItem.BadgeAwardId);
-
-                        _itemProcessor.ProcessItem(latestItem);
-
-                        latestItem = _queueItemDAL.Peek();
-
-                    } while (latestItem != null);
-                }
-            }
-            catch (Exception exception)
-            {
-                Logger.Error<QueueItemProcessor>(exception.Message, exception);
-            }
-            Logger.Info<NotificationProcessor>($"Executed Job {nameof(QueueItemProcessor)}.");
         }
     }
 }

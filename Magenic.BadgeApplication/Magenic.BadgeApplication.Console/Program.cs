@@ -10,11 +10,10 @@ namespace Magenic.BadgeApplication.Console
         {
             AutofacBootstrapper.Init();
 
-            var badgeSchedulerFactory = new BadgeSchedulerFactory();
-
             if (Environment.UserInteractive)
             {
-                badgeSchedulerFactory.StartJob<Processor.QueueProcessor>();
+                var queueProcessor = new QueueProcessor();
+                queueProcessor.RunAsConsole(args);
             }
             else
             {
@@ -22,15 +21,15 @@ namespace Magenic.BadgeApplication.Console
                 {
                     var servicesToRun = new ServiceBase[]
                     {
-                        new QueueProcessor(),
-                        new NotificationProcessor()
+                    new QueueProcessor(),
+                    new NotificationProcessor()
                     };
                     ServiceBase.Run(servicesToRun);
                 }
                 else
                 {
-                    badgeSchedulerFactory.StartJob<Processor.QueueProcessor>();
-                    badgeSchedulerFactory.StartJob<Processor.NotificationProcessor>();
+                    NotificationStarter.Start();
+                    Starter.Start();
                 }
             }
         }
