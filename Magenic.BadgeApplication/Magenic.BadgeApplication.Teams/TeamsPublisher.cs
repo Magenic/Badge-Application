@@ -64,7 +64,22 @@ namespace Magenic.BadgeApplication.Teams
 
         public void Publish(EarnedBadgeItemDTO earnedBadge)
         {
-            var userEmail = $"{earnedBadge.EmployeeADName}@magenic.com";
+            var environment = ConfigurationManager.AppSettings["Environment"];
+            if (string.IsNullOrWhiteSpace(environment))
+            {
+                environment = "debug";
+            }
+
+            var eventType = string.Empty;
+            switch(environment.ToLower())
+            {
+                case "test":
+                    eventType = EventType.TeamsTestingEventType.ToString();
+                    break;
+                case "prod":
+                    eventType = EventType.TeamsEventType.ToString();
+                    break;
+            }
 
             try
             {
@@ -74,7 +89,7 @@ namespace Magenic.BadgeApplication.Teams
                 {
                     Credentials = CredentialCache.DefaultCredentials
                 };
-                var employee = context.vwODataEmployees.Where(e => e.EMailAddress == userEmail).FirstOrDefault();
+                var employee = context.vwODataEmployees.Where(e => e.EMailAddress == earnedBadge.EmployeeEmailAddr).FirstOrDefault();
 
                 if (employee != null)
                 {
@@ -87,7 +102,7 @@ namespace Magenic.BadgeApplication.Teams
 
                     var flowMessageRequest = new FlowMessageRequest
                     {
-                        eventType = EventType.TeamsTestingEventType.ToString(), // TODO: Add logic to handle event type, using MS Teams for now
+                        eventType = eventType,
                         summary = "Badge Award!", // TODO: Think about how to construct summary text
                         body = body,
                         ogImage = earnedBadge.ImagePath,
@@ -101,7 +116,7 @@ namespace Magenic.BadgeApplication.Teams
                 }
                 else
                 {
-                    Logger.Error<TeamsPublisher>($"Employee {userEmail} does not exist for publishing to Teams.");
+                    Logger.Error<TeamsPublisher>($"Employee {earnedBadge.EmployeeEmailAddr} does not exist for publishing to Teams.");
                 }
             }
             catch (Exception exception)
