@@ -5,6 +5,7 @@ using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Magenic.BadgeApplication.Processor
 {
@@ -34,32 +35,30 @@ namespace Magenic.BadgeApplication.Processor
             _publishers = _factory.Resolve<IEnumerable<IPublisher>>();
         }
 
-        public void ProcessItem(QueueItemDTO latestItem)
+        public void ProcessItem(PublishMessageConfigDTO publishMessageConfig)
         {
             try
             {
-                EarnedBadgeItemDTO earnedBadge = _earnedBadgeDAL.GetEarnedBadge(latestItem.BadgeAwardId);
+                //RegisterQueueItemProgress(QueueEventType.Processing, latestItem);
 
-                RegisterQueueItemProgress(QueueEventType.Processing, latestItem);
+                PublishUpdates(publishMessageConfig);
 
-                PublishUpdates(earnedBadge);
+                //_queueItemDAL.Delete(latestItem.QueueItemId);
 
-                _queueItemDAL.Delete(latestItem.QueueItemId);
-
-                RegisterQueueItemProgress(QueueEventType.Processed, latestItem);
+                //RegisterQueueItemProgress(QueueEventType.Processed, latestItem);
             }
             catch
             {
-                RegisterQueueItemProgress(QueueEventType.Failed, latestItem);
+                //RegisterQueueItemProgress(QueueEventType.Failed, latestItem);
                 throw;
             }
         }
 
-        public void PublishUpdates(EarnedBadgeItemDTO earnedBadge)
+        public void PublishUpdates(PublishMessageConfigDTO publishMessageConfig)
         {
             foreach (IPublisher publisher in _publishers)
             {
-                publisher.Publish(earnedBadge);
+                publisher.Publish(publishMessageConfig);
             }
         }
 

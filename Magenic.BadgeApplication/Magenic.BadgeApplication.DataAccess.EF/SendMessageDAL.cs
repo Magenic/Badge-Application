@@ -27,41 +27,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         /// <param name="body">The body.</param>
         public void SendMessage(IEnumerable<string> sendToEmailAddresses, string subject, string body)
         {
-            Arg.IsNotNull( () => sendToEmailAddresses );
-
-            using ( MailMessage mailMessage = new MailMessage() )
-            {
-#pragma warning disable CA1062 // Validate arguments of public methods
-                foreach (string emailAddress in sendToEmailAddresses)
-#pragma warning restore CA1062 // Validate arguments of public methods
-                {
-                    if ( string.IsNullOrWhiteSpace( emailAddress ) )
-                        continue;
-
-                    bool isValidEmailAddr = Regex.IsMatch( emailAddress,
-                        @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
-                        @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
-                        RegexOptions.IgnoreCase );
-
-                    if ( false == isValidEmailAddr )
-                        continue;
-
-                    mailMessage.To.Add( emailAddress );
-                }
-		        
-	            mailMessage.Subject = subject;
-                mailMessage.Body = body;
-                mailMessage.IsBodyHtml = true;
-	            mailMessage.From = new MailAddress( "no-reply@magenic.com", "Magenic Badge Application" );
-
-                using (var smtpClient = new SmtpClient())
-                {
-	                smtpClient.EnableSsl = Config.EnableSslForSMTP;
-	                smtpClient.Port = Config.SMTPPort;
-	                smtpClient.Host = Config.SMTPAddress;
-                    smtpClient.Send(mailMessage);
-                }
-            }
+            Common.Utils.Emails.SendMessage(new MailAddress("no-reply@magenic.com", "Magenic Badge Application"), sendToEmailAddresses, subject, body);
         }
 
         /// <summary>
@@ -91,8 +57,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 }
 
                 var emailBody = String.Format(CultureInfo.CurrentCulture, ApplicationResources.ActivityNotificationBody);
-
-                
 
                 SendMessage(emailAddresses, emailSubject, emailBody);
             }

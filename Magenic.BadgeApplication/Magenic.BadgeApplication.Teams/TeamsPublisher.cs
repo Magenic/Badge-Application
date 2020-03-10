@@ -6,12 +6,14 @@ using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Teams.Messages;
 using MagenicDataModel;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading;
 
 namespace Magenic.BadgeApplication.Teams
@@ -33,21 +35,6 @@ namespace Magenic.BadgeApplication.Teams
             get { return ConfigurationManager.AppSettings["FlowBaseURL"]; }
         }
 
-        private string MessageText
-        {
-            get { return ConfigurationManager.AppSettings["Message"]; }
-        }
-
-        private string LeaderboardUrl
-        {
-            get { return ConfigurationManager.AppSettings["LeaderboardURL"]; }
-        }
-
-        private string DataServiceUrl
-        {
-            get { return ConfigurationManager.AppSettings["ITDataServiceURL"]; }
-        }
-
         public TeamsPublisher() : this(IoC.Container)
         {
         }
@@ -62,62 +49,171 @@ namespace Magenic.BadgeApplication.Teams
             _restClient = _restClientFactory.Create(new Uri(flowBaseUrl));
         }
 
-        public void Publish(EarnedBadgeItemDTO earnedBadge)
+        public void Publish(PublishMessageConfigDTO publishMessageConfig)
         {
-            var environment = ConfigurationManager.AppSettings["Environment"];
-            if (string.IsNullOrWhiteSpace(environment))
-            {
-                environment = "debug";
-            }
+            var msgEmp = $"{publishMessageConfig.EmployeeFullName} has been awarded the following Magenic Badges:";
 
             var eventType = string.Empty;
-            switch(environment.ToLower())
+            switch(publishMessageConfig.Environment.ToLower())
             {
-                case "test":
-                    eventType = EventType.TeamsTestingEventType.ToString();
-                    break;
                 case "prod":
                     eventType = EventType.TeamsEventType.ToString();
+                    break;
+                default:
+                    eventType = EventType.TeamsTestingEventType.ToString();
+                    msgEmp = $"{msgEmp} ({publishMessageConfig.Environment} test)";
                     break;
             }
 
             try
             {
-                // Get the user that earned the badge from IT's service endpoint
-                var dataServiceUri = new Uri(DataServiceUrl, UriKind.Absolute);
-                var context = new MagenicDataEntities(dataServiceUri)
+                var adptMsg = new AdaptFlowMsg();
+                adptMsg.type = "AdpativeCard";
+                adptMsg.body = new List<AdaptFlowMsgBody>();
+                adptMsg.actions = new List<AdaptFlowMsgAction>();
+                adptMsg.schemaNameToBeReplaced = "http://adaptivecards.io/schemas/adaptive-card.json";
+                adptMsg.version = "1.0";
+
+                var adptMsgAction = new AdaptFlowMsgAction()
                 {
-                    Credentials = CredentialCache.DefaultCredentials
+                    type = "Action.OpenUrl",
+                    title = "View",
+                    url = publishMessageConfig.EmployeeLeaderboard
                 };
-                var employee = context.vwODataEmployees.Where(e => e.EMailAddress == earnedBadge.EmployeeEmailAddr).FirstOrDefault();
+                adptMsg.actions.Add(adptMsgAction);
 
-                if (employee != null)
+                //var adptMsgBodyList = new List<AdaptFlowMsgBody>();
+                var adptMsgBody = new AdaptFlowMsgBody()
                 {
-                    var adName = earnedBadge.EmployeeADName.Substring(earnedBadge.EmployeeADName.IndexOf("\\") + 1);
-                    var leaderboardUrl = string.Format(LeaderboardUrl, adName);
+                    type = "Container",
+                    items = new List<string>()
+                };
 
-                    var body = string.Format(MessageText,
-                        employee.EmployeeFullName,
-                        earnedBadge.Name);
+                adptMsgBody.items.Add("@TextBlock");
 
-                    var flowMessageRequest = new FlowMessageRequest
+                var textBlock = new AdaptFlowMsgTextBlock()
+                {
+                    type = "TextBlock",
+                    size = "Medium",
+                    weight = "Bold",
+                    text = "This is Person"
+                };
+
+                var columnSets = new List<AdaptFlowMsgColumnSet>();
+                var column1s = new List<AdaptFlowMsgColumn>();
+                var column1Images = new List<AdaptFlowMsgImage>();
+                var column2s = new List<AdaptFlowMsgColumn>();
+                var column2TextBlocks = new List<AdaptFlowMsgTextBlock>();
+                var badgeCnt = 0;
+                foreach (var qItem in publishMessageConfig.QueueItems)
+                {
+                    badgeCnt++;
+
+                    adptMsgBody.items.Add($"@ColumnSet{badgeCnt.ToString()}");
+                    var columnSet = new AdaptFlowMsgColumnSet()
                     {
-                        eventType = eventType,
-                        summary = "Badge Award!", // TODO: Think about how to construct summary text
-                        body = body,
-                        ogImage = earnedBadge.ImagePath,
-                        ogTitle = earnedBadge.Name,
-                        ogDescription = earnedBadge.Tagline,
-                        ogUrl = leaderboardUrl
+                        type = "ColumnSet",
+                        columns = new List<string>()
                     };
+                    columnSets.Add(columnSet);
 
-                    //try adding the message
-                    MakePostRequest(flowMessageRequest, FlowEndpoint);
+                    columnSet.columns.Add($"@Column1Set{badgeCnt.ToString()}");
+                    var column1 = new AdaptFlowMsgColumn()
+                    {
+                        type = "Column",
+                        items = new List<string>(),
+                        width = "auto"
+                    };
+                    column1s.Add(column1);
+
+                    column1.items.Add($"@ItemColumn1Set{badgeCnt.ToString()}");
+                    var itemColumn1 = new AdaptFlowMsgImage()
+                    {
+                        type = "Image",
+                        style = "Person",
+                        url = "https://magenicbadgeappprod.blob.core.windows.net/badgeimagesqa/badgeimage36",
+                        size = "Small"
+                    };
+                    column1Images.Add(itemColumn1);
+
+                    columnSet.columns.Add($"@Column2Set{badgeCnt.ToString()}");
+                    var column2 = new AdaptFlowMsgColumn()
+                    {
+                        type = "Column",
+                        items = new List<string>(),
+                        width = "auto"
+                    };
+                    column2s.Add(column2);
+
+                    column2.items.Add($"@ItemColumn2Set{badgeCnt.ToString()}");
+                    var itemColumn2 = new AdaptFlowMsgTextBlock()
+                    {
+                        type = "TextBlock",
+                        size = "Medium",
+                        weight = "Normal",
+                        text = "This is Badge Name - Badge Tagline"
+                    };
+                    column2TextBlocks.Add(itemColumn2);
                 }
-                else
+
+                adptMsg.body.Add(adptMsgBody);
+
+                var adptJson = JsonConvert.SerializeObject(adptMsg);
+                adptJson = adptJson.Replace("schemaNameToBeReplaced", "$schema");
+                var textBlockJson = JsonConvert.SerializeObject(textBlock);
+                adptJson = adptJson.Replace("@TextBlock", textBlockJson);
+
+                for (int i = 0; badgeCnt > 0 && i < badgeCnt; i++)
                 {
-                    Logger.Error<TeamsPublisher>($"Employee {earnedBadge.EmployeeEmailAddr} does not exist for publishing to Teams.");
+                    var columnSetJson = JsonConvert.SerializeObject(columnSets[i]);
+                    adptJson = adptJson.Replace($"\"@ColumnSet{(i + 1).ToString()}\"", columnSetJson);
+
+                    var column1Json = JsonConvert.SerializeObject(column1s[i]);
+                    adptJson = adptJson.Replace($"\"@Column1Set{(i + 1).ToString()}\"", column1Json);
+
+                    var itemColumn1SetJson = JsonConvert.SerializeObject(column1Images[i]);
+                    adptJson = adptJson.Replace($"\"@ItemColumn1Set{(i + 1).ToString()}\"", itemColumn1SetJson);
+
+                    var column2Json = JsonConvert.SerializeObject(column2s[i]);
+                    adptJson = adptJson.Replace($"\"@Column2Set{(i + 1).ToString()}\"", column2Json);
+
+                    var itemColumn2Json = JsonConvert.SerializeObject(column2TextBlocks[i]);
+                    adptJson = adptJson.Replace($"\"@ItemColumn2Set{(i + 1).ToString()}\"", itemColumn2Json);
                 }
+
+                //StringBuilder sb = new StringBuilder();
+                //sb.Append($"{msgEmp}<br/>");
+                //sb.Append("<table>");
+                //foreach (var item in publishMessageConfig.QueueItems)
+                //{
+                //    sb.Append("<tr>");
+                //    sb.Append($"<td><img src='{item.BadgePath}' width='50%' height='50%' alt='{item.BadgeName}' /></td>");
+                //    sb.Append($"<td>&nbsp;{item.BadgeName}</td>");
+                //    sb.Append("<td>");
+                //    if (!string.IsNullOrWhiteSpace(item.BadgeTagline))
+                //    {
+                //        sb.Append($" - {item.BadgeTagline}</td>");
+                //    }
+                //    sb.Append("</td>");
+                //    sb.Append("</tr>");
+                //}
+                //sb.Append("</table>");
+                //sb.Append("<p>");
+
+                //var msgBody = sb.ToString();
+
+                var flowMessageRequest = new FlowMessageRequest
+                {
+                    eventType = "TempFlow",
+                    //summary = publishMessageConfig.Title, // TODO: Think about how to construct summary text
+                    body = adptJson,
+                    //ogImage = string.Empty,
+                    //ogTitle = "Badge Name",
+                    //ogDescription = "Badge Tag Line",
+                    //ogUrl = publishMessageConfig.EmployeeLeaderboard
+                };
+
+                MakePostRequest(flowMessageRequest, FlowEndpoint);
             }
             catch (Exception exception)
             {

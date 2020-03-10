@@ -23,11 +23,11 @@ namespace Magenic.BadgeApplication.Console
             var processor = Assembly.Load("Magenic.BadgeApplication.Processor");
             builder.RegisterAssemblyTypes(processor).AsImplementedInterfaces();
 
-            var adapters = Assembly.Load("Magenic.BadgeApplication.Yammer");
-            builder.RegisterAssemblyTypes(adapters).AsImplementedInterfaces();
-
             var teamsAdapter = Assembly.Load("Magenic.BadgeApplication.Teams");
             builder.RegisterAssemblyTypes(teamsAdapter).AsImplementedInterfaces();
+
+            var emailAdapter = Assembly.Load("Magenic.BadgeApplication.EmailPublisher");
+            builder.RegisterAssemblyTypes(emailAdapter).AsImplementedInterfaces();
 
             builder.RegisterGeneric(typeof(ObjectFactory<>)).As(typeof(IObjectFactory<>));
 

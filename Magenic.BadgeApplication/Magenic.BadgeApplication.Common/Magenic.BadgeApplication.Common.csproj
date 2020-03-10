@@ -117,6 +117,8 @@
     <Compile Include="DTO\BadgeActivityEditDTO.cs" />
     <Compile Include="DTO\BadgeAwardDTO.cs" />
     <Compile Include="DTO\BadgeAwardEditDTO.cs" />
+    <Compile Include="DTO\PublishQueueItemDTO.cs" />
+    <Compile Include="DTO\PublishMessageConfigDTO.cs" />
     <Compile Include="DTO\BadgeEditDTO.cs" />
     <Compile Include="DTO\BadgeItemDTO.cs" />
     <Compile Include="DTO\CustomIdentityDTO.cs" />
@@ -127,6 +129,7 @@
     <Compile Include="DTO\PointsReportItemDTO.cs" />
     <Compile Include="DTO\QueueEventLogDTO.cs" />
     <Compile Include="DTO\QueueItemDTO.cs" />
+    <Compile Include="DTO\QueueItemToPublishDTO.cs" />
     <Compile Include="DTO\SubmitActivityDTO.cs" />
     <Compile Include="DTO\SubmittedActivityItemDTO.cs" />
     <Compile Include="DTO\UserItemDTO.cs" />
@@ -198,6 +201,9 @@
     <Compile Include="Interfaces\IQueueEventLogDAL.cs" />
     <Compile Include="Interfaces\IQueueItemDAL.cs" />
     <Compile Include="Interfaces\IDTORepository.cs" />
+    <Compile Include="Interfaces\IQueueItemToPublish.cs" />
+    <Compile Include="Interfaces\IQueueItemToPublishCollection.cs" />
+    <Compile Include="Interfaces\IQueueItemToPublishCollectionDAL.cs" />
     <Compile Include="Interfaces\IRestClientFactory.cs" />
     <Compile Include="Interfaces\ISendMessageDAL.cs" />
     <Compile Include="Interfaces\ISubmitActivity.cs" />
@@ -215,6 +221,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplicationResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Emails.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CodeDictionary.xml">

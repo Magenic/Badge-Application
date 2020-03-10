@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ED0E0579-1178-4197-BAB7-7B29B425CCA2}</ProjectGuid>
+    <ProjectGuid>{E89AB11B-8D4B-4527-8F22-3FDDFF406A7D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Magenic.BadgeApplication.Teams</RootNamespace>
-    <AssemblyName>Magenic.BadgeApplication.Teams</AssemblyName>
+    <RootNamespace>Magenic.BadgeApplication.EmailPublisher</RootNamespace>
+    <AssemblyName>Magenic.BadgeApplication.EmailPublisher</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,26 +30,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
-    <OutputPath>bin\Test\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Prod|AnyCPU'">
-    <OutputPath>bin\Prod\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=4.0.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.0.1\lib\net45\Autofac.dll</HintPath>
@@ -56,13 +37,8 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,34 +47,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataService.cs" />
-    <Compile Include="Messages\AdaptFlowMsg.cs" />
-    <Compile Include="Messages\AdaptFlowMsgAction.cs" />
-    <Compile Include="Messages\AdaptFlowMsgBody.cs" />
-    <Compile Include="Messages\AdaptFlowMsgColumn.cs" />
-    <Compile Include="Messages\AdaptFlowMsgColumnSet.cs" />
-    <Compile Include="Messages\AdaptFlowMsgImage.cs" />
-    <Compile Include="Messages\AdaptFlowMsgTextBlock.cs" />
-    <Compile Include="Messages\FlowMessageRequest.cs" />
-    <Compile Include="Messages\Message.cs" />
-    <Compile Include="Messages\PostWebhookMessage.cs" />
-    <Compile Include="Messages\PublishColumnSet.cs" />
+    <Compile Include="EmailPublisher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TeamsPublisher.cs" />
-    <Compile Include="Utilities\RestClientFactory.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">
-      <Project>{0274f325-95a1-43c8-b1d7-f81adfc0a535}</Project>
+      <Project>{0274F325-95A1-43C8-B1D7-F81ADFC0A535}</Project>
       <Name>Magenic.BadgeApplication.BusinessLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\Magenic.BadgeApplication.Common\Magenic.BadgeApplication.Common.csproj">
-      <Project>{d7b48f98-7bd5-4e80-8740-6c348a7f9a1e}</Project>
+      <Project>{D7B48F98-7BD5-4E80-8740-6C348A7F9A1E}</Project>
       <Name>Magenic.BadgeApplication.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

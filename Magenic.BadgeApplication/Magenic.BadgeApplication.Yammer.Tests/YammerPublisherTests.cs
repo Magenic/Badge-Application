@@ -9,17 +9,15 @@ namespace Magenic.BadgeApplication.Yammer.Tests
         [TestMethod]
         public void PublishHarness()
         {
-            var dto = new EarnedBadgeItemDTO
-            {
-                EmployeeADName = "billzi",
-                Name = "testBadgeName3",
-                ImagePath = "testImagePath3",
-                Tagline = "testTagLine3"
-            };
+            //var dto = new PublishMessageConfigDTO
+            //{
+            //    EmployeeFirstName = "Bill",
+            //    EmployeeLastName = "zi",
+            //};
 
-            var yp = new YammerPublisher();
+            //var yp = new YammerPublisher();
 
-            yp.Publish( dto );
+            //yp.Publish(dto);
         }
     }
 }

@@ -167,7 +167,7 @@
           <Property Name="QueueItemCreated" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Magenic.BadgeApplication.Prod.dbo.CurrentActiveBadges' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.CurrentActiveBadges' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CurrentActiveBadges">
           <Key>
             <PropertyRef Name="BadgeTypeName" />
@@ -205,10 +205,9 @@ warning 6002: The table/view 'Magenic.BadgeApplication.Prod.dbo.CurrentActiveBad
           <Property Name="BadgeAwardValueAmountMax" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Magenic.BadgeApplication.Prod.dbo.EarnedBadges' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EarnedBadges">
           <Key>
-            <PropertyRef Name="BadgeAwardId" />
             <PropertyRef Name="EmployeeId" />
             <PropertyRef Name="FirstName" />
             <PropertyRef Name="LastName" />
@@ -228,8 +227,8 @@ warning 6002: The table/view 'Magenic.BadgeApplication.Prod.dbo.EarnedBadges' do
             <PropertyRef Name="AwardDate" />
             <PropertyRef Name="AwardAmount" />
             <PropertyRef Name="PaidOut" />
+            <PropertyRef Name="BadgeAwardId" />
           </Key>
-          <Property Name="BadgeAwardId" Type="int" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -257,6 +256,35 @@ warning 6002: The table/view 'Magenic.BadgeApplication.Prod.dbo.EarnedBadges' do
           <Property Name="AwardDate" Type="date" Nullable="false" />
           <Property Name="AwardAmount" Type="int" Nullable="false" />
           <Property Name="PaidOut" Type="bit" Nullable="false" />
+          <Property Name="BadgeAwardId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublish' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="QueueItemsToPublish">
+          <Key>
+            <PropertyRef Name="QueueItemId" />
+            <PropertyRef Name="BadgeAwardId" />
+            <PropertyRef Name="QueueItemCreated" />
+            <PropertyRef Name="BadgeId" />
+            <PropertyRef Name="BadgeName" />
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="ADName" />
+          </Key>
+          <Property Name="QueueItemId" Type="int" Nullable="false" />
+          <Property Name="BadgeAwardId" Type="int" Nullable="false" />
+          <Property Name="QueueItemCreated" Type="datetime" Nullable="false" />
+          <Property Name="BadgeId" Type="int" Nullable="false" />
+          <Property Name="BadgeName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="BadgeTagline" Type="varchar" MaxLength="200" />
+          <Property Name="BadgePath" Type="varchar" MaxLength="512" />
+          <Property Name="BadgeDescription" Type="varchar(max)" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="ADName" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="FK_Activity_ActivityEntryType">
           <End Role="ActivityEntryType" Type="Self.ActivityEntryType" Multiplicity="1" />
@@ -511,9 +539,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.Prod.dbo.EarnedBadges' do
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_QueueEventLog_BadgeAward">
-          <End Role="BadgeAward" Type="Self.BadgeAward" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="BadgeAward" Type="Self.BadgeAward" Multiplicity="1" />
           <End Role="QueueEventLog" Type="Self.QueueEventLog" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BadgeAward">
@@ -537,9 +563,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.Prod.dbo.EarnedBadges' do
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_QueueItem_BadgeAward">
-          <End Role="BadgeAward" Type="Self.BadgeAward" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="BadgeAward" Type="Self.BadgeAward" Multiplicity="1" />
           <End Role="QueueItem" Type="Self.QueueItem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BadgeAward">
@@ -592,7 +616,6 @@ warning 6002: The table/view 'Magenic.BadgeApplication.Prod.dbo.EarnedBadges' do
           </EntitySet>
           <EntitySet Name="EarnedBadges" EntityType="Self.EarnedBadges" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [EarnedBadges].[BadgeAwardId] AS [BadgeAwardId], 
     [EarnedBadges].[EmployeeId] AS [EmployeeId], 
     [EarnedBadges].[FirstName] AS [FirstName], 
     [EarnedBadges].[LastName] AS [LastName], 
@@ -619,8 +642,26 @@ warning 6002: The table/view 'Magenic.BadgeApplication.Prod.dbo.EarnedBadges' do
     [EarnedBadges].[PayrollEligible] AS [PayrollEligible], 
     [EarnedBadges].[AwardDate] AS [AwardDate], 
     [EarnedBadges].[AwardAmount] AS [AwardAmount], 
-    [EarnedBadges].[PaidOut] AS [PaidOut]
+    [EarnedBadges].[PaidOut] AS [PaidOut], 
+    [EarnedBadges].[BadgeAwardId] AS [BadgeAwardId]
     FROM [dbo].[EarnedBadges] AS [EarnedBadges]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="QueueItemsToPublish" EntityType="Self.QueueItemsToPublish" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [QueueItemsToPublish].[QueueItemId] AS [QueueItemId], 
+    [QueueItemsToPublish].[BadgeAwardId] AS [BadgeAwardId], 
+    [QueueItemsToPublish].[QueueItemCreated] AS [QueueItemCreated], 
+    [QueueItemsToPublish].[BadgeId] AS [BadgeId], 
+    [QueueItemsToPublish].[BadgeName] AS [BadgeName], 
+    [QueueItemsToPublish].[BadgeTagline] AS [BadgeTagline], 
+    [QueueItemsToPublish].[BadgePath] AS [BadgePath], 
+    [QueueItemsToPublish].[BadgeDescription] AS [BadgeDescription], 
+    [QueueItemsToPublish].[EmployeeId] AS [EmployeeId], 
+    [QueueItemsToPublish].[FirstName] AS [FirstName], 
+    [QueueItemsToPublish].[LastName] AS [LastName], 
+    [QueueItemsToPublish].[EmailAddress] AS [EmailAddress], 
+    [QueueItemsToPublish].[ADName] AS [ADName]
+    FROM [dbo].[QueueItemsToPublish] AS [QueueItemsToPublish]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Activity_ActivityEntryType" Association="Self.FK_Activity_ActivityEntryType">
             <End Role="ActivityEntryType" EntitySet="ActivityEntryType" />
@@ -915,6 +956,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.Prod.dbo.EarnedBadges' do
             <End Role="ActivityEntryType" EntitySet="ActivityEntryTypes" />
             <End Role="Activity" EntitySet="Activities" />
           </AssociationSet>
+          <EntitySet Name="QueueItemsToPublish" EntityType="Magenic.BadgeApplication.DBModel.QueueItemToPublish" />
           </EntityContainer>
         <EntityType Name="BadgePrerequisite">
           <Key>
@@ -1423,6 +1465,32 @@ warning 6002: The table/view 'Magenic.BadgeApplication.Prod.dbo.EarnedBadges' do
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="QueueItemToPublish">
+          <Key>
+            <PropertyRef Name="QueueItemId" />
+            <PropertyRef Name="BadgeAwardId" />
+            <PropertyRef Name="QueueItemCreated" />
+            <PropertyRef Name="BadgeId" />
+            <PropertyRef Name="BadgeName" />
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="ADName" />
+          </Key>
+          <Property Name="QueueItemId" Type="Int32" Nullable="false" />
+          <Property Name="BadgeAwardId" Type="Int32" Nullable="false" />
+          <Property Name="QueueItemCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BadgeId" Type="Int32" Nullable="false" />
+          <Property Name="BadgeName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BadgePath" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BadgeTagline" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ADName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1662,6 +1730,25 @@ warning 6002: The table/view 'Magenic.BadgeApplication.Prod.dbo.EarnedBadges' do
               <MappingFragment StoreEntitySet="ActivityEntryType">
                 <ScalarProperty Name="EntryTypeName" ColumnName="EntryTypeName" />
                 <ScalarProperty Name="ActivityEntryTypeId" ColumnName="ActivityEntryTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QueueItemsToPublish">
+            <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.QueueItemToPublish">
+              <MappingFragment StoreEntitySet="QueueItemsToPublish">
+                <ScalarProperty Name="ADName" ColumnName="ADName" />
+                <ScalarProperty Name="BadgeTagline" ColumnName="BadgeTagline" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="BadgeDescription" ColumnName="BadgeDescription" />
+                <ScalarProperty Name="BadgePath" ColumnName="BadgePath" />
+                <ScalarProperty Name="BadgeName" ColumnName="BadgeName" />
+                <ScalarProperty Name="BadgeId" ColumnName="BadgeId" />
+                <ScalarProperty Name="QueueItemCreated" ColumnName="QueueItemCreated" />
+                <ScalarProperty Name="BadgeAwardId" ColumnName="BadgeAwardId" />
+                <ScalarProperty Name="QueueItemId" ColumnName="QueueItemId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

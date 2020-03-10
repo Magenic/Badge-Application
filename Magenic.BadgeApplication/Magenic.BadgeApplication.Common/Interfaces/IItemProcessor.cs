@@ -11,14 +11,14 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <summary>
         /// Processes the input item
         /// </summary>
-        /// <param name="latestItem">The item to process</param>
-        void ProcessItem(QueueItemDTO latestItem);
+        /// <param name="publishMessageConfig">The message to publish</param>
+        void ProcessItem(PublishMessageConfigDTO publishMessageConfig);
 
         /// <summary>
         /// Publishes updates related to the input item
         /// </summary>
-        /// <param name="earnedBadge">The item to publish updates about</param>
-        void PublishUpdates(EarnedBadgeItemDTO earnedBadge);
+        /// <param name="publishMessageConfig">The item to publish updates about</param>
+        void PublishUpdates(PublishMessageConfigDTO publishMessageConfig);
 
         /// <summary>
         /// Logs progress related to the processing of a queue item

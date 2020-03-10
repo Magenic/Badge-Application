@@ -21,7 +21,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
 
     public class TestYammerPublisher : IPublisher
     {
-        public void Publish(Common.DTO.EarnedBadgeItemDTO earnedBadge)
+        public void Publish(Common.DTO.PublishMessageConfigDTO publishMessageConfig)
         {
             
         }
