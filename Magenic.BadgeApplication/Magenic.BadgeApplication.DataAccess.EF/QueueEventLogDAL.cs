@@ -1,6 +1,8 @@
 ﻿using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Exceptions;
 using Magenic.BadgeApplication.Common.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Magenic.BadgeApplication.DataAccess.EF
@@ -95,6 +97,11 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 context.QueueEventLogs.Remove(item);
                 context.SaveChanges();
             }
+        }
+
+        public void DeleteRange(IList<int> ids)
+        {
+            throw new NotSupportedException();
         }
     }
 }

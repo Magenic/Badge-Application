@@ -12,7 +12,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// Processes the input item
         /// </summary>
         /// <param name="publishMessageConfig">The message to publish</param>
-        void ProcessItem(PublishMessageConfigDTO publishMessageConfig);
+        void ProcessItems(PublishMessageConfigDTO publishMessageConfig);
 
         /// <summary>
         /// Publishes updates related to the input item
@@ -24,7 +24,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// Logs progress related to the processing of a queue item
         /// </summary>
         /// <param name="eventType">The type of event we are recording information about</param>
-        /// <param name="latestItem">The item that has been updated</param>
-        void RegisterQueueItemProgress(QueueEventType eventType, QueueItemDTO latestItem);
+        /// <param name="publishMessageConfig">The items that has been updated</param>
+        void RegisterQueueItemProgress(QueueEventType eventType, PublishMessageConfigDTO publishMessageConfig);
     }
 }

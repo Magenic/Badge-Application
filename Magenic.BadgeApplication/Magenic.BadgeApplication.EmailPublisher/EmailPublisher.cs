@@ -25,7 +25,7 @@ namespace Magenic.BadgeApplication.EmailPublisher
             _factory = factory;
         }
 
-        public void Publish(PublishMessageConfigDTO publishMessageConfig) //(EarnedBadgeItemDTO earnedBadge, BadgeAwardPublishMessageDTO awardMessage)
+        public void Publish(PublishMessageConfigDTO publishMessageConfig)
         {
             try
             {
@@ -41,14 +41,15 @@ namespace Magenic.BadgeApplication.EmailPublisher
                 foreach (var item in publishMessageConfig.QueueItems)
                 {
                     sb.Append("<tr>");
-                    sb.Append($"<td><img src='{item.BadgePath}' width='50%' height='50%' alt='{item.BadgeName}' /></td>");
-                    sb.Append($"<td>&nbsp;{item.BadgeName}</td>");
-                    sb.Append("<td>");
-                    if (!string.IsNullOrWhiteSpace(item.BadgeTagline))
-                    {
-                        sb.Append($" - {item.BadgeTagline}</td>");
-                    }
-                    sb.Append("</td>");
+                    sb.Append($"<td colspan=3>&nbsp;{item.BadgeName}</td>");
+                    sb.Append("</tr>");
+                    sb.Append("<tr>");
+                    sb.Append($"<td><img src='{item.BadgePath}' width='70%' height='70%' alt='{item.BadgeName}' /></td>");
+                    sb.Append($"<td>&nbsp;{item.BadgeTagline}&nbsp;&nbsp;&nbsp;</td>");
+                    sb.Append($"<td>{item.BadgeDescription}</td>");
+                    sb.Append("</tr>");
+                    sb.Append("<tr>");
+                    sb.Append($"<td colspan=3>&nbsp;</td>");
                     sb.Append("</tr>");
                 }
                 sb.Append("</table>");

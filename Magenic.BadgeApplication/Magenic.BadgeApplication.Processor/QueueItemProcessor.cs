@@ -5,6 +5,8 @@ using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using System.Text;
 
 namespace Magenic.BadgeApplication.Processor
@@ -35,44 +37,54 @@ namespace Magenic.BadgeApplication.Processor
             _publishers = _factory.Resolve<IEnumerable<IPublisher>>();
         }
 
-        public void ProcessItem(PublishMessageConfigDTO publishMessageConfig)
+        public void ProcessItems(PublishMessageConfigDTO publishMessageConfig)
         {
             try
             {
-                //RegisterQueueItemProgress(QueueEventType.Processing, latestItem);
+                RegisterQueueItemProgress(QueueEventType.Processing, publishMessageConfig);
 
                 PublishUpdates(publishMessageConfig);
 
-                //_queueItemDAL.Delete(latestItem.QueueItemId);
+                _queueItemDAL.DeleteRange(publishMessageConfig.QueueItems.Select(x => x.QueueItemId).ToList());
 
-                //RegisterQueueItemProgress(QueueEventType.Processed, latestItem);
+                RegisterQueueItemProgress(QueueEventType.Processed, publishMessageConfig);
             }
             catch
             {
-                //RegisterQueueItemProgress(QueueEventType.Failed, latestItem);
+                RegisterQueueItemProgress(QueueEventType.Failed, publishMessageConfig);
                 throw;
             }
         }
 
         public void PublishUpdates(PublishMessageConfigDTO publishMessageConfig)
         {
-            foreach (IPublisher publisher in _publishers)
+            var activePublishers = ConfigurationManager.AppSettings["ActivePublishers"];
+            if (!string.IsNullOrWhiteSpace(activePublishers))
             {
-                publisher.Publish(publishMessageConfig);
+                foreach (IPublisher publisher in _publishers)
+                {
+                    if (activePublishers.Contains(publisher.GetType().Name))
+                    {
+                        publisher.Publish(publishMessageConfig);
+                    }
+                }
             }
         }
 
-        public void RegisterQueueItemProgress(QueueEventType eventType, QueueItemDTO latestItem)
+        public void RegisterQueueItemProgress(QueueEventType eventType, PublishMessageConfigDTO publishMessageConfig)
         {
-            QueueEventLogDTO eventLogItem = new QueueEventLogDTO
+            foreach(var item in publishMessageConfig.QueueItems)
             {
-                Message = string.Format("Queue Data Item {0} is {1}", latestItem.BadgeAwardId, eventType.ToString()),
-                QueueEventCreated = DateTime.Now,
-                QueueEventId = (int)eventType,
-                BadgeAwardId = latestItem.BadgeAwardId
-            };
+                QueueEventLogDTO eventLogItem = new QueueEventLogDTO
+                {
+                    Message = string.Format("Queue Data Item {0} is {1}", item.BadgeAwardId, eventType.ToString()),
+                    QueueEventCreated = DateTime.Now,
+                    QueueEventId = (int)eventType,
+                    BadgeAwardId = item.BadgeAwardId
+                };
 
-            _queueEventLogDAL.Add(eventLogItem);
+                var newEventLog = _queueEventLogDAL.Add(eventLogItem);
+            }
         }
     }
 }
