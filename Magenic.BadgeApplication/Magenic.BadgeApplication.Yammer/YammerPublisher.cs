@@ -42,7 +42,7 @@ namespace Magenic.BadgeApplication.Yammer
             return string.Format(ConfigurationManager.AppSettings["YammerGetUserURL"], userEmail);
         }
 
-        public void Publish(EarnedBadgeItemDTO earnedBadge)
+        public void Publish(PublishMessageConfigDTO publishMessageConfig)
         {
             ////Get the user that earned the badge
             //string userEmail = string.Format("{0}@magenic.com", earnedBadge.EmployeeADName); 

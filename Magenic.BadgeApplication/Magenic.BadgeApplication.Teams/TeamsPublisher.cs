@@ -6,12 +6,14 @@ using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Teams.Messages;
 using MagenicDataModel;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading;
 
 namespace Magenic.BadgeApplication.Teams
@@ -37,17 +39,6 @@ namespace Magenic.BadgeApplication.Teams
         {
             get { return ConfigurationManager.AppSettings["Message"]; }
         }
-
-        private string LeaderboardUrl
-        {
-            get { return ConfigurationManager.AppSettings["LeaderboardURL"]; }
-        }
-
-        private string DataServiceUrl
-        {
-            get { return ConfigurationManager.AppSettings["ITDataServiceURL"]; }
-        }
-
         public TeamsPublisher() : this(IoC.Container)
         {
         }
@@ -62,61 +53,48 @@ namespace Magenic.BadgeApplication.Teams
             _restClient = _restClientFactory.Create(new Uri(flowBaseUrl));
         }
 
-        public void Publish(EarnedBadgeItemDTO earnedBadge)
+        public void Publish(PublishMessageConfigDTO publishMessageConfig)
         {
-            var environment = ConfigurationManager.AppSettings["Environment"];
-            if (string.IsNullOrWhiteSpace(environment))
-            {
-                environment = "debug";
-            }
+            var testIndicatorMsg = string.Empty;
 
             var eventType = string.Empty;
-            switch(environment.ToLower())
+            switch(publishMessageConfig.Environment.ToLower())
             {
-                case "test":
-                    eventType = EventType.TeamsTestingEventType.ToString();
-                    break;
                 case "prod":
                     eventType = EventType.TeamsEventType.ToString();
+                    break;
+                default:
+                    eventType = EventType.TeamsTestingEventType.ToString();
+                    testIndicatorMsg = $"({publishMessageConfig.Environment} test)";
                     break;
             }
 
             try
             {
-                // Get the user that earned the badge from IT's service endpoint
-                var dataServiceUri = new Uri(DataServiceUrl, UriKind.Absolute);
-                var context = new MagenicDataEntities(dataServiceUri)
+                foreach(var item in publishMessageConfig.QueueItems)
                 {
-                    Credentials = CredentialCache.DefaultCredentials
-                };
-                var employee = context.vwODataEmployees.Where(e => e.EMailAddress == earnedBadge.EmployeeEmailAddr).FirstOrDefault();
+                    var formattedMsg = MessageText;
+                    if (!string.IsNullOrWhiteSpace(testIndicatorMsg))
+                    {
+                        formattedMsg = string.Concat(formattedMsg, " ", testIndicatorMsg);
+                    }
 
-                if (employee != null)
-                {
-                    var adName = earnedBadge.EmployeeADName.Substring(earnedBadge.EmployeeADName.IndexOf("\\") + 1);
-                    var leaderboardUrl = string.Format(LeaderboardUrl, adName);
-
-                    var body = string.Format(MessageText,
-                        employee.EmployeeFullName,
-                        earnedBadge.Name);
+                    var body = string.Format(formattedMsg,
+                        publishMessageConfig.EmployeeFullName,
+                        item.BadgeName);
 
                     var flowMessageRequest = new FlowMessageRequest
                     {
                         eventType = eventType,
-                        summary = "Badge Award!", // TODO: Think about how to construct summary text
+                        summary = publishMessageConfig.Title, 
                         body = body,
-                        ogImage = earnedBadge.ImagePath,
-                        ogTitle = earnedBadge.Name,
-                        ogDescription = earnedBadge.Tagline,
-                        ogUrl = leaderboardUrl
+                        ogImage = item.BadgePath,
+                        ogTitle = item.BadgeName,
+                        ogDescription = item.BadgeTagline,
+                        ogUrl = publishMessageConfig.EmployeeLeaderboard
                     };
 
-                    //try adding the message
                     MakePostRequest(flowMessageRequest, FlowEndpoint);
-                }
-                else
-                {
-                    Logger.Error<TeamsPublisher>($"Employee {earnedBadge.EmployeeEmailAddr} does not exist for publishing to Teams.");
                 }
             }
             catch (Exception exception)

@@ -1,4 +1,5 @@
 ﻿using Magenic.BadgeApplication.Common.DTO;
+using System.Collections.Generic;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -35,5 +36,11 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         /// <param name="id"></param>
         void Delete(int id);
+
+        /// <summary>
+        /// Deletes Range DTO with the input list of Ids
+        /// </summary>
+        /// <param name="ids"></param>
+        void DeleteRange(IList<int> ids);
     }
 }

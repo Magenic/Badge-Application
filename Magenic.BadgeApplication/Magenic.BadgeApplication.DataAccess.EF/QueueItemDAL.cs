@@ -2,6 +2,7 @@
 using Magenic.BadgeApplication.Common.Exceptions;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Magenic.BadgeApplication.DataAccess.EF
@@ -97,6 +98,26 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 
                 context.QueueItems.Remove(item);
                 context.SaveChanges();
+            }
+        }
+
+        public void DeleteRange(IList<int> ids)
+        {
+            if (ids != null && ids.Count() > 0)
+            {
+                using (Entities context = new Entities())
+                {
+                    var items = context
+                        .QueueItems
+                        .Where(e => ids.Contains(e.QueueItemId));
+
+                    if (items != null && items.Count() > 0)
+                    {
+                        var itemsToRemove = items.ToList();
+                        context.QueueItems.RemoveRange(itemsToRemove);
+                        context.SaveChanges();
+                    }
+                }
             }
         }
     }

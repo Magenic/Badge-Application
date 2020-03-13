@@ -78,10 +78,6 @@
       <Project>{D7B48F98-7BD5-4E80-8740-6C348A7F9A1E}</Project>
       <Name>Magenic.BadgeApplication.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Magenic.BadgeApplication.Yammer\Magenic.BadgeApplication.Yammer.csproj">
-      <Project>{7A376D75-249B-4A1D-BD7F-B80F720036C1}</Project>
-      <Name>Magenic.BadgeApplication.Yammer</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

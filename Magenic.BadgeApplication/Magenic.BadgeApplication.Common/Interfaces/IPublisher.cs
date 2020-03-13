@@ -10,7 +10,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <summary>
         /// Publishes a notification about the input earned badge
         /// </summary>
-        /// <param name="earnedBadge"></param>
-        void Publish(EarnedBadgeItemDTO earnedBadge);
+        /// <param name="publishMessageConfig"></param>
+        void Publish(PublishMessageConfigDTO publishMessageConfig);
     }
 }

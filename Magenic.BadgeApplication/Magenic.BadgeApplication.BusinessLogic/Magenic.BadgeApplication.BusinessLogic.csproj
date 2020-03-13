@@ -128,6 +128,8 @@
     <Compile Include="PointsReport\PointsReportCollection.cs" />
     <Compile Include="PointsReport\PointsReportItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queue\QueueItemToPublish.cs" />
+    <Compile Include="Queue\QueueItemToPublishCollection.cs" />
     <Compile Include="Rules\CanCreateSubmission.cs" />
     <Compile Include="Rules\CanChange.cs" />
     <Compile Include="Rules\CanSetBadgeType.cs" />

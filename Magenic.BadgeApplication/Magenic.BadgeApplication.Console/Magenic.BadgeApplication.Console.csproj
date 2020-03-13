@@ -155,6 +155,10 @@
       <Project>{80df9c9b-f946-42b1-87e7-57ef40709382}</Project>
       <Name>Magenic.BadgeApplication.DataAccess.EF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Magenic.BadgeApplication.EmailPublisher\Magenic.BadgeApplication.EmailPublisher.csproj">
+      <Project>{e89ab11b-8d4b-4527-8f22-3fddff406a7d}</Project>
+      <Name>Magenic.BadgeApplication.EmailPublisher</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Magenic.BadgeApplication.Processor\Magenic.BadgeApplication.Processor.csproj">
       <Project>{0d8c2715-a9b5-4e95-885b-3928063bc61e}</Project>
       <Name>Magenic.BadgeApplication.Processor</Name>
@@ -162,10 +166,6 @@
     <ProjectReference Include="..\Magenic.BadgeApplication.Teams\Magenic.BadgeApplication.Teams.csproj">
       <Project>{ed0e0579-1178-4197-bab7-7b29b425cca2}</Project>
       <Name>Magenic.BadgeApplication.Teams</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Magenic.BadgeApplication.Yammer\Magenic.BadgeApplication.Yammer.csproj">
-      <Project>{7a376d75-249b-4a1d-bd7f-b80f720036c1}</Project>
-      <Name>Magenic.BadgeApplication.Yammer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

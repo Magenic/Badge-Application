@@ -160,7 +160,6 @@
     <Compile Include="BadgeType.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
-    <Compile Include="Config.cs" />
     <Compile Include="CurrentActiveBadge.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
@@ -198,6 +197,10 @@
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
     <Compile Include="QueueItemDAL.cs" />
+    <Compile Include="QueueItemToPublish.cs">
+      <DependentUpon>Badge.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QueueItemToPublishCollectionDAL.cs" />
     <Compile Include="SendMessageDAL.cs" />
     <Compile Include="SubmitActivityDAL.cs" />
     <Compile Include="SubmittedActivityCollecitonDAL.cs" />

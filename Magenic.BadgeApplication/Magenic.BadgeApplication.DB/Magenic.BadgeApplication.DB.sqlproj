@@ -109,6 +109,7 @@
     <Build Include="dbo\Tables\QueueEvent.sql" />
     <Build Include="dbo\Tables\QueueEventLog.sql" />
     <Build Include="dbo\Tables\ActivityEntryType.sql" />
+    <Build Include="dbo\Views\QueueItemsToPublish.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostDeployScaffolding.sql" />
