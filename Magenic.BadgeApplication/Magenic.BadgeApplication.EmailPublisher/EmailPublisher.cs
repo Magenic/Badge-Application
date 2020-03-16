@@ -64,6 +64,7 @@ namespace Magenic.BadgeApplication.EmailPublisher
             catch (Exception ex)
             {
                 Logger.Error<EmailPublisher>(ex.Message, ex);
+                throw;
             }
         }
     }
