@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
@@ -49,8 +50,9 @@ namespace Magenic.BadgeApplication.Processor
 
                 RegisterQueueItemProgress(QueueEventType.Processed, publishMessageConfig);
             }
-            catch
+            catch(Exception ex)
             {
+                Logger.Error<QueueItemProcessor>(ex.Message, ex);
                 RegisterQueueItemProgress(QueueEventType.Failed, publishMessageConfig);
                 throw;
             }
