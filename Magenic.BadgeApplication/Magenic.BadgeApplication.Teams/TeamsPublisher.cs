@@ -95,6 +95,7 @@ namespace Magenic.BadgeApplication.Teams
                     };
 
                     MakePostRequest(flowMessageRequest, FlowEndpoint);
+                    Thread.Sleep(2000);
                 }
             }
             catch (Exception exception)
