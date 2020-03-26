@@ -57,9 +57,16 @@ namespace Magenic.BadgeApplication.EmailPublisher
 
                 var msgBody = sb.ToString();
 
-                Common.Utils.Emails.SendMessage(
-                    new MailAddress("no-reply@magenic.com", "Magenic Badge Application"),
-                                    new List<string>() { publishMessageConfig.EmployeeEmailAddress }, publishMessageConfig.Title, msgBody);
+                if (string.IsNullOrWhiteSpace(publishMessageConfig.EmployeeEmailAddress))
+                {
+                    Logger.Error<EmailPublisher>($"No email address for {publishMessageConfig.EmployeeFullName} - {publishMessageConfig.EmployeeADName}");
+                }
+                else
+                {
+                    Common.Utils.Emails.SendMessage(
+                        new MailAddress("no-reply@magenic.com", "Magenic Badge Application"),
+                                        new List<string>() { publishMessageConfig.EmployeeEmailAddress }, publishMessageConfig.Title, msgBody);
+                }
             }
             catch (Exception ex)
             {

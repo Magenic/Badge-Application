@@ -110,11 +110,10 @@ namespace Magenic.BadgeApplication.Processor
                                 {
                                     Credentials = CredentialCache.DefaultCredentials
                                 };
-                                var employee = context.vwODataEmployees.Where(e => e.EMailAddress == emp.EmailAddress).FirstOrDefault();
+                                var employee = context.vwODataEmployees.Where(e => e.NetworkAlias == emp.ADName).FirstOrDefault();
 
                                 if (employee != null)
                                 {
-                                    var empFullName = $"{emp.FirstName} {emp.LastName}";
                                     var adName = emp.ADName.Substring(emp.ADName.IndexOf("\\") + 1);
                                     var empLeaderboardUrl = string.Format(Leaderboard, adName);
 
@@ -123,10 +122,10 @@ namespace Magenic.BadgeApplication.Processor
                                         Environment = environment,
                                         Title = "Badge Award!",
                                         EmployeeId = emp.EmployeeId,
-                                        EmployeeFullName = empFullName,
-                                        EmployeeFirstName = emp.FirstName,
-                                        EmployeeLastName = emp.LastName,
-                                        EmployeeEmailAddress = emp.EmailAddress,
+                                        EmployeeFullName = employee.EmployeeFullName,
+                                        EmployeeFirstName = employee.EmployeeFirstName,
+                                        EmployeeLastName = employee.EmployeeLastName,
+                                        EmployeeEmailAddress = employee.EMailAddress,
                                         EmployeeADName = emp.ADName,
                                         EmployeeADNameNoDomain = adName,
                                         EmployeeLeaderboard = empLeaderboardUrl,
