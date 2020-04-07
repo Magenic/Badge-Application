@@ -60,23 +60,6 @@
             }
             @ApplicationResources.BadgeCorporateLabel
         </label>
-        &nbsp;&nbsp;
-        <label>
-            @* Have to do this manually because business rule only handles property, not the UI Elements. *@
-            @if (ApplicationContext.User.IsInRole(PermissionType.Administrator.ToString()))
-            {
-                <text>
-                    @Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Community)
-                </text>
-            }
-            else
-            {
-                <text>
-                    @Html.RadioButtonFor(bevm => bevm.Badge.Type, BadgeType.Community, new { onclick = "removeCorporateBadgeValue();" })
-                </text>
-            }
-            @ApplicationResources.BadgeCommunityLabel
-        </label>
         <br /><br />
         <div class="editor-label">
             @Html.Label(ApplicationResources.RequiredActivitiesLabel)
@@ -97,8 +80,6 @@
         </div>
         <div class="editor-field">
             @Html.Partial(Mvc.Shared.Views._CorporateBadgeTemplate)
-            &nbsp;|&nbsp;
-            @Html.Partial(Mvc.Shared.Views._CommunityBadgeTemplate)
         </div>
         <div class="pull-left">
             <div class="editor-label">
