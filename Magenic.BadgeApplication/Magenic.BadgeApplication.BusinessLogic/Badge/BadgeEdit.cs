@@ -240,7 +240,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             base.DataPortal_Create();
             this.LoadProperty(CreatedProperty, DateTime.UtcNow);
             this.LoadProperty(PriorityProperty, int.MaxValue);
-            this.LoadProperty(TypeProperty, BadgeType.Community);
+            this.LoadProperty(TypeProperty, BadgeType.Corporate);
             this.LoadProperty(BadgeActivitiesProperty, new BadgeActivityEditCollection());
             this.SetProperty(CreateEmployeeIdProperty, ((ICustomPrincipal)ApplicationContext.User).CustomIdentity().EmployeeId);
         }
