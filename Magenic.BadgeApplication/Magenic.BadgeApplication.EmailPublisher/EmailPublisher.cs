@@ -2,6 +2,7 @@
 using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.DTO;
+using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace Magenic.BadgeApplication.EmailPublisher
             _factory = factory;
         }
 
-        public void Publish(PublishMessageConfigDTO publishMessageConfig)
+        public void PublishBadge(PublishBadgeMsgConfigDTO publishMessageConfig)
         {
             try
             {
@@ -50,6 +51,68 @@ namespace Magenic.BadgeApplication.EmailPublisher
                     sb.Append("</tr>");
                     sb.Append("<tr>");
                     sb.Append($"<td colspan=3>&nbsp;</td>");
+                    sb.Append("</tr>");
+                }
+                sb.Append("</table>");
+                sb.Append("<p>");
+
+                var msgBody = sb.ToString();
+
+                if (string.IsNullOrWhiteSpace(publishMessageConfig.EmployeeEmailAddress))
+                {
+                    Logger.Error<EmailPublisher>($"No email address for {publishMessageConfig.EmployeeFullName} - {publishMessageConfig.EmployeeADName}");
+                }
+                else
+                {
+                    Common.Utils.Emails.SendMessage(
+                        new MailAddress("no-reply@magenic.com", "Magenic Badge Application"),
+                                        new List<string>() { publishMessageConfig.EmployeeEmailAddress }, publishMessageConfig.Title, msgBody);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error<EmailPublisher>(ex.Message, ex);
+                throw;
+            }
+        }
+
+        public void PublishSubmitNotify(PublishNotificationMsgConfigDTO publishMessageConfig)
+        {
+            try
+            {
+                var msgEmp = $"Status of the following Badge activities submitted for {publishMessageConfig.EmployeeFullName}:";
+
+                StringBuilder sb = new StringBuilder();
+                if (!publishMessageConfig.Environment.ToLower().Equals("prod"))
+                {
+                    sb.Append($" ({publishMessageConfig.Environment} test)<br/>");
+                }
+                sb.Append($"{msgEmp}<br/>");
+                sb.Append("<table style=\"width:100%\">");
+                sb.Append("<tr align='left'>");
+                sb.Append("<th width=\"5%\" style=\"border: 1px solid black;\">Date Submitted</th>");
+                sb.Append("<th width=\"10%\" style=\"border: 1px solid black;\">Status</th>");
+                sb.Append("<th width=\"20%\" style=\"border: 1px solid black;\">Description</th>");
+                sb.Append("<th width=\"20%\" style=\"border: 1px solid black;\">Activity Name</th>");
+                sb.Append("<th width=\"40%\" style=\"border: 1px solid black;\">Activity Description</th>");
+                sb.Append("<th width=\"5%\" style=\"border: 1px solid black;\">Award Value</th>");
+                sb.Append("</tr>");
+                foreach (var item in publishMessageConfig.NotificationItems)
+                {
+                    sb.Append("<tr>");
+                    sb.Append($"<td>{item.SubmissionDate.ToString("MM/dd/yyyy")}</td>");
+                    var redStyle = string.Empty;
+                    var submissionStatus = "Approved";
+                    if (item.SubmissionStatusId == (int)ActivitySubmissionStatus.Denied)
+                    {
+                        redStyle = " style=\"color:red;\"";
+                        submissionStatus = "Not Approved";
+                    }
+                    sb.Append($"<td{redStyle}>{submissionStatus}</td>");
+                    sb.Append($"<td>{item.SubmissionDescription}</td>");
+                    sb.Append($"<td>{item.ActivityName}</td>");
+                    sb.Append($"<td>{item.ActivityDescription}</td>");
+                    sb.Append($"<td>{(item.AwardValue.HasValue ? item.AwardValue.ToString() : string.Empty)}</td>");
                     sb.Append("</tr>");
                 }
                 sb.Append("</table>");

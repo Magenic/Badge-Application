@@ -1,5 +1,4 @@
 ﻿using Csla;
-using Magenic.BadgeApplication.Common.DTO;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {

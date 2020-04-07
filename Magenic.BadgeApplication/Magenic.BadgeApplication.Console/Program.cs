@@ -22,7 +22,8 @@ namespace Magenic.BadgeApplication.Console
                     var servicesToRun = new ServiceBase[]
                     {
                     new QueueProcessor(),
-                    new NotificationProcessor()
+                    new NotificationProcessor(),
+                    new SubmissionNotifyProcessor()
                     };
                     ServiceBase.Run(servicesToRun);
                 }

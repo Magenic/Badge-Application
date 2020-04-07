@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Processor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -21,9 +22,12 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
 
     public class TestYammerPublisher : IPublisher
     {
-        public void Publish(Common.DTO.PublishMessageConfigDTO publishMessageConfig)
-        {
-            
+        public void PublishBadge(Common.DTO.PublishBadgeMsgConfigDTO publishMessageConfig)
+        {           
         }
-    }   
+
+        public void PublishSubmitNotify(PublishNotificationMsgConfigDTO publishMessageConfig)
+        {
+        }
+    }
 }

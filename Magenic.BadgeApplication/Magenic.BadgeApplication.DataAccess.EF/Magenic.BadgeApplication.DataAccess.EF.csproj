@@ -180,6 +180,14 @@
     </Compile>
     <Compile Include="LeaderboardCollectionDAL.cs" />
     <Compile Include="LeaderboardItemDAL.cs" />
+    <Compile Include="Notification.cs">
+      <DependentUpon>Badge.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationDAL.cs" />
+    <Compile Include="NotificationItemToPublish.cs">
+      <DependentUpon>Badge.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationItemToPublishCollectionDAL.cs" />
     <Compile Include="Partials\SendMessageDAL.cs" />
     <Compile Include="Permission.cs">
       <DependentUpon>Badge.tt</DependentUpon>

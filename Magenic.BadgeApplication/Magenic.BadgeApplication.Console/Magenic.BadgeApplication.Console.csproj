@@ -130,6 +130,13 @@
       <DependentUpon>QueueProcessor.cs</DependentUpon>
     </Compile>
     <Compile Include="Starter.cs" />
+    <Compile Include="SubmissionNotifyProcessor.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SubmissionNotifyProcessor.Designer.cs">
+      <DependentUpon>SubmissionNotifyProcessor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubmissionNotifyStarter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
