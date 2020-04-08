@@ -23,9 +23,9 @@ using System.Web.Mvc;
 namespace Magenic.BadgeApplication.Controllers
 {
     /// <summary>
-    /// 
+    /// Badge manager controller
     /// </summary>
-    [Authorize]
+    [CustomAuthorize(Roles = "Administrator,Manager")]
     public partial class BadgeManagerController
         : BaseController
     {
