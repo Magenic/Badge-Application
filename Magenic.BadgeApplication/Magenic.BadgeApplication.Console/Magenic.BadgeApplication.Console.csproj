@@ -129,7 +129,7 @@
     <Compile Include="QueueProcessor.Designer.cs">
       <DependentUpon>QueueProcessor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Starter.cs" />
+    <Compile Include="QueueStarter.cs" />
     <Compile Include="SubmissionNotifyProcessor.cs">
       <SubType>Component</SubType>
     </Compile>

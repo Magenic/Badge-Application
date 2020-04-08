@@ -30,7 +30,8 @@ namespace Magenic.BadgeApplication.Console
                 else
                 {
                     NotificationStarter.Start();
-                    Starter.Start();
+                    QueueStarter.Start();
+                    SubmissionNotifyStarter.Start();
                 }
             }
         }
