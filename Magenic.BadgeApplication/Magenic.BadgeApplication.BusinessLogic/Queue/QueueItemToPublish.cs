@@ -23,7 +23,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Queue
             private set { SetProperty(QueueItemIdProperty, value); }
         }
 
-
         public static readonly PropertyInfo<int> BadgeAwardIdProperty = RegisterProperty<int>(c => c.BadgeAwardId);
         public int BadgeAwardId
         {

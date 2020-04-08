@@ -53,7 +53,7 @@ namespace Magenic.BadgeApplication.Teams
             _restClient = _restClientFactory.Create(new Uri(flowBaseUrl));
         }
 
-        public void Publish(PublishMessageConfigDTO publishMessageConfig)
+        public void PublishBadge(PublishBadgeMsgConfigDTO publishMessageConfig)
         {
             var testIndicatorMsg = string.Empty;
 
@@ -61,10 +61,10 @@ namespace Magenic.BadgeApplication.Teams
             switch(publishMessageConfig.Environment.ToLower())
             {
                 case "prod":
-                    eventType = EventType.TeamsEventType.ToString();
+                    eventType = TeamsFlowType.TeamsType.ToString();
                     break;
                 default:
-                    eventType = EventType.TeamsTestingEventType.ToString();
+                    eventType = TeamsFlowType.TestingType.ToString();
                     testIndicatorMsg = $"({publishMessageConfig.Environment} test)";
                     break;
             }
@@ -102,6 +102,11 @@ namespace Magenic.BadgeApplication.Teams
             {
                 throw exception;
             }
+        }
+
+        public void PublishSubmitNotify(PublishNotificationMsgConfigDTO publishMessageConfig)
+        {
+            throw new NotSupportedException();
         }
 
         private void MakePostRequest(Message message, string endpoint, string authHeader = null, string contentType = null)

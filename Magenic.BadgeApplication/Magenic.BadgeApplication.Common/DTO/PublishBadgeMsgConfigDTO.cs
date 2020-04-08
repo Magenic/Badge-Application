@@ -9,7 +9,7 @@ namespace Magenic.BadgeApplication.Common.DTO
     /// <summary>
     /// Class for data transfer persist operations.
     /// </summary>
-    public class PublishMessageConfigDTO
+    public class PublishBadgeMsgConfigDTO
     {
         /// <summary>
         /// The Environemnt to be published

@@ -88,6 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SubmissionNotifyItemProcessor.cs" />
     <Compile Include="NotificationProcessor.cs" />
     <Compile Include="ActvityLoader.cs" />
     <Compile Include="ADProcessor.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueueItemProcessor.cs" />
     <Compile Include="QueueProcessor.cs" />
+    <Compile Include="SubmissionNotifyProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.BusinessLogic\Magenic.BadgeApplication.BusinessLogic.csproj">

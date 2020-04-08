@@ -132,6 +132,17 @@
           <Property Name="ItemStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StatusName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActivitySubmissionId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="NotificationStatusId" Type="int" Nullable="false" />
+          <Property Name="NotificationSentDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Permission">
           <Key>
             <PropertyRef Name="PermissionId" />
@@ -257,6 +268,43 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.EarnedBadges' does
           <Property Name="AwardAmount" Type="int" Nullable="false" />
           <Property Name="PaidOut" Type="bit" Nullable="false" />
           <Property Name="BadgeAwardId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.NotificationItemsToPublish' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="NotificationItemsToPublish">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+            <PropertyRef Name="ActivitySubmissionId" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="NotificationStatusId" />
+            <PropertyRef Name="ActivityId" />
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="SubmissionDate" />
+            <PropertyRef Name="SubmissionStatusId" />
+            <PropertyRef Name="ActivityName" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="ADName" />
+          </Key>
+          <Property Name="NotificationId" Type="int" Nullable="false" />
+          <Property Name="ActivitySubmissionId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="NotificationStatusId" Type="int" Nullable="false" />
+          <Property Name="NotificationSentDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="ActivityId" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="SubmissionDescription" Type="varchar(max)" />
+          <Property Name="SubmissionApprovedById" Type="int" />
+          <Property Name="SubmissionDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="SubmissionStatusId" Type="int" Nullable="false" />
+          <Property Name="AwardValue" Type="int" />
+          <Property Name="ActivityName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ActivityDescription" Type="varchar(max)" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="ADName" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublish' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -586,6 +634,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeePermission" EntityType="Self.EmployeePermission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemStatus" EntityType="Self.ItemStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Permission" EntityType="Self.Permission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QueueEvent" EntityType="Self.QueueEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QueueEventLog" EntityType="Self.QueueEventLog" Schema="dbo" store:Type="Tables" />
@@ -645,6 +694,29 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
     [EarnedBadges].[PaidOut] AS [PaidOut], 
     [EarnedBadges].[BadgeAwardId] AS [BadgeAwardId]
     FROM [dbo].[EarnedBadges] AS [EarnedBadges]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="NotificationItemsToPublish" EntityType="Self.NotificationItemsToPublish" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [NotificationItemsToPublish].[NotificationId] AS [NotificationId], 
+    [NotificationItemsToPublish].[ActivitySubmissionId] AS [ActivitySubmissionId], 
+    [NotificationItemsToPublish].[CreatedDate] AS [CreatedDate], 
+    [NotificationItemsToPublish].[NotificationStatusId] AS [NotificationStatusId], 
+    [NotificationItemsToPublish].[NotificationSentDate] AS [NotificationSentDate], 
+    [NotificationItemsToPublish].[UpdatedDate] AS [UpdatedDate], 
+    [NotificationItemsToPublish].[ActivityId] AS [ActivityId], 
+    [NotificationItemsToPublish].[EmployeeId] AS [EmployeeId], 
+    [NotificationItemsToPublish].[SubmissionDescription] AS [SubmissionDescription], 
+    [NotificationItemsToPublish].[SubmissionApprovedById] AS [SubmissionApprovedById], 
+    [NotificationItemsToPublish].[SubmissionDate] AS [SubmissionDate], 
+    [NotificationItemsToPublish].[SubmissionStatusId] AS [SubmissionStatusId], 
+    [NotificationItemsToPublish].[AwardValue] AS [AwardValue], 
+    [NotificationItemsToPublish].[ActivityName] AS [ActivityName], 
+    [NotificationItemsToPublish].[ActivityDescription] AS [ActivityDescription], 
+    [NotificationItemsToPublish].[FirstName] AS [FirstName], 
+    [NotificationItemsToPublish].[LastName] AS [LastName], 
+    [NotificationItemsToPublish].[EmailAddress] AS [EmailAddress], 
+    [NotificationItemsToPublish].[ADName] AS [ADName]
+    FROM [dbo].[NotificationItemsToPublish] AS [NotificationItemsToPublish]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="QueueItemsToPublish" EntityType="Self.QueueItemsToPublish" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -957,6 +1029,8 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
             <End Role="Activity" EntitySet="Activities" />
           </AssociationSet>
           <EntitySet Name="QueueItemsToPublish" EntityType="Magenic.BadgeApplication.DBModel.QueueItemToPublish" />
+          <EntitySet Name="NotificationItemsToPublish" EntityType="Magenic.BadgeApplication.DBModel.NotificationItemToPublish" />
+          <EntitySet Name="Notifications" EntityType="Magenic.BadgeApplication.DBModel.Notification" />
           </EntityContainer>
         <EntityType Name="BadgePrerequisite">
           <Key>
@@ -1491,6 +1565,52 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
           <Property Name="BadgeTagline" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ADName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="NotificationItemToPublish">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+            <PropertyRef Name="ActivitySubmissionId" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="NotificationStatusId" />
+            <PropertyRef Name="ActivityId" />
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="SubmissionDate" />
+            <PropertyRef Name="SubmissionStatusId" />
+            <PropertyRef Name="ActivityName" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="ADName" />
+          </Key>
+          <Property Name="NotificationId" Type="Int32" Nullable="false" />
+          <Property Name="ActivitySubmissionId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NotificationStatusId" Type="Int32" Nullable="false" />
+          <Property Name="NotificationSentDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ActivityId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="SubmissionDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SubmissionApprovedById" Type="Int32" />
+          <Property Name="SubmissionDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="SubmissionStatusId" Type="Int32" Nullable="false" />
+          <Property Name="AwardValue" Type="Int32" />
+          <Property Name="ActivityName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ActivityDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ADName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivitySubmissionId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NotificationStatusId" Type="Int32" Nullable="false" />
+          <Property Name="NotificationSentDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1752,6 +1872,43 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="NotificationItemsToPublish">
+            <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.NotificationItemToPublish">
+              <MappingFragment StoreEntitySet="NotificationItemsToPublish">
+                <ScalarProperty Name="ADName" ColumnName="ADName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ActivityDescription" ColumnName="ActivityDescription" />
+                <ScalarProperty Name="ActivityName" ColumnName="ActivityName" />
+                <ScalarProperty Name="AwardValue" ColumnName="AwardValue" />
+                <ScalarProperty Name="SubmissionStatusId" ColumnName="SubmissionStatusId" />
+                <ScalarProperty Name="SubmissionDate" ColumnName="SubmissionDate" />
+                <ScalarProperty Name="SubmissionApprovedById" ColumnName="SubmissionApprovedById" />
+                <ScalarProperty Name="SubmissionDescription" ColumnName="SubmissionDescription" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="NotificationSentDate" ColumnName="NotificationSentDate" />
+                <ScalarProperty Name="NotificationStatusId" ColumnName="NotificationStatusId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ActivitySubmissionId" ColumnName="ActivitySubmissionId" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="NotificationSentDate" ColumnName="NotificationSentDate" />
+                <ScalarProperty Name="NotificationStatusId" ColumnName="NotificationStatusId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ActivitySubmissionId" ColumnName="ActivitySubmissionId" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1767,7 +1924,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

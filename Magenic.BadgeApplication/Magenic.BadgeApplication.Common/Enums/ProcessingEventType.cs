@@ -3,18 +3,22 @@
     /// <summary>
     /// Represents the state of a queue item
     /// </summary>
-    public enum QueueEventType
+    public enum ProcessingEventType
     {
         /// <summary>
-        /// The queue item has been completely processed successfully with no errors
+        /// The item has not been processed
+        /// </summary>
+        AwaitingProcessing = 0,
+        /// <summary>
+        /// The item has been completely processed successfully with no errors
         /// </summary>
         Processed = 1,
         /// <summary>
-        /// The queue item is currently being processed
+        /// The item is currently being processed
         /// </summary>
         Processing = 2,
         /// <summary>
-        /// The processing of the queue item failed
+        /// The processing of the item failed
         /// </summary>
         Failed = 3
     }

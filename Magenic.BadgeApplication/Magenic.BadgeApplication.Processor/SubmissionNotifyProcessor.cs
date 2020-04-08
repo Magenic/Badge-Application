@@ -4,25 +4,24 @@ using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
 using MagenicDataModel;
-using Quartz;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.Processor
 {
-    public sealed class QueueProcessor
+    public sealed class SubmissionNotifyProcessor
     {
         private IContainer _factory;
 
-        private IQueueItemProcessor _itemProcessor;
-        private IQueueItemDAL _queueItemDAL;
-        private IQueueItemToPublishCollectionDAL _queueItemToPublishCollectionDAL;
+        private ISubmissionNotifyItemProcessor _itemProcessor;
+        private INotificationDAL _notificationItemDAL;
+        private INotificationItemToPublishCollectionDAL _notificationItemToPublishCollectionDAL;
 
         private string Environment
         {
@@ -34,9 +33,9 @@ namespace Magenic.BadgeApplication.Processor
             get { return int.Parse(ConfigurationManager.AppSettings["QPSleepIntervalInMilliseconds"]); }
         }
 
-        private int ProcessHourOfDay
+        private string ProcessingHours
         {
-            get { return Int32.Parse(ConfigurationManager.AppSettings["QPProcessHourOfDay"]); }
+            get { return ConfigurationManager.AppSettings["SubmissionNotifyProcessingHours"]; }
         }
 
         private int ErrorSleepInterval
@@ -44,43 +43,43 @@ namespace Magenic.BadgeApplication.Processor
             get { return int.Parse(ConfigurationManager.AppSettings["ErrorSleepIntervalInMilliseconds"]); }
         }
 
-        private string Leaderboard
-        {
-            get { return ConfigurationManager.AppSettings["LeaderboardURL"]; }
-        }
-
         private string DataService
         {
             get { return ConfigurationManager.AppSettings["ITDataServiceURL"]; }
         }
 
-        public QueueProcessor() : this(IoC.Container)
+        public SubmissionNotifyProcessor() : this(IoC.Container)
         {
-            
+
         }
 
-        public QueueProcessor(IContainer factory)
+        public SubmissionNotifyProcessor(IContainer factory)
         {
             _factory = factory;
 
-            _itemProcessor = _factory.Resolve<IQueueItemProcessor>();
-            _queueItemDAL = _factory.Resolve<IQueueItemDAL>();
-            _queueItemToPublishCollectionDAL = _factory.Resolve<IQueueItemToPublishCollectionDAL>();
-        }        
+            _itemProcessor = _factory.Resolve<ISubmissionNotifyItemProcessor>();
+            _notificationItemDAL = _factory.Resolve<INotificationDAL>();
+            _notificationItemToPublishCollectionDAL = _factory.Resolve<INotificationItemToPublishCollectionDAL>();
+        }
 
-        /// <summary>
-        /// This method runs the queue process
-        /// </summary>
         public void Start()
         {
             var consecutiveErrorCount = 0;
-            Logger.Info<QueueProcessor>("The Queue Processor was started");
+            var processingHours = new List<int>();
+
+            Logger.Info<SubmissionNotifyProcessor>("The Submission Notify Processor was started");
 
             while (true)
             {
                 try
                 {
-                    if (ProcessHourOfDay == DateTime.Now.Hour)
+                    var list = ProcessingHours.ToString().Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                    foreach(var item in list)
+                    {
+                        processingHours.Add(int.Parse(item));
+                    }
+
+                    if (processingHours.Contains(DateTime.Now.Hour))
                     {
                         var environment = Environment;
                         if (string.IsNullOrWhiteSpace(environment))
@@ -88,9 +87,9 @@ namespace Magenic.BadgeApplication.Processor
                             environment = "debug";
                         }
 
-                        var itemsToPublish = new List<QueueItemToPublishDTO>();
-                        var employees = new List<QueueItemToPublishDTO>();
-                        var items = _queueItemToPublishCollectionDAL.GetAllQueueItemsToPublishAsync().Result;
+                        var itemsToPublish = new List<NotificationItemToPublishDTO>();
+                        var employees = new List<NotificationItemToPublishDTO>();
+                        var items = _notificationItemToPublishCollectionDAL.GetAllNotificationItemsToPublishAsync().Result;
                         if (itemsToPublish != null)
                         {
                             foreach (var item in items)
@@ -115,12 +114,11 @@ namespace Magenic.BadgeApplication.Processor
                                 if (employee != null)
                                 {
                                     var adName = emp.ADName.Substring(emp.ADName.IndexOf("\\") + 1);
-                                    var empLeaderboardUrl = string.Format(Leaderboard, adName);
 
-                                    var publishMessageConfig = new PublishBadgeMsgConfigDTO()
+                                    var publishMessageConfig = new PublishNotificationMsgConfigDTO()
                                     {
                                         Environment = environment,
-                                        Title = "Badge Award!",
+                                        Title = "Activity Submission Notification",
                                         EmployeeId = emp.EmployeeId,
                                         EmployeeFullName = employee.EmployeeFullName,
                                         EmployeeFirstName = employee.EmployeeFirstName,
@@ -128,37 +126,44 @@ namespace Magenic.BadgeApplication.Processor
                                         EmployeeEmailAddress = employee.EMailAddress,
                                         EmployeeADName = emp.ADName,
                                         EmployeeADNameNoDomain = adName,
-                                        EmployeeLeaderboard = empLeaderboardUrl,
-                                        Leaderboard = Leaderboard,
                                         MagenicDataService = DataService,
-                                        QueueItems = new List<PublishQueueItemDTO>()
+                                        NotificationItems = new List<PublishNotificationItemDTO>()
                                     };
 
-                                    var empBadges = itemsToPublish.Where(x => x.EmployeeId == emp.EmployeeId).ToList();
-                                    foreach (var empBadge in empBadges)
+                                    var empNotifications = itemsToPublish.Where(x => x.EmployeeId == emp.EmployeeId).ToList()
+                                                                            .OrderBy(x => x.SubmissionDate).OrderBy(x => x.CreatedDate);
+;
+                                    foreach (var empNotification in empNotifications)
                                     {
-                                        var publishItem = new PublishQueueItemDTO()
+                                        var publishItem = new PublishNotificationItemDTO()
                                         {
-                                            QueueItemId = empBadge.QueueItemId,
-                                            BadgeAwardId = empBadge.BadgeAwardId,
-                                            QueueItemCreated = empBadge.QueueItemCreated,
-                                            BadgeId = empBadge.BadgeId,
-                                            BadgeName = empBadge.BadgeName,
-                                            BadgeTagline = empBadge.BadgeTagline,
-                                            BadgeDescription = empBadge.BadgeDescription,
-                                            BadgePath = empBadge.BadgePath
+                                            NotificationId = empNotification.NotificationId,
+                                            ActivitySubmissionId = empNotification.ActivitySubmissionId,
+                                            CreatedDate = empNotification.CreatedDate,
+                                            NotificationStatusId = empNotification.NotificationStatusId,
+                                            NotificationSentDate = empNotification.NotificationSentDate,
+                                            UpdatedDate = empNotification.UpdatedDate,
+                                            ActivityId = empNotification.ActivityId,
+                                            ActivityName = empNotification.ActivityName,
+                                            ActivityDescription = empNotification.ActivityDescription,
+                                            SubmissionDescription = empNotification.SubmissionDescription,
+                                            SubmissionApprovedById = empNotification.SubmissionApprovedById,
+                                            SubmissionDate = empNotification.SubmissionDate,
+                                            SubmissionStatusId = empNotification.SubmissionStatusId,
+                                            AwardValue = empNotification.AwardValue
                                         };
-                                        publishMessageConfig.QueueItems.Add(publishItem);
+                                        publishMessageConfig.NotificationItems.Add(publishItem);
                                     }
 
                                     _itemProcessor.ProcessItems(publishMessageConfig);
                                 }
                                 else
                                 {
-                                    Logger.Error<QueueProcessor>($"Employee {emp.EmailAddress} does not exist for publishing.");
+                                    Logger.Error<SubmissionNotifyProcessor>($"Employee {emp.EmailAddress} does not exist for publishing.");
                                 }
                             }
                         }
+
                         consecutiveErrorCount = 0;
                     }
                     Thread.Sleep(SleepInterval);
@@ -166,16 +171,16 @@ namespace Magenic.BadgeApplication.Processor
                 catch (Exception ex)
                 {
                     Logger.Error<QueueProcessor>(ex.Message, ex);
-                    consecutiveErrorCount ++;
+                    consecutiveErrorCount++;
                     if (consecutiveErrorCount >= 5)
                     {
                         //Continuous logging of an error in a tight loop is bad, go to sleep and see if the system 
                         //recovers
-                        Logger.InfoFormat<QueueProcessor>("Queue processor consecutive error limit exceeded, sleeping for {0} seconds", ErrorSleepInterval / 1000);  
+                        Logger.InfoFormat<SubmissionNotifyProcessor>("Submission Notify processor consecutive error limit exceeded, sleeping for {0} seconds", ErrorSleepInterval / 1000);
                         Thread.Sleep(ErrorSleepInterval);
                     }
                 }
-            }            
+            }
         }
     }
 }
