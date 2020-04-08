@@ -11,7 +11,7 @@ namespace Magenic.BadgeApplication.Console
     {
         public static void Start()
         {
-            Logger.Info<Processor.SubmissionNotifyProcessor>($"{nameof(Starter)} initialized.");
+            Logger.Info<Processor.SubmissionNotifyProcessor>($"{nameof(SubmissionNotifyStarter)} initialized.");
             AutofacBootstrapper.Init();
             Task.Factory.StartNew(() => new Processor.SubmissionNotifyProcessor().Start());
         }

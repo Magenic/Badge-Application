@@ -13,7 +13,7 @@ namespace Magenic.BadgeApplication.Console
 
         protected override void OnStart(string[] args)
         {
-            Starter.Start();
+            QueueStarter.Start();
         }
 
         protected override void OnStop()
