@@ -12,6 +12,8 @@ namespace Magenic.BadgeApplication.Processor
     {
         public void Start()
         {
+            Logger.Info<NotificationProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: The Notification Processor was started");
+
             while (true)
             {
                 try

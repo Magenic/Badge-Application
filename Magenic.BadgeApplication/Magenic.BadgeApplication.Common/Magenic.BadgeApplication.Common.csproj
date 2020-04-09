@@ -141,7 +141,7 @@
     <Compile Include="Enums\ActivitySubmissionStatus.cs" />
     <Compile Include="Enums\BadgeStatus.cs" />
     <Compile Include="Enums\BadgeType.cs" />
-    <Compile Include="Enums\TeamsFlowType.cs" />
+    <Compile Include="Enums\MSFlowType.cs" />
     <Compile Include="Enums\PermissionType.cs" />
     <Compile Include="Enums\PhotoSize.cs" />
     <Compile Include="Enums\ProcessingEventType.cs" />

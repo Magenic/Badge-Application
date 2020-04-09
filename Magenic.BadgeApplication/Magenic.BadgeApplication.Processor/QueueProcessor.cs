@@ -74,7 +74,7 @@ namespace Magenic.BadgeApplication.Processor
         public void Start()
         {
             var consecutiveErrorCount = 0;
-            Logger.Info<QueueProcessor>("The Queue Processor was started");
+            Logger.Info<QueueProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: The Queue Processor was started");
 
             while (true)
             {
