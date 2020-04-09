@@ -1,7 +1,8 @@
-﻿@using Magenic.BadgeApplication.Extensions
+﻿@using Magenic.BadgeApplication.Common.Enums
+@using Magenic.BadgeApplication.Extensions
 @using Magenic.BadgeApplication.Resources
 @using Links
-
+@using Csla
 <div class="container">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -15,13 +16,21 @@
         @if (Csla.ApplicationContext.User != null && Csla.ApplicationContext.User.Identity != null
             && Csla.ApplicationContext.User.Identity.AuthenticationType == "Csla" && Csla.ApplicationContext.User.Identity.IsAuthenticated)
         {
-            <ul class="nav navbar-nav navbar-right">
-                <li>@Html.ActionLink(ApplicationResources.BadgesLink, Mvc.Badges.Index())</li>
-                <li>@Html.ActionLink(ApplicationResources.AccountLink, Mvc.Account.Index())</li>
-                <li>@Html.ActionLink(ApplicationResources.LeaderboardLink, Mvc.Leaderboard.Index())</li>
-                <li>@Html.ActionLink(ApplicationResources.BadgeManagerLink, Mvc.BadgeManager.Index())</li>
-                <li>@Html.ActionLink(ApplicationResources.LogOffLink, Mvc.Account.LogOff())</li>
-            </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink(ApplicationResources.BadgesLink, Mvc.Badges.Index())</li>
+            <li>@Html.ActionLink(ApplicationResources.AccountLink, Mvc.Account.Index())</li>
+            <li>@Html.ActionLink(ApplicationResources.LeaderboardLink, Mvc.Leaderboard.Index())</li>
+            @if (ApplicationContext.User.IsInRole(PermissionType.Administrator.ToString()) ||
+                    ApplicationContext.User.IsInRole(PermissionType.Manager.ToString()))
+            { 
+                <text>
+                    <li>
+                        @Html.ActionLink(ApplicationResources.BadgeManagerLink, Mvc.BadgeManager.Index())
+                    </li>
+                </text>
+            }
+            <li>@Html.ActionLink(ApplicationResources.LogOffLink, Mvc.Account.LogOff())</li>
+        </ul>
         }
     </div>
 </div>

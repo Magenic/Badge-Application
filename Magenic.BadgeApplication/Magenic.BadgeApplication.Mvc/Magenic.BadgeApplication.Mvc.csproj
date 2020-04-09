@@ -197,6 +197,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attributes\CustomAuthorizeAttribute.cs" />
     <Compile Include="Attributes\HandleModelStateExceptionAttribute.cs" />
     <Compile Include="Attributes\NoCacheAttribute.cs" />
     <Compile Include="BadgeManagerController.generated.cs">
