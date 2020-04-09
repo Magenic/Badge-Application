@@ -61,10 +61,10 @@ namespace Magenic.BadgeApplication.Teams
             switch(publishMessageConfig.Environment.ToLower())
             {
                 case "prod":
-                    eventType = TeamsFlowType.TeamsType.ToString();
+                    eventType = MSFlowType.TeamsEventType.ToString();
                     break;
                 default:
-                    eventType = TeamsFlowType.TestingType.ToString();
+                    eventType = MSFlowType.TeamsTestingEventType.ToString();
                     testIndicatorMsg = $"({publishMessageConfig.Environment} test)";
                     break;
             }
