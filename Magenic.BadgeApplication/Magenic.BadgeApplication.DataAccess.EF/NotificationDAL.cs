@@ -76,8 +76,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 {
                     ActivitySubmissionId = item.ActivitySubmissionId,
                     CreatedDate = DateTime.Now,
-                    NotificationStatusId = item.NotificationStatusId,
-                    NotificationSentDate = item.NotificationSentDate
+                    NotificationStatusId = item.NotificationStatusId
                 });
 
                 context.SaveChanges();

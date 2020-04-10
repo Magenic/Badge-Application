@@ -123,6 +123,7 @@
     <Compile Include="Framework\IoC.cs" />
     <Compile Include="Framework\ObjectActivator.cs" />
     <Compile Include="Framework\ObjectFactory.cs" />
+    <Compile Include="Notification\NotificationItem.cs" />
     <Compile Include="Notification\NotificationItemToPublish.cs" />
     <Compile Include="Notification\NotificationItemToPublishCollection.cs" />
     <Compile Include="PointsReport\BadgeAwardEditCollection.cs" />
