@@ -5,6 +5,7 @@
 }
 
 function approveActivity(element, activityId) {
+    disableAnchors(element);
     var approvalUrl = $('#UrlToApprove').val();
     $.post(approvalUrl, { SubmissionId: activityId }, function (data) {
         refreshPreviousActivitiesList();
@@ -12,10 +13,22 @@ function approveActivity(element, activityId) {
 }
 
 function rejectActivity(element, activityId) {
+    disableAnchors(element);
     var rejectionUrl = $('#UrlToReject').val();
     $.post(rejectionUrl, { SubmissionId: activityId }, function (data) {
         refreshPreviousActivitiesList();
     });
+}
+
+function disableAnchors(anchor) {
+    var parent = $(anchor).parent();
+    parent.addClass('not-allowed');
+
+    var anchors = parent.find('a.btn');
+    anchors.attr('disabled', true);
+
+    var spinner = $(anchor).find('.fa.fa-spinner.fa-spin');
+    $(spinner).removeClass('hide');
 }
 
 // TODO: maybe this should be in a global script?

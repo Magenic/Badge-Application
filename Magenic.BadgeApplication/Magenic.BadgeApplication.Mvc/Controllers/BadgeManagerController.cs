@@ -6,6 +6,7 @@ using EasySec.Encryption;
 using Magenic.BadgeApplication.Attributes;
 using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
+using Magenic.BadgeApplication.BusinessLogic.Notification;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Exceptions;
@@ -346,6 +347,11 @@ namespace Magenic.BadgeApplication.Controllers
             activityItem.ApproveActivitySubmission(AuthenticatedUser.EmployeeId);
             if (await SaveObjectAsync(activitiesToApprove, true))
             {
+                var notification = NotificationItem.CreateNotification();
+                notification.SetActivitySubmissionId(submissionId);
+
+                await SaveObjectAsync(notification, false);
+
                 return Json(new { Success = true });
             }
 
@@ -367,6 +373,11 @@ namespace Magenic.BadgeApplication.Controllers
             activityItem.DenyActivitySubmission();
             if (await SaveObjectAsync(activitiesToApprove, true))
             {
+                var notification = NotificationItem.CreateNotification();
+                notification.SetActivitySubmissionId(submissionId);
+
+                await SaveObjectAsync(notification, false);
+
                 return Json(new { Success = true });
             }
 

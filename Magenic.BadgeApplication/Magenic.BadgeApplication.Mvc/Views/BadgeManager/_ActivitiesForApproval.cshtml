@@ -2,6 +2,7 @@
 @using Magenic.BadgeApplication.Common.Interfaces
 @model IApproveActivityCollection
 
+
 @foreach (var activityForApproval in Model)
 {
     <div class="row no-margin">
@@ -15,9 +16,11 @@
                 <div class="col-md-3">
                     <a href="#" onclick="approveActivity(this, @activityForApproval.SubmissionId); return false;" class="btn btn-magenic">
                         @ApplicationResources.ApproveActivityLink
+                        <i class="fa fa-spinner fa-spin hide"></i>
                     </a>
                     <a href="#" onclick="rejectActivity(this, @activityForApproval.SubmissionId); return false;" class="btn btn-warning">
                         @ApplicationResources.RejectActivityLink
+                        <i class="fa fa-spinner fa-spin hide"></i>
                     </a>
                 </div>
                 <div class="col-md-5">
