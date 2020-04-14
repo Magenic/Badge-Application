@@ -1,19 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Linq;
 using System.ServiceProcess;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.Console
 {
-    partial class QueueProcessor : ServiceBase
+    partial class BadgeApplicationService : ServiceBase
     {
-        public QueueProcessor()
+        public BadgeApplicationService()
         {
             InitializeComponent();
         }
 
         protected override void OnStart(string[] args)
         {
-            QueueStarter.Start();
+            BadgeApplicationStarter.Start();
         }
 
         protected override void OnStop()

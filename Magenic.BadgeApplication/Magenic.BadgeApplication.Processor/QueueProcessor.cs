@@ -29,21 +29,6 @@ namespace Magenic.BadgeApplication.Processor
             get { return ConfigurationManager.AppSettings["Environment"]; }
         }
 
-        private int SleepInterval
-        {
-            get { return int.Parse(ConfigurationManager.AppSettings["QPSleepIntervalInMilliseconds"]); }
-        }
-
-        private int ProcessHourOfDay
-        {
-            get { return Int32.Parse(ConfigurationManager.AppSettings["QPProcessHourOfDay"]); }
-        }
-
-        private int ErrorSleepInterval
-        {
-            get { return int.Parse(ConfigurationManager.AppSettings["ErrorSleepIntervalInMilliseconds"]); }
-        }
-
         private string Leaderboard
         {
             get { return ConfigurationManager.AppSettings["LeaderboardURL"]; }
@@ -68,114 +53,96 @@ namespace Magenic.BadgeApplication.Processor
             _queueItemToPublishCollectionDAL = _factory.Resolve<IQueueItemToPublishCollectionDAL>();
         }        
 
-        /// <summary>
-        /// This method runs the queue process
-        /// </summary>
-        public void Start()
+        public void Process()
         {
-            var consecutiveErrorCount = 0;
-            Logger.Info<QueueProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: The Queue Processor was started");
-
-            while (true)
+            try
             {
-                try
+                var environment = Environment;
+                if (string.IsNullOrWhiteSpace(environment))
                 {
-                    if (ProcessHourOfDay == DateTime.Now.Hour)
+                    environment = "debug";
+                }
+
+                var itemsToPublish = new List<QueueItemToPublishDTO>();
+                var employees = new List<QueueItemToPublishDTO>();
+                var items = _queueItemToPublishCollectionDAL.GetAllQueueItemsToPublishAsync().Result;
+                if (itemsToPublish != null)
+                {
+                    foreach (var item in items)
                     {
-                        var environment = Environment;
-                        if (string.IsNullOrWhiteSpace(environment))
-                        {
-                            environment = "debug";
-                        }
+                        itemsToPublish.Add(item);
+                    }
+                }
 
-                        var itemsToPublish = new List<QueueItemToPublishDTO>();
-                        var employees = new List<QueueItemToPublishDTO>();
-                        var items = _queueItemToPublishCollectionDAL.GetAllQueueItemsToPublishAsync().Result;
-                        if (itemsToPublish != null)
+                if (itemsToPublish.Count() > 0)
+                {
+                    Logger.Info<QueueProcessor>($"QueueProcessor items to process count: {itemsToPublish.Count().ToString()}");
+
+                    employees = itemsToPublish.GroupBy(grp => grp.EmployeeId).Select(g => g.First()).ToList();
+
+                    foreach (var emp in employees)
+                    {
+                        var dataServiceUri = new Uri(DataService, UriKind.Absolute);
+                        var context = new MagenicDataEntities(dataServiceUri)
                         {
-                            foreach (var item in items)
+                            Credentials = CredentialCache.DefaultCredentials
+                        };
+                        var employee = context.vwODataEmployees.Where(e => e.NetworkAlias == emp.ADName).FirstOrDefault();
+
+                        if (employee != null)
+                        {
+                            var adName = emp.ADName.Substring(emp.ADName.IndexOf("\\") + 1);
+                            var empLeaderboardUrl = string.Format(Leaderboard, adName);
+
+                            var publishMessageConfig = new PublishBadgeMsgConfigDTO()
                             {
-                                itemsToPublish.Add(item);
-                            }
-                        }
+                                Environment = environment,
+                                Title = "Badge Award!",
+                                EmployeeId = emp.EmployeeId,
+                                EmployeeFullName = employee.EmployeeFullName,
+                                EmployeeFirstName = employee.EmployeeFirstName,
+                                EmployeeLastName = employee.EmployeeLastName,
+                                EmployeeEmailAddress = employee.EMailAddress,
+                                EmployeeADName = emp.ADName,
+                                EmployeeADNameNoDomain = adName,
+                                EmployeeLeaderboard = empLeaderboardUrl,
+                                Leaderboard = Leaderboard,
+                                MagenicDataService = DataService,
+                                QueueItems = new List<PublishQueueItemDTO>()
+                            };
 
-                        if (itemsToPublish.Count() > 0)
-                        {
-                            employees = itemsToPublish.GroupBy(grp => grp.EmployeeId).Select(g => g.First()).ToList();
-
-                            foreach (var emp in employees)
+                            var empBadges = itemsToPublish.Where(x => x.EmployeeId == emp.EmployeeId).ToList();
+                            foreach (var empBadge in empBadges)
                             {
-                                var dataServiceUri = new Uri(DataService, UriKind.Absolute);
-                                var context = new MagenicDataEntities(dataServiceUri)
+                                var publishItem = new PublishQueueItemDTO()
                                 {
-                                    Credentials = CredentialCache.DefaultCredentials
+                                    QueueItemId = empBadge.QueueItemId,
+                                    BadgeAwardId = empBadge.BadgeAwardId,
+                                    QueueItemCreated = empBadge.QueueItemCreated,
+                                    BadgeId = empBadge.BadgeId,
+                                    BadgeName = empBadge.BadgeName,
+                                    BadgeTagline = empBadge.BadgeTagline,
+                                    BadgeDescription = empBadge.BadgeDescription,
+                                    BadgePath = empBadge.BadgePath
                                 };
-                                var employee = context.vwODataEmployees.Where(e => e.NetworkAlias == emp.ADName).FirstOrDefault();
-
-                                if (employee != null)
-                                {
-                                    var adName = emp.ADName.Substring(emp.ADName.IndexOf("\\") + 1);
-                                    var empLeaderboardUrl = string.Format(Leaderboard, adName);
-
-                                    var publishMessageConfig = new PublishBadgeMsgConfigDTO()
-                                    {
-                                        Environment = environment,
-                                        Title = "Badge Award!",
-                                        EmployeeId = emp.EmployeeId,
-                                        EmployeeFullName = employee.EmployeeFullName,
-                                        EmployeeFirstName = employee.EmployeeFirstName,
-                                        EmployeeLastName = employee.EmployeeLastName,
-                                        EmployeeEmailAddress = employee.EMailAddress,
-                                        EmployeeADName = emp.ADName,
-                                        EmployeeADNameNoDomain = adName,
-                                        EmployeeLeaderboard = empLeaderboardUrl,
-                                        Leaderboard = Leaderboard,
-                                        MagenicDataService = DataService,
-                                        QueueItems = new List<PublishQueueItemDTO>()
-                                    };
-
-                                    var empBadges = itemsToPublish.Where(x => x.EmployeeId == emp.EmployeeId).ToList();
-                                    foreach (var empBadge in empBadges)
-                                    {
-                                        var publishItem = new PublishQueueItemDTO()
-                                        {
-                                            QueueItemId = empBadge.QueueItemId,
-                                            BadgeAwardId = empBadge.BadgeAwardId,
-                                            QueueItemCreated = empBadge.QueueItemCreated,
-                                            BadgeId = empBadge.BadgeId,
-                                            BadgeName = empBadge.BadgeName,
-                                            BadgeTagline = empBadge.BadgeTagline,
-                                            BadgeDescription = empBadge.BadgeDescription,
-                                            BadgePath = empBadge.BadgePath
-                                        };
-                                        publishMessageConfig.QueueItems.Add(publishItem);
-                                    }
-
-                                    _itemProcessor.ProcessItems(publishMessageConfig);
-                                }
-                                else
-                                {
-                                    Logger.Error<QueueProcessor>($"Employee {emp.EmailAddress} does not exist for publishing.");
-                                }
+                                publishMessageConfig.QueueItems.Add(publishItem);
                             }
+
+                            _itemProcessor.ProcessItems(publishMessageConfig);
                         }
-                        consecutiveErrorCount = 0;
+                        else
+                        {
+                            Logger.Error<QueueProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: Employee {emp.EmailAddress} does not exist for publishing.");
+                        }
                     }
-                    Thread.Sleep(SleepInterval);
+                
+                    Logger.Info<QueueProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: QueueProcessor completed");
                 }
-                catch (Exception ex)
-                {
-                    Logger.Error<QueueProcessor>(ex.Message, ex);
-                    consecutiveErrorCount ++;
-                    if (consecutiveErrorCount >= 5)
-                    {
-                        //Continuous logging of an error in a tight loop is bad, go to sleep and see if the system 
-                        //recovers
-                        Logger.InfoFormat<QueueProcessor>("Queue processor consecutive error limit exceeded, sleeping for {0} seconds", ErrorSleepInterval / 1000);  
-                        Thread.Sleep(ErrorSleepInterval);
-                    }
-                }
-            }            
+            }
+            catch (Exception ex)
+            {
+                Logger.Error<QueueProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: {ex.Message}", ex);
+            }
         }
     }
 }
