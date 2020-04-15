@@ -28,21 +28,6 @@ namespace Magenic.BadgeApplication.Processor
             get { return ConfigurationManager.AppSettings["Environment"]; }
         }
 
-        private int SleepInterval
-        {
-            get { return int.Parse(ConfigurationManager.AppSettings["QPSleepIntervalInMilliseconds"]); }
-        }
-
-        private string ProcessingHours
-        {
-            get { return ConfigurationManager.AppSettings["SubmissionNotifyProcessingHours"]; }
-        }
-
-        private int ErrorSleepInterval
-        {
-            get { return int.Parse(ConfigurationManager.AppSettings["ErrorSleepIntervalInMilliseconds"]); }
-        }
-
         private string DataService
         {
             get { return ConfigurationManager.AppSettings["ITDataServiceURL"]; }
@@ -62,124 +47,100 @@ namespace Magenic.BadgeApplication.Processor
             _notificationItemToPublishCollectionDAL = _factory.Resolve<INotificationItemToPublishCollectionDAL>();
         }
 
-        public void Start()
+        public void Process()
         {
-            var consecutiveErrorCount = 0;
-            var processingHours = new List<int>();
-
-            Logger.Info<SubmissionNotifyProcessor>("The Submission Notify Processor was started");
-
-            while (true)
+            try
             {
-                try
+                var environment = Environment;
+                if (string.IsNullOrWhiteSpace(environment))
                 {
-                    var list = ProcessingHours.ToString().Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                    foreach(var item in list)
+                    environment = "debug";
+                }
+
+                var itemsToPublish = new List<NotificationItemToPublishDTO>();
+                var employees = new List<NotificationItemToPublishDTO>();
+                var items = _notificationItemToPublishCollectionDAL.GetAllNotificationItemsToPublishAsync().Result;
+                if (itemsToPublish != null)
+                {
+                    foreach (var item in items)
                     {
-                        processingHours.Add(int.Parse(item));
+                        itemsToPublish.Add(item);
                     }
+                }
 
-                    if (processingHours.Contains(DateTime.Now.Hour))
+                if (itemsToPublish.Count() > 0)
+                {
+                    Logger.Info<SubmissionNotifyProcessor>($"SubmissionNotifyProcessor items to process count: {itemsToPublish.Count().ToString()}");
+
+                    employees = itemsToPublish.GroupBy(grp => grp.EmployeeId).Select(g => g.First()).ToList();
+
+                    foreach (var emp in employees)
                     {
-                        var environment = Environment;
-                        if (string.IsNullOrWhiteSpace(environment))
+                        var dataServiceUri = new Uri(DataService, UriKind.Absolute);
+                        var context = new MagenicDataEntities(dataServiceUri)
                         {
-                            environment = "debug";
-                        }
+                            Credentials = CredentialCache.DefaultCredentials
+                        };
+                        var employee = context.vwODataEmployees.Where(e => e.NetworkAlias == emp.ADName).FirstOrDefault();
 
-                        var itemsToPublish = new List<NotificationItemToPublishDTO>();
-                        var employees = new List<NotificationItemToPublishDTO>();
-                        var items = _notificationItemToPublishCollectionDAL.GetAllNotificationItemsToPublishAsync().Result;
-                        if (itemsToPublish != null)
+                        if (employee != null)
                         {
-                            foreach (var item in items)
+                            var adName = emp.ADName.Substring(emp.ADName.IndexOf("\\") + 1);
+
+                            var publishMessageConfig = new PublishNotificationMsgConfigDTO()
                             {
-                                itemsToPublish.Add(item);
-                            }
-                        }
+                                Environment = environment,
+                                Title = "Activity Submission Notification",
+                                EmployeeId = emp.EmployeeId,
+                                EmployeeFullName = employee.EmployeeFullName,
+                                EmployeeFirstName = employee.EmployeeFirstName,
+                                EmployeeLastName = employee.EmployeeLastName,
+                                EmployeeEmailAddress = employee.EMailAddress,
+                                EmployeeADName = emp.ADName,
+                                EmployeeADNameNoDomain = adName,
+                                MagenicDataService = DataService,
+                                NotificationItems = new List<PublishNotificationItemDTO>()
+                            };
 
-                        if (itemsToPublish.Count() > 0)
-                        {
-                            employees = itemsToPublish.GroupBy(grp => grp.EmployeeId).Select(g => g.First()).ToList();
-
-                            foreach (var emp in employees)
+                            var empNotifications = itemsToPublish.Where(x => x.EmployeeId == emp.EmployeeId).ToList()
+                                                                    .OrderBy(x => x.SubmissionDate).OrderBy(x => x.CreatedDate);
+                            ;
+                            foreach (var empNotification in empNotifications)
                             {
-                                var dataServiceUri = new Uri(DataService, UriKind.Absolute);
-                                var context = new MagenicDataEntities(dataServiceUri)
+                                var publishItem = new PublishNotificationItemDTO()
                                 {
-                                    Credentials = CredentialCache.DefaultCredentials
+                                    NotificationId = empNotification.NotificationId,
+                                    ActivitySubmissionId = empNotification.ActivitySubmissionId,
+                                    CreatedDate = empNotification.CreatedDate,
+                                    NotificationStatusId = empNotification.NotificationStatusId,
+                                    NotificationSentDate = empNotification.NotificationSentDate,
+                                    UpdatedDate = empNotification.UpdatedDate,
+                                    ActivityId = empNotification.ActivityId,
+                                    ActivityName = empNotification.ActivityName,
+                                    ActivityDescription = empNotification.ActivityDescription,
+                                    SubmissionDescription = empNotification.SubmissionDescription,
+                                    SubmissionApprovedById = empNotification.SubmissionApprovedById,
+                                    SubmissionDate = empNotification.SubmissionDate,
+                                    SubmissionStatusId = empNotification.SubmissionStatusId,
+                                    AwardValue = empNotification.AwardValue
                                 };
-                                var employee = context.vwODataEmployees.Where(e => e.NetworkAlias == emp.ADName).FirstOrDefault();
-
-                                if (employee != null)
-                                {
-                                    var adName = emp.ADName.Substring(emp.ADName.IndexOf("\\") + 1);
-
-                                    var publishMessageConfig = new PublishNotificationMsgConfigDTO()
-                                    {
-                                        Environment = environment,
-                                        Title = "Activity Submission Notification",
-                                        EmployeeId = emp.EmployeeId,
-                                        EmployeeFullName = employee.EmployeeFullName,
-                                        EmployeeFirstName = employee.EmployeeFirstName,
-                                        EmployeeLastName = employee.EmployeeLastName,
-                                        EmployeeEmailAddress = employee.EMailAddress,
-                                        EmployeeADName = emp.ADName,
-                                        EmployeeADNameNoDomain = adName,
-                                        MagenicDataService = DataService,
-                                        NotificationItems = new List<PublishNotificationItemDTO>()
-                                    };
-
-                                    var empNotifications = itemsToPublish.Where(x => x.EmployeeId == emp.EmployeeId).ToList()
-                                                                            .OrderBy(x => x.SubmissionDate).OrderBy(x => x.CreatedDate);
-;
-                                    foreach (var empNotification in empNotifications)
-                                    {
-                                        var publishItem = new PublishNotificationItemDTO()
-                                        {
-                                            NotificationId = empNotification.NotificationId,
-                                            ActivitySubmissionId = empNotification.ActivitySubmissionId,
-                                            CreatedDate = empNotification.CreatedDate,
-                                            NotificationStatusId = empNotification.NotificationStatusId,
-                                            NotificationSentDate = empNotification.NotificationSentDate,
-                                            UpdatedDate = empNotification.UpdatedDate,
-                                            ActivityId = empNotification.ActivityId,
-                                            ActivityName = empNotification.ActivityName,
-                                            ActivityDescription = empNotification.ActivityDescription,
-                                            SubmissionDescription = empNotification.SubmissionDescription,
-                                            SubmissionApprovedById = empNotification.SubmissionApprovedById,
-                                            SubmissionDate = empNotification.SubmissionDate,
-                                            SubmissionStatusId = empNotification.SubmissionStatusId,
-                                            AwardValue = empNotification.AwardValue
-                                        };
-                                        publishMessageConfig.NotificationItems.Add(publishItem);
-                                    }
-
-                                    _itemProcessor.ProcessItems(publishMessageConfig);
-                                }
-                                else
-                                {
-                                    Logger.Error<SubmissionNotifyProcessor>($"Employee {emp.EmailAddress} does not exist for publishing.");
-                                }
+                                publishMessageConfig.NotificationItems.Add(publishItem);
                             }
-                        }
 
-                        consecutiveErrorCount = 0;
+                            _itemProcessor.ProcessItems(publishMessageConfig);
+                        }
+                        else
+                        {
+                            Logger.Error<SubmissionNotifyProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: Employee {emp.EmailAddress} does not exist for publishing.");
+                        }
                     }
-                    Thread.Sleep(SleepInterval);
+
+                    Logger.Info<SubmissionNotifyProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: SubmissionNotifyProcessor completed");
                 }
-                catch (Exception ex)
-                {
-                    Logger.Error<QueueProcessor>(ex.Message, ex);
-                    consecutiveErrorCount++;
-                    if (consecutiveErrorCount >= 5)
-                    {
-                        //Continuous logging of an error in a tight loop is bad, go to sleep and see if the system 
-                        //recovers
-                        Logger.InfoFormat<SubmissionNotifyProcessor>("Submission Notify processor consecutive error limit exceeded, sleeping for {0} seconds", ErrorSleepInterval / 1000);
-                        Thread.Sleep(ErrorSleepInterval);
-                    }
-                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error<SubmissionNotifyProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: {ex.Message}", ex);
             }
         }
     }

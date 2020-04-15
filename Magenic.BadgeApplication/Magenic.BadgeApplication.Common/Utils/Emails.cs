@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 
@@ -33,6 +34,9 @@ namespace Magenic.BadgeApplication.Common.Utils
         {
             Arg.IsNotNull(() => sendToEmailAddresses);
 
+            var env = ConfigurationManager.AppSettings["Environment"];
+            var debugEmail = ConfigurationManager.AppSettings["DebugOverrideEmailTo"];
+
             using (MailMessage mailMessage = new MailMessage())
             {
 #pragma warning disable CA1062 // Validate arguments of public methods
@@ -51,6 +55,12 @@ namespace Magenic.BadgeApplication.Common.Utils
                         continue;
 
                     mailMessage.To.Add(emailAddress);
+                }
+
+                if (!string.IsNullOrWhiteSpace(debugEmail) && !string.IsNullOrWhiteSpace(env) && !(env.Equals("Prod") || env.Equals("prod")))
+                {
+                    mailMessage.To.Clear();
+                    mailMessage.To.Add(debugEmail);
                 }
 
                 // default settings for email from address, host, port, and enable https is on the smtp configuration

@@ -88,6 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BadgeApplicationProcessor.cs" />
     <Compile Include="SubmissionNotifyItemProcessor.cs" />
     <Compile Include="NotificationProcessor.cs" />
     <Compile Include="ActvityLoader.cs" />

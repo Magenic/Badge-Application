@@ -1,6 +1,6 @@
 ﻿namespace Magenic.BadgeApplication.Console
 {
-    partial class QueueProcessor
+    partial class BadgeApplicationService
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            this.ServiceName = "QueueProcessor";
+            this.ServiceName = "BadgeApplicationService";
         }
 
         #endregion

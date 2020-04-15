@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.Console
 {
-    public static class SubmissionNotifyStarter
+    public static class BadgeApplicationStarter
     {
         public static void Start()
         {
-            Logger.Info<Processor.SubmissionNotifyProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: {nameof(SubmissionNotifyStarter)} initialized.");
+            Logger.Info<Processor.BadgeApplicationProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: {nameof(BadgeApplicationStarter)} initialized.");
             AutofacBootstrapper.Init();
-            Task.Factory.StartNew(() => new Processor.SubmissionNotifyProcessor().Start());
+            Task.Factory.StartNew(() => new Processor.BadgeApplicationProcessor().Start());
         }
     }
 }
