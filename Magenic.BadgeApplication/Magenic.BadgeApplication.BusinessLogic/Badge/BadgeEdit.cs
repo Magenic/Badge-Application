@@ -165,11 +165,11 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             set { SetProperty(ImageProperty, value); }
         }
 
-        public static readonly PropertyInfo<bool> HasAwardsProperty = RegisterProperty<bool>(c => c.AllowDeletion);
+        public static readonly PropertyInfo<bool> AllowDeletionProperty = RegisterProperty<bool>(c => c.AllowDeletion);
         public bool AllowDeletion
         { 
-            get { return GetProperty(HasAwardsProperty); }
-            set { SetProperty(HasAwardsProperty, value); }
+            get { return GetProperty(AllowDeletionProperty); }
+            set { SetProperty(AllowDeletionProperty, value); }
         }
         #endregion Properties
 
