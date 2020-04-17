@@ -18,6 +18,9 @@ namespace Magenic.BadgeApplication.Processor
         private IList<int> queueHours;
         private IList<int> submitHours;
 
+        private int lastQueueHour = 0;
+        private int lastSubmitHour = 0;
+
         private IContainer _factory;
 
         private int TimerInterval
@@ -87,8 +90,9 @@ namespace Magenic.BadgeApplication.Processor
 
             var hourOfDay = DateTime.Now.Hour;
 
-            if (queueHours.Contains(hourOfDay))
+            if (queueHours.Contains(hourOfDay) && !lastQueueHour.Equals(hourOfDay))
             {
+                lastQueueHour = hourOfDay;
                 try
                 {
                     var queueProcessor = new QueueProcessor();
@@ -113,8 +117,9 @@ namespace Magenic.BadgeApplication.Processor
                 }
             }
 
-            if (submitHours.Contains(hourOfDay))
+            if (submitHours.Contains(hourOfDay) && !lastSubmitHour.Equals(hourOfDay))
             {
+                lastSubmitHour = hourOfDay;
                 try
                 {
                     var submissionProcessor = new SubmissionNotifyProcessor();
