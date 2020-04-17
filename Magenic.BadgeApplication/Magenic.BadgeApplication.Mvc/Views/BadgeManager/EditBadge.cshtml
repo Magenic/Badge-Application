@@ -13,7 +13,7 @@
                     <h2>@ApplicationResources.EditBadgeHeader</h2>
                 </div>
             </div>
-            @using (Html.BeginForm("EditBadgePost", "BadgeManager", new { id = Model.Badge.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("BadgePost", "BadgeManager", new { id = Model.Badge.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.EditorFor(bevw => bevw)
             }

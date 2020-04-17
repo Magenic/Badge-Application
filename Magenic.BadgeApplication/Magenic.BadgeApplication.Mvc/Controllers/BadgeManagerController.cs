@@ -207,6 +207,25 @@ namespace Magenic.BadgeApplication.Controllers
         }
 
         /// <summary>
+        /// Edit or delete the badge post.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="badgeEditViewModel">The badge edit view model.</param>
+        /// <param name="badgeImage">The badge image.</param>
+        /// <returns></returns>
+        [HttpPost]
+        [HasPermission(AuthorizationActions.GetObject, typeof(BadgeEdit))]
+        public virtual async Task<ActionResult> BadgePost(int id, BadgeEditViewModel badgeEditViewModel, HttpPostedFileBase badgeImage)
+        {
+            if (Request.Form["submitButton"].ToString() == "Delete")
+            {
+                return await DeleteBadgePost(id);
+            }
+
+            return await EditBadgePost(id, badgeEditViewModel, badgeImage);
+        }
+
+        /// <summary>
         /// Edits the badge post.
         /// </summary>
         /// <param name="id">The identifier.</param>
@@ -230,6 +249,27 @@ namespace Magenic.BadgeApplication.Controllers
             CheckForValidImage(badgeEditViewModel.Badge);
 
             if (await SaveObjectAsync(badgeEditViewModel.Badge, true))
+            {
+                return RedirectToAction(Mvc.BadgeManager.Index().Result);
+            }
+
+            return await EditBadge(id);
+        }
+
+        /// <summary>
+        /// Delete badge
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [HasPermission(AuthorizationActions.DeleteObject, typeof(BadgeEdit))]
+        public virtual async Task<ActionResult> DeleteBadgePost(int id)
+        {
+            var badge = await BadgeEdit.GetBadgeEditByIdAsync(id) as BadgeEdit;
+
+            badge.Delete();
+
+            if (await SaveObjectAsync(badge, false))
             {
                 return RedirectToAction(Mvc.BadgeManager.Index().Result);
             }

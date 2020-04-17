@@ -90,5 +90,12 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// A collection of prerequisite activities needed to be awarded this badge.
         /// </summary>
         IBadgeActivityEditCollection BadgeActivities { get; }
+
+        /// <summary>
+        /// Determines if the badge can be hard deleted.
+        /// </summary>
+        /// <returns></returns>
+
+        bool AllowHardDeletion { get; set; }
     }
 }

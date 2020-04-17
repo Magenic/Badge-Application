@@ -12,6 +12,10 @@ function setImagePath() {
     $('#Badge_ImagePath').val($('#badgeImage').val());
 }
 
+function handleDeleteClick() {
+    $('#deleteConfirmationModal').modal('hide');
+}
+
 $(document).ready(function () {
     $(':file').filestyle();
     $('.datepicker').datepicker();
@@ -22,4 +26,6 @@ $(document).ready(function () {
     });
 
     $('.selectpicker').selectpicker();
+
+    $('#btnDelete').on('click', handleDeleteClick);
 });

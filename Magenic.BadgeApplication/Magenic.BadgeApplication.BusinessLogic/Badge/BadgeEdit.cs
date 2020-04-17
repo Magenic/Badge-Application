@@ -165,6 +165,12 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             set { SetProperty(ImageProperty, value); }
         }
 
+        public static readonly PropertyInfo<bool> HasAwardsProperty = RegisterProperty<bool>(c => c.AllowHardDeletion);
+        public bool AllowHardDeletion
+        { 
+            get { return GetProperty(HasAwardsProperty); }
+            set { SetProperty(HasAwardsProperty, value); }
+        }
         #endregion Properties
 
         #region Methods
@@ -180,7 +186,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.LoadProperty(ImageProperty, image);
             this.LoadProperty(ImagePathProperty, string.Empty);
         }
-
         #endregion Methods
 
         #region Factory Methods
@@ -339,6 +344,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
                 this.ApprovedDate = data.ApprovedDate;
                 this.BadgeStatus = data.BadgeStatus;
                 this.Image = null;
+                this.AllowHardDeletion = !data.HasAwards;
                 this.LoadProperty(CreateEmployeeIdProperty, data.CreateEmployeeId);
                 this.LoadChildren(data);
             }
@@ -367,6 +373,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         private void DeleteChildren()
         {
+            var dal = IoC.Container.Resolve<IBadgeEditDAL>();
+            dal.DeleteActivities(this.Id);
+            dal.DeletePrerequisites(this.Id);
         }
 
         [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]

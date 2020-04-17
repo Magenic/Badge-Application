@@ -33,6 +33,16 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <param name="badgeId">The id of the badge to remove.</param>
         void Delete(int badgeId);
         /// <summary>
+        /// Removes associated activities
+        /// </summary>
+        /// <param name="badgeId"></param>
+        void DeleteActivities(int badgeId);
+        /// <summary>
+        /// Removes associated prerequisites
+        /// </summary>
+        /// <param name="badgeId"></param>
+        void DeletePrerequisites(int badgeId);
+        /// <summary>
         /// Returns a list of badges that could be created by a given activity.
         /// </summary>
         /// <param name="activityId">The activity id to look for.</param>
