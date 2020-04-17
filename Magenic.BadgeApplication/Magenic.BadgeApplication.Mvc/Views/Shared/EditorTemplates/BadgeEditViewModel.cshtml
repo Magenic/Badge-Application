@@ -142,8 +142,8 @@
     <div class="col-md-12">
         <input type="submit" name="submitButton" class="btn btn-success" value="@ApplicationResources.SubmitButton" />
 
-        @if (Model.Badge.AllowHardDeletion && ApplicationContext.User.IsInRole(PermissionType.Administrator.ToString()))
-        { 
+        @if (Model.Badge.AllowDeletion && ApplicationContext.User.IsInRole(PermissionType.Administrator.ToString()))
+        {
             <text>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirmationModal">
                     Delete

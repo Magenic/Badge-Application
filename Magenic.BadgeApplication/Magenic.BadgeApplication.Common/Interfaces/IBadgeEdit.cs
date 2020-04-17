@@ -96,6 +96,6 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         /// <returns></returns>
 
-        bool AllowHardDeletion { get; set; }
+        bool AllowDeletion { get; set; }
     }
 }

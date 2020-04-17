@@ -165,8 +165,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             set { SetProperty(ImageProperty, value); }
         }
 
-        public static readonly PropertyInfo<bool> HasAwardsProperty = RegisterProperty<bool>(c => c.AllowHardDeletion);
-        public bool AllowHardDeletion
+        public static readonly PropertyInfo<bool> HasAwardsProperty = RegisterProperty<bool>(c => c.AllowDeletion);
+        public bool AllowDeletion
         { 
             get { return GetProperty(HasAwardsProperty); }
             set { SetProperty(HasAwardsProperty, value); }
@@ -344,7 +344,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
                 this.ApprovedDate = data.ApprovedDate;
                 this.BadgeStatus = data.BadgeStatus;
                 this.Image = null;
-                this.AllowHardDeletion = !data.HasAwards;
+                this.AllowDeletion = !data.HasAwards;
                 this.LoadProperty(CreateEmployeeIdProperty, data.CreateEmployeeId);
                 this.LoadChildren(data);
             }
