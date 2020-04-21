@@ -9,6 +9,10 @@ namespace Magenic.BadgeApplication.Models
     public class BadgeManagerIndexViewModel
     {
         /// <summary>
+        /// Gets or sets the corporate badge header
+        /// </summary>
+        public string CorporateBadgeHeader { get; set; }
+        /// <summary>
         /// Gets or sets the corporate badges.
         /// </summary>
         /// <value>
@@ -23,5 +27,15 @@ namespace Magenic.BadgeApplication.Models
         /// The community badges.
         /// </value>
         public IEnumerable<IBadgeItem> CommunityBadges { get; set; }
+
+        /// <summary>
+        /// Gets or sets the show add button flag.
+        /// </summary>
+        public bool ShowAddButton { get; set; }
+
+        /// <summary>
+        /// Gets or sets the show community badges flag.
+        /// </summary>
+        public bool ShowCommunityBadges { get; set; }
     }
 }
