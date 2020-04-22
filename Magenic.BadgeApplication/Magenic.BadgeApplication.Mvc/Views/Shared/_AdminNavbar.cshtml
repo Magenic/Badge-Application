@@ -30,6 +30,6 @@
     @Html.HasPermission(AuthorizationActions.GetObject, typeof(ApproveActivityItemForManager), Html.GenerateConditionalNavigation(ApplicationResources.ActivitiesForApproval, Mvc.BadgeManager.ApproveActivities(true).Result), String.Empty)
 
     <li>
-        @Html.ActionLink(ApplicationResources.InactiveBadges, "InactiveBadges")
+        @Html.ActionLink(ApplicationResources.InactiveBadges, "InactiveBadges", "BadgeManager")
     </li>
 </ul>
