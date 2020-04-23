@@ -118,6 +118,7 @@
     <Compile Include="DTO\BadgeActivityEditDTO.cs" />
     <Compile Include="DTO\BadgeAwardDTO.cs" />
     <Compile Include="DTO\BadgeAwardEditDTO.cs" />
+    <Compile Include="DTO\InactiveBadgeSearchDTO.cs" />
     <Compile Include="DTO\NotificationDTO.cs" />
     <Compile Include="DTO\NotificationItemToPublishDTO.cs" />
     <Compile Include="DTO\PublishNotificationItemDTO.cs" />

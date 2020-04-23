@@ -465,4 +465,10 @@
   <data name="UserIdsLabel" xml:space="preserve">
     <value>User(s)</value>
   </data>
+  <data name="InactiveBadges" xml:space="preserve">
+    <value>Inactive Badges</value>
+  </data>
+  <data name="CorporateInactiveBadgeHeader" xml:space="preserve">
+    <value>Inactive Corporate Badges</value>
+  </data>
 </root>

@@ -12,6 +12,7 @@ using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Exceptions;
 using Magenic.BadgeApplication.Extensions;
 using Magenic.BadgeApplication.Models;
+using Magenic.BadgeApplication.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -101,11 +102,35 @@ namespace Magenic.BadgeApplication.Controllers
 
             var badgeManagerIndexViewModel = new BadgeManagerIndexViewModel()
             {
+                CorporateBadgeHeader = ApplicationResources.CorporateBadgeHeader,
                 CorporateBadges = corporateBadges,
                 CommunityBadges = communityBadges,
+                ShowAddButton = true,
+                ShowCommunityBadges = true
             };
 
             return View(badgeManagerIndexViewModel);
+        }
+
+        /// <summary>
+        /// List of inactive badges.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [HasPermission(AuthorizationActions.GetObject, typeof(BadgeCollection))]
+        public async virtual Task<ActionResult> InactiveBadges()
+        {
+            var corporateBadges = await BadgeCollection.GetInactiveBadgesByAsync(BadgeType.Corporate, DateTime.Now);
+
+            var badgeManagerIndexViewModel = new BadgeManagerIndexViewModel()
+            {
+                CorporateBadgeHeader = ApplicationResources.CorporateInactiveBadgeHeader,
+                CorporateBadges = corporateBadges,
+                ShowAddButton = false,
+                ShowCommunityBadges = false
+            };
+
+            return View("Index", badgeManagerIndexViewModel);
         }
 
         /// <summary>
