@@ -1,0 +1,25 @@
+﻿@using Magenic.BadgeApplication.BusinessLogic.Badge
+@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Models
+@using Magenic.BadgeApplication.Extensions
+@model SubmitBadgeRequest
+
+<h2>
+    @ApplicationResources.SubmitBadgeRequestHeader
+</h2>
+@using (Html.BeginForm("SubmitBadgeRequestForm", "BadgeRequest", FormMethod.Post, new { @role = "form" }))
+{
+    
+    <div class="form-group">
+        @Html.LabelFor(sa => sa.EmployeeName, ApplicationResources.BadgeRequestNameLabel)
+        @Html.TextBoxFor(sa => sa.EmployeeName, new { @class = "form-control", rows = "2", cols = "10", @readonly = true })
+        @Html.ValidationMessageFor(sa => sa.EmployeeName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(sa => sa.Description, ApplicationResources.BadgeRequestSubmissionDescriptionLabel)
+        @Html.TextAreaFor(sa => sa.Description, new { @class = "form-control", rows = "4", cols = "10" })
+        @Html.ValidationMessageFor(sa => sa.Description)
+    </div>
+    <input type="submit" value="@ApplicationResources.SubmitButton" class="btn btn-success" />
+}
+@Scripts.Render("~/bundles/submitActivity")

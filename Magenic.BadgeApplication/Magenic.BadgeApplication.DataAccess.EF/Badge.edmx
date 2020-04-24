@@ -92,6 +92,15 @@
           <Property Name="BadgeId" Type="int" />
           <Property Name="RequiredBadgeId" Type="int" />
         </EntityType>
+        <EntityType Name="BadgeRequest">
+          <Key>
+            <PropertyRef Name="BadgeId" />
+          </Key>
+          <Property Name="BadgeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="BadgeName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="BadgeDescription" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="BadgeType">
           <Key>
             <PropertyRef Name="BadgeTypeId" />
@@ -490,6 +499,18 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_BadgeRequest_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="BadgeRequest" Type="Self.BadgeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="BadgeRequest">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Employee_ApprovingManager1">
           <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
           <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
@@ -582,6 +603,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
           <EntitySet Name="BadgeActivity" EntityType="Self.BadgeActivity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BadgeAward" EntityType="Self.BadgeAward" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BadgePrerequisite" EntityType="Self.BadgePrerequisite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BadgeRequest" EntityType="Self.BadgeRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BadgeType" EntityType="Self.BadgeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeePermission" EntityType="Self.EmployeePermission" Schema="dbo" store:Type="Tables" />
@@ -730,6 +752,10 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
           <AssociationSet Name="FK_BadgePrerequisite_Badge1" Association="Self.FK_BadgePrerequisite_Badge1">
             <End Role="Badge" EntitySet="Badge" />
             <End Role="BadgePrerequisite" EntitySet="BadgePrerequisite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BadgeRequest_Employee" Association="Self.FK_BadgeRequest_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="BadgeRequest" EntitySet="BadgeRequest" />
           </AssociationSet>
           <AssociationSet Name="fk_Employee_ApprovingManager1" Association="Self.fk_Employee_ApprovingManager1">
             <End Role="Employee" EntitySet="Employee" />
@@ -957,6 +983,11 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
             <End Role="Activity" EntitySet="Activities" />
           </AssociationSet>
           <EntitySet Name="QueueItemsToPublish" EntityType="Magenic.BadgeApplication.DBModel.QueueItemToPublish" />
+          <EntitySet Name="BadgeRequests" EntityType="Magenic.BadgeApplication.DBModel.BadgeRequest" />
+          <AssociationSet Name="FK_BadgeRequest_Employee" Association="Magenic.BadgeApplication.DBModel.FK_BadgeRequest_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="BadgeRequest" EntitySet="BadgeRequests" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="BadgePrerequisite">
           <Key>
@@ -1324,6 +1355,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
           <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Department" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BadgeRequests" Relationship="Magenic.BadgeApplication.DBModel.FK_BadgeRequest_Employee" FromRole="Employee" ToRole="BadgeRequest" />
         </EntityType>
         <Association Name="fk_ActivitySubmission_Employee">
           <End Type="Magenic.BadgeApplication.DBModel.Employee" Role="Employee" Multiplicity="1" />
@@ -1491,6 +1523,28 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
           <Property Name="BadgeTagline" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ADName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="BadgeRequest">
+          <Key>
+            <PropertyRef Name="BadgeId" />
+          </Key>
+          <Property Name="BadgeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="BadgeName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employee" Relationship="Magenic.BadgeApplication.DBModel.FK_BadgeRequest_Employee" FromRole="BadgeRequest" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_BadgeRequest_Employee">
+          <End Type="Magenic.BadgeApplication.DBModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="Magenic.BadgeApplication.DBModel.BadgeRequest" Role="BadgeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="BadgeRequest">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1749,6 +1803,16 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
                 <ScalarProperty Name="QueueItemCreated" ColumnName="QueueItemCreated" />
                 <ScalarProperty Name="BadgeAwardId" ColumnName="BadgeAwardId" />
                 <ScalarProperty Name="QueueItemId" ColumnName="QueueItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BadgeRequests">
+            <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.BadgeRequest">
+              <MappingFragment StoreEntitySet="BadgeRequest">
+                <ScalarProperty Name="BadgeDescription" ColumnName="BadgeDescription" />
+                <ScalarProperty Name="BadgeName" ColumnName="BadgeName" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="BadgeId" ColumnName="BadgeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

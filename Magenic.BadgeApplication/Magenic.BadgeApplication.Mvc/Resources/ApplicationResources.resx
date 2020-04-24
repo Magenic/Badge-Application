@@ -465,4 +465,19 @@
   <data name="UserIdsLabel" xml:space="preserve">
     <value>User(s)</value>
   </data>
+  <data name="SubmitBadgeRequestHeader" xml:space="preserve">
+    <value>Request New Badge</value>
+  </data>
+  <data name="BadgeRequestNameLabel" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="BadgeRequestEmailLabel" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="BadgeRequestSubmissionDescriptionLabel" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="BadgeRequestBadgeNameLabel" xml:space="preserve">
+    <value>Proposed Name for Badge</value>
+  </data>
 </root>

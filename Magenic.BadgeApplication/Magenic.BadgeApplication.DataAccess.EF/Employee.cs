@@ -26,6 +26,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             this.EmployeePermissions = new HashSet<EmployeePermission>();
             this.Activities = new HashSet<Activity>();
             this.Badges1 = new HashSet<Badge>();
+            this.BadgeRequests = new HashSet<BadgeRequest>();
         }
     
         public int EmployeeId { get; set; }
@@ -53,5 +54,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public virtual ICollection<EmployeePermission> EmployeePermissions { get; set; }
         public virtual ICollection<Activity> Activities { get; set; }
         public virtual ICollection<Badge> Badges1 { get; set; }
+        public virtual ICollection<BadgeRequest> BadgeRequests { get; set; }
     }
 }

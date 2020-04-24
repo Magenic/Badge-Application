@@ -157,6 +157,9 @@
     <Compile Include="BadgePrerequisite.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
+    <Compile Include="BadgeRequest.cs">
+      <DependentUpon>Badge.tt</DependentUpon>
+    </Compile>
     <Compile Include="BadgeType.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>

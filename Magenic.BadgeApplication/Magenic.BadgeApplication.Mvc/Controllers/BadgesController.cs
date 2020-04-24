@@ -44,10 +44,12 @@ namespace Magenic.BadgeApplication.Controllers
                 CommunityEarnedBadges = earnedCommunityBadges,
                 SubmittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.EmployeeId),
                 AvailableUsers = await UserCollection.GetAllAvailabileUsersForCurrentUserAsync(),
+                SubmittedBadgeRequest = SubmitBadgeRequest.CreateBadgeRequestSubmission(AuthenticatedUser.EmployeeId)
             };
 
             badgeIndexViewModel.AllActivities = allActivities;
             badgeIndexViewModel.PossibleActivities = allActivities.Where(act => act.BadgeIds.Count() > 0).Select(ai => new SelectListItem() { Text = ai.Name, Value = ai.Id.ToString(CultureInfo.CurrentCulture) });
+            badgeIndexViewModel.SubmittedBadgeRequest.EmployeeName = badgeIndexViewModel.AvailableUsers.Where(f => f.EmployeeId == badgeIndexViewModel.SubmittedBadgeRequest.EmployeeId).Select(n => n.FullName).FirstOrDefault();
 
             return View(badgeIndexViewModel);
         }

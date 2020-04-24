@@ -131,6 +131,7 @@
     <Compile Include="DTO\QueueItemDTO.cs" />
     <Compile Include="DTO\QueueItemToPublishDTO.cs" />
     <Compile Include="DTO\SubmitActivityDTO.cs" />
+    <Compile Include="DTO\SubmitBadgeRequestDTO.cs" />
     <Compile Include="DTO\SubmittedActivityItemDTO.cs" />
     <Compile Include="DTO\UserItemDTO.cs" />
     <Compile Include="Enums\ActivityEntryType.cs" />
@@ -208,6 +209,8 @@
     <Compile Include="Interfaces\ISendMessageDAL.cs" />
     <Compile Include="Interfaces\ISubmitActivity.cs" />
     <Compile Include="Interfaces\ISubmitActivityDAL.cs" />
+    <Compile Include="Interfaces\ISubmitBadgeRequest.cs" />
+    <Compile Include="Interfaces\ISubmitBadgeRequestDAL.cs" />
     <Compile Include="Interfaces\ISubmittedActivityCollection.cs" />
     <Compile Include="Interfaces\ISubmittedActivityCollectionDAL.cs" />
     <Compile Include="Interfaces\ISubmittedActivityItem.cs" />
