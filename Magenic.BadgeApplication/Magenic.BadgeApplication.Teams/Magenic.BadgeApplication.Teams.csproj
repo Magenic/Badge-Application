@@ -71,13 +71,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataService.cs" />
     <Compile Include="Messages\FlowMessageRequest.cs" />
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Messages\PostWebhookMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TeamsPublisher.cs" />
-    <Compile Include="Utilities\RestClientFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -91,6 +89,9 @@
       <Project>{d7b48f98-7bd5-4e80-8740-6c348a7f9a1e}</Project>
       <Name>Magenic.BadgeApplication.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utilities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

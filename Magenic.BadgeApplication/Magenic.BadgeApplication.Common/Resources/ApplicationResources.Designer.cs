@@ -64,12 +64,10 @@ namespace Magenic.BadgeApplication.Common.Resources {
         ///   Looks up a localized string similar to &lt;html&gt;
         ///    &lt;body&gt;
         ///        You have employees who are waiting for you to approve their activities in the Magenic Badge Application.&lt;br /&gt;&lt;br /&gt;
-        ///        Please go to your badge application approval page to approve their activities.&lt;br /&gt;&lt;br /&gt;
-        ///        &lt;a href=&quot;https://badgeapplication.magenic.com/BadgeManager/ApproveActivities&quot;&gt;https://badgeapplication.magenic.com/BadgeManager/ApproveActivities&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
-        ///        Thank you,&lt;br /&gt;
-        ///        -Magenic HR
-        ///    &lt;/body&gt;
-        ///&lt;/html&gt;.
+        ///		If you are not logged into the Magenic Bagde Application, please log into the application.&lt;br /&gt;
+        ///		Once logged into the application, either follow these directions or click on the link.&lt;br /&gt;
+        ///        Please go to Badge Manager and then to Activities for Approval.&lt;br /&gt;&lt;br /&gt;
+        ///        &lt;a href=&quot;https://badgeapplication.magenic.com/BadgeManager/ApproveActivities&quot; [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ActivityNotificationBody {
             get {

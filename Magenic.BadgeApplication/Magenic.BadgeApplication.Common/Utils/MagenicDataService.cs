@@ -10,7 +10,7 @@
 
 // Original file name: DataService.cs
 // Generation date: 7/17/2018 5:03:16 PM
-namespace MagenicDataModel
+namespace Magenic.BadgeApplication.Common.Utils
 {
     
     /// <summary>
@@ -514,8 +514,15 @@ namespace MagenicDataModel
         private global::System.Nullable<int> _SharedServicesFlag;
         partial void OnSharedServicesFlagChanging(global::System.Nullable<int> value);
         partial void OnSharedServicesFlagChanged();
+        /// <summary>
+        /// 
+        /// </summary>
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         protected virtual void OnPropertyChanged(string property)
         {
@@ -634,8 +641,15 @@ namespace MagenicDataModel
         private string _BusUnitCode;
         partial void OnBusUnitCodeChanging(string value);
         partial void OnBusUnitCodeChanged();
+        /// <summary>
+        /// 
+        /// </summary>
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         protected virtual void OnPropertyChanged(string property)
         {
@@ -930,8 +944,15 @@ namespace MagenicDataModel
         private global::System.Nullable<int> _ActiveFlag;
         partial void OnActiveFlagChanging(global::System.Nullable<int> value);
         partial void OnActiveFlagChanged();
+        /// <summary>
+        /// 
+        /// </summary>
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         protected virtual void OnPropertyChanged(string property)
         {
@@ -1842,8 +1863,15 @@ namespace MagenicDataModel
         private global::System.Nullable<long> _ADPCheckSumInAX;
         partial void OnADPCheckSumInAXChanging(global::System.Nullable<long> value);
         partial void OnADPCheckSumInAXChanged();
+        /// <summary>
+        /// 
+        /// </summary>
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         protected virtual void OnPropertyChanged(string property)
         {
@@ -2270,8 +2298,15 @@ namespace MagenicDataModel
         private global::System.Nullable<global::System.DateTime> _SchedToDate;
         partial void OnSchedToDateChanging(global::System.Nullable<global::System.DateTime> value);
         partial void OnSchedToDateChanged();
+        /// <summary>
+        /// 
+        /// </summary>
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         protected virtual void OnPropertyChanged(string property)
         {
@@ -2744,8 +2779,15 @@ namespace MagenicDataModel
         private global::System.Nullable<global::System.DateTime> _ProjectEndDate;
         partial void OnProjectEndDateChanging(global::System.Nullable<global::System.DateTime> value);
         partial void OnProjectEndDateChanged();
+        /// <summary>
+        /// 
+        /// </summary>
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         protected virtual void OnPropertyChanged(string property)
         {
@@ -2842,8 +2884,15 @@ namespace MagenicDataModel
         private string _GeneralManager;
         partial void OnGeneralManagerChanging(string value);
         partial void OnGeneralManagerChanged();
+        /// <summary>
+        /// 
+        /// </summary>
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         protected virtual void OnPropertyChanged(string property)
         {
@@ -3094,8 +3143,15 @@ namespace MagenicDataModel
         private global::System.Nullable<global::System.DateTime> _ModifiedDateTime;
         partial void OnModifiedDateTimeChanging(global::System.Nullable<global::System.DateTime> value);
         partial void OnModifiedDateTimeChanged();
+        /// <summary>
+        /// 
+        /// </summary>
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
         [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         protected virtual void OnPropertyChanged(string property)
         {

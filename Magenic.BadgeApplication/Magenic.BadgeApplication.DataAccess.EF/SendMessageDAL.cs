@@ -2,12 +2,14 @@
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Common.Resources;
+using Magenic.BadgeApplication.Common.Utils;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 
@@ -19,6 +21,11 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     /// </summary>
     public partial class SendMessageDAL : ISendMessageDAL
     {
+        private static string DataService
+        {
+            get { return ConfigurationManager.AppSettings["ITDataServiceURL"]; }
+        }
+
         /// <summary>
         /// Sends the message.
         /// </summary>
@@ -67,11 +74,14 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             IList<string> emailAddresses = new List<string>();
             foreach ( var person in peopleToEmail )
             {
-                if ( false == person.ApprovingManagerId1.HasValue && false == person.ApprovingManagerId2.HasValue )
-                    continue;
-
-                addEmailAddress( employees, person.ApprovingManagerId1, emailAddresses );
-                addEmailAddress( employees, person.ApprovingManagerId2, emailAddresses );
+                if (person.ApprovingManagerId1.HasValue)
+                {
+                    addEmailAddress(employees, person.ApprovingManagerId1, emailAddresses);
+                }
+                if (person.ApprovingManagerId2.HasValue)
+                {
+                    addEmailAddress(employees, person.ApprovingManagerId2, emailAddresses);
+                }
             }
             return emailAddresses.Distinct().ToList();
         }
@@ -82,8 +92,26 @@ namespace Magenic.BadgeApplication.DataAccess.EF
 
             Employee manager = employees.SingleOrDefault( emp => emp.EmployeeId == managerId );
 
-            if ( manager != null && false == String.IsNullOrWhiteSpace( manager.EmailAddress ) )
-                emailAddresses.Add( manager.EmailAddress );
+            if ( manager != null)
+            {
+                if (String.IsNullOrWhiteSpace(manager.EmailAddress))
+                {
+                    var dataServiceUri = new Uri(DataService, UriKind.Absolute);
+                    var context = new MagenicDataEntities(dataServiceUri)
+                    {
+                        Credentials = CredentialCache.DefaultCredentials
+                    };
+                    var employee = context.vwODataEmployees.Where(e => e.NetworkAlias == manager.ADName).FirstOrDefault();
+                    if (employee != null)
+                    {
+                        emailAddresses.Add(employee.EMailAddress);
+                    }
+                }
+                else
+                {
+                    emailAddresses.Add(manager.EmailAddress);
+                }
+            }
         }
 
         private static IList<Employee> getEmployees( Entities context )
