@@ -5,7 +5,6 @@ using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Teams.Messages;
-using MagenicDataModel;
 using Newtonsoft.Json;
 using RestSharp;
 using System;

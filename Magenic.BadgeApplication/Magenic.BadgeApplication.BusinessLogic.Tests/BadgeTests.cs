@@ -79,5 +79,15 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests
         {
             throw new NotImplementedException();
         }
+
+        public void DeleteActivities(int badgeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeletePrerequisites(int badgeId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

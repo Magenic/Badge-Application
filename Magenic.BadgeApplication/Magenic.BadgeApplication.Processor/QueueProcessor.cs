@@ -3,7 +3,7 @@ using Magenic.BadgeApplication.BusinessLogic.Framework;
 using Magenic.BadgeApplication.Common;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Interfaces;
-using MagenicDataModel;
+using Magenic.BadgeApplication.Common.Utils;
 using Quartz;
 using System;
 using System.Collections;
