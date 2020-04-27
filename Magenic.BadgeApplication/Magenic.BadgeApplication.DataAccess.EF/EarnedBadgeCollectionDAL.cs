@@ -37,6 +37,34 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        public async Task<IEnumerable<EarnedBadgeItemDTO>> GetBadgesAsync()
+        {
+            using (var ctx = new Entities())
+            {
+                ctx.Database.Connection.Open();
+                var badgeList = await (from eb in ctx.EarnedBadges
+                                       select new EarnedBadgeItemDTO
+                                       {
+                                           BadgeAwardId = eb.BadgeAwardId,
+                                           Id = eb.BadgeId,
+                                           Name = eb.BadgeName,
+                                           Description = eb.BadgeDescription,
+                                           Type = (Common.Enums.BadgeType)eb.BadgeTypeId,
+                                           ImagePath = eb.BadgePath,
+                                           Tagline = eb.BadgeTagLine,
+                                           AwardDate = eb.AwardDate,
+                                           AwardPoints = eb.AwardAmount,
+                                           PaidOut = eb.PaidOut,
+                                           BadgePriority = eb.BadgePriority,
+                                           DisplayOnce = eb.DisplayOnce,
+                                           EmployeeName = eb.FirstName + " " + eb.LastName,
+                                           BadgeEffectiveEnd = eb.BadgeEffectiveEnd,
+                                           AwardAmount = eb.AwardAmount
+                                       }).ToArrayAsync();
+                return badgeList;
+            }
+        }
 
         public EarnedBadgeItemDTO GetEarnedBadge(int badgeAwardId)
         {

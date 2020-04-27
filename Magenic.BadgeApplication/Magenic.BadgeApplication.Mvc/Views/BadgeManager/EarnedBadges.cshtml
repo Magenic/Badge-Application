@@ -1,0 +1,40 @@
+﻿@using Magenic.BadgeApplication.Resources
+
+@section content {
+    @Styles.Render("~/Scripts/jtable/themes/metro/green/css")
+}
+
+@Html.Hidden("ListAction", Url.Action("List", "ManageActivities"))
+@Html.Hidden("DeleteAction", Url.Action("Delete", "ManageActivities"))
+
+<div class="container">
+    <div class="row">
+        @Html.Partial("_AdminNavbar")
+    </div>
+    <div class="row">
+        <div class="col-md-12 grayBox">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>@ApplicationResources.EarnedBadgesHeader2</h2>
+                </div>
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="earned-badges-tbl"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        &nbsp;
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jtable")
+
+    <script src="~/Scripts/earnedBadges.js"></script>
+}

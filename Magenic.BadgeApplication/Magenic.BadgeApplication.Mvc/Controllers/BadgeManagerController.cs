@@ -534,5 +534,31 @@ namespace Magenic.BadgeApplication.Controllers
                 return string.Empty;
             }
         }
+
+        /// <summary>
+        /// Earned Badges view
+        /// </summary>
+        /// <returns></returns>
+        [HasPermission(AuthorizationActions.GetObject, typeof(EarnedBadgeCollection))]
+        public virtual ActionResult EarnedBadges()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Lists this instance.
+        /// </summary>
+        /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "jt"), HttpPost]
+        [HasPermission(AuthorizationActions.GetObject, typeof(EarnedBadgeCollection))]
+        public async Task<JsonResult> EarnedBadgesList(int jtStartIndex, int jtPageSize)
+        {
+            var badges = await EarnedBadgeCollection.GetAllBadgesAsync();
+
+            var totalRecourds = badges.Count();
+            var records = badges.Skip(jtStartIndex).Take(jtPageSize);
+
+            return Json(new { Result = "OK", Records = records, TotalRecordCount = totalRecourds });
+        }
     }
 }

@@ -471,4 +471,7 @@
   <data name="CorporateInactiveBadgeHeader" xml:space="preserve">
     <value>Inactive Corporate Badges</value>
   </data>
+  <data name="EarnedBadgesHeader2" xml:space="preserve">
+    <value>Earned Badges</value>
+  </data>
 </root>

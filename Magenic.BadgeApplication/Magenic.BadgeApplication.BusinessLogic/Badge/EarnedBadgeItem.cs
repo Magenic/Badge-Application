@@ -161,7 +161,42 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             private set { LoadProperty(BadgeAwardIdProperty, value); }
         }
 
+        /// <summary>
+        /// The employee name property
+        /// </summary>
+        public static readonly PropertyInfo<string> EmployeeNameProperty = RegisterProperty<string>(b => b.EmployeeName);
+        /// <summary>
+        /// Employee name
+        /// </summary>
+        public string EmployeeName 
+        { 
+            get { return GetProperty(EmployeeNameProperty); }
+            set { LoadProperty(EmployeeNameProperty, value); }
+        }
 
+        /// <summary>
+        /// Badge effective end property
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        public static readonly PropertyInfo<DateTime?> BadgeEffectiveEndProperty = RegisterProperty<DateTime?>(b => b.BadgeEffectiveEnd);
+        
+        /// <summary>
+        /// Badge effective end date
+        /// </summary>
+        public DateTime? BadgeEffectiveEnd
+        { 
+            get { return GetProperty(BadgeEffectiveEndProperty); }
+            set { LoadProperty(BadgeEffectiveEndProperty, value); }
+        }
+
+        /// <summary>
+        /// Award amount property
+        /// </summary>
+        public static readonly PropertyInfo<int> AwardAmountProperty = RegisterProperty<int>(b => b.AwardAmount);
+        /// <summary>
+        /// Award amount
+        /// </summary>
+        public int AwardAmount { get; set; }
         #endregion Properties
 
         #region Methods
@@ -180,6 +215,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.PaidOut = item.PaidOut;
             this.BadgePriority = item.BadgePriority;
             this.DisplayOnce = item.DisplayOnce;
+            this.EmployeeName = item.EmployeeName;
+            this.BadgeEffectiveEnd = item.BadgeEffectiveEnd;
+            this.AwardAmount = item.AwardAmount;
         }
 
         #endregion Methods

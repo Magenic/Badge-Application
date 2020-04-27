@@ -574,6 +574,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Earned Badges.
+        /// </summary>
+        public static string EarnedBadgesHeader2 {
+            get {
+                return ResourceManager.GetString("EarnedBadgesHeader2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to earned community badge(s).
         /// </summary>
         public static string EarnedCommunityBadgesLabel {
