@@ -546,17 +546,21 @@ namespace Magenic.BadgeApplication.Controllers
         }
 
         /// <summary>
-        /// Lists this instance.
+        /// Earned badges list
         /// </summary>
+        /// <param name="jtStartIndex"></param>
+        /// <param name="jtPageSize"></param>
+        /// <param name="jtSorting"></param>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "jt"), HttpPost]
         [HasPermission(AuthorizationActions.GetObject, typeof(EarnedBadgeCollection))]
-        public async Task<JsonResult> EarnedBadgesList(int jtStartIndex, int jtPageSize)
+        public async Task<JsonResult> EarnedBadgesList(int jtStartIndex, int jtPageSize, string jtSorting)
         {
+            Console.WriteLine(jtSorting);
             var badges = await EarnedBadgeCollection.GetAllBadgesAsync();
 
             var totalRecourds = badges.Count();
-            var records = badges.Skip(jtStartIndex).Take(jtPageSize);
+            var records = badges.OrderBy(item => item, new EarnedBadgeComparer(jtSorting)).Skip(jtStartIndex).Take(jtPageSize);
 
             return Json(new { Result = "OK", Records = records, TotalRecordCount = totalRecourds });
         }

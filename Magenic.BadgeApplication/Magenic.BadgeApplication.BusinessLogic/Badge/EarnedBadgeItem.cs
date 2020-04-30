@@ -219,7 +219,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.BadgeEffectiveEnd = item.BadgeEffectiveEnd;
             this.AwardAmount = item.AwardAmount;
         }
-
         #endregion Methods
     }
 }

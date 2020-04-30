@@ -119,6 +119,7 @@
     <Compile Include="Badge\BadgeItem.cs" />
     <Compile Include="Badge\BadgeDelete.cs" />
     <Compile Include="Badge\EarnedBadgeCollection.cs" />
+    <Compile Include="Badge\EarnedBadgeComparer.cs" />
     <Compile Include="Badge\EarnedBadgeItem.cs" />
     <Compile Include="Framework\IoC.cs" />
     <Compile Include="Framework\ObjectActivator.cs" />

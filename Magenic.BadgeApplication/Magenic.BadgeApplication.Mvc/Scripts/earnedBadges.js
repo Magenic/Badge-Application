@@ -5,6 +5,8 @@
     //Prepare jtable plugin
     $('#earned-badges-tbl').jtable({
         title: 'Earned Badges',
+        sorting: true,
+        defaultSorting: 'Name ASC',
         paging: true,
         actions: {
             listAction: '/BadgeManager/EarnedBadgesList',
@@ -34,10 +36,12 @@
                 displayFormat: 'mm/dd/yy'
             },
             PaidOut: {
-                title: 'Paid Out'
+                title: 'Paid Out',
+                sorting: false
             },
             AwardAmount: {
-                title: 'Award Amount'
+                title: 'Award Amount',
+                sorting: false
             }
         }
     });

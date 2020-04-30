@@ -56,5 +56,13 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// The id of the badgeAward.
         /// </summary>
         int BadgeAwardId { get; }
+        /// <summary>
+        /// Employee name
+        /// </summary>
+        string EmployeeName { get; set; }
+        /// <summary>
+        /// Badge effective end date
+        /// </summary>
+        DateTime? BadgeEffectiveEnd { get; set; }
     }
 }
