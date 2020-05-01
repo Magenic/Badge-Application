@@ -1,13 +1,18 @@
-﻿using Csla;
+﻿using Autofac;
+using Csla;
+using Csla.Rules;
+using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.BusinessLogic.Rules;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Badge
 {
     [Serializable]
-    public sealed class EarnedBadgeItem : ReadOnlyBase<EarnedBadgeItem>, IEarnedBadgeItem
+    public sealed class EarnedBadgeItem : BusinessBase<EarnedBadgeItem>, IEarnedBadgeItem
     {
         #region Properties
 
@@ -219,6 +224,51 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.BadgeEffectiveEnd = item.BadgeEffectiveEnd;
             this.AwardAmount = item.AwardAmount;
         }
+
+        public async static Task<IEarnedBadgeItem> GetById(int badgeAwardId)
+        {
+            return await IoC.Container.Resolve<IObjectFactory<IEarnedBadgeItem>>().FetchAsync(badgeAwardId);
+        }
         #endregion Methods
+
+        #region Rules
+        public static void AddObjectAuthorizationRules()
+        {
+            BusinessRules.AddRule(typeof(IEarnedBadgeItem), new CanChange(AuthorizationActions.DeleteObject, PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(EarnedBadgeItem), new CanChange(AuthorizationActions.DeleteObject, PermissionType.Administrator.ToString()));
+        }
+        #endregion Rules
+
+        #region Data Access
+        private async Task DataPortal_Fetch(int badgeAwardId)
+        {
+            var dal = IoC.Container.Resolve<IEarnedBadgeCollectionDAL>();
+
+            var result = await dal.GetEarnedBadge(badgeAwardId);
+            this.Load(result);
+        }
+
+        [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]
+        protected override void DataPortal_DeleteSelf()
+        {
+            base.DataPortal_DeleteSelf();
+            var dal = IoC.Container.Resolve<IEarnedBadgeCollectionDAL>();
+
+            if (!IsNew)
+            {
+                this.DeleteChildren();
+                dal.Delete(this.BadgeAwardId);
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        private void DeleteChildren()
+        {
+            System.Diagnostics.Debug.WriteLine("TODO: Delete children for earned badges");
+            //var dal = IoC.Container.Resolve<IEarnedBadgeCollectionDAL>();
+            //dal.DeleteQueueEventLogs(this.Id);
+            //dal.DeleteQueueItems(this.Id);
+        }
+        #endregion Data Access
     }
 }

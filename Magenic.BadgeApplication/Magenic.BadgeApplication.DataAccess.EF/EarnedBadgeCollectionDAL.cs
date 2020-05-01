@@ -66,11 +66,11 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             }
         }
 
-        public EarnedBadgeItemDTO GetEarnedBadge(int badgeAwardId)
+        public async Task<EarnedBadgeItemDTO> GetEarnedBadge(int badgeAwardId)
         {
             using (var ctx = new Entities())
             {
-                BadgeAward badgeAward = ctx.BadgeAwards.Include(b => b.Badge).SingleOrDefault(badges => badges.BadgeAwardId == badgeAwardId);
+                BadgeAward badgeAward = await (ctx.BadgeAwards.Include(b => b.Badge)).SingleOrDefaultAsync(badges => badges.BadgeAwardId == badgeAwardId);
                 if (badgeAward == null)
                 { 
                     throw new NotFoundException(string.Format("Badge award with id {0} was not found", badgeAwardId));
@@ -90,10 +90,27 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                     Name = badgeAward.Badge.BadgeName,
                     PaidOut = badgeAward.PaidOut,
                     Tagline = badgeAward.Badge.BadgeTagLine,
-                    Type = (Common.Enums.BadgeType)badgeAward.Badge.BadgeTypeId                    
+                    Type = (Common.Enums.BadgeType)badgeAward.Badge.BadgeTypeId
                 };
 
                 return earnedBadge;
+            }
+        }
+
+        public void Delete(int badgeAwardId)
+        {
+            using (var ctx = new Entities())
+            {
+                ctx.Database.Connection.Open();
+
+                var badgeAward = new BadgeAward
+                {
+                    BadgeAwardId = badgeAwardId
+                };
+
+                ctx.BadgeAwards.Attach(badgeAward);
+                ctx.BadgeAwards.Remove(badgeAward);
+                ctx.SaveChanges();
             }
         }
     }

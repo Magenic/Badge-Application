@@ -564,5 +564,31 @@ namespace Magenic.BadgeApplication.Controllers
 
             return Json(new { Result = "OK", Records = records, TotalRecordCount = totalRecourds });
         }
+
+        /// <summary>
+        /// Delete earned badge
+        /// </summary>
+        /// <param name="badgeAwardId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [HasPermission(AuthorizationActions.DeleteObject, typeof(EarnedBadgeItem))]
+        public async Task<JsonResult> DeleteEarnedBadge(int badgeAwardId)
+        {
+            var badge = await EarnedBadgeItem.GetById(badgeAwardId) as EarnedBadgeItem;
+
+            if (badge.PaidOut)
+            {
+                return Json(new { Result = "ERROR", Message = ApplicationResources.EarnedBadgePaidOutDeleteError });
+            }
+
+            badge.Delete();
+
+            if (await SaveObjectAsync(badge, false))
+            {
+                return Json(new { Result = "OK" });
+            }
+
+            return Json(new { Result = "ERROR", Message = ApplicationResources.EarnedBadgeDeletionErrorMessage });
+        }
     }
 }

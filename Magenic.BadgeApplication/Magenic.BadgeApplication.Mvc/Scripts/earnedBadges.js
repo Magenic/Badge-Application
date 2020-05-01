@@ -1,6 +1,14 @@
 ﻿$(document).ready(function () {
-    var canEditRequiresApproval = $('#CanEditRequiresApproval').val() === 'true';
-    var canEditEntryType = $('#CanEditEntryType').val() === 'true';
+    var actions = $('#CanDelete').val() === 'True'
+        ?    
+        {
+            listAction: $('#ListAction').val(),
+            deleteAction: $('#DeleteAction').val(),
+        }
+        :
+        {
+            listAction: $('#ListAction').val(),
+        };
 
     //Prepare jtable plugin
     $('#earned-badges-tbl').jtable({
@@ -8,10 +16,7 @@
         sorting: true,
         defaultSorting: 'Name ASC',
         paging: true,
-        actions: {
-            listAction: '/BadgeManager/EarnedBadgesList',
-            deleteAction: '/BadgeManager/DeleteEarnedBadge',
-        },
+        actions: actions,
         fields: {
             BadgeAwardId: {
                 key: true,

@@ -474,4 +474,10 @@
   <data name="EarnedBadgesHeader2" xml:space="preserve">
     <value>Earned Badges</value>
   </data>
+  <data name="EarnedBadgeDeletionErrorMessage" xml:space="preserve">
+    <value>The earned badge could not be deleted.</value>
+  </data>
+  <data name="EarnedBadgePaidOutDeleteError" xml:space="preserve">
+    <value>The earned badge has been paid out and cannot be deleted.</value>
+  </data>
 </root>

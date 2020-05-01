@@ -1,12 +1,13 @@
 ﻿@using Magenic.BadgeApplication.Resources
-
+@using Csla
+@using Magenic.BadgeApplication.Common.Enums
 @section content {
     @Styles.Render("~/Scripts/jtable/themes/metro/green/css")
 }
 
-@Html.Hidden("ListAction", Url.Action("List", "ManageActivities"))
-@Html.Hidden("DeleteAction", Url.Action("Delete", "ManageActivities"))
-
+@Html.Hidden("ListAction", Url.Action("EarnedBadgesList", "BadgeManager"))
+@Html.Hidden("DeleteAction", Url.Action("DeleteEarnedBadge", "BadgeManager"))
+@Html.Hidden("CanDelete", ApplicationContext.User.IsInRole(PermissionType.Administrator.ToString()))
 <div class="container">
     <div class="row">
         @Html.Partial("_AdminNavbar")
