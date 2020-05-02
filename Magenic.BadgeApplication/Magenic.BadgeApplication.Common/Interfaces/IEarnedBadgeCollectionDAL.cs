@@ -41,5 +41,17 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         /// <param name="badgeAwardId"></param>
         void Delete(int badgeAwardId);
+
+        /// <summary>
+        /// Delete queue event logs
+        /// </summary>
+        /// <param name="badgeAwardId"></param>
+        void DeleteQueueEventLogs(int badgeAwardId);
+
+        /// <summary>
+        /// Delete queue items
+        /// </summary>
+        /// <param name="badgeAwardId"></param>
+        void DeleteQueueItems(int badgeAwardId);
     }
 }

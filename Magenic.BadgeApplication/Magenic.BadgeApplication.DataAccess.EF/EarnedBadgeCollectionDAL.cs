@@ -113,5 +113,27 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 ctx.SaveChanges();
             }
         }
+
+        public void DeleteQueueEventLogs(int badgeAwardId)
+        {
+            using (var ctx = new Entities())
+            {
+                ctx.Database.Connection.Open();
+                var records = ctx.QueueEventLogs.Where(item => item.BadgeAwardId == badgeAwardId).ToList();
+                ctx.QueueEventLogs.RemoveRange(records);
+                ctx.SaveChanges();
+            }
+        }
+
+        public void DeleteQueueItems(int badgeAwardId)
+        {
+            using (var ctx = new Entities())
+            {
+                ctx.Database.Connection.Open();
+                var records = ctx.QueueItems.Where(item => item.BadgeAwardId == badgeAwardId).ToList();
+                ctx.QueueItems.RemoveRange(records);
+                ctx.SaveChanges();
+            }
+        }
     }
 }

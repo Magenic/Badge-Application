@@ -264,10 +264,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         private void DeleteChildren()
         {
-            System.Diagnostics.Debug.WriteLine("TODO: Delete children for earned badges");
-            //var dal = IoC.Container.Resolve<IEarnedBadgeCollectionDAL>();
-            //dal.DeleteQueueEventLogs(this.Id);
-            //dal.DeleteQueueItems(this.Id);
+            var dal = IoC.Container.Resolve<IEarnedBadgeCollectionDAL>();
+            dal.DeleteQueueEventLogs(this.BadgeAwardId);
+            dal.DeleteQueueItems(this.BadgeAwardId);
         }
         #endregion Data Access
     }
