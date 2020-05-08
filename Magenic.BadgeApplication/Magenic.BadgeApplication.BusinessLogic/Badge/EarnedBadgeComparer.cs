@@ -4,77 +4,33 @@ using System.Collections.Generic;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Badge
 {
-    public enum Direction { ASC, DESC };
-
     public class EarnedBadgeComparer : IComparer<IEarnedBadgeItem>
     {
-        private const string BadgeName = "Name";
-        private const string EmployeeName = "EmployeeName";
-        private const string BadgeEffectiveEnd = "BadgeEffectiveEnd";
-        private const string AwardDate = "AwardDate";
-        private readonly string fieldName;
-        private readonly Direction sortDirection;
+        private readonly EarnedBadgeSortBy SortBy;
 
-        public EarnedBadgeComparer(string sort)
+        public EarnedBadgeComparer(EarnedBadgeSortBy sortBy)
         {
-            if (string.IsNullOrEmpty(sort))
-            {
-                this.fieldName = BadgeName;
-                this.sortDirection = Direction.ASC;
-                return;
-            }
-
-            var values = sort.Split(' ');
-
-            switch (values[0])
-            {
-                case BadgeName:
-                    this.fieldName = BadgeName;
-                    break;
-
-                case EmployeeName:
-                    this.fieldName = EmployeeName;
-                    break;
-
-                case BadgeEffectiveEnd:
-                    this.fieldName = BadgeEffectiveEnd;
-                    break;
-
-                case AwardDate:
-                    this.fieldName = AwardDate;
-                    break;
-
-                default:
-                    this.fieldName = BadgeName;
-                    break;
-            }
-
-            var direction = values.Length > 1 ? values[1] : "";
-
-            if (!Enum.TryParse<Direction>(direction, out this.sortDirection))
-            {
-                this.sortDirection = Direction.ASC;
-            }
+            this.SortBy = sortBy ?? new EarnedBadgeSortBy(string.Empty);
         }
 
         public int Compare(IEarnedBadgeItem x, IEarnedBadgeItem y)
         {
-            return this.sortDirection == Direction.ASC ? CompareASC(x, y) : CompareDESC(x, y);
+            return this.SortBy.IsAscending() ? CompareASC(x, y) : CompareDESC(x, y);
         }
 
         private int CompareASC(IEarnedBadgeItem item1, IEarnedBadgeItem item2)
         {
-            if (this.fieldName == BadgeName)
+            if (this.SortBy.SortByBadgeName())
             {
                 return string.Compare(item1.Name, item2.Name, StringComparison.CurrentCultureIgnoreCase);
             }
 
-            if (this.fieldName == EmployeeName)
+            if (this.SortBy.SortByEmployeeName())
             {
                 return string.Compare(item1.EmployeeName, item2.EmployeeName, StringComparison.CurrentCultureIgnoreCase);
             }
 
-            if (this.fieldName == BadgeEffectiveEnd)
+            if (this.SortBy.SortByBadgeEffectiveEnd())
             {
                 if (item1.BadgeEffectiveEnd.HasValue && item2.BadgeEffectiveEnd.HasValue)
                 {
@@ -92,7 +48,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
                 }
             }
 
-            if (this.fieldName == AwardDate)
+            if (this.SortBy.SortByBadgeAwardDate())
             {
                 return DateTime.Compare(item1.AwardDate, item2.AwardDate);
             }
@@ -102,17 +58,17 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
 
         private int CompareDESC(IEarnedBadgeItem item1, IEarnedBadgeItem item2)
         {
-            if (this.fieldName == BadgeName)
+            if (this.SortBy.SortByBadgeName())
             {
                 return CompareToReverse(string.Compare(item1.Name, item2.Name, StringComparison.CurrentCultureIgnoreCase));
             }
 
-            if (this.fieldName == EmployeeName)
+            if (this.SortBy.SortByEmployeeName())
             {
                 return CompareToReverse(string.Compare(item1.EmployeeName, item2.EmployeeName, StringComparison.CurrentCultureIgnoreCase));
             }
 
-            if (this.fieldName == BadgeEffectiveEnd)
+            if (this.SortBy.SortByBadgeEffectiveEnd())
             {
                 if (item1.BadgeEffectiveEnd.HasValue && item2.BadgeEffectiveEnd.HasValue)
                 {
@@ -130,7 +86,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
                 }
             }
 
-            if (this.fieldName == AwardDate)
+            if (this.SortBy.SortByBadgeAwardDate())
             {
                 return CompareToReverse(DateTime.Compare(item1.AwardDate, item2.AwardDate));
             }

@@ -556,11 +556,11 @@ namespace Magenic.BadgeApplication.Controllers
         [HasPermission(AuthorizationActions.GetObject, typeof(EarnedBadgeCollection))]
         public async Task<JsonResult> EarnedBadgesList(int jtStartIndex, int jtPageSize, string jtSorting)
         {
-            Console.WriteLine(jtSorting);
             var badges = await EarnedBadgeCollection.GetAllBadgesAsync();
 
             var totalRecourds = badges.Count();
-            var records = badges.OrderBy(item => item, new EarnedBadgeComparer(jtSorting)).Skip(jtStartIndex).Take(jtPageSize);
+
+            var records = badges.Sort(jtSorting).Skip(jtStartIndex).Take(jtPageSize);
 
             return Json(new { Result = "OK", Records = records, TotalRecordCount = totalRecourds });
         }

@@ -58,7 +58,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                            PaidOut = eb.PaidOut,
                                            BadgePriority = eb.BadgePriority,
                                            DisplayOnce = eb.DisplayOnce,
-                                           EmployeeName = eb.FirstName + " " + eb.LastName,
+                                           EmployeeName = eb.LastName + " " + eb.FirstName,
                                            BadgeEffectiveEnd = eb.BadgeEffectiveEnd,
                                            AwardAmount = eb.AwardAmount
                                        }).ToArrayAsync();

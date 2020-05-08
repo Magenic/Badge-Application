@@ -1,4 +1,5 @@
 ﻿using Csla;
+using System.Linq;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
@@ -7,5 +8,10 @@ namespace Magenic.BadgeApplication.Common.Interfaces
     /// </summary>
     public interface IEarnedBadgeCollection : IReadOnlyListBase<IEarnedBadgeItem>
     {
+        /// <summary>
+        /// Sort earned badge collection
+        /// </summary>
+        /// <param name="sortBy"></param>
+        IOrderedEnumerable<IEarnedBadgeItem> Sort(string sortBy);
     }
 }
