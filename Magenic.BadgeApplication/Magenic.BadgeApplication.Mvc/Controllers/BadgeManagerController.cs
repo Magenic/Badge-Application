@@ -534,5 +534,61 @@ namespace Magenic.BadgeApplication.Controllers
                 return string.Empty;
             }
         }
+
+        /// <summary>
+        /// Earned Badges view
+        /// </summary>
+        /// <returns></returns>
+        [HasPermission(AuthorizationActions.GetObject, typeof(EarnedBadgeCollection))]
+        public virtual ActionResult EarnedBadges()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Earned badges list
+        /// </summary>
+        /// <param name="jtStartIndex"></param>
+        /// <param name="jtPageSize"></param>
+        /// <param name="jtSorting"></param>
+        /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "jt"), HttpPost]
+        [HasPermission(AuthorizationActions.GetObject, typeof(EarnedBadgeCollection))]
+        public async Task<JsonResult> EarnedBadgesList(int jtStartIndex, int jtPageSize, string jtSorting)
+        {
+            var badges = await EarnedBadgeCollection.GetAllBadgesAsync();
+
+            var totalRecourds = badges.Count();
+
+            var records = badges.Sort(jtSorting).Skip(jtStartIndex).Take(jtPageSize);
+
+            return Json(new { Result = "OK", Records = records, TotalRecordCount = totalRecourds });
+        }
+
+        /// <summary>
+        /// Delete earned badge
+        /// </summary>
+        /// <param name="badgeAwardId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [HasPermission(AuthorizationActions.DeleteObject, typeof(EarnedBadgeItem))]
+        public async Task<JsonResult> DeleteEarnedBadge(int badgeAwardId)
+        {
+            var badge = await EarnedBadgeItem.GetById(badgeAwardId) as EarnedBadgeItem;
+
+            if (badge.PaidOut)
+            {
+                return Json(new { Result = "ERROR", Message = ApplicationResources.EarnedBadgePaidOutDeleteError });
+            }
+
+            badge.Delete();
+
+            if (await SaveObjectAsync(badge, false))
+            {
+                return Json(new { Result = "OK" });
+            }
+
+            return Json(new { Result = "ERROR", Message = ApplicationResources.EarnedBadgeDeletionErrorMessage });
+        }
     }
 }

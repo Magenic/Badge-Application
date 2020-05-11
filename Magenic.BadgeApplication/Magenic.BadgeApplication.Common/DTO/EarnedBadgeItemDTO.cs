@@ -64,5 +64,17 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// The id of the badgeAward.
         /// </summary>
         public int BadgeAwardId { get; set; }
+        /// <summary>
+        /// The first and last name of the employee
+        /// </summary>
+        public string EmployeeName { get; set; }
+        /// <summary>
+        /// Badge effective end date
+        /// </summary>
+        public DateTime? BadgeEffectiveEnd { get; set; }
+        /// <summary>
+        /// Award amount
+        /// </summary>
+        public int AwardAmount { get; set; }
     }
 }

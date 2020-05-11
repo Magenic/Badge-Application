@@ -148,6 +148,7 @@
     <Compile Include="Enums\PermissionType.cs" />
     <Compile Include="Enums\PhotoSize.cs" />
     <Compile Include="Enums\ProcessingEventType.cs" />
+    <Compile Include="Enums\SortDirection.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interfaces\IAccountInfoEdit.cs" />

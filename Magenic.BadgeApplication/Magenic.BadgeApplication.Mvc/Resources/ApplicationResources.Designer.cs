@@ -565,11 +565,38 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The earned badge could not be deleted..
+        /// </summary>
+        public static string EarnedBadgeDeletionErrorMessage {
+            get {
+                return ResourceManager.GetString("EarnedBadgeDeletionErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The earned badge has been paid out and cannot be deleted..
+        /// </summary>
+        public static string EarnedBadgePaidOutDeleteError {
+            get {
+                return ResourceManager.GetString("EarnedBadgePaidOutDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to earned badge(s).
         /// </summary>
         public static string EarnedBadgesHeader {
             get {
                 return ResourceManager.GetString("EarnedBadgesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Earned Badges.
+        /// </summary>
+        public static string EarnedBadgesHeader2 {
+            get {
+                return ResourceManager.GetString("EarnedBadgesHeader2", resourceCulture);
             }
         }
         

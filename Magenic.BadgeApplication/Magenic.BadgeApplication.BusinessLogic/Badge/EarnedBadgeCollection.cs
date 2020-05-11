@@ -6,6 +6,7 @@ using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Badge
@@ -16,6 +17,37 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
     [Serializable]
     public sealed class EarnedBadgeCollection : ReadOnlyListBase<EarnedBadgeCollection, IEarnedBadgeItem>, IEarnedBadgeCollection
     {
+        #region Methods
+        public IOrderedEnumerable<IEarnedBadgeItem> Sort(string sortBy)
+        {
+            var earnedBadgeSortBy = new EarnedBadgeSortBy(sortBy);
+
+            var initialSort = this.OrderBy(item => item, new EarnedBadgeComparer(earnedBadgeSortBy));
+
+            if (earnedBadgeSortBy.SortByBadgeName())
+            {
+                return initialSort.ThenBy(item => item, new EarnedBadgeComparer(new EarnedBadgeSortBy(EarnedBadgeSortBy.BuildString(EarnedBadgeFields.EmployeeName, SortDirection.ASC))));
+            }
+            else if (earnedBadgeSortBy.SortByEmployeeName())
+            {
+                return initialSort.ThenBy(item => item, new EarnedBadgeComparer(new EarnedBadgeSortBy(EarnedBadgeSortBy.BuildString(EarnedBadgeFields.AwardDate, SortDirection.ASC))));
+            }
+            else if (earnedBadgeSortBy.SortByBadgeEffectiveEnd())
+            {
+                return initialSort
+                    .ThenBy(item => item, new EarnedBadgeComparer(new EarnedBadgeSortBy(EarnedBadgeSortBy.BuildString(EarnedBadgeFields.BadgeName, SortDirection.ASC))))
+                    .ThenBy(item => item, new EarnedBadgeComparer(new EarnedBadgeSortBy(EarnedBadgeSortBy.BuildString(EarnedBadgeFields.EmployeeName, SortDirection.ASC))));
+            }
+            else if (earnedBadgeSortBy.SortByBadgeAwardDate())
+            {
+                return initialSort
+                    .ThenBy(item => item, new EarnedBadgeComparer(new EarnedBadgeSortBy(EarnedBadgeSortBy.BuildString(EarnedBadgeFields.BadgeName, SortDirection.ASC))))
+                    .ThenBy(item => item, new EarnedBadgeComparer(new EarnedBadgeSortBy(EarnedBadgeSortBy.BuildString(EarnedBadgeFields.EmployeeName, SortDirection.ASC))));
+            }
+
+            return initialSort;
+        }
+        #endregion Methods
 
         #region Criteria Classes
 
@@ -41,6 +73,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             return await IoC.Container.Resolve<IObjectFactory<IEarnedBadgeCollection>>().FetchAsync(new BadgeCollectionForUserCriteria { BadgeType = badgeType, EmployeeId = employeeId });
         }
 
+        public async static Task<IEarnedBadgeCollection> GetAllBadgesAsync()
+        {
+            return await IoC.Container.Resolve<IObjectFactory<IEarnedBadgeCollection>>().FetchAsync();
+        }
         #endregion Factory Methods
 
         #region Data Access
@@ -51,6 +87,15 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             var dal = IoC.Container.Resolve<IEarnedBadgeCollectionDAL>();
 
             var result = await dal.GetBadgesForUserByBadgeTypeAsync(criteria.EmployeeId, criteria.BadgeType);
+            this.LoadData(result);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        private async Task DataPortal_Fetch()
+        {
+            var dal = IoC.Container.Resolve<IEarnedBadgeCollectionDAL>();
+
+            var result = await dal.GetBadgesAsync();
             this.LoadData(result);
         }
 
