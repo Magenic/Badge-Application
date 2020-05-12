@@ -47,6 +47,8 @@
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.ActivityEntryType" Width="1.5" PointX="0.75" PointY="18.375" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.FK_Activity_ActivityEntryType" />
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.QueueItemToPublish" Width="1.75" PointX="14.75" PointY="2.375" />
+        <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.NotificationItemToPublish" Width="1.75" PointX="14.75" PointY="6.125" />
+        <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.Notification" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.BadgeRequest" Width="1.5" PointX="5.375" PointY="0.75" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.FK_BadgeRequest_Employee" />
         </Diagram>

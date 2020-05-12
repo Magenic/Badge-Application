@@ -27,6 +27,31 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         /// <param name="badgeAwardId">The badge award id</param>
         /// <returns>The earned badge</returns>
-        EarnedBadgeItemDTO GetEarnedBadge(int badgeAwardId);
+        Task<EarnedBadgeItemDTO> GetEarnedBadge(int badgeAwardId);
+
+        /// <summary>
+        /// Get all earned badges
+        /// </summary>
+        /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        Task<IEnumerable<EarnedBadgeItemDTO>> GetBadgesAsync();
+
+        /// <summary>
+        /// Delete badge awarded
+        /// </summary>
+        /// <param name="badgeAwardId"></param>
+        void Delete(int badgeAwardId);
+
+        /// <summary>
+        /// Delete queue event logs
+        /// </summary>
+        /// <param name="badgeAwardId"></param>
+        void DeleteQueueEventLogs(int badgeAwardId);
+
+        /// <summary>
+        /// Delete queue items
+        /// </summary>
+        /// <param name="badgeAwardId"></param>
+        void DeleteQueueItems(int badgeAwardId);
     }
 }

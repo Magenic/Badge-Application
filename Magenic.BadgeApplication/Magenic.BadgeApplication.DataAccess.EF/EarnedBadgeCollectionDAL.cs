@@ -37,12 +37,40 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             }
         }
 
-
-        public EarnedBadgeItemDTO GetEarnedBadge(int badgeAwardId)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        public async Task<IEnumerable<EarnedBadgeItemDTO>> GetBadgesAsync()
         {
             using (var ctx = new Entities())
             {
-                BadgeAward badgeAward = ctx.BadgeAwards.Include(b => b.Badge).SingleOrDefault(badges => badges.BadgeAwardId == badgeAwardId);
+                ctx.Database.Connection.Open();
+                var badgeList = await (from eb in ctx.EarnedBadges
+                                       select new EarnedBadgeItemDTO
+                                       {
+                                           BadgeAwardId = eb.BadgeAwardId,
+                                           Id = eb.BadgeId,
+                                           Name = eb.BadgeName,
+                                           Description = eb.BadgeDescription,
+                                           Type = (Common.Enums.BadgeType)eb.BadgeTypeId,
+                                           ImagePath = eb.BadgePath,
+                                           Tagline = eb.BadgeTagLine,
+                                           AwardDate = eb.AwardDate,
+                                           AwardPoints = eb.AwardAmount,
+                                           PaidOut = eb.PaidOut,
+                                           BadgePriority = eb.BadgePriority,
+                                           DisplayOnce = eb.DisplayOnce,
+                                           EmployeeName = eb.LastName + " " + eb.FirstName,
+                                           BadgeEffectiveEnd = eb.BadgeEffectiveEnd,
+                                           AwardAmount = eb.AwardAmount
+                                       }).ToArrayAsync();
+                return badgeList;
+            }
+        }
+
+        public async Task<EarnedBadgeItemDTO> GetEarnedBadge(int badgeAwardId)
+        {
+            using (var ctx = new Entities())
+            {
+                BadgeAward badgeAward = await (ctx.BadgeAwards.Include(b => b.Badge)).SingleOrDefaultAsync(badges => badges.BadgeAwardId == badgeAwardId);
                 if (badgeAward == null)
                 { 
                     throw new NotFoundException(string.Format("Badge award with id {0} was not found", badgeAwardId));
@@ -62,10 +90,49 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                     Name = badgeAward.Badge.BadgeName,
                     PaidOut = badgeAward.PaidOut,
                     Tagline = badgeAward.Badge.BadgeTagLine,
-                    Type = (Common.Enums.BadgeType)badgeAward.Badge.BadgeTypeId                    
+                    Type = (Common.Enums.BadgeType)badgeAward.Badge.BadgeTypeId
                 };
 
                 return earnedBadge;
+            }
+        }
+
+        public void Delete(int badgeAwardId)
+        {
+            using (var ctx = new Entities())
+            {
+                ctx.Database.Connection.Open();
+
+                var badgeAward = new BadgeAward
+                {
+                    BadgeAwardId = badgeAwardId
+                };
+
+                ctx.BadgeAwards.Attach(badgeAward);
+                ctx.BadgeAwards.Remove(badgeAward);
+                ctx.SaveChanges();
+            }
+        }
+
+        public void DeleteQueueEventLogs(int badgeAwardId)
+        {
+            using (var ctx = new Entities())
+            {
+                ctx.Database.Connection.Open();
+                var records = ctx.QueueEventLogs.Where(item => item.BadgeAwardId == badgeAwardId).ToList();
+                ctx.QueueEventLogs.RemoveRange(records);
+                ctx.SaveChanges();
+            }
+        }
+
+        public void DeleteQueueItems(int badgeAwardId)
+        {
+            using (var ctx = new Entities())
+            {
+                ctx.Database.Connection.Open();
+                var records = ctx.QueueItems.Where(item => item.BadgeAwardId == badgeAwardId).ToList();
+                ctx.QueueItems.RemoveRange(records);
+                ctx.SaveChanges();
             }
         }
     }

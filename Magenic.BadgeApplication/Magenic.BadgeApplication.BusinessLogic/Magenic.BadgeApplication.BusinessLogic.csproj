@@ -119,11 +119,17 @@
     <Compile Include="Badge\BadgeItem.cs" />
     <Compile Include="Badge\BadgeDelete.cs" />
     <Compile Include="Badge\EarnedBadgeCollection.cs" />
+    <Compile Include="Badge\EarnedBadgeComparer.cs" />
+    <Compile Include="Badge\EarnedBadgeFields.cs" />
     <Compile Include="Badge\EarnedBadgeItem.cs" />
+    <Compile Include="Badge\EarnedBadgeSortBy.cs" />
     <Compile Include="Badge\SubmitBadgeRequest.cs" />
     <Compile Include="Framework\IoC.cs" />
     <Compile Include="Framework\ObjectActivator.cs" />
     <Compile Include="Framework\ObjectFactory.cs" />
+    <Compile Include="Notification\NotificationItem.cs" />
+    <Compile Include="Notification\NotificationItemToPublish.cs" />
+    <Compile Include="Notification\NotificationItemToPublishCollection.cs" />
     <Compile Include="PointsReport\BadgeAwardEditCollection.cs" />
     <Compile Include="PointsReport\BadgeAwardEdit.cs" />
     <Compile Include="PointsReport\PointsReportCollection.cs" />

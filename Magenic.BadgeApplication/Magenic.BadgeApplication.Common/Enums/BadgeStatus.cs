@@ -25,5 +25,9 @@ namespace Magenic.BadgeApplication.Common.Enums
         /// The activity submission has been denied by a manager.
         /// </summary>
         Denied = 3,
+        /// <summary>
+        /// The activity is complete
+        /// </summary>
+        Complete = 4,
     }
 }

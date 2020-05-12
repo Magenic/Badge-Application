@@ -1,13 +1,18 @@
-﻿using Csla;
+﻿using Autofac;
+using Csla;
+using Csla.Rules;
+using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.BusinessLogic.Rules;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.BusinessLogic.Badge
 {
     [Serializable]
-    public sealed class EarnedBadgeItem : ReadOnlyBase<EarnedBadgeItem>, IEarnedBadgeItem
+    public sealed class EarnedBadgeItem : BusinessBase<EarnedBadgeItem>, IEarnedBadgeItem
     {
         #region Properties
 
@@ -161,7 +166,42 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             private set { LoadProperty(BadgeAwardIdProperty, value); }
         }
 
+        /// <summary>
+        /// The employee name property
+        /// </summary>
+        public static readonly PropertyInfo<string> EmployeeNameProperty = RegisterProperty<string>(b => b.EmployeeName);
+        /// <summary>
+        /// Employee name
+        /// </summary>
+        public string EmployeeName 
+        { 
+            get { return GetProperty(EmployeeNameProperty); }
+            set { LoadProperty(EmployeeNameProperty, value); }
+        }
 
+        /// <summary>
+        /// Badge effective end property
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        public static readonly PropertyInfo<DateTime?> BadgeEffectiveEndProperty = RegisterProperty<DateTime?>(b => b.BadgeEffectiveEnd);
+        
+        /// <summary>
+        /// Badge effective end date
+        /// </summary>
+        public DateTime? BadgeEffectiveEnd
+        { 
+            get { return GetProperty(BadgeEffectiveEndProperty); }
+            set { LoadProperty(BadgeEffectiveEndProperty, value); }
+        }
+
+        /// <summary>
+        /// Award amount property
+        /// </summary>
+        public static readonly PropertyInfo<int> AwardAmountProperty = RegisterProperty<int>(b => b.AwardAmount);
+        /// <summary>
+        /// Award amount
+        /// </summary>
+        public int AwardAmount { get; set; }
         #endregion Properties
 
         #region Methods
@@ -180,8 +220,54 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.PaidOut = item.PaidOut;
             this.BadgePriority = item.BadgePriority;
             this.DisplayOnce = item.DisplayOnce;
+            this.EmployeeName = item.EmployeeName;
+            this.BadgeEffectiveEnd = item.BadgeEffectiveEnd;
+            this.AwardAmount = item.AwardAmount;
         }
 
+        public async static Task<IEarnedBadgeItem> GetById(int badgeAwardId)
+        {
+            return await IoC.Container.Resolve<IObjectFactory<IEarnedBadgeItem>>().FetchAsync(badgeAwardId);
+        }
         #endregion Methods
+
+        #region Rules
+        public static void AddObjectAuthorizationRules()
+        {
+            BusinessRules.AddRule(typeof(IEarnedBadgeItem), new CanChange(AuthorizationActions.DeleteObject, PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(EarnedBadgeItem), new CanChange(AuthorizationActions.DeleteObject, PermissionType.Administrator.ToString()));
+        }
+        #endregion Rules
+
+        #region Data Access
+        private async Task DataPortal_Fetch(int badgeAwardId)
+        {
+            var dal = IoC.Container.Resolve<IEarnedBadgeCollectionDAL>();
+
+            var result = await dal.GetEarnedBadge(badgeAwardId);
+            this.Load(result);
+        }
+
+        [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]
+        protected override void DataPortal_DeleteSelf()
+        {
+            base.DataPortal_DeleteSelf();
+            var dal = IoC.Container.Resolve<IEarnedBadgeCollectionDAL>();
+
+            if (!IsNew)
+            {
+                this.DeleteChildren();
+                dal.Delete(this.BadgeAwardId);
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        private void DeleteChildren()
+        {
+            var dal = IoC.Container.Resolve<IEarnedBadgeCollectionDAL>();
+            dal.DeleteQueueEventLogs(this.BadgeAwardId);
+            dal.DeleteQueueItems(this.BadgeAwardId);
+        }
+        #endregion Data Access
     }
 }

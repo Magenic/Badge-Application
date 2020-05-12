@@ -15,7 +15,7 @@ namespace Magenic.BadgeApplication.Processor
     /// <summary>
     /// 
     /// </summary>
-    public class QueueItemProcessor : IItemProcessor
+    public class QueueItemProcessor : IQueueItemProcessor
     {
         private IContainer _factory;
 
@@ -38,27 +38,27 @@ namespace Magenic.BadgeApplication.Processor
             _publishers = _factory.Resolve<IEnumerable<IPublisher>>();
         }
 
-        public void ProcessItems(PublishMessageConfigDTO publishMessageConfig)
+        public void ProcessItems(PublishBadgeMsgConfigDTO publishMessageConfig)
         {
             try
             {
-                RegisterQueueItemProgress(QueueEventType.Processing, publishMessageConfig);
+                RegisterQueueItemProgress(ProcessingEventType.Processing, publishMessageConfig);
 
                 PublishUpdates(publishMessageConfig);
 
                 _queueItemDAL.DeleteRange(publishMessageConfig.QueueItems.Select(x => x.QueueItemId).ToList());
 
-                RegisterQueueItemProgress(QueueEventType.Processed, publishMessageConfig);
+                RegisterQueueItemProgress(ProcessingEventType.Processed, publishMessageConfig);
             }
             catch(Exception ex)
             {
                 Logger.Error<QueueItemProcessor>(ex.Message, ex);
-                RegisterQueueItemProgress(QueueEventType.Failed, publishMessageConfig);
+                RegisterQueueItemProgress(ProcessingEventType.Failed, publishMessageConfig);
                 throw;
             }
         }
 
-        public void PublishUpdates(PublishMessageConfigDTO publishMessageConfig)
+        public void PublishUpdates(PublishBadgeMsgConfigDTO publishMessageConfig)
         {
             var activePublishers = ConfigurationManager.AppSettings["ActivePublishers"];
             if (!string.IsNullOrWhiteSpace(activePublishers))
@@ -67,13 +67,13 @@ namespace Magenic.BadgeApplication.Processor
                 {
                     if (activePublishers.Contains(publisher.GetType().Name))
                     {
-                        publisher.Publish(publishMessageConfig);
+                        publisher.PublishBadge(publishMessageConfig);
                     }
                 }
             }
         }
 
-        public void RegisterQueueItemProgress(QueueEventType eventType, PublishMessageConfigDTO publishMessageConfig)
+        public void RegisterQueueItemProgress(ProcessingEventType eventType, PublishBadgeMsgConfigDTO publishMessageConfig)
         {
             foreach(var item in publishMessageConfig.QueueItems)
             {

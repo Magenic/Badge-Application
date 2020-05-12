@@ -25,7 +25,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DocumentationFile>bin\Debug\Magenic.BadgeApplication.Common.XML</DocumentationFile>
     <CodeAnalysisRuleSet>..\Magenic.BadgeApplication.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -95,7 +95,9 @@
       <HintPath>..\packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -117,8 +119,12 @@
     <Compile Include="DTO\BadgeActivityEditDTO.cs" />
     <Compile Include="DTO\BadgeAwardDTO.cs" />
     <Compile Include="DTO\BadgeAwardEditDTO.cs" />
+    <Compile Include="DTO\InactiveBadgeSearchDTO.cs" />
+    <Compile Include="DTO\NotificationDTO.cs" />
+    <Compile Include="DTO\NotificationItemToPublishDTO.cs" />
+    <Compile Include="DTO\PublishNotificationItemDTO.cs" />
     <Compile Include="DTO\PublishQueueItemDTO.cs" />
-    <Compile Include="DTO\PublishMessageConfigDTO.cs" />
+    <Compile Include="DTO\PublishBadgeMsgConfigDTO.cs" />
     <Compile Include="DTO\BadgeEditDTO.cs" />
     <Compile Include="DTO\BadgeItemDTO.cs" />
     <Compile Include="DTO\CustomIdentityDTO.cs" />
@@ -127,6 +133,7 @@
     <Compile Include="DTO\ExternalActivitySubmissionDTO.cs" />
     <Compile Include="DTO\LeaderboardItemDTO.cs" />
     <Compile Include="DTO\PointsReportItemDTO.cs" />
+    <Compile Include="DTO\PublishNotificationMsgConfigDTO.cs" />
     <Compile Include="DTO\QueueEventLogDTO.cs" />
     <Compile Include="DTO\QueueItemDTO.cs" />
     <Compile Include="DTO\QueueItemToPublishDTO.cs" />
@@ -138,10 +145,11 @@
     <Compile Include="Enums\ActivitySubmissionStatus.cs" />
     <Compile Include="Enums\BadgeStatus.cs" />
     <Compile Include="Enums\BadgeType.cs" />
-    <Compile Include="Enums\EventType.cs" />
+    <Compile Include="Enums\MSFlowType.cs" />
     <Compile Include="Enums\PermissionType.cs" />
     <Compile Include="Enums\PhotoSize.cs" />
-    <Compile Include="Enums\QueueEventType.cs" />
+    <Compile Include="Enums\ProcessingEventType.cs" />
+    <Compile Include="Enums\SortDirection.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interfaces\IAccountInfoEdit.cs" />
@@ -189,11 +197,16 @@
     <Compile Include="Interfaces\IHaveEntryType.cs" />
     <Compile Include="Interfaces\IHaveBadgeStatus.cs" />
     <Compile Include="Interfaces\IIdentityCriteria.cs" />
-    <Compile Include="Interfaces\IItemProcessor.cs" />
+    <Compile Include="Interfaces\ISubmissionNotifyItemProcessor.cs" />
+    <Compile Include="Interfaces\IQueueItemProcessor.cs" />
     <Compile Include="Interfaces\ILeaderboardCollection.cs" />
     <Compile Include="Interfaces\ILeaderboardCollectionDAL.cs" />
     <Compile Include="Interfaces\ILeaderboardItem.cs" />
     <Compile Include="Interfaces\ILeaderboardItemDAL.cs" />
+    <Compile Include="Interfaces\INotificationDAL.cs" />
+    <Compile Include="Interfaces\INotificationItemToPublish.cs" />
+    <Compile Include="Interfaces\INotificationItemToPublishCollection.cs" />
+    <Compile Include="Interfaces\INotificationItemToPublishCollectionDAL.cs" />
     <Compile Include="Interfaces\IObjectFactory.cs" />
     <Compile Include="Interfaces\IPointsReportCollection.cs" />
     <Compile Include="Interfaces\IPointsReportCollectionDAL.cs" />
@@ -224,7 +237,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplicationResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\MagenicDataService.cs" />
     <Compile Include="Utils\Emails.cs" />
+    <Compile Include="Utils\RestClientFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CodeDictionary.xml">
@@ -244,6 +259,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interfaces\INotificationItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

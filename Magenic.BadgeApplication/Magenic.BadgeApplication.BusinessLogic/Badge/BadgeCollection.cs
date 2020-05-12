@@ -40,6 +40,21 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             return await IoC.Container.Resolve<IObjectFactory<IBadgeCollection>>().FetchAsync(activityIds);
         }
 
+        public async static Task<IBadgeCollection> GetInactiveBadgesByAsync(BadgeType badgeType, DateTime inactiveEffectiveDate)
+        {
+            var searchDTO = new InactiveBadgeSearchDTO 
+            { 
+                BadgeType = badgeType, 
+                InactiveEffectiveDate = inactiveEffectiveDate, 
+                BadgeStatusList = new List<BadgeStatus> 
+                { 
+                    BadgeStatus.Approved, 
+                    BadgeStatus.Complete 
+                } 
+            };
+
+            return await IoC.Container.Resolve<IObjectFactory<IBadgeCollection>>().FetchAsync(searchDTO);
+        }
         #endregion Factory Methods
 
         #region Data Access
@@ -69,6 +84,20 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             var dal = IoC.Container.Resolve<IBadgeCollectionDAL>();
 
             var result = await dal.GetBadgesByActivityIdsAsync(activityIds);
+            this.LoadData(result);
+        }
+
+        /// <summary>
+        /// The fetch portal method.
+        /// </summary>
+        /// <param name="badgeType">Type of the badge.</param>
+        /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        private async Task DataPortal_Fetch(InactiveBadgeSearchDTO searchDTO)
+        {
+            var dal = IoC.Container.Resolve<IBadgeCollectionDAL>();
+
+            var result = await dal.GetInactiveBadgesAsync(searchDTO);
             this.LoadData(result);
         }
 

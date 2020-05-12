@@ -1,12 +1,11 @@
-﻿using Csla;
-using System;
+﻿using System;
 
 namespace Magenic.BadgeApplication.Common.Interfaces
 {
     /// <summary>
     /// A read only earned badge item to be used in a collection of earned badges.
     /// </summary>
-    public interface IEarnedBadgeItem : IReadOnlyBase
+    public interface IEarnedBadgeItem : Csla.IBusinessBase
     {
         /// <summary>
         /// The id of the badge.
@@ -56,5 +55,13 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// The id of the badgeAward.
         /// </summary>
         int BadgeAwardId { get; }
+        /// <summary>
+        /// Employee name
+        /// </summary>
+        string EmployeeName { get; set; }
+        /// <summary>
+        /// Badge effective end date
+        /// </summary>
+        DateTime? BadgeEffectiveEnd { get; set; }
     }
 }

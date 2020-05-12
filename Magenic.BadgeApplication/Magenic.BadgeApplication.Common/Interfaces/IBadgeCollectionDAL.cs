@@ -28,5 +28,13 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         Task<IEnumerable<BadgeItemDTO>> GetBadgesByActivityIdsAsync(IEnumerable<int> activityIds);
+
+        /// <summary>
+        /// Gets the inactive badges by search parameters
+        /// </summary>
+        /// <param name="searchDTO"></param>
+        /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        Task<IEnumerable<BadgeItemDTO>> GetInactiveBadgesAsync(InactiveBadgeSearchDTO searchDTO);
     }
 }

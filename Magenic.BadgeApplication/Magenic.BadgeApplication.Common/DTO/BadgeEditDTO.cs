@@ -92,6 +92,12 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// The id of the employee that created the badge.
         /// </summary>
         public int CreateEmployeeId { get; set; }
+
+        /// <summary>
+        /// The badge has awards earned.
+        /// </summary>
+        public bool HasAwards { get; set;  }
+
         /// <summary>
         /// A list of activities that are required for this badge to be awarded.
         /// </summary>

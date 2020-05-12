@@ -197,6 +197,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attributes\CustomAuthorizeAttribute.cs" />
     <Compile Include="Attributes\HandleModelStateExceptionAttribute.cs" />
     <Compile Include="Attributes\NoCacheAttribute.cs" />
     <Compile Include="BadgeManagerController.generated.cs">
@@ -313,6 +314,9 @@
     <Content Include="Content\metro-bootstrap.css" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.min.css">
+      <DependentUpon>Site.css</DependentUpon>
     </Content>
     <Content Include="Content\slider.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -432,6 +436,7 @@
     <None Include="Properties\PublishProfiles\BadgeAppTest.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Magenic Badge Application - Magenic Prod.pubxml" />
+    <Content Include="Scripts\earnedBadges.js" />
     <Content Include="Scripts\global.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
@@ -641,6 +646,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\BadgeManager\EarnedBadges.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SubmitBadgeRequest.cshtml" />
     <Content Include="Views\BadgeRequest\_PreviousActivities.cshtml" />
     <Content Include="Views\BadgeRequest\Index.cshtml" />

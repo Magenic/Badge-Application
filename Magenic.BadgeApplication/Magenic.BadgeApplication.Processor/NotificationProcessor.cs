@@ -10,47 +10,21 @@ namespace Magenic.BadgeApplication.Processor
 {
     public class NotificationProcessor
     {
-        public void Start()
+        public void Process()
         {
-            while (true)
+            Logger.Info<NotificationProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: The Notification Processor was started");
+
+            try
             {
-                try
-                {
-                    if (DateTime.Now.DayOfWeek == NotificationDay && DateTime.Now.Hour == NotificationHourOfDay && DateTime.Now.Minute == 0)
-                    {
-                        var sendMessageDal = IoC.Container.Resolve<ISendMessageDAL>();
-                        sendMessageDal.SendActivityNotifications();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error<ADProcessor>(ex.Message, ex);
-                }
-                finally
-                {
-                    Thread.Sleep(SleepInterval);
-                }
+                var sendMessageDal = IoC.Container.Resolve<ISendMessageDAL>();
+                sendMessageDal.SendActivityNotifications();
             }
-        }
+            catch (Exception ex)
+            {
+                Logger.Error<NotificationProcessor>(ex.Message, ex);
+            }
 
-        private int SleepInterval
-        {
-            get { return int.Parse(ConfigurationManager.AppSettings["SleepIntervalInMilliseconds"]); }
-        }
-
-        private int ErrorSleepInterval
-        {
-            get { return int.Parse(ConfigurationManager.AppSettings["ErrorSleepIntervalInMilliseconds"]); }
-        }
-
-        private DayOfWeek NotificationDay
-        {
-            get { return (DayOfWeek)Enum.Parse(typeof(DayOfWeek), ConfigurationManager.AppSettings["NotificationDay"]); }
-        }
-
-        private int NotificationHourOfDay
-        {
-            get { return Int32.Parse(ConfigurationManager.AppSettings["NotificationHourOfDay"]); }
+            Logger.Info<NotificationProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: The Notification Processor completed");
         }
     }
 }

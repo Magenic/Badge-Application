@@ -6,11 +6,13 @@ using EasySec.Encryption;
 using Magenic.BadgeApplication.Attributes;
 using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
+using Magenic.BadgeApplication.BusinessLogic.Notification;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Exceptions;
 using Magenic.BadgeApplication.Extensions;
 using Magenic.BadgeApplication.Models;
+using Magenic.BadgeApplication.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +25,9 @@ using System.Web.Mvc;
 namespace Magenic.BadgeApplication.Controllers
 {
     /// <summary>
-    /// 
+    /// Badge manager controller
     /// </summary>
-    [Authorize]
+    [CustomAuthorize(Roles = "Administrator,Manager")]
     public partial class BadgeManagerController
         : BaseController
     {
@@ -100,11 +102,35 @@ namespace Magenic.BadgeApplication.Controllers
 
             var badgeManagerIndexViewModel = new BadgeManagerIndexViewModel()
             {
+                CorporateBadgeHeader = ApplicationResources.CorporateBadgeHeader,
                 CorporateBadges = corporateBadges,
                 CommunityBadges = communityBadges,
+                ShowAddButton = true,
+                ShowCommunityBadges = true
             };
 
             return View(badgeManagerIndexViewModel);
+        }
+
+        /// <summary>
+        /// List of inactive badges.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [HasPermission(AuthorizationActions.GetObject, typeof(BadgeCollection))]
+        public async virtual Task<ActionResult> InactiveBadges()
+        {
+            var corporateBadges = await BadgeCollection.GetInactiveBadgesByAsync(BadgeType.Corporate, DateTime.Now);
+
+            var badgeManagerIndexViewModel = new BadgeManagerIndexViewModel()
+            {
+                CorporateBadgeHeader = ApplicationResources.CorporateInactiveBadgeHeader,
+                CorporateBadges = corporateBadges,
+                ShowAddButton = false,
+                ShowCommunityBadges = false
+            };
+
+            return View("Index", badgeManagerIndexViewModel);
         }
 
         /// <summary>
@@ -206,6 +232,25 @@ namespace Magenic.BadgeApplication.Controllers
         }
 
         /// <summary>
+        /// Edit or delete the badge post.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="badgeEditViewModel">The badge edit view model.</param>
+        /// <param name="badgeImage">The badge image.</param>
+        /// <returns></returns>
+        [HttpPost]
+        [HasPermission(AuthorizationActions.GetObject, typeof(BadgeEdit))]
+        public virtual async Task<ActionResult> BadgePost(int id, BadgeEditViewModel badgeEditViewModel, HttpPostedFileBase badgeImage)
+        {
+            if (Request.Form["submitButton"].ToString() == "Delete")
+            {
+                return await DeleteBadgePost(id);
+            }
+
+            return await EditBadgePost(id, badgeEditViewModel, badgeImage);
+        }
+
+        /// <summary>
         /// Edits the badge post.
         /// </summary>
         /// <param name="id">The identifier.</param>
@@ -229,6 +274,27 @@ namespace Magenic.BadgeApplication.Controllers
             CheckForValidImage(badgeEditViewModel.Badge);
 
             if (await SaveObjectAsync(badgeEditViewModel.Badge, true))
+            {
+                return RedirectToAction(Mvc.BadgeManager.Index().Result);
+            }
+
+            return await EditBadge(id);
+        }
+
+        /// <summary>
+        /// Delete badge
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [HasPermission(AuthorizationActions.DeleteObject, typeof(BadgeEdit))]
+        public virtual async Task<ActionResult> DeleteBadgePost(int id)
+        {
+            var badge = await BadgeEdit.GetBadgeEditByIdAsync(id) as BadgeEdit;
+
+            badge.Delete();
+
+            if (await SaveObjectAsync(badge, false))
             {
                 return RedirectToAction(Mvc.BadgeManager.Index().Result);
             }
@@ -346,6 +412,11 @@ namespace Magenic.BadgeApplication.Controllers
             activityItem.ApproveActivitySubmission(AuthenticatedUser.EmployeeId);
             if (await SaveObjectAsync(activitiesToApprove, true))
             {
+                var notification = NotificationItem.CreateNotification();
+                notification.SetActivitySubmissionId(submissionId);
+
+                await SaveObjectAsync(notification, false);
+
                 return Json(new { Success = true });
             }
 
@@ -367,6 +438,11 @@ namespace Magenic.BadgeApplication.Controllers
             activityItem.DenyActivitySubmission();
             if (await SaveObjectAsync(activitiesToApprove, true))
             {
+                var notification = NotificationItem.CreateNotification();
+                notification.SetActivitySubmissionId(submissionId);
+
+                await SaveObjectAsync(notification, false);
+
                 return Json(new { Success = true });
             }
 
@@ -457,6 +533,62 @@ namespace Magenic.BadgeApplication.Controllers
             {
                 return string.Empty;
             }
+        }
+
+        /// <summary>
+        /// Earned Badges view
+        /// </summary>
+        /// <returns></returns>
+        [HasPermission(AuthorizationActions.GetObject, typeof(EarnedBadgeCollection))]
+        public virtual ActionResult EarnedBadges()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Earned badges list
+        /// </summary>
+        /// <param name="jtStartIndex"></param>
+        /// <param name="jtPageSize"></param>
+        /// <param name="jtSorting"></param>
+        /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "jt"), HttpPost]
+        [HasPermission(AuthorizationActions.GetObject, typeof(EarnedBadgeCollection))]
+        public async Task<JsonResult> EarnedBadgesList(int jtStartIndex, int jtPageSize, string jtSorting)
+        {
+            var badges = await EarnedBadgeCollection.GetAllBadgesAsync();
+
+            var totalRecourds = badges.Count();
+
+            var records = badges.Sort(jtSorting).Skip(jtStartIndex).Take(jtPageSize);
+
+            return Json(new { Result = "OK", Records = records, TotalRecordCount = totalRecourds });
+        }
+
+        /// <summary>
+        /// Delete earned badge
+        /// </summary>
+        /// <param name="badgeAwardId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [HasPermission(AuthorizationActions.DeleteObject, typeof(EarnedBadgeItem))]
+        public async Task<JsonResult> DeleteEarnedBadge(int badgeAwardId)
+        {
+            var badge = await EarnedBadgeItem.GetById(badgeAwardId) as EarnedBadgeItem;
+
+            if (badge.PaidOut)
+            {
+                return Json(new { Result = "ERROR", Message = ApplicationResources.EarnedBadgePaidOutDeleteError });
+            }
+
+            badge.Delete();
+
+            if (await SaveObjectAsync(badge, false))
+            {
+                return Json(new { Result = "OK" });
+            }
+
+            return Json(new { Result = "ERROR", Message = ApplicationResources.EarnedBadgeDeletionErrorMessage });
         }
     }
 }

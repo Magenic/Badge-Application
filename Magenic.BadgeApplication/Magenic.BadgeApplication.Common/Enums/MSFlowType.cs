@@ -3,7 +3,7 @@
     /// <summary>
     /// A placeholder enum for event types.
     /// </summary>
-    public enum EventType
+    public enum MSFlowType
     {
         /// <summary>
         /// A placeholder value that indicates an event for Microsoft Teams notification for testing.

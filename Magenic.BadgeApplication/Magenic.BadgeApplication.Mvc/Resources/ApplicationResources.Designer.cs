@@ -583,6 +583,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inactive Corporate Badges.
+        /// </summary>
+        public static string CorporateInactiveBadgeHeader {
+            get {
+                return ResourceManager.GetString("CorporateInactiveBadgeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date Earned.
         /// </summary>
         public static string DateEarnedRowHeader {
@@ -592,11 +601,38 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The earned badge could not be deleted..
+        /// </summary>
+        public static string EarnedBadgeDeletionErrorMessage {
+            get {
+                return ResourceManager.GetString("EarnedBadgeDeletionErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The earned badge has been paid out and cannot be deleted..
+        /// </summary>
+        public static string EarnedBadgePaidOutDeleteError {
+            get {
+                return ResourceManager.GetString("EarnedBadgePaidOutDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to earned badge(s).
         /// </summary>
         public static string EarnedBadgesHeader {
             get {
                 return ResourceManager.GetString("EarnedBadgesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Earned Badges.
+        /// </summary>
+        public static string EarnedBadgesHeader2 {
+            get {
+                return ResourceManager.GetString("EarnedBadgesHeader2", resourceCulture);
             }
         }
         
@@ -624,6 +660,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string EditBadgeHeader {
             get {
                 return ResourceManager.GetString("EditBadgeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inactive Badges.
+        /// </summary>
+        public static string InactiveBadges {
+            get {
+                return ResourceManager.GetString("InactiveBadges", resourceCulture);
             }
         }
         

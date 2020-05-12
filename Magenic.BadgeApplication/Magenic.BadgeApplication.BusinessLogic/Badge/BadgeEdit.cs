@@ -165,6 +165,12 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             set { SetProperty(ImageProperty, value); }
         }
 
+        public static readonly PropertyInfo<bool> AllowDeletionProperty = RegisterProperty<bool>(c => c.AllowDeletion);
+        public bool AllowDeletion
+        { 
+            get { return GetProperty(AllowDeletionProperty); }
+            set { SetProperty(AllowDeletionProperty, value); }
+        }
         #endregion Properties
 
         #region Methods
@@ -180,7 +186,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             this.LoadProperty(ImageProperty, image);
             this.LoadProperty(ImagePathProperty, string.Empty);
         }
-
         #endregion Methods
 
         #region Factory Methods
@@ -240,7 +245,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             base.DataPortal_Create();
             this.LoadProperty(CreatedProperty, DateTime.UtcNow);
             this.LoadProperty(PriorityProperty, int.MaxValue);
-            this.LoadProperty(TypeProperty, BadgeType.Community);
+            this.LoadProperty(TypeProperty, BadgeType.Corporate);
             this.LoadProperty(BadgeActivitiesProperty, new BadgeActivityEditCollection());
             this.SetProperty(CreateEmployeeIdProperty, ((ICustomPrincipal)ApplicationContext.User).CustomIdentity().EmployeeId);
         }
@@ -339,6 +344,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
                 this.ApprovedDate = data.ApprovedDate;
                 this.BadgeStatus = data.BadgeStatus;
                 this.Image = null;
+                this.AllowDeletion = !data.HasAwards;
                 this.LoadProperty(CreateEmployeeIdProperty, data.CreateEmployeeId);
                 this.LoadChildren(data);
             }
@@ -367,6 +373,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         private void DeleteChildren()
         {
+            var dal = IoC.Container.Resolve<IBadgeEditDAL>();
+            dal.DeleteActivities(this.Id);
+            dal.DeletePrerequisites(this.Id);
         }
 
         [Transactional(TransactionalTypes.TransactionScope, TransactionIsolationLevel.ReadCommitted)]

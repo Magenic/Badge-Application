@@ -29,8 +29,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Rules
             {
                 validStatus = (badgeStatus.BadgeStatus == BadgeStatus.AwaitingApproval);
             }
-            context.HasPermission = (((ICreateEmployee)context.Target).CreateEmployeeId == ((ICustomPrincipal)ApplicationContext.User).CustomIdentity().EmployeeId && validStatus)
-                || ApplicationContext.User.IsInRole(AllowedRole);
+
+            context.HasPermission = ApplicationContext.User.IsInRole(AllowedRole)
+                || (((ICreateEmployee)context.Target).CreateEmployeeId == ((ICustomPrincipal)ApplicationContext.User).CustomIdentity().EmployeeId && validStatus);
         }
     }
 }

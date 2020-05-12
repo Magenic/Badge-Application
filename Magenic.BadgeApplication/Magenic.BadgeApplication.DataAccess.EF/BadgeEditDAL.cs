@@ -20,6 +20,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 ctx.Database.Connection.Open();
                 
                 var badgeList = await (from t in ctx.Badges.Include("BadgeActivities")
+                                                           .Include("BadgeAwards")
                                        where t.BadgeId == badgeEditId
                                        select t).ToListAsync();
                 var badge = badgeList.Single();
@@ -52,7 +53,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 ApprovedDate = badge.BadgeApprovedDate,
                 BadgeStatus = (Common.Enums.BadgeStatus)badge.BadgeStatusId,
                 CreateEmployeeId = badge.CreateEmployeeId,
-                BadgeActivities = new List<BadgeActivityEditDTO>()
+                BadgeActivities = new List<BadgeActivityEditDTO>(),
+                HasAwards = badge.BadgeAwards.Any()
             };
             foreach (var badgeActivity in badge.BadgeActivities)
             {
@@ -234,16 +236,34 @@ namespace Magenic.BadgeApplication.DataAccess.EF
             using (var ctx = new Entities())
             {
                 ctx.Database.Connection.Open();
-                var badgeActivities = ctx.BadgeActivities.Where(ba => ba.BadgeId == badgeId).ToList();
-                ctx.BadgeActivities.RemoveRange(badgeActivities);
-                ctx.SaveChanges();
-                
                 var deleteBadge = new Badge
                 {
                     BadgeId = badgeId
                 };
                 ctx.Badges.Attach(deleteBadge);
                 ctx.Badges.Remove(deleteBadge);
+                ctx.SaveChanges();
+            }
+        }
+
+        public void DeleteActivities(int badgeId)
+        {
+            using (var ctx = new Entities())
+            {
+                ctx.Database.Connection.Open();
+                var badgeActivities = ctx.BadgeActivities.Where(ba => ba.BadgeId == badgeId).ToList();
+                ctx.BadgeActivities.RemoveRange(badgeActivities);
+                ctx.SaveChanges();
+            }
+        }
+
+        public void DeletePrerequisites(int badgeId) 
+        {
+            using (var ctx = new Entities())
+            {
+                ctx.Database.Connection.Open();
+                var badgePrerequisites = ctx.BadgePrerequisites.Where(ba => ba.BadgeId == badgeId || ba.RequiredBadgeId == badgeId).ToList();
+                ctx.BadgePrerequisites.RemoveRange(badgePrerequisites);
                 ctx.SaveChanges();
             }
         }
