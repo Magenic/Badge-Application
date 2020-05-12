@@ -28,5 +28,9 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// The user's full name
         /// </summary>
         string FullName { get; }
+        /// <summary>
+        /// The user's email address.
+        /// </summary>
+        string EmployeeEmailAddress { get; }
     }
 }

@@ -94,9 +94,9 @@
         </EntityType>
         <EntityType Name="BadgeRequest">
           <Key>
-            <PropertyRef Name="BadgeId" />
+            <PropertyRef Name="BadgeRequestId" />
           </Key>
-          <Property Name="BadgeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BadgeRequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="BadgeName" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="BadgeDescription" Type="varchar(max)" />
@@ -1525,9 +1525,9 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
         </EntityType>
         <EntityType Name="BadgeRequest">
           <Key>
-            <PropertyRef Name="BadgeId" />
+            <PropertyRef Name="BadgeRequestId" />
           </Key>
-          <Property Name="BadgeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BadgeRequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
           <Property Name="BadgeName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="BadgeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -1812,7 +1812,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
                 <ScalarProperty Name="BadgeDescription" ColumnName="BadgeDescription" />
                 <ScalarProperty Name="BadgeName" ColumnName="BadgeName" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="BadgeId" ColumnName="BadgeId" />
+                <ScalarProperty Name="BadgeRequestId" ColumnName="BadgeRequestId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

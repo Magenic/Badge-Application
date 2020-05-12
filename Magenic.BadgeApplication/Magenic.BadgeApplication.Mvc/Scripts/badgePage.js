@@ -15,6 +15,19 @@ ko.bindingHandlers.disableClick = {
     }
 };
 
+function requestNewBadge() {
+    var x = document.getElementById("divRequestNewBadge");
+    var y = document.getElementById("requestNewBadge");
+    document.getElementById('SubmittedBadgeRequest_Name').value = "";
+    document.getElementById('SubmittedBadgeRequest_Description').value = "";
+    if (x.style.display === "none") {
+        x.style.display = "block";
+        y.style.display = "none";
+    } else {
+        x.style.display = "none";
+    }
+}
+
 $(document).ready(function () {
     var BadgePageViewModel = {
         showCorporateBadgeAllTab: ko.observable(false),
@@ -52,3 +65,4 @@ $(document).ready(function () {
         $(this).val(startingValue.substring(0, startingValue.indexOf(' ')));
     });
 });
+

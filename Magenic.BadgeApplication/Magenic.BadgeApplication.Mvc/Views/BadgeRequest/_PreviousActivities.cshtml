@@ -1,0 +1,44 @@
+﻿@using Magenic.BadgeApplication.Extensions
+@using Magenic.BadgeApplication.Resources
+@using Magenic.BadgeApplication.Models
+@model ActivityIndexViewModel
+
+<div class="col-sm-8 no-padding">
+    <h1>
+        @ApplicationResources.PreviousActivitiesHeader
+    </h1>
+</div>
+
+<div class="clearfix">&nbsp;</div>
+<div class="grayLine col-md-11">&nbsp;</div>
+
+<div class="container">
+    @foreach (var previousActivity in Model.PreviousActivities)
+    {
+        <div class="row">
+            <div class="col-md-7">
+                <div class="row">
+                    <h3>
+                        @previousActivity.ActivityName
+                    </h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <i>@previousActivity.Status.GetDescriptionFromEnumValue()</i>
+                    </div>
+                    <div class="col-md-6">
+                        @previousActivity.SubmissionNotes
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <b>
+                            @previousActivity.ActivitySubmissionDate.ToString("MMMM dd, yyyy")
+                        </b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            &nbsp;
+        </div>
+    }
+</div>

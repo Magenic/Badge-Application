@@ -35,6 +35,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
             get { return string.Format(CultureInfo.CurrentCulture, "{0} {1}", EmployeeFirstName, EmployeeLastName); }
         }
 
+        public static readonly PropertyInfo<string> EmployeeEmailAddressProperty = RegisterProperty<string>(c => c.EmployeeEmailAddress);
+        public string EmployeeEmailAddress
+        {
+            get { return GetProperty(EmployeeEmailAddressProperty); }
+            private set { LoadProperty(EmployeeEmailAddressProperty, value); }
+        }
+
         #endregion Properties
 
         #region Methods
@@ -44,6 +51,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
             this.EmployeeId = item.EmployeeId;
             this.EmployeeFirstName = item.EmployeeFirstName;
             this.EmployeeLastName = item.EmployeeLastName;
+            this.EmployeeEmailAddress = item.EmployeeEmailAddress;
         }
 
         #endregion Methods

@@ -14,7 +14,7 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     
     public partial class BadgeRequest
     {
-        public int BadgeId { get; set; }
+        public int BadgeRequestId { get; set; }
         public int EmployeeId { get; set; }
         public string BadgeName { get; set; }
         public string BadgeDescription { get; set; }

@@ -206,6 +206,7 @@
     <Compile Include="QueueItemToPublishCollectionDAL.cs" />
     <Compile Include="SendMessageDAL.cs" />
     <Compile Include="SubmitActivityDAL.cs" />
+    <Compile Include="SubmitBadgeReqestDAL.cs" />
     <Compile Include="SubmittedActivityCollecitonDAL.cs" />
     <Compile Include="UserCollectionDAL.cs" />
   </ItemGroup>

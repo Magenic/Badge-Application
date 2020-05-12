@@ -9,11 +9,21 @@
 </h2>
 @using (Html.BeginForm("SubmitBadgeRequestForm", "BadgeRequest", FormMethod.Post, new { @role = "form" }))
 {
-    
+
     <div class="form-group">
-        @Html.LabelFor(sa => sa.EmployeeName, ApplicationResources.BadgeRequestNameLabel)
+        @Html.LabelFor(sa => sa.EmployeeName, ApplicationResources.UserIdLabel)
         @Html.TextBoxFor(sa => sa.EmployeeName, new { @class = "form-control", rows = "2", cols = "10", @readonly = true })
         @Html.ValidationMessageFor(sa => sa.EmployeeName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(sa => sa.EmployeeEmail, ApplicationResources.BadgeRequestEmailLabel)
+        @Html.TextBoxFor(sa => sa.EmployeeEmail, new { @class = "form-control", rows = "2", cols = "10", @readonly = true })
+        @Html.ValidationMessageFor(sa => sa.EmployeeEmail)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(sa => sa.Name, ApplicationResources.BadgeRequestBadgeNameLabel)
+        @Html.TextBoxFor(sa => sa.Name, new { @class = "form-control", rows = "2", cols = "10" })
+        @Html.ValidationMessageFor(sa => sa.Name)
     </div>
     <div class="form-group">
         @Html.LabelFor(sa => sa.Description, ApplicationResources.BadgeRequestSubmissionDescriptionLabel)
@@ -22,4 +32,3 @@
     </div>
     <input type="submit" value="@ApplicationResources.SubmitButton" class="btn btn-success" />
 }
-@Scripts.Render("~/bundles/submitActivity")

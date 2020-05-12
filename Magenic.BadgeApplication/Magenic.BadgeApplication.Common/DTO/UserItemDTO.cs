@@ -18,5 +18,10 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// The user's last name.
         /// </summary>
         public string EmployeeLastName { get; set; }
+
+        /// <summary>
+        /// The user's email address.
+        /// </summary>
+        public string EmployeeEmailAddress { get; set; }
     }
 }

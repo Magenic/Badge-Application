@@ -50,6 +50,7 @@ namespace Magenic.BadgeApplication.Controllers
             badgeIndexViewModel.AllActivities = allActivities;
             badgeIndexViewModel.PossibleActivities = allActivities.Where(act => act.BadgeIds.Count() > 0).Select(ai => new SelectListItem() { Text = ai.Name, Value = ai.Id.ToString(CultureInfo.CurrentCulture) });
             badgeIndexViewModel.SubmittedBadgeRequest.EmployeeName = badgeIndexViewModel.AvailableUsers.Where(f => f.EmployeeId == badgeIndexViewModel.SubmittedBadgeRequest.EmployeeId).Select(n => n.FullName).FirstOrDefault();
+            badgeIndexViewModel.SubmittedBadgeRequest.EmployeeEmail = badgeIndexViewModel.AvailableUsers.Where(f => f.EmployeeId == badgeIndexViewModel.SubmittedBadgeRequest.EmployeeId).Select(n => n.EmployeeEmailAddress).FirstOrDefault();
 
             return View(badgeIndexViewModel);
         }

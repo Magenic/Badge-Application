@@ -24,23 +24,13 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
 
         #region Properties
         /// <summary>
-        /// The Id for this activity submission.  Zero if new.
-        /// </summary>
-        public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(c => c.Id);
-        public int Id
-        {
-            get { return GetProperty(IdProperty); }
-            private set { SetProperty(IdProperty, value); }
-        }
-
-        /// <summary>
         /// The id of the badge request this submission is for.
         /// </summary>
-        public static readonly PropertyInfo<int> BadgeIdProperty = RegisterProperty<int>(c => c.BadgeId);
-        public int BadgeId
+        public static readonly PropertyInfo<int> BadgeRequestIdProperty = RegisterProperty<int>(c => c.BadgeRequestId);
+        public int BadgeRequestId
         {
-            get { return GetProperty(BadgeIdProperty); }
-            set { SetProperty(BadgeIdProperty, value); }
+            get { return GetProperty(BadgeRequestIdProperty); }
+            set { SetProperty(BadgeRequestIdProperty, value); }
         }
 
         /// <summary>
@@ -66,6 +56,27 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         }
 
         /// <summary>
+        /// The AD user id of the person who this badge submission is for.  
+        /// This should be the same as the name of the identity.
+        /// </summary>
+        public static readonly PropertyInfo<string> EmployeeEmailProperty = RegisterProperty<string>(c => c.EmployeeEmail);
+        public string EmployeeEmail
+        {
+            get { return GetProperty(EmployeeEmailProperty); }
+            set { SetProperty(EmployeeEmailProperty, value); }
+        }
+
+        /// <summary>
+        /// Any name associated with this submission.
+        /// </summary>
+        public static readonly PropertyInfo<string> NameProperty = RegisterProperty<string>(c => c.Name);
+        public string Name
+        {
+            get { return GetProperty(NameProperty); }
+            set { SetProperty(NameProperty, value); }
+        }
+
+        /// <summary>
         /// Any description associated with this submission.
         /// </summary>
         public static readonly PropertyInfo<string> DescriptionProperty = RegisterProperty<string>(c => c.Description);
@@ -73,6 +84,16 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         {
             get { return GetProperty(DescriptionProperty); }
             set { SetProperty(DescriptionProperty, value); }
+        }
+
+        /// <summary>
+        /// Display depends on save success with this submission.
+        /// </summary>
+        public static readonly PropertyInfo<bool> ShowNewBadgeProperty = RegisterProperty<bool>(c => c.ShowNewBadge);
+        public bool ShowNewBadge
+        {
+            get { return GetProperty(ShowNewBadgeProperty); }
+            set { SetProperty(ShowNewBadgeProperty, value); }
         }
 
         #endregion Properties
@@ -105,7 +126,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             base.AddBusinessRules();
 
             this.BusinessRules.AddRule(new MinValue<int>(EmployeeIdProperty, 1));
-            this.BusinessRules.AddRule(new MinValue<int>(BadgeIdProperty, 1));
+            this.BusinessRules.AddRule(new Required(NameProperty));
+            this.BusinessRules.AddRule(new Required(DescriptionProperty));
 
             this.BusinessRules.AddRule(new CanCreateSubmission(AuthorizationActions.CreateObject));
         }
@@ -119,6 +141,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         {
             base.DataPortal_Create();
             this.LoadProperty(EmployeeIdProperty, employeeId);
+            this.LoadProperty(NameProperty, String.Empty);
+            this.LoadProperty(DescriptionProperty, String.Empty);
             this.BusinessRules.CheckRules();
         }
 
@@ -162,10 +186,10 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
             {
                 var returnValue = new SubmitBadgeRequestDTO
                 {
-                    Id = this.Id,
-                    BadgeId = this.BadgeId,
+                    BadgeRequestId = this.BadgeRequestId,
                     EmployeeId = this.EmployeeId,
-                    Description = this.Description
+                    Description = this.Description,
+                    Name = this.Name
                 };
                 return returnValue;
             }
@@ -176,9 +200,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         {
             using (this.BypassPropertyChecks)
             {
-                this.Id = data.Id;
-                this.BadgeId = data.BadgeId;
+                this.BadgeRequestId = data.BadgeRequestId;
                 this.EmployeeId = data.EmployeeId;
+                this.Name = data.Name;
                 this.Description = data.Description;                
             }
         }

@@ -403,7 +403,7 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User.
+        ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string BadgeRequestNameLabel {
             get {
@@ -718,6 +718,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must specify Proposed Name and Description..
+        /// </summary>
+        public static string NoNameorDescriptionErrorMsg {
+            get {
+                return ResourceManager.GetString("NoNameorDescriptionErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paid Out.
         /// </summary>
         public static string PaidOutRowHeader {
@@ -1011,6 +1020,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string RememberMeLabel {
             get {
                 return ResourceManager.GetString("RememberMeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request New Badge.
+        /// </summary>
+        public static string RequestNewBadgeLabel {
+            get {
+                return ResourceManager.GetString("RequestNewBadgeLabel", resourceCulture);
             }
         }
         

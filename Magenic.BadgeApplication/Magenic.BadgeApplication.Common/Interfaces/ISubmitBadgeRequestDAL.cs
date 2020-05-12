@@ -11,9 +11,9 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// <summary>
         /// Asynchronously returns an <see cref="SubmitBadgeRequestDTO"/> for the specified id.
         /// </summary>
-        /// <param name="badgeRequestSubmissionId">The badge request submission id to search for.</param>
-        /// <returns>A <see cref="SubmitActivityDTO"/>.</returns>
-        Task<SubmitBadgeRequestDTO> GetActivitySubmissionByIdAsync(int badgeRequestSubmissionId);
+        /// <param name="badgeRequestId">The badge request submission id to search for.</param>
+        /// <returns>A <see cref="SubmitBadgeRequestDTO"/>.</returns>
+        Task<SubmitBadgeRequestDTO> GetBadgeRequestSubmissionByIdAsync(int badgeRequestId);
         /// <summary>
         /// Updates an existing badge request submission based on information passed in via the DTO.
         /// </summary>
