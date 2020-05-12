@@ -648,8 +648,6 @@
     </Content>
     <Content Include="Views\BadgeManager\EarnedBadges.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SubmitBadgeRequest.cshtml" />
-    <Content Include="Views\BadgeRequest\_PreviousActivities.cshtml" />
-    <Content Include="Views\BadgeRequest\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
