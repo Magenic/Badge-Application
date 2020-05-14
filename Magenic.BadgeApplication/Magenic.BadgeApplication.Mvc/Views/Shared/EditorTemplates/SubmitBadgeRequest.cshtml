@@ -31,4 +31,6 @@
         @Html.ValidationMessageFor(sa => sa.Description)
     </div>
     <input type="submit" value="@ApplicationResources.SubmitButton" class="btn btn-success" />
-}
+    @Html.ActionLink(ApplicationResources.CancelButton, "Index", null, new { @class= "btn btn-success" })
+    }
+    

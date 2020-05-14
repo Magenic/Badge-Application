@@ -501,4 +501,7 @@
   <data name="RequestNewBadgeLabel" xml:space="preserve">
     <value>Request New Badge</value>
   </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
 </root>

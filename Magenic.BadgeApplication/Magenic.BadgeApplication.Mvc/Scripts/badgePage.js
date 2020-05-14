@@ -23,8 +23,11 @@ function requestNewBadge() {
     if (x.style.display === "none") {
         x.style.display = "block";
         y.style.display = "none";
+        document.getElementById("submitAcitivty").disabled = true;
     } else {
         x.style.display = "none";
+        document.getElementById("submitAcitivty").disabled = false;
+
     }
 }
 
@@ -64,5 +67,13 @@ $(document).ready(function () {
         var startingValue = $(this).val();
         $(this).val(startingValue.substring(0, startingValue.indexOf(' ')));
     });
+
+    var x = document.getElementById("divRequestNewBadge");
+    if (x.style.display === "none") {
+        document.getElementById("submitAcitivty").disabled = false;
+    } else {
+        document.getElementById("submitAcitivty").disabled = true;
+
+    }
 });
 

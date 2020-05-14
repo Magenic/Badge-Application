@@ -141,8 +141,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.Badge
         {
             base.DataPortal_Create();
             this.LoadProperty(EmployeeIdProperty, employeeId);
-            this.LoadProperty(NameProperty, String.Empty);
-            this.LoadProperty(DescriptionProperty, String.Empty);
             this.BusinessRules.CheckRules();
         }
 
