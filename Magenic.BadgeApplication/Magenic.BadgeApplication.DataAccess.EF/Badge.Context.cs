@@ -45,5 +45,6 @@ namespace Magenic.BadgeApplication.DataAccess.EF
         public virtual DbSet<QueueItemToPublish> QueueItemsToPublish { get; set; }
         public virtual DbSet<NotificationItemToPublish> NotificationItemsToPublish { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<BadgeRequest> BadgeRequests { get; set; }
     }
 }

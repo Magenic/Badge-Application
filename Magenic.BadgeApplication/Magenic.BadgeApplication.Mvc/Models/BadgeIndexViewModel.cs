@@ -79,5 +79,14 @@ namespace Magenic.BadgeApplication.Models
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public IUserCollection AvailableUsers { get; set; }
+
+        /// <summary>
+        /// Gets or sets the new badge request.
+        /// </summary>
+        /// <value>
+        /// The new activity.
+        /// </value>
+        public ISubmitBadgeRequest SubmittedBadgeRequest { get; set; }
+
     }
 }

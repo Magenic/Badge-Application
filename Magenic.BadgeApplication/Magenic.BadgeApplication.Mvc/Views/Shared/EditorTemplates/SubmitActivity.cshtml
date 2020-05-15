@@ -33,6 +33,6 @@
         @Html.TagSelectBoxFor(sa => sa.EmployeeIds, ViewData["AvailableUsers"] as IEnumerable<SelectListItem>, ApplicationResources.InvalidPastedUserIdsLabel, (bool)ViewData["UsersEditable"])
         @Html.ValidationMessageFor(sa => sa.EmployeeIds)
     </div>
-    <input type="submit" value="@ApplicationResources.SubmitButton" class="btn btn-success" />
+    <input type="submit" value="@ApplicationResources.SubmitButton" id="submitAcitivty" class="btn btn-success" />
 }
 @Scripts.Render("~/bundles/submitActivity")

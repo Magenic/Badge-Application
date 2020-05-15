@@ -13,8 +13,21 @@
 
             @Html.Partial(Mvc.Badges.Views._CommunityBadgeDisplay, Model)
         </div>
-        <div class="col-md-4 grayBox">
-            @Html.EditorFor(bivm => bivm.SubmittedActivity, new { PossibleActivities = Model.PossibleActivities, AvailableUsers = new SelectList(Model.AvailableUsers.OrderBy(ui => ui.FullName), "EmployeeId", "FullName", Model.AvailableUsers.Count == 1 ? Model.AvailableUsers[0].EmployeeId.ToString() : null), UsersEditable = Model.AvailableUsers.Count > 1 })
+        <div class="col-md-4">
+            <div class="row">
+                <div class="grayBox">
+                    @Html.EditorFor(bivm => bivm.SubmittedActivity, new { PossibleActivities = Model.PossibleActivities, AvailableUsers = new SelectList(Model.AvailableUsers.OrderBy(ui => ui.FullName), "EmployeeId", "FullName", Model.AvailableUsers.Count == 1 ? Model.AvailableUsers[0].EmployeeId.ToString() : null), UsersEditable = Model.AvailableUsers.Count > 1 })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="grayBox">
+                    <button id="requestNewBadge" onclick="requestNewBadge()" class="btn btn-success" style="@(!Model.SubmittedBadgeRequest.ShowNewBadge ? "display:block" : "display:none")">@ApplicationResources.RequestNewBadgeLabel</button>
+                    <div id="divRequestNewBadge" style="@(Model.SubmittedBadgeRequest.ShowNewBadge ? "display:block" : "display:none")">
+                        @Html.EditorFor(bivm => bivm.SubmittedBadgeRequest, new { EmployeeName = Model.SubmittedBadgeRequest.EmployeeName, EmployeeId = Model.SubmittedBadgeRequest.EmployeeId, Name = Model.SubmittedBadgeRequest.Name, Description = Model.SubmittedBadgeRequest.Description })
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -22,3 +35,4 @@
 @section scripts {
     @Scripts.Render("~/bundles/badgePage")
 }
+

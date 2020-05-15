@@ -24,7 +24,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                                          {
                                              EmployeeId = t.EmployeeId,
                                              EmployeeFirstName = t.FirstName,
-                                             EmployeeLastName = t.LastName
+                                             EmployeeLastName = t.LastName,
+                                             EmployeeEmailAddress = t.EmailAddress
                                          }).ToArrayAsync();
                 return userList;
             }

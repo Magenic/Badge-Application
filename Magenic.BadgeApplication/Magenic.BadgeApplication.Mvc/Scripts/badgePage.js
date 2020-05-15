@@ -15,6 +15,22 @@ ko.bindingHandlers.disableClick = {
     }
 };
 
+function requestNewBadge() {
+    var x = document.getElementById("divRequestNewBadge");
+    var y = document.getElementById("requestNewBadge");
+    document.getElementById('SubmittedBadgeRequest_Name').value = "";
+    document.getElementById('SubmittedBadgeRequest_Description').value = "";
+    if (x.style.display === "none") {
+        x.style.display = "block";
+        y.style.display = "none";
+        document.getElementById("submitAcitivty").disabled = true;
+    } else {
+        x.style.display = "none";
+        document.getElementById("submitAcitivty").disabled = false;
+
+    }
+}
+
 $(document).ready(function () {
     var BadgePageViewModel = {
         showCorporateBadgeAllTab: ko.observable(false),
@@ -51,4 +67,13 @@ $(document).ready(function () {
         var startingValue = $(this).val();
         $(this).val(startingValue.substring(0, startingValue.indexOf(' ')));
     });
+
+    var x = document.getElementById("divRequestNewBadge");
+    if (x.style.display === "none") {
+        document.getElementById("submitAcitivty").disabled = false;
+    } else {
+        document.getElementById("submitAcitivty").disabled = true;
+
+    }
 });
+

@@ -385,6 +385,42 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Proposed Name for Badge.
+        /// </summary>
+        public static string BadgeRequestBadgeNameLabel {
+            get {
+                return ResourceManager.GetString("BadgeRequestBadgeNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string BadgeRequestEmailLabel {
+            get {
+                return ResourceManager.GetString("BadgeRequestEmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string BadgeRequestNameLabel {
+            get {
+                return ResourceManager.GetString("BadgeRequestNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string BadgeRequestSubmissionDescriptionLabel {
+            get {
+                return ResourceManager.GetString("BadgeRequestSubmissionDescriptionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Badges.
         /// </summary>
         public static string BadgesLink {
@@ -453,6 +489,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string BadgeWindowTitle {
             get {
                 return ResourceManager.GetString("BadgeWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string CancelButton {
+            get {
+                return ResourceManager.GetString("CancelButton", resourceCulture);
             }
         }
         
@@ -723,6 +768,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string NoEmployeeIdsErrorMsg {
             get {
                 return ResourceManager.GetString("NoEmployeeIdsErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must specify Proposed Name and Description..
+        /// </summary>
+        public static string NoNameorDescriptionErrorMsg {
+            get {
+                return ResourceManager.GetString("NoNameorDescriptionErrorMsg", resourceCulture);
             }
         }
         
@@ -1024,6 +1078,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Request New Badge.
+        /// </summary>
+        public static string RequestNewBadgeLabel {
+            get {
+                return ResourceManager.GetString("RequestNewBadgeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Required Activities.
         /// </summary>
         public static string RequiredActivitiesLabel {
@@ -1092,6 +1155,15 @@ namespace Magenic.BadgeApplication.Resources {
         public static string ShowEarnedCorporateBadges {
             get {
                 return ResourceManager.GetString("ShowEarnedCorporateBadges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request New Badge.
+        /// </summary>
+        public static string SubmitBadgeRequestHeader {
+            get {
+                return ResourceManager.GetString("SubmitBadgeRequestHeader", resourceCulture);
             }
         }
         

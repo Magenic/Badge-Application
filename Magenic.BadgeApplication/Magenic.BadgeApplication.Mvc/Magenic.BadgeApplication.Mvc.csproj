@@ -203,12 +203,16 @@
     <Compile Include="BadgeManagerController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="BadgeRequestController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="BadgesController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AsyncController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\BadgeRequestController.cs" />
     <Compile Include="Controllers\BadgesController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -253,6 +257,7 @@
     <Compile Include="Models\AuthenticatedUser.cs" />
     <Compile Include="Models\BadgeEditViewModel.cs" />
     <Compile Include="Models\BadgeIndexViewModel.cs" />
+    <Compile Include="Models\BadgeRequestIndexViewModel.cs" />
     <Compile Include="Models\EarnedBadgeListViewModel.cs" />
     <Compile Include="Models\BadgeManagerIndexViewModel.cs" />
     <Compile Include="Models\LeaderboardCompareViewModel.cs" />
@@ -642,6 +647,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\BadgeManager\EarnedBadges.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SubmitBadgeRequest.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,17 +1,19 @@
 ﻿using Csla.Rules;
 using Csla.Web.Mvc;
 using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
-using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
-using Magenic.BadgeApplication.Extensions;
-using Magenic.BadgeApplication.Models;
+using Magenic.BadgeApplication.Common.Interfaces;
 using Magenic.BadgeApplication.Resources;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
+using Magenic.BadgeApplication.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Magenic.BadgeApplication.BusinessLogic.Activity;
+using System.Globalization;
+using Magenic.BadgeApplication.Common.Enums;
+using System.Collections.Generic;
+using System;
+using Magenic.BadgeApplication.Extensions;
 
 namespace Magenic.BadgeApplication.Controllers
 {
@@ -28,18 +30,35 @@ namespace Magenic.BadgeApplication.Controllers
         [HasPermission(AuthorizationActions.GetObject, typeof(SubmittedActivityCollection))]
         public async virtual Task<ActionResult> Index()
         {
-            var submittedActivities = await SubmittedActivityCollection.GetSubmittedActivitiesByEmployeeIdAsync(AuthenticatedUser.EmployeeId, null, null);
-            var activityIndexViewModel = new ActivityIndexViewModel()
+            var allBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Unset);
+            var allEarnedBadges = await EarnedBadgeCollection.GetAllBadgesForUserByTypeAsync(AuthenticatedUser.EmployeeId, BadgeType.Unset);
+            var allActivities = await ActivityCollection.GetAllActivitiesAsync(true);
+
+            var corporateBadges = allBadges.Where(b => b.Type == BadgeType.Corporate);
+            var communityBadges = allBadges.Where(b => b.Type == BadgeType.Community);
+            var earnedCorporateBadges = allEarnedBadges.Where(b => b.Type == BadgeType.Corporate);
+            var earnedCommunityBadges = allEarnedBadges.Where(b => b.Type == BadgeType.Community);
+
+            var sortedCorporateBadges = corporateBadges.OrderByDescending(b => b.BadgePriority);
+            var sortedCommunityBadges = communityBadges.OrderByDescending(b => b.BadgePriority);
+            var badgeIndexViewModel = new BadgeIndexViewModel()
             {
+                CorporateBadges = sortedCorporateBadges,
+                CorporateEarnedBadges = earnedCorporateBadges,
+                CommunityBadges = sortedCommunityBadges,
+                CommunityEarnedBadges = earnedCommunityBadges,
                 SubmittedActivity = SubmitActivity.CreateActivitySubmission(AuthenticatedUser.EmployeeId),
                 AvailableUsers = await UserCollection.GetAllAvailabileUsersForCurrentUserAsync(),
+                SubmittedBadgeRequest = SubmitBadgeRequest.CreateBadgeRequestSubmission(AuthenticatedUser.EmployeeId)
             };
 
-            var allActivities = await ActivityCollection.GetAllActivitiesAsync(true);
-            activityIndexViewModel.PossibleActivities = allActivities.Select(ai => new SelectListItem() { Text = ai.Name, Value = ai.Id.ToString(CultureInfo.CurrentCulture) });
-            activityIndexViewModel.PreviousActivities = await SubmittedActivityCollection.GetSubmittedActivitiesByEmployeeIdAsync(AuthenticatedUser.EmployeeId, null, null);
+            badgeIndexViewModel.AllActivities = allActivities;
+            badgeIndexViewModel.PossibleActivities = allActivities.Where(act => act.BadgeIds.Count() > 0).Select(ai => new SelectListItem() { Text = ai.Name, Value = ai.Id.ToString(CultureInfo.CurrentCulture) });
+            badgeIndexViewModel.SubmittedBadgeRequest.EmployeeName = badgeIndexViewModel.AvailableUsers.Where(f => f.EmployeeId == badgeIndexViewModel.SubmittedBadgeRequest.EmployeeId).Select(n => n.FullName).FirstOrDefault();
+            badgeIndexViewModel.SubmittedBadgeRequest.EmployeeEmail = badgeIndexViewModel.AvailableUsers.Where(f => f.EmployeeId == badgeIndexViewModel.SubmittedBadgeRequest.EmployeeId).Select(n => n.EmployeeEmailAddress).FirstOrDefault();
+            badgeIndexViewModel.SubmittedBadgeRequest.ShowNewBadge = false;
 
-            return View(Mvc.Activities.Views.Index, activityIndexViewModel);
+            return View(Mvc.Badges.Views.Index, badgeIndexViewModel);
         }
 
         /// <summary>

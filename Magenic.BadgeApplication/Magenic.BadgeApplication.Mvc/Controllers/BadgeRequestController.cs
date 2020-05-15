@@ -1,28 +1,26 @@
 ﻿using Csla.Rules;
 using Csla.Web.Mvc;
 using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
-using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
-using Magenic.BadgeApplication.Common.Enums;
+using Magenic.BadgeApplication.Common.Interfaces;
+using Magenic.BadgeApplication.Resources;
 using Magenic.BadgeApplication.Models;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Magenic.BadgeApplication.BusinessLogic.Activity;
+using System.Globalization;
+using Magenic.BadgeApplication.Common.Enums;
 
 namespace Magenic.BadgeApplication.Controllers
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public partial class BadgesController
-        : BaseController
+    public partial class BadgeRequestController : BaseController
     {
+        private bool ShowNewBadge = false;
         /// <summary>
         /// Handles the /Home/Index action.
         /// </summary>
-        /// <returns></returns>
-        [HasPermission(AuthorizationActions.GetObject, typeof(BadgeCollection))]
+        /// <returns></returns>        
         public async virtual Task<ActionResult> Index()
         {
             var allBadges = await BadgeCollection.GetAllBadgesByTypeAsync(BadgeType.Unset);
@@ -51,8 +49,33 @@ namespace Magenic.BadgeApplication.Controllers
             badgeIndexViewModel.PossibleActivities = allActivities.Where(act => act.BadgeIds.Count() > 0).Select(ai => new SelectListItem() { Text = ai.Name, Value = ai.Id.ToString(CultureInfo.CurrentCulture) });
             badgeIndexViewModel.SubmittedBadgeRequest.EmployeeName = badgeIndexViewModel.AvailableUsers.Where(f => f.EmployeeId == badgeIndexViewModel.SubmittedBadgeRequest.EmployeeId).Select(n => n.FullName).FirstOrDefault();
             badgeIndexViewModel.SubmittedBadgeRequest.EmployeeEmail = badgeIndexViewModel.AvailableUsers.Where(f => f.EmployeeId == badgeIndexViewModel.SubmittedBadgeRequest.EmployeeId).Select(n => n.EmployeeEmailAddress).FirstOrDefault();
+            badgeIndexViewModel.SubmittedBadgeRequest.ShowNewBadge = ShowNewBadge;
 
-            return View(badgeIndexViewModel);
+            return View(Mvc.Badges.Views.Index, badgeIndexViewModel);            
         }
+
+        /// <summary>
+        /// Creates the badge request.
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [HasPermission(AuthorizationActions.CreateObject, typeof(SubmitBadgeRequest))]
+        public async virtual Task<ActionResult> SubmitBadgeRequestForm()
+        {
+            var submittedBadgeRequest = SubmitBadgeRequest.CreateBadgeRequestSubmission(AuthenticatedUser.EmployeeId);
+            TryUpdateModel(submittedBadgeRequest, "submittedBadgeRequest");
+            var badgeRequest = SubmitBadgeRequest.CreateBadgeRequestSubmission(AuthenticatedUser.EmployeeId);
+            badgeRequest.EmployeeId = submittedBadgeRequest.EmployeeId;
+            badgeRequest.Description = submittedBadgeRequest.Description;
+            badgeRequest.Name = submittedBadgeRequest.Name;
+            if (badgeRequest.IsValid)
+                badgeRequest = (ISubmitBadgeRequest)badgeRequest.Save();
+
+            ShowNewBadge = badgeRequest.IsValid ? false : true;
+
+            return await Index();
+
+        }
+
     }
 }
