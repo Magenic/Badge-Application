@@ -75,8 +75,13 @@ namespace Magenic.BadgeApplication.Controllers
             var activityIds = activities.Where(x => x.Id == submittedActivity.ActivityId).Select(x => x.Id).ToList();
             var badges = await BadgeCollection.GetAllBadgesForActivitiesAsync(activityIds);
             var badge = badges.Select(x => new { x.Id, x.BadgeAwardValue, x.BadgeAwardValueMax }).FirstOrDefault();
-            if (submittedActivity.AwardValue > badge.BadgeAwardValueMax || submittedActivity.AwardValue < badge.BadgeAwardValue) {
+            if (badge.BadgeAwardValueMax.HasValue && submittedActivity.AwardValue > badge.BadgeAwardValueMax)
+            {
                 ModelState.AddModelError("SubmittedActivity.AwardValue", string.Format("Award Value not within acceptable range. ({0} - {1})", badge.BadgeAwardValue, badge.BadgeAwardValueMax));
+            }
+            else if (submittedActivity.AwardValue < badge.BadgeAwardValue)
+            {
+                ModelState.AddModelError("SubmittedActivity.AwardValue", string.Format("Award Value not within acceptable range. Less than {0}", badge.BadgeAwardValue));
             }
             else if (string.IsNullOrWhiteSpace(submittedActivity.EmployeeIds)) {
                 ModelState.AddModelError("SubmittedActivity.EmployeeIds", ApplicationResources.NoEmployeeIdsErrorMsg);
