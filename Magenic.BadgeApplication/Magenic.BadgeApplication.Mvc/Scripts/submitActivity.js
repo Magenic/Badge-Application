@@ -1,6 +1,6 @@
 ﻿function setAwardValue () {
     var name = $('#ActivityType')[0][$('#ActivityType')[0].selectedIndex].innerHTML;
-    $.get("/BadgeManager/MaxAwardValue", { BadgeName: name }, function (data) {
+    $.get("/Activities/MaxAwardValue", { BadgeName: name }, function (data) {
         var obj = JSON.parse(data);
         $('#AwardAmount').val(obj.minval);
         if (obj.maxval) {
