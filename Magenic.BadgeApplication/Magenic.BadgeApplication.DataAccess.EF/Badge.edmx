@@ -98,8 +98,10 @@
           </Key>
           <Property Name="BadgeRequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
-          <Property Name="BadgeName" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="BadgeDescription" Type="varchar(max)" />
+          <Property Name="BadgeName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="BadgeDescription" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="NotifySentDate" Type="datetime" />
         </EntityType>
         <EntityType Name="BadgeType">
           <Key>
@@ -185,6 +187,30 @@
           <Property Name="QueueItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BadgeAwardId" Type="int" Nullable="false" />
           <Property Name="QueueItemCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.BadgeRequestItemsToPublish' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BadgeRequestItemsToPublish">
+          <Key>
+            <PropertyRef Name="BadgeRequestId" />
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="ADName" />
+            <PropertyRef Name="BadgeName" />
+            <PropertyRef Name="BadgeDescription" />
+            <PropertyRef Name="CreatedDate" />
+          </Key>
+          <Property Name="BadgeRequestId" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="ADName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="BadgeName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="BadgeDescription" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="NotifySentDate" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.CurrentActiveBadges' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -661,6 +687,20 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
           <EntitySet Name="QueueEvent" EntityType="Self.QueueEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QueueEventLog" EntityType="Self.QueueEventLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QueueItem" EntityType="Self.QueueItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BadgeRequestItemsToPublish" EntityType="Self.BadgeRequestItemsToPublish" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BadgeRequestItemsToPublish].[BadgeRequestId] AS [BadgeRequestId], 
+    [BadgeRequestItemsToPublish].[EmployeeId] AS [EmployeeId], 
+    [BadgeRequestItemsToPublish].[FirstName] AS [FirstName], 
+    [BadgeRequestItemsToPublish].[LastName] AS [LastName], 
+    [BadgeRequestItemsToPublish].[EmailAddress] AS [EmailAddress], 
+    [BadgeRequestItemsToPublish].[ADName] AS [ADName], 
+    [BadgeRequestItemsToPublish].[BadgeName] AS [BadgeName], 
+    [BadgeRequestItemsToPublish].[BadgeDescription] AS [BadgeDescription], 
+    [BadgeRequestItemsToPublish].[CreatedDate] AS [CreatedDate], 
+    [BadgeRequestItemsToPublish].[NotifySentDate] AS [NotifySentDate]
+    FROM [dbo].[BadgeRequestItemsToPublish] AS [BadgeRequestItemsToPublish]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="CurrentActiveBadges" EntityType="Self.CurrentActiveBadges" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [CurrentActiveBadges].[BadgeTypeName] AS [BadgeTypeName], 
@@ -1062,6 +1102,7 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
             <End Role="Employee" EntitySet="Employees" />
             <End Role="BadgeRequest" EntitySet="BadgeRequests" />
           </AssociationSet>
+          <EntitySet Name="BadgeRequestItemsToPublish" EntityType="Magenic.BadgeApplication.DBModel.BadgeRequestItemToPublish" />
           </EntityContainer>
         <EntityType Name="BadgePrerequisite">
           <Key>
@@ -1649,9 +1690,11 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
           </Key>
           <Property Name="BadgeRequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="BadgeName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="BadgeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="Magenic.BadgeApplication.DBModel.FK_BadgeRequest_Employee" FromRole="BadgeRequest" ToRole="Employee" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NotifySentDate" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_BadgeRequest_Employee">
           <End Type="Magenic.BadgeApplication.DBModel.Employee" Role="Employee" Multiplicity="1" />
@@ -1665,6 +1708,28 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="BadgeRequestItemToPublish">
+          <Key>
+            <PropertyRef Name="BadgeRequestId" />
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="ADName" />
+            <PropertyRef Name="BadgeName" />
+            <PropertyRef Name="BadgeDescription" />
+            <PropertyRef Name="CreatedDate" />
+          </Key>
+          <Property Name="BadgeRequestId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ADName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BadgeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BadgeDescription" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NotifySentDate" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1966,8 +2031,26 @@ warning 6002: The table/view 'Magenic.BadgeApplication.DB.dbo.QueueItemsToPublis
           <EntitySetMapping Name="BadgeRequests">
             <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.BadgeRequest">
               <MappingFragment StoreEntitySet="BadgeRequest">
+                <ScalarProperty Name="NotifySentDate" ColumnName="NotifySentDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="BadgeDescription" ColumnName="BadgeDescription" />
                 <ScalarProperty Name="BadgeName" ColumnName="BadgeName" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="BadgeRequestId" ColumnName="BadgeRequestId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BadgeRequestItemsToPublish">
+            <EntityTypeMapping TypeName="Magenic.BadgeApplication.DBModel.BadgeRequestItemToPublish">
+              <MappingFragment StoreEntitySet="BadgeRequestItemsToPublish">
+                <ScalarProperty Name="NotifySentDate" ColumnName="NotifySentDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="BadgeDescription" ColumnName="BadgeDescription" />
+                <ScalarProperty Name="BadgeName" ColumnName="BadgeName" />
+                <ScalarProperty Name="ADName" ColumnName="ADName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="BadgeRequestId" ColumnName="BadgeRequestId" />
               </MappingFragment>

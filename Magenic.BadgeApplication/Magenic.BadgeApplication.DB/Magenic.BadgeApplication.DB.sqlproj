@@ -112,6 +112,8 @@
     <Build Include="dbo\Views\QueueItemsToPublish.sql" />
     <Build Include="dbo\Tables\Notification.sql" />
     <Build Include="dbo\Views\NotificationItemsToPublish.sql" />
+    <Build Include="dbo\Views\BadgeRequestItemsToPublish.sql" />
+    <Build Include="dbo\Tables\BadgeRequest.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostDeployScaffolding.sql" />

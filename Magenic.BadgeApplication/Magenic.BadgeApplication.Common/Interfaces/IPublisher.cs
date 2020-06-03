@@ -17,5 +17,10 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         /// </summary>
         /// <param name="publishMessageConfig"></param>
         void PublishSubmitNotify(PublishNotificationMsgConfigDTO publishMessageConfig);
+        /// <summary>
+        /// Publishes a notification about the approval status of activity submission
+        /// </summary>
+        /// <param name="publishMessageConfig"></param>
+        void PublishBadgeRequest(PublishBadgeRequestMsgConfigDTO publishMessageConfig);
     }
 }

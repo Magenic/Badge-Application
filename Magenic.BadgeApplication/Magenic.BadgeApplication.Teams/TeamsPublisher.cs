@@ -108,6 +108,11 @@ namespace Magenic.BadgeApplication.Teams
             throw new NotSupportedException();
         }
 
+        public void PublishBadgeRequest(PublishBadgeRequestMsgConfigDTO publishMessageConfig)
+        {
+            throw new NotSupportedException();
+        }
+
         private void MakePostRequest(Message message, string endpoint, string authHeader = null, string contentType = null)
         {
             System.Net.ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;

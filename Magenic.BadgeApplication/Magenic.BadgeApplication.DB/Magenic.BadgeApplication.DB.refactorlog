@@ -126,4 +126,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="CreatedDate" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="4cb15de7-aa31-400b-9971-0b37ca77d21e" ChangeDateTime="06/03/2020 05:03:43">
+    <Property Name="ElementName" Value="[dbo].[BadgeRequest].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BadgeRequest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BadgeRequestId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="573af190-83be-4aef-92de-564d9d2c5dce" ChangeDateTime="06/03/2020 05:07:53">
+    <Property Name="ElementName" Value="[dbo].[FK_BadgeRequest_ToTable]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[BadgeRequest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_BadgeRequest_Employee]" />
+  </Operation>
 </Operations>

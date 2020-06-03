@@ -51,6 +51,7 @@
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.Notification" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.BadgeRequest" Width="1.5" PointX="5.375" PointY="0.75" />
         <AssociationConnector Association="Magenic.BadgeApplication.DBModel.FK_BadgeRequest_Employee" />
+        <EntityTypeShape EntityType="Magenic.BadgeApplication.DBModel.BadgeRequestItemToPublish" Width="1.5" PointX="12.625" PointY="11.25" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
