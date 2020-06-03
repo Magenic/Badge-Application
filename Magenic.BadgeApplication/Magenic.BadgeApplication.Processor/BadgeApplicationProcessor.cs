@@ -17,9 +17,11 @@ namespace Magenic.BadgeApplication.Processor
         private Timer processTimer;
         private IList<int> queueHours;
         private IList<int> submitHours;
+        private IList<int> badgeRequestsHours;
 
         private int lastQueueHour = 0;
         private int lastSubmitHour = 0;
+        private int lastBadgeRequestsHour = 0;
 
         private IContainer _factory;
 
@@ -48,6 +50,11 @@ namespace Magenic.BadgeApplication.Processor
             get { return ConfigurationManager.AppSettings["SubmissionNotifyProcessingHours"]; }
         }
 
+        private string BadgeRequestsProcessingHours
+        {
+            get { return ConfigurationManager.AppSettings["BadgeRequestsProcessingHours"]; }
+        }
+
         public BadgeApplicationProcessor() : this(IoC.Container)
         {
 
@@ -59,11 +66,12 @@ namespace Magenic.BadgeApplication.Processor
 
             queueHours = new List<int>();
             submitHours = new List<int>();
+            badgeRequestsHours = new List<int>();
         }
 
         public void Start()
         {
-            Logger.Info<SubmissionNotifyProcessor>("The Badge Application Processor was started");
+            Logger.Info<BadgeApplicationProcessor>("The Badge Application Processor was started");
 
             var queueList = QueueProcessingHours.ToString().Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             foreach (var item in queueList)
@@ -75,6 +83,12 @@ namespace Magenic.BadgeApplication.Processor
             foreach (var item in submitList)
             {
                 submitHours.Add(int.Parse(item));
+            }
+
+            var badgeRequestsList = BadgeRequestsProcessingHours.ToString().Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            foreach (var item in badgeRequestsList)
+            {
+                badgeRequestsHours.Add(int.Parse(item));
             }
 
             processTimer = new Timer();
@@ -128,6 +142,20 @@ namespace Magenic.BadgeApplication.Processor
                 catch(Exception ex)
                 {
                     Logger.Error<SubmissionNotifyProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: {ex.Message}", ex);
+                }
+            }
+
+            if (badgeRequestsHours.Contains(hourOfDay) && !lastBadgeRequestsHour.Equals(hourOfDay))
+            {
+                lastBadgeRequestsHour = hourOfDay;
+                try
+                {
+                    var badgeRequestProcessor = new BadgeRequestProcessor();
+                    badgeRequestProcessor.Process();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error<BadgeRequestProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: {ex.Message}", ex);
                 }
             }
 

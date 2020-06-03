@@ -10,17 +10,16 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Magenic.BadgeApplication.Processor
 {
-    public sealed class SubmissionNotifyProcessor
+    public sealed class BadgeRequestProcessor
     {
         private IContainer _factory;
 
-        private ISubmissionNotifyItemProcessor _itemProcessor;
-        private INotificationItemToPublishCollectionDAL _notificationItemToPublishCollectionDAL;
+        private IBadgeRequestItemProcessor _itemProcessor;
+        private IBadgeRequestItemToPublishCollectionDAL _badgeRequestItemToPublishCollectionDAL;
 
         private string Environment
         {
@@ -32,17 +31,17 @@ namespace Magenic.BadgeApplication.Processor
             get { return ConfigurationManager.AppSettings["ITDataServiceURL"]; }
         }
 
-        public SubmissionNotifyProcessor() : this(IoC.Container)
+        public BadgeRequestProcessor() : this(IoC.Container)
         {
 
         }
 
-        public SubmissionNotifyProcessor(IContainer factory)
+        public BadgeRequestProcessor(IContainer factory)
         {
             _factory = factory;
 
-            _itemProcessor = _factory.Resolve<ISubmissionNotifyItemProcessor>();
-            _notificationItemToPublishCollectionDAL = _factory.Resolve<INotificationItemToPublishCollectionDAL>();
+            _itemProcessor = _factory.Resolve<IBadgeRequestItemProcessor>();
+            _badgeRequestItemToPublishCollectionDAL = _factory.Resolve<IBadgeRequestItemToPublishCollectionDAL>();
         }
 
         public void Process()
@@ -55,9 +54,9 @@ namespace Magenic.BadgeApplication.Processor
                     environment = "debug";
                 }
 
-                var itemsToPublish = new List<NotificationItemToPublishDTO>();
-                var employees = new List<NotificationItemToPublishDTO>();
-                var items = _notificationItemToPublishCollectionDAL.GetAllNotificationItemsToPublishAsync().Result;
+                var itemsToPublish = new List<BadgeRequestItemToPublishDTO>();
+                var employees = new List<BadgeRequestItemToPublishDTO>();
+                var items = _badgeRequestItemToPublishCollectionDAL.GetAllBadgeRequestItemsToPublishAsync().Result;
                 if (itemsToPublish != null)
                 {
                     foreach (var item in items)
@@ -68,7 +67,7 @@ namespace Magenic.BadgeApplication.Processor
 
                 if (itemsToPublish.Count() > 0)
                 {
-                    Logger.Info<SubmissionNotifyProcessor>($"SubmissionNotifyProcessor items to process count: {itemsToPublish.Count().ToString()}");
+                    Logger.Info<BadgeRequestProcessor>($"BadgeRequestProcessor items to process count: {itemsToPublish.Count().ToString()}");
 
                     employees = itemsToPublish.GroupBy(grp => grp.EmployeeId).Select(g => g.First()).ToList();
 
@@ -85,10 +84,10 @@ namespace Magenic.BadgeApplication.Processor
                         {
                             var adName = emp.ADName.Substring(emp.ADName.IndexOf("\\") + 1);
 
-                            var publishMessageConfig = new PublishNotificationMsgConfigDTO()
+                            var publishMessageConfig = new PublishBadgeRequestMsgConfigDTO()
                             {
                                 Environment = environment,
-                                Title = "Activity Submission Notification",
+                                Title = "New Badge Request Notification",
                                 EmployeeId = emp.EmployeeId,
                                 EmployeeFullName = employee.EmployeeFullName,
                                 EmployeeFirstName = employee.EmployeeFirstName,
@@ -97,48 +96,44 @@ namespace Magenic.BadgeApplication.Processor
                                 EmployeeADName = emp.ADName,
                                 EmployeeADNameNoDomain = adName,
                                 MagenicDataService = DataService,
-                                NotificationItems = new List<PublishNotificationItemDTO>()
+                                BadgeRequestItems = new List<PublishBadgeRequestItemDTO>()
                             };
 
                             var empNotifications = itemsToPublish.Where(x => x.EmployeeId == emp.EmployeeId).ToList()
-                                                                    .OrderBy(x => x.SubmissionDate).OrderBy(x => x.CreatedDate);
+                                                                    .OrderBy(x => x.CreatedDate);
                             ;
                             foreach (var empNotification in empNotifications)
                             {
-                                var publishItem = new PublishNotificationItemDTO()
+                                var publishItem = new PublishBadgeRequestItemDTO()
                                 {
-                                    NotificationId = empNotification.NotificationId,
-                                    ActivitySubmissionId = empNotification.ActivitySubmissionId,
+                                    ADName = empNotification.ADName,
+                                    BadgeDescription = empNotification.BadgeDescription,
+                                    BadgeName = empNotification.BadgeName,
+                                    BadgeRequestId = empNotification.BadgeRequestId,
                                     CreatedDate = empNotification.CreatedDate,
-                                    NotificationStatusId = empNotification.NotificationStatusId,
-                                    NotificationSentDate = empNotification.NotificationSentDate,
-                                    UpdatedDate = empNotification.UpdatedDate,
-                                    ActivityId = empNotification.ActivityId,
-                                    ActivityName = empNotification.ActivityName,
-                                    ActivityDescription = empNotification.ActivityDescription,
-                                    SubmissionDescription = empNotification.SubmissionDescription,
-                                    SubmissionApprovedById = empNotification.SubmissionApprovedById,
-                                    SubmissionDate = empNotification.SubmissionDate,
-                                    SubmissionStatusId = empNotification.SubmissionStatusId,
-                                    AwardValue = empNotification.AwardValue
+                                    EmailAddress = empNotification.EmailAddress,
+                                    EmployeeId = empNotification.EmployeeId,
+                                    FirstName = empNotification.FirstName,
+                                    LastName = empNotification.LastName,
+                                    NotifySentDate = empNotification.NotifySentDate
                                 };
-                                publishMessageConfig.NotificationItems.Add(publishItem);
+                                publishMessageConfig.BadgeRequestItems.Add(publishItem);
                             }
 
                             _itemProcessor.ProcessItems(publishMessageConfig);
                         }
                         else
                         {
-                            Logger.Error<SubmissionNotifyProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: Employee {emp.EmailAddress} does not exist for publishing.");
+                            Logger.Error<BadgeRequestProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: Employee {emp.EmailAddress} does not exist for publishing.");
                         }
                     }
 
-                    Logger.Info<SubmissionNotifyProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: SubmissionNotifyProcessor completed");
+                    Logger.Info<BadgeRequestProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: BadgeRequestProcessor completed");
                 }
             }
             catch (Exception ex)
             {
-                Logger.Error<SubmissionNotifyProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: {ex.Message}", ex);
+                Logger.Error<BadgeRequestProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: {ex.Message}", ex);
             }
         }
     }

@@ -160,6 +160,11 @@
     <Compile Include="BadgeRequest.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>
+    <Compile Include="BadgeRequestDAL.cs" />
+    <Compile Include="BadgeRequestItemToPublish.cs">
+      <DependentUpon>Badge.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BadgeRequestItemToPublishCollectionDAL.cs" />
     <Compile Include="BadgeType.cs">
       <DependentUpon>Badge.tt</DependentUpon>
     </Compile>

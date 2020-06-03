@@ -29,5 +29,9 @@ namespace Magenic.BadgeApplication.BusinessLogic.Tests.Integration
         public void PublishSubmitNotify(PublishNotificationMsgConfigDTO publishMessageConfig)
         {
         }
+
+        public void PublishBadgeRequest(PublishBadgeRequestMsgConfigDTO publishMessageConfig)
+        {
+        }
     }
 }

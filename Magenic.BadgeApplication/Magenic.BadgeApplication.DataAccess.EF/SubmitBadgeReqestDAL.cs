@@ -49,7 +49,8 @@ namespace Magenic.BadgeApplication.DataAccess.EF
                 BadgeRequestId = data.BadgeRequestId,
                 BadgeDescription = data.Description,
                 BadgeName = data.Name,
-                EmployeeId = data.EmployeeId
+                EmployeeId = data.EmployeeId,
+                CreatedDate = DateTime.Now
             };
             return badgeRequest;
         }

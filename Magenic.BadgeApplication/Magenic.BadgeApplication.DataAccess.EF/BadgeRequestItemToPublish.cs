@@ -12,15 +12,17 @@ namespace Magenic.BadgeApplication.DataAccess.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class BadgeRequest
+    public partial class BadgeRequestItemToPublish
     {
         public int BadgeRequestId { get; set; }
         public int EmployeeId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string EmailAddress { get; set; }
+        public string ADName { get; set; }
         public string BadgeName { get; set; }
         public string BadgeDescription { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.DateTime> NotifySentDate { get; set; }
-    
-        public virtual Employee Employee { get; set; }
     }
 }
