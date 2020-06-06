@@ -26,6 +26,11 @@ namespace Magenic.BadgeApplication.Processor
             get { return ConfigurationManager.AppSettings["Environment"]; }
         }
 
+        private string BadgeRequestsSendTo
+        {
+            get { return ConfigurationManager.AppSettings["BadgeRequestsSendTo"]; }
+        }
+
         private string DataService
         {
             get { return ConfigurationManager.AppSettings["ITDataServiceURL"]; }
@@ -69,6 +74,15 @@ namespace Magenic.BadgeApplication.Processor
                 {
                     Logger.Info<BadgeRequestProcessor>($"BadgeRequestProcessor items to process count: {itemsToPublish.Count().ToString()}");
 
+                    var publishMessageConfig = new PublishBadgeRequestMsgConfigDTO()
+                    {
+                        Environment = environment,
+                        Title = "New Badge Request Notification",
+                        SendToEmailAddress = BadgeRequestsSendTo,
+                        MagenicDataService = DataService,
+                        BadgeRequestItems = new List<PublishBadgeRequestItemDTO>()
+                    };
+
                     employees = itemsToPublish.GroupBy(grp => grp.EmployeeId).Select(g => g.First()).ToList();
 
                     foreach (var emp in employees)
@@ -82,28 +96,13 @@ namespace Magenic.BadgeApplication.Processor
 
                         if (employee != null)
                         {
-                            var adName = emp.ADName.Substring(emp.ADName.IndexOf("\\") + 1);
-
-                            var publishMessageConfig = new PublishBadgeRequestMsgConfigDTO()
-                            {
-                                Environment = environment,
-                                Title = "New Badge Request Notification",
-                                EmployeeId = emp.EmployeeId,
-                                EmployeeFullName = employee.EmployeeFullName,
-                                EmployeeFirstName = employee.EmployeeFirstName,
-                                EmployeeLastName = employee.EmployeeLastName,
-                                EmployeeEmailAddress = employee.EMailAddress,
-                                EmployeeADName = emp.ADName,
-                                EmployeeADNameNoDomain = adName,
-                                MagenicDataService = DataService,
-                                BadgeRequestItems = new List<PublishBadgeRequestItemDTO>()
-                            };
-
                             var empNotifications = itemsToPublish.Where(x => x.EmployeeId == emp.EmployeeId).ToList()
                                                                     .OrderBy(x => x.CreatedDate);
-                            ;
+
                             foreach (var empNotification in empNotifications)
                             {
+                                var adName = empNotification.ADName.Substring(empNotification.ADName.IndexOf("\\") + 1);
+
                                 var publishItem = new PublishBadgeRequestItemDTO()
                                 {
                                     ADName = empNotification.ADName,
@@ -115,17 +114,23 @@ namespace Magenic.BadgeApplication.Processor
                                     EmployeeId = empNotification.EmployeeId,
                                     FirstName = empNotification.FirstName,
                                     LastName = empNotification.LastName,
+                                    FullName = (empNotification.FirstName + " " + empNotification.LastName).Trim(),
+                                    ADNameNoDomain = adName,
                                     NotifySentDate = empNotification.NotifySentDate
                                 };
+
                                 publishMessageConfig.BadgeRequestItems.Add(publishItem);
                             }
-
-                            _itemProcessor.ProcessItems(publishMessageConfig);
                         }
                         else
                         {
                             Logger.Error<BadgeRequestProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: Employee {emp.EmailAddress} does not exist for publishing.");
                         }
+                    }
+
+                    if (publishMessageConfig.BadgeRequestItems.Count() > 0)
+                    {
+                        _itemProcessor.ProcessItems(publishMessageConfig);
                     }
 
                     Logger.Info<BadgeRequestProcessor>($"{DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}: BadgeRequestProcessor completed");

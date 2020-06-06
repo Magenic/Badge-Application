@@ -142,7 +142,7 @@ namespace Magenic.BadgeApplication.EmailPublisher
         {
             try
             {
-                var msgEmp = $"The following Badge Requests were submitted by {publishMessageConfig.EmployeeFullName}:";
+                var msgEmp = $"The following Badge Requests were submitted:";
 
                 StringBuilder sb = new StringBuilder();
                 if (!publishMessageConfig.Environment.ToLower().Equals("prod"))
@@ -153,8 +153,9 @@ namespace Magenic.BadgeApplication.EmailPublisher
                 sb.Append("<table style=\"width:100%\">");
                 sb.Append("<tr align='left'>");
                 sb.Append("<th width=\"5%\" style=\"border: 1px solid black;\">Date Submitted</th>");
-                sb.Append("<th width=\"10%\" style=\"border: 1px solid black;\">Badge Name</th>");
-                sb.Append("<th width=\"20%\" style=\"border: 1px solid black;\">Description</th>");
+                sb.Append("<th width=\"15%\" style=\"border: 1px solid black;\">Badge Name</th>");
+                sb.Append("<th width=\"40%\" style=\"border: 1px solid black;\">Description</th>");
+                sb.Append("<th width=\"40%\" style=\"border: 1px solid black;\">Employee</th>");
                 sb.Append("</tr>");
                 foreach (var item in publishMessageConfig.BadgeRequestItems)
                 {
@@ -162,6 +163,7 @@ namespace Magenic.BadgeApplication.EmailPublisher
                     sb.Append($"<td>{item.CreatedDate.ToString("MM/dd/yyyy")}</td>");
                     sb.Append($"<td>{item.BadgeName}</td>");
                     sb.Append($"<td>{item.BadgeDescription}</td>");
+                    sb.Append($"<td>{item.FullName} ({item.EmailAddress})</td>");
                     sb.Append("</tr>");
                 }
                 sb.Append("</table>");
@@ -169,15 +171,16 @@ namespace Magenic.BadgeApplication.EmailPublisher
 
                 var msgBody = sb.ToString();
 
-                if (string.IsNullOrWhiteSpace(publishMessageConfig.EmployeeEmailAddress))
+                if (string.IsNullOrWhiteSpace(publishMessageConfig.SendToEmailAddress))
                 {
-                    Logger.Error<EmailPublisher>($"No email address for {publishMessageConfig.EmployeeFullName} - {publishMessageConfig.EmployeeADName}");
+                    Logger.Error<EmailPublisher>($"Badge Request: No email address");
+                    throw new SmtpFailedRecipientException("Badge Request: No email address");
                 }
                 else
                 {
                     Common.Utils.Emails.SendMessage(
                         new MailAddress("no-reply@magenic.com", "Magenic Badge Application"),
-                                        new List<string>() { publishMessageConfig.EmployeeEmailAddress }, publishMessageConfig.Title, msgBody);
+                                        new List<string>() { publishMessageConfig.SendToEmailAddress }, publishMessageConfig.Title, msgBody);
                 }
             }
             catch (Exception ex)
