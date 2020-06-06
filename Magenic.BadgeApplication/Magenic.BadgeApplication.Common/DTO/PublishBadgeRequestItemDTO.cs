@@ -37,7 +37,14 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// The Active Directory Name of the Employee
         /// </summary>
         public string ADName { get; set; }
-
+        /// <summary>
+        /// The full name of the employee
+        /// </summary>
+        public string FullName { get; set; }
+        /// <summary>
+        /// The Active Directory Name of the employee without Doman Name
+        /// </summary>
+        public string ADNameNoDomain { get; set; }
         /// <summary>
         /// The Name of the Badge being requested
         /// </summary>

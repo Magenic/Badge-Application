@@ -17,33 +17,9 @@ namespace Magenic.BadgeApplication.Common.DTO
         /// </summary>
         public string Title { get; set; }
         /// <summary>
-        /// The Id of the employee
+        /// The emsil address of the message to be published
         /// </summary>
-        public int EmployeeId { get; set; }
-        /// <summary>
-        /// The full name of the employee
-        /// </summary>
-        public string EmployeeFullName { get; set; }
-        /// <summary>
-        /// The first name of the employee
-        /// </summary>
-        public string EmployeeFirstName { get; set; }
-        /// <summary>
-        /// The last name of the employee
-        /// </summary>
-        public string EmployeeLastName { get; set; }
-        /// <summary>
-        /// The last name of the employee
-        /// </summary>
-        public string EmployeeEmailAddress { get; set; }
-        /// <summary>
-        /// The Active Directory Name of the employee which may include the Doman Name
-        /// </summary>
-        public string EmployeeADName { get; set; }
-        /// <summary>
-        /// The Active Directory Name of the employee without Doman Name
-        /// </summary>
-        public string EmployeeADNameNoDomain { get; set; }
+        public string SendToEmailAddress { get; set; }
         /// <summary>
         /// The URL of the Magenic DataService
         /// </summary>
