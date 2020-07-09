@@ -8,7 +8,7 @@ namespace Magenic.BadgeApplication.Attributes
     /// <summary>
     /// Custom Authorize Attribute will redirect to access denied view
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class CustomAuthorizeAttribute : AuthorizeAttribute
     {
         /// <summary>

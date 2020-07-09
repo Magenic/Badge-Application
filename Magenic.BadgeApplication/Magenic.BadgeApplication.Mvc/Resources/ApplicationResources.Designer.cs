@@ -763,6 +763,15 @@ namespace Magenic.BadgeApplication.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manage Permissions.
+        /// </summary>
+        public static string ManagePermissionsHeader {
+            get {
+                return ResourceManager.GetString("ManagePermissionsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must specify one or more people who completed this activity..
         /// </summary>
         public static string NoEmployeeIdsErrorMsg {
