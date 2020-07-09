@@ -40,13 +40,6 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
             get { return GetProperty(PermissionIdProperty); }
             set { LoadProperty(PermissionIdProperty, value); }
         }
-
-        public static readonly PropertyInfo<string> PermissionNameProperty = RegisterProperty<string>(c => c.PermissionName);
-        public string PermissionName
-        {
-            get { return GetProperty(PermissionNameProperty); }
-            set { LoadProperty(PermissionNameProperty, value); }
-        }
         #endregion
 
         #region Methods

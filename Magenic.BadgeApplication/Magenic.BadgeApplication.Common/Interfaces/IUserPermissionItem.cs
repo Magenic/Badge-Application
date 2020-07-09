@@ -26,11 +26,6 @@ namespace Magenic.BadgeApplication.Common.Interfaces
         PermissionType PermissionId { get; set; }
 
         /// <summary>
-        /// Permission name
-        /// </summary>
-        string PermissionName { get; set; }
-
-        /// <summary>
         /// Set permission Id to mark object dirty
         /// </summary>
         /// <param name="permissionId"></param>

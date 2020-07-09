@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Magenic.BadgeApplication.Common.Enums;
 
 namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
 {
@@ -27,16 +26,38 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
         {
             var userPermissionSortBy = new UserPermissionSortBy(sortBy);
 
-            var initialSort = this.OrderBy(item => item, new UserPermissionComparer(userPermissionSortBy));
-
-            if (userPermissionSortBy.SortByFirstName())
+            if (userPermissionSortBy.SortByPermissionName())
             {
-                return initialSort
-                    .ThenBy(item => new UserPermissionComparer(new UserPermissionSortBy(UserPermissionSortBy.BuildString(UserPermissionFields.LastName, SortDirection.ASC))))
-                    .ThenBy(item => new UserPermissionComparer(new UserPermissionSortBy(UserPermissionSortBy.BuildString(UserPermissionFields.PermissionName, SortDirection.ASC))));
+                return SortByPermissionName(userPermissionSortBy.IsAscending());
             }
 
-            return initialSort;
+            if (userPermissionSortBy.SortByLastName())
+            {
+                return SortByLastName(userPermissionSortBy.IsAscending());
+            }
+
+            return SortByFirstName(userPermissionSortBy.IsAscending());
+        }
+
+        private IOrderedEnumerable<IUserPermissionItem> SortByFirstName(bool isAscending)
+        { 
+            return isAscending 
+                ? this.OrderBy(item => item.FirstName).ThenBy(item => item.LastName).ThenBy(item => item.PermissionId.ToString())
+                : this.OrderByDescending(item => item.FirstName).ThenBy(item => item.LastName).ThenBy(item => item.PermissionId.ToString());
+        }
+
+        private IOrderedEnumerable<IUserPermissionItem> SortByLastName(bool isAscending)
+        {
+            return isAscending
+                    ? this.OrderBy(item => item.LastName).ThenBy(item => item.FirstName).ThenBy(item => item.PermissionId.ToString())
+                    : this.OrderByDescending(item => item.LastName).ThenBy(item => item.FirstName).ThenBy(item => item.PermissionId.ToString());
+        }
+
+        private IOrderedEnumerable<IUserPermissionItem> SortByPermissionName(bool isAscending)
+        {
+            return isAscending
+                    ? this.OrderBy(item => item.PermissionId.ToString()).ThenBy(item => item.FirstName).ThenBy(item => item.LastName)
+                    : this.OrderByDescending(item => item.PermissionId.ToString()).ThenBy(item => item.FirstName).ThenBy(item => item.LastName);
         }
         #endregion
 

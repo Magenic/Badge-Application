@@ -96,7 +96,6 @@
     <Compile Include="AccountInfo\UserCollection.cs" />
     <Compile Include="AccountInfo\UserItem.cs" />
     <Compile Include="AccountInfo\UserPermissionCollection.cs" />
-    <Compile Include="AccountInfo\UserPermissionComparer.cs" />
     <Compile Include="AccountInfo\UserPermissionFields.cs" />
     <Compile Include="AccountInfo\UserPermissionItem.cs" />
     <Compile Include="AccountInfo\UserPermissionSortBy.cs" />

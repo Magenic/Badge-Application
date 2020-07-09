@@ -34,8 +34,8 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
                     this.fieldName = UserPermissionFields.LastName;
                     break;
 
-                case UserPermissionFields.PermissionName:
-                    this.fieldName = UserPermissionFields.PermissionName;
+                case UserPermissionFields.PermissionId:
+                    this.fieldName = UserPermissionFields.PermissionId;
                     break;
 
                 default:
@@ -68,7 +68,7 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
 
         public bool SortByPermissionName()
         {
-            return fieldName == UserPermissionFields.PermissionName;
+            return fieldName == UserPermissionFields.PermissionId;
         }
     }
 }

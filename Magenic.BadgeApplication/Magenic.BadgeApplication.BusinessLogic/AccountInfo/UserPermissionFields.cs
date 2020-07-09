@@ -12,6 +12,5 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
         public const string FirstName = "FirstName";
         public const string LastName = "LastName";
         public const string PermissionId = "PermissionId";
-        public const string PermissionName = "PermissionName";
     }
 }

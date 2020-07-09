@@ -7,7 +7,7 @@
     //Prepare jtable plugin
     $('#PermissonsTable').jtable({
         title: 'Employee Permissions',
-        sorting: false,
+        sorting: true,
         defaultSorting: 'FirstName ASC',
         paging: true,
         actions: actions,

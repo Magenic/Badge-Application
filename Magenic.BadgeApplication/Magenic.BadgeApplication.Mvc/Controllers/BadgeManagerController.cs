@@ -571,7 +571,7 @@ namespace Magenic.BadgeApplication.Controllers
             return Json(new { Result = "ERROR", Message = ApplicationResources.EarnedBadgeDeletionErrorMessage });
         }
 
-        // [CustomAuthorize(Roles = "Administrator")]
+        [CustomAuthorize(Roles = "Administrator")]
         public ActionResult Permissions()
         {
             return View();
@@ -583,7 +583,7 @@ namespace Magenic.BadgeApplication.Controllers
 
             var totalRecourds = items.Count();
 
-            var records = items.Skip(jtStartIndex).Take(jtPageSize);
+            var records = items.Sort(jtSorting).Skip(jtStartIndex).Take(jtPageSize);
 
             return Json(new { Result = "OK", Records = records, TotalRecordCount = totalRecourds });
         }
