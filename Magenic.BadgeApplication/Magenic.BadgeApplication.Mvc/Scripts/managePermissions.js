@@ -20,11 +20,13 @@
             },
             FirstName: {
                 title: 'First Name',
-                edit: false
+                list: true,
+                edit: true
             },
             LastName: {
                 title: 'Last Name',
-                edit: false
+                list: true,
+                edit: true
             },
             PermissionId: {
                 title: 'Permission Name',
@@ -33,6 +35,10 @@
                 options: { 1: 'User', 2: 'Administrator', 3: 'Manager' },
                 type: 'combobox',
             }
+        },
+        formCreated: function (event, data) {
+            data.form.find('input[name="FirstName"]').attr("disabled", "disabled");
+            data.form.find('input[name="LastName"]').attr("disabled", "disabled");
         }
     });
 

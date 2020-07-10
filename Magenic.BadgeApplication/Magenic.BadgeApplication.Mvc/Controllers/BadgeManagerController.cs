@@ -577,6 +577,7 @@ namespace Magenic.BadgeApplication.Controllers
             return View();
         }
 
+        [HasPermission(AuthorizationActions.GetObject, typeof(UserPermissionCollection))]
         public async Task<JsonResult> GetUserPermissions(int jtStartIndex, int jtPageSize, string jtSorting)
         {
             var items = await UserPermissionCollection.GetAllAsync();
@@ -589,6 +590,7 @@ namespace Magenic.BadgeApplication.Controllers
         }
 
         [HttpPost]
+        [HasPermission(AuthorizationActions.EditObject, typeof(UserPermissionItem))]
         public async Task<JsonResult> UpdateUserPermission(int employeePermissionId, int permissionId)
         {
             var userPermission = await UserPermissionItem.GetByIdAsync(employeePermissionId);

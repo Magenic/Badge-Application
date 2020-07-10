@@ -1,6 +1,9 @@
 ﻿using Autofac;
 using Csla;
+using Csla.Rules;
+using Csla.Rules.CommonRules;
 using Magenic.BadgeApplication.BusinessLogic.Framework;
+using Magenic.BadgeApplication.BusinessLogic.Rules;
 using Magenic.BadgeApplication.Common.DTO;
 using Magenic.BadgeApplication.Common.Enums;
 using Magenic.BadgeApplication.Common.Interfaces;
@@ -91,6 +94,21 @@ namespace Magenic.BadgeApplication.BusinessLogic.AccountInfo
             var userPermissionDTO = this.Unload();
 
             dal.Update(userPermissionDTO);
+        }
+        #endregion
+
+        #region Rules
+        protected override void AddBusinessRules()
+        {
+            base.AddBusinessRules();
+
+            this.BusinessRules.AddRule(new IsInRole(AuthorizationActions.WriteProperty, PermissionIdProperty, PermissionType.Administrator.ToString()));
+        }
+
+        public static void AddObjectAuthorizationRules()
+        {
+            BusinessRules.AddRule(typeof(IUserPermissionItem), new CanChange(AuthorizationActions.EditObject, PermissionType.Administrator.ToString()));
+            BusinessRules.AddRule(typeof(UserPermissionItem), new CanChange(AuthorizationActions.EditObject, PermissionType.Administrator.ToString()));
         }
         #endregion
     }
