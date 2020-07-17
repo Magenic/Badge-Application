@@ -436,6 +436,7 @@
     <None Include="Properties\PublishProfiles\BadgeAppTest.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Magenic Badge Application - Magenic Prod.pubxml" />
+    <Content Include="Scripts\managePermissions.js" />
     <Content Include="Scripts\earnedBadges.js" />
     <Content Include="Scripts\global.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
@@ -648,6 +649,7 @@
     </Content>
     <Content Include="Views\BadgeManager\EarnedBadges.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SubmitBadgeRequest.cshtml" />
+    <Content Include="Views\BadgeManager\Permissions.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

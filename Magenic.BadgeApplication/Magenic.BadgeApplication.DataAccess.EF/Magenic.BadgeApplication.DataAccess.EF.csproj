@@ -222,6 +222,7 @@
     <Compile Include="SubmitBadgeReqestDAL.cs" />
     <Compile Include="SubmittedActivityCollecitonDAL.cs" />
     <Compile Include="UserCollectionDAL.cs" />
+    <Compile Include="UserPermissionsDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Magenic.BadgeApplication.Common\Magenic.BadgeApplication.Common.csproj">

@@ -4,6 +4,7 @@ using Csla.Rules.CommonRules;
 using Csla.Web.Mvc;
 using EasySec.Encryption;
 using Magenic.BadgeApplication.Attributes;
+using Magenic.BadgeApplication.BusinessLogic.AccountInfo;
 using Magenic.BadgeApplication.BusinessLogic.Activity;
 using Magenic.BadgeApplication.BusinessLogic.Badge;
 using Magenic.BadgeApplication.BusinessLogic.Notification;
@@ -15,6 +16,7 @@ using Magenic.BadgeApplication.Models;
 using Magenic.BadgeApplication.Resources;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Mime;
@@ -567,6 +569,40 @@ namespace Magenic.BadgeApplication.Controllers
             }
 
             return Json(new { Result = "ERROR", Message = ApplicationResources.EarnedBadgeDeletionErrorMessage });
+        }
+
+        [CustomAuthorize(Roles = "Administrator")]
+        public ActionResult Permissions()
+        {
+            return View();
+        }
+
+        [HasPermission(AuthorizationActions.GetObject, typeof(UserPermissionCollection))]
+        public async Task<JsonResult> GetUserPermissions(int jtStartIndex, int jtPageSize, string jtSorting)
+        {
+            var items = await UserPermissionCollection.GetAllAsync();
+
+            var totalRecourds = items.Count();
+
+            var records = items.Sort(jtSorting).Skip(jtStartIndex).Take(jtPageSize);
+
+            return Json(new { Result = "OK", Records = records, TotalRecordCount = totalRecourds });
+        }
+
+        [HttpPost]
+        [HasPermission(AuthorizationActions.EditObject, typeof(UserPermissionItem))]
+        public async Task<JsonResult> UpdateUserPermission(int employeePermissionId, int permissionId)
+        {
+            var userPermission = await UserPermissionItem.GetByIdAsync(employeePermissionId);
+
+            userPermission.SetPermissionId((PermissionType)permissionId);
+
+            if (await SaveObjectAsync(userPermission, true))
+            {
+                return Json(new { Result = "OK" });
+            }
+
+            return Json(new { Result = "ERROR" });
         }
     }
 }

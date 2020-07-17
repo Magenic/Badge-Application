@@ -504,4 +504,7 @@
   <data name="CancelButton" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="ManagePermissionsHeader" xml:space="preserve">
+    <value>Manage Permissions</value>
+  </data>
 </root>

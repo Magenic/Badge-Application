@@ -95,6 +95,10 @@
     <Compile Include="AccountInfo\LeaderboardItem.cs" />
     <Compile Include="AccountInfo\UserCollection.cs" />
     <Compile Include="AccountInfo\UserItem.cs" />
+    <Compile Include="AccountInfo\UserPermissionCollection.cs" />
+    <Compile Include="AccountInfo\UserPermissionFields.cs" />
+    <Compile Include="AccountInfo\UserPermissionItem.cs" />
+    <Compile Include="AccountInfo\UserPermissionSortBy.cs" />
     <Compile Include="Activity\ActivityEditCollection.cs" />
     <Compile Include="Activity\ActivityCollection.cs" />
     <Compile Include="Activity\ActivityEdit.cs" />
