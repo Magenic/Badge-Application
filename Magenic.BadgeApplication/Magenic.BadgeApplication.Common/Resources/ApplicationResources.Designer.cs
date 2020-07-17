@@ -64,7 +64,7 @@ namespace Magenic.BadgeApplication.Common.Resources {
         ///   Looks up a localized string similar to &lt;html&gt;
         ///    &lt;body&gt;
         ///        You have employees who are waiting for you to approve their activities in the Magenic Badge Application.&lt;br /&gt;&lt;br /&gt;
-        ///		If you are not logged into the Magenic Bagde Application, please log into the application.&lt;br /&gt;
+        ///		If you are not logged into the Magenic Badge Application, please log into the application.&lt;br /&gt;
         ///		Once logged into the application, either follow these directions or click on the link.&lt;br /&gt;
         ///        Please go to Badge Manager and then to Activities for Approval.&lt;br /&gt;&lt;br /&gt;
         ///        &lt;a href=&quot;https://badgeapplication.magenic.com/BadgeManager/ApproveActivities&quot; [rest of string was truncated]&quot;;.
