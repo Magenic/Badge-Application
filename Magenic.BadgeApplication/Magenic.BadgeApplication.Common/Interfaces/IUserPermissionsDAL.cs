@@ -9,6 +9,7 @@ namespace Magenic.BadgeApplication.Common.Interfaces
 {
     public interface IUserPermissionsDAL
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         Task<IEnumerable<UserPermissionDTO>> GetAll();
 
         Task<UserPermissionDTO> GetById(int employeePermissionId);
